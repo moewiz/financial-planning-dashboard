@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, RouteComponentProps } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, RouteComponentProps, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 
@@ -13,6 +13,7 @@ import LoginLayout from './layouts/LoginLayout';
 
 // Import Pages
 import { Home, LoginPage } from './pages';
+import ApiUtils from './utils/apiUtils';
 
 export const store = configureStore();
 
@@ -37,6 +38,10 @@ const PublicRoute: React.SFC<DefaultProps> = (props) => {
 
 const PrivateRoute: React.SFC<DefaultProps> = (props) => {
   const { component: Component, ...rest } = props;
+
+  if (!ApiUtils.getAccessToken()) {
+    return <Redirect to="/sign-in" />;
+  }
 
   return (
     <Route {...rest} render={(matchProps: RouteComponentProps) => (
