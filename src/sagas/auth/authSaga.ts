@@ -4,8 +4,8 @@ import { get, isFunction } from 'lodash-es';
 
 import { AuthActionTypes, LoginPayload, CheckEmailPayload, OTPPayload, AuthActions } from '../../reducers/auth';
 import AuthService from './authService';
-import { RootState } from '../../reducers/reducerTypes';
-import { store } from '../../App';
+// import { RootState } from '../../reducers/reducerTypes';
+// import { store } from '../../App';
 
 interface APIResponse {
   data: string;
@@ -16,6 +16,32 @@ interface APIResponse {
 
 function getAPIErrorMessage(error?: any, defaultMessage: string = 'Internal server error') {
   return get(error, 'response.data.error', defaultMessage);
+}
+
+function setAccessToken(token: string, expired: number, refreshToken?: string) {
+  localStorage.setItem('access_token', token);
+  localStorage.setItem('expires_at', String(expired));
+  if (refreshToken) {
+    localStorage.setItem('refresh_token', refreshToken);
+  }
+}
+
+function removeAccessToken() {
+  localStorage.removeItem('access_token');
+  localStorage.removeItem('expires_at');
+  localStorage.removeItem('refresh_token');
+}
+
+export function getAccessToken() {
+  return localStorage.getItem('access_token');
+}
+
+export function getRefreshToken() {
+  return localStorage.getItem('refresh_token');
+}
+
+export function getExpiration() {
+  return Number(localStorage.getItem('expires_at'));
 }
 
 export default class AuthSaga {
@@ -72,6 +98,7 @@ export default class AuthSaga {
         const token = response.data.data.access_token;
         const expired = response.data.data.access_token_expires;
         const refreshToken = response.data.data.refresh_token;
+        setAccessToken(token, expired, refreshToken);
         yield put(
           AuthActions.verifyOTPCompleted({
             token,
@@ -96,37 +123,40 @@ export default class AuthSaga {
   }
 
   public static *refreshToken() {
-    const refreshToken = yield select((state: RootState) => state.auth.refreshToken);
-    if (!refreshToken) {
+    // const refreshToken = yield select((state: RootState) => state.auth.refreshToken);
+    const refreshToken = getRefreshToken();
+    if (refreshToken) {
+      try {
+        const response: AxiosResponse<
+          APIResponse & {
+            data: {
+              access_token: string;
+              access_token_expires: number;
+            };
+          }
+        > = yield call(AuthService.refreshToken, refreshToken);
+        if (response.status === 200 && response.data.success) {
+          const token = response.data.data.access_token;
+          const expired = response.data.data.access_token_expires;
+          setAccessToken(token, expired);
+          yield put(
+            AuthActions.refreshTokenCompleted({
+              token,
+              expired,
+            }),
+          );
+        }
+      } catch (error) {
+        const errorMsg = getAPIErrorMessage(error);
+        yield put({
+          type: AuthActionTypes.REFRESH_TOKEN_FAILURE,
+          error: errorMsg,
+        });
+      }
+    } else {
       yield put({
         type: AuthActionTypes.REFRESH_TOKEN_FAILURE,
         error: getAPIErrorMessage(),
-      });
-    }
-    try {
-      const response: AxiosResponse<
-        APIResponse & {
-          data: {
-            access_token: string;
-            access_token_expires: number;
-          };
-        }
-      > = yield call(AuthService.refreshToken, refreshToken);
-      if (response.status === 200 && response.data.success) {
-        const token = response.data.data.access_token;
-        const expired = response.data.data.access_token_expires;
-        yield put(
-          AuthActions.refreshTokenCompleted({
-            token,
-            expired,
-          }),
-        );
-      }
-    } catch (error) {
-      const errorMsg = getAPIErrorMessage(error);
-      yield put({
-        type: AuthActionTypes.REFRESH_TOKEN_FAILURE,
-        error: errorMsg,
       });
     }
   }
