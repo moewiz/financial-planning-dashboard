@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { store } from '../App';
 
 export interface RequestConfig extends AxiosRequestConfig {
   apiVersion?: string;
@@ -16,7 +17,8 @@ class ApiUtils {
   });
 
   public static getAccessToken() {
-    return 'test';
+    const rootState = store.getState();
+    return rootState.auth && rootState.auth.token;
   }
 
   public static handleLogout() {
