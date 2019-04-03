@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import moment from 'moment';
 import { store } from '../App';
 
 export interface RequestConfig extends AxiosRequestConfig {
@@ -16,9 +17,25 @@ class ApiUtils {
     baseURL: ApiUtils.BASE_URL,
   });
 
-  public static getAccessToken() {
+  public static getAccessToken(): string | undefined {
     const rootState = store.getState();
     return rootState.auth && rootState.auth.token;
+  }
+
+  public static getExpiredAt(): number | undefined {
+    const rootState = store.getState();
+    return rootState.auth && rootState.auth.expired;
+  }
+
+  public static shouldRefreshToken(): boolean {
+    const token = ApiUtils.getAccessToken();
+    const expiredAt = ApiUtils.getExpiredAt();
+
+    if (token && expiredAt) {
+      return moment().unix() < expiredAt;
+    }
+
+    return true;
   }
 
   public static handleLogout() {
@@ -29,6 +46,10 @@ class ApiUtils {
 ApiUtils.HTTP.interceptors.request.use((extendedConfig: RequestConfig) => {
   const config: RequestConfig = Object.assign({}, extendedConfig);
   const accessToken = ApiUtils.getAccessToken() || null;
+
+  if (ApiUtils.shouldRefreshToken()) {
+    console.log('we should refresh to get the new token');
+  }
 
   config.withCredentials = true;
   config.headers.Authorization = `Bearer ${accessToken}`;
