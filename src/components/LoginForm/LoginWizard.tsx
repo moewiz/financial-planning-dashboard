@@ -78,12 +78,22 @@ class LoginWizard extends React.PureComponent<LoginProp, LoginState> {
         <PoseGroup isMoveToRight={isMoveToRight}>
           {page === 1 && (
             <EmailAnimation key="1">
-              <Page1 loading={loading} formProps={formProps} onSubmit={this.verifyEmail} error={error} />
+              <Page1
+                loading={loading}
+                formProps={formProps}
+                onSubmit={this.verifyEmail}
+                error={error}
+              />
             </EmailAnimation>
           )}
           {page === 2 && (
             <PasswordAnimation key="2">
-              <Page2 loading={loading} formProps={formProps} onSubmit={this.verifyPassword} error={error} />
+              <Page2
+                loading={loading}
+                formProps={formProps}
+                onSubmit={this.verifyPassword}
+                error={error}
+              />
             </PasswordAnimation>
           )}
           {page === 3 && (

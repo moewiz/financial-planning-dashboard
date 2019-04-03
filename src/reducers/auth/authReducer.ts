@@ -1,7 +1,10 @@
 import { fromJS } from 'immutable';
 import { Reducer } from 'redux';
 
-import { AuthStateRecord, AuthState, defaultAuthState, AuthActionTypes } from './authTypes';
+import {
+  AuthState, defaultAuthState, AuthActionTypes,
+  AuthStateRecord,
+} from './authTypes';
 import { StandardAction } from '../reducerTypes';
 
 export default class AuthReducer {
@@ -32,6 +35,8 @@ export default class AuthReducer {
   }
 
   private static readonly initialState = new AuthStateRecord(defaultAuthState);
+
+  // private static readonly initialState = fromJS(defaultAuthState);
 
   private static verifyEmailHandler(state: AuthState, action: StandardAction<any>): AuthState {
     switch (action.type) {

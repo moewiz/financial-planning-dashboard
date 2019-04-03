@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Row, Col } from 'antd';
+
 import { LoginFormWrap } from './styled';
 import Heading from '../Heading/Heading';
 import { Formik, FormikActions } from 'formik';
@@ -75,10 +76,10 @@ const LoginForm: React.FC<LoginProp & RouteComponentProps> = (props) => {
 };
 
 const mapStateToProps = (state: RootState) => ({
-  page: state.auth.page,
-  loading: state.auth.loading,
-  error: state.auth.error,
-  message: state.auth.message,
+  page: state.auth.get('page'),
+  loading: state.auth.get('loading'),
+  error: state.auth.get('error'),
+  message: state.auth.get('message'),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>

@@ -1,4 +1,4 @@
-import { Map, Record } from 'immutable';
+import { Record } from 'immutable';
 
 import { PayloadAction } from '../reducerTypes';
 
@@ -11,10 +11,10 @@ export interface AuthState {
   expired: number;
   refreshToken?: string;
 
-  [propsName: string]: any;
+  [ propsName: string ]: any;
 }
 
-export const defaultAuthState = {
+export const defaultAuthState: AuthState = {
   page: 1,
   loading: false,
   error: '',
@@ -72,7 +72,5 @@ export type CheckEmailAction = PayloadAction<AuthActionTypes.VERIFY_EMAIL_REQUES
 export type LoginAction = PayloadAction<AuthActionTypes.VERIFY_PASSWORD_REQUEST, LoginPayload>;
 export type VerifyOTPAction = PayloadAction<AuthActionTypes.VERIFY_OTP_REQUEST, OTPPayload>;
 export type RefreshTokenAction = PayloadAction<AuthActionTypes.REFRESH_TOKEN_REQUEST, {}>;
-export type TokenAction = PayloadAction<
-  AuthActionTypes.VERIFY_OTP_SUCCESS | AuthActionTypes.REFRESH_TOKEN_SUCCESS,
-  TokenPayload
->;
+export type TokenAction = PayloadAction<AuthActionTypes.VERIFY_OTP_SUCCESS | AuthActionTypes.REFRESH_TOKEN_SUCCESS,
+  TokenPayload>;

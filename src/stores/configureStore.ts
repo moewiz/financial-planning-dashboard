@@ -1,9 +1,10 @@
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import { persistStore } from 'redux-persist';
 import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 
-import { createRootReducer } from '../reducers';
+import { createRootReducer, injectReducer } from '../reducers';
 import rootSaga from '../sagas';
 
 const logger = createLogger();
@@ -20,7 +21,17 @@ const bindMiddleware = (middleware: any) => {
 };
 
 export default function configureStore() {
-  const store = createStore(createRootReducer(), bindMiddleware([ sagaMiddleware ]));
+  const rootReducer = createRootReducer();
+  const store = createStore(rootReducer, bindMiddleware([ sagaMiddleware ]));
   sagaMiddleware.run(rootSaga);
-  return store;
+
+  if (module.hot) {
+    module.hot.accept('../reducers', () => {
+      injectReducer(store, rootReducer);
+    });
+  }
+  const persistor = persistStore(store, undefined, () => {
+    store.getState();
+  });
+  return { store, persistor };
 }
