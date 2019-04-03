@@ -42,6 +42,9 @@ export enum AuthActionTypes {
   VERIFY_OTP_REQUEST = 'auth/VERIFY_OTP_REQUEST',
   VERIFY_OTP_SUCCESS = 'auth/VERIFY_OTP_SUCCESS',
   VERIFY_OTP_FAILURE = 'auth/VERIFY_OTP_FAILURE',
+  REFRESH_TOKEN_REQUEST = 'auth/REFRESH_TOKEN_REQUEST',
+  REFRESH_TOKEN_SUCCESS = 'auth/REFRESH_TOKEN_SUCCESS',
+  REFRESH_TOKEN_FAILURE = 'auth/REFRESH_TOKEN_FAILURE',
 }
 
 export interface CheckEmailPayload {
@@ -61,11 +64,15 @@ export interface OTPPayload {
 
 export interface TokenPayload {
   token: string;
-  refreshToken: string;
+  refreshToken?: string;
   expired?: number;
 }
 
 export type CheckEmailAction = PayloadAction<AuthActionTypes.VERIFY_EMAIL_REQUEST, CheckEmailPayload>;
 export type LoginAction = PayloadAction<AuthActionTypes.VERIFY_PASSWORD_REQUEST, LoginPayload>;
 export type VerifyOTPAction = PayloadAction<AuthActionTypes.VERIFY_OTP_REQUEST, OTPPayload>;
-export type TokenAction = PayloadAction<AuthActionTypes.VERIFY_OTP_SUCCESS, TokenPayload>;
+export type RefreshTokenAction = PayloadAction<AuthActionTypes.REFRESH_TOKEN_REQUEST, {}>;
+export type TokenAction = PayloadAction<
+  AuthActionTypes.VERIFY_OTP_SUCCESS | AuthActionTypes.REFRESH_TOKEN_SUCCESS,
+  TokenPayload
+>;
