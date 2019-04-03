@@ -7,7 +7,9 @@ export interface AuthState {
   loading?: boolean;
   error?: string;
   message?: string;
-  token: Map<string, any>;
+  token?: string;
+  expired: number;
+  refreshToken?: string;
 
   [propsName: string]: any;
 }
@@ -17,7 +19,9 @@ export const defaultAuthState = {
   loading: false,
   error: '',
   message: '',
-  token: Map({}),
+  token: '',
+  expired: 0,
+  refreshToken: '',
 };
 
 export class AuthStateRecord extends Record(defaultAuthState) implements AuthState {
@@ -58,7 +62,7 @@ export interface OTPPayload {
 export interface TokenPayload {
   token: string;
   refreshToken: string;
-  expired?: any;
+  expired?: number;
 }
 
 export type CheckEmailAction = PayloadAction<AuthActionTypes.VERIFY_EMAIL_REQUEST, CheckEmailPayload>;

@@ -1,13 +1,7 @@
 import { fromJS } from 'immutable';
 import { Reducer } from 'redux';
 
-import {
-  AuthStateRecord,
-  AuthState,
-  defaultAuthState,
-  AuthActionTypes,
-  TokenPayload,
-} from './authTypes';
+import { AuthStateRecord, AuthState, defaultAuthState, AuthActionTypes } from './authTypes';
 import { StandardAction } from '../reducerTypes';
 
 export default class AuthReducer {
@@ -84,7 +78,7 @@ export default class AuthReducer {
     }
   }
 
-  private static verifyOTPHandler(state: AuthState, action: StandardAction<TokenPayload>): AuthState {
+  private static verifyOTPHandler(state: AuthState, action: StandardAction<any>): AuthState {
     switch (action.type) {
       case AuthActionTypes.VERIFY_OTP_REQUEST:
         return state
@@ -94,16 +88,22 @@ export default class AuthReducer {
           .set('refreshToken', '')
           .set('expired', '');
 
-      case AuthActionTypes.VERIFY_OTP_SUCCESS:
+      case AuthActionTypes.VERIFY_OTP_SUCCESS: {
+        const token = action.payload.token;
+        const expired = action.payload.expired;
+        const refreshToken = action.payload.refreshToken;
+
         return state.merge(
           fromJS({
             loading: false,
+            message: '',
             page: 1,
-            token: action.payload && action.payload.token,
-            refreshToken: action.payload && action.payload.refreshToken,
-            expired: action.payload && action.payload.expired,
+            token,
+            expired,
+            refreshToken,
           }),
         );
+      }
 
       case AuthActionTypes.VERIFY_OTP_FAILURE:
         return state.set('loading', false).set('error', action.error);

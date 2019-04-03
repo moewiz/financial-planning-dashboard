@@ -57,13 +57,25 @@ export default class AuthSaga {
   public static *verifyOTP({ payload }: { payload: OTPPayload }) {
     const { otp, callback } = payload;
     try {
-      const response: AxiosResponse<APIResponse> = yield call(AuthService.verifyOTP, otp);
+      const response: AxiosResponse<
+        APIResponse & {
+          data: {
+            access_token: string;
+            access_token_expires: number;
+            refresh_token: string;
+          };
+        }
+      > = yield call(AuthService.verifyOTP, otp);
       if (response.status === 200 && response.data.success) {
+        const token = response.data.data.access_token;
+        const expired = response.data.data.access_token_expires;
+        const refreshToken = response.data.data.refresh_token;
+
         yield put(
           AuthActions.verifyOTPCompleted({
-            token: 'test-token',
-            refreshToken: 'refresh-token',
-            expired: new Date(),
+            token,
+            expired,
+            refreshToken,
           }),
         );
       }

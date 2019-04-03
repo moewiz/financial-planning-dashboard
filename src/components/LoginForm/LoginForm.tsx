@@ -53,8 +53,11 @@ const LoginForm: React.FC<LoginProp> = (props) => {
               if (values.code && values.code.length === 4) {
                 props.verifyOTP({
                   otp: values.code.join(''),
-                  callback: () => {
-                    console.log('formik submitted')
+                  callback: (error) => {
+                    console.log('formik submitted');
+                    if (!error) {
+                      console.log('redirect to /home');
+                    }
                     actions.setSubmitting(false);
                   },
                 });
