@@ -1,8 +1,8 @@
 import { all, takeLatest, call, put } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
-import { get } from 'lodash-es';
+import { get, isFunction } from 'lodash-es';
 
-import { AuthActionTypes, LoginPayload, CheckEmailPayload } from '../../reducers/auth';
+import { AuthActionTypes, LoginPayload, CheckEmailPayload, OTPPayload, AuthActions } from '../../reducers/auth';
 import AuthService from './authService';
 
 interface APIResponse {
@@ -54,6 +54,34 @@ export default class AuthSaga {
     }
   }
 
+  public static *verifyOTP({ payload }: { payload: OTPPayload }) {
+    const { otp, callback } = payload;
+    try {
+      const response: AxiosResponse<APIResponse> = yield call(AuthService.verifyOTP, otp);
+      if (response.status === 200 && response.data.success) {
+        yield put(
+          AuthActions.verifyOTPCompleted({
+            token: 'test-token',
+            refreshToken: 'refresh-token',
+            expired: new Date(),
+          }),
+        );
+      }
+      if (callback && isFunction(callback)) {
+        callback();
+      }
+    } catch (error) {
+      const errorMsg = getErrorMessage(error);
+      yield put({
+        type: AuthActionTypes.VERIFY_OTP_FAILURE,
+        error: errorMsg,
+      });
+      if (callback && isFunction(callback)) {
+        callback(errorMsg);
+      }
+    }
+  }
+
   public static *watchVerifyEmail() {
     // @ts-ignore
     yield takeLatest(AuthActionTypes.VERIFY_EMAIL_REQUEST, AuthSaga.verifyEmail);
@@ -64,12 +92,12 @@ export default class AuthSaga {
     yield takeLatest(AuthActionTypes.VERIFY_PASSWORD_REQUEST, AuthSaga.verifyPassword);
   }
 
-  // public static* watchVerifyOTP() {
-  //   // @ts-ignore
-  //   yield takeLatest(AuthActionTypes.AUTH_LOGIN_START, AuthSaga.loginUser);
-  // }
+  public static *watchVerifyOTP() {
+    // @ts-ignore
+    yield takeLatest(AuthActionTypes.VERIFY_OTP_REQUEST, AuthSaga.verifyOTP);
+  }
 
   public static *authFlow() {
-    yield all([AuthSaga.watchVerifyEmail(), AuthSaga.watchVerifyPassword()]);
+    yield all([AuthSaga.watchVerifyEmail(), AuthSaga.watchVerifyPassword(), AuthSaga.watchVerifyOTP()]);
   }
 }

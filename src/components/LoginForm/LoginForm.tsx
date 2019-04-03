@@ -7,16 +7,16 @@ import { Formik, FormikActions } from 'formik';
 import LoginWizard from './LoginWizard';
 import { bindActionCreators, Dispatch } from 'redux';
 import { StandardAction, RootState } from '../../reducers/reducerTypes';
-import { AuthActions, CheckEmailPayload, CheckEmailAction, LoginPayload, LoginAction } from '../../reducers/auth';
+import {
+  AuthActions,
+  CheckEmailPayload,
+  CheckEmailAction,
+  LoginPayload,
+  LoginAction,
+  OTPPayload,
+  VerifyOTPAction,
+} from '../../reducers/auth';
 import { connect } from 'react-redux';
-
-const delay = (timeout: number) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, timeout);
-  });
-};
 
 export interface LoginFormValues {
   email: string;
@@ -37,8 +37,9 @@ interface LoginProp {
   loading?: boolean;
   error?: string;
   message?: string;
-  checkEmailAction: (payload: CheckEmailPayload) => CheckEmailAction;
-  loginAction: (payload: LoginPayload) => LoginAction;
+  verifyEmail: (payload: CheckEmailPayload) => CheckEmailAction;
+  verifyPassword: (payload: LoginPayload) => LoginAction;
+  verifyOTP: (payload: OTPPayload) => VerifyOTPAction;
 }
 
 const LoginForm: React.FC<LoginProp> = (props) => {
@@ -49,11 +50,15 @@ const LoginForm: React.FC<LoginProp> = (props) => {
           {props.page !== 3 && <Heading titleText={'Sign In'} level={2} className="default" />}
           <Formik
             onSubmit={(values: LoginFormValues, actions: FormikActions<LoginFormValues>) => {
-              console.log('Verify code', values);
-
-              delay(500).then(() => {
-                actions.setSubmitting(false);
-              });
+              if (values.code && values.code.length === 4) {
+                props.verifyOTP({
+                  otp: values.code.join(''),
+                  callback: () => {
+                    console.log('formik submitted')
+                    actions.setSubmitting(false);
+                  },
+                });
+              }
             }}
             initialValues={{ email: '', password: '', code: [] }}
             validationSchema={LoginSchema}
@@ -76,8 +81,9 @@ const mapStateToProps = (state: RootState) => ({
 const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>
   bindActionCreators(
     {
-      checkEmailAction: AuthActions.verifyEmail,
-      loginAction: AuthActions.verifyPassword,
+      verifyEmail: AuthActions.verifyEmail,
+      verifyPassword: AuthActions.verifyPassword,
+      verifyOTP: AuthActions.verifyOTP,
     },
     dispatch,
   );

@@ -29,17 +29,19 @@ export class AuthStateRecord extends Record(defaultAuthState) implements AuthSta
 
 // Define action types
 export enum AuthActionTypes {
+  VERIFY_EMAIL_REQUEST = 'auth/VERIFY_EMAIL_REQUEST',
+  VERIFY_EMAIL_SUCCESS = 'auth/VERIFY_EMAIL_SUCCESS',
+  VERIFY_EMAIL_FAILURE = 'auth/VERIFY_EMAIL_FAILURE',
   VERIFY_PASSWORD_REQUEST = 'auth/VERIFY_PASSWORD_REQUEST',
   VERIFY_PASSWORD_SUCCESS = 'auth/VERIFY_PASSWORD_SUCCESS',
   VERIFY_PASSWORD_FAILURE = 'auth/VERIFY_PASSWORD_FAILURE',
-  VERIFY_EMAIL_REQUEST = 'auth/CHECK_EMAIL_REQUEST',
-  VERIFY_EMAIL_SUCCESS = 'auth/CHECK_EMAIL_SUCCESS',
-  VERIFY_EMAIL_FAILURE = 'auth/CHECK_EMAIL_FAILURE',
+  VERIFY_OTP_REQUEST = 'auth/VERIFY_OTP_REQUEST',
+  VERIFY_OTP_SUCCESS = 'auth/VERIFY_OTP_SUCCESS',
+  VERIFY_OTP_FAILURE = 'auth/VERIFY_OTP_FAILURE',
 }
 
 export interface CheckEmailPayload {
   email: string;
-  error?: string;
 }
 
 export interface LoginPayload {
@@ -48,11 +50,18 @@ export interface LoginPayload {
   message?: string;
 }
 
+export interface OTPPayload {
+  otp: string;
+  callback: (error?: string) => void;
+}
+
 export interface TokenPayload {
   token: string;
+  refreshToken: string;
   expired?: any;
 }
 
 export type CheckEmailAction = PayloadAction<AuthActionTypes.VERIFY_EMAIL_REQUEST, CheckEmailPayload>;
 export type LoginAction = PayloadAction<AuthActionTypes.VERIFY_PASSWORD_REQUEST, LoginPayload>;
-export type TokenAction = PayloadAction<AuthActionTypes.VERIFY_PASSWORD_SUCCESS, TokenPayload>;
+export type VerifyOTPAction = PayloadAction<AuthActionTypes.VERIFY_OTP_REQUEST, OTPPayload>;
+export type TokenAction = PayloadAction<AuthActionTypes.VERIFY_OTP_SUCCESS, TokenPayload>;
