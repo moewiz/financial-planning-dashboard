@@ -1,11 +1,13 @@
 import React from 'react';
+import { bindActionCreators, Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Row, Col } from 'antd';
 import { LoginFormWrap } from './styled';
 import Heading from '../Heading/Heading';
 import { Formik, FormikActions } from 'formik';
 import LoginWizard from './LoginWizard';
-import { bindActionCreators, Dispatch } from 'redux';
 import { StandardAction, RootState } from '../../reducers/reducerTypes';
 import {
   AuthActions,
@@ -16,7 +18,6 @@ import {
   OTPPayload,
   VerifyOTPAction,
 } from '../../reducers/auth';
-import { connect } from 'react-redux';
 
 export interface LoginFormValues {
   email: string;
@@ -42,7 +43,7 @@ interface LoginProp {
   verifyOTP: (payload: OTPPayload) => VerifyOTPAction;
 }
 
-const LoginForm: React.FC<LoginProp> = (props) => {
+const LoginForm: React.FC<LoginProp & RouteComponentProps> = (props) => {
   return (
     <LoginFormWrap>
       <Row gutter={16}>
@@ -54,9 +55,8 @@ const LoginForm: React.FC<LoginProp> = (props) => {
                 props.verifyOTP({
                   otp: values.code.join(''),
                   callback: (error) => {
-                    console.log('formik submitted');
                     if (!error) {
-                      console.log('redirect to /home');
+                      props.history.push('/');
                     }
                     actions.setSubmitting(false);
                   },
@@ -94,4 +94,4 @@ const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(LoginForm);
+)(withRouter(LoginForm));
