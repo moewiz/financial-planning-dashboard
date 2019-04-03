@@ -22,6 +22,10 @@ export default class AuthReducer {
       case AuthActionTypes.VERIFY_OTP_SUCCESS:
       case AuthActionTypes.VERIFY_OTP_FAILURE:
         return AuthReducer.verifyOTPHandler(state, action);
+      case AuthActionTypes.REFRESH_TOKEN_REQUEST:
+      case AuthActionTypes.REFRESH_TOKEN_SUCCESS:
+      case AuthActionTypes.REFRESH_TOKEN_FAILURE:
+        return AuthReducer.refreshTokenHandler(state, action);
       default:
         return state;
     }
@@ -107,6 +111,41 @@ export default class AuthReducer {
 
       case AuthActionTypes.VERIFY_OTP_FAILURE:
         return state.set('loading', false).set('error', action.error);
+
+      default:
+        return state;
+    }
+  }
+
+  private static refreshTokenHandler(state: AuthState, action: StandardAction<any>): AuthState {
+    switch (action.type) {
+      case AuthActionTypes.REFRESH_TOKEN_REQUEST:
+        return state
+          .set('loading', true)
+          .set('error', '')
+          .set('token', '')
+          .set('expired', '');
+
+      case AuthActionTypes.REFRESH_TOKEN_SUCCESS: {
+        const token = action.payload.token;
+        const expired = action.payload.expired;
+
+        return state.merge(
+          fromJS({
+            loading: false,
+            message: '',
+            page: 1,
+            token,
+            expired,
+          }),
+        );
+      }
+
+      case AuthActionTypes.REFRESH_TOKEN_FAILURE:
+        return state
+          .set('loading', false)
+          .set('error', action.error)
+          .set('page', 1);
 
       default:
         return state;
