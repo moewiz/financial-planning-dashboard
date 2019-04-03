@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import moment from 'moment';
 import { store } from '../App';
+import { AuthActions } from '../reducers/auth';
 
 export interface RequestConfig extends AxiosRequestConfig {
   apiVersion?: string;
@@ -48,11 +49,14 @@ ApiUtils.HTTP.interceptors.request.use((extendedConfig: RequestConfig) => {
   const accessToken = ApiUtils.getAccessToken() || null;
 
   if (ApiUtils.shouldRefreshToken()) {
-    console.log('we should refresh to get the new token');
+    store.dispatch(AuthActions.refreshToken());
   }
 
   config.withCredentials = true;
-  config.headers.Authorization = `Bearer ${accessToken}`;
+  console.log('config', config);
+  if (!config.headers.Authorization) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
+  }
 
   let endPoint;
   switch (config.apiVersion) {
@@ -78,11 +82,14 @@ ApiUtils.HTTP.interceptors.request.use((extendedConfig: RequestConfig) => {
   return config;
 });
 
-ApiUtils.HTTP.interceptors.response.use((response: AxiosResponse) => response, (error) => {
-  if (error && error.response && error.response.status === 401) {
-    ApiUtils.handleLogout();
-  }
-  return Promise.reject(error);
-});
+ApiUtils.HTTP.interceptors.response.use(
+  (response: AxiosResponse) => response,
+  (error) => {
+    if (error && error.response && error.response.status === 401) {
+      ApiUtils.handleLogout();
+    }
+    return Promise.reject(error);
+  },
+);
 
 export default ApiUtils;

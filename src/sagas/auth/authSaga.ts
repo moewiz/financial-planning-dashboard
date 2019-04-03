@@ -1,9 +1,11 @@
-import { all, takeLatest, call, put } from 'redux-saga/effects';
+import { all, takeLatest, call, put, select } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 import { get, isFunction } from 'lodash-es';
 
 import { AuthActionTypes, LoginPayload, CheckEmailPayload, OTPPayload, AuthActions } from '../../reducers/auth';
 import AuthService from './authService';
+import { RootState } from '../../reducers/reducerTypes';
+import { store } from '../../App';
 
 interface APIResponse {
   data: string;
@@ -12,7 +14,7 @@ interface APIResponse {
   success: boolean;
 }
 
-function getErrorMessage(error: any, defaultMessage: string = 'Internal server error') {
+function getAPIErrorMessage(error?: any, defaultMessage: string = 'Internal server error') {
   return get(error, 'response.data.error', defaultMessage);
 }
 
@@ -29,7 +31,7 @@ export default class AuthSaga {
     } catch (error) {
       yield put({
         type: AuthActionTypes.VERIFY_EMAIL_FAILURE,
-        error: getErrorMessage(error),
+        error: getAPIErrorMessage(error),
       });
     }
   }
@@ -49,7 +51,7 @@ export default class AuthSaga {
     } catch (error) {
       yield put({
         type: AuthActionTypes.VERIFY_PASSWORD_FAILURE,
-        error: getErrorMessage(error),
+        error: getAPIErrorMessage(error),
       });
     }
   }
@@ -70,7 +72,6 @@ export default class AuthSaga {
         const token = response.data.data.access_token;
         const expired = response.data.data.access_token_expires;
         const refreshToken = response.data.data.refresh_token;
-
         yield put(
           AuthActions.verifyOTPCompleted({
             token,
@@ -83,7 +84,7 @@ export default class AuthSaga {
         callback();
       }
     } catch (error) {
-      const errorMsg = getErrorMessage(error);
+      const errorMsg = getAPIErrorMessage(error);
       yield put({
         type: AuthActionTypes.VERIFY_OTP_FAILURE,
         error: errorMsg,
@@ -91,6 +92,42 @@ export default class AuthSaga {
       if (callback && isFunction(callback)) {
         callback(errorMsg);
       }
+    }
+  }
+
+  public static *refreshToken() {
+    const refreshToken = yield select((state: RootState) => state.auth.refreshToken);
+    if (!refreshToken) {
+      yield put({
+        type: AuthActionTypes.REFRESH_TOKEN_FAILURE,
+        error: getAPIErrorMessage(),
+      });
+    }
+    try {
+      const response: AxiosResponse<
+        APIResponse & {
+          data: {
+            access_token: string;
+            access_token_expires: number;
+          };
+        }
+      > = yield call(AuthService.refreshToken, refreshToken);
+      if (response.status === 200 && response.data.success) {
+        const token = response.data.data.access_token;
+        const expired = response.data.data.access_token_expires;
+        yield put(
+          AuthActions.refreshTokenCompleted({
+            token,
+            expired,
+          }),
+        );
+      }
+    } catch (error) {
+      const errorMsg = getAPIErrorMessage(error);
+      yield put({
+        type: AuthActionTypes.REFRESH_TOKEN_FAILURE,
+        error: errorMsg,
+      });
     }
   }
 
@@ -109,7 +146,17 @@ export default class AuthSaga {
     yield takeLatest(AuthActionTypes.VERIFY_OTP_REQUEST, AuthSaga.verifyOTP);
   }
 
+  public static *watchRefreshToken() {
+    // @ts-ignore
+    yield takeLatest(AuthActionTypes.REFRESH_TOKEN_REQUEST, AuthSaga.refreshToken);
+  }
+
   public static *authFlow() {
-    yield all([AuthSaga.watchVerifyEmail(), AuthSaga.watchVerifyPassword(), AuthSaga.watchVerifyOTP()]);
+    yield all([
+      AuthSaga.watchVerifyEmail(),
+      AuthSaga.watchVerifyPassword(),
+      AuthSaga.watchVerifyOTP(),
+      AuthSaga.watchRefreshToken(),
+    ]);
   }
 }
