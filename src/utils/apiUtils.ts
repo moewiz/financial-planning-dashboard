@@ -33,10 +33,10 @@ class ApiUtils {
     const expiredAt = ApiUtils.getExpiredAt();
 
     if (token && expiredAt) {
-      return moment().unix() < expiredAt;
+      return moment().unix() > expiredAt;
     }
 
-    return true;
+    return false;
   }
 
   public static handleLogout() {
@@ -53,9 +53,8 @@ ApiUtils.HTTP.interceptors.request.use((extendedConfig: RequestConfig) => {
   }
 
   config.withCredentials = true;
-  console.log('config', config);
   if (!config.headers.Authorization) {
-    config.headers.Authorization = `Bearer ${accessToken}`;
+    config.headers.Authorization = accessToken && `Bearer ${accessToken}`;
   }
 
   let endPoint;
