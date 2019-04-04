@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  RouteComponentProps,
-  Redirect
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, RouteComponentProps, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ThemeProvider } from 'styled-components';
@@ -29,35 +23,38 @@ interface DefaultProps {
   path?: string;
   exact?: boolean;
 
-  [ propsName: string ]: any;
+  [propsName: string]: any;
 }
 
 const PublicRoute: React.SFC<DefaultProps> = (props) => {
   const { component: Component, ...rest } = props;
 
   return (
-    <Route {...rest} render={(matchProps: RouteComponentProps) => (
-      <LoginLayout>
-        <Component {...matchProps} />
-      </LoginLayout>
-    )}
+    <Route
+      {...rest}
+      render={(matchProps: RouteComponentProps) => (
+        <LoginLayout>
+          <Component {...matchProps} />
+        </LoginLayout>
+      )}
     />
   );
 };
 
 const PrivateRoute: React.SFC<DefaultProps> = (props) => {
   const { component: Component, ...rest } = props;
-
   if (!ApiUtils.getAccessToken()) {
     return <Redirect to="/sign-in" />;
   }
 
   return (
-    <Route {...rest} render={(matchProps: RouteComponentProps) => (
-      <MainLayout>
-        <Component {...matchProps} />
-      </MainLayout>
-    )}
+    <Route
+      {...rest}
+      render={(matchProps: RouteComponentProps) => (
+        <MainLayout>
+          <Component {...matchProps} />
+        </MainLayout>
+      )}
     />
   );
 };

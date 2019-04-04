@@ -106,7 +106,6 @@ export default class AuthReducer {
           fromJS({
             loading: false,
             message: '',
-            page: 1,
             token,
             expired,
             refreshToken,
@@ -139,7 +138,6 @@ export default class AuthReducer {
           fromJS({
             loading: false,
             message: '',
-            page: 1,
             token,
             expired,
           }),
@@ -150,7 +148,6 @@ export default class AuthReducer {
         return state
           .set('loading', false)
           .set('error', action.error)
-          .set('page', 1);
 
       default:
         return state;

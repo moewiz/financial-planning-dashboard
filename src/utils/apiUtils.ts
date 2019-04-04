@@ -2,7 +2,6 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import moment from 'moment';
 import { store } from '../App';
 import { AuthActions } from '../reducers/auth';
-import { getAccessToken, getExpiration } from '../sagas/auth/authSaga';
 
 export interface RequestConfig extends AxiosRequestConfig {
   apiVersion?: string;
@@ -19,16 +18,14 @@ class ApiUtils {
     baseURL: ApiUtils.BASE_URL,
   });
 
-  public static getAccessToken(): string | null {
-    // const rootState = store.getState();
-    // return rootState.auth && rootState.auth.token;
-    return getAccessToken();
+  public static getAccessToken(): string | undefined {
+    const rootState = store.getState();
+    return rootState.auth && rootState.auth.get('token');
   }
 
   public static getExpiredAt(): number | null {
-    // const rootState = store.getState();
-    // return rootState.auth && rootState.auth.expired;
-    return getExpiration();
+    const rootState = store.getState();
+    return rootState.auth && rootState.auth.get('expired');
   }
 
   public static shouldRefreshToken(): boolean {
