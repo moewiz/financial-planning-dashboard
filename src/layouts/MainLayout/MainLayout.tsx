@@ -13,10 +13,8 @@ class MainLayout extends React.PureComponent {
       <LayoutMain>
         <Sidebar />
         <MainLayoutContent>
-          <Header/>
-          <Content>
-            {children}
-          </Content>
+          <Header />
+          <Content>{children}</Content>
         </MainLayoutContent>
       </LayoutMain>
     );
