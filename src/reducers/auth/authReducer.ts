@@ -1,10 +1,7 @@
 import { fromJS } from 'immutable';
 import { Reducer } from 'redux';
 
-import {
-  AuthState, defaultAuthState, AuthActionTypes,
-  AuthStateRecord,
-} from './authTypes';
+import { AuthState, defaultAuthState, AuthActionTypes, AuthStateRecord } from './authTypes';
 import { StandardAction } from '../reducerTypes';
 
 export default class AuthReducer {
@@ -145,9 +142,7 @@ export default class AuthReducer {
       }
 
       case AuthActionTypes.REFRESH_TOKEN_FAILURE:
-        return state
-          .set('loading', false)
-          .set('error', action.error)
+        return state.set('loading', false).set('error', action.error);
 
       default:
         return state;
