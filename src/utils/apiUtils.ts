@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import moment from 'moment';
 import { store } from '../App';
 import { AuthActions } from '../reducers/auth';
+import https from 'https';
 
 export interface RequestConfig extends AxiosRequestConfig {
   apiVersion?: string;
@@ -10,11 +11,15 @@ export interface RequestConfig extends AxiosRequestConfig {
 }
 
 class ApiUtils {
-  public static BASE_URL: string = 'https://13.229.27.66/';
+  public static BASE_URL: string = 'https://bookings.odoc.life/';
   public static API_VERSION_NONE: string = '';
   public static API_VERSION_1: string = 'v1';
   public static API_VERSION_2: string = 'v2';
   public static HTTP = axios.create({
+    withCredentials: true,
+    httpsAgent: new https.Agent({
+      rejectUnauthorized: false,
+    }),
     baseURL: ApiUtils.BASE_URL,
   });
 
@@ -52,7 +57,6 @@ ApiUtils.HTTP.interceptors.request.use((extendedConfig: RequestConfig) => {
     store.dispatch(AuthActions.refreshToken());
   }
 
-  config.withCredentials = true;
   if (!config.headers.Authorization) {
     config.headers.Authorization = accessToken && `Bearer ${accessToken}`;
   }
