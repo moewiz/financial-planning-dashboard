@@ -2,6 +2,7 @@ import React from 'react';
 import { Modal, Icon, Button, Form, Input, DatePicker } from 'antd';
 import { ModalNameBirthDay, TitleForm, ModalFormHome } from './styled';
 import { ButtonSideBar } from '../../layouts/Sidebar/styled';
+import { sendGAEventCreateClientButtonClicked, sendGAEventNewClientCreated } from '../../../src/utils/GA'
 
 class NameAndBirthDay extends React.PureComponent {
   public state = {
@@ -13,6 +14,7 @@ class NameAndBirthDay extends React.PureComponent {
     this.setState({
       visible: true,
     });
+    sendGAEventCreateClientButtonClicked();
   }
 
   public handleOk = () => {
@@ -25,6 +27,7 @@ class NameAndBirthDay extends React.PureComponent {
         visible: false,
       });
     }, 2000);
+    sendGAEventNewClientCreated();
   }
 
   public handleCancel = () => {
