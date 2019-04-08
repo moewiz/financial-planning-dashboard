@@ -1,25 +1,35 @@
-import ReactGA from 'react-ga';
+import ReactGA, { EventArgs } from 'react-ga';
 import { isLocalhost } from '../serviceWorker';
 
-declare type EventCategory = 'new_client';
-declare type EventAction = 'create_button_clicked' | 'client_saved';
 const GOOGLE_ANALYTICS_ID: string = 'UA-137783509-1';
 
-// Initialize Google Analytics
-function initializeGASession(): void {
+/**
+ * Initialize Google Analytics
+ */
+function initializeGA(trackingID?: string): void {
   const isDevelop = isLocalhost;
 
-  return ReactGA.initialize(GOOGLE_ANALYTICS_ID, { debug: isDevelop });
+  return ReactGA.initialize(trackingID || GOOGLE_ANALYTICS_ID, { debug: isDevelop });
 }
 
 /**
- * Send GA Event creator
+ * Track user navigate
  */
-function sendGAEvent({ category, action }: { category: EventCategory; action: EventAction; }) {
-  return ReactGA.event({
+function updatePageView(_path?: string) {
+  const path = _path || window.location.pathname + window.location.search;
+  ReactGA.pageview(path);
+}
+
+/**
+ * Event - Add custom tracking event
+ */
+function Event(category: string, action: string, label?: string): void {
+  const args: EventArgs = {
     category,
     action,
-  });
+    label,
+  };
+  return ReactGA.event(args);
 }
 
 /**
@@ -28,7 +38,7 @@ function sendGAEvent({ category, action }: { category: EventCategory; action: Ev
  * event_label = create_button_clicked
  */
 function sendGAEventCreateClientButtonClicked(): void {
-  return sendGAEvent({ category: 'new_client', action: 'create_button_clicked' });
+  return Event('new_client', 'create_button_clicked');
 }
 
 /**
@@ -37,7 +47,7 @@ function sendGAEventCreateClientButtonClicked(): void {
  * event_label = client_saved
  */
 function sendGAEventNewClientCreated(): void {
-  return sendGAEvent({ category: 'new_client', action: 'client_saved' });
+  return Event('new_client', 'client_saved');
 }
 
-export { initializeGASession, sendGAEventCreateClientButtonClicked, sendGAEventNewClientCreated };
+export { initializeGA, sendGAEventCreateClientButtonClicked, sendGAEventNewClientCreated, updatePageView };

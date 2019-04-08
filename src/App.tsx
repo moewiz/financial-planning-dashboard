@@ -16,9 +16,6 @@ import LoginLayout from './layouts/LoginLayout';
 import { Home, LoginPage } from './pages';
 import ApiUtils from './utils/apiUtils';
 
-// Google Analytics
-import { initializeGASession } from './utils/GA';
-
 export const { store, persistor } = configureStore();
 
 interface DefaultProps {
@@ -63,7 +60,6 @@ const PrivateRoute: React.SFC<DefaultProps> = (props) => {
 };
 
 const AppRouter = (): JSX.Element => {
-  initializeGASession();
   return (
     <ThemeProvider theme={myTheme}>
       <Provider store={store}>

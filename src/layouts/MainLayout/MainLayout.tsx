@@ -6,8 +6,14 @@ import Sidebar from '../Sidebar';
 
 const { Content } = Layout;
 import { MainLayoutContent, LayoutMain } from './styled';
+import { initializeGA } from '../../utils/GA';
+
 class MainLayout extends React.PureComponent {
-  public render(): JSX.Element {
+  public componentDidMount() {
+    initializeGA();
+  }
+
+  public render(): React.ReactNode {
     const { children } = this.props;
     return (
       <LayoutMain>
