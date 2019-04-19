@@ -6,10 +6,14 @@ const GOOGLE_ANALYTICS_ID: string = 'UA-137783509-1';
 /**
  * Initialize Google Analytics
  */
-function initializeGA(trackingID?: string): void {
+function initializeGA(userId: string, trackingID?: string): void {
   const isDevelop = isLocalhost;
+  // Set up Options
+  const options = {
+    userId,
+  };
 
-  return ReactGA.initialize(trackingID || GOOGLE_ANALYTICS_ID, { debug: isDevelop });
+  return ReactGA.initialize(trackingID || GOOGLE_ANALYTICS_ID, { debug: isDevelop, gaOptions: options });
 }
 
 /**

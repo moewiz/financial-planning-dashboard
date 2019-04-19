@@ -16,6 +16,7 @@ const rootPersistConfig = {
     createTransform(
       (inboundState: AuthState) => {
         return fromJS({
+          userId: inboundState.get('userId'),
           token: inboundState.get('token'),
           expired: inboundState.get('expired'),
           refreshToken: inboundState.get('refreshToken'),
@@ -24,6 +25,7 @@ const rootPersistConfig = {
       (outboundState: AuthState) => {
         const defaultState = new AuthStateRecord(defaultAuthState);
         return defaultState
+          .set('userId', outboundState.userId)
           .set('token', outboundState.token)
           .set('expired', outboundState.expired)
           .set('refreshToken', outboundState.refreshToken);

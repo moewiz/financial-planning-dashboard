@@ -61,6 +61,7 @@ export default class AuthSaga {
       const response: AxiosResponse<
         APIResponse & {
           data: {
+            user_id: string;
             access_token: string;
             access_token_expires: number;
             refresh_token: string;
@@ -68,11 +69,13 @@ export default class AuthSaga {
         }
       > = yield call(AuthService.verifyOTP, otp);
       if (response.status === 200 && response.data.success) {
+        const userId = response.data.data.user_id;
         const token = response.data.data.access_token;
         const expired = response.data.data.access_token_expires;
         const refreshToken = response.data.data.refresh_token;
         yield put(
           AuthActions.verifyOTPCompleted({
+            userId,
             token,
             expired,
             refreshToken,

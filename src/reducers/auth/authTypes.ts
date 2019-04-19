@@ -7,6 +7,7 @@ export interface AuthState {
   loading?: boolean;
   error?: string;
   message?: string;
+  userId?: string;
   token?: string;
   expired: number;
   refreshToken?: string;
@@ -19,6 +20,7 @@ export const defaultAuthState: AuthState = {
   loading: false,
   error: '',
   message: '',
+  userId: '',
   token: '',
   expired: 0,
   refreshToken: '',
@@ -64,6 +66,7 @@ export interface OTPPayload {
 
 export interface TokenPayload {
   token: string;
+  userId?: string;
   refreshToken?: string;
   expired?: number;
 }

@@ -95,6 +95,7 @@ export default class AuthReducer {
           .set('expired', '');
 
       case AuthActionTypes.VERIFY_OTP_SUCCESS: {
+        const userId = action.payload.userId;
         const token = action.payload.token;
         const expired = action.payload.expired;
         const refreshToken = action.payload.refreshToken;
@@ -103,6 +104,7 @@ export default class AuthReducer {
           fromJS({
             loading: false,
             message: '',
+            userId,
             token,
             expired,
             refreshToken,
