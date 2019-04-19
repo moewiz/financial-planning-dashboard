@@ -10,7 +10,9 @@ import { initializeGA } from '../../utils/GA';
 
 class MainLayout extends React.PureComponent {
   public componentDidMount() {
-    initializeGA();
+    const { userId } = this.props;
+
+    initializeGA(userId);
   }
 
   public render(): React.ReactNode {
