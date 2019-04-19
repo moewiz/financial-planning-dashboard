@@ -1,13 +1,13 @@
 import styled, { StyledComponent, StyledFunction, css } from 'styled-components';
 import { Menu, Button, Layout, Skeleton  } from 'antd';
+import { get } from 'lodash';
+
 const { Sider } = Layout;
-import { get } from 'lodash-es';
 
 const SubMenu = Menu.SubMenu;
 export const ClientInfo = styled.div.attrs({
   className: 'client-Info',
 })`
-
 `;
 
 export const SiderCollapsible = styled(Sider).attrs({
