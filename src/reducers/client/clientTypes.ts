@@ -5,7 +5,7 @@ export interface TaskList {
   date: string;
   dataEntries?: Array<{
     tabName: string;
-    tables: Array<{ tableName: string; [key: string]: any }>;
+    tables: Array<{ tableKey: string, tableName: string; [key: string]: any }>;
   }>;
 }
 
@@ -31,7 +31,14 @@ export const defaultClientState: ClientState = {
           dataEntries: [
             {
               tabName: 'Current',
-              tables: [{ tableName: 'Basic Information' }],
+              tables: [
+                { tableKey: 'basicInformation', tableName: 'Basic Information' },
+                { tableKey: 'income', tableName: 'Income' },
+                { tableKey: 'expenditure', tableName: 'Expenditure' },
+                { tableKey: 'assets', tableName: 'Assets' },
+                { tableKey: 'liabilities', tableName: 'Liabilities' },
+                { tableKey: 'insurance', tableName: 'Insurance' },
+              ],
             },
           ],
         },
