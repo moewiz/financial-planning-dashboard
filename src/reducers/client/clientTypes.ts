@@ -1,11 +1,12 @@
 import { Record } from 'immutable';
+import { PayloadAction } from '../reducerTypes';
 
 export interface TaskList {
   name: string;
   date: string;
   dataEntries?: Array<{
     tabName: string;
-    tables: Array<{ tableKey: string, tableName: string; [key: string]: any }>;
+    tables: Array<{ tableKey: string; tableName: string; [key: string]: any }>;
   }>;
 }
 
@@ -63,3 +64,11 @@ export enum ClientActionTypes {
   FETCH_DATA_ENTRY_SUCCESS = 'client/FETCH_DATA_ENTRY_SUCCESS',
   FETCH_DATA_ENTRY_FAILURE = 'client/FETCH_DATA_ENTRY_FAILURE',
 }
+
+export interface FetchDataEntryPayload {
+  clientId: string;
+  taskName: string;
+  tabName: string;
+}
+
+export type FetchDataEntryAction = PayloadAction<ClientActionTypes.FETCH_DATA_ENTRY_REQUEST, FetchDataEntryPayload>;

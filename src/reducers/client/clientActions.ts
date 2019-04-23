@@ -1,18 +1,7 @@
-// import {
-//   ClientActionTypes,
-//   LoginPayload,
-//   LoginAction,
-//   TokenPayload,
-//   TokenAction,
-//   CheckEmailAction,
-//   CheckEmailPayload,
-//   OTPPayload,
-//   VerifyOTPAction,
-//   RefreshTokenAction,
-// } from './authTypes';
-// import { createPayloadAction } from '../reducerHelpers';
+import { ClientActionTypes, FetchDataEntryPayload, FetchDataEntryAction } from './clientTypes';
+import { createPayloadAction } from '../reducerHelpers';
 
 export default class ClientActions {
-  // public static verifyEmail = (payload: CheckEmailPayload): CheckEmailAction =>
-  //   createPayloadAction(ClientActionTypes.VERIFY_EMAIL_REQUEST, payload);
+  public static fetchDataEntry = (payload: FetchDataEntryPayload): FetchDataEntryAction =>
+    createPayloadAction(ClientActionTypes.FETCH_DATA_ENTRY_REQUEST, payload)
 }
