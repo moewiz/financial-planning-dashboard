@@ -7,6 +7,7 @@ import { LoadedState, LoadedReducers } from './reducerTypes';
 
 // Import other reducers
 import AuthReducer, { AuthStateRecord, defaultAuthState, AuthState } from './auth';
+import ClientReducer from './client';
 
 const rootPersistConfig = {
   key: 'root',
@@ -41,6 +42,7 @@ let asyncReducers: LoadedReducers = {};
 export const createRootReducer = (): Reducer => {
   const initialReducers = combineReducers({
     auth: AuthReducer.reducer,
+    clientMetaData: ClientReducer.reducer,
     ...asyncReducers,
   });
   return persistReducer(rootPersistConfig, initialReducers);

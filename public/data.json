@@ -1,0 +1,182 @@
+{
+  "basicInformation": [
+    {
+      "description": "Client",
+      "firstName": "Jack",
+      "lastName": "Rayan",
+      "dob": 1555924936,
+      "empStatus": "selfEmployed",
+      "retirementYear": 1555924936,
+      "maritalState": "married",
+      "expandable": {
+        "riskProfile": "defensive",
+        "hasPrivateHealthInsurance": true,
+        "lookingForCoupleAdvice": false
+      }
+    },
+    {
+      "description": "Partner",
+      "firstName": "Susane",
+      "lastName": "Diaz",
+      "dob": 1555924936,
+      "empStatus": "unemployed",
+      "retirementYear": "",
+      "maritalState": "married",
+      "expandable": {
+        "riskProfile": "highGrowth",
+        "hasPrivateHealthInsurance": false,
+        "jointRiskProfile": "defensive"
+      }
+    }
+  ],
+  "income": [
+    {
+      "description": "Salary",
+      "type": "employment",
+      "owner": "Client",
+      "value": 1000,
+      "indexation": "salaryInflation",
+      "from": "start",
+      "to": "clientRetirement"
+    },
+    {
+      "description": "Rental",
+      "type": "taxable",
+      "owner": "Partner",
+      "value": 1000,
+      "indexation": "inflationCPI",
+      "from": "start",
+      "to": "end"
+    }
+  ],
+  "expenditure": [
+    {
+      "description": "Living Expenses",
+      "type": "employment",
+      "owner": "Client",
+      "value": 1000,
+      "indexation": "inflationCPI",
+      "from": "start",
+      "to": "end"
+    }
+  ],
+  "assets": [
+    {
+      "description": "Home",
+      "type": "lifestyle",
+      "owner": "Client",
+      "value": 25000,
+      "investment": "primaryResidence",
+      "from": "existing",
+      "to": "retain",
+      "expandable": {
+        "costBase": 50000,
+        "growthRate": 12
+      }
+    },
+    {
+      "description": "Shares",
+      "type": "directInvestment",
+      "owner": "Client",
+      "value": 100000,
+      "investment": "australianEquity",
+      "from": "existing",
+      "to": "retain",
+      "expandable": {
+        "taxableComponent": 1000,
+        "taxFreeComponent": 5000,
+        "incomeGenerated": 15,
+        "insuranceCost": 4500,
+        "growthRate": 15,
+        "frankedRate": 10,
+        "contributionRate": 25
+      },
+      "contributionWithdrawals": [
+        {
+          "type": "contribution",
+          "value": 10000,
+          "from": 1555924936,
+          "to": 1555924936
+        }
+      ]
+    },
+    {
+      "description": "Pension",
+      "type": "accountBased",
+      "owner": "Client",
+      "value": 100000,
+      "investment": "preservation",
+      "from": "existing",
+      "to": "end",
+      "expandable": {
+        "totalBalance": 120000,
+        "productFee": 2,
+        "taxableComponent": 4000,
+        "taxFreeComponent": 2000,
+        "growthRate": 5,
+        "frankedRate": 1,
+        "contributionRate": 15
+      },
+      "contributionWithdrawals": [
+        {
+          "type": "contribution",
+          "value": 10000,
+          "from": 1555924936,
+          "to": 1555924936
+        }
+      ]
+    }
+  ],
+  "liabilities": [
+    {
+      "description": "Home Loan",
+      "type": "nonDeductible",
+      "owner": "Client",
+      "value": 100000,
+      "interest": 4.5,
+      "from": "existing",
+      "to": "retain",
+      "expandable": {
+        "deductibily": 2,
+        "repaymentAmount": 1150,
+        "type": "principalAndInterest",
+        "durationLength": 10,
+        "durationType": "years",
+        "creditLimit": 5000,
+        "associatedAsset": "Shares"
+      },
+      "drawdowns": [
+        {
+          "value": 18000,
+          "from": "start",
+          "to": "end"
+        }
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "provider": "ABC",
+      "owner": "Client",
+      "premiumFeeDetails": [
+        {
+          "feeType": "premium",
+          "amount": 2000,
+          "frequency": "yearly",
+          "specialNote": "Sample note."
+        }
+      ],
+      "coverDetails": [
+        {
+          "coverType": "life",
+          "policyOwner": "superFund",
+          "benefitAmount": 200000,
+          "premiumType": "stepped",
+          "expandable": {
+            "coverType": "within"
+          }
+        }
+      ]
+    }
+  ]
+}
