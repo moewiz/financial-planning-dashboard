@@ -42,7 +42,7 @@ let asyncReducers: LoadedReducers = {};
 export const createRootReducer = (): Reducer => {
   const initialReducers = combineReducers({
     auth: AuthReducer.reducer,
-    clientMetaData: ClientReducer.reducer,
+    client: ClientReducer.reducer,
     ...asyncReducers,
   });
   return persistReducer(rootPersistConfig, initialReducers);

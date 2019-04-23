@@ -1,9 +1,18 @@
 import { Record } from 'immutable';
 
+export interface TaskList {
+  name: string;
+  date: string;
+  dataEntries?: Array<{
+    tabName: string;
+    tables: Array<{ tableName: string; [key: string]: any }>;
+  }>;
+}
+
 export interface Client {
   clientID: string;
   clientName: string;
-  taskList?: object[];
+  taskList?: TaskList[];
 }
 
 export interface ClientState {
@@ -15,7 +24,18 @@ export const defaultClientState: ClientState = {
     {
       clientID: '123456',
       clientName: 'John Samual',
-      taskList: [],
+      taskList: [
+        {
+          name: 'New',
+          date: '20/03/2019',
+          dataEntries: [
+            {
+              tabName: 'Current',
+              tables: [{ tableName: 'Basic Information' }],
+            },
+          ],
+        },
+      ],
     },
   ],
 };
@@ -32,4 +52,7 @@ export enum ClientActionTypes {
   FETCH_CLIENT_REQUEST = 'client/FETCH_CLIENT_REQUEST',
   FETCH_CLIENT_SUCCESS = 'client/FETCH_CLIENT_SUCCESS',
   FETCH_CLIENT_FAILURE = 'client/FETCH_CLIENT_FAILURE',
+  FETCH_DATA_ENTRY_REQUEST = 'client/FETCH_DATA_ENTRY_REQUEST',
+  FETCH_DATA_ENTRY_SUCCESS = 'client/FETCH_DATA_ENTRY_SUCCESS',
+  FETCH_DATA_ENTRY_FAILURE = 'client/FETCH_DATA_ENTRY_FAILURE',
 }
