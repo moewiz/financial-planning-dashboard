@@ -5,6 +5,7 @@ import Heading from '../../components/Heading/Heading';
 import { ButtonModalFixed } from '../../components/NameAndBirthDay/styled';
 import { HomeDesc, HomePage } from '../home/styled';
 import { get } from 'lodash';
+import DataEntryTable from './DataEntryTable';
 const { Content } = Layout;
 
 class Client extends React.PureComponent<RouteComponentProps> {
@@ -14,7 +15,7 @@ class Client extends React.PureComponent<RouteComponentProps> {
     const tabName = get(match, 'params.tabName');
 
     return tabName ? (
-      <div>{tabName}</div>
+      <DataEntryTable tabName={tabName} />
     ) : (
       <HomePage select>
         <Content>
