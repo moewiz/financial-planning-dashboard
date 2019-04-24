@@ -1,8 +1,11 @@
 import React, { PureComponent } from 'react';
 import { Icon, Popconfirm, Table } from 'antd';
 
-interface DataEntryProps {
-  tabName: string;
+interface DataEntryTableProps {
+  name: string;
+  icon?: React.ReactNode;
+  expanded?: boolean;
+  add?: boolean;
 }
 
 const columns = [
@@ -34,7 +37,7 @@ const data = [
     name: 'Jim Green',
     age: 42,
     address: 'London No. 1 Lake Park',
-    description: 'My name is Jim Green, I am 42 years old, living in London No. 1 Lake Park.',
+    // description: 'My name is Jim Green, I am 42 years old, living in London No. 1 Lake Park.',
   },
   {
     key: 3,
@@ -45,15 +48,33 @@ const data = [
   },
 ];
 
-class DataEntryTable extends PureComponent<DataEntryProps> {
+class DataEntryTable extends PureComponent<DataEntryTableProps> {
+  protected static defaultProps = {
+    expanded: true,
+  };
+
   public render() {
-    const { tabName } = this.props;
+    const { icon, name, expanded, add } = this.props;
+
     return (
-      <Table
-        columns={columns}
-        expandedRowRender={(record) => <p style={{ margin: 0 }}>{record.description}</p>}
-        dataSource={data}
-      />
+      <>
+        <div>
+          {icon}
+          {name}
+        </div>
+
+        {expanded ? (
+          <Table
+            columns={columns}
+            expandedRowRender={(record) =>
+              record.description ? <p style={{ margin: 0 }}>{record.description}</p> : null
+            }
+            dataSource={data}
+          />
+        ) : (
+          <Table columns={columns} dataSource={data} />
+        )}
+      </>
     );
   }
 }
