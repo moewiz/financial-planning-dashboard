@@ -1,14 +1,22 @@
 import React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import { Layout, Icon } from 'antd';
 import Heading from '../../components/Heading/Heading';
 import { ButtonModalFixed } from '../../components/NameAndBirthDay/styled';
 import { HomeDesc, HomePage } from '../home/styled';
+import { get } from 'lodash';
 const { Content } = Layout;
 
-class Home extends React.PureComponent {
+class Client extends React.PureComponent<RouteComponentProps> {
   public render(): JSX.Element {
-    return (
-      <HomePage select={true}>
+    const { match } = this.props;
+    const clientId = get(match, 'params.clientId');
+    const tabName = get(match, 'params.tabName');
+
+    return tabName ? (
+      <div>{tabName}</div>
+    ) : (
+      <HomePage select>
         <Content>
           <Heading level={2} className="subHeading" titleText="Hi John we missed you." />
           <HomeDesc>Click the plus button to start your advice</HomeDesc>
@@ -21,4 +29,4 @@ class Home extends React.PureComponent {
   }
 }
 
-export default Home;
+export default Client;

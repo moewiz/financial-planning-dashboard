@@ -43,6 +43,20 @@ class Sidebar extends React.PureComponent<SidebarProps & RouteComponentProps> {
     });
   }
 
+  public showTable = (tabName: string) => {
+    const { history } = this.props;
+    const clientId = '123456';
+
+    history.push(`/client/${clientId}/${tabName}`);
+  }
+
+  public selectClient = () => {
+    const { history } = this.props;
+    const clientId = '123456';
+
+    history.push(`/client/${clientId}`);
+  }
+
   public ClientItemRender = (tagName: string) => {
     const { loading } = this.state;
     return (
@@ -55,35 +69,28 @@ class Sidebar extends React.PureComponent<SidebarProps & RouteComponentProps> {
           </StatusItem>
         }
       >
-        <SubList key="1">
+        <SubList key="1" onClick={() => this.showTable('current')}>
           <i className="icon-current" />
           <span>Current</span>
         </SubList>
-        <SubList key="2">
+        <SubList key="2" onClick={() => this.showTable('strategy')}>
           <i className="icon-strategy" />
           <span>Strategy</span>
         </SubList>
-        <SubList key="3">
+        <SubList key="3" onClick={() => this.showTable('switching')}>
           <i className="icon-projections" />
           <span>Switching</span>
         </SubList>
-        <SubList key="4">
+        <SubList key="4" onClick={() => this.showTable('documents')}>
           <i className="icon-documents" />
           <span>Documents</span>
         </SubList>
-        <SubList key="5">
+        <SubList key="5" onClick={() => this.showTable('presentation')}>
           <i className="icon-presentation" />
           <span>Presentation</span>
         </SubList>
       </ClientItem>
     );
-  }
-
-  public selectClient = () => {
-    const { history } = this.props;
-    const clientId = '123456';
-
-    history.push(`/client/${clientId}`);
   }
 
   public render(): JSX.Element {

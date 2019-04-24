@@ -68,7 +68,8 @@ const AppRouter = (): JSX.Element => {
             <Switch>
               <PublicRoute exact path="/sign-in" component={LoginPage} />
               <PrivateRoute exact path="/" component={Home} />
-              <PrivateRoute exact path="/client/:clientId" component={Client} />
+              <PrivateRoute exact path="/client/:clientId/:tabName" component={Client} />
+              <PrivateRoute expact path="/client/:clientId" component={Client} />
             </Switch>
           </Router>
         </PersistGate>
