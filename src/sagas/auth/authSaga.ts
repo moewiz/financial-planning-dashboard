@@ -5,16 +5,10 @@ import { get, isFunction } from 'lodash';
 import { AuthActionTypes, LoginPayload, CheckEmailPayload, OTPPayload, AuthActions } from '../../reducers/auth';
 import AuthService from './authService';
 import { RootState } from '../../reducers/reducerTypes';
-
-interface APIResponse {
-  data: string;
-  error: string;
-  message: string;
-  success: boolean;
-}
+import {APIResponse} from '../../utils/apiUtils';
 
 function getAPIErrorMessage(error?: any, defaultMessage: string = 'Internal server error') {
-  return get(error, 'response.data.error', defaultMessage);
+  return get(error, 'data.error', defaultMessage);
 }
 
 export default class AuthSaga {

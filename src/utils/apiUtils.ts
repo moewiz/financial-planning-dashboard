@@ -3,11 +3,23 @@ import moment from 'moment';
 import { store } from '../App';
 import { AuthActions } from '../reducers/auth';
 import https from 'https';
+import {get} from 'lodash';
 
 export interface RequestConfig extends AxiosRequestConfig {
   apiVersion?: string;
 
   [propName: string]: any;
+}
+
+export interface APIResponse {
+  data: string;
+  error: string;
+  message: string;
+  success: boolean;
+}
+
+export function getAPIErrorMessage(error?: any, defaultMessage: string = 'Internal server error') {
+  return get(error, 'data.error', defaultMessage);
 }
 
 class ApiUtils {

@@ -18,6 +18,10 @@ export interface Client {
 
 export interface ClientState {
   clients: Client[];
+  loading?: boolean;
+  error?: string;
+
+  [ propsName: string ]: any;
 }
 
 export const defaultClientState: ClientState = {
@@ -33,12 +37,12 @@ export const defaultClientState: ClientState = {
             {
               tabName: 'Current',
               tables: [
-                { tableKey: 'basicInformation', tableName: 'Basic Information' },
-                { tableKey: 'income', tableName: 'Income' },
-                { tableKey: 'expenditure', tableName: 'Expenditure' },
-                { tableKey: 'assets', tableName: 'Assets' },
-                { tableKey: 'liabilities', tableName: 'Liabilities' },
-                { tableKey: 'insurance', tableName: 'Insurance' },
+                // { tableKey: 'basicInformation', tableName: 'Basic Information' },
+                // { tableKey: 'income', tableName: 'Income' },
+                // { tableKey: 'expenditure', tableName: 'Expenditure' },
+                // { tableKey: 'assets', tableName: 'Assets' },
+                // { tableKey: 'liabilities', tableName: 'Liabilities' },
+                // { tableKey: 'insurance', tableName: 'Insurance' },
               ],
             },
           ],
@@ -46,6 +50,8 @@ export const defaultClientState: ClientState = {
       ],
     },
   ],
+  loading: false,
+  error: '',
 };
 
 export class ClientStateRecord extends Record(defaultClientState) implements ClientState {

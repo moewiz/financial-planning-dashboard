@@ -23,6 +23,8 @@ class MainLayout extends React.PureComponent<MainLayoutProp> {
     const { userId, fetchDataEntry } = this.props;
 
     initializeGA(userId);
+
+    // for testing
     fetchDataEntry({ clientId: '123456', taskName: 'New', tabName: 'Current' });
   }
 

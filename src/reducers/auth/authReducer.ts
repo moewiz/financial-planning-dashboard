@@ -33,8 +33,6 @@ export default class AuthReducer {
 
   private static readonly initialState = new AuthStateRecord(defaultAuthState);
 
-  // private static readonly initialState = fromJS(defaultAuthState);
-
   private static verifyEmailHandler(state: AuthState, action: StandardAction<any>): AuthState {
     switch (action.type) {
       case AuthActionTypes.VERIFY_EMAIL_REQUEST:
