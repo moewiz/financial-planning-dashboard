@@ -11,11 +11,11 @@ class DataEntry extends PureComponent<DataEntryProps> {
     return (
       <div>
         <DataEntryTable icon={<Icon type="user" />} name={'Basic Information'} />
-        <DataEntryTable name={'Income'} add expanded={false} />
-        <DataEntryTable name={'Expenditure'} add expanded={false} />
-        <DataEntryTable name={'Assets'} add />
-        <DataEntryTable name={'Liabilities'} add />
-        <DataEntryTable name={'Insurance'} add />
+        {/*<DataEntryTable name={'Income'} add expanded={false} />*/}
+        {/*<DataEntryTable name={'Expenditure'} add expanded={false} />*/}
+        {/*<DataEntryTable name={'Assets'} add />*/}
+        {/*<DataEntryTable name={'Liabilities'} add />*/}
+        {/*<DataEntryTable name={'Insurance'} add />*/}
       </div>
     );
   }
