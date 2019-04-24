@@ -21,7 +21,7 @@ export interface ClientState {
   loading?: boolean;
   error?: string;
 
-  [ propsName: string ]: any;
+  [propsName: string]: any;
 }
 
 export const defaultClientState: ClientState = {

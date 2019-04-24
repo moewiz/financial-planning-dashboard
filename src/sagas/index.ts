@@ -4,8 +4,5 @@ import AuthSaga from './auth';
 import ClientSaga from './client';
 
 export default function* rootSaga() {
-  yield all([
-    AuthSaga.authFlow(),
-    ClientSaga.clientFlow(),
-  ]);
+  yield all([AuthSaga.authFlow(), ClientSaga.clientFlow()]);
 }

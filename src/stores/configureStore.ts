@@ -22,7 +22,7 @@ const bindMiddleware = (middleware: any) => {
 
 export default function configureStore() {
   const rootReducer = createRootReducer();
-  const store = createStore(rootReducer, bindMiddleware([ sagaMiddleware ]));
+  const store = createStore(rootReducer, bindMiddleware([sagaMiddleware]));
   sagaMiddleware.run(rootSaga);
 
   if (module.hot) {

@@ -1,10 +1,10 @@
-import {
-  MetaAction,
-  PayloadAction,
-} from './reducerTypes';
+import { MetaAction, PayloadAction } from './reducerTypes';
 
-export const createAction = <Type extends string, Meta, Error>(type: Type, meta?: Meta, error?: Error)
-  : MetaAction<Type, Meta, Error> => ({ type, meta, error });
+export const createAction = <Type extends string, Meta, Error>(
+  type: Type,
+  meta?: Meta,
+  error?: Error,
+): MetaAction<Type, Meta, Error> => ({ type, meta, error });
 
 export const createPayloadAction = <Type extends string, Payload, Meta, Error>(
   type: Type,

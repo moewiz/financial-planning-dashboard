@@ -3,7 +3,7 @@ import moment from 'moment';
 import { store } from '../App';
 import { AuthActions } from '../reducers/auth';
 import https from 'https';
-import {get} from 'lodash';
+import { get } from 'lodash';
 
 export interface RequestConfig extends AxiosRequestConfig {
   apiVersion?: string;

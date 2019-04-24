@@ -5,7 +5,7 @@ import { get, isFunction } from 'lodash';
 import { AuthActionTypes, LoginPayload, CheckEmailPayload, OTPPayload, AuthActions } from '../../reducers/auth';
 import AuthService from './authService';
 import { RootState } from '../../reducers/reducerTypes';
-import {APIResponse} from '../../utils/apiUtils';
+import { APIResponse } from '../../utils/apiUtils';
 
 function getAPIErrorMessage(error?: any, defaultMessage: string = 'Internal server error') {
   return get(error, 'data.error', defaultMessage);

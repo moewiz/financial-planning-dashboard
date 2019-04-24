@@ -1,11 +1,9 @@
 import { all, takeLatest, call, put } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 
-import {
-  ClientActionTypes, FetchDataEntryPayload,
-} from '../../reducers/client/clientTypes';
+import { ClientActionTypes, FetchDataEntryPayload } from '../../reducers/client/clientTypes';
 import ClientService from './clientService';
-import {APIResponse, getAPIErrorMessage} from '../../utils/apiUtils';
+import { APIResponse, getAPIErrorMessage } from '../../utils/apiUtils';
 
 export default class ClientSaga {
   public static *fetchDataEntry({ payload }: { payload: FetchDataEntryPayload }) {
@@ -31,14 +29,12 @@ export default class ClientSaga {
     }
   }
 
-  public static * watchFetchDataEntry() {
+  public static *watchFetchDataEntry() {
     // @ts-ignore
     yield takeLatest(ClientActionTypes.FETCH_DATA_ENTRY_REQUEST, ClientSaga.fetchDataEntry);
   }
 
-  public static * clientFlow() {
-    yield all([
-      ClientSaga.watchFetchDataEntry(),
-    ]);
+  public static *clientFlow() {
+    yield all([ClientSaga.watchFetchDataEntry()]);
   }
 }
