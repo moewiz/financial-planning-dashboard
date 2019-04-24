@@ -101,7 +101,7 @@ class DataEntryTable extends PureComponent<DataEntryTableProps> {
           {icon}
           {name}
         </div>
-        <Table columns={columns} dataSource={dataSource} />
+        <Table columns={columns} dataSource={dataSource} pagination={false} />
 
         {/*{expanded ? (*/}
         {/*  <Table*/}
