@@ -83,7 +83,7 @@ class Sidebar extends React.PureComponent<SidebarProps & RouteComponentProps> {
     const { history } = this.props;
     const clientId = '123456';
 
-    history.push(`client/${clientId}`);
+    history.push(`/client/${clientId}`);
   }
 
   public render(): JSX.Element {
