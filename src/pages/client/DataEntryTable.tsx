@@ -16,42 +16,90 @@ class DataEntryTable extends PureComponent<DataEntryTableProps> {
     dataSource: [
       {
         key: '0',
-        name: 'Edward King 0',
-        age: '32',
-        address: 'London, Park Lane no. 0',
+        description: 'Client',
+        firstName: 'Jack',
+        lastName: 'Rayan',
+        dob: 1555924936,
+        empStatus: 'selfEmployed',
+        retirementYear: 1555924936,
+        maritalState: 'married',
+        expandable: {
+          riskProfile: 'defensive',
+          hasPrivateHealthInsurance: true,
+          lookingForCoupleAdvice: false,
+        },
       },
       {
         key: '1',
-        name: 'Edward King 1',
-        age: '32',
-        address: 'London, Park Lane no. 1',
+        description: 'Partner',
+        firstName: 'Susane',
+        lastName: 'Diaz',
+        dob: 1555924936,
+        empStatus: 'unemployed',
+        retirementYear: '',
+        maritalState: 'married',
+        expandable: {
+          riskProfile: 'highGrowth',
+          hasPrivateHealthInsurance: false,
+          jointRiskProfile: 'defensive',
+        },
       },
     ],
     count: 2,
   };
 
-  private columns = [
+  public columns = [
     {
-      title: 'name',
-      dataIndex: 'name',
-      width: '30%',
-      editable: true,
+      title: 'Description',
+      dataIndex: 'description',
+      width: 130,
+      fixed: 'left',
     },
     {
-      title: 'age',
-      dataIndex: 'age',
+      title: 'First Name',
+      dataIndex: 'firstName',
+      key: '1',
+      width: 120,
     },
     {
-      title: 'address',
-      dataIndex: 'address',
+      title: 'Last Name',
+      dataIndex: 'lastName',
+      key: '2',
+      width: 120,
     },
     {
-      title: 'operation',
-      dataIndex: 'operation',
+      title: 'DOB',
+      dataIndex: 'dob',
+      key: '3',
+      width: 120,
+    },
+    {
+      title: 'Emp Status',
+      dataIndex: 'empStatus',
+      key: '4',
+      width: 120,
+    },
+    {
+      title: 'Retirement Year',
+      dataIndex: 'retirementYear',
+      key: '5',
+      width: 120,
+    },
+    {
+      title: 'Marital State',
+      dataIndex: 'maritalState',
+      key: '6',
+      width: 120,
+    },
+    {
+      title: 'Action',
+      key: 'operation',
+      fixed: 'right',
+      width: 100,
       render: (text: any, record: any) =>
         this.state.dataSource.length >= 1 ? (
           <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
-            <a href="javascript:;">Delete</a>
+            <a href="javascript:">Delete</a>
           </Popconfirm>
         ) : null,
     },
@@ -76,18 +124,26 @@ class DataEntryTable extends PureComponent<DataEntryTableProps> {
     });
   }
 
+  public renderExpandable = (expandable: any = {}) => {
+    return (
+      <>
+        <p>{expandable.riskProfile}</p>
+        <p>{expandable.hasPrivateHealthInsurance}</p>
+        <p>{expandable.jointRiskProfile}</p>
+      </>
+    );
+  }
+
   public render() {
     const { icon, name, expanded, add } = this.props;
     const { dataSource } = this.state;
     const columns = this.columns.map((col) => {
-      if (!col.editable) {
-        return col;
-      }
       return {
         ...col,
+        fixed: col.fixed || false,
         onCell: (record: any) => ({
           record,
-          editable: col.editable,
+          editable: true,
           dataIndex: col.dataIndex,
           title: col.title,
         }),
@@ -101,7 +157,14 @@ class DataEntryTable extends PureComponent<DataEntryTableProps> {
           {icon}
           {name}
         </div>
-        <Table columns={columns} dataSource={dataSource} pagination={false} />
+        <Table
+          // @ts-ignore
+          columns={columns}
+          scroll={{ x: 950, y: 300 }}
+          dataSource={dataSource}
+          expandedRowRender={(record) => (record.expandable ? this.renderExpandable(record.expandable) : null)}
+          pagination={false}
+        />
 
         {/*{expanded ? (*/}
         {/*  <Table*/}
