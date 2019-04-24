@@ -13,7 +13,7 @@ import MainLayout from './layouts/MainLayout';
 import LoginLayout from './layouts/LoginLayout';
 
 // Import Pages
-import { Home, LoginPage } from './pages';
+import { Home, LoginPage, Client } from './pages';
 import ApiUtils from './utils/apiUtils';
 
 export const { store, persistor } = configureStore();
@@ -68,6 +68,7 @@ const AppRouter = (): JSX.Element => {
             <Switch>
               <PublicRoute exact path="/sign-in" component={LoginPage} />
               <PrivateRoute exact path="/" component={Home} />
+              <PrivateRoute exact path="/client/:clientId" component={Client} />
             </Switch>
           </Router>
         </PersistGate>
