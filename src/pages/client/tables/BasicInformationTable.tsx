@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Icon, Popconfirm, Table } from 'antd';
-import ExpandedBasicInformationRow, {BasicInformation} from './ExpandedBasicInformationRow';
+import ExpandedBasicInformationRow, {BasicInformation} from '../ExpandedBasicInformationRow';
 
 class BasicInformationTable extends PureComponent {
   protected static defaultProps = {

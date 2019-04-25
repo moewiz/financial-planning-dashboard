@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Icon, Popconfirm, Table } from 'antd';
-import ExpandedBasicInformationRow, { BasicInformation } from './ExpandedBasicInformationRow';
 
-class IncomeTable extends PureComponent {
+class ExpenditureTable extends PureComponent {
   protected static defaultProps = {
     expanded: true,
   };
@@ -10,19 +9,9 @@ class IncomeTable extends PureComponent {
     dataSource: [
       {
         key: '0',
-        description: 'Salary',
+        description: 'Living Expenses',
         type: 'employment',
         owner: 'Client',
-        value: 1000,
-        indexation: 'salaryInflation',
-        from: 'start',
-        to: 'clientRetirement',
-      },
-      {
-        key: '1',
-        description: 'Rental',
-        type: 'taxable',
-        owner: 'Partner',
         value: 1000,
         indexation: 'inflationCPI',
         from: 'start',
@@ -36,7 +25,8 @@ class IncomeTable extends PureComponent {
     {
       title: 'Description',
       dataIndex: 'description',
-      width: 120,
+      width: 140,
+      fixed: 'left',
     },
     {
       title: 'Type',
@@ -110,16 +100,6 @@ class IncomeTable extends PureComponent {
     });
   }
 
-  public renderExpandable = (expandable: any = {}) => {
-    return (
-      <>
-        <p>{expandable.riskProfile}</p>
-        <p>{expandable.hasPrivateHealthInsurance}</p>
-        <p>{expandable.jointRiskProfile}</p>
-      </>
-    );
-  }
-
   public render() {
     const { dataSource } = this.state;
     const columns = this.columns.map((col) => {
@@ -139,12 +119,12 @@ class IncomeTable extends PureComponent {
       <>
         <div>
           <Icon type={'plus-square'} theme={'filled'} onClick={this.handleAdd} />
-          {'Income'}
+          {'Expenditure'}
         </div>
         <Table
           // @ts-ignore
           columns={columns}
-          scroll={{ x: 1050, y: 320 }}
+          scroll={{ x: 950, y: 320 }}
           dataSource={dataSource}
           pagination={false}
         />
@@ -153,4 +133,4 @@ class IncomeTable extends PureComponent {
   }
 }
 
-export default IncomeTable;
+export default ExpenditureTable;
