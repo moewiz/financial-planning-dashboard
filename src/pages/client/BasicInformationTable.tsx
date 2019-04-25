@@ -84,48 +84,7 @@ class BasicInformationTable extends PureComponent {
       dataIndex: 'maritalState',
       key: '6',
     },
-    {
-      title: 'Action',
-      key: 'operation',
-      fixed: 'right',
-      width: 100,
-      render: (text: any, record: any) =>
-        this.state.dataSource.length >= 1 ? (
-          <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
-            <a href="javascript:">Delete</a>
-          </Popconfirm>
-        ) : null,
-    },
   ];
-
-  public handleDelete = (key: string) => {
-    const dataSource = [...this.state.dataSource];
-    this.setState({ dataSource: dataSource.filter((item) => item.key !== key) });
-  }
-
-  public handleAdd = () => {
-    const { count, dataSource } = this.state;
-    const newData = {
-      key: count,
-      name: `Edward King ${count}`,
-      age: 32,
-      address: `London, Park Lane no. ${count}`,
-    };
-    this.setState({
-      dataSource: [...dataSource, newData],
-      count: count + 1,
-    });
-  }
-
-  public renderExpandable = (expandable: any = {}) => {
-    return (
-      <>
-        <p>{expandable.riskProfile}</p>
-        <p>{expandable.hasPrivateHealthInsurance}</p>
-        <p>{expandable.jointRiskProfile}</p>
-      </>
-    );
-  }
 
   public render() {
     const { dataSource } = this.state;
