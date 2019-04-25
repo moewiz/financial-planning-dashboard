@@ -1,14 +1,7 @@
 import React, { PureComponent } from 'react';
-import { Button, Icon, Popconfirm, Table } from 'antd';
+import { Icon, Popconfirm, Table } from 'antd';
 
-interface DataEntryTableProps {
-  name: string;
-  icon?: React.ReactNode;
-  expanded?: boolean;
-  add?: boolean;
-}
-
-class DataEntryTable extends PureComponent<DataEntryTableProps> {
+class BasicInformation extends PureComponent {
   protected static defaultProps = {
     expanded: true,
   };
@@ -83,13 +76,12 @@ class DataEntryTable extends PureComponent<DataEntryTableProps> {
       title: 'Retirement Year',
       dataIndex: 'retirementYear',
       key: '5',
-      width: 120,
+      width: 140,
     },
     {
       title: 'Marital State',
       dataIndex: 'maritalState',
       key: '6',
-      width: 120,
     },
     {
       title: 'Action',
@@ -135,7 +127,6 @@ class DataEntryTable extends PureComponent<DataEntryTableProps> {
   }
 
   public render() {
-    const { icon, name, expanded, add } = this.props;
     const { dataSource } = this.state;
     const columns = this.columns.map((col) => {
       return {
@@ -154,13 +145,13 @@ class DataEntryTable extends PureComponent<DataEntryTableProps> {
       <>
         <div>
           <Icon type={'plus-square'} theme={'filled'} onClick={this.handleAdd} />
-          {icon}
-          {name}
+          <Icon type={'user'} />
+          {'Basic Information'}
         </div>
         <Table
           // @ts-ignore
           columns={columns}
-          scroll={{ x: 950, y: 300 }}
+          scroll={{ x: 1050, y: 300 }}
           dataSource={dataSource}
           expandedRowRender={(record) => (record.expandable ? this.renderExpandable(record.expandable) : null)}
           pagination={false}
@@ -182,4 +173,4 @@ class DataEntryTable extends PureComponent<DataEntryTableProps> {
   }
 }
 
-export default DataEntryTable;
+export default BasicInformation;
