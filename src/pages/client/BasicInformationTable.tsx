@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import { Icon, Popconfirm, Table } from 'antd';
+import ExpandedBasicInformationRow, {BasicInformation} from './ExpandedBasicInformationRow';
 
-class BasicInformation extends PureComponent {
+class BasicInformationTable extends PureComponent {
   protected static defaultProps = {
     expanded: true,
   };
@@ -46,7 +47,7 @@ class BasicInformation extends PureComponent {
       title: 'Description',
       dataIndex: 'description',
       width: 130,
-      fixed: 'left',
+      // fixed: 'left',
     },
     {
       title: 'First Name',
@@ -153,24 +154,12 @@ class BasicInformation extends PureComponent {
           columns={columns}
           scroll={{ x: 1050, y: 300 }}
           dataSource={dataSource}
-          expandedRowRender={(record) => (record.expandable ? this.renderExpandable(record.expandable) : null)}
+          expandedRowRender={ExpandedBasicInformationRow}
           pagination={false}
         />
-
-        {/*{expanded ? (*/}
-        {/*  <Table*/}
-        {/*    columns={columns}*/}
-        {/*    expandedRowRender={(record) =>*/}
-        {/*      record.description ? <p style={{ margin: 0 }}>{record.description}</p> : null*/}
-        {/*    }*/}
-        {/*    dataSource={data}*/}
-        {/*  />*/}
-        {/*) : (*/}
-        {/*  <Table columns={columns} dataSource={data} />*/}
-        {/*)}*/}
       </>
     );
   }
 }
 
-export default BasicInformation;
+export default BasicInformationTable;
