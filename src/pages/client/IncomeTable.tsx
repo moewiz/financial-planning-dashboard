@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import { Icon, Popconfirm, Table } from 'antd';
-import ExpandedBasicInformationRow, {BasicInformation} from './ExpandedBasicInformationRow';
+import ExpandedBasicInformationRow, { BasicInformation } from './ExpandedBasicInformationRow';
 
-class BasicInformationTable extends PureComponent {
+class IncomeTable extends PureComponent {
   protected static defaultProps = {
     expanded: true,
   };
@@ -10,33 +10,23 @@ class BasicInformationTable extends PureComponent {
     dataSource: [
       {
         key: '0',
-        description: 'Client',
-        firstName: 'Jack',
-        lastName: 'Rayan',
-        dob: 1555924936,
-        empStatus: 'selfEmployed',
-        retirementYear: 1555924936,
-        maritalState: 'married',
-        expandable: {
-          riskProfile: 'defensive',
-          hasPrivateHealthInsurance: true,
-          lookingForCoupleAdvice: false,
-        },
+        description: 'Salary',
+        type: 'employment',
+        owner: 'Client',
+        value: 1000,
+        indexation: 'salaryInflation',
+        from: 'start',
+        to: 'clientRetirement',
       },
       {
         key: '1',
-        description: 'Partner',
-        firstName: 'Susane',
-        lastName: 'Diaz',
-        dob: 1555924936,
-        empStatus: 'unemployed',
-        retirementYear: '',
-        maritalState: 'married',
-        expandable: {
-          riskProfile: 'highGrowth',
-          hasPrivateHealthInsurance: false,
-          jointRiskProfile: 'defensive',
-        },
+        description: 'Rental',
+        type: 'taxable',
+        owner: 'Partner',
+        value: 1000,
+        indexation: 'inflationCPI',
+        from: 'start',
+        to: 'end',
       },
     ],
     count: 2,
@@ -46,42 +36,41 @@ class BasicInformationTable extends PureComponent {
     {
       title: 'Description',
       dataIndex: 'description',
-      width: 130,
-      // fixed: 'left',
+      width: 120,
     },
     {
-      title: 'First Name',
-      dataIndex: 'firstName',
+      title: 'Type',
+      dataIndex: 'type',
       key: '1',
       width: 120,
     },
     {
-      title: 'Last Name',
-      dataIndex: 'lastName',
+      title: 'Owner',
+      dataIndex: 'owner',
       key: '2',
       width: 120,
     },
     {
-      title: 'DOB',
-      dataIndex: 'dob',
+      title: 'Value',
+      dataIndex: 'value',
       key: '3',
       width: 120,
     },
     {
-      title: 'Emp Status',
-      dataIndex: 'empStatus',
+      title: 'Indexation',
+      dataIndex: 'indexation',
       key: '4',
       width: 120,
     },
     {
-      title: 'Retirement Year',
-      dataIndex: 'retirementYear',
+      title: 'From',
+      dataIndex: 'from',
       key: '5',
-      width: 140,
+      width: 120,
     },
     {
-      title: 'Marital State',
-      dataIndex: 'maritalState',
+      title: 'To',
+      dataIndex: 'to',
       key: '6',
     },
     {
@@ -107,9 +96,13 @@ class BasicInformationTable extends PureComponent {
     const { count, dataSource } = this.state;
     const newData = {
       key: count,
-      name: `Edward King ${count}`,
-      age: 32,
-      address: `London, Park Lane no. ${count}`,
+      description: '',
+      type: '',
+      owner: '',
+      value: 0,
+      indexation: '',
+      from: '',
+      to: '',
     };
     this.setState({
       dataSource: [...dataSource, newData],
@@ -132,8 +125,7 @@ class BasicInformationTable extends PureComponent {
     const columns = this.columns.map((col) => {
       return {
         ...col,
-        fixed: false,
-        // fixed: col.fixed || false,
+        fixed: col.fixed || false,
         onCell: (record: any) => ({
           record,
           editable: true,
@@ -146,15 +138,14 @@ class BasicInformationTable extends PureComponent {
     return (
       <>
         <div>
-          <Icon type={'user'} />
-          {'Basic Information'}
+          <Icon type={'plus-square'} theme={'filled'} onClick={this.handleAdd} />
+          {'Income'}
         </div>
         <Table
           // @ts-ignore
           columns={columns}
-          // scroll={{ x: 850, y: 300 }}
+          scroll={{ x: 1050, y: 320 }}
           dataSource={dataSource}
-          expandedRowRender={ExpandedBasicInformationRow}
           pagination={false}
         />
       </>
@@ -162,4 +153,4 @@ class BasicInformationTable extends PureComponent {
   }
 }
 
-export default BasicInformationTable;
+export default IncomeTable;

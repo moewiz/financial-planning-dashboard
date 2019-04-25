@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import BasicInformationTable from './BasicInformationTable';
+import IncomeTable from './IncomeTable';
 
 interface DataEntryProps {
   tabName: string;
@@ -10,6 +11,7 @@ class DataEntry extends PureComponent<DataEntryProps> {
     return (
       <div>
         <BasicInformationTable />
+        <IncomeTable />
         {/*<DataEntryTable name={'Income'} add expanded={false} />*/}
         {/*<DataEntryTable name={'Expenditure'} add expanded={false} />*/}
         {/*<DataEntryTable name={'Assets'} add />*/}
