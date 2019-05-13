@@ -12,8 +12,8 @@
       "lastName": "Rayan",
       "dob": "19/01/1970",
       "empStatus": "selfEmployed",
-      "retirementYear": "31/12/2020",
       "maritalState": "married",
+      "gender":"male",
       "expandable": {
         "riskProfile": "defensive",
         "hasPrivateHealthInsurance": false,
@@ -28,7 +28,7 @@
       "lastName": "Diaz",
       "dob": "27/05/1978",
       "empStatus": "unemployed",
-      "retirementYear": "31/12/2020",
+      "gender":"female",
       "maritalState": "married",
       "expandable": {
         "riskProfile": "highGrowth",

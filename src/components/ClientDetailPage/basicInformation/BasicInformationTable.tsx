@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Button, Icon } from 'antd';
 import ExpandedBasicInformationRow from './ExpandedBasicInformationRow';
-import {ActionTableGeneral, HeaderTitleTable, TableEntryContainer, TextTitle} from '../../../pages/client/styled';
+import { ActionTableGeneral, HeaderTitleTable, TableEntryContainer, TextTitle } from '../../../pages/client/styled';
 import GeneralTable from '../GeneralTable';
 import { FormikProps } from 'formik';
 import { addKeyToArray } from '../DataEntry';
@@ -34,8 +34,8 @@ class BasicInformationTable extends PureComponent<BasicInformationProps, BasicIn
     {
       title: 'Description',
       dataIndex: 'description',
-      editable: false,
       width: 'calc(15% - 20px)',
+      type: 'text',
     },
     {
       title: 'First Name',
@@ -63,10 +63,11 @@ class BasicInformationTable extends PureComponent<BasicInformationProps, BasicIn
       options: [{ value: 'selfEmployed', label: 'Self-employed' }, { value: 'unemployed', label: 'Unemployed' }],
     },
     {
-      title: 'Retirement Year',
-      dataIndex: 'retirementYear',
-      type: 'date',
+      title: 'Gender',
+      dataIndex: 'gender',
+      type: 'select',
       width: '15%',
+      options: [{ value: 'male', label: 'Male' }, { value: 'female', label: 'Female' }],
     },
     {
       title: 'Marital State',
@@ -174,7 +175,8 @@ class BasicInformationTable extends PureComponent<BasicInformationProps, BasicIn
     const { dataSource } = this.state;
     const { loading } = this.props;
     const columns = this.columns.map((col) => {
-      const editable = col.editable === false ? false : 'true';
+      // const editable = col.editable === false ? false : 'true';
+      const editable = 'true';
 
       return {
         ...col,
