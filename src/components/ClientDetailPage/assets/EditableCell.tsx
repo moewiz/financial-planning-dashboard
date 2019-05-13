@@ -7,15 +7,16 @@ import { PickerType } from '../../../common/EntryPicker/EntryPicker';
 
 import { EditableCellWrap, ValueEditCell } from '../styled';
 interface EditableProps {
-  title: string;
   type: InputType;
   record: any;
   dataIndex: string;
-  handleSave: (arg: object) => void;
+  handleSave?: (arg: object) => void;
+  title?: string;
   editable?: boolean;
   tableName?: string;
   rowIndex?: number;
   pickerType?: PickerType;
+  expandedField?: boolean;
   options?: Array<{ value: any; label: any }>;
 }
 
@@ -52,7 +53,7 @@ export default class EditableCell extends React.Component<EditableProps> {
       }
     }
 
-    if (fieldName) {
+    if (fieldName && isFunction(handleSave)) {
       handleSave({ tableName, rowIndex, dataIndex, value, record });
     }
     this.toggleEdit();
@@ -88,9 +89,50 @@ export default class EditableCell extends React.Component<EditableProps> {
       tableName,
       options,
       pickerType,
+      expandedField,
       ...restProps
     } = this.props;
     const appendedProps = this.getAppendedProps(this.props, editing);
+
+    if (expandedField) {
+      return editable ? (
+        editing ? (
+          <EditableCellWrap>
+            <FormInput
+              type={type}
+              name={`${tableName}[${rowIndex}].${dataIndex}`}
+              ref={this.input}
+              onPressEnter={this.save}
+              handleBlur={this.save}
+              {...appendedProps}
+            />
+          </EditableCellWrap>
+        ) : (
+          <EditableCellWrap onClick={this.toggleEdit}>
+            <ValueEditCell>
+              <FormInput
+                className={classNames({ readOnly: true })}
+                type={type}
+                name={`${tableName}[${rowIndex}].${dataIndex}`}
+                {...appendedProps}
+              />
+            </ValueEditCell>
+          </EditableCellWrap>
+        )
+      ) : dataIndex ? (
+        <EditableCellWrap>
+          <FormInput
+            className={classNames({ readOnly: true, disabled: true })}
+            disabled={true}
+            type={type}
+            name={`${tableName}[${rowIndex}].${dataIndex}`}
+            {...appendedProps}
+          />
+        </EditableCellWrap>
+      ) : (
+        restProps.children
+      );
+    }
 
     return (
       <td {...restProps}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { InputWrapper, InputLabel } from './styled';
 import { FormikHandlers } from 'formik';
-import { get, isFunction } from 'lodash';
+import { get, isFunction, isBoolean } from 'lodash';
 import { Select } from 'antd';
 
 interface InputProps {
@@ -15,7 +15,7 @@ interface InputProps {
   ref?: React.RefObject<any>;
   handleChange?: (e: any, name?: string, value?: any) => void;
   handleBlur?: (e: React.FocusEvent | string) => void;
-  options?: Array<{label: string, value: string | number}>;
+  options?: Array<{ value: any; label: string }>;
   setFieldValue?: (field: string, value: any) => void;
 }
 
@@ -38,10 +38,15 @@ class CustomSelect extends React.PureComponent<InputProps> {
 
   public handleBlur = (e: React.FocusEvent | string) => {
     const { onBlur, handleBlur } = this.props;
+    let value = e;
 
-    onBlur(e);
+    if (isBoolean(e)) {
+      value = e.toString();
+    }
+
+    onBlur(value);
     if (handleBlur && isFunction(handleBlur)) {
-      handleBlur(e);
+      handleBlur(value);
     }
   }
 

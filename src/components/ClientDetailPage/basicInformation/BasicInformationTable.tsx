@@ -113,14 +113,16 @@ class BasicInformationTable extends PureComponent<BasicInformationProps, BasicIn
         description: 'Partner',
         firstName: 'Susane',
         lastName: 'Diaz',
-        dob: 1555924936,
+        dob: '27/05/1978',
         empStatus: 'unemployed',
-        retirementYear: '1555924936',
+        gender: 'female',
         maritalState: 'married',
         expandable: {
           riskProfile: 'highGrowth',
-          hasPrivateHealthInsurance: false,
+          hasPrivateHealthInsurance: true,
           jointRiskProfile: 'defensive',
+          retirementYear: null,
+          isSmoker: false,
         },
       };
 

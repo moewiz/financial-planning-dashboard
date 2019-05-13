@@ -28,7 +28,7 @@ interface InputProps {
   min?: number;
   max?: number;
   // Select
-  options?: Array<{ value: string | number; label: string }>;
+  options?: Array<{ value: any; label: string }>;
   showSearch?: boolean;
   defaultOpen?: boolean;
 }
