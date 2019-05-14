@@ -4,7 +4,9 @@ import { Select } from 'antd';
 import ContributionWithdrawalsTable from './ContributionWithdrawalsTable';
 import SGContributionTable from './SGContributionTable';
 import EditableCell from '../assets/EditableCell';
-import { PrefixGroup, TypeDollarPrefix, TypePercentPrefix, PrefixViewGroup, PrefixChooseGroup } from './styled';
+import { PrefixGroup, TypeDollarPrefix, TypePercentPrefix,
+  PrefixViewGroup, PrefixChooseGroup, PrefixSingleGroup, ExpandedAssetsInlineGroups,
+  ExpandedAssetsGroups, ExpandedAssetsText, ExpandedAssetsBlock } from './styled';
 
 
 const Option = Select.Option;
@@ -45,14 +47,134 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
   console.log(expandable.adviserFeeType);
   switch (type) {
     case 'lifestyle':
-      return <div>The value of this (Lifestyle Asset) will grow by X% each year</div>;
+      return (
+        <ExpandedAssetsBlock>
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>The value of this (Lifestyle Asset) will grow by</ExpandedAssetsText>
+            <PrefixSingleGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.growthRate'}
+                type={'text'}
+                tableName={'assets'}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+              <TypePercentPrefix>%</TypePercentPrefix>
+            </PrefixSingleGroup>
+            <ExpandedAssetsText>each year</ExpandedAssetsText>
+          </ExpandedAssetsInlineGroups>
+        </ExpandedAssetsBlock>)
+        ;
     case 'directInvestment':
       return (
-        <div>
-          Rate terms of the (Direct Investment) are: X% annual growth, Y% annual income, Z% franked. The (Direct
-          Investment) has a cost base of $X and is assessable for CGT The (Direct Investment) is assessed by Centrelink
-          The (Direct Investment) has product fees of X% and adviser fees of $X The (Direct investment) will be
-          re-invested
+        <ExpandedAssetsGroups>
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>
+              Rate terms of the (Direct Investment) are:
+            </ExpandedAssetsText>
+            <PrefixSingleGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.growthRate'}
+                type={'text'}
+                tableName={'assets'}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+              <TypePercentPrefix>%</TypePercentPrefix>
+            </PrefixSingleGroup>
+            <ExpandedAssetsText>annual growth,</ExpandedAssetsText>
+            <PrefixSingleGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.incomeGenerated'}
+                type={'text'}
+                tableName={'assets'}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+              <TypePercentPrefix>%</TypePercentPrefix>
+            </PrefixSingleGroup>
+            <ExpandedAssetsText>annual income,</ExpandedAssetsText>
+            <PrefixSingleGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.frankedRate'}
+                type={'text'}
+                tableName={'assets'}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+              <TypePercentPrefix>%</TypePercentPrefix>
+            </PrefixSingleGroup>
+            <ExpandedAssetsText>franked.</ExpandedAssetsText>
+          </ExpandedAssetsInlineGroups>
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>The (Direct Investment) has a cost base of</ExpandedAssetsText>
+            <PrefixSingleGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.costBase'}
+                type={'text'}
+                tableName={'assets'}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+              <TypePercentPrefix>%</TypePercentPrefix>
+            </PrefixSingleGroup>
+            <ExpandedAssetsText>
+              and is assessable for CGT 
+            </ExpandedAssetsText>
+          </ExpandedAssetsInlineGroups>
+
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>The (Direct Investment) is assessed by Centrelink</ExpandedAssetsText>
+          </ExpandedAssetsInlineGroups>
+
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>The (Direct Investment) has product fees of</ExpandedAssetsText>
+            <PrefixSingleGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.productFees'}
+                type={'text'}
+                tableName={'assets'}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+              <TypePercentPrefix>%</TypePercentPrefix>
+            </PrefixSingleGroup>
+            <ExpandedAssetsText>
+              and adviser fees of
+            </ExpandedAssetsText>
+          </ExpandedAssetsInlineGroups>
+
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>The (Direct investment)</ExpandedAssetsText>
+            <PrefixSingleGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.productFees'}
+                type={'text'}
+                tableName={'assets'}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+              <TypePercentPrefix>%</TypePercentPrefix>
+            </PrefixSingleGroup>
+            <ExpandedAssetsText>
+            will be re-invested
+            </ExpandedAssetsText>
+          </ExpandedAssetsInlineGroups>
+
           <PrefixGroup dollar={expandable.adviserFeeType === 'dollar' ? true : false}>
             <PrefixChooseGroup>
               <EditableCell
@@ -81,7 +203,7 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
             </PrefixViewGroup>
           </PrefixGroup>
           <ContributionWithdrawalsTable />
-        </div>
+        </ExpandedAssetsGroups>
       );
     case 'contribution':
       return <div>The value of this (Lifestyle Asset) will grow by X% each year</div>;

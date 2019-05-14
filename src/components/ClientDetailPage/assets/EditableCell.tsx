@@ -70,10 +70,6 @@ export default class EditableCell extends React.Component<EditableProps> {
         appendProps.push({ defaultOpen: editing, options });
         break;
       }
-      case 'text': {
-        appendProps.push({ prefix, suffix });
-        break;
-      }
       case 'date': {
         appendProps.push({ defaultOpen: editing, pickerType, options });
       }

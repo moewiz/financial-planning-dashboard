@@ -67,3 +67,46 @@ export const PrefixChooseGroup = styled.div.attrs({
   className: 'prefix-choose-group',
   })`
 `;
+export const PrefixSingleGroup = styled.section.attrs({
+  className: 'prefix-single-group',
+  })`
+    width: 45px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 0 3px;
+    .type-percent-prefix{
+      position: absolute;
+      font-weight: 600;
+      right: 3px;
+    }
+    input{
+      margin: 0px;
+      font-weight: 600;
+      padding: 0 3px;
+    }
+`;
+export const ExpandedAssetsGroups = styled.div.attrs({
+  className: 'expanded-assets-groups',
+  })`
+  flex-wrap: wrap;
+  display: flex;
+`;
+export const ExpandedAssetsInlineGroups = styled.div.attrs({
+  className: 'expanded-assets-inline-groups',
+  })`
+  flex: 0 0 100%;
+  display: flex;
+  align-items: center;
+`;
+export const ExpandedAssetsText = styled.span.attrs({
+  className: 'expanded-assets-text',
+  })`
+  color: #5f698d;
+`;
+export const ExpandedAssetsBlock = styled.section.attrs({
+  className: 'expanded-assets-block',
+  })`
+  display: flex;
+  flex-direction: column;
+`;
