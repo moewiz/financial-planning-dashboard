@@ -39,6 +39,8 @@ const riskProfileOptions = [
   },
 ];
 
+const joinRiskProfileOptions = riskProfileOptions;
+
 const hasPrivateHealthInsuranceOptions = [{ value: true, label: 'did' }, { value: false, label: 'did not' }];
 
 const profileText = {
@@ -53,7 +55,6 @@ const ExpandedBasicInformationRow = (
   expanded: boolean,
 ): React.ReactNode => {
   const { expandable, description } = record;
-  console.log('ExpandedBasicInformationRow', { record, index, indent, expanded });
 
   if (description && expandable) {
     const { riskProfile, hasPrivateHealthInsurance, lookingForCoupleAdvice, jointRiskProfile = '' } = expandable;

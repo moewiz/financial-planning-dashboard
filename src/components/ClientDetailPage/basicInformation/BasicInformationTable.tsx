@@ -60,7 +60,12 @@ class BasicInformationTable extends PureComponent<BasicInformationProps, BasicIn
       dataIndex: 'empStatus',
       type: 'select',
       width: '15%',
-      options: [{ value: 'selfEmployed', label: 'Self-employed' }, { value: 'unemployed', label: 'Unemployed' }],
+      options: [
+        { value: 'employed', label: 'Employed' },
+        { value: 'selfEmployed', label: 'Self Employed' },
+        { value: 'retired', label: 'Retired' },
+        { value: 'unemployed', label: 'Unemployed' },
+      ],
     },
     {
       title: 'Gender',
@@ -74,7 +79,7 @@ class BasicInformationTable extends PureComponent<BasicInformationProps, BasicIn
       dataIndex: 'maritalState',
       type: 'select',
       width: 'calc(15% - 20px)',
-      options: [{ value: 'married', label: 'Married' }, { value: 'unMarried', label: 'Unmarried' }],
+      options: [{ value: 'married', label: 'Married' }, { value: 'single', label: 'Single' }],
     },
   ];
 
