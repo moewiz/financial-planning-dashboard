@@ -36,7 +36,7 @@ const profileText = {
 const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, expanded: boolean): React.ReactNode => {
   const { expandable, type } = record;
   const { riskProfile, lookingForCoupleAdvice } = expandable;
-  const [adviserFeeType, setAdviserFeeType] = React.useState(expandable.adviserFeeType);
+  // const [adviserFeeType, setAdviserFeeType] = React.useState(expandable.adviserFeeType);
   // const handleChangeAdviserFeeType = (param: any) => {
   //   const { value } = param;
   //   setAdviserFeeType(value);
@@ -53,11 +53,11 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
           Investment) has a cost base of $X and is assessable for CGT The (Direct Investment) is assessed by Centrelink
           The (Direct Investment) has product fees of X% and adviser fees of $X The (Direct investment) will be
           re-invested
-          <PrefixGroup dollar={adviserFeeType === 'dollar' ? true : false}>
+          <PrefixGroup dollar={expandable.adviserFeeType === 'dollar' ? true : false}>
             <PrefixChooseGroup>
               <EditableCell
                 record={record}
-                dataIndex={'expandable.adviserFeeTypß'}
+                dataIndex={'expandable.adviserFeeType'}
                 type={'select'}
                 tableName={'assets'}
                 options={adviserFeeTypeOptions}

@@ -6,10 +6,10 @@ interface PrefixProps {
 export const PrefixGroup = styled.section<PrefixProps>`
   display: flex;
   align-items: center;
-  width: 60px;
+  flex-basis: 45px;
   .prefix-choose-group{
     .ant-select-enabled{
-      /* display: none; */
+      display: none;
       &.ant-select-focused{
         display: inline-block;
       }
@@ -27,13 +27,16 @@ export const PrefixGroup = styled.section<PrefixProps>`
     margin: 0px;
     display: inline-block;
     background: transparent;
-    width: 20px;
+    width: 40px;
     font-weight: 600;
-    text-align: center;
+    text-align: center!important;
   }
   &:hover{
-    width: 100px;
+    flex-basis: 145px;
     transition: width 300ms ease;
+    input{
+      border: 1px solid #515c83 !important;
+    }
     .prefix-choose-group{
       .ant-select-enabled{
         display: inline-block;
@@ -45,16 +48,20 @@ export const PrefixGroup = styled.section<PrefixProps>`
 export const TypeDollarPrefix = styled.span.attrs({
   className: 'type-dollar-prefix',
   })`
+  color: #6c7596;
   font-weight: 600;
 `;
 export const TypePercentPrefix = styled.span.attrs({
   className: 'type-percent-prefix',
   })`
+  color: #6c7596;
   font-weight: 600;
 `;
 export const PrefixViewGroup = styled.div.attrs({
   className: 'prefix-view-group',
   })`
+    display: flex;
+    align-items: center;
 `;
 export const PrefixChooseGroup = styled.div.attrs({
   className: 'prefix-choose-group',
