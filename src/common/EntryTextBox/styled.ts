@@ -66,3 +66,13 @@ export const EntryInputDefault = styled.section`
     }
   }
 `;
+
+export const PrefixGroup = styled.section`
+`;
+export const TypeDollarPrefix = styled.span`
+
+
+`;
+export const TypePercentPrefix = styled.span`
+
+`;

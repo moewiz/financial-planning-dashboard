@@ -16,6 +16,8 @@ interface EditableProps {
   tableName?: string;
   rowIndex?: number;
   pickerType?: PickerType;
+  prefix?: string | React.ReactNode;
+  suffix?: string | React.ReactNode;
   expandedField?: boolean;
   options?: Array<{ value: any; label: any }>;
 }
@@ -60,12 +62,16 @@ export default class EditableCell extends React.Component<EditableProps> {
   }
 
   public getAppendedProps = (props: EditableProps, editing: boolean = false) => {
-    const { type, options, pickerType } = props;
+    const { type, options, pickerType, prefix, suffix } = props;
     const appendProps = [];
 
     switch (type) {
       case 'select': {
         appendProps.push({ defaultOpen: editing, options });
+        break;
+      }
+      case 'text': {
+        appendProps.push({ prefix, suffix });
         break;
       }
       case 'date': {
@@ -90,6 +96,8 @@ export default class EditableCell extends React.Component<EditableProps> {
       options,
       pickerType,
       expandedField,
+      prefix,
+      suffix,
       ...restProps
     } = this.props;
     const appendedProps = this.getAppendedProps(this.props, editing);
