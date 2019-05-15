@@ -4,7 +4,6 @@ import { FormikProps } from 'formik';
 import { isFunction } from 'lodash';
 import { ActionTableGeneral, HeaderTitleTable, TableEntryContainer, TextTitle } from '../../../pages/client/styled';
 import GeneralTable from '../GeneralTable';
-import { addKeyToArray } from '../DataEntry';
 
 interface ExpenditureTableProps {
   data: object[];
@@ -18,17 +17,7 @@ interface ExpenditureTableProps {
   deleteRow: (key: number) => void;
 }
 
-interface ExpenditureTableState {
-  dataSource: object[];
-  count: number;
-}
-
-class ExpenditureTable extends PureComponent<ExpenditureTableProps, ExpenditureTableState> {
-  public state = {
-    dataSource: addKeyToArray(this.props.data),
-    count: this.props.data.length,
-  };
-
+class ExpenditureTable extends PureComponent<ExpenditureTableProps> {
   public columns = [
     {
       title: 'Description',
@@ -104,15 +93,6 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps, ExpenditureT
 
   private tableName = 'expenditure';
 
-  public componentDidUpdate(prevProps: Readonly<ExpenditureTableProps>, prevState: Readonly<{}>, snapshot?: any): void {
-    if (this.props.loading !== prevProps.loading) {
-      this.setState({
-        dataSource: addKeyToArray(this.props.data),
-        count: this.props.data.length,
-      });
-    }
-  }
-
   public handleDelete = (key: number) => {
     const { deleteRow } = this.props;
 
@@ -120,15 +100,10 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps, ExpenditureT
     if (isFunction(deleteRow)) {
       deleteRow(key);
     }
-
-    // update table
-    const dataSource = [...this.state.dataSource];
-    this.setState({ dataSource: dataSource.filter((item) => item.key !== key) });
   }
 
   public handleAdd = () => {
     const { addRow } = this.props;
-    const { count, dataSource } = this.state;
     const newData = {
       key: Date.now(),
       description: 'Living Expenses',
@@ -150,41 +125,21 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps, ExpenditureT
     if (isFunction(addRow)) {
       addRow(newData);
     }
-
-    // update table
-    dataSource.unshift(newData);
-    this.setState({
-      dataSource,
-      count: count + 1,
-    });
   }
 
   public handleSave = (arg: { tableName: string; rowIndex: number; dataIndex: string; value: any; record: any }) => {
     const { tableName, rowIndex, dataIndex, value, record } = arg;
-    const newData = [...this.state.dataSource];
-    const index = newData.findIndex((data) => record.key === data.key);
-    const item = newData[index];
-    newData.splice(index, 1, {
-      ...item,
-      [dataIndex]: value,
-    });
-    this.setState({ dataSource: newData });
   }
 
   public handleResetForm = () => {
-    const { resetForm, data } = this.props;
+    const { resetForm } = this.props;
     if (isFunction(resetForm)) {
       resetForm();
     }
-    this.setState({
-      dataSource: addKeyToArray(data),
-      count: data.length,
-    });
   }
 
   public render() {
-    const { dataSource } = this.state;
-    const { loading } = this.props;
+    const { loading, data } = this.props;
     const columns = this.columns.map((col) => {
       const editable = col.editable === false ? false : 'true';
       if (col.key === 'operation') {
@@ -224,7 +179,7 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps, ExpenditureT
         <GeneralTable
           loading={loading || false}
           columns={columns}
-          dataSource={dataSource}
+          dataSource={data}
           pagination={false}
           className={`${this.tableName}-table`}
         />

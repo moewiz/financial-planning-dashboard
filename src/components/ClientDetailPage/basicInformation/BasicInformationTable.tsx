@@ -4,7 +4,6 @@ import ExpandedBasicInformationRow from './ExpandedBasicInformationRow';
 import { ActionTableGeneral, HeaderTitleTable, TableEntryContainer, TextTitle } from '../../../pages/client/styled';
 import GeneralTable from '../GeneralTable';
 import { FormikProps } from 'formik';
-import { addKeyToArray } from '../DataEntry';
 import { isFunction } from 'lodash';
 
 interface BasicInformationProps {
@@ -117,7 +116,9 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
   public handleSave = (arg: { tableName: string; rowIndex: number; dataIndex: string; value: any; record: any }) => {
     const { rowIndex, dataIndex, value } = arg;
 
-    // side effect
+    /**
+     * side effect
+     */
     if (rowIndex === 0 && dataIndex === 'maritalState') {
       if (value === 'single') {
         this.handleDelete(1);
@@ -129,14 +130,10 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
   }
 
   public handleResetForm = () => {
-    const { resetForm, data } = this.props;
+    const { resetForm } = this.props;
     if (isFunction(resetForm)) {
       resetForm();
     }
-    this.setState({
-      dataSource: addKeyToArray(data),
-      count: data.length,
-    });
   }
 
   public render() {

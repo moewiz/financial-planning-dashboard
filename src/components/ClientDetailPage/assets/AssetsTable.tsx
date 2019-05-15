@@ -5,7 +5,6 @@ import { TableEntryContainer, HeaderTitleTable, TextTitle, ActionTableGeneral } 
 import GeneralTable from '../GeneralTable';
 import { FormikProps } from 'formik';
 import { isFunction } from 'lodash';
-import { addKeyToArray } from '../DataEntry';
 
 interface AssetsTableProps {
   data: object[];
@@ -89,19 +88,9 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
 
   private tableName = 'assets';
 
-  // public componentDidUpdate(prevProps: Readonly<AssetsTableProps>, prevState: Readonly<{}>, snapshot?: any): void {
-  //   if (this.props.loading !== prevProps.loading) {
-  //     this.setState({
-  //       dataSource: addKeyToArray(this.props.data),
-  //       count: this.props.data.length,
-  //     });
-  //   }
-  // }
-
   public handleDelete = (key: number) => {
     const { deleteRow } = this.props;
 
-    console.log('key', key);
     // update formik
     if (isFunction(deleteRow)) {
       deleteRow(key);
@@ -141,30 +130,16 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
 
   public handleSave = (arg: { tableName: string; rowIndex: number; dataIndex: string; value: any; record: any }) => {
     console.log('handle save', arg);
-    // const { tableName, rowIndex, dataIndex, value, record } = arg;
-    // const newData = [...this.state.dataSource];
-    // const index = newData.findIndex((data) => record.key === data.key);
-    // const item = newData[index];
-    // newData.splice(index, 1, {
-    //   ...item,
-    //   [dataIndex]: value,
-    // });
-    // this.setState({ dataSource: newData });
   }
 
   public handleResetForm = () => {
-    const { resetForm, data } = this.props;
+    const { resetForm, } = this.props;
     if (isFunction(resetForm)) {
       resetForm();
     }
-    // this.setState({
-    //   dataSource: addKeyToArray(data),
-    //   count: data.length,
-    // });
   }
 
   public render() {
-    // const { dataSource } = this.state;
     const { loading, data } = this.props;
     const columns = this.columns.map((col: any) => {
       const editable = col.editable === false ? false : 'true';

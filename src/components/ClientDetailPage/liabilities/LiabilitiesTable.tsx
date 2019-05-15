@@ -5,7 +5,6 @@ import { TableEntryContainer, HeaderTitleTable, TextTitle, ActionTableGeneral } 
 import ExpandedLiabilitiesRow from './ExpandedLiabilitiesRow';
 import GeneralTable from '../GeneralTable';
 import { FormikProps } from 'formik';
-import { addKeyToArray } from '../DataEntry';
 
 interface LiabilitiesTableProps {
   data: object[];
@@ -19,17 +18,7 @@ interface LiabilitiesTableProps {
   deleteRow: (key: number) => void;
 }
 
-interface LiabilitiesTableState {
-  dataSource: object[];
-  count: number;
-}
-
-class LiabilitiesTable extends PureComponent<LiabilitiesTableProps, LiabilitiesTableState> {
-  public state = {
-    dataSource: addKeyToArray(this.props.data),
-    count: this.props.data.length,
-  };
-
+class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
   public columns = [
     {
       title: 'Description',
@@ -103,15 +92,6 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps, LiabilitiesT
 
   private tableName = 'liabilities';
 
-  public componentDidUpdate(prevProps: Readonly<LiabilitiesTableProps>, prevState: Readonly<{}>, snapshot?: any): void {
-    if (this.props.loading !== prevProps.loading) {
-      this.setState({
-        dataSource: addKeyToArray(this.props.data),
-        count: this.props.data.length,
-      });
-    }
-  }
-
   public handleDelete = (key: number) => {
     const { deleteRow } = this.props;
 
@@ -119,15 +99,10 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps, LiabilitiesT
     if (isFunction(deleteRow)) {
       deleteRow(key);
     }
-
-    // update table
-    const dataSource = [...this.state.dataSource];
-    this.setState({ dataSource: dataSource.filter((item) => item.key !== key) });
   }
 
   public handleAdd = () => {
     const { addRow } = this.props;
-    const { count, dataSource } = this.state;
     const newData = {
       key: Date.now(),
       description: 'Home Loan',
@@ -172,41 +147,21 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps, LiabilitiesT
     if (isFunction(addRow)) {
       addRow(newData);
     }
-
-    // update table
-    dataSource.unshift(newData);
-    this.setState({
-      dataSource,
-      count: count + 1,
-    });
   }
 
   public handleSave = (arg: { tableName: string; rowIndex: number; dataIndex: string; value: any; record: any }) => {
     const { tableName, rowIndex, dataIndex, value, record } = arg;
-    const newData = [...this.state.dataSource];
-    const index = newData.findIndex((data) => record.key === data.key);
-    const item = newData[index];
-    newData.splice(index, 1, {
-      ...item,
-      [dataIndex]: value,
-    });
-    this.setState({ dataSource: newData });
   }
 
   public handleResetForm = () => {
-    const { resetForm, data } = this.props;
+    const { resetForm, } = this.props;
     if (isFunction(resetForm)) {
       resetForm();
     }
-    this.setState({
-      dataSource: addKeyToArray(data),
-      count: data.length,
-    });
   }
 
   public render() {
-    const { dataSource } = this.state;
-    const { loading } = this.props;
+    const { loading, data } = this.props;
     const columns = this.columns.map((col) => {
       const editable = col.editable === false ? false : 'true';
       if (col.key === 'operation') {
@@ -246,7 +201,7 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps, LiabilitiesT
         <GeneralTable
           loading={loading || false}
           columns={columns}
-          dataSource={dataSource}
+          dataSource={data}
           pagination={false}
           expandedRowRender={ExpandedLiabilitiesRow}
           className={`${this.tableName}-table`}
