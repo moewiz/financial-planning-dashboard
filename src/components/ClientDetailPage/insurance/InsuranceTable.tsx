@@ -94,7 +94,7 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
   }
 
   public handleResetForm = () => {
-    const { resetForm, } = this.props;
+    const { resetForm } = this.props;
     if (isFunction(resetForm)) {
       resetForm();
     }
