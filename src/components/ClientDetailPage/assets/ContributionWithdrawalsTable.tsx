@@ -8,27 +8,20 @@ class ContributionWithdrawalsTable extends PureComponent {
     dataSource: [
       {
         key: '0',
-        type: 'Custom',
-        value: 25000,
+        type: 'Contribution',
+        value: 100000,
         from: 'start',
         to: 'End',
       },
       {
         key: '1',
-        type: 'Custom',
-        value: 10000,
-        from: 'start',
-        to: 'End',
-      },
-      {
-        key: '2',
-        type: 'Custom',
-        value: 25000,
+        type: 'Withdrawals',
+        value: 50000,
         from: 'start',
         to: 'End',
       },
     ],
-    count: 3,
+    count: 2,
   };
 
   public columns = [
