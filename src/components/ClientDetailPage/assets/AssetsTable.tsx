@@ -125,17 +125,24 @@ class AssetsTable extends PureComponent<AssetsTableProps, AssetsTableState> {
     const { addRow } = this.props;
     const { count, dataSource } = this.state;
     const newData = {
-      key: count,
-      description: `Home ${count}`,
+      key: Date.now(),
+      description: 'Home',
       type: 'lifestyle',
-      owner: 'Client',
+      owner: 'client',
       value: 25000,
       investment: 'primaryResidence',
-      from: 'existing',
-      to: 'retain',
+      from: {
+        type: 'existing',
+        yearValue: null,
+      },
+      to: {
+        type: 'retain',
+        yearValue: null,
+      },
       expandable: {
-        costBase: 50000,
-        growthRate: 12,
+        growthRate: 3.2,
+        costBase: 0,
+        isCGTAssessable: true,
       },
     };
 
@@ -177,7 +184,7 @@ class AssetsTable extends PureComponent<AssetsTableProps, AssetsTableState> {
 
   public render() {
     const { dataSource } = this.state;
-    const { loading } = this.props;
+    const { loading, data } = this.props;
     const columns = this.columns.map((col: any) => {
       const editable = col.editable === false ? false : 'true';
       if (col.key === 'operation') {
@@ -217,7 +224,7 @@ class AssetsTable extends PureComponent<AssetsTableProps, AssetsTableState> {
         <GeneralTable
           loading={loading || false}
           columns={columns}
-          dataSource={dataSource}
+          dataSource={data}
           pagination={false}
           expandedRowRender={ExpandedAssetsRow}
           className={`${this.tableName}-table`}

@@ -46,7 +46,7 @@ class PremiumFeeDetailsTable extends PureComponent {
       render: (text: any, record: any) =>
         this.state.dataSource.length >= 1 ? (
           <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
-            <Icon type="close-square" theme="twoTone" style={{ fontSize: '16px' }}  />
+            <Icon type="close-square" theme="twoTone" style={{ fontSize: '16px' }} />
           </Popconfirm>
         ) : null,
     },
@@ -83,11 +83,11 @@ class PremiumFeeDetailsTable extends PureComponent {
   public handleAdd = () => {
     const { count, dataSource } = this.state;
     const newData = {
-      key: count,
-      type: 'Custom',
-      value: 0,
-      from: 'Start',
-      to: 'End',
+      key: Date.now(),
+      feeType: 'premium',
+      amount: 80000.0,
+      frequency: 'yearly',
+      specialNote: 'Sample note',
     };
     this.setState({
       dataSource: [...dataSource, newData],

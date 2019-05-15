@@ -130,14 +130,20 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps, ExpenditureT
     const { addRow } = this.props;
     const { count, dataSource } = this.state;
     const newData = {
-      key: count,
+      key: Date.now(),
       description: 'Living Expenses',
       type: 'postTax',
       owner: 'client',
-      value: 1000,
+      value: 25000.0,
       indexation: 'inflationCPI',
-      from: '31/12/2020',
-      to: '31/12/2020',
+      from: {
+        type: 'start',
+        yearValue: null,
+      },
+      to: {
+        type: 'end',
+        yearValue: null,
+      },
     };
 
     // update formik

@@ -83,11 +83,16 @@ class CoverDetailsTable extends PureComponent {
   public handleAdd = () => {
     const { count, dataSource } = this.state;
     const newData = {
-      key: count,
-      type: 'Custom',
-      value: 0,
-      from: 'Start',
-      to: 'End',
+      key: Date.now(),
+      coverType: 'life',
+      policyOwner: 'superFund',
+      benefitAmount: 200000.0,
+      premiumType: 'stepped',
+      notes: 'Sample Note.',
+      expandable: {
+        isLinked: false,
+        linkedProduct: null,
+      },
     };
     this.setState({
       dataSource: [...dataSource, newData],

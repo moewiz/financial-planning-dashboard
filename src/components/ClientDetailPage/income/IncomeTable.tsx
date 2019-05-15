@@ -133,14 +133,20 @@ class IncomeTable extends PureComponent<IncomeTableProps, IncomeTableState> {
     const { addRow } = this.props;
     const { count, dataSource } = this.state;
     const newData = {
-      key: count,
+      key: Date.now(),
       description: 'Salary',
       type: 'employment',
       owner: 'client',
       value: 1000,
       indexation: 'salaryInflation',
-      from: '31/12/2020',
-      to: '31/12/2020',
+      from: {
+        type: 'start',
+        yearValue: null,
+      },
+      to: {
+        type: 'clientRetirement',
+        yearValue: null,
+      },
     };
 
     // update formik

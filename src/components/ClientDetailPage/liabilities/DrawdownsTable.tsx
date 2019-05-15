@@ -62,11 +62,16 @@ class DrawdownsTable extends PureComponent {
   public handleAdd = () => {
     const { count, dataSource } = this.state;
     const newData = {
-      key: count,
-      type: 'Custom',
-      value: 0,
-      from: 'Start',
-      to: 'End',
+      key: Date.now(),
+      value: 18000.0,
+      from: {
+        type: 'start',
+        yearValue: null,
+      },
+      to: {
+        type: 'end',
+        yearValue: null,
+      },
     };
     this.setState({
       dataSource: [...dataSource, newData],
@@ -95,12 +100,7 @@ class DrawdownsTable extends PureComponent {
           <TextTitle small={true}>{'Drawdowns'}</TextTitle>
           <DivideLine />
         </HeaderTitleTable>
-        <Table
-          columns={columns}
-          dataSource={dataSource}
-          pagination={false}
-          size={'small'}
-        />
+        <Table columns={columns} dataSource={dataSource} pagination={false} size={'small'} />
       </InnerTableContainer>
     );
   }

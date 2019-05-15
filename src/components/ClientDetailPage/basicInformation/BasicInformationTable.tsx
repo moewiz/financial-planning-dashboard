@@ -114,7 +114,7 @@ class BasicInformationTable extends PureComponent<BasicInformationProps, BasicIn
     // only 1 partner
     if (dataSource.length === 1) {
       const newData = {
-        key: count,
+        key: Date.now(),
         description: 'Partner',
         firstName: 'Susane',
         lastName: 'Diaz',

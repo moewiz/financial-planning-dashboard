@@ -22,7 +22,7 @@ interface EditableProps {
   options?: Array<{ value: any; label: any }>;
 }
 
-export default class EditableCell extends React.Component<EditableProps> {
+export default class EditableCell extends React.PureComponent<EditableProps> {
   public state = {
     editing: false,
   };

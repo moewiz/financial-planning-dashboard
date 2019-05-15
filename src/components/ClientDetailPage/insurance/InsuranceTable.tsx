@@ -81,25 +81,28 @@ class InsuranceTable extends PureComponent<InsuranceTableProps, InsuranceTableSt
     const { addRow } = this.props;
     const { count, dataSource } = this.state;
     const newData = {
-      key: count,
+      key: Date.now(),
       provider: 'ABC',
       owner: 'client',
       premiumFeeDetails: [
         {
           feeType: 'premium',
-          amount: 2000,
+          amount: 80000.0,
           frequency: 'yearly',
-          specialNote: 'Sample note.',
+          specialNote: 'Sample note',
         },
       ],
       coverDetails: [
         {
+          // refId: 0,
           coverType: 'life',
           policyOwner: 'superFund',
-          benefitAmount: 200000,
+          benefitAmount: 200000.0,
           premiumType: 'stepped',
+          notes: 'Sample Note.',
           expandable: {
-            coverType: 'within',
+            isLinked: false,
+            linkedProduct: null,
           },
         },
       ],

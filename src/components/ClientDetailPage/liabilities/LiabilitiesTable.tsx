@@ -129,28 +129,41 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps, LiabilitiesT
     const { addRow } = this.props;
     const { count, dataSource } = this.state;
     const newData = {
-      key: count,
-      description: 'Loan',
-      type: 'deductible',
+      key: Date.now(),
+      description: 'Home Loan',
+      type: 'nonDeductible',
       owner: 'client',
       value: 100000,
       interest: 4.5,
-      from: 'existing',
-      to: 'retain',
+      from: {
+        type: 'existing',
+        yearValue: null,
+      },
+      to: {
+        type: 'retain',
+        yearValue: null,
+      },
       expandable: {
-        deductibily: 2,
-        repaymentAmount: 1150,
-        type: 'principalAndInterest',
-        durationLength: 10,
-        durationType: 'years',
-        creditLimit: 5000,
-        associatedAsset: 'Shares',
+        deductibility: 0,
+        repaymentAmount: 6139.0,
+        repaymentType: 'principalInterest',
+        durationLength: 30,
+        durationType: 'months',
+        creditLimit: 0,
+        associatedAssetRefId: 1,
       },
       drawdowns: [
         {
-          value: 18000,
-          from: 'start',
-          to: 'end',
+          // id: 1,
+          value: 18000.0,
+          from: {
+            type: 'start',
+            yearValue: null,
+          },
+          to: {
+            type: 'end',
+            yearValue: null,
+          },
         },
       ],
     };

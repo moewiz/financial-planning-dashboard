@@ -1,15 +1,21 @@
 import React from 'react';
 import { get } from 'lodash';
-import { Select } from 'antd';
 import ContributionWithdrawalsTable from './ContributionWithdrawalsTable';
 import SGContributionTable from './SGContributionTable';
 import EditableCell from '../assets/EditableCell';
-import { PrefixGroup, TypeDollarPrefix, TypePercentPrefix,
-  PrefixViewGroup, PrefixChooseGroup, PrefixSingleGroup, ExpandedAssetsInlineGroups,
-  ExpandedAssetsGroups, ExpandedAssetsText, ExpandedAssetsBlock } from './styled';
+import {
+  PrefixGroup,
+  TypeDollarPrefix,
+  TypePercentPrefix,
+  PrefixViewGroup,
+  PrefixChooseGroup,
+  PrefixSingleGroup,
+  ExpandedAssetsInlineGroups,
+  ExpandedAssetsGroups,
+  ExpandedAssetsText,
+  ExpandedAssetsBlock,
+} from './styled';
 
-
-const Option = Select.Option;
 export interface AssetProps {
   description: string;
   type: string;
@@ -22,11 +28,11 @@ export interface AssetProps {
 const adviserFeeTypeOptions = [
   {
     value: 'dollar',
-    label: 'Choose $',
+    label: '$',
   },
   {
     value: 'percent',
-    label: 'Choose %',
+    label: '%',
   },
 ];
 
@@ -65,15 +71,14 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
             </PrefixSingleGroup>
             <ExpandedAssetsText>each year</ExpandedAssetsText>
           </ExpandedAssetsInlineGroups>
-        </ExpandedAssetsBlock>)
-        ;
+        </ExpandedAssetsBlock>
+      );
     case 'directInvestment':
+      console.log('expandable.adviserFeeType === \'dollar\'', expandable.adviserFeeType === 'dollar');
       return (
         <ExpandedAssetsGroups>
           <ExpandedAssetsInlineGroups>
-            <ExpandedAssetsText>
-              Rate terms of the (Direct Investment) are:
-            </ExpandedAssetsText>
+            <ExpandedAssetsText>Rate terms of the (Direct Investment) are:</ExpandedAssetsText>
             <PrefixSingleGroup>
               <EditableCell
                 record={record}
@@ -128,9 +133,7 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
               />
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
-            <ExpandedAssetsText>
-              and is assessable for CGT 
-            </ExpandedAssetsText>
+            <ExpandedAssetsText>and is assessable for CGT</ExpandedAssetsText>
           </ExpandedAssetsInlineGroups>
 
           <ExpandedAssetsInlineGroups>
@@ -151,9 +154,7 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
               />
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
-            <ExpandedAssetsText>
-              and adviser fees of
-            </ExpandedAssetsText>
+            <ExpandedAssetsText>and adviser fees of</ExpandedAssetsText>
           </ExpandedAssetsInlineGroups>
 
           <ExpandedAssetsInlineGroups>
@@ -170,12 +171,10 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
               />
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
-            <ExpandedAssetsText>
-            will be re-invested
-            </ExpandedAssetsText>
+            <ExpandedAssetsText>will be re-invested</ExpandedAssetsText>
           </ExpandedAssetsInlineGroups>
 
-          <PrefixGroup dollar={expandable.adviserFeeType === 'dollar' ? true : false}>
+          <PrefixGroup dollar={expandable.adviserFeeType === 'dollar'}>
             <PrefixChooseGroup>
               <EditableCell
                 record={record}
