@@ -368,7 +368,7 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
                   <TypeDollarPrefix>$</TypeDollarPrefix>
                   <EditableCell
                     record={record}
-                    dataIndex={'expandable.productFees'}
+                    dataIndex={'expandable.deductibleAmount'}
                     type={'text'}
                     tableName={'assets'}
                     rowIndex={index}

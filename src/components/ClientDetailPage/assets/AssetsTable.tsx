@@ -35,7 +35,9 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
         { value: 'lifestyle', label: 'Lifestyle' },
         { value: 'directInvestment', label: 'Direct Investment' },
         { value: 'accountBased', label: 'Account Based' },
+        { value: 'pension', label: 'Pension' },
         { value: 'super', label: 'Super' },
+        { value: 'property', label: 'Property' },
       ],
     },
     {
