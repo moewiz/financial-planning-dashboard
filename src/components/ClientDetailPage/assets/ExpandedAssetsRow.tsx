@@ -7,7 +7,7 @@ import { PrefixGroup, TypeDollarPrefix, TypePercentPrefix,
   PrefixViewGroup, PrefixChooseGroup, PrefixSingleGroup, ExpandedAssetsInlineGroups,
   ExpandedAssetsGroups, ExpandedAssetsText, ExpandedAssetsBlock, ExpandedSelectGroup } from './styled';
 
-  
+
 export interface AssetProps {
   description: string;
   type: string;
@@ -141,7 +141,8 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
           </ExpandedAssetsInlineGroups>
           <ExpandedAssetsInlineGroups>
             <ExpandedAssetsText>The (Direct Investment) has a cost base of</ExpandedAssetsText>
-            <PrefixSingleGroup>
+            <PrefixSingleGroup dollar>
+              <TypeDollarPrefix>$</TypeDollarPrefix>
               <EditableCell
                 record={record}
                 dataIndex={'expandable.costBase'}
@@ -151,7 +152,6 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
                 editable={true}
                 expandedField={true}
               />
-              <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
             <ExpandedAssetsText>
               and
