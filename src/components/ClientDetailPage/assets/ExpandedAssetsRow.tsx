@@ -307,7 +307,7 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
           </ExpandedAssetsInlineGroups>
           <ExpandedAssetsInlineGroups>
             <ExpandedAssetsText>The (Pension) has a taxable component of</ExpandedAssetsText>
-            <PrefixSingleGroup>
+            <PrefixSingleGroup dollar>
               <TypeDollarPrefix>$</TypeDollarPrefix>
               <EditableCell
                 record={record}
@@ -364,7 +364,7 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
             {expandable.isDeemed === false && (
               <>
                 <ExpandedAssetsText>amount of</ExpandedAssetsText>
-                <PrefixSingleGroup>
+                <PrefixSingleGroup dollar>
                   <TypeDollarPrefix>$</TypeDollarPrefix>
                   <EditableCell
                     record={record}
