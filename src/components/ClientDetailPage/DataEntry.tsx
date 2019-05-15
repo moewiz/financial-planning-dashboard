@@ -195,7 +195,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
                 <AssetsTable
                   resetForm={props.resetForm}
                   setFieldValue={props.setFieldValue}
-                  data={(tables && tables.assets) || []}
+                  data={(props && props.values && props.values.assets) || []}
                   loading={loading}
                   addRow={addRow}
                   deleteRow={deleteRow}

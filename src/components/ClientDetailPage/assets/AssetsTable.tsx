@@ -19,17 +19,7 @@ interface AssetsTableProps {
   deleteRow: (key: number) => void;
 }
 
-interface AssetsTableState {
-  dataSource: object[];
-  count: number;
-}
-
-class AssetsTable extends PureComponent<AssetsTableProps, AssetsTableState> {
-  public state = {
-    dataSource: addKeyToArray(this.props.data),
-    count: this.props.data.length,
-  };
-
+class AssetsTable extends PureComponent<AssetsTableProps> {
   public columns = [
     {
       title: 'Description',
@@ -99,31 +89,27 @@ class AssetsTable extends PureComponent<AssetsTableProps, AssetsTableState> {
 
   private tableName = 'assets';
 
-  public componentDidUpdate(prevProps: Readonly<AssetsTableProps>, prevState: Readonly<{}>, snapshot?: any): void {
-    if (this.props.loading !== prevProps.loading) {
-      this.setState({
-        dataSource: addKeyToArray(this.props.data),
-        count: this.props.data.length,
-      });
-    }
-  }
+  // public componentDidUpdate(prevProps: Readonly<AssetsTableProps>, prevState: Readonly<{}>, snapshot?: any): void {
+  //   if (this.props.loading !== prevProps.loading) {
+  //     this.setState({
+  //       dataSource: addKeyToArray(this.props.data),
+  //       count: this.props.data.length,
+  //     });
+  //   }
+  // }
 
   public handleDelete = (key: number) => {
     const { deleteRow } = this.props;
 
+    console.log('key', key);
     // update formik
     if (isFunction(deleteRow)) {
       deleteRow(key);
     }
-
-    // update table
-    const dataSource = [...this.state.dataSource];
-    this.setState({ dataSource: dataSource.filter((item) => item.key !== key) });
   }
 
   public handleAdd = () => {
     const { addRow } = this.props;
-    const { count, dataSource } = this.state;
     const newData = {
       key: Date.now(),
       description: 'Home',
@@ -146,29 +132,24 @@ class AssetsTable extends PureComponent<AssetsTableProps, AssetsTableState> {
       },
     };
 
+    console.log('new row', newData);
     // update formik
     if (isFunction(addRow)) {
       addRow(newData);
     }
-
-    // update table
-    dataSource.unshift(newData);
-    this.setState({
-      dataSource,
-      count: count + 1,
-    });
   }
 
   public handleSave = (arg: { tableName: string; rowIndex: number; dataIndex: string; value: any; record: any }) => {
-    const { tableName, rowIndex, dataIndex, value, record } = arg;
-    const newData = [...this.state.dataSource];
-    const index = newData.findIndex((data) => record.key === data.key);
-    const item = newData[index];
-    newData.splice(index, 1, {
-      ...item,
-      [dataIndex]: value,
-    });
-    this.setState({ dataSource: newData });
+    console.log('handle save', arg);
+    // const { tableName, rowIndex, dataIndex, value, record } = arg;
+    // const newData = [...this.state.dataSource];
+    // const index = newData.findIndex((data) => record.key === data.key);
+    // const item = newData[index];
+    // newData.splice(index, 1, {
+    //   ...item,
+    //   [dataIndex]: value,
+    // });
+    // this.setState({ dataSource: newData });
   }
 
   public handleResetForm = () => {
@@ -176,14 +157,14 @@ class AssetsTable extends PureComponent<AssetsTableProps, AssetsTableState> {
     if (isFunction(resetForm)) {
       resetForm();
     }
-    this.setState({
-      dataSource: addKeyToArray(data),
-      count: data.length,
-    });
+    // this.setState({
+    //   dataSource: addKeyToArray(data),
+    //   count: data.length,
+    // });
   }
 
   public render() {
-    const { dataSource } = this.state;
+    // const { dataSource } = this.state;
     const { loading, data } = this.props;
     const columns = this.columns.map((col: any) => {
       const editable = col.editable === false ? false : 'true';

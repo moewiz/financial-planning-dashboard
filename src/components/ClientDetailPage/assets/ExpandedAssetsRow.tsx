@@ -50,7 +50,6 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
   //   setAdviserFeeType(value);
   // }
 
-  console.log(expandable.adviserFeeType);
   switch (type) {
     case 'lifestyle':
       return (
@@ -74,7 +73,6 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
         </ExpandedAssetsBlock>
       );
     case 'directInvestment':
-      console.log('expandable.adviserFeeType === \'dollar\'', expandable.adviserFeeType === 'dollar');
       return (
         <ExpandedAssetsGroups>
           <ExpandedAssetsInlineGroups>
