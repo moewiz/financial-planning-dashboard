@@ -1,6 +1,12 @@
-import React from 'react';
 import { get } from 'lodash';
+import React from 'react';
 import EditableCell from '../assets/EditableCell';
+import {
+  ExpandedAssetsGroups,
+  ExpandedAssetsInlineGroups,
+  ExpandedAssetsText,
+  ExpandedSelectGroup,
+} from '../assets/styled';
 
 export interface BasicInformation {
   description: string;
@@ -11,6 +17,26 @@ export interface BasicInformation {
     jointRiskProfile?: string;
   };
 }
+const coupleOptions = [
+  {
+    value: 'preservation',
+    label: 'couple',
+  },
+  {
+    value: 'defensive',
+    label: 'couple',
+  },
+];
+const thepartnerOptions = [
+  {
+    value: 'preservation',
+    label: 'is',
+  },
+  {
+    value: 'defensive',
+    label: 'is not',
+  },
+];
 
 const riskProfileOptions = [
   {
@@ -60,10 +86,10 @@ const ExpandedBasicInformationRow = (
     const { riskProfile, hasPrivateHealthInsurance, lookingForCoupleAdvice, jointRiskProfile = '' } = expandable;
     if (description === 'Client') {
       return (
-        <div>
-          <div>
-            Client’s risk profile is{' '}
-            <b>
+        <ExpandedAssetsGroups>
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>Client’s risk profile is</ExpandedAssetsText>
+            <ExpandedSelectGroup>
               <EditableCell
                 record={record}
                 dataIndex={'expandable.riskProfile'}
@@ -74,9 +100,9 @@ const ExpandedBasicInformationRow = (
                 editable={true}
                 expandedField={true}
               />
-            </b>{' '}
-            and they{' '}
-            <b>
+            </ExpandedSelectGroup>
+            <ExpandedAssetsText>and they</ExpandedAssetsText>
+            <ExpandedSelectGroup>
               <EditableCell
                 record={record}
                 dataIndex={'expandable.hasPrivateHealthInsurance'}
@@ -87,37 +113,140 @@ const ExpandedBasicInformationRow = (
                 editable={true}
                 expandedField={true}
               />
-            </b>{' '}
-            have private health insurance
-          </div>
-          <div>
-            Client is seeking advice for <b>{lookingForCoupleAdvice ? 'couple' : 'couple'}</b>
-          </div>
-          <div>
-            The client will retire in <b>XXXX</b>
-          </div>
-          <div>
-            The client <b>is not</b> a smoker
-          </div>
-        </div>
+            </ExpandedSelectGroup>
+            <ExpandedAssetsText>have private health insurance</ExpandedAssetsText>
+          </ExpandedAssetsInlineGroups>
+
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>Client is seeking advice for</ExpandedAssetsText>
+            <ExpandedSelectGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.riskProfile'}
+                type={'select'}
+                tableName={'basicInformation'}
+                options={coupleOptions}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+            </ExpandedSelectGroup>
+          </ExpandedAssetsInlineGroups>
+
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>The client will retire in</ExpandedAssetsText>
+            <ExpandedSelectGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.retirementYear'}
+                type={'date'}
+                tableName={'basicInformation'}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+            </ExpandedSelectGroup>
+          </ExpandedAssetsInlineGroups>
+
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>The partner</ExpandedAssetsText>
+            <ExpandedSelectGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.riskProfile'}
+                type={'select'}
+                tableName={'basicInformation'}
+                options={thepartnerOptions}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+            </ExpandedSelectGroup>
+            <ExpandedAssetsText>a smoker</ExpandedAssetsText>
+          </ExpandedAssetsInlineGroups>
+        </ExpandedAssetsGroups>
       );
     }
     return (
-      <div>
-        <div>
-          Partner's risk profile is <b>{get(profileText, riskProfile)}</b> profile and they{' '}
-          <b>{hasPrivateHealthInsurance ? 'did' : 'did not'}</b> have private health insurance
-        </div>
-        <div>
-          Joint risk profile is <b>{get(profileText, jointRiskProfile)}</b>
-        </div>
-        <div>
-          The partner will retire in <b>XXXX</b>
-        </div>
-        <div>
-          The partner <b>is not</b> a smoker
-        </div>
-      </div>
+      <ExpandedAssetsGroups>
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>Partner’s risk profile is</ExpandedAssetsText>
+            <ExpandedSelectGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.riskProfile'}
+                type={'select'}
+                tableName={'basicInformation'}
+                options={riskProfileOptions}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+            </ExpandedSelectGroup>
+            <ExpandedAssetsText>profile and they</ExpandedAssetsText>
+            <ExpandedSelectGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.hasPrivateHealthInsurance'}
+                type={'select'}
+                tableName={'basicInformation'}
+                options={hasPrivateHealthInsuranceOptions}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+            </ExpandedSelectGroup>
+            <ExpandedAssetsText>have private health insurance</ExpandedAssetsText>
+          </ExpandedAssetsInlineGroups>
+
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>Joint risk profile is</ExpandedAssetsText>
+            <ExpandedSelectGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.riskProfile'}
+                type={'select'}
+                tableName={'basicInformation'}
+                options={coupleOptions}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+            </ExpandedSelectGroup>
+          </ExpandedAssetsInlineGroups>
+
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>The partner will retire in</ExpandedAssetsText>
+            <ExpandedSelectGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.retirementYear'}
+                type={'date'}
+                tableName={'basicInformation'}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+            </ExpandedSelectGroup>
+          </ExpandedAssetsInlineGroups>
+
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>The partner</ExpandedAssetsText>
+            <ExpandedSelectGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.riskProfile'}
+                type={'select'}
+                tableName={'basicInformation'}
+                options={thepartnerOptions}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+            </ExpandedSelectGroup>
+            <ExpandedAssetsText>a smoker</ExpandedAssetsText>
+          </ExpandedAssetsInlineGroups>
+        </ExpandedAssetsGroups>
     );
   }
 
