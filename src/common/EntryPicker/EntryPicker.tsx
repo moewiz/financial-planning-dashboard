@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import { DatePicker, Button } from 'antd';
-import { get, isFunction } from 'lodash';
+import { get, isFunction, isObject } from 'lodash';
 import moment, { Moment } from 'moment';
 import { EntryPickerTable, DateButtonCustom } from './styled';
 import { FormikHandlers } from 'formik';
@@ -15,7 +15,7 @@ interface Option {
 
 interface EntryPickerProps {
   name: string;
-  value?: string | number;
+  value?: any;
   options?: Option[];
   onBlur?: FormikHandlers['handleBlur'];
   handleChange?: (name?: string, value?: any) => void;
@@ -123,6 +123,7 @@ class EntryPicker extends PureComponent<EntryPickerProps, {}> {
         );
       }
       case 'custom': {
+        const { type, yearValue } = value;
         return (
           <EntryPickerTable className={className}>
             <DatePicker
@@ -141,6 +142,7 @@ class EntryPicker extends PureComponent<EntryPickerProps, {}> {
                         htmlType={'button'}
                         onClick={() => this.handleChange(moment(), option.value)}
                         key={index}
+                        className={classNames({ 'dropdown-selected': type === option.value })}
                       >
                         {option.label}
                       </Button>
