@@ -100,7 +100,6 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
     let editable = editableProp;
     if (type === 'select' && options && options.length === 1) {
       editable = false;
-      console.log('editable', { editable, tableName, dataIndex });
     }
 
     if (expandedField) {
