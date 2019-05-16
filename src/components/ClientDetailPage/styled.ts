@@ -56,6 +56,18 @@ export const EditableCellWrap = styled.section.attrs({
           color: #d9d9d9;
         }
       }
+      &.ant-select-disabled{
+        cursor: pointer;
+        &:hover{
+          .ant-select-selection {
+            border-color: #d9d9d9;
+            cursor: pointer;
+          }
+          .ant-select-arrow {
+            color: transparent;
+          }
+        }
+      }
     }
     /* Input Number */
     &.ant-input-number {
