@@ -81,7 +81,7 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
   public render() {
     const { editing } = this.state;
     const {
-      editable,
+      editable: editableProp,
       dataIndex,
       title,
       record,
@@ -97,6 +97,11 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
       ...restProps
     } = this.props;
     const appendedProps = this.getAppendedProps(this.props, editing);
+    let editable = editableProp;
+    if (type === 'select' && options && options.length === 1) {
+      editable = false;
+      console.log('editable', { editable, tableName, dataIndex });
+    }
 
     if (expandedField) {
       return editable ? (

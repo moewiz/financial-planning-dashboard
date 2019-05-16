@@ -52,12 +52,11 @@ class CustomSelect extends React.PureComponent<InputProps> {
   }
 
   public render(): JSX.Element {
-    const { placeholder, options, disabled: propDisabled, ...props } = this.props;
-    const disabled = propDisabled || options.length === 1;
+    const { placeholder, options, ...props } = this.props;
 
     return (
       <InputWrapper>
-        <Select {...props} onChange={this.handleChange} ref={this.myRef} onBlur={this.handleBlur} disabled={disabled}>
+        <Select {...props} onChange={this.handleChange} ref={this.myRef} onBlur={this.handleBlur}>
           {options &&
             options.length > 0 &&
             options.map((option) => (
