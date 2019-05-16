@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import { DatePicker, Button } from 'antd';
-import { get, isFunction, isObject } from 'lodash';
+import { get, isFunction } from 'lodash';
 import moment, { Moment } from 'moment';
 import { EntryPickerTable, DateButtonCustom } from './styled';
 import { FormikHandlers } from 'formik';
+import { DatePickerMode } from 'antd/lib/date-picker/interface';
 
 const { MonthPicker, WeekPicker } = DatePicker;
 
@@ -68,6 +69,34 @@ class EntryPicker extends PureComponent<EntryPickerProps, {}> {
     }
   }
 
+  public handleYearChange = (value: Moment | undefined, mode: DatePickerMode) => {
+    const { setFieldValue, name, handleBlur } = this.props;
+
+    if (value) {
+      if (setFieldValue) {
+        setFieldValue(name, { yearValue: value.year(), type: null });
+      }
+
+      if (isFunction(handleBlur)) {
+        handleBlur({ yearValue: value.year(), type: null });
+      }
+    }
+    // close panel
+    this.handleOpenChange(false);
+  }
+
+  public handleSelectDropdown = (value: string | number) => {
+    const { setFieldValue, name, handleBlur } = this.props;
+
+    if (setFieldValue) {
+      setFieldValue(name, { type: value, yearValue: null });
+    }
+
+    if (isFunction(handleBlur)) {
+      handleBlur({ type: value, yearValue: null });
+    }
+  }
+
   public render(): React.ReactNode {
     const { open } = this.state;
     const { pickerType, border, fontStyle, value, textType, defaultOpen, format, options, ...props } = this.props;
@@ -124,15 +153,21 @@ class EntryPicker extends PureComponent<EntryPickerProps, {}> {
       }
       case 'custom': {
         const { type, yearValue } = value;
+        const yearFormat = 'YYYY';
+        const yearMoment = yearValue ? moment(yearValue, yearFormat) : moment();
+
         return (
           <EntryPickerTable className={className}>
+            {type && get((options || []).find((option: Option) => option.value === type), 'label', '')}
             <DatePicker
               ref={this.myRef}
-              defaultValue={momentValue}
               {...props}
+              defaultValue={yearMoment}
               onOpenChange={this.handleOpenChange}
+              format={yearFormat}
               open={open}
-              format={format}
+              mode={'year'}
+              onPanelChange={this.handleYearChange}
               renderExtraFooter={() => (
                 <DateButtonCustom>
                   {options &&
@@ -140,7 +175,7 @@ class EntryPicker extends PureComponent<EntryPickerProps, {}> {
                       <Button
                         type="primary"
                         htmlType={'button'}
-                        onClick={() => this.handleChange(moment(), option.value)}
+                        onClick={() => this.handleSelectDropdown(option.value)}
                         key={index}
                         className={classNames({ 'dropdown-selected': type === option.value })}
                       >
