@@ -27,19 +27,29 @@ export const EntryPickerTable = styled.section`
 `;
 export const DateButtonCustom = styled.div`
   padding: 8px 0px;
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   button{
     background: none;
     border: none;
     color: #1890ff;
     box-shadow: none;
+    padding: 0px;
     text-align: left;
+    width: fit-content;
     &:hover{
       color: #192A6F;
       background-color: transparent;
       border: none!important;
       text-decoration: underline!important;
+    }
+    &.dropdown-selected{
+      background-color: #192A6F;
+      padding: 0 15px;
+      color: #fff;
+      &:hover{
+        opacity: 0.7
+      }
     }
   }
 `;
