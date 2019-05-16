@@ -7,15 +7,16 @@ import { Select } from 'antd';
 interface InputProps {
   name: string;
   value: any;
+  options: Array<{ value: any; label: string }>;
   // onChange: FormikHandlers['handleChange'];
   onBlur: FormikHandlers['handleBlur'];
   placeholder?: string;
   prefix?: React.ReactNode;
   autoFocus?: boolean;
+  disabled?: boolean;
   ref?: React.RefObject<any>;
   handleChange?: (e: any, name?: string, value?: any) => void;
   handleBlur?: (e: React.FocusEvent | string) => void;
-  options?: Array<{ value: any; label: string }>;
   setFieldValue?: (field: string, value: any) => void;
 }
 
@@ -51,11 +52,12 @@ class CustomSelect extends React.PureComponent<InputProps> {
   }
 
   public render(): JSX.Element {
-    const { placeholder, options, ...props } = this.props;
+    const { placeholder, options, disabled: propDisabled, ...props } = this.props;
+    const disabled = propDisabled || options.length === 1;
 
     return (
       <InputWrapper>
-        <Select {...props} onChange={this.handleChange} ref={this.myRef} onBlur={this.handleBlur}>
+        <Select {...props} onChange={this.handleChange} ref={this.myRef} onBlur={this.handleBlur} disabled={disabled}>
           {options &&
             options.length > 0 &&
             options.map((option) => (
