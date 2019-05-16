@@ -44,8 +44,8 @@ export const DateButtonCustom = styled.div`
       text-decoration: underline!important;
     }
     &.dropdown-selected{
-      background-color: #192A6F;
-      padding: 0 15px;
+      background-color: #1890ff;
+      padding: 0 10px;
       color: #fff;
       &:hover{
         opacity: 0.7
