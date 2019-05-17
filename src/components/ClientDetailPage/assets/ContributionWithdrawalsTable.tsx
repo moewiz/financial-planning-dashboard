@@ -70,24 +70,41 @@ class ContributionWithdrawalsTable extends PureComponent {
       title: 'Type',
       dataIndex: 'type',
       width: 140,
+      type: 'select',
+      options: [{ value: 'contribution', label: 'Contribution' }, { value: 'withdrawals', label: 'Withdrawals' }],
     },
     {
       title: 'Value',
       dataIndex: 'value',
       key: '1',
       width: 120,
+      type: 'text',
     },
     {
       title: 'From',
       dataIndex: 'from',
       key: '2',
       width: 120,
+      type: 'date',
+      pickerType: 'custom',
+      options: [
+        { value: 'start', label: 'Start' },
+        { value: 'clientRetirement', label: `Client's Retirement` },
+        { value: 'partnerRetirement', label: `Partner's Retirement` },
+      ],
     },
     {
       title: 'To',
       dataIndex: 'to',
       key: '3',
       width: 120,
+      type: 'date',
+      pickerType: 'custom',
+      options: [
+        { value: 'end', label: 'End' },
+        { value: 'clientRetirement', label: `Client's Retirement` },
+        { value: 'partnerRetirement', label: `Partner's Retirement` },
+      ],
     },
   ];
 
