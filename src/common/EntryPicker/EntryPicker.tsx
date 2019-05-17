@@ -168,6 +168,12 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
         const { type, yearValue } = value;
         const yearFormat = 'YYYY';
         const yearMoment = yearValue ? moment(yearValue, yearFormat) : moment();
+        const datepickerProps = {
+          defaultValue: yearMoment,
+        };
+        if (yearValue === null) {
+          delete datepickerProps.defaultValue;
+        }
 
         return (
           <EntryPickerTable className={className}>
@@ -179,8 +185,8 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
             <DatePicker
               ref={this.myRef}
               {...props}
+              {...datepickerProps}
               className={classNames({ 'input-hidden': yearValue === null })}
-              defaultValue={yearMoment}
               onOpenChange={this.handleOpenChange}
               format={yearFormat}
               open={open}
