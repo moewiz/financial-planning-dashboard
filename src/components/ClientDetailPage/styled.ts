@@ -56,6 +56,11 @@ export const EditableCellWrap = styled.section.attrs({
           color: #d9d9d9;
         }
       }
+      &.disabled{
+       .ant-select-arrow {
+          color: transparent;
+        }
+      }
       &.ant-select-disabled{
         cursor: pointer;
         &:hover{

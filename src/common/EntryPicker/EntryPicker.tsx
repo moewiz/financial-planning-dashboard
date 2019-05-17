@@ -1,11 +1,13 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { DatePicker, Button } from 'antd';
+import { DatePicker, Button, Select } from 'antd';
+const Option = Select.Option;
 import { get, isFunction } from 'lodash';
 import moment, { Moment } from 'moment';
 import { EntryPickerTable, DateButtonCustom } from './styled';
 import { FormikHandlers } from 'formik';
 import { DatePickerMode } from 'antd/lib/date-picker/interface';
+import { EditableCellWrap } from '../../components/ClientDetailPage/styled';
 
 const { MonthPicker, WeekPicker } = DatePicker;
 
@@ -35,7 +37,11 @@ interface EntryPickerProps {
 
 export declare type PickerType = 'month' | 'week' | 'date' | 'custom';
 
-class EntryPicker extends PureComponent<EntryPickerProps, {}> {
+interface EntryPickerState {
+  open: boolean;
+}
+
+class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
   protected static defaultProps = {
     placeholder: '',
     format: 'DD/MM/YYYY',
@@ -55,6 +61,13 @@ class EntryPicker extends PureComponent<EntryPickerProps, {}> {
 
   public handleOpenChange = (open: boolean) => {
     this.setState({ open });
+  }
+
+  public openDatePicker = () => {
+    const { open } = this.state;
+    if (!open) {
+      this.handleOpenChange(true);
+    }
   }
 
   public handleChange = (date: Moment, dateString: string | number) => {
@@ -158,10 +171,17 @@ class EntryPicker extends PureComponent<EntryPickerProps, {}> {
 
         return (
           <EntryPickerTable className={className}>
-            {type && get((options || []).find((option: Option) => option.value === type), 'label', '')}
+            {yearValue === null && type !== '' && (
+              <EditableCellWrap>
+                <div className="readOnly" onClick={!open ? this.openDatePicker : undefined}>
+                  {get((options || []).find((option: Option) => option.value === type), 'label')}
+                </div>
+              </EditableCellWrap>
+            )}
             <DatePicker
               ref={this.myRef}
               {...props}
+              className={classNames({ 'input-hidden': yearValue === null })}
               defaultValue={yearMoment}
               onOpenChange={this.handleOpenChange}
               format={yearFormat}
