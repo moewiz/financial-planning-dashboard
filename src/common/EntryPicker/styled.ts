@@ -30,6 +30,27 @@ export const EntryPickerTable = styled.section`
       font-weight: 800;
     }
   }
+  .dropdown-value {
+    color: #5f698d;
+    margin-left: -10px;
+    cursor: pointer;
+    box-shadow: none;
+    background: transparent;
+    min-height: 35px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 10px;
+    transition: all 300ms ease;
+    height: 35px;
+    &:hover {
+      border: 1px solid #d9d9d9;
+    }
+  }
 `;
 export const DateButtonCustom = styled.div`
   padding: 8px 0px;

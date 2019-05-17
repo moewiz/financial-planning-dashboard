@@ -178,7 +178,7 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
         return (
           <EntryPickerTable className={className}>
             {yearValue === null && type !== '' && (
-              <div className="readOnly" onClick={!open ? this.openDatePicker : undefined}>
+              <div className="dropdown-value readOnly" onClick={!open ? this.openDatePicker : undefined}>
                 {get((options || []).find((option: Option) => option.value === type), 'label')}
               </div>
             )}
