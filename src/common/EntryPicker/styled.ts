@@ -41,15 +41,17 @@ export const EntryPickerTable = styled.section`
     display: flex;
     align-items: center;
     width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     padding: 0 10px;
     transition: all 300ms ease;
     height: 35px;
     border: 1px solid transparent;
     &:hover {
       border: 1px solid #d9d9d9;
+    }
+    span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 `;
