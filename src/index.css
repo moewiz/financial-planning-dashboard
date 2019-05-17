@@ -57,3 +57,14 @@ body .ant-select-dropdown.ant-select-dropdown--single.ant-select-dropdown-placem
   min-width: 145px;
   width: auto !important;
 }
+
+.no-year-selected .ant-calendar-year-panel-selected-cell .ant-calendar-year-panel-year {
+  color: rgba(0, 0, 0, 0.65);
+  background: transparent;
+}
+
+.no-year-selected .ant-calendar-year-panel-selected-cell .ant-calendar-year-panel-year:hover {
+  color: #40a9ff;
+  background: #e6faff;
+  cursor: pointer;
+}

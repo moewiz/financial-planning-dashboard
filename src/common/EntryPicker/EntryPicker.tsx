@@ -187,6 +187,7 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
               {...props}
               {...datepickerProps}
               className={classNames({ 'input-hidden': yearValue === null })}
+              dropdownClassName={classNames({ 'no-year-selected': yearValue === null })}
               onOpenChange={this.handleOpenChange}
               format={yearFormat}
               open={open}

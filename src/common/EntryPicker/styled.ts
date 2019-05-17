@@ -5,7 +5,6 @@ export const EntryPickerTable = styled.section`
   align-items: center;
   display: flex;
   .input-hidden{
-    postion: absolute;
     input{
       display: none;
     }
