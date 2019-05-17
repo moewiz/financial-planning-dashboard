@@ -31,7 +31,10 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps> {
       key: '1',
       width: 'calc(12% - 20px)',
       type: 'select',
-      options: [{ value: 'postTax', label: 'Post-tax' }],
+      options: [
+        { value: 'postTax', label: 'Post-Tax' },
+        { value: 'preTax', label: 'Pre-Tax' },
+      ],
     },
     {
       title: 'Owner',

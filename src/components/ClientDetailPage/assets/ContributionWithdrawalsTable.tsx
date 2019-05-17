@@ -154,7 +154,13 @@ class ContributionWithdrawalsTable extends PureComponent {
           <TextTitle small={true}>{'Contribution/Withdrawals'}</TextTitle>
           <DivideLine />
         </HeaderTitleTable>
-        <Table columns={columns} dataSource={dataSource} pagination={false} components={components} size={'small'} />
+        <Table
+          className= "contribution-withdrawals-table"
+          columns={columns}
+          dataSource={dataSource}
+          pagination={false}
+          components={components}
+          size={'small'} />
       </InnerTableContainer>
     );
   }

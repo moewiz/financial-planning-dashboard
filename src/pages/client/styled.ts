@@ -156,8 +156,12 @@ export const InnerTableContainer = styled.section`
   color: #072074;
   margin-top: 10px;
   font-size: 21px;
+  .contribution-withdrawals-table{
+    max-width: 700px;
+    width: 100%
+  }
   .ant-table-wrapper {
-    margin-left: -38px;
+    margin-left: -24px;
   }
   .ant-table-small {
     border: none;
