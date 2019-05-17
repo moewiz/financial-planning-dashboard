@@ -28,8 +28,6 @@ interface EntryPickerProps {
   pickerType?: PickerType;
   placeholder?: string;
   border?: string;
-  textType?: string;
-  fontStyle?: string;
   format?: string;
   defaultOpen?: boolean;
   allowClear?: boolean;
@@ -112,10 +110,11 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
 
   public render(): React.ReactNode {
     const { open } = this.state;
-    const { pickerType, border, fontStyle, value, textType, defaultOpen, format, options, ...props } = this.props;
+    const { pickerType, border, value, defaultOpen, format, options, ...props } = this.props;
     const className = classNames(
-      'picker-' + pickerType + ' has-' + border + ' font-' + fontStyle + ' text-' + textType,
+      'picker-' + pickerType + ' has-' + border,
     );
+
     const momentValue = moment(value, format);
 
     switch (pickerType) {
