@@ -2,7 +2,14 @@
 import styled, { css } from 'styled-components';
 
 export const EntryPickerTable = styled.section`
-  display: inline-block;
+  align-items: center;
+  display: flex;
+  .input-hidden{
+    postion: absolute;
+    input{
+      display: none;
+    }
+  }
   &.has-none{
     .anticon-calendar{
       display: none;

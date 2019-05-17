@@ -41,6 +41,7 @@ export const EditableCellWrap = styled.section.attrs({
       }
     }
     &.readOnly {
+      line-height: 20px;
       .ant-select-selection {
         border-color: transparent;
         background-color: transparent;
