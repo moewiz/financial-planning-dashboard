@@ -33,7 +33,7 @@ interface EntryPickerProps {
   allowClear?: boolean;
 }
 
-export declare type PickerType = 'month' | 'week' | 'date' | 'custom';
+export declare type PickerType = 'month' | 'week' | 'year' | 'date' | 'custom';
 
 interface EntryPickerState {
   open: boolean;
@@ -108,12 +108,24 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
     }
   }
 
+  public onPanelChange = (value: Moment | undefined, mode: DatePickerMode) => {
+    const { setFieldValue, name, handleBlur } = this.props;
+
+    if (value) {
+      if (setFieldValue) {
+        setFieldValue(name, value.year());
+      }
+
+      if (isFunction(handleBlur)) {
+        handleBlur(value.year());
+      }
+    }
+  }
+
   public render(): React.ReactNode {
     const { open } = this.state;
     const { pickerType, border, value, defaultOpen, format, options, ...props } = this.props;
-    const className = classNames(
-      'picker-' + pickerType + ' has-' + border,
-    );
+    const className = classNames('picker-' + pickerType + ' has-' + border);
 
     const momentValue = moment(value, format);
 
@@ -159,6 +171,25 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
               onOpenChange={this.handleOpenChange}
               open={open}
               format={format}
+            />
+          </EntryPickerTable>
+        );
+      }
+      case 'year': {
+        const yearFormat = 'YYYY';
+        const yearMoment = value ? moment(value, yearFormat) : moment();
+
+        return (
+          <EntryPickerTable className={className}>
+            <DatePicker
+              ref={this.myRef}
+              defaultValue={yearMoment}
+              {...props}
+              mode={'year'}
+              onPanelChange={this.onPanelChange}
+              onOpenChange={this.handleOpenChange}
+              open={open}
+              format={yearFormat}
             />
           </EntryPickerTable>
         );
