@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { StandardAction } from '../../../reducers/reducerTypes';
 import { bindActionCreators, Dispatch } from 'redux';
 import { ClientActions, UpdateMaritalStateAction } from '../../../reducers/client';
+import {empStatusOptions, genderOptions, maritalStateOptions} from "../../../enums/options";
 const confirm = Modal.confirm;
 
 interface BasicInformationProps {
@@ -57,26 +58,21 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
       dataIndex: 'empStatus',
       type: 'select',
       width: '15%',
-      options: [
-        { value: 'employed', label: 'Employed' },
-        { value: 'selfEmployed', label: 'Self Employed' },
-        { value: 'retired', label: 'Retired' },
-        { value: 'unemployed', label: 'Unemployed' },
-      ],
+      options: empStatusOptions,
     },
     {
       title: 'Gender',
       dataIndex: 'gender',
       type: 'select',
       width: '15%',
-      options: [{ value: 'male', label: 'Male' }, { value: 'female', label: 'Female' }],
+      options: genderOptions,
     },
     {
       title: 'Marital State',
       dataIndex: 'maritalState',
       type: 'select',
       width: 'calc(15% - 20px)',
-      options: [{ value: 'married', label: 'Married' }, { value: 'single', label: 'Single' }],
+      options: maritalStateOptions,
     },
   ];
 

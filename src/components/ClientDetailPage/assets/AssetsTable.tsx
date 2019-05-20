@@ -5,6 +5,7 @@ import { TableEntryContainer, HeaderTitleTable, TextTitle, ActionTableGeneral } 
 import GeneralTable from '../GeneralTable';
 import { FormikProps } from 'formik';
 import { isFunction } from 'lodash';
+import { ownerOptions } from '../../../enums/options';
 
 interface AssetsTableProps {
   data: object[];
@@ -47,7 +48,7 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
       dataIndex: 'owner',
       key: '2',
       type: 'select',
-      options: [{ value: 'client', label: 'Client' }],
+      options: ownerOptions,
       width: 'calc(13% - 20px)',
     },
     {

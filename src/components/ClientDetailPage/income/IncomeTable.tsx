@@ -4,6 +4,7 @@ import { ActionTableGeneral, HeaderTitleTable, TableEntryContainer, TextTitle } 
 import { isFunction } from 'lodash';
 import GeneralTable from '../GeneralTable';
 import { FormikProps } from 'formik';
+import {maritalStateOptions, ownerOptions} from '../../../enums/options';
 
 interface IncomeTableProps {
   data: object[];
@@ -47,7 +48,7 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
       key: '2',
       width: '13%',
       type: 'select',
-      options: [{ value: 'client', label: 'Client' }, { value: 'partner', label: 'Partner' }],
+      options: ownerOptions,
     },
     {
       title: 'Value',
@@ -111,7 +112,7 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
 
   public componentDidUpdate(prevProps: Readonly<IncomeTableProps>, prevState: Readonly<{}>, snapshot?: any): void {
     const { maritalState, setFieldValue, data } = this.props;
-    if (prevProps.maritalState !== maritalState && maritalState === 'single') {
+    if (prevProps.maritalState !== maritalState && maritalState === maritalStateOptions[1].value) {
       // update All Owner to Client
       const newData = data.map((d) => ({ ...d, owner: 'client' }));
       setFieldValue(this.tableName, newData);
