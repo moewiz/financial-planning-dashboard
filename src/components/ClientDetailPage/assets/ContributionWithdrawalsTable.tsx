@@ -12,6 +12,7 @@ interface ContributionWithdrawalsTableProps {
   data: object[];
   index: number;
   titleTable?: string;
+  tableName: string;
 }
 const enterAnim = [
   {
@@ -109,8 +110,6 @@ class ContributionWithdrawalsTable extends PureComponent<ContributionWithdrawals
     },
   ];
 
-  public tableName = 'contributionWithdrawals';
-
   public handleDelete = (key: string) => {
     const dataSource = [...this.state.dataSource];
     this.setState({ dataSource: dataSource.filter((item) => item.key !== key) });
@@ -138,7 +137,7 @@ class ContributionWithdrawalsTable extends PureComponent<ContributionWithdrawals
   }
 
   public render(): React.ReactNode {
-    const { titleTable, data, maritalState, index } = this.props;
+    const { titleTable, data, maritalState, index, tableName } = this.props;
     const columns = this.columns.map((col) => {
       const options = removePartnerOption(col, maritalState);
       const editable = col.key === 'operation' ? false : 'true';
@@ -151,7 +150,7 @@ class ContributionWithdrawalsTable extends PureComponent<ContributionWithdrawals
           ...col,
           options,
           rowIndex,
-          tableName: `assets[${index}].${this.tableName}`,
+          tableName: `assets[${index}].${tableName}`,
           type: col.type || 'text',
           record,
           editable,
