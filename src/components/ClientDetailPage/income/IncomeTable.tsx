@@ -4,7 +4,7 @@ import { ActionTableGeneral, HeaderTitleTable, TableEntryContainer, TextTitle } 
 import { isFunction } from 'lodash';
 import GeneralTable from '../GeneralTable';
 import { FormikProps } from 'formik';
-import {from1Options, maritalStateOptions, ownerOptions, to1Options} from '../../../enums/options';
+import {maritalStateOptions, ownerOptions, incomeTypeOptions, from1Options, to1Options, indexationOptions} from '../../../enums/options';
 
 interface IncomeTableProps {
   data: object[];
@@ -35,12 +35,7 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
       key: '1',
       width: 'calc(12% - 20px)',
       type: 'select',
-      options: [
-        { value: 'employment', label: 'Employment' },
-        { value: 'taxable', label: 'Centrelink Payment' },
-        { value: 'otherTaxable', label: 'Other Taxable' },
-        { value: 'otherNonTaxable', label: 'Other Non-Taxable' },
-      ],
+      options: incomeTypeOptions,
     },
     {
       title: 'Owner',
@@ -63,16 +58,7 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
       key: '4',
       width: '13%',
       type: 'select',
-      options: [
-        { value: 'salaryInflation', label: 'Salary Inflation' },
-        { value: 'inflationCPI', label: 'Inflation (CPI)' },
-        { value: 'awote', label: 'Awote' },
-        { value: '0.0%', label: '0.0%' },
-        { value: '0.5%', label: '0.5%' },
-        { value: '1.0%', label: '1.0%' },
-        { value: '1.5%', label: '1.5%' },
-        { value: '10.0%', label: '10.0%' },
-      ],
+      options: indexationOptions,
     },
     {
       title: 'From',

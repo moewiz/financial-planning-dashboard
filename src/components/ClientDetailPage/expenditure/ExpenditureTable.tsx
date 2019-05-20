@@ -4,7 +4,7 @@ import { FormikProps } from 'formik';
 import { isFunction } from 'lodash';
 import { ActionTableGeneral, HeaderTitleTable, TableEntryContainer, TextTitle } from '../../../pages/client/styled';
 import GeneralTable from '../GeneralTable';
-import {from1Options, ownerOptions, to1Options} from "../../../enums/options";
+import {from1Options, ownerOptions, to1Options, expenditureTypeOptions, indexationOptions} from "../../../enums/options";
 
 interface ExpenditureTableProps {
   data: object[];
@@ -33,7 +33,7 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps> {
       key: '1',
       width: 'calc(12% - 20px)',
       type: 'select',
-      options: [{ value: 'postTax', label: 'Post-Tax' }, { value: 'preTax', label: 'Pre-Tax' }],
+      options: expenditureTypeOptions,
     },
     {
       title: 'Owner',
@@ -55,10 +55,7 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps> {
       key: '4',
       width: '13%',
       type: 'select',
-      options: [
-        { value: 'salaryInflation', label: 'Salary Inflation' },
-        { value: 'inflationCPI', label: 'Inflation (CPI)' },
-      ],
+      options: indexationOptions,
     },
     {
       title: 'From',

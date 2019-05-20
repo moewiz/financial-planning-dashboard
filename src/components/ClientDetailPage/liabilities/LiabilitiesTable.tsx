@@ -4,7 +4,7 @@ import { isFunction } from 'lodash';
 import { TableEntryContainer, HeaderTitleTable, TextTitle, ActionTableGeneral } from '../../../pages/client/styled';
 import ExpandedLiabilitiesRow from './ExpandedLiabilitiesRow';
 import GeneralTable from '../GeneralTable';
-import {from1Options, to2Options} from "../../../enums/options";
+import {from1Options, to2Options, liabilitiesTypes, ownerOptions} from "../../../enums/options";
 
 interface LiabilitiesTableProps {
   data: object[];
@@ -34,7 +34,7 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
       key: '1',
       width: 'calc(12% - 20px)',
       type: 'select',
-      options: [{ value: 'nonDeductible', label: 'Non-Deductible' }, { value: 'deductible', label: 'Deductible' }],
+      options: liabilitiesTypes,
     },
     {
       title: 'Owner',
@@ -42,7 +42,7 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
       key: '2',
       width: '13%',
       type: 'select',
-      options: [{ value: 'client', label: 'Client' }, { value: 'partner', label: 'Partner' }],
+      options: ownerOptions,
     },
     {
       title: 'Value',
