@@ -2,7 +2,8 @@ import React from 'react';
 import { InputWrapper, InputLabel } from './styled';
 import { FormikHandlers } from 'formik';
 import { get, isFunction, isBoolean } from 'lodash';
-import { Select } from 'antd';
+import { Select, Modal } from 'antd';
+const confirm = Modal.confirm;
 
 interface InputProps {
   name: string;
@@ -18,6 +19,7 @@ interface InputProps {
   handleChange?: (e: any, name?: string, value?: any) => void;
   handleBlur?: (e: React.FocusEvent | string) => void;
   setFieldValue?: (field: string, value: any) => void;
+  confirmTitle?: { title: string; fieldValue: any };
 }
 
 class CustomSelect extends React.PureComponent<InputProps> {
@@ -33,7 +35,25 @@ class CustomSelect extends React.PureComponent<InputProps> {
     const { setFieldValue, name } = this.props;
 
     if (setFieldValue) {
+      // handle save editable cell
+      this.handleBlur(newValue);
+
       setFieldValue(name, newValue);
+    }
+  }
+
+  public handleSelect = (value: any) => {
+    const { confirmTitle } = this.props;
+    if (confirmTitle && value === confirmTitle.fieldValue) {
+      confirm({
+        title: confirmTitle.title,
+        onOk: () => {
+          this.handleChange(value);
+        },
+        onCancel: () => {},
+      });
+    } else {
+      this.handleChange(value);
     }
   }
 
@@ -52,11 +72,11 @@ class CustomSelect extends React.PureComponent<InputProps> {
   }
 
   public render(): JSX.Element {
-    const { placeholder, options, ...props } = this.props;
+    const { placeholder, onBlur, options, ...props } = this.props;
 
     return (
       <InputWrapper>
-        <Select {...props} onChange={this.handleChange} ref={this.myRef} onBlur={this.handleBlur}>
+        <Select {...props} onSelect={this.handleSelect} ref={this.myRef}>
           {options &&
             options.length > 0 &&
             options.map((option) => (

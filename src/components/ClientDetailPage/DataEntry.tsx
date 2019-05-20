@@ -157,6 +157,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
         <Formik
           onSubmit={(values: any, actions: FormikActions<any>) => {
             // set state
+            console.log(values);
             this.updateFormData(values);
           }}
           initialValues={{ basicInformation: tables ? addKeyToArray(tables.basicInformation || []) : [] }}

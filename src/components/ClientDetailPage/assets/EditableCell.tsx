@@ -20,6 +20,7 @@ interface EditableProps {
   suffix?: string | React.ReactNode;
   expandedField?: boolean;
   options?: Array<{ value: any; label: any }>;
+  confirmTitle?: { title: string, fieldValue: any};
 }
 
 export default class EditableCell extends React.PureComponent<EditableProps> {
@@ -62,12 +63,12 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
   }
 
   public getAppendedProps = (props: EditableProps, editing: boolean = false) => {
-    const { type, options, pickerType, prefix, suffix } = props;
+    const { type, options, pickerType, confirmTitle } = props;
     const appendProps = [];
 
     switch (type) {
       case 'select': {
-        appendProps.push({ defaultOpen: editing, options });
+        appendProps.push({ defaultOpen: editing, options, confirmTitle });
         break;
       }
       case 'date': {
@@ -94,6 +95,7 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
       expandedField,
       prefix,
       suffix,
+      confirmTitle,
       ...restProps
     } = this.props;
     const appendedProps = this.getAppendedProps(this.props, editing);

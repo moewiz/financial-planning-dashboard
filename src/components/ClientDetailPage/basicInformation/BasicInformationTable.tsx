@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { StandardAction } from '../../../reducers/reducerTypes';
 import { bindActionCreators, Dispatch } from 'redux';
 import { ClientActions, UpdateMaritalStateAction } from '../../../reducers/client';
-import {empStatusOptions, genderOptions, maritalStateOptions} from "../../../enums/options";
+import { empStatusOptions, genderOptions, maritalStateOptions } from '../../../enums/options';
 const confirm = Modal.confirm;
 
 interface BasicInformationProps {
@@ -73,6 +73,10 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
       type: 'select',
       width: 'calc(15% - 20px)',
       options: maritalStateOptions,
+      confirmTitle: {
+        title: 'Do you want to change All Owner to Client?',
+        fieldValue: maritalStateOptions[1].value,
+      },
     },
   ];
 
@@ -142,22 +146,16 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
      */
     if (rowIndex === 0 && dataIndex === 'maritalState') {
       const { updateMaritalState } = this.props;
+      // update marital state in redux store
+      if (updateMaritalState) {
+        updateMaritalState(value);
+      }
 
       if (value === 'single') {
         this.handleDelete(1);
-        this.showConfirm(() => {
-          // update marital state in redux store
-          if (updateMaritalState) {
-            updateMaritalState(value);
-          }
-        });
       }
       if (value === 'married') {
         this.handleAdd();
-        // update marital state in redux store
-        if (updateMaritalState) {
-          updateMaritalState(value);
-        }
       }
     }
   }
@@ -200,7 +198,7 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
           expandedRowRender={ExpandedBasicInformationRow}
           className={`${this.tableName}-table`}
         />
-        <ActionTableGeneral>
+        <ActionTableGeneral visible={true}>
           <Button htmlType={'button'} type={'default'} onClick={this.handleResetForm}>
             <Icon type="close" />
             <span>Discard</span>
