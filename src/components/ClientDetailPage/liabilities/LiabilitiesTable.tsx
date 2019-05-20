@@ -7,9 +7,10 @@ import GeneralTable from '../GeneralTable';
 
 interface LiabilitiesTableProps {
   data: object[];
+  maritalState: string;
   loading?: boolean;
 
-  setFieldValue?: (field: string, value: any) => void;
+  setFieldValue: (field: string, value: any) => void;
   resetForm: (nextValues?: any) => void;
   submitForm: () => void;
   addRow: (row: any) => void;
@@ -90,6 +91,15 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
   ];
 
   private tableName = 'liabilities';
+
+  public componentDidUpdate(prevProps: Readonly<LiabilitiesTableProps>, prevState: Readonly<{}>, snapshot?: any): void {
+    const { maritalState, setFieldValue, data } = this.props;
+    if (prevProps.maritalState !== maritalState && maritalState === 'single') {
+      // update All Owner to Client
+      const newData = data.map((d) => ({ ...d, owner: 'client' }));
+      setFieldValue(this.tableName, newData);
+    }
+  }
 
   public resetForm = () => {
     this.handleResetForm();

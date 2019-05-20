@@ -27,6 +27,7 @@ interface DataEntryProps {
   clientId: string;
   tagName: string;
   tabName: string;
+  maritalState: string;
 
   tables?: Table;
   loading?: boolean;
@@ -47,6 +48,9 @@ export const addKeyToArray = (array: object[], defaultValue?: any) => {
 };
 
 class DataEntryComponent extends PureComponent<DataEntryProps> {
+  public static defaultProps = {
+    maritalState: '',
+  };
   public readonly state: DataEntryState = {
     formData: {},
   };
@@ -146,7 +150,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
   }
 
   public render() {
-    const { tables, loading } = this.props;
+    const { tables, loading, maritalState } = this.props;
 
     return (
       <>
@@ -217,6 +221,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
                   addRow={addRow}
                   deleteRow={deleteRow}
                   ref={this.incomeForm}
+                  maritalState={maritalState}
                 />
               </Form>
             );
@@ -253,6 +258,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
                   addRow={addRow}
                   deleteRow={deleteRow}
                   ref={this.expenditureForm}
+                  maritalState={maritalState}
                 />
               </Form>
             );
@@ -289,6 +295,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
                   addRow={addRow}
                   deleteRow={deleteRow}
                   ref={this.assetsForm}
+                  maritalState={maritalState}
                 />
               </Form>
             );
@@ -325,6 +332,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
                   addRow={addRow}
                   deleteRow={deleteRow}
                   ref={this.liabilitiesForm}
+                  maritalState={maritalState}
                 />
               </Form>
             );
@@ -361,6 +369,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
                   addRow={addRow}
                   deleteRow={deleteRow}
                   ref={this.insuranceForm}
+                  maritalState={maritalState}
                 />
               </Form>
             );
@@ -384,6 +393,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
 const mapStateToProps = (state: RootState, ownProps: DataEntryProps) => {
   let tables;
   const clients = state.client.get('clients');
+  const maritalState = state.client.get('maritalState');
   const loading = state.client.get('loading');
   const clientId = ownProps.clientId;
   const tagName = ownProps.tagName;
@@ -403,6 +413,7 @@ const mapStateToProps = (state: RootState, ownProps: DataEntryProps) => {
   return {
     tables,
     loading,
+    maritalState,
   };
 };
 

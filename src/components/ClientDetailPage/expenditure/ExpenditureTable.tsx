@@ -7,11 +7,12 @@ import GeneralTable from '../GeneralTable';
 
 interface ExpenditureTableProps {
   data: object[];
+  maritalState: string;
   loading?: boolean;
 
   formProps?: FormikProps<any>;
   tableName?: string;
-  setFieldValue?: (field: string, value: any) => void;
+  setFieldValue: (field: string, value: any) => void;
   resetForm: (nextValues?: any) => void;
   submitForm: () => void;
   addRow: (row: any) => void;
@@ -31,10 +32,7 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps> {
       key: '1',
       width: 'calc(12% - 20px)',
       type: 'select',
-      options: [
-        { value: 'postTax', label: 'Post-Tax' },
-        { value: 'preTax', label: 'Pre-Tax' },
-      ],
+      options: [{ value: 'postTax', label: 'Post-Tax' }, { value: 'preTax', label: 'Pre-Tax' }],
     },
     {
       title: 'Owner',
@@ -96,6 +94,15 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps> {
   ];
 
   private tableName = 'expenditure';
+
+  public componentDidUpdate(prevProps: Readonly<ExpenditureTableProps>, prevState: Readonly<{}>, snapshot?: any): void {
+    const { maritalState, setFieldValue, data } = this.props;
+    if (prevProps.maritalState !== maritalState && maritalState === 'single') {
+      // update All Owner to Client
+      const newData = data.map((d) => ({ ...d, owner: 'client' }));
+      setFieldValue(this.tableName, newData);
+    }
+  }
 
   public resetForm = () => {
     this.handleResetForm();

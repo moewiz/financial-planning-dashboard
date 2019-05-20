@@ -7,11 +7,12 @@ import { FormikProps } from 'formik';
 
 interface IncomeTableProps {
   data: object[];
+  maritalState: string;
   loading?: boolean;
 
   formProps?: FormikProps<any>;
   tableName?: string;
-  setFieldValue?: (field: string, value: any) => void;
+  setFieldValue: (field: string, value: any) => void;
   resetForm: (nextValues?: any) => void;
   submitForm: () => void;
   addRow: (row: any) => void;
@@ -107,6 +108,15 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
   ];
 
   private tableName = 'income';
+
+  public componentDidUpdate(prevProps: Readonly<IncomeTableProps>, prevState: Readonly<{}>, snapshot?: any): void {
+    const { maritalState, setFieldValue, data } = this.props;
+    if (prevProps.maritalState !== maritalState && maritalState === 'single') {
+      // update All Owner to Client
+      const newData = data.map((d) => ({ ...d, owner: 'client' }));
+      setFieldValue(this.tableName, newData);
+    }
+  }
 
   public resetForm = () => {
     this.handleResetForm();

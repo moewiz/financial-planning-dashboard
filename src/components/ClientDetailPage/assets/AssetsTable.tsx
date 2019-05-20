@@ -8,11 +8,12 @@ import { isFunction } from 'lodash';
 
 interface AssetsTableProps {
   data: object[];
+  maritalState: string;
   loading?: boolean;
 
   formProps?: FormikProps<any>;
   tableName?: string;
-  setFieldValue?: (field: string, value: any) => void;
+  setFieldValue: (field: string, value: any) => void;
   resetForm: (nextValues?: any) => void;
   submitForm: () => void;
   addRow: (row: any) => void;
@@ -104,6 +105,15 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
   ];
 
   private tableName = 'assets';
+
+  public componentDidUpdate(prevProps: Readonly<AssetsTableProps>, prevState: Readonly<{}>, snapshot?: any): void {
+    const { maritalState, setFieldValue, data } = this.props;
+    if (prevProps.maritalState !== maritalState && maritalState === 'single') {
+      // update All Owner to Client
+      const newData = data.map((d) => ({ ...d, owner: 'client' }));
+      setFieldValue(this.tableName, newData);
+    }
+  }
 
   public resetForm = () => {
     this.handleResetForm();
