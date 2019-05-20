@@ -2,8 +2,15 @@ import React, { PureComponent } from 'react';
 import { Icon, Popconfirm, Table } from 'antd';
 import { InnerTableContainer, HeaderTitleTable, TextTitle, DivideLine } from '../../../pages/client/styled';
 import { TweenOneGroup } from 'rc-tween-one';
+import { from1Options, to1Options } from '../../../enums/options';
+import { removePartnerOption } from '../../../utils/columnUtils';
+import EditableCell from './EditableCell';
+import { addKeyToArray } from '../DataEntry';
 
 interface ContributionWithdrawalsTableProps {
+  maritalState: string;
+  data: object[];
+  index: number;
   titleTable?: string;
 }
 const enterAnim = [
@@ -33,7 +40,7 @@ export const AnimTag = ($props: any) => {
   return <TweenOneGroup component="tbody" enter={enterAnim} leave={leaveAnim} appear={false} exclusive {...$props} />;
 };
 
-const components = { body: { wrapper: AnimTag } };
+const components = { body: { wrapper: AnimTag, cell: EditableCell } };
 
 class ContributionWithdrawalsTable extends PureComponent<ContributionWithdrawalsTableProps, {}> {
   public state = {
@@ -62,12 +69,11 @@ class ContributionWithdrawalsTable extends PureComponent<ContributionWithdrawals
       key: 'operation',
       width: 18,
       className: 'operation',
-      render: (text: any, record: any) =>
-        this.state.dataSource.length >= 1 ? (
-          <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
-            <Icon type="close-square" theme="twoTone" style={{ fontSize: '16px' }} />
-          </Popconfirm>
-        ) : null,
+      render: (text: any, record: any) => (
+        <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+          <Icon type="close-square" theme="twoTone" style={{ fontSize: '16px' }} />
+        </Popconfirm>
+      ),
     },
     {
       title: 'Type',
@@ -90,11 +96,7 @@ class ContributionWithdrawalsTable extends PureComponent<ContributionWithdrawals
       width: 120,
       type: 'date',
       pickerType: 'custom',
-      options: [
-        { value: 'start', label: 'Start' },
-        { value: 'clientRetirement', label: `Client's Retirement` },
-        { value: 'partnerRetirement', label: `Partner's Retirement` },
-      ],
+      options: from1Options,
     },
     {
       title: 'To',
@@ -103,13 +105,11 @@ class ContributionWithdrawalsTable extends PureComponent<ContributionWithdrawals
       width: 120,
       type: 'date',
       pickerType: 'custom',
-      options: [
-        { value: 'end', label: 'End' },
-        { value: 'clientRetirement', label: `Client's Retirement` },
-        { value: 'partnerRetirement', label: `Partner's Retirement` },
-      ],
+      options: to1Options,
     },
   ];
+
+  public tableName = 'contributionWithdrawals';
 
   public handleDelete = (key: string) => {
     const dataSource = [...this.state.dataSource];
@@ -138,16 +138,23 @@ class ContributionWithdrawalsTable extends PureComponent<ContributionWithdrawals
   }
 
   public render(): React.ReactNode {
-    const { titleTable } = this.props;
-    const { dataSource } = this.state;
+    const { titleTable, data, maritalState, index } = this.props;
     const columns = this.columns.map((col) => {
+      const options = removePartnerOption(col, maritalState);
+      const editable = col.key === 'operation' ? false : 'true';
+
       return {
         ...col,
         fixed: false,
-        onCell: (record: any) => ({
+        options,
+        onCell: (record: any, rowIndex: number) => ({
+          ...col,
+          options,
+          rowIndex,
+          tableName: `assets[${index}].${this.tableName}`,
+          type: col.type || 'text',
           record,
-          editable: 'true',
-          title: col.title,
+          editable,
         }),
       };
     });
@@ -155,16 +162,17 @@ class ContributionWithdrawalsTable extends PureComponent<ContributionWithdrawals
       <InnerTableContainer>
         <HeaderTitleTable small={true}>
           <Icon type={'plus-square'} theme={'filled'} onClick={this.handleAdd} />
-          <TextTitle small={true}>{ titleTable }</TextTitle>
+          <TextTitle small={true}>{titleTable}</TextTitle>
           <DivideLine />
         </HeaderTitleTable>
         <Table
-          className= "contribution-withdrawals-table"
+          className="contribution-withdrawals-table"
           columns={columns}
-          dataSource={dataSource}
+          dataSource={addKeyToArray(data)}
           pagination={false}
           components={components}
-          size={'small'} />
+          size={'small'}
+        />
       </InnerTableContainer>
     );
   }

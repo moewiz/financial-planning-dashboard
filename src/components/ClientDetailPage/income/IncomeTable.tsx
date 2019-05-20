@@ -4,7 +4,15 @@ import { ActionTableGeneral, HeaderTitleTable, TableEntryContainer, TextTitle } 
 import { isFunction } from 'lodash';
 import GeneralTable from '../GeneralTable';
 import { FormikProps } from 'formik';
-import {maritalStateOptions, ownerOptions, incomeTypeOptions, from1Options, to1Options, indexationOptions} from '../../../enums/options';
+import {
+  maritalStateOptions,
+  ownerOptions,
+  incomeTypeOptions,
+  from1Options,
+  to1Options,
+  indexationOptions,
+} from '../../../enums/options';
+import { removePartnerOption } from '../../../utils/columnUtils';
 
 interface IncomeTableProps {
   data: object[];
@@ -152,8 +160,9 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
   }
 
   public render() {
-    const { loading, data } = this.props;
+    const { loading, data, maritalState } = this.props;
     const columns = this.columns.map((col) => {
+      const options = removePartnerOption(col, maritalState);
       const editable = col.editable === false ? false : 'true';
       if (col.key === 'operation') {
         return {
@@ -171,8 +180,10 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
 
       return {
         ...col,
+        options,
         onCell: (record: any, rowIndex: number) => ({
           ...col,
+          options,
           rowIndex,
           tableName: this.tableName,
           type: col.type || 'text',

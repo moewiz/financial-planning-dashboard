@@ -4,7 +4,14 @@ import { FormikProps } from 'formik';
 import { isFunction } from 'lodash';
 import { ActionTableGeneral, HeaderTitleTable, TableEntryContainer, TextTitle } from '../../../pages/client/styled';
 import GeneralTable from '../GeneralTable';
-import {from1Options, ownerOptions, to1Options, expenditureTypeOptions, indexationOptions} from "../../../enums/options";
+import {
+  from1Options,
+  ownerOptions,
+  to1Options,
+  expenditureTypeOptions,
+  indexationOptions,
+} from '../../../enums/options';
+import { removePartnerOption } from '../../../utils/columnUtils';
 
 interface ExpenditureTableProps {
   data: object[];
@@ -149,8 +156,9 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps> {
   }
 
   public render() {
-    const { loading, data } = this.props;
+    const { loading, data, maritalState } = this.props;
     const columns = this.columns.map((col) => {
+      const options = removePartnerOption(col, maritalState);
       const editable = col.editable === false ? false : 'true';
       if (col.key === 'operation') {
         return {
@@ -168,8 +176,10 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps> {
 
       return {
         ...col,
+        options,
         onCell: (record: any, rowIndex: number) => ({
           ...col,
+          options,
           rowIndex,
           tableName: this.tableName,
           type: col.type || 'text',

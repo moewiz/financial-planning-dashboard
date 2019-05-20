@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
 import { Button, Icon, Popconfirm } from 'antd';
-import ExpandedAssetsRow from './ExpandedAssetsRow';
+import ExpandedAssetsRowWrapper from './ExpandedAssetsRowWrapper';
 import { TableEntryContainer, HeaderTitleTable, TextTitle, ActionTableGeneral } from '../../../pages/client/styled';
 import GeneralTable from '../GeneralTable';
 import { FormikProps } from 'formik';
 import { isFunction } from 'lodash';
-import {from2Options, ownerOptions, to2Options, assetTypes, investmentTypes} from '../../../enums/options';
+import { from2Options, ownerOptions, to2Options, assetTypes, investmentTypes } from '../../../enums/options';
+import { removePartnerOption } from '../../../utils/columnUtils';
 
 interface AssetsTableProps {
   data: object[];
@@ -157,8 +158,9 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
   }
 
   public render() {
-    const { loading, data } = this.props;
+    const { loading, data, maritalState } = this.props;
     const columns = this.columns.map((col: any) => {
+      const options = removePartnerOption(col, maritalState);
       const editable = col.editable === false ? false : 'true';
       if (col.key === 'operation') {
         return {
@@ -176,15 +178,19 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
 
       return {
         ...col,
-        onCell: (record: any, rowIndex: number) => ({
-          ...col,
-          rowIndex,
-          tableName: this.tableName,
-          type: col.type || 'text',
-          record,
-          editable,
-          handleSave: this.handleSave,
-        }),
+        options,
+        onCell: (record: any, rowIndex: number) => {
+          return {
+            ...col,
+            options,
+            rowIndex,
+            tableName: this.tableName,
+            type: col.type || 'text',
+            record: { ...record, maritalState },
+            editable,
+            handleSave: this.handleSave,
+          };
+        },
       };
     });
 
@@ -199,7 +205,7 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
           columns={columns}
           dataSource={data}
           pagination={false}
-          expandedRowRender={ExpandedAssetsRow}
+          expandedRowRender={ExpandedAssetsRowWrapper}
           className={`${this.tableName}-table`}
         />
         <ActionTableGeneral>

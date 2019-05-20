@@ -15,6 +15,8 @@ import {
   ExpandedAssetsBlock,
   ExpandedSelectGroup,
 } from './styled';
+import { connect } from 'react-redux';
+import { RootState } from '../../../reducers/reducerTypes';
 
 export interface AssetProps {
   description: string;
@@ -25,6 +27,7 @@ export interface AssetProps {
     lookingForCoupleAdvice?: boolean;
     isDeemed?: boolean;
   };
+  contributionWithdrawals: object[];
 }
 const reinvestOptions = [
   {
@@ -77,7 +80,14 @@ const adviserFeeTypeOptions = [
   },
 ];
 
-const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, expanded: boolean): React.ReactNode => {
+const ExpandedAssetsRow = (props: {
+  record: AssetProps;
+  index: number;
+  indent: number;
+  expanded: boolean;
+  maritalState: string;
+}) => {
+  const { record, maritalState, index } = props;
   const { expandable, type } = record;
 
   switch (type) {
@@ -254,8 +264,12 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
             </ExpandedSelectGroup>
             <ExpandedAssetsText>be re-invested</ExpandedAssetsText>
           </ExpandedAssetsInlineGroups>
-          <ContributionWithdrawalsTable titleTable={'Contribution/Withdrawals'} />
-
+          <ContributionWithdrawalsTable
+            data={record.contributionWithdrawals}
+            index={index}
+            titleTable={'Contribution/Withdrawals'}
+            maritalState={maritalState}
+          />
         </ExpandedAssetsGroups>
       );
     case 'super':
@@ -423,7 +437,12 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
             </PrefixSingleGroup>
           </ExpandedAssetsInlineGroups>
           <SGContributionTable titleTable={'SG Contribution'} />
-          <ContributionWithdrawalsTable titleTable={'Contribution/Withdrawals'} />
+          <ContributionWithdrawalsTable
+            data={record.contributionWithdrawals}
+            index={index}
+            titleTable={'Contribution/Withdrawals'}
+            maritalState={maritalState}
+          />
         </ExpandedAssetsGroups>
       );
     case 'pension':
@@ -592,7 +611,12 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
             </PrefixGroup>
           </ExpandedAssetsInlineGroups>
 
-          <ContributionWithdrawalsTable  titleTable={'Pension income'} />
+          <ContributionWithdrawalsTable
+            data={record.contributionWithdrawals}
+            index={index}
+            titleTable={'Pension income'}
+            maritalState={maritalState}
+          />
         </ExpandedAssetsGroups>
       );
     default:
@@ -761,10 +785,28 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
             </PrefixGroup>
           </ExpandedAssetsInlineGroups>
 
-          <ContributionWithdrawalsTable  titleTable={'Pension income'} />
+          <ContributionWithdrawalsTable
+            data={record.contributionWithdrawals}
+            index={index}
+            titleTable={'Pension income'}
+            maritalState={maritalState}
+          />
         </ExpandedAssetsGroups>
       );
   }
 };
 
-export default ExpandedAssetsRow;
+const mapStateToProps = (state: RootState) => {
+  const maritalState = state.client.get('maritalState');
+
+  return {
+    maritalState,
+  };
+};
+const EnhanceExpandedAssetsRow = connect(mapStateToProps)(ExpandedAssetsRow);
+
+const ExpandedAssetsRowWrapper = (record: AssetProps, index: number, indent: number, expanded: boolean) => {
+  return <EnhanceExpandedAssetsRow record={record} index={index} indent={indent} expanded={expanded} />;
+};
+
+export default ExpandedAssetsRowWrapper;

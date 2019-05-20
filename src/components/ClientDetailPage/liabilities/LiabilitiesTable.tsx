@@ -5,6 +5,7 @@ import { TableEntryContainer, HeaderTitleTable, TextTitle, ActionTableGeneral } 
 import ExpandedLiabilitiesRow from './ExpandedLiabilitiesRow';
 import GeneralTable from '../GeneralTable';
 import {from1Options, to2Options, liabilitiesTypes, ownerOptions} from "../../../enums/options";
+import {removePartnerOption} from "../../../utils/columnUtils";
 
 interface LiabilitiesTableProps {
   data: object[];
@@ -172,8 +173,9 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
   }
 
   public render() {
-    const { loading, data } = this.props;
+    const { loading, data, maritalState } = this.props;
     const columns = this.columns.map((col) => {
+      const options = removePartnerOption(col, maritalState);
       const editable = col.editable === false ? false : 'true';
       if (col.key === 'operation') {
         return {
@@ -191,8 +193,10 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
 
       return {
         ...col,
+        options,
         onCell: (record: any, rowIndex: number) => ({
           ...col,
+          options,
           rowIndex,
           tableName: this.tableName,
           type: col.type || 'text',
