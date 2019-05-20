@@ -56,3 +56,33 @@ export const IS_OR_NOT = {
   false: 'is not',
 };
 export const isOrNotOptions = mapOptionObjectToArray(IS_OR_NOT);
+
+export const FROM_1 = {
+  start: 'Start',
+  clientRetirement: 'Client\'s Retirement',
+  partnerRetirement: 'Partner\'s Retirement',
+};
+export const from1Options = mapOptionObjectToArray(FROM_1);
+
+export const FROM_2 = {
+  existing: 'Existing',
+  start: 'Start',
+  clientRetirement: 'Client\'s Retirement',
+  partnerRetirement: 'Partner\'s Retirement',
+};
+export const from2Options = mapOptionObjectToArray(FROM_2);
+
+export const TO_1 = {
+  end: 'End',
+  clientRetirement: 'Client\'s Retirement',
+  partnerRetirement: 'Partner\'s Retirement',
+};
+export const to1Options = mapOptionObjectToArray(TO_1);
+
+export const TO_2 = {
+  retain: 'Retain',
+  end: 'End',
+  clientRetirement: 'Client\'s Retirement',
+  partnerRetirement: 'Partner\'s Retirement',
+};
+export const to2Options = mapOptionObjectToArray(TO_2);

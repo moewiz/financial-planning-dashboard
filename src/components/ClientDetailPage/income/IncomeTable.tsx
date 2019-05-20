@@ -4,7 +4,7 @@ import { ActionTableGeneral, HeaderTitleTable, TableEntryContainer, TextTitle } 
 import { isFunction } from 'lodash';
 import GeneralTable from '../GeneralTable';
 import { FormikProps } from 'formik';
-import {maritalStateOptions, ownerOptions} from '../../../enums/options';
+import {from1Options, maritalStateOptions, ownerOptions, to1Options} from '../../../enums/options';
 
 interface IncomeTableProps {
   data: object[];
@@ -81,11 +81,7 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
       type: 'date',
       width: '13%',
       pickerType: 'custom',
-      options: [
-        { value: 'start', label: 'Start' },
-        { value: 'clientRetirement', label: `Client's Retirement` },
-        { value: 'partnerRetirement', label: `Partner's Retirement` },
-      ],
+      options: from1Options,
     },
     {
       title: 'To',
@@ -94,11 +90,7 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
       width: '13%',
       type: 'date',
       pickerType: 'custom',
-      options: [
-        { value: 'end', label: 'End' },
-        { value: 'clientRetirement', label: `Client's Retirement` },
-        { value: 'partnerRetirement', label: `Partner's Retirement` },
-      ],
+      options: to1Options,
     },
     {
       title: 'Action',

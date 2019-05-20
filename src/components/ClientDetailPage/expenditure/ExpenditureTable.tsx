@@ -4,6 +4,7 @@ import { FormikProps } from 'formik';
 import { isFunction } from 'lodash';
 import { ActionTableGeneral, HeaderTitleTable, TableEntryContainer, TextTitle } from '../../../pages/client/styled';
 import GeneralTable from '../GeneralTable';
+import {from1Options, ownerOptions, to1Options} from "../../../enums/options";
 
 interface ExpenditureTableProps {
   data: object[];
@@ -40,7 +41,7 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps> {
       key: '2',
       width: '13%',
       type: 'select',
-      options: [{ value: 'client', label: 'Client' }, { value: 'partner', label: 'Partner' }],
+      options: ownerOptions,
     },
     {
       title: 'Value',
@@ -66,11 +67,7 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps> {
       type: 'date',
       width: '13%',
       pickerType: 'custom',
-      options: [
-        { value: 'start', label: 'Start' },
-        { value: 'clientRetirement', label: `Client's Retirement` },
-        { value: 'partnerRetirement', label: `Partner's Retirement` },
-      ],
+      options: from1Options,
     },
     {
       title: 'To',
@@ -79,11 +76,7 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps> {
       width: '13%',
       type: 'date',
       pickerType: 'custom',
-      options: [
-        { value: 'end', label: 'End' },
-        { value: 'clientRetirement', label: `Client's Retirement` },
-        { value: 'partnerRetirement', label: `Partner's Retirement` },
-      ],
+      options: to1Options,
     },
     {
       title: 'Action',
