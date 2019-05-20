@@ -1,14 +1,15 @@
 import React, { PureComponent } from 'react';
-import { Button, Icon } from 'antd';
+import { Button, Icon, Modal } from 'antd';
 import ExpandedBasicInformationRow from './ExpandedBasicInformationRow';
 import { ActionTableGeneral, HeaderTitleTable, TableEntryContainer, TextTitle } from '../../../pages/client/styled';
 import GeneralTable from '../GeneralTable';
 import { FormikProps } from 'formik';
 import { isFunction } from 'lodash';
 import { connect } from 'react-redux';
-import { RootState, StandardAction } from '../../../reducers/reducerTypes';
+import { StandardAction } from '../../../reducers/reducerTypes';
 import { bindActionCreators, Dispatch } from 'redux';
 import { ClientActions, UpdateMaritalStateAction } from '../../../reducers/client';
+const confirm = Modal.confirm;
 
 interface BasicInformationProps {
   data: object[];
@@ -129,6 +130,14 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
     }
   }
 
+  public showConfirm(onOk: () => void, onCancel?: () => void) {
+    confirm({
+      title: 'Do you want to change All Owner to Client?',
+      onOk,
+      onCancel,
+    });
+  }
+
   public handleSave = (arg: { tableName: string; rowIndex: number; dataIndex: string; value: any; record: any }) => {
     const { rowIndex, dataIndex, value } = arg;
 
@@ -140,14 +149,19 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
 
       if (value === 'single') {
         this.handleDelete(1);
+        this.showConfirm(() => {
+          // update marital state in redux store
+          if (updateMaritalState) {
+            updateMaritalState(value);
+          }
+        });
       }
       if (value === 'married') {
         this.handleAdd();
-      }
-
-      // update marital state in redux store
-      if (updateMaritalState) {
-        updateMaritalState(value);
+        // update marital state in redux store
+        if (updateMaritalState) {
+          updateMaritalState(value);
+        }
       }
     }
   }
