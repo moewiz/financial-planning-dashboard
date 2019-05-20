@@ -106,8 +106,9 @@ export const HeaderTitleTable = styled.div.attrs({
 `;
 
 export const TextTitle = styled.span<TextTitleProps>`
-  color: #072074;
-  font-size: ${(props) => (props.small ? '14px' : '21px')};
+  color: #4e5b86;
+  font-size: ${(props) => (props.small ? '15px' : '21px')};
+  font-weight: 600;
 `;
 
 export const DivideLine = styled.span`
@@ -121,6 +122,10 @@ export const InnerTableNoDelContainer = styled.section`
   color: #072074;
   font-size: 21px;
   margin-bottom: 20px;
+  .SGContribution-table{
+    max-width: 640px;
+    width: 100%
+  }
   .ant-table-small {
     border: none;
     & > .ant-table-content > .ant-table-body {
@@ -160,6 +165,7 @@ export const InnerTableContainer = styled.section`
     max-width: 700px;
     width: 100%
   }
+
   .ant-table-wrapper {
     margin-left: -24px;
   }

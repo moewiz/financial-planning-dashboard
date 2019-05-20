@@ -254,7 +254,8 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
             </ExpandedSelectGroup>
             <ExpandedAssetsText>be re-invested</ExpandedAssetsText>
           </ExpandedAssetsInlineGroups>
-          <ContributionWithdrawalsTable />
+          <ContributionWithdrawalsTable titleTable={'Contribution/Withdrawals'} />
+
         </ExpandedAssetsGroups>
       );
     case 'super':
@@ -421,8 +422,8 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
           </ExpandedAssetsInlineGroups>
-          <SGContributionTable />
-          <ContributionWithdrawalsTable />
+          <SGContributionTable titleTable={'SG Contribution'} />
+          <ContributionWithdrawalsTable titleTable={'Contribution/Withdrawals'} />
         </ExpandedAssetsGroups>
       );
     case 'pension':
@@ -591,18 +592,177 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
             </PrefixGroup>
           </ExpandedAssetsInlineGroups>
 
-          <ContributionWithdrawalsTable />
+          <ContributionWithdrawalsTable  titleTable={'Pension income'} />
         </ExpandedAssetsGroups>
       );
     default:
       return (
-        <div>
-          Rate terms of the (Direct Investment) are: X% annual growth, Y% annual income, Z% franked. The (Direct
-          Investment) has a cost base of $X and is assessable for CGT The (Direct Investment) is assessed by Centrelink
-          The (Direct Investment) has product fees of X% and adviser fees of $X The (Direct investment) will be
-          re-invested
-          <ContributionWithdrawalsTable />
-        </div>
+        <ExpandedAssetsGroups>
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>Rate terms of the (Property) are:</ExpandedAssetsText>
+            <PrefixSingleGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.growthRate'}
+                type={'text'}
+                tableName={'assets'}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+              <TypePercentPrefix>%</TypePercentPrefix>
+            </PrefixSingleGroup>
+            <ExpandedAssetsText>annual growth,</ExpandedAssetsText>
+            <PrefixSingleGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.incomeGenerated'}
+                type={'text'}
+                tableName={'assets'}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+              <TypePercentPrefix>%</TypePercentPrefix>
+            </PrefixSingleGroup>
+            <ExpandedAssetsText>annual income,</ExpandedAssetsText>
+            <PrefixSingleGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.frankedRate'}
+                type={'text'}
+                tableName={'assets'}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+              <TypePercentPrefix>%</TypePercentPrefix>
+            </PrefixSingleGroup>
+            <ExpandedAssetsText>franked.</ExpandedAssetsText>
+          </ExpandedAssetsInlineGroups>
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>The (Property) has a taxable component of</ExpandedAssetsText>
+            <PrefixSingleGroup dollar>
+              <TypeDollarPrefix>$</TypeDollarPrefix>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.taxableComponent'}
+                type={'text'}
+                tableName={'assets'}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+            </PrefixSingleGroup>
+            <ExpandedAssetsText>and a tax-free component</ExpandedAssetsText>
+            <PrefixSingleGroup dollar>
+              <TypeDollarPrefix>$</TypeDollarPrefix>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.taxableComponent'}
+                type={'text'}
+                tableName={'assets'}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+            </PrefixSingleGroup>
+          </ExpandedAssetsInlineGroups>
+
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>The (Property)</ExpandedAssetsText>
+            <ExpandedSelectGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.isCentrelinkAssessable'}
+                type={'select'}
+                tableName={'assets'}
+                options={isCentrelinkAssessableOptions}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+            </ExpandedSelectGroup>
+            <ExpandedAssetsText>by Centrelink and </ExpandedAssetsText>
+            <ExpandedSelectGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.isDeemed'}
+                type={'select'}
+                tableName={'assets'}
+                options={isDeemedOptions}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+            </ExpandedSelectGroup>
+            {expandable.isDeemed === false && (
+              <>
+                <ExpandedAssetsText>amount of</ExpandedAssetsText>
+                <PrefixSingleGroup dollar>
+                  <TypeDollarPrefix>$</TypeDollarPrefix>
+                  <EditableCell
+                    record={record}
+                    dataIndex={'expandable.deductibleAmount'}
+                    type={'text'}
+                    tableName={'assets'}
+                    rowIndex={index}
+                    editable={true}
+                    expandedField={true}
+                  />
+                </PrefixSingleGroup>
+              </>
+            )}
+          </ExpandedAssetsInlineGroups>
+
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>The (Property) has product fees of</ExpandedAssetsText>
+            <PrefixSingleGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.productFees'}
+                type={'text'}
+                tableName={'assets'}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+              <TypePercentPrefix>%</TypePercentPrefix>
+            </PrefixSingleGroup>
+            <ExpandedAssetsText>and adviser fees of</ExpandedAssetsText>
+
+            {/* TODO: Prefix OR suffix and Free Text component */}
+            <PrefixGroup dollar={expandable.adviserFeeType === 'dollar'}>
+              <PrefixChooseGroup>
+                <EditableCell
+                  record={record}
+                  dataIndex={'expandable.adviserFeeType'}
+                  type={'select'}
+                  tableName={'assets'}
+                  options={adviserFeeTypeOptions}
+                  rowIndex={index}
+                  editable={true}
+                  expandedField={true}
+                />
+              </PrefixChooseGroup>
+              <PrefixViewGroup>
+                <TypeDollarPrefix>$</TypeDollarPrefix>
+                <EditableCell
+                  record={record}
+                  dataIndex={'expandable.adviserFeeValue'}
+                  type={'text'}
+                  tableName={'assets'}
+                  rowIndex={index}
+                  editable={true}
+                  expandedField={true}
+                />
+                <TypePercentPrefix>%</TypePercentPrefix>
+              </PrefixViewGroup>
+            </PrefixGroup>
+          </ExpandedAssetsInlineGroups>
+
+          <ContributionWithdrawalsTable  titleTable={'Pension income'} />
+        </ExpandedAssetsGroups>
       );
   }
 };

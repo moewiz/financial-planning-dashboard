@@ -3,6 +3,9 @@ import { Icon, Popconfirm, Table } from 'antd';
 import { InnerTableContainer, HeaderTitleTable, TextTitle, DivideLine } from '../../../pages/client/styled';
 import { TweenOneGroup } from 'rc-tween-one';
 
+interface ContributionWithdrawalsTableProps {
+  titleTable?: string;
+}
 const enterAnim = [
   {
     opacity: 0,
@@ -32,7 +35,7 @@ export const AnimTag = ($props: any) => {
 
 const components = { body: { wrapper: AnimTag } };
 
-class ContributionWithdrawalsTable extends PureComponent {
+class ContributionWithdrawalsTable extends PureComponent<ContributionWithdrawalsTableProps, {}> {
   public state = {
     dataSource: [
       {
@@ -134,7 +137,8 @@ class ContributionWithdrawalsTable extends PureComponent {
     });
   }
 
-  public render() {
+  public render(): React.ReactNode {
+    const { titleTable } = this.props;
     const { dataSource } = this.state;
     const columns = this.columns.map((col) => {
       return {
@@ -151,7 +155,7 @@ class ContributionWithdrawalsTable extends PureComponent {
       <InnerTableContainer>
         <HeaderTitleTable small={true}>
           <Icon type={'plus-square'} theme={'filled'} onClick={this.handleAdd} />
-          <TextTitle small={true}>{'Contribution/Withdrawals'}</TextTitle>
+          <TextTitle small={true}>{ titleTable }</TextTitle>
           <DivideLine />
         </HeaderTitleTable>
         <Table

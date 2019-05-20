@@ -2,7 +2,10 @@ import React, { PureComponent } from 'react';
 import { Icon, Popconfirm, Table } from 'antd';
 import { InnerTableNoDelContainer, HeaderTitleTable, TextTitle, DivideLine } from '../../../pages/client/styled';
 
-class SGContributionTable extends PureComponent {
+interface SGContributionTableProps {
+  titleTable: string;
+}
+class SGContributionTable extends PureComponent<SGContributionTableProps, {}> {
   public state = {
     dataSource: [
       {
@@ -35,7 +38,8 @@ class SGContributionTable extends PureComponent {
     },
   ];
 
-  public render() {
+  public render(): React.ReactNode {
+    const { titleTable } = this.props;
     const { dataSource } = this.state;
     const columns = this.columns.map((col) => {
       return {
@@ -52,10 +56,15 @@ class SGContributionTable extends PureComponent {
     return (
       <InnerTableNoDelContainer>
         <HeaderTitleTable small={true}>
-          <TextTitle small={true}>{'SG Contribution'}</TextTitle>
+          <TextTitle small={true}>{titleTable}</TextTitle>
           <DivideLine />
         </HeaderTitleTable>
-        <Table columns={columns} dataSource={dataSource} pagination={false} size={'small'} />
+        <Table
+          className= "SGContribution-table"
+          columns={columns}
+          dataSource={dataSource}
+          pagination={false}
+          size={'small'} />
       </InnerTableNoDelContainer>
     );
   }
