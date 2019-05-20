@@ -18,6 +18,7 @@ import {
   ClientActions,
   Table,
   DataEntry,
+  UpdateMaritalStateAction,
 } from '../../reducers/client';
 import { Button, Icon } from 'antd';
 import { ActionTableGeneral } from '../../pages/client/styled';
@@ -30,6 +31,7 @@ interface DataEntryProps {
   tables?: Table;
   loading?: boolean;
   fetchDataEntry?: (payload: FetchDataEntryPayload) => FetchDataEntryAction;
+  updateMaritalState?: (maritalState: string) => UpdateMaritalStateAction;
 }
 
 interface DataEntryState {
@@ -88,6 +90,14 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
 
     if (fetchDataEntry) {
       fetchDataEntry(params);
+    }
+  }
+
+  public componentWillUnmount(): void {
+    const { updateMaritalState } = this.props;
+    // update marital state in redux store
+    if (updateMaritalState) {
+      updateMaritalState('');
     }
   }
 
@@ -400,6 +410,7 @@ const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>
   bindActionCreators(
     {
       fetchDataEntry: ClientActions.fetchDataEntry,
+      updateMaritalState: ClientActions.updateMaritalState,
     },
     dispatch,
   );

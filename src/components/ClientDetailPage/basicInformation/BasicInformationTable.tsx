@@ -5,6 +5,10 @@ import { ActionTableGeneral, HeaderTitleTable, TableEntryContainer, TextTitle } 
 import GeneralTable from '../GeneralTable';
 import { FormikProps } from 'formik';
 import { isFunction } from 'lodash';
+import { connect } from 'react-redux';
+import { RootState, StandardAction } from '../../../reducers/reducerTypes';
+import { bindActionCreators, Dispatch } from 'redux';
+import { ClientActions, UpdateMaritalStateAction } from '../../../reducers/client';
 
 interface BasicInformationProps {
   data: object[];
@@ -17,6 +21,8 @@ interface BasicInformationProps {
   submitForm: () => void;
   addRow: (row: any) => void;
   deleteRow: (key: number) => void;
+
+  updateMaritalState?: (maritalState: string) => UpdateMaritalStateAction;
 }
 
 class BasicInformationTable extends PureComponent<BasicInformationProps> {
@@ -130,11 +136,18 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
      * side effect
      */
     if (rowIndex === 0 && dataIndex === 'maritalState') {
+      const { updateMaritalState } = this.props;
+
       if (value === 'single') {
         this.handleDelete(1);
       }
       if (value === 'married') {
         this.handleAdd();
+      }
+
+      // update marital state in redux store
+      if (updateMaritalState) {
+        updateMaritalState(value);
       }
     }
   }
@@ -192,4 +205,15 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
   }
 }
 
-export default BasicInformationTable;
+const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>
+  bindActionCreators(
+    {
+      updateMaritalState: ClientActions.updateMaritalState,
+    },
+    dispatch,
+  );
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(BasicInformationTable);
