@@ -1,5 +1,6 @@
 import React from 'react';
 import ContributionWithdrawalsTable from './ContributionWithdrawalsTable';
+import SGContributionTable from './SGContributionTable';
 import EditableCell from '../assets/EditableCell';
 import {
   PrefixGroup,
@@ -257,9 +258,173 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
         </ExpandedAssetsGroups>
       );
     case 'super':
-      return <div>Super</div>;
-    case 'accountBased':
-      return <div>Account Based</div>;
+      return (
+        <ExpandedAssetsGroups>
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>Rate terms of the (Super) are:</ExpandedAssetsText>
+            <PrefixSingleGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.growthRate'}
+                type={'text'}
+                tableName={'assets'}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+              <TypePercentPrefix>%</TypePercentPrefix>
+            </PrefixSingleGroup>
+            <ExpandedAssetsText>annual growth,</ExpandedAssetsText>
+            <PrefixSingleGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.incomeGenerated'}
+                type={'text'}
+                tableName={'assets'}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+              <TypePercentPrefix>%</TypePercentPrefix>
+            </PrefixSingleGroup>
+            <ExpandedAssetsText>annual income,</ExpandedAssetsText>
+            <PrefixSingleGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.frankedRate'}
+                type={'text'}
+                tableName={'assets'}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+              <TypePercentPrefix>%</TypePercentPrefix>
+            </PrefixSingleGroup>
+            <ExpandedAssetsText>franked.</ExpandedAssetsText>
+          </ExpandedAssetsInlineGroups>
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>The (Super) has a taxable component of</ExpandedAssetsText>
+            <PrefixSingleGroup dollar>
+              <TypeDollarPrefix>$</TypeDollarPrefix>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.taxableComponent'}
+                type={'text'}
+                tableName={'assets'}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+            </PrefixSingleGroup>
+            <ExpandedAssetsText>and a tax-free component of</ExpandedAssetsText>
+            <PrefixSingleGroup dollar>
+              <TypeDollarPrefix>$</TypeDollarPrefix>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.taxableComponent'}
+                type={'text'}
+                tableName={'assets'}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+            </PrefixSingleGroup>
+          </ExpandedAssetsInlineGroups>
+
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>The (Super)</ExpandedAssetsText>
+            <ExpandedSelectGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.centrelink'}
+                type={'select'}
+                tableName={'assets'}
+                options={isCentrelinkAssessableOptions}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+            </ExpandedSelectGroup>
+            <ExpandedAssetsText>by Centrelink</ExpandedAssetsText>
+            <ExpandedSelectGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.isDeemed'}
+                type={'select'}
+                tableName={'assets'}
+                options={isDeemedOptions}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+            </ExpandedSelectGroup>
+          </ExpandedAssetsInlineGroups>
+
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>The (Super) has product fees of</ExpandedAssetsText>
+            <PrefixSingleGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.productFees'}
+                type={'text'}
+                tableName={'assets'}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+              <TypePercentPrefix>%</TypePercentPrefix>
+            </PrefixSingleGroup>
+            <ExpandedAssetsText>and adviser fees of</ExpandedAssetsText>
+
+            {/* TODO: Prefix OR suffix and Free Text component */}
+            <PrefixGroup dollar={expandable.adviserFeeType === 'dollar'}>
+              <PrefixChooseGroup>
+                <EditableCell
+                  record={record}
+                  dataIndex={'expandable.adviserFeeType'}
+                  type={'select'}
+                  tableName={'assets'}
+                  options={adviserFeeTypeOptions}
+                  rowIndex={index}
+                  editable={true}
+                  expandedField={true}
+                />
+              </PrefixChooseGroup>
+              <PrefixViewGroup>
+                <TypeDollarPrefix>$</TypeDollarPrefix>
+                <EditableCell
+                  record={record}
+                  dataIndex={'expandable.adviserFeeValue'}
+                  type={'text'}
+                  tableName={'assets'}
+                  rowIndex={index}
+                  editable={true}
+                  expandedField={true}
+                />
+                <TypePercentPrefix>%</TypePercentPrefix>
+              </PrefixViewGroup>
+            </PrefixGroup>
+          </ExpandedAssetsInlineGroups>
+
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>The (Super) has insurance cost of</ExpandedAssetsText>
+            <PrefixSingleGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.productFees'}
+                type={'text'}
+                tableName={'assets'}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+              <TypePercentPrefix>%</TypePercentPrefix>
+            </PrefixSingleGroup>
+          </ExpandedAssetsInlineGroups>
+          <SGContributionTable />
+          <ContributionWithdrawalsTable />
+        </ExpandedAssetsGroups>
+      );
     case 'pension':
       return (
         <ExpandedAssetsGroups>
