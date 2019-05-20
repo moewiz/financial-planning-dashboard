@@ -320,18 +320,18 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
               />
             </PrefixSingleGroup>
             <ExpandedAssetsText>and a tax-free component</ExpandedAssetsText>
-            <ExpandedSelectGroup>
+            <PrefixSingleGroup dollar>
+              <TypeDollarPrefix>$</TypeDollarPrefix>
               <EditableCell
                 record={record}
-                dataIndex={'expandable.taxFreeComponent'}
-                type={'select'}
+                dataIndex={'expandable.taxableComponent'}
+                type={'text'}
                 tableName={'assets'}
-                options={isCGTAssessableOptions}
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
               />
-            </ExpandedSelectGroup>
+            </PrefixSingleGroup>
           </ExpandedAssetsInlineGroups>
 
           <ExpandedAssetsInlineGroups>
@@ -426,22 +426,6 @@ const ExpandedAssetsRow = (record: AssetProps, index: number, indent: number, ex
             </PrefixGroup>
           </ExpandedAssetsInlineGroups>
 
-          <ExpandedAssetsInlineGroups>
-            <ExpandedAssetsText>The (Direct investment)</ExpandedAssetsText>
-            <ExpandedSelectGroup>
-              <EditableCell
-                record={record}
-                dataIndex={'expandable.reinvest'}
-                type={'select'}
-                tableName={'assets'}
-                options={reinvestOptions}
-                rowIndex={index}
-                editable={true}
-                expandedField={true}
-              />
-            </ExpandedSelectGroup>
-            <ExpandedAssetsText>be re-invested</ExpandedAssetsText>
-          </ExpandedAssetsInlineGroups>
           <ContributionWithdrawalsTable />
         </ExpandedAssetsGroups>
       );

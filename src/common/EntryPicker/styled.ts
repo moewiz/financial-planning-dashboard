@@ -64,7 +64,7 @@ export const DateButtonCustom = styled.div`
     border: none;
     color: #1890ff;
     box-shadow: none;
-    padding: 0px;
+    padding: 0px 10px;
     text-align: left;
     width: fit-content;
     &:hover{

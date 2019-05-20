@@ -37,6 +37,16 @@ const thepartnerOptions = [
     label: 'is not',
   },
 ];
+const isSmokerOptions = [
+  {
+    value: true,
+    label: 'is',
+  },
+  {
+    value: false,
+    label: 'is not',
+  },
+];
 
 const riskProfileOptions = [
   {
@@ -154,10 +164,10 @@ const ExpandedBasicInformationRow = (
             <ExpandedSelectGroup>
               <EditableCell
                 record={record}
-                dataIndex={'expandable.riskProfile'}
+                dataIndex={'expandable.isSmoker'}
                 type={'select'}
                 tableName={'basicInformation'}
-                options={thepartnerOptions}
+                options={isSmokerOptions}
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
@@ -205,10 +215,10 @@ const ExpandedBasicInformationRow = (
             <ExpandedSelectGroup>
               <EditableCell
                 record={record}
-                dataIndex={'expandable.riskProfile'}
+                dataIndex={'expandable.jointRiskProfile'}
                 type={'select'}
                 tableName={'basicInformation'}
-                options={coupleOptions}
+                options={joinRiskProfileOptions}
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
@@ -237,10 +247,10 @@ const ExpandedBasicInformationRow = (
             <ExpandedSelectGroup>
               <EditableCell
                 record={record}
-                dataIndex={'expandable.riskProfile'}
+                dataIndex={'expandable.isSmoker'}
                 type={'select'}
                 tableName={'basicInformation'}
-                options={thepartnerOptions}
+                options={isSmokerOptions}
                 rowIndex={index}
                 editable={true}
                 expandedField={true}

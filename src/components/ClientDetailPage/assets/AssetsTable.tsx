@@ -73,13 +73,27 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
       title: 'From',
       dataIndex: 'from',
       key: '5',
+      type: 'date',
       width: '13%',
+      pickerType: 'custom',
+      options: [
+        { value: 'start', label: 'Start' },
+        { value: 'clientRetirement', label: `Client's Retirement` },
+        { value: 'partnerRetirement', label: `Partner's Retirement` },
+      ],
     },
     {
       title: 'To',
       dataIndex: 'to',
       key: '6',
       width: '13%',
+      type: 'date',
+      pickerType: 'custom',
+      options: [
+        { value: 'end', label: 'End' },
+        { value: 'clientRetirement', label: `Client's Retirement` },
+        { value: 'partnerRetirement', label: `Partner's Retirement` },
+      ],
     },
     {
       title: 'Action',
