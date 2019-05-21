@@ -28,7 +28,7 @@ class CoverDetailsTable extends PureComponent<CoverDetailsProps> {
       title: '',
       key: 'operation',
       className: 'operation',
-      width: 18,
+      width: 25,
       render: (text: any, record: any) => (
         <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
           <Icon type="close-square" theme="twoTone" style={{ fontSize: '16px' }} />
@@ -118,6 +118,7 @@ class CoverDetailsTable extends PureComponent<CoverDetailsProps> {
         </HeaderTitleTable>
         <Table
           columns={columns}
+          className={'cover-details-table'}
           dataSource={addKeyToArray(data)}
           components={components}
           defaultExpandAllRows={true}

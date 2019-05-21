@@ -168,6 +168,20 @@ export const InnerTableContainer = styled.section`
 
   .ant-table-wrapper {
     margin-left: -24px;
+    &.premium-details-table{
+      margin-left: -33px;
+    }
+    &.cover-details-table{
+      margin-left: -94px;
+      .ant-table-row-expand-icon-cell{
+        opacity: 0;
+        visibility: hidden;
+      }
+      tr.ant-table-expanded-row,
+      tr.ant-table-expanded-row:hover{
+        background: transparent;
+      }
+    }
   }
   .ant-table-small {
     border: none;

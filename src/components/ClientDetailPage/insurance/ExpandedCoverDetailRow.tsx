@@ -1,7 +1,7 @@
 import React from 'react';
 import EditableCell from '../assets/EditableCell';
 import {
-  ExpandedAssetsGroups,
+  ExpandedInsuranceGroups,
   ExpandedAssetsInlineGroups,
   ExpandedAssetsText,
   ExpandedSelectGroup,
@@ -24,7 +24,7 @@ const ExpandedCoverDetailRow = (props: {
   switch (coverType) {
     case 'life': {
       return (
-        <ExpandedAssetsGroups>
+        <ExpandedInsuranceGroups>
           <ExpandedAssetsInlineGroups>
             <ExpandedAssetsText>The cover is</ExpandedAssetsText>
             <ExpandedSelectGroup>
@@ -40,16 +40,16 @@ const ExpandedCoverDetailRow = (props: {
               />
             </ExpandedSelectGroup>
           </ExpandedAssetsInlineGroups>
-        </ExpandedAssetsGroups>
+        </ExpandedInsuranceGroups>
       );
     }
     default: {
       return (
-        <ExpandedAssetsGroups>
+        <ExpandedInsuranceGroups>
           <ExpandedAssetsInlineGroups>
             <ExpandedAssetsText>This is default section</ExpandedAssetsText>
           </ExpandedAssetsInlineGroups>
-        </ExpandedAssetsGroups>
+        </ExpandedInsuranceGroups>
       );
     }
   }

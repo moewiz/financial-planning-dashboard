@@ -109,6 +109,15 @@ export const ExpandedAssetsGroups = styled.div.attrs({
   flex-wrap: wrap;
   display: flex;
 `;
+
+export const ExpandedInsuranceGroups = styled.div.attrs({
+  className: 'expanded-nsurance-groups',
+})`
+  flex-wrap: wrap;
+  display: flex;
+  padding-left: 38px;
+`;
+
 export const ExpandedAssetsInlineGroups = styled.div.attrs({
   className: 'expanded-assets-inline-groups',
 })`

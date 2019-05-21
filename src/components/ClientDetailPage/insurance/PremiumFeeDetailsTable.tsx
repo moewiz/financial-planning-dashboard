@@ -24,7 +24,7 @@ class PremiumFeeDetailsTable extends PureComponent<PremiumFeeDetailsProp> {
       title: '',
       key: 'operation',
       className: 'operation',
-      width: 18,
+      width: 20,
       render: (text: any, record: any) => (
         <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
           <Icon type="close-square" theme="twoTone" style={{ fontSize: '16px' }} />
@@ -100,6 +100,7 @@ class PremiumFeeDetailsTable extends PureComponent<PremiumFeeDetailsProp> {
           <DivideLine />
         </HeaderTitleTable>
         <Table
+          className={'premium-details-table'}
           columns={columns}
           dataSource={addKeyToArray(data)}
           components={components}
