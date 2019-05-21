@@ -4,6 +4,12 @@ import styled, { css } from 'styled-components';
 export const EntryPickerTable = styled.section`
   align-items: center;
   display: flex;
+  &.picker-year{
+    width: 60px;
+    input{
+      padding: 0px;
+    }
+  }
   .input-hidden{
     input{
       display: none;
