@@ -1,7 +1,7 @@
 import React from 'react';
 import { InputWrapper, InputLabel } from './styled';
 import { FormikHandlers } from 'formik';
-import { get, isFunction, isBoolean } from 'lodash';
+import { get, isFunction, isBoolean, isNumber } from 'lodash';
 import { Select, Modal } from 'antd';
 const confirm = Modal.confirm;
 
@@ -36,7 +36,7 @@ class CustomSelect extends React.PureComponent<InputProps> {
 
     if (setFieldValue) {
       // handle save editable cell
-      this.handleBlur(newValue);
+      this.handleBlur(newValue.toString());
 
       setFieldValue(name, newValue);
     }
@@ -61,7 +61,7 @@ class CustomSelect extends React.PureComponent<InputProps> {
     const { onBlur, handleBlur } = this.props;
     let value = e;
 
-    if (isBoolean(e)) {
+    if (isNumber(e) || isBoolean(e)) {
       value = e.toString();
     }
 

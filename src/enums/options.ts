@@ -143,7 +143,7 @@ export const SG_RATE = {
 };
 export const sgRateOptions = mapOptionObjectToArray(SG_RATE);
 
-export const COVER_TYPE = {
+export const COVER_TYPE: { [key: string]: string } = {
   life: 'Life',
   tpd: 'TPD',
   trauma: 'Trauma',
@@ -168,11 +168,13 @@ export const premiumTypeOptions = mapOptionObjectToArray(PREMIUM_TYPE);
 export const standaloneLinkedOptions = [{ value: true, label: 'Linked' }, { value: false, label: 'Stand-alone' }];
 
 export const TPD_TYPE = {
-  any: 'Any',
-  own: 'Own',
-  nonWorking: 'Non Working',
+  any: 'any',
+  own: 'own',
+  nonWorking: 'non working',
 };
 export const tpdTypeOptions = mapOptionObjectToArray(TPD_TYPE);
+
+export const superlinkedOptions = [{ value: true, label: 'superlinked'}, { value: false, label: 'not superlinked'}]
 
 export const INCOME_PROTECTION_TYPE = {
   agreedValue: 'Agreed Value',
