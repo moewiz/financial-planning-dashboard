@@ -65,9 +65,11 @@ class CustomSelect extends React.PureComponent<InputProps> {
       value = e.toString();
     }
 
-    onBlur(value);
-    if (handleBlur && isFunction(handleBlur)) {
-      handleBlur(value);
+    if (value) {
+      onBlur(value);
+      if (handleBlur && isFunction(handleBlur)) {
+        handleBlur(value);
+      }
     }
   }
 

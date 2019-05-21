@@ -174,7 +174,7 @@ export const TPD_TYPE = {
 };
 export const tpdTypeOptions = mapOptionObjectToArray(TPD_TYPE);
 
-export const superlinkedOptions = [{ value: true, label: 'superlinked'}, { value: false, label: 'not superlinked'}]
+export const superlinkedOptions = [{ value: true, label: 'superlinked' }, { value: false, label: 'not superlinked' }];
 
 export const INCOME_PROTECTION_TYPE = {
   agreedValue: 'Agreed Value',
@@ -183,9 +183,9 @@ export const INCOME_PROTECTION_TYPE = {
 export const incomeProtectionTypeOptions = mapOptionObjectToArray(INCOME_PROTECTION_TYPE);
 
 export const WAITING_PERIOD_TYPE = {
-  days: 'Days',
-  months: 'Months',
-  years: 'Years',
+  days: 'days',
+  months: 'months',
+  years: 'years',
 };
 export const waitingPeriodTypeOptions = mapOptionObjectToArray(WAITING_PERIOD_TYPE);
 
@@ -202,3 +202,5 @@ export const FREQUENCY = {
   monthly: 'Monthly',
 };
 export const frequencyOptions = mapOptionObjectToArray(FREQUENCY);
+
+export const benefitDefaultAgeOptions = [{ value: true, label: 'to age 65' }, { value: false, label: 'to age' }];
