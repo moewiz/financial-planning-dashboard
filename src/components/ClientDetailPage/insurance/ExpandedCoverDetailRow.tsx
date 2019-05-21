@@ -33,7 +33,7 @@ const ExpandedCoverDetailRow = (props: {
     case COVER_TYPE.life:
     case COVER_TYPE.trauma: {
       return (
-        <ExpandedAssetsGroups>
+        <ExpandedInsuranceGroups>
           <ExpandedAssetsInlineGroups>
             <ExpandedAssetsText>The cover is</ExpandedAssetsText>
             <ExpandedSelectGroup>
@@ -66,7 +66,7 @@ const ExpandedCoverDetailRow = (props: {
               </>
             )}
           </ExpandedAssetsInlineGroups>
-        </ExpandedAssetsGroups>
+        </ExpandedInsuranceGroups>
       );
     }
     case COVER_TYPE.tpd: {
@@ -138,7 +138,7 @@ const ExpandedCoverDetailRow = (props: {
     }
     case COVER_TYPE.incomeProtection: {
       return (
-        <ExpandedAssetsGroups>
+        <ExpandedInsuranceGroups>
           <ExpandedAssetsInlineGroups>
             <ExpandedAssetsText>This Income Protection cover is</ExpandedAssetsText>
             <ExpandedSelectGroup>
@@ -251,7 +251,7 @@ const ExpandedCoverDetailRow = (props: {
               </PrefixSingleGroup>
             )}
           </ExpandedAssetsInlineGroups>
-        </ExpandedAssetsGroups>
+        </ExpandedInsuranceGroups>
       );
     }
     default: {
