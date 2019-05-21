@@ -22,6 +22,7 @@ interface EditableProps {
   expandedField?: boolean;
   options?: Array<{ value: any; label: any }>;
   confirmTitle?: { title: string, fieldValue: any};
+  render?: () => void;
 }
 
 export default class EditableCell extends React.PureComponent<EditableProps> {
@@ -98,6 +99,7 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
       suffix,
       confirmTitle,
       disableRowIndex,
+      render,
       ...restProps
     } = this.props;
     const appendedProps = this.getAppendedProps(this.props, editing);

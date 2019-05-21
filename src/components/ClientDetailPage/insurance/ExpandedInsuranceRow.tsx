@@ -7,13 +7,17 @@ export interface LiabilityProps {
   premiumFeeDetails: PremiumFeeDetail[];
 }
 
-const ExpandedInsuranceRow: React.FC<LiabilityProps> = (props) => {
-  const { coverDetails, premiumFeeDetails } = props;
+const ExpandedInsuranceRow: React.FC<LiabilityProps> = (record: any, index: number) => {
+  const { coverDetails, premiumFeeDetails } = record;
 
   return (
     <>
       <CoverDetailsTable data={coverDetails} />
-      <PremiumFeeDetailsTable data={premiumFeeDetails} />
+      <PremiumFeeDetailsTable
+        data={premiumFeeDetails}
+        index={index}
+        tableName={'premiumFeeDetails'}
+      />
     </>
   );
 };

@@ -44,26 +44,6 @@ export const AnimTag = ($props: any) => {
 export const components = { body: { wrapper: AnimTag, cell: EditableCell } };
 
 class ContributionWithdrawalsTable extends PureComponent<ContributionWithdrawalsTableProps, {}> {
-  public state = {
-    dataSource: [
-      {
-        key: '0',
-        type: 'Contribution',
-        value: 100000,
-        from: 'start',
-        to: 'End',
-      },
-      {
-        key: '1',
-        type: 'Withdrawals',
-        value: 50000,
-        from: 'start',
-        to: 'End',
-      },
-    ],
-    count: 2,
-  };
-
   public columns = [
     {
       title: '',
@@ -110,13 +90,9 @@ class ContributionWithdrawalsTable extends PureComponent<ContributionWithdrawals
     },
   ];
 
-  public handleDelete = (key: string) => {
-    const dataSource = [...this.state.dataSource];
-    this.setState({ dataSource: dataSource.filter((item) => item.key !== key) });
-  }
+  public handleDelete = (key: string) => {};
 
   public handleAdd = () => {
-    const { count, dataSource } = this.state;
     const newData = {
       key: Date.now(),
       type: 'contribution',
@@ -130,10 +106,6 @@ class ContributionWithdrawalsTable extends PureComponent<ContributionWithdrawals
         yearValue: null,
       },
     };
-    this.setState({
-      dataSource: [...dataSource, newData],
-      count: count + 1,
-    });
   }
 
   public render(): React.ReactNode {
@@ -145,7 +117,6 @@ class ContributionWithdrawalsTable extends PureComponent<ContributionWithdrawals
       return {
         ...col,
         fixed: false,
-        options,
         onCell: (record: any, rowIndex: number) => ({
           ...col,
           options,
@@ -157,6 +128,7 @@ class ContributionWithdrawalsTable extends PureComponent<ContributionWithdrawals
         }),
       };
     });
+
     return (
       <InnerTableContainer>
         <HeaderTitleTable small={true}>
