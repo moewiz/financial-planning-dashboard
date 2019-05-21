@@ -165,6 +165,8 @@ export const PREMIUM_TYPE = {
 };
 export const premiumTypeOptions = mapOptionObjectToArray(PREMIUM_TYPE);
 
+export const standaloneLinkedOptions = [{ value: true, label: 'Linked' }, { value: false, label: 'Stand-alone' }];
+
 export const TPD_TYPE = {
   any: 'Any',
   own: 'Own',

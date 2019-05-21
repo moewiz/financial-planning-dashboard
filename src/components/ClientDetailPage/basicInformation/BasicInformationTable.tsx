@@ -73,7 +73,7 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
       width: 'calc(15% - 20px)',
       options: maritalStateOptions,
       confirmTitle: {
-        title: 'Do you want to change All Owner to Client?',
+        title: 'Do you want to change All Owners to Client?',
         fieldValue: maritalStateOptions[1].value,
       },
     },

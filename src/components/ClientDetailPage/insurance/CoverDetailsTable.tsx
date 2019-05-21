@@ -4,6 +4,7 @@ import { InnerTableContainer, DivideLine, HeaderTitleTable, TextTitle } from '..
 import { components } from '../assets/ContributionWithdrawalsTable';
 import { addKeyToArray } from '../DataEntry';
 import { coverTypeOptions, policyOwnerOptions, premiumTypeOptions } from '../../../enums/options';
+import ExpandedCoverDetailRow from './ExpandedCoverDetailRow';
 
 export interface CoverDetail {
   refId?: string;
@@ -12,7 +13,7 @@ export interface CoverDetail {
   benefitAmount: number;
   premiumType: string;
   notes: string;
-  expandable: {};
+  expandable: any;
 }
 
 interface CoverDetailsProps {
@@ -119,6 +120,15 @@ class CoverDetailsTable extends PureComponent<CoverDetailsProps> {
           columns={columns}
           dataSource={addKeyToArray(data)}
           components={components}
+          expandedRowRender={(record: CoverDetail, expandedIndex: number, indent: number, expanded: boolean) => (
+            <ExpandedCoverDetailRow
+              record={record}
+              index={expandedIndex}
+              indent={indent}
+              expanded={expanded}
+              insuranceIndex={index}
+            />
+          )}
           pagination={false}
           size={'small'}
         />
