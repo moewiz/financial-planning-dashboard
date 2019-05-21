@@ -9,7 +9,7 @@ import {
   ownerOptions,
   to1Options,
   expenditureTypeOptions,
-  indexationOptions,
+  indexationOptions, ownerWithJointOptions,
 } from '../../../enums/options';
 import { removePartnerOption } from '../../../utils/columnUtils';
 
@@ -48,7 +48,7 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps> {
       key: '2',
       width: '13%',
       type: 'select',
-      options: ownerOptions,
+      options: ownerWithJointOptions,
     },
     {
       title: 'Value',

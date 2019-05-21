@@ -111,7 +111,7 @@ export const INDEXATION_OPTIONS = {
 };
 export const indexationOptions = mapOptionObjectToArray(INDEXATION_OPTIONS);
 
-export const ASSET_TYPES = {
+export const ASSET_TYPES: { [key: string]: string } = {
   lifestyle: 'Lifestyle',
   directInvestment: 'Direct Investment',
   accountBased: 'Account Based',
@@ -183,11 +183,11 @@ export const FEE_TYPE = {
   policyFee: 'Policy Fee',
   stampDuty: 'Stamp Duty',
   other: 'Other',
-}
+};
 export const feeTypeOptions = mapOptionObjectToArray(FEE_TYPE);
 
 export const FREQUENCY = {
   yearly: 'Yearly',
   monthly: 'Monthly',
-}
+};
 export const frequencyOptions = mapOptionObjectToArray(FREQUENCY);

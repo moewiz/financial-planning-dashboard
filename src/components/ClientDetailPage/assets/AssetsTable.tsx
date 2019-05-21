@@ -6,7 +6,7 @@ import GeneralTable from '../GeneralTable';
 import { FormikProps } from 'formik';
 import { isFunction } from 'lodash';
 import { from2Options, ownerOptions, to2Options, assetTypes, investmentTypes } from '../../../enums/options';
-import { removePartnerOption } from '../../../utils/columnUtils';
+import {addJointOption, loadOptionsBaseOnCol, removePartnerOption} from '../../../utils/columnUtils';
 
 interface AssetsTableProps {
   data: object[];
@@ -147,7 +147,6 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
   }
 
   public handleSave = (arg: { tableName: string; rowIndex: number; dataIndex: string; value: any; record: any }) => {
-    console.log('handle save', arg);
   }
 
   public handleResetForm = () => {
@@ -160,7 +159,6 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
   public render() {
     const { loading, data, maritalState } = this.props;
     const columns = this.columns.map((col: any) => {
-      const options = removePartnerOption(col, maritalState);
       const editable = col.editable === false ? false : 'true';
       if (col.key === 'operation') {
         return {
@@ -178,8 +176,9 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
 
       return {
         ...col,
-        options,
         onCell: (record: any, rowIndex: number) => {
+          const options = loadOptionsBaseOnCol(col, record, maritalState);
+
           return {
             ...col,
             options,
