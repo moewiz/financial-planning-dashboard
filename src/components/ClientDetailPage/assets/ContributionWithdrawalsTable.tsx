@@ -41,7 +41,7 @@ export const AnimTag = ($props: any) => {
   return <TweenOneGroup component="tbody" enter={enterAnim} leave={leaveAnim} appear={false} exclusive {...$props} />;
 };
 
-const components = { body: { wrapper: AnimTag, cell: EditableCell } };
+export const components = { body: { wrapper: AnimTag, cell: EditableCell } };
 
 class ContributionWithdrawalsTable extends PureComponent<ContributionWithdrawalsTableProps, {}> {
   public state = {

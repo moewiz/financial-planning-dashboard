@@ -28,6 +28,7 @@ export interface AssetProps {
     isDeemed?: boolean;
   };
   contributionWithdrawals?: object[];
+  sgContribution?: object[];
   pensionIncome?: object[];
 }
 const reinvestOptions = [
@@ -438,7 +439,12 @@ const ExpandedAssetsRow = (props: {
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
           </ExpandedAssetsInlineGroups>
-          <SGContributionTable titleTable={'SG Contribution'} />
+          <SGContributionTable
+            data={record.sgContribution && [record.sgContribution] || []}
+            index={index}
+            tableName={'sgContribution'}
+            titleTable={'SG Contribution'}
+          />
           <ContributionWithdrawalsTable
             data={record.contributionWithdrawals || []}
             index={index}

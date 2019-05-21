@@ -1,12 +1,10 @@
-import { map } from 'lodash';
-
 function mapOptionObjectToArray(object: { [key: string]: any }) {
-  return map(object, (value: any, key: string) => ({ value: key, label: value }));
+  return Object.entries(object).map(([key, value]) => ({ value: key, label: value }));
 }
 
-function createIndexationOptions() : object {
-  const options: {[key: string]: any} = {};
-  for( let i = 0; i <= 10; i = i + 0.5 ) {
+function createIndexationOptions(step = 0.5): object {
+  const options: { [key: string]: any } = {};
+  for (let i = 0; i <= 10; i = i + step) {
     options[`${i}%`] = `${i}%`;
   }
   return options;
@@ -142,3 +140,14 @@ export const LIABILITIES_TYPES = {
 };
 export const liabilitiesTypes = mapOptionObjectToArray(LIABILITIES_TYPES);
 
+export const YES_NO = {
+  true: 'Yes',
+  false: 'No',
+};
+export const yesNoOptions = mapOptionObjectToArray(YES_NO);
+
+export const SG_RATE = {
+  sgc: 'SGC',
+  ...createIndexationOptions(1),
+};
+export const sgRateOptions = mapOptionObjectToArray(SG_RATE);
