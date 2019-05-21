@@ -120,6 +120,7 @@ class CoverDetailsTable extends PureComponent<CoverDetailsProps> {
           columns={columns}
           dataSource={addKeyToArray(data)}
           components={components}
+          defaultExpandAllRows={true}
           expandedRowRender={(record: CoverDetail, expandedIndex: number, indent: number, expanded: boolean) => (
             <ExpandedCoverDetailRow
               record={record}
