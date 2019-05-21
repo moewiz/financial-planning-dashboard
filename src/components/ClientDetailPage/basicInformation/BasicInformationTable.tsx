@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Button, Icon, Modal } from 'antd';
+import { Button, Icon } from 'antd';
 import ExpandedBasicInformationRow from './ExpandedBasicInformationRow';
 import { ActionTableGeneral, HeaderTitleTable, TableEntryContainer, TextTitle } from '../../../pages/client/styled';
 import GeneralTable from '../GeneralTable';
@@ -10,7 +10,6 @@ import { StandardAction } from '../../../reducers/reducerTypes';
 import { bindActionCreators, Dispatch } from 'redux';
 import { ClientActions, UpdateMaritalStateAction } from '../../../reducers/client';
 import { empStatusOptions, genderOptions, maritalStateOptions } from '../../../enums/options';
-const confirm = Modal.confirm;
 
 interface BasicInformationProps {
   data: object[];
@@ -130,14 +129,6 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
     }
   }
 
-  public showConfirm(onOk: () => void, onCancel?: () => void) {
-    confirm({
-      title: 'Do you want to change All Owner to Client?',
-      onOk,
-      onCancel,
-    });
-  }
-
   public handleSave = (arg: { tableName: string; rowIndex: number; dataIndex: string; value: any; record: any }) => {
     const { rowIndex, dataIndex, value } = arg;
 
@@ -198,7 +189,7 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
           expandedRowRender={ExpandedBasicInformationRow}
           className={`${this.tableName}-table`}
         />
-        <ActionTableGeneral visible={true}>
+        <ActionTableGeneral>
           <Button htmlType={'button'} type={'default'} onClick={this.handleResetForm}>
             <Icon type="close" />
             <span>Discard</span>
