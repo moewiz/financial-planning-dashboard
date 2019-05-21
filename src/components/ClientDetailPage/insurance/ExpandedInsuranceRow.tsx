@@ -12,7 +12,11 @@ const ExpandedInsuranceRow: React.FC<LiabilityProps> = (record: any, index: numb
 
   return (
     <>
-      <CoverDetailsTable data={coverDetails} />
+      <CoverDetailsTable
+        data={coverDetails}
+        index={index}
+        tableName={'coverDetails'}
+      />
       <PremiumFeeDetailsTable
         data={premiumFeeDetails}
         index={index}

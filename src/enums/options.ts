@@ -158,6 +158,13 @@ export const POLICY_OWNER = {
 };
 export const policyOwnerOptions = mapOptionObjectToArray(POLICY_OWNER);
 
+export const PREMIUM_TYPE = {
+  level: 'Level',
+  stepped: 'Stepped',
+  hybrid: 'Hybrid',
+};
+export const premiumTypeOptions = mapOptionObjectToArray(PREMIUM_TYPE);
+
 export const TPD_TYPE = {
   any: 'Any',
   own: 'Own',

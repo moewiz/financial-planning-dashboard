@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
 import { Icon, Popconfirm, Table } from 'antd';
 import { InnerTableContainer, DivideLine, HeaderTitleTable, TextTitle } from '../../../pages/client/styled';
-import GeneralTable from '../GeneralTable';
-import { AnimTag } from '../assets/ContributionWithdrawalsTable';
+import { components } from '../assets/ContributionWithdrawalsTable';
+import { addKeyToArray } from '../DataEntry';
+import { coverTypeOptions, policyOwnerOptions, premiumTypeOptions } from '../../../enums/options';
 
 export interface CoverDetail {
+  refId?: string;
   coverType: string;
   policyOwner: string;
   benefitAmount: number;
@@ -15,123 +17,93 @@ export interface CoverDetail {
 
 interface CoverDetailsProps {
   data: CoverDetail[];
+  index: number;
+  tableName: string;
 }
 
 class CoverDetailsTable extends PureComponent<CoverDetailsProps> {
-  public state = {
-    dataSource: [
-      {
-        key: '0',
-        type: 'Custom',
-        value: 25000,
-        from: 'start',
-        to: 'End',
-      },
-      {
-        key: '1',
-        type: 'Custom',
-        value: 10000,
-        from: 'start',
-        to: 'End',
-      },
-      {
-        key: '2',
-        type: 'Custom',
-        value: 25000,
-        from: 'start',
-        to: 'End',
-      },
-      {
-        key: '3',
-        type: 'Custom',
-        value: 15000,
-        from: 'start',
-        to: 'End',
-      },
-    ],
-    count: 4,
-  };
-
   public columns = [
     {
       title: '',
       key: 'operation',
       className: 'operation',
       width: 18,
-      render: (text: any, record: any) =>
-        this.state.dataSource.length >= 1 ? (
-          <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
-            <Icon type="close-square" theme="twoTone" style={{ fontSize: '16px' }} />
-          </Popconfirm>
-        ) : null,
+      render: (text: any, record: any) => (
+        <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+          <Icon type="close-square" theme="twoTone" style={{ fontSize: '16px' }} />
+        </Popconfirm>
+      ),
     },
     {
-      title: 'Type',
-      dataIndex: 'type',
+      title: 'Cover Type',
+      dataIndex: 'coverType',
       width: 140,
+      type: 'select',
+      options: coverTypeOptions,
     },
     {
-      title: 'Value',
-      dataIndex: 'value',
+      title: 'Policy Owner',
+      dataIndex: 'policyOwner',
       key: '1',
       width: 120,
+      type: 'select',
+      options: policyOwnerOptions,
     },
     {
-      title: 'From',
-      dataIndex: 'from',
+      title: 'Benefit Amount',
+      dataIndex: 'benefitAmount',
       key: '2',
       width: 120,
+      type: 'number',
     },
     {
-      title: 'To',
-      dataIndex: 'to',
+      title: 'Premium Type',
+      dataIndex: 'premiumType',
       key: '3',
+      width: 120,
+      type: 'select',
+      options: premiumTypeOptions,
+    },
+    {
+      title: 'Special Note',
+      dataIndex: 'notes',
+      key: '4',
       width: 120,
     },
   ];
 
-  public handleDelete = (key: string) => {
-    const dataSource = [...this.state.dataSource];
-    this.setState({ dataSource: dataSource.filter((item) => item.key !== key) });
-  }
+  public handleDelete = (key: string) => {};
 
   public handleAdd = () => {
-    const { count, dataSource } = this.state;
-    // const newData = {
-    //   key: Date.now(),
-    //   coverType: 'life',
-    //   policyOwner: 'superFund',
-    //   benefitAmount: 200000.0,
-    //   premiumType: 'stepped',
-    //   notes: 'Sample Note.',
-    //   expandable: {
-    //     isLinked: false,
-    //     linkedProduct: null,
-    //   },
-    // };
     const newData = {
       key: Date.now(),
-      type: 'Custom',
-      value: 1000,
-      from: 'start',
-      to: 'end',
+      coverType: 'life',
+      policyOwner: 'superFund',
+      benefitAmount: 200000.0,
+      premiumType: 'stepped',
+      notes: 'Sample Note.',
+      expandable: {
+        isLinked: false,
+        linkedProduct: null,
+      },
     };
-    this.setState({
-      dataSource: [...dataSource, newData],
-      count: count + 1,
-    });
   }
 
   public render() {
-    const { dataSource } = this.state;
+    const { data, index, tableName } = this.props;
     const columns = this.columns.map((col) => {
+      const editable = col.key === 'operation' ? false : 'true';
+
       return {
         ...col,
         fixed: false,
-        onCell: (record: any) => ({
+        onCell: (record: any, rowIndex: number) => ({
+          ...col,
+          rowIndex,
+          tableName: `insurance[${index}].${tableName}`,
+          type: col.type || 'text',
           record,
-          editable: 'true',
-          title: col.title,
+          editable,
         }),
       };
     });
@@ -145,8 +117,8 @@ class CoverDetailsTable extends PureComponent<CoverDetailsProps> {
         </HeaderTitleTable>
         <Table
           columns={columns}
-          dataSource={dataSource}
-          components={{ body: { wrapper: AnimTag } }}
+          dataSource={addKeyToArray(data)}
+          components={components}
           pagination={false}
           size={'small'}
         />
