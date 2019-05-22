@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
 import { Button, Icon, Popconfirm } from 'antd';
-import { isFunction } from 'lodash';
+import { get, isFunction } from 'lodash';
 import { TableEntryContainer, HeaderTitleTable, TextTitle, ActionTableGeneral } from '../../../pages/client/styled';
 import ExpandedLiabilitiesRow, { LiabilityProps } from './ExpandedLiabilitiesRow';
 import GeneralTable from '../GeneralTable';
 import { from1Options, to2Options, liabilitiesTypes, ownerOptions } from '../../../enums/options';
 import { removePartnerOption } from '../../../utils/columnUtils';
+import ExpandedAssetsRow from "../assets/ExpandedAssetsRowWrapper";
 
 interface LiabilitiesTableProps {
   data: object[];
@@ -139,20 +140,7 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
         creditLimit: 0,
         associatedAssetRefId: 1,
       },
-      drawdowns: [
-        {
-          // id: 1,
-          value: 18000.0,
-          from: {
-            type: 'start',
-            yearValue: null,
-          },
-          to: {
-            type: 'end',
-            yearValue: null,
-          },
-        },
-      ],
+      drawdowns: [],
     };
 
     // update formik
@@ -170,6 +158,27 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
     if (isFunction(resetForm)) {
       resetForm();
     }
+  }
+
+  public addRowInnerTable = (index: number, tableName: string, row: any) => {
+    const { setFieldValue, data } = this.props;
+    const tableData = get(data[index], tableName);
+    tableData.unshift(row);
+
+    const newData: any = data;
+    newData[index][tableName] = tableData;
+
+    setFieldValue(this.tableName, newData);
+  }
+
+  public removeRowInnerTable = (index: number, tableName: string, key: number) => {
+    const { setFieldValue, data } = this.props;
+    const tableData = get(data[index], tableName).filter((i: any) => i.key !== key);
+
+    const newData: any = data;
+    newData[index][tableName] = tableData;
+
+    setFieldValue(this.tableName, newData);
   }
 
   public render() {
@@ -224,6 +233,8 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
               indent={indent}
               expanded={expanded}
               maritalState={maritalState}
+              addRow={this.addRowInnerTable}
+              deleteRow={this.removeRowInnerTable}
             />
           )}
           className={`${this.tableName}-table`}

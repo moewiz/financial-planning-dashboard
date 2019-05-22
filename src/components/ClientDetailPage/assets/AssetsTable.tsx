@@ -139,7 +139,6 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
       },
     };
 
-    console.log('new row', newData);
     // update formik
     if (isFunction(addRow)) {
       addRow(newData);

@@ -5,7 +5,6 @@ import { TweenOneGroup } from 'rc-tween-one';
 import { from1Options, to1Options } from '../../../enums/options';
 import { removePartnerOption } from '../../../utils/columnUtils';
 import EditableCell from './EditableCell';
-import { addKeyToArray } from '../DataEntry';
 
 interface ContributionWithdrawalsTableProps {
   maritalState: string;

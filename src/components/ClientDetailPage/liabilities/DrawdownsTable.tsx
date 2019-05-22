@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Icon, Popconfirm, Table } from 'antd';
 import { InnerTableContainer, DivideLine, HeaderTitleTable, TextTitle } from '../../../pages/client/styled';
 import { removePartnerOption } from '../../../utils/columnUtils';
@@ -12,9 +12,11 @@ interface DrawdownsTableProps {
   index: number;
   titleTable?: string;
   tableName: string;
+  addRow: (index: number, tableName: string, row: any) => void;
+  deleteRow: (index: number, tableName: string, key: number) => void;
 }
 
-class DrawdownsTable extends PureComponent<DrawdownsTableProps> {
+class DrawdownsTable extends Component<DrawdownsTableProps> {
   public columns = [
     {
       title: '',
@@ -53,10 +55,13 @@ class DrawdownsTable extends PureComponent<DrawdownsTableProps> {
     },
   ];
 
-  public handleDelete = (key: string) => {
+  public handleDelete = (key: number) => {
+    const { index, tableName, deleteRow } = this.props;
+    deleteRow(index, tableName, key);
   }
 
   public handleAdd = () => {
+    const { index, tableName, addRow } = this.props;
     const newData = {
       key: Date.now(),
       value: 18000.0,
@@ -69,6 +74,7 @@ class DrawdownsTable extends PureComponent<DrawdownsTableProps> {
         yearValue: null,
       },
     };
+    addRow(index, tableName, newData);
   }
 
   public render() {
@@ -100,7 +106,7 @@ class DrawdownsTable extends PureComponent<DrawdownsTableProps> {
           <DivideLine />
         </HeaderTitleTable>
         <Table
-          className="drawdowns-table"
+          className="contribution-withdrawals-table"
           columns={columns}
           dataSource={addKeyToArray(data)}
           pagination={false}
