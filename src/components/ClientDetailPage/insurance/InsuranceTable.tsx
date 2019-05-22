@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import { Button, Icon, Popconfirm } from 'antd';
-import { isFunction } from 'lodash';
+import { isFunction, get } from 'lodash';
 import { TableEntryContainer, HeaderTitleTable, TextTitle, ActionTableGeneral } from '../../../pages/client/styled';
-import ExpandedInsuranceRow from './ExpandedInsuranceRow';
+import ExpandedInsuranceRow, { InsuranceProps } from './ExpandedInsuranceRow';
 import GeneralTable from '../GeneralTable';
 import { FormikProps } from 'formik';
 import { ownerWithJointOptions } from '../../../enums/options';
@@ -122,6 +122,27 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
     }
   }
 
+  public addRowInnerTable = (index: number, tableName: string, row: any) => {
+    const { setFieldValue, data } = this.props;
+    const tableData = get(data[index], tableName);
+    tableData.unshift(row);
+
+    const newData: any = data;
+    newData[index][tableName] = tableData;
+
+    setFieldValue(this.tableName, newData);
+  }
+
+  public removeRowInnerTable = (index: number, tableName: string, key: number) => {
+    const { setFieldValue, data } = this.props;
+    const tableData = get(data[index], tableName).filter((i: any) => i.key !== key);
+
+    const newData: any = data;
+    newData[index][tableName] = tableData;
+
+    setFieldValue(this.tableName, newData);
+  }
+
   public render() {
     const { loading, data, maritalState } = this.props;
     const columns = this.columns.map((col) => {
@@ -167,7 +188,16 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
           columns={columns}
           dataSource={data}
           pagination={false}
-          expandedRowRender={ExpandedInsuranceRow}
+          expandedRowRender={(record: InsuranceProps, index: number, indent: number, expanded: boolean) => (
+            <ExpandedInsuranceRow
+              record={record}
+              index={index}
+              indent={indent}
+              expanded={expanded}
+              addRow={this.addRowInnerTable}
+              deleteRow={this.removeRowInnerTable}
+            />
+          )}
           className={`${this.tableName}-table`}
         />
         <ActionTableGeneral>

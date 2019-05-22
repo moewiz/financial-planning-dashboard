@@ -66,7 +66,7 @@ class SGContributionTable extends PureComponent<SGContributionTableProps, {}> {
         <Table
           className="SGContribution-table"
           columns={columns}
-          dataSource={addKeyToArray(data)}
+          dataSource={data}
           pagination={false}
           components={components}
           size={'small'}

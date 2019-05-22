@@ -2,12 +2,20 @@ import React from 'react';
 import PremiumFeeDetailsTable, { PremiumFeeDetail } from './PremiumFeeDetailsTable';
 import CoverDetailsTable, { CoverDetail } from './CoverDetailsTable';
 
-export interface LiabilityProps {
+export interface InsuranceProps {
   coverDetails: CoverDetail[];
   premiumFeeDetails: PremiumFeeDetail[];
 }
 
-const ExpandedInsuranceRow: React.FC<LiabilityProps> = (record: any, index: number) => {
+const ExpandedInsuranceRow = (props: {
+  record: InsuranceProps;
+  index: number;
+  indent: number;
+  expanded: boolean;
+  addRow: (index: number, tableName: string, row: any) => void;
+  deleteRow: (index: number, tableName: string, key: number) => void;
+}) => {
+  const { record, index, addRow, deleteRow } = props;
   const { coverDetails, premiumFeeDetails } = record;
 
   return (
@@ -16,11 +24,15 @@ const ExpandedInsuranceRow: React.FC<LiabilityProps> = (record: any, index: numb
         data={coverDetails}
         index={index}
         tableName={'coverDetails'}
+        addRow={addRow}
+        deleteRow={deleteRow}
       />
       <PremiumFeeDetailsTable
         data={premiumFeeDetails}
         index={index}
         tableName={'premiumFeeDetails'}
+        addRow={addRow}
+        deleteRow={deleteRow}
       />
     </>
   );

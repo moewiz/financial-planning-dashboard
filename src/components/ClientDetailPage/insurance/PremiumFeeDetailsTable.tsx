@@ -1,9 +1,8 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Icon, Popconfirm, Table } from 'antd';
 import { DivideLine, HeaderTitleTable, InnerTableContainer, TextTitle } from '../../../pages/client/styled';
-import { AnimTag, components } from '../assets/ContributionWithdrawalsTable';
+import { components } from '../assets/ContributionWithdrawalsTable';
 import { feeTypeOptions, frequencyOptions } from '../../../enums/options';
-import { addKeyToArray } from '../DataEntry';
 
 export interface PremiumFeeDetail {
   feeType: string;
@@ -16,9 +15,11 @@ interface PremiumFeeDetailsProp {
   data: PremiumFeeDetail[];
   index: number;
   tableName: string;
+  addRow: (index: number, tableName: string, row: any) => void;
+  deleteRow: (index: number, tableName: string, key: number) => void;
 }
 
-class PremiumFeeDetailsTable extends PureComponent<PremiumFeeDetailsProp> {
+class PremiumFeeDetailsTable extends Component<PremiumFeeDetailsProp> {
   public columns = [
     {
       title: '',
@@ -61,9 +62,13 @@ class PremiumFeeDetailsTable extends PureComponent<PremiumFeeDetailsProp> {
     },
   ];
 
-  public handleDelete = (key: string) => {};
+  public handleDelete = (key: number) => {
+    const { index, tableName, deleteRow } = this.props;
+    deleteRow(index, tableName, key);
+  }
 
   public handleAdd = () => {
+    const { index, tableName, addRow } = this.props;
     const newData = {
       key: Date.now(),
       feeType: 'premium',
@@ -71,6 +76,7 @@ class PremiumFeeDetailsTable extends PureComponent<PremiumFeeDetailsProp> {
       frequency: 'yearly',
       specialNote: 'Sample note',
     };
+    addRow(index, tableName, newData);
   }
 
   public render() {
@@ -102,7 +108,7 @@ class PremiumFeeDetailsTable extends PureComponent<PremiumFeeDetailsProp> {
         <Table
           className={'premium-details-table'}
           columns={columns}
-          dataSource={addKeyToArray(data)}
+          dataSource={data}
           components={components}
           pagination={false}
           size={'small'}

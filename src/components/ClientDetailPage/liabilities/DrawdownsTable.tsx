@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Icon, Popconfirm, Table } from 'antd';
 import { InnerTableContainer, DivideLine, HeaderTitleTable, TextTitle } from '../../../pages/client/styled';
 import { removePartnerOption } from '../../../utils/columnUtils';
-import { addKeyToArray } from '../DataEntry';
 import { components } from '../assets/ContributionWithdrawalsTable';
 import { from1Options, to1Options } from '../../../enums/options';
 
@@ -108,7 +107,7 @@ class DrawdownsTable extends Component<DrawdownsTableProps> {
         <Table
           className="contribution-withdrawals-table"
           columns={columns}
-          dataSource={addKeyToArray(data)}
+          dataSource={data}
           pagination={false}
           components={components}
           size={'small'}

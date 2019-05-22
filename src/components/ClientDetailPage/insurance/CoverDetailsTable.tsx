@@ -1,8 +1,7 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Icon, Popconfirm, Table } from 'antd';
 import { InnerTableContainer, DivideLine, HeaderTitleTable, TextTitle } from '../../../pages/client/styled';
 import { components } from '../assets/ContributionWithdrawalsTable';
-import { addKeyToArray } from '../DataEntry';
 import { coverTypeOptions, policyOwnerOptions, premiumTypeOptions } from '../../../enums/options';
 import ExpandedCoverDetailRow from './ExpandedCoverDetailRow';
 
@@ -20,15 +19,17 @@ interface CoverDetailsProps {
   data: CoverDetail[];
   index: number;
   tableName: string;
+  addRow: (index: number, tableName: string, row: any) => void;
+  deleteRow: (index: number, tableName: string, key: number) => void;
 }
 
-class CoverDetailsTable extends PureComponent<CoverDetailsProps> {
+class CoverDetailsTable extends Component<CoverDetailsProps> {
   public columns = [
     {
       title: '',
       key: 'operation',
       className: 'operation',
-      width: 25,
+      width: 18,
       render: (text: any, record: any) => (
         <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
           <Icon type="close-square" theme="twoTone" style={{ fontSize: '16px' }} />
@@ -73,9 +74,13 @@ class CoverDetailsTable extends PureComponent<CoverDetailsProps> {
     },
   ];
 
-  public handleDelete = (key: string) => {};
+  public handleDelete = (key: number) => {
+    const { index, tableName, deleteRow } = this.props;
+    deleteRow(index, tableName, key);
+  }
 
   public handleAdd = () => {
+    const { index, tableName, addRow } = this.props;
     const newData = {
       key: Date.now(),
       coverType: 'life',
@@ -88,6 +93,7 @@ class CoverDetailsTable extends PureComponent<CoverDetailsProps> {
         linkedProduct: null,
       },
     };
+    addRow(index, tableName, newData);
   }
 
   public render() {
@@ -118,8 +124,7 @@ class CoverDetailsTable extends PureComponent<CoverDetailsProps> {
         </HeaderTitleTable>
         <Table
           columns={columns}
-          className={'cover-details-table'}
-          dataSource={addKeyToArray(data)}
+          dataSource={data}
           components={components}
           defaultExpandAllRows={true}
           expandedRowRender={(record: CoverDetail, expandedIndex: number, indent: number, expanded: boolean) => (
