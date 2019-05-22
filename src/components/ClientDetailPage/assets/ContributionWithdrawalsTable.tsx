@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Icon, Popconfirm, Table } from 'antd';
 import { InnerTableContainer, HeaderTitleTable, TextTitle, DivideLine } from '../../../pages/client/styled';
 import { TweenOneGroup } from 'rc-tween-one';
@@ -13,6 +13,8 @@ interface ContributionWithdrawalsTableProps {
   index: number;
   titleTable?: string;
   tableName: string;
+  addRow: (index: number, tableName: string, row: any) => void;
+  deleteRow: (index: number, tableName: string, key: number) => void;
 }
 const enterAnim = [
   {
@@ -43,7 +45,7 @@ export const AnimTag = ($props: any) => {
 
 export const components = { body: { wrapper: AnimTag, cell: EditableCell } };
 
-class ContributionWithdrawalsTable extends PureComponent<ContributionWithdrawalsTableProps, {}> {
+class ContributionWithdrawalsTable extends Component<ContributionWithdrawalsTableProps, {}> {
   public columns = [
     {
       title: '',
@@ -68,7 +70,7 @@ class ContributionWithdrawalsTable extends PureComponent<ContributionWithdrawals
       dataIndex: 'value',
       key: '1',
       width: 120,
-      type: 'text',
+      type: 'number',
     },
     {
       title: 'From',
@@ -90,9 +92,13 @@ class ContributionWithdrawalsTable extends PureComponent<ContributionWithdrawals
     },
   ];
 
-  public handleDelete = (key: string) => {};
+  public handleDelete = (key: number) => {
+    const { index, tableName, deleteRow } = this.props;
+    deleteRow(index, tableName, key);
+  }
 
   public handleAdd = () => {
+    const { index, tableName, addRow } = this.props;
     const newData = {
       key: Date.now(),
       type: 'contribution',
@@ -106,6 +112,7 @@ class ContributionWithdrawalsTable extends PureComponent<ContributionWithdrawals
         yearValue: null,
       },
     };
+    addRow(index, tableName, newData);
   }
 
   public render(): React.ReactNode {
@@ -139,7 +146,7 @@ class ContributionWithdrawalsTable extends PureComponent<ContributionWithdrawals
         <Table
           className="contribution-withdrawals-table"
           columns={columns}
-          dataSource={addKeyToArray(data)}
+          dataSource={data}
           pagination={false}
           components={components}
           size={'small'}

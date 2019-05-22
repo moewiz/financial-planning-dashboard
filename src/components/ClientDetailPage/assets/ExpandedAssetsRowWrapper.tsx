@@ -15,8 +15,6 @@ import {
   ExpandedAssetsBlock,
   ExpandedSelectGroup,
 } from './styled';
-import { connect } from 'react-redux';
-import { RootState } from '../../../reducers/reducerTypes';
 
 export interface AssetProps {
   description: string;
@@ -88,8 +86,10 @@ const ExpandedAssetsRow = (props: {
   indent: number;
   expanded: boolean;
   maritalState: string;
+  addRow: (index: number, tableName: string, row: any) => void;
+  deleteRow: (index: number, tableName: string, key: number) => void;
 }) => {
-  const { record, maritalState, index } = props;
+  const { record, maritalState, index, addRow, deleteRow } = props;
   const { expandable, type } = record;
 
   switch (type) {
@@ -272,6 +272,8 @@ const ExpandedAssetsRow = (props: {
             titleTable={'Contribution/Withdrawals'}
             tableName={'contributionWithdrawals'}
             maritalState={maritalState}
+            addRow={addRow}
+            deleteRow={deleteRow}
           />
         </ExpandedAssetsGroups>
       );
@@ -440,7 +442,7 @@ const ExpandedAssetsRow = (props: {
             </PrefixSingleGroup>
           </ExpandedAssetsInlineGroups>
           <SGContributionTable
-            data={record.sgContribution && [record.sgContribution] || []}
+            data={(record.sgContribution && [record.sgContribution]) || []}
             index={index}
             tableName={'sgContribution'}
             titleTable={'SG Contribution'}
@@ -451,6 +453,8 @@ const ExpandedAssetsRow = (props: {
             titleTable={'Contribution/Withdrawals'}
             tableName={'contributionWithdrawals'}
             maritalState={maritalState}
+            addRow={addRow}
+            deleteRow={deleteRow}
           />
         </ExpandedAssetsGroups>
       );
@@ -626,6 +630,8 @@ const ExpandedAssetsRow = (props: {
             titleTable={'Pension income'}
             tableName={'pensionIncome'}
             maritalState={maritalState}
+            addRow={addRow}
+            deleteRow={deleteRow}
           />
         </ExpandedAssetsGroups>
       );
@@ -700,17 +706,4 @@ const ExpandedAssetsRow = (props: {
   }
 };
 
-const mapStateToProps = (state: RootState) => {
-  const maritalState = state.client.get('maritalState');
-
-  return {
-    maritalState,
-  };
-};
-const EnhanceExpandedAssetsRow = connect(mapStateToProps)(ExpandedAssetsRow);
-
-const ExpandedAssetsRowWrapper = (record: AssetProps, index: number, indent: number, expanded: boolean) => {
-  return <EnhanceExpandedAssetsRow record={record} index={index} indent={indent} expanded={expanded} />;
-};
-
-export default ExpandedAssetsRowWrapper;
+export default ExpandedAssetsRow;

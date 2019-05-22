@@ -55,18 +55,18 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
     if (get(this.myRef, 'current.focus')) {
       this.myRef.current.focus();
     }
-  }
+  };
 
   public handleOpenChange = (open: boolean) => {
     this.setState({ open });
-  }
+  };
 
   public openDatePicker = () => {
     const { open } = this.state;
     if (!open) {
       this.handleOpenChange(true);
     }
-  }
+  };
 
   public handleChange = (date: Moment, dateString: string | number) => {
     const { setFieldValue, name, handleBlur } = this.props;
@@ -78,7 +78,7 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
     if (isFunction(handleBlur)) {
       handleBlur(dateString);
     }
-  }
+  };
 
   public handleYearChange = (value: Moment | undefined, mode: DatePickerMode) => {
     const { setFieldValue, name, handleBlur } = this.props;
@@ -94,7 +94,7 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
     }
     // close panel
     this.handleOpenChange(false);
-  }
+  };
 
   public handleSelectDropdown = (value: string | number) => {
     const { setFieldValue, name, handleBlur } = this.props;
@@ -106,7 +106,7 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
     if (isFunction(handleBlur)) {
       handleBlur({ type: value, yearValue: null });
     }
-  }
+  };
 
   public onPanelChange = (value: Moment | undefined, mode: DatePickerMode) => {
     const { setFieldValue, name, handleBlur } = this.props;
@@ -120,7 +120,7 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
         handleBlur(value.year());
       }
     }
-  }
+  };
 
   public render(): React.ReactNode {
     const { open } = this.state;
@@ -195,7 +195,7 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
         );
       }
       case 'custom': {
-        const { type, yearValue } = value;
+        const { type = null, yearValue = null } = value || {};
         const yearFormat = 'YYYY';
         const yearMoment = yearValue ? moment(yearValue, yearFormat) : moment();
         const datepickerProps = {

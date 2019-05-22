@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import { Button, Icon, Popconfirm } from 'antd';
-import ExpandedAssetsRowWrapper from './ExpandedAssetsRowWrapper';
+import ExpandedAssetsRow, { AssetProps } from './ExpandedAssetsRowWrapper';
 import { TableEntryContainer, HeaderTitleTable, TextTitle, ActionTableGeneral } from '../../../pages/client/styled';
 import GeneralTable from '../GeneralTable';
 import { FormikProps } from 'formik';
-import { isFunction } from 'lodash';
+import { isFunction, get } from 'lodash';
 import { from2Options, ownerOptions, to2Options, assetTypes, investmentTypes } from '../../../enums/options';
 import { loadOptionsBaseOnCol } from '../../../utils/columnUtils';
 
@@ -155,6 +155,27 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
     }
   }
 
+  public addRowInnerTable = (index: number, tableName: string, row: any) => {
+    const { setFieldValue, data } = this.props;
+    const tableData = get(data[index], tableName);
+    tableData.unshift(row);
+
+    const newData: any = data;
+    newData[index][tableName] = tableData;
+
+    setFieldValue(this.tableName, newData);
+  }
+
+  public removeRowInnerTable = (index: number, tableName: string, key: number) => {
+    const { setFieldValue, data } = this.props;
+    const tableData = get(data[index], tableName).filter((i: any) => i.key !== key);
+
+    const newData: any = data;
+    newData[index][tableName] = tableData;
+
+    setFieldValue(this.tableName, newData);
+  }
+
   public render() {
     const { loading, data, maritalState } = this.props;
     const columns = this.columns.map((col: any) => {
@@ -203,7 +224,17 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
           columns={columns}
           dataSource={data}
           pagination={false}
-          expandedRowRender={ExpandedAssetsRowWrapper}
+          expandedRowRender={(record: AssetProps, index: number, indent: number, expanded: boolean) => (
+            <ExpandedAssetsRow
+              record={record}
+              index={index}
+              indent={indent}
+              expanded={expanded}
+              maritalState={maritalState}
+              addRow={this.addRowInnerTable}
+              deleteRow={this.removeRowInnerTable}
+            />
+          )}
           className={`${this.tableName}-table`}
         />
         <ActionTableGeneral>
