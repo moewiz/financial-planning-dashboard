@@ -21,7 +21,7 @@ class DrawdownsTable extends Component<DrawdownsTableProps> {
       title: '',
       key: 'operation',
       className: 'operation',
-      width: 18,
+      width: 12,
       render: (text: any, record: any) => (
         <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
           <Icon type="close-square" theme="twoTone" style={{ fontSize: '16px' }} />

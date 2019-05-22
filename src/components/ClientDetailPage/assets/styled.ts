@@ -116,6 +116,9 @@ export const ExpandedInsuranceGroups = styled.div.attrs({
   flex-wrap: wrap;
   display: flex;
   padding-left: 38px;
+  @media(max-width: 1369px){
+    padding-left: 23px;
+  }
 `;
 
 export const ExpandedAssetsInlineGroups = styled.div.attrs({
@@ -129,6 +132,7 @@ export const ExpandedAssetsText = styled.span.attrs({
   className: 'expanded-assets-text',
 })`
   color: #5f698d;
+  font-size: 13px;
 `;
 export const ExpandedAssetsBlock = styled.section.attrs({
   className: 'expanded-assets-block',

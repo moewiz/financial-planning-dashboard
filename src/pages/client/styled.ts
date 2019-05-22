@@ -34,6 +34,14 @@ export const TableEntryContainer = styled.section.attrs({
     table{
       table-layout: fixed;
     }
+    .ant-table{
+     &.ant-table-small{
+      font-size: 13px;
+      .ant-select{
+        font-size: 13px;
+       }
+      }
+     }
     .ant-row.ant-form-item{
       margin: 0px;
       width: 100%;
@@ -123,8 +131,8 @@ export const InnerTableNoDelContainer = styled.section`
   font-size: 21px;
   margin-bottom: 20px;
   .SGContribution-table{
-    max-width: 640px;
-    width: 100%
+    // max-width: 640px;
+    // width: 100%
   }
   .ant-table-small {
     border: none;
@@ -162,17 +170,29 @@ export const InnerTableContainer = styled.section`
   margin-top: 10px;
   font-size: 21px;
   .contribution-withdrawals-table{
-    max-width: 700px;
-    width: 100%
+    // max-width: 700px;
+    // width: 100%
   }
 
   .ant-table-wrapper {
-    margin-left: -24px;
-    &.premium-details-table{
-      margin-left: -33px;
-    }
     &.cover-details-table{
-      margin-left: -94px;
+      table {
+        colgroup{
+          .ant-table-expand-icon-col{
+            display: none;
+          }
+        }
+        .ant-table-thead > tr > th{
+          &:first-child{
+            display: none;
+          }
+        }
+        .ant-table-tbody > tr > td{
+          &:first-child{
+            display: none;
+          }
+        }
+      }
       .ant-table-row-expand-icon-cell{
         opacity: 0;
         visibility: hidden;
@@ -185,6 +205,12 @@ export const InnerTableContainer = styled.section`
   }
   .ant-table-small {
     border: none;
+    table {
+       margin-left: -32px;
+       @media(max-width: 1369px){
+        margin-left: -21px;
+       }
+     }
     & > .ant-table-content > .ant-table-body {
       margin: 0;
     }
@@ -192,7 +218,7 @@ export const InnerTableContainer = styled.section`
       background-color: #eaedef;
       color: #505c84;
       font-weight: normal;
-      font-size: 12px;
+      font-size: 13px;
     }
     & > .ant-table-content > .ant-table-body > table > .ant-table-thead > tr > th {
       border-bottom: none;

@@ -49,7 +49,7 @@ class ContributionWithdrawalsTable extends Component<ContributionWithdrawalsTabl
     {
       title: '',
       key: 'operation',
-      width: 18,
+      width: 12,
       className: 'operation',
       render: (text: any, record: any) => (
         <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
