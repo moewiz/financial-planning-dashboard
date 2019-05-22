@@ -11,7 +11,7 @@ import {
   ExpandedAssetsText,
 } from '../assets/styled';
 import EditableCell from '../assets/EditableCell';
-import { LIABILITIES_TYPES } from '../../../enums/options';
+import {LIABILITIES_TYPES, waitingPeriodTypeOptions} from '../../../enums/options';
 
 export interface LiabilityProps {
   description: string;
@@ -100,7 +100,18 @@ const ExpandedLiabilitiesRow = (props: {
             expandedField={true}
           />
         </PrefixSingleGroup>
-        <ExpandedAssetsText>months</ExpandedAssetsText>
+        <ExpandedSelectGroup>
+          <EditableCell
+            record={record}
+            dataIndex={'expandable.durationType'}
+            type={'select'}
+            tableName={'liabilities'}
+            rowIndex={index}
+            editable={true}
+            expandedField={true}
+            options={waitingPeriodTypeOptions}
+          />
+        </ExpandedSelectGroup>
       </ExpandedAssetsInlineGroups>
       <ExpandedAssetsInlineGroups>
         <ExpandedAssetsText>This loan has a credit limit of </ExpandedAssetsText>
