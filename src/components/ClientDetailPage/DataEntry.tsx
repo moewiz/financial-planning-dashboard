@@ -41,7 +41,17 @@ interface DataEntryState {
 
 export const addKeyToArray = (array: object[], defaultValue?: any) => {
   if (isArray(array)) {
-    return map(array, (d, index: number) => ({ key: index, ...d }));
+    return map(array, (d, index: number) => {
+      const data: any = {};
+      Object.entries(d).map(([key, value]) => {
+        if (isArray(value)) {
+          data[key] = addKeyToArray(value);
+        } else {
+          data[key] = value;
+        }
+      });
+      return { key: index, ...data };
+    });
   }
 
   return defaultValue;
@@ -246,7 +256,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
               props.setFieldValue('expenditure', expenditure);
             };
             const deleteRow = (key: number) => {
-              const expenditure = props.values.expenditure.filter((asset: any) => asset.key !== key);
+              const expenditure = props.values.expenditure.filter((exp: any) => exp.key !== key);
 
               props.setFieldValue('expenditure', expenditure);
             };
@@ -285,6 +295,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
             const deleteRow = (key: number) => {
               const assets = props.values.assets.filter((asset: any) => asset.key !== key);
 
+              debugger;
               props.setFieldValue('assets', assets);
             };
 
