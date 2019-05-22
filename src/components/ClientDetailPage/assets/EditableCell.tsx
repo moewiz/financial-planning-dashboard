@@ -21,8 +21,9 @@ interface EditableProps {
   suffix?: string | React.ReactNode;
   expandedField?: boolean;
   options?: Array<{ value: any; label: any }>;
-  confirmTitle?: { title: string, fieldValue: any};
+  confirmTitle?: { title: string; fieldValue: any };
   render?: () => void;
+  borderDefault?: boolean;
 }
 
 export default class EditableCell extends React.PureComponent<EditableProps> {
@@ -100,6 +101,7 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
       confirmTitle,
       disableRowIndex,
       render,
+      borderDefault,
       ...restProps
     } = this.props;
     const appendedProps = this.getAppendedProps(this.props, editing);
@@ -131,12 +133,7 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
         ) : (
           <EditableCellWrap onClick={this.toggleEdit}>
             <ValueEditCell>
-              <FormInput
-                className={classNames({ readOnly: true })}
-                type={type}
-                name={fieldName}
-                {...appendedProps}
-              />
+              <FormInput className={classNames({ readOnly: true })} type={type} name={fieldName} {...appendedProps} />
             </ValueEditCell>
           </EditableCellWrap>
         )
@@ -173,7 +170,7 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
             <EditableCellWrap onClick={this.toggleEdit}>
               <ValueEditCell>
                 <FormInput
-                  className={classNames({ readOnly: true })}
+                  className={classNames({ readOnly: !borderDefault })}
                   type={type}
                   name={fieldName}
                   {...appendedProps}

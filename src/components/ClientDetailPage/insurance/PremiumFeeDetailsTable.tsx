@@ -94,6 +94,7 @@ class PremiumFeeDetailsTable extends Component<PremiumFeeDetailsProp> {
           type: col.type || 'text',
           record,
           editable,
+          borderDefault: true,
         }),
       };
     });

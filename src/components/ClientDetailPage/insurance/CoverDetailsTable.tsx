@@ -112,6 +112,7 @@ class CoverDetailsTable extends Component<CoverDetailsProps> {
           type: col.type || 'text',
           record,
           editable,
+          borderDefault: true,
         }),
       };
     });
