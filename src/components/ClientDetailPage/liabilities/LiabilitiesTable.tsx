@@ -2,10 +2,10 @@ import React, { PureComponent } from 'react';
 import { Button, Icon, Popconfirm } from 'antd';
 import { isFunction } from 'lodash';
 import { TableEntryContainer, HeaderTitleTable, TextTitle, ActionTableGeneral } from '../../../pages/client/styled';
-import ExpandedLiabilitiesRow from './ExpandedLiabilitiesRow';
+import ExpandedLiabilitiesRow, { LiabilityProps } from './ExpandedLiabilitiesRow';
 import GeneralTable from '../GeneralTable';
-import {from1Options, to2Options, liabilitiesTypes, ownerOptions} from "../../../enums/options";
-import {removePartnerOption} from "../../../utils/columnUtils";
+import { from1Options, to2Options, liabilitiesTypes, ownerOptions } from '../../../enums/options';
+import { removePartnerOption } from '../../../utils/columnUtils';
 
 interface LiabilitiesTableProps {
   data: object[];
@@ -166,7 +166,7 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
   }
 
   public handleResetForm = () => {
-    const { resetForm, } = this.props;
+    const { resetForm } = this.props;
     if (isFunction(resetForm)) {
       resetForm();
     }
@@ -218,7 +218,15 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
           columns={columns}
           dataSource={data}
           pagination={false}
-          expandedRowRender={ExpandedLiabilitiesRow}
+          expandedRowRender={(record: LiabilityProps, index: number, indent: number, expanded: boolean) => (
+            <ExpandedLiabilitiesRow
+              record={record}
+              index={index}
+              indent={indent}
+              expanded={expanded}
+              maritalState={maritalState}
+            />
+          )}
           className={`${this.tableName}-table`}
         />
         <ActionTableGeneral>

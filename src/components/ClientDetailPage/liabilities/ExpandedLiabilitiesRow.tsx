@@ -2,26 +2,21 @@ import React from 'react';
 import { get } from 'lodash';
 import DrawdownsTable from './DrawdownsTable';
 import {
-  PrefixGroup,
   TypeDollarPrefix,
   TypePercentPrefix,
-  PrefixViewGroup,
   ExpandedSelectGroup,
-  PrefixChooseGroup,
   PrefixSingleGroup,
   ExpandedAssetsInlineGroups,
   ExpandedAssetsGroups,
   ExpandedAssetsText,
 } from '../assets/styled';
 import EditableCell from '../assets/EditableCell';
-
+import { LIABILITIES_TYPES } from '../../../enums/options';
 
 export interface LiabilityProps {
   description: string;
-  expandable: {
-    riskProfile: string;
-    lookingForCoupleAdvice?: boolean;
-  };
+  type: string;
+  expandable: object;
 }
 
 const repaymentTypeOptions = [
@@ -39,12 +34,20 @@ const repaymentTypeOptions = [
   },
 ];
 
-const ExpandedLiabilitiesRow = (record: LiabilityProps, index: number, indent: number, expanded: boolean): React.ReactNode => {
-  const { expandable } = record;
+const ExpandedLiabilitiesRow = (props: {
+  record: LiabilityProps;
+  index: number;
+  indent: number;
+  expanded: boolean;
+  maritalState: string;
+}) => {
+  const { record, index } = props;
+  const { type } = record;
+
   return (
     <ExpandedAssetsGroups>
       <ExpandedAssetsInlineGroups>
-        <ExpandedAssetsText>The deductibility of this (Non-deductible Loan) is</ExpandedAssetsText>
+        <ExpandedAssetsText>The deductibility of this ({get(LIABILITIES_TYPES, type)} Loan) is</ExpandedAssetsText>
         <PrefixSingleGroup>
           <EditableCell
             record={record}
