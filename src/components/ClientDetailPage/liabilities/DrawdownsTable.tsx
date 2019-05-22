@@ -93,7 +93,7 @@ class DrawdownsTable extends Component<DrawdownsTableProps> {
           type: col.type || 'text',
           record,
           editable,
-          borderDefault: true,
+          smallInput: true,
         }),
       };
     });

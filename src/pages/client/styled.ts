@@ -158,7 +158,7 @@ export const InnerTableNoDelContainer = styled.section`
     }
     & > .ant-table-content > .ant-table-body > table > .ant-table-tbody > tr > td {
       border-bottom: none;
-      padding: 2px 0;
+      padding: 2px 4px;
       width: 20px;
       &.operation {
       }
@@ -233,7 +233,7 @@ export const InnerTableContainer = styled.section`
     }
     & > .ant-table-content > .ant-table-body > table > .ant-table-tbody > tr > td {
       border-bottom: none;
-      padding: 2px 0;
+      padding: 2px 4px;
       width: 20px;
       &.operation {
       }

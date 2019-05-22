@@ -131,7 +131,7 @@ class ContributionWithdrawalsTable extends Component<ContributionWithdrawalsTabl
           type: col.type || 'text',
           record,
           editable,
-          borderDefault: true,
+          smallInput: true,
         }),
       };
     });

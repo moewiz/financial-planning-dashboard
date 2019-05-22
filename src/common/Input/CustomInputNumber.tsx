@@ -1,7 +1,8 @@
 import React from 'react';
 import { InputWrapper, InputLabel } from './styled';
 import { InputNumber } from 'antd';
-import { get } from 'lodash';
+import { get, isFunction } from 'lodash';
+import { FormikHandlers } from 'formik';
 
 interface CustomInputNumberProps {
   name: string;
@@ -10,6 +11,8 @@ interface CustomInputNumberProps {
   placeholder?: string;
   autoFocus?: boolean;
   ref?: React.RefObject<any>;
+  onBlur: FormikHandlers['handleBlur'];
+  handleBlur?: (e: React.FocusEvent) => void;
 }
 
 class CustomInputNumber extends React.PureComponent<CustomInputNumberProps> {
@@ -40,14 +43,14 @@ class CustomInputNumber extends React.PureComponent<CustomInputNumberProps> {
   //   }
   // }
 
-  // public handleBlur = (e: React.FocusEvent) => {
-  //   const { onBlur, handleBlur } = this.props;
-  //
-  //   onBlur(e);
-  //   if (handleBlur && isFunction(handleBlur)) {
-  //     handleBlur(e);
-  //   }
-  // }
+  public handleBlur = (e: React.FocusEvent) => {
+    const { onBlur, handleBlur } = this.props;
+
+    onBlur(e);
+    if (handleBlur && isFunction(handleBlur)) {
+      handleBlur(e);
+    }
+  }
 
   // public formatter = (value: number | string | undefined): string => {
   //   return numeral(value).format('0,0.00');
@@ -68,6 +71,7 @@ class CustomInputNumber extends React.PureComponent<CustomInputNumberProps> {
           formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           // @ts-ignore
           parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+          onBlur={this.handleBlur}
         />
         {placeholder && <InputLabel>{placeholder}</InputLabel>}
       </InputWrapper>
