@@ -180,7 +180,6 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
 
       return {
         ...col,
-        options,
         onCell: (record: any, rowIndex: number) => ({
           ...col,
           options,

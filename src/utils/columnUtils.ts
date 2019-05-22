@@ -1,4 +1,4 @@
-import { ASSET_TYPES, maritalStateOptions } from '../enums/options';
+import {ASSET_TYPES, FROM_1, maritalStateOptions, OWNER, ownerOptions} from '../enums/options';
 
 export function addJointOption(
   col: { dataIndex: string },
@@ -22,15 +22,24 @@ export function addJointOption(
   return result;
 }
 
-export function removePartnerOption(col: any, maritalState: string, options?: Array<{ value: any; label: any }>) {
-  // Marital State is Single
+export function removePartnerOption(
+  col: { dataIndex?: string; options?: any },
+  maritalState: string,
+  options?: Array<{ value: any; label: any }>,
+) {
   let result = options ? options : col.options;
-  if (
-    (col.dataIndex === 'from' || col.dataIndex === 'to') &&
-    maritalState === maritalStateOptions[1].value &&
-    result
-  ) {
-    result = result.filter((option: any) => option.value !== 'partnerRetirement');
+  // Marital State is Single
+  if (maritalState === maritalStateOptions[1].value && result && col.dataIndex) {
+    switch (col.dataIndex) {
+      case 'from':
+      case 'to': {
+        result = result.filter((option: any) => option.label !== FROM_1.partnerRetirement);
+        break;
+      }
+      case 'owner': {
+        result = result.filter((option: any) => option.label !== OWNER.partner);
+      }
+    }
   }
 
   return result;

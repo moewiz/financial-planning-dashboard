@@ -5,6 +5,8 @@ import { TableEntryContainer, HeaderTitleTable, TextTitle, ActionTableGeneral } 
 import ExpandedInsuranceRow from './ExpandedInsuranceRow';
 import GeneralTable from '../GeneralTable';
 import { FormikProps } from 'formik';
+import { ownerWithJointOptions } from '../../../enums/options';
+import { removePartnerOption } from '../../../utils/columnUtils';
 
 interface InsuranceTableProps {
   data: object[];
@@ -34,7 +36,7 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
       dataIndex: 'owner',
       key: '2',
       type: 'select',
-      options: [{ value: 'client', label: 'Client' }, { value: 'partner', label: 'Partner' }],
+      options: ownerWithJointOptions,
     },
     {
       title: 'Action',
@@ -121,8 +123,9 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
   }
 
   public render() {
-    const { loading, data } = this.props;
+    const { loading, data, maritalState } = this.props;
     const columns = this.columns.map((col) => {
+      const options = removePartnerOption(col, maritalState);
       const editable = col.editable === false ? false : 'true';
       if (col.key === 'operation') {
         return {
@@ -143,6 +146,7 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
         onCell: (record: any, rowIndex: number) => ({
           ...col,
           rowIndex,
+          options,
           tableName: this.tableName,
           type: col.type || 'text',
           record,

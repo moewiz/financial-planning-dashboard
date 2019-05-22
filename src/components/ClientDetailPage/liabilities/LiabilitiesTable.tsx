@@ -193,7 +193,6 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
 
       return {
         ...col,
-        options,
         onCell: (record: any, rowIndex: number) => ({
           ...col,
           options,

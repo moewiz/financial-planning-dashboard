@@ -6,10 +6,10 @@ import { ActionTableGeneral, HeaderTitleTable, TableEntryContainer, TextTitle } 
 import GeneralTable from '../GeneralTable';
 import {
   from1Options,
-  ownerOptions,
   to1Options,
   expenditureTypeOptions,
-  indexationOptions, ownerWithJointOptions,
+  indexationOptions,
+  ownerWithJointOptions,
 } from '../../../enums/options';
 import { removePartnerOption } from '../../../utils/columnUtils';
 
