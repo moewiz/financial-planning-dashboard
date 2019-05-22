@@ -11,12 +11,13 @@ import {
   ExpandedAssetsText,
 } from '../assets/styled';
 import EditableCell from '../assets/EditableCell';
-import {LIABILITIES_TYPES, waitingPeriodTypeOptions} from '../../../enums/options';
+import { LIABILITIES_TYPES, waitingPeriodTypeOptions } from '../../../enums/options';
 
 export interface LiabilityProps {
   description: string;
   type: string;
   expandable: object;
+  drawdowns?: Array<{ value: number; from: object; to: object }>;
 }
 
 const repaymentTypeOptions = [
@@ -41,7 +42,7 @@ const ExpandedLiabilitiesRow = (props: {
   expanded: boolean;
   maritalState: string;
 }) => {
-  const { record, index } = props;
+  const { record, index, maritalState } = props;
   const { type } = record;
 
   return (
@@ -142,7 +143,12 @@ const ExpandedLiabilitiesRow = (props: {
         </ExpandedSelectGroup>
       </ExpandedAssetsInlineGroups>
 
-      <DrawdownsTable />
+      <DrawdownsTable
+        data={record.drawdowns || []}
+        index={index}
+        tableName={'drawdowns'}
+        maritalState={maritalState}
+      />
     </ExpandedAssetsGroups>
   );
 };

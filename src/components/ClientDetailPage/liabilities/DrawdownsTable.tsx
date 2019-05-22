@@ -1,66 +1,62 @@
 import React, { PureComponent } from 'react';
 import { Icon, Popconfirm, Table } from 'antd';
 import { InnerTableContainer, DivideLine, HeaderTitleTable, TextTitle } from '../../../pages/client/styled';
+import { removePartnerOption } from '../../../utils/columnUtils';
+import { addKeyToArray } from '../DataEntry';
+import { components } from '../assets/ContributionWithdrawalsTable';
+import { from1Options, to1Options } from '../../../enums/options';
 
-class DrawdownsTable extends PureComponent {
-  public state = {
-    dataSource: [
-      {
-        key: '0',
-        type: 'Custom',
-        value: 25000,
-        from: 'start',
-        to: 'End',
-      },
-    ],
-    count: 1,
-  };
+interface DrawdownsTableProps {
+  maritalState: string;
+  data: object[];
+  index: number;
+  titleTable?: string;
+  tableName: string;
+}
 
+class DrawdownsTable extends PureComponent<DrawdownsTableProps> {
   public columns = [
     {
       title: '',
       key: 'operation',
       className: 'operation',
       width: 18,
-      render: (text: any, record: any) =>
-        this.state.dataSource.length >= 1 ? (
-          <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
-            <Icon type="close-square" theme="twoTone" style={{ fontSize: '16px' }} />
-          </Popconfirm>
-        ) : null,
-    },
-    {
-      title: 'Type',
-      dataIndex: 'type',
-      width: 140,
+      render: (text: any, record: any) => (
+        <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+          <Icon type="close-square" theme="twoTone" style={{ fontSize: '16px' }} />
+        </Popconfirm>
+      ),
     },
     {
       title: 'Value',
       dataIndex: 'value',
-      key: '1',
-      width: 120,
+      width: 140,
+      type: 'number',
     },
     {
       title: 'From',
       dataIndex: 'from',
-      key: '2',
+      key: '1',
       width: 120,
+      type: 'date',
+      pickerType: 'custom',
+      options: from1Options,
     },
     {
       title: 'To',
       dataIndex: 'to',
-      key: '3',
+      key: '2',
       width: 120,
+      type: 'date',
+      pickerType: 'custom',
+      options: to1Options,
     },
   ];
 
   public handleDelete = (key: string) => {
-    const dataSource = [...this.state.dataSource];
-    this.setState({ dataSource: dataSource.filter((item) => item.key !== key) });
   }
 
   public handleAdd = () => {
-    const { count, dataSource } = this.state;
     const newData = {
       key: Date.now(),
       value: 18000.0,
@@ -73,22 +69,25 @@ class DrawdownsTable extends PureComponent {
         yearValue: null,
       },
     };
-    this.setState({
-      dataSource: [...dataSource, newData],
-      count: count + 1,
-    });
   }
 
   public render() {
-    const { dataSource } = this.state;
+    const { data, maritalState, index, tableName } = this.props;
     const columns = this.columns.map((col) => {
+      const options = removePartnerOption(col, maritalState);
+      const editable = col.key === 'operation' ? false : 'true';
+
       return {
         ...col,
         fixed: false,
-        onCell: (record: any) => ({
+        onCell: (record: any, rowIndex: number) => ({
+          ...col,
+          options,
+          rowIndex,
+          tableName: `liabilities[${index}].${tableName}`,
+          type: col.type || 'text',
           record,
-          editable: 'true',
-          title: col.title,
+          editable,
         }),
       };
     });
@@ -100,7 +99,14 @@ class DrawdownsTable extends PureComponent {
           <TextTitle small={true}>{'Drawdowns'}</TextTitle>
           <DivideLine />
         </HeaderTitleTable>
-        <Table columns={columns} dataSource={dataSource} pagination={false} size={'small'} />
+        <Table
+          className="drawdowns-table"
+          columns={columns}
+          dataSource={addKeyToArray(data)}
+          pagination={false}
+          components={components}
+          size={'small'}
+        />
       </InnerTableContainer>
     );
   }
