@@ -140,6 +140,7 @@ export const ExpandedSelectGroup = styled.div.attrs({
   className: 'expanded-select-group',
 })`
   width: auto;
+  min-width: 30px;
   display: flex;
   font-weight: 700;
   margin: 0 3px;

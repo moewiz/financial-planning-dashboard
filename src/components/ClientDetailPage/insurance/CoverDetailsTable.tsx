@@ -6,6 +6,7 @@ import { coverTypeOptions, policyOwnerOptions, premiumTypeOptions } from '../../
 import ExpandedCoverDetailRow from './ExpandedCoverDetailRow';
 
 export interface CoverDetail {
+  key: number;
   refId?: string;
   coverType: string;
   policyOwner: string;
@@ -134,6 +135,7 @@ class CoverDetailsTable extends Component<CoverDetailsProps> {
               indent={indent}
               expanded={expanded}
               insuranceIndex={index}
+              coverDetails={data}
             />
           )}
           pagination={false}

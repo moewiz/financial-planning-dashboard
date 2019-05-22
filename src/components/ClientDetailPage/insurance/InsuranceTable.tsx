@@ -83,6 +83,7 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
       owner: 'client',
       premiumFeeDetails: [
         {
+          key: 0,
           feeType: 'premium',
           amount: 80000.0,
           frequency: 'yearly',
@@ -92,6 +93,7 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
       coverDetails: [
         {
           // refId: 0,
+          key: 0,
           coverType: 'life',
           policyOwner: 'superFund',
           benefitAmount: 200000.0,

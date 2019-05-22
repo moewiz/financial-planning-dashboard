@@ -147,6 +147,7 @@ export const COVER_TYPE: { [key: string]: string } = {
   life: 'Life',
   tpd: 'TPD',
   trauma: 'Trauma',
+  childTrauma: 'Child Trauma',
   incomeProtection: 'Income Protection',
 };
 export const coverTypeOptions = mapOptionObjectToArray(COVER_TYPE);

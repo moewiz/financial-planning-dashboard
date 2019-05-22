@@ -1,4 +1,5 @@
 import React from 'react';
+import { get } from 'lodash';
 import EditableCell from '../assets/EditableCell';
 import {
   ExpandedInsuranceGroups,
@@ -17,20 +18,31 @@ import {
   waitingPeriodTypeOptions,
 } from '../../../enums/options';
 import { CoverDetail } from './CoverDetailsTable';
-const linkedProductOptions = [{ value: 1, label: 'AAA' }, { value: 2, label: 'BBB' }, { value: 3, label: 'CCC' }];
+
+function loadLinkedProductOptions(coverDetails: CoverDetail[], key: number) {
+  return coverDetails
+    .filter((coverDetail: CoverDetail) => coverDetail.key !== key)
+    .map((coverDetail) => ({
+      value: coverDetail.key,
+      label: get(COVER_TYPE, coverDetail.coverType),
+    }));
+}
 
 const ExpandedCoverDetailRow = (props: {
   record: CoverDetail;
+  coverDetails: CoverDetail[];
   index: number;
   indent: number;
   expanded: boolean;
   insuranceIndex: number;
 }) => {
-  const { record, index, insuranceIndex } = props;
+  const { record, index, insuranceIndex, coverDetails } = props;
   const { expandable, coverType } = record;
+  const linkedProductOptions = loadLinkedProductOptions(coverDetails, record.key);
 
   switch (COVER_TYPE[coverType]) {
     case COVER_TYPE.life:
+    case COVER_TYPE.childTrauma:
     case COVER_TYPE.trauma: {
       return (
         <ExpandedInsuranceGroups>
