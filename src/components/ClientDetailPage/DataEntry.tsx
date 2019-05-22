@@ -106,8 +106,8 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
   }
 
   public handleDiscardForm = () => {
-    if (this.basicInformationForm) {
-      this.basicInformationForm.current.resetForm();
+    if (this.basicInformationForm && this.basicInformationForm.current) {
+      this.basicInformationForm.current.props.resetForm();
     }
     if (this.incomeForm) {
       this.incomeForm.current.resetForm();
@@ -128,8 +128,8 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
   }
 
   public handleSubmitForm = () => {
-    if (this.basicInformationForm) {
-      this.basicInformationForm.current.submitForm();
+    if (this.basicInformationForm && this.basicInformationForm.current) {
+      this.basicInformationForm.current.props.submitForm();
     }
     if (this.incomeForm) {
       this.incomeForm.current.submitForm();
@@ -146,7 +146,11 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
     if (this.insuranceForm) {
       this.insuranceForm.current.submitForm();
     }
-    console.log('handle submit form', this.state.formData);
+
+    // Make sure all forms already submitted.
+    setTimeout(() => {
+      console.log('handle submit form', this.state.formData);
+    }, 0);
   }
 
   public render() {
@@ -157,7 +161,6 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
         <Formik
           onSubmit={(values: any, actions: FormikActions<any>) => {
             // set state
-            console.log(values);
             this.updateFormData(values);
           }}
           initialValues={{ basicInformation: tables ? addKeyToArray(tables.basicInformation || []) : [] }}
