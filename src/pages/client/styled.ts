@@ -207,6 +207,17 @@ export const InnerTableContainer = styled.section`
     border: none;
     table {
       margin-left: -24px;
+      .table-expand-datepicker{
+        .dropdown-value{
+          border: 1px solid #d9d9d9;
+          &:hover{
+            border: 1px solid #515c83;
+          }
+        }
+        .has-none .anticon-calendar{
+          display: block;
+        }
+      }
       .operation{
         position: relative;
         .anticon-close-square{

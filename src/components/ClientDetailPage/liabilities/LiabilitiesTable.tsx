@@ -67,6 +67,7 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
       width: '13%',
       pickerType: 'custom',
       options: from1Options,
+      className: 'table-expand-datepicker',
     },
     {
       title: 'To',
@@ -75,6 +76,7 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
       width: '13%',
       type: 'date',
       pickerType: 'custom',
+      className: 'table-expand-datepicker',
       options: to2Options,
     },
     {

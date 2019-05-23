@@ -79,6 +79,7 @@ class ContributionWithdrawalsTable extends Component<ContributionWithdrawalsTabl
       type: 'date',
       pickerType: 'custom',
       options: from1Options,
+      className: 'table-expand-datepicker',
     },
     {
       title: 'To',
@@ -87,6 +88,7 @@ class ContributionWithdrawalsTable extends Component<ContributionWithdrawalsTabl
       width: 120,
       type: 'date',
       pickerType: 'custom',
+      className: 'table-expand-datepicker',
       options: to1Options,
     },
   ];

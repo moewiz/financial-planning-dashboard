@@ -42,6 +42,7 @@ class DrawdownsTable extends Component<DrawdownsTableProps> {
       type: 'date',
       pickerType: 'custom',
       options: from1Options,
+      className: 'table-expand-datepicker',
     },
     {
       title: 'To',
@@ -51,6 +52,7 @@ class DrawdownsTable extends Component<DrawdownsTableProps> {
       type: 'date',
       pickerType: 'custom',
       options: to1Options,
+      className: 'table-expand-datepicker',
     },
   ];
 
