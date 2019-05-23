@@ -7,7 +7,7 @@ import {
   ExpandedSelectGroup,
 } from '../assets/styled';
 import {
-  didOrNotOptions,
+  hasPrivateHealthInsuranceOptions,
   isOrNotOptions,
   lookingForCoupleAdviceOptions,
   riskProfileOptions,
@@ -24,8 +24,6 @@ export interface BasicInformation {
 }
 
 const joinRiskProfileOptions = riskProfileOptions;
-
-const hasPrivateHealthInsuranceOptions = didOrNotOptions;
 
 const ExpandedBasicInformationRow = (
   record: BasicInformation,
@@ -97,6 +95,7 @@ const ExpandedBasicInformationRow = (
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
+                disabledYear={true}
               />
             </ExpandedSelectGroup>
           </ExpandedAssetsInlineGroups>
@@ -180,6 +179,7 @@ const ExpandedBasicInformationRow = (
               rowIndex={index}
               editable={true}
               expandedField={true}
+              disabledYear={true}
             />
           </ExpandedSelectGroup>
         </ExpandedAssetsInlineGroups>

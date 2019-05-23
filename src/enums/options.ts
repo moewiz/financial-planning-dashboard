@@ -55,7 +55,12 @@ export const riskProfileOptions = mapOptionObjectToArray(RISK_PROFILE);
 
 export const didOrNotOptions = [{ value: true, label: 'did' }, { value: false, label: 'did not' }];
 
-export const lookingForCoupleAdviceOptions = [{ value: true, label: 'couple' }, { value: false, label: 'single' }];
+export const hasPrivateHealthInsuranceOptions = [
+  { value: true, label: 'has' },
+  { value: false, label: 'does not have' },
+];
+
+export const lookingForCoupleAdviceOptions = [{ value: true, label: 'couple' }, { value: false, label: 'individual' }];
 
 export const isOrNotOptions = [{ value: true, label: 'is' }, { value: false, label: 'is not' }];
 

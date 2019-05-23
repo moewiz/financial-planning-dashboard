@@ -1,13 +1,11 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { DatePicker, Button, Select } from 'antd';
-const Option = Select.Option;
+import { DatePicker, Button } from 'antd';
 import { get, isFunction } from 'lodash';
-import moment, { Moment } from 'moment';
+import moment, {Moment, unitOfTime} from 'moment';
 import { EntryPickerTable, DateButtonCustom } from './styled';
 import { FormikHandlers } from 'formik';
 import { DatePickerMode } from 'antd/lib/date-picker/interface';
-import { EditableCellWrap } from '../../components/ClientDetailPage/styled';
 
 const { MonthPicker, WeekPicker } = DatePicker;
 
@@ -31,12 +29,18 @@ interface EntryPickerProps {
   format?: string;
   defaultOpen?: boolean;
   allowClear?: boolean;
+  disabledYear?: boolean;
 }
 
 export declare type PickerType = 'month' | 'week' | 'year' | 'date' | 'custom';
 
 interface EntryPickerState {
   open: boolean;
+}
+
+function disabledRule(current: Moment, granularity: unitOfTime.StartOf = 'year') {
+  // Can not select (day, month, year) before today
+  return moment().isAfter(current, granularity);
 }
 
 class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
@@ -55,18 +59,18 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
     if (get(this.myRef, 'current.focus')) {
       this.myRef.current.focus();
     }
-  };
+  }
 
   public handleOpenChange = (open: boolean) => {
     this.setState({ open });
-  };
+  }
 
   public openDatePicker = () => {
     const { open } = this.state;
     if (!open) {
       this.handleOpenChange(true);
     }
-  };
+  }
 
   public handleChange = (date: Moment, dateString: string | number) => {
     const { setFieldValue, name, handleBlur } = this.props;
@@ -78,7 +82,7 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
     if (isFunction(handleBlur)) {
       handleBlur(dateString);
     }
-  };
+  }
 
   public handleYearChange = (value: Moment | undefined, mode: DatePickerMode) => {
     const { setFieldValue, name, handleBlur } = this.props;
@@ -94,7 +98,7 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
     }
     // close panel
     this.handleOpenChange(false);
-  };
+  }
 
   public handleSelectDropdown = (value: string | number) => {
     const { setFieldValue, name, handleBlur } = this.props;
@@ -106,12 +110,15 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
     if (isFunction(handleBlur)) {
       handleBlur({ type: value, yearValue: null });
     }
-  };
+  }
 
   public onPanelChange = (value: Moment | undefined, mode: DatePickerMode) => {
-    const { setFieldValue, name, handleBlur } = this.props;
+    const { setFieldValue, name, handleBlur, disabledYear } = this.props;
 
     if (value) {
+      if (disabledYear && disabledRule(value)) {
+        return;
+      }
       if (setFieldValue) {
         setFieldValue(name, value.year());
       }
@@ -120,11 +127,11 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
         handleBlur(value.year());
       }
     }
-  };
+  }
 
   public render(): React.ReactNode {
     const { open } = this.state;
-    const { pickerType, border, value, defaultOpen, format, options, ...props } = this.props;
+    const { pickerType, border, value, defaultOpen, format, options, disabledYear, ...props } = this.props;
     const className = classNames('picker-' + pickerType + ' has-' + border);
 
     const momentValue = moment(value, format);
