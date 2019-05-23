@@ -208,7 +208,7 @@ export const InnerTableContainer = styled.section`
     table {
       margin-left: -24px;
       .operation{
-        position: absolute;
+        position: relative;
         .anticon-close-square{
           position: absolute;
           left: -9px;
