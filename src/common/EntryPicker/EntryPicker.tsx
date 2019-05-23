@@ -214,16 +214,15 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
 
         return (
           <EntryPickerTable className={className}>
-            {yearValue === null && type !== '' && (
-              <div className="dropdown-value readOnly" onClick={!open ? this.openDatePicker : undefined}>
-                <span>{get((options || []).find((option: Option) => option.value === type), 'label')}</span>
-              </div>
-            )}
+            <div className="dropdown-value readOnly" onClick={!open ? this.openDatePicker : undefined}>
+              { yearValue && <span>{yearValue}</span> }
+              { type && <span>{get((options || []).find((option: Option) => option.value === type), 'label')}</span> }
+            </div>
             <DatePicker
               ref={this.myRef}
               {...props}
               {...datepickerProps}
-              className={classNames({ 'input-hidden': yearValue === null })}
+              className={classNames({ 'input-hidden': true })}
               dropdownClassName={classNames({ 'no-year-selected': yearValue === null })}
               onOpenChange={this.handleOpenChange}
               format={yearFormat}
