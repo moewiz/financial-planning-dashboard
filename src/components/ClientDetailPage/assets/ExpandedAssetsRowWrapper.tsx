@@ -88,8 +88,9 @@ const ExpandedAssetsRow = (props: {
   maritalState: string;
   addRow: (index: number, tableName: string, row: any) => void;
   deleteRow: (index: number, tableName: string, key: number) => void;
+  dynamicCustomValue: object;
 }) => {
-  const { record, maritalState, index, addRow, deleteRow } = props;
+  const { record, maritalState, index, addRow, deleteRow, dynamicCustomValue } = props;
   const { expandable, type } = record;
 
   switch (type) {
@@ -446,6 +447,7 @@ const ExpandedAssetsRow = (props: {
             index={index}
             tableName={'sgContribution'}
             titleTable={'SG Contribution'}
+            dynamicCustomValue={dynamicCustomValue}
           />
           <ContributionWithdrawalsTable
             data={record.contributionWithdrawals || []}

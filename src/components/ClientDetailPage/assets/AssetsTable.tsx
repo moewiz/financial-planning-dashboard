@@ -11,6 +11,7 @@ import { loadOptionsBaseOnCol } from '../../../utils/columnUtils';
 interface AssetsTableProps {
   data: object[];
   maritalState: string;
+  dynamicCustomValue: object;
   loading?: boolean;
 
   formProps?: FormikProps<any>;
@@ -176,7 +177,7 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
   }
 
   public render() {
-    const { loading, data, maritalState } = this.props;
+    const { loading, data, maritalState, dynamicCustomValue } = this.props;
     const columns = this.columns.map((col: any) => {
       const editable = col.editable === false ? false : 'true';
       if (col.key === 'operation') {
@@ -232,6 +233,7 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
               maritalState={maritalState}
               addRow={this.addRowInnerTable}
               deleteRow={this.removeRowInnerTable}
+              dynamicCustomValue={dynamicCustomValue}
             />
           )}
           className={`${this.tableName}-table`}

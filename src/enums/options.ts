@@ -140,7 +140,6 @@ export const liabilitiesTypes = mapOptionObjectToArray(LIABILITIES_TYPES);
 export const yesNoOptions = [{ value: true, label: 'Yes' }, { value: false, label: 'No' }];
 
 export const SG_RATE = {
-  sgc: 'SGC',
   ...createRateOptions(1, 15),
 };
 export const sgRateOptions = mapOptionObjectToArray(SG_RATE);

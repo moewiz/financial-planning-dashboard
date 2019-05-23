@@ -312,6 +312,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
                   deleteRow={deleteRow}
                   ref={this.assetsForm}
                   maritalState={maritalState}
+                  dynamicCustomValue={dynamicCustomValue}
                 />
               </Form>
             );

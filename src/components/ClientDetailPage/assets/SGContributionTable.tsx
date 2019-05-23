@@ -2,14 +2,15 @@ import React, { PureComponent } from 'react';
 import { Table } from 'antd';
 import { InnerTableNoDelContainer, HeaderTitleTable, TextTitle, DivideLine } from '../../../pages/client/styled';
 import { components } from './ContributionWithdrawalsTable';
-import { addKeyToArray } from '../DataEntry';
 import { sgRateOptions, yesNoOptions } from '../../../enums/options';
+import { loadOptionsBaseOnCol } from '../../../utils/columnUtils';
 
 interface SGContributionTableProps {
   data: object[];
   index: number;
   titleTable?: string;
   tableName: string;
+  dynamicCustomValue: object;
 }
 class SGContributionTable extends PureComponent<SGContributionTableProps, {}> {
   public columns = [
@@ -38,22 +39,26 @@ class SGContributionTable extends PureComponent<SGContributionTableProps, {}> {
   ];
 
   public render(): React.ReactNode {
-    const { titleTable, data, tableName, index } = this.props;
-    const columns = this.columns.map((col) => {
+    const { titleTable, data, tableName, index, dynamicCustomValue } = this.props;
+    const columns = this.columns.map((col: any) => {
       const editable = 'true';
 
       return {
         ...col,
         fixed: false,
-        onCell: (record: any, rowIndex: number) => ({
-          ...col,
-          rowIndex,
-          tableName: `assets[${index}].${tableName}`,
-          type: col.type || 'text',
-          record,
-          disableRowIndex: true,
-          editable,
-        }),
+        onCell: (record: any, rowIndex: number) => {
+          const options = loadOptionsBaseOnCol(col, record, { dynamicCustomValue });
+          return {
+            ...col,
+            options,
+            rowIndex,
+            tableName: `assets[${index}].${tableName}`,
+            type: col.type || 'text',
+            record,
+            disableRowIndex: true,
+            editable,
+          };
+        },
       };
     });
 

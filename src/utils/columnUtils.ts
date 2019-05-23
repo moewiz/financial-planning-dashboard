@@ -51,10 +51,15 @@ function addInflationOptions(options: any[], dynamicCustomValue: { [key: string]
   return options;
 }
 
+function addDefaultSgcRate(options: any[], dynamicCustomValue: { [key: string]: any }) {
+  options.unshift({ value: 'sgc', label: `Default SG rate = ${dynamicCustomValue.sgcRate}%` });
+  return options;
+}
+
 export function loadOptionsBaseOnCol(
   col: { dataIndex: string; options?: Array<{ value: any; label: any }> },
   record: { type: string },
-  customValue: { maritalState: string; dynamicCustomValue?: object },
+  customValue: { maritalState?: string; dynamicCustomValue?: object },
 ) {
   const { maritalState, dynamicCustomValue } = customValue;
   if (col.options) {
@@ -67,8 +72,13 @@ export function loadOptionsBaseOnCol(
       // Marital State is Single
       options = removePartnerOption(col, maritalState, options);
     }
-    if (col.dataIndex === 'indexation' && dynamicCustomValue) {
-      options = addInflationOptions(options, dynamicCustomValue);
+    if (dynamicCustomValue) {
+      if (col.dataIndex === 'indexation') {
+        options = addInflationOptions(options, dynamicCustomValue);
+      }
+      if (col.dataIndex === 'sgrate') {
+        options = addDefaultSgcRate(options, dynamicCustomValue);
+      }
     }
 
     return options;
