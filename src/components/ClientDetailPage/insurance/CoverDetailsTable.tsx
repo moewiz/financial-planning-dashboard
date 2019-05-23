@@ -127,6 +127,7 @@ class CoverDetailsTable extends Component<CoverDetailsProps> {
         </HeaderTitleTable>
         <Table
           columns={columns}
+          className={'cover-details-table'}
           dataSource={data}
           components={components}
           defaultExpandAllRows={true}

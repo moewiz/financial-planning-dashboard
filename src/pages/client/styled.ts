@@ -206,12 +206,12 @@ export const InnerTableContainer = styled.section`
   .ant-table-small {
     border: none;
     table {
-      margin-left: -20px;
+      margin-left: -24px;
       .operation{
         position: absolute;
         .anticon-close-square{
           position: absolute;
-          left: -16px;
+          left: -9px;
           top: 12px;
         }
       }
