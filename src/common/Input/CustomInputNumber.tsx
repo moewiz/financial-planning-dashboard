@@ -70,7 +70,6 @@ class CustomInputNumber extends React.PureComponent<CustomInputNumberProps> {
     const { placeholder, setFieldValue, calculateWidth, ...props } = this.props;
     const optionalProps: { [key: string]: any } = this.getOptionalProps();
 
-    console.log({ optionalProps });
     return (
       <InputWrapper>
         <InputNumber

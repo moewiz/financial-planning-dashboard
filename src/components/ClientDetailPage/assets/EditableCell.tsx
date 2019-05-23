@@ -113,7 +113,7 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
     } = this.props;
     const appendedProps = this.getAppendedProps(this.props, editing);
     let editable = editableProp;
-    if (type === 'select' && options && options.length === 1) {
+    if (type === 'select' && options && options.length === 1 && dataIndex !== 'expandable.linkedProduct') {
       editable = false;
     }
 
