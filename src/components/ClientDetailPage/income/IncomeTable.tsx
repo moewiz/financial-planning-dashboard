@@ -12,11 +12,12 @@ import {
   to1Options,
   indexationOptions,
 } from '../../../enums/options';
-import { removePartnerOption } from '../../../utils/columnUtils';
+import { loadOptionsBaseOnCol } from '../../../utils/columnUtils';
 
 interface IncomeTableProps {
   data: object[];
   maritalState: string;
+  dynamicCustomValue: object;
   loading?: boolean;
 
   formProps?: FormikProps<any>;
@@ -160,9 +161,8 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
   }
 
   public render() {
-    const { loading, data, maritalState } = this.props;
-    const columns = this.columns.map((col) => {
-      const options = removePartnerOption(col, maritalState);
+    const { loading, data, maritalState, dynamicCustomValue } = this.props;
+    const columns = this.columns.map((col: any) => {
       const editable = col.editable === false ? false : 'true';
       if (col.key === 'operation') {
         return {
@@ -180,16 +180,20 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
 
       return {
         ...col,
-        onCell: (record: any, rowIndex: number) => ({
-          ...col,
-          options,
-          rowIndex,
-          tableName: this.tableName,
-          type: col.type || 'text',
-          record,
-          editable,
-          handleSave: this.handleSave,
-        }),
+        onCell: (record: any, rowIndex: number) => {
+          const options = loadOptionsBaseOnCol(col, record, { maritalState, dynamicCustomValue });
+
+          return {
+            ...col,
+            options,
+            rowIndex,
+            tableName: this.tableName,
+            type: col.type || 'text',
+            record,
+            editable,
+            handleSave: this.handleSave,
+          };
+        },
       };
     });
 

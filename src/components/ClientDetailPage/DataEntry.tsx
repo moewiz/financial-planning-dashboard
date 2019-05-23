@@ -9,7 +9,7 @@ import InsuranceTable from './insurance/InsuranceTable';
 import { Form, Formik, FormikActions, FormikProps } from 'formik';
 import { connect } from 'react-redux';
 import { RootState, StandardAction } from '../../reducers/reducerTypes';
-import { find, map, isArray } from 'lodash';
+import { find, map, isArray, pick } from 'lodash';
 import {
   Client,
   Tag,
@@ -165,6 +165,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
 
   public render() {
     const { tables, loading, maritalState } = this.props;
+    const dynamicCustomValue = pick(tables, ['inflationCPI', 'salaryInflation', 'sgcRate', 'benefitDefaultAge']);
 
     return (
       <>
@@ -236,6 +237,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
                   deleteRow={deleteRow}
                   ref={this.incomeForm}
                   maritalState={maritalState}
+                  dynamicCustomValue={dynamicCustomValue}
                 />
               </Form>
             );
@@ -295,7 +297,6 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
             const deleteRow = (key: number) => {
               const assets = props.values.assets.filter((asset: any) => asset.key !== key);
 
-              debugger;
               props.setFieldValue('assets', assets);
             };
 

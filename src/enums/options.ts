@@ -53,8 +53,6 @@ export const RISK_PROFILE = {
 };
 export const riskProfileOptions = mapOptionObjectToArray(RISK_PROFILE);
 
-export const didOrNotOptions = [{ value: true, label: 'did' }, { value: false, label: 'did not' }];
-
 export const hasPrivateHealthInsuranceOptions = [
   { value: true, label: 'has' },
   { value: false, label: 'does not have' },
@@ -109,10 +107,9 @@ export const EXPENDITURE_TYPES = {
 export const expenditureTypeOptions = mapOptionObjectToArray(EXPENDITURE_TYPES);
 
 export const INDEXATION_OPTIONS = {
-  salaryInflation: 'Salary Inflation',
-  inflationCPI: 'Inflation (CPI)',
+  cpi: 'CPI',
+  awote: 'AWOTE',
   ...createRateOptions(),
-  otherNonTaxable: 'Other Non-Taxable',
 };
 export const indexationOptions = mapOptionObjectToArray(INDEXATION_OPTIONS);
 

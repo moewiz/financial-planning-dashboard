@@ -196,7 +196,7 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
       return {
         ...col,
         onCell: (record: any, rowIndex: number) => {
-          const options = loadOptionsBaseOnCol(col, record, maritalState);
+          const options = loadOptionsBaseOnCol(col, record, { maritalState });
 
           return {
             ...col,
