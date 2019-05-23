@@ -11,6 +11,8 @@ interface InputProps {
   placeholder?: string;
   prefix?: React.ReactNode;
   autoFocus?: boolean;
+  smallInput?: boolean;
+  calculateWidth?: boolean;
   useNumberOnly?: boolean;
   ref?: React.RefObject<any>;
   handleChange?: (e: any, name?: string, value?: any) => void;
@@ -59,8 +61,35 @@ class Input extends React.PureComponent<InputProps> {
     }
   }
 
+  public getOptionalProps = () => {
+    const { value, calculateWidth, smallInput } = this.props;
+    const optionalProps: { [key: string]: any } = {};
+    let valueLength = 1;
+    if (calculateWidth) {
+      valueLength = value && value.toString().length ? value.toString().length + 1 : 1;
+      const numberSize = valueLength > 3 ? 14 : 15;
+      const width = valueLength * numberSize;
+      optionalProps.style = { width: `${width > 36 ? width : 36}px` };
+    }
+    if (smallInput) {
+      optionalProps.size = 'small';
+    }
+
+    return optionalProps;
+  }
+
   public render(): JSX.Element {
-    const { placeholder, onChange, onKeyUp, useNumberOnly, handleBlur, ...props } = this.props;
+    const {
+      placeholder,
+      onChange,
+      onKeyUp,
+      useNumberOnly,
+      handleBlur,
+      smallInput,
+      calculateWidth,
+      ...props
+    } = this.props;
+    const optionalProps: { [key: string]: any } = this.getOptionalProps();
 
     return (
       <InputWrapper>
@@ -70,6 +99,7 @@ class Input extends React.PureComponent<InputProps> {
           onChange={this.handleChange}
           onKeyUp={this.handleKeyUp}
           onBlur={this.handleBlur}
+          {...optionalProps}
         />
         {placeholder && <InputLabel>{placeholder}</InputLabel>}
       </InputWrapper>

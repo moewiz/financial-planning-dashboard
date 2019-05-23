@@ -27,6 +27,7 @@ interface InputProps {
   // CustomInputNumber Number
   min?: number;
   max?: number;
+  calculateWidth?: boolean;
   // Select
   options?: Array<{ value: any; label: string }>;
   showSearch?: boolean;

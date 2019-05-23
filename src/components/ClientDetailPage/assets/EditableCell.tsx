@@ -25,6 +25,7 @@ interface EditableProps {
   render?: () => void;
   smallInput?: boolean;
   disabledYear?: boolean;
+  calculateWidth?: boolean;
 }
 
 export default class EditableCell extends React.PureComponent<EditableProps> {
@@ -67,7 +68,7 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
   }
 
   public getAppendedProps = (props: EditableProps, editing: boolean = false) => {
-    const { type, options, pickerType, confirmTitle, disabledYear } = props;
+    const { type, options, pickerType, confirmTitle, smallInput, disabledYear, expandedField, calculateWidth } = props;
     const appendProps = [];
 
     switch (type) {
@@ -80,7 +81,10 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
       }
     }
 
-    return reduce(appendProps, (accumulator, prop) => ({ ...accumulator, ...prop }), {});
+    return reduce(appendProps, (accumulator, prop) => ({ ...accumulator, ...prop }), {
+      calculateWidth: calculateWidth || expandedField,
+      smallInput,
+    });
   }
 
   public render() {
@@ -104,6 +108,7 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
       render,
       smallInput,
       disabledYear,
+      calculateWidth,
       ...restProps
     } = this.props;
     const appendedProps = this.getAppendedProps(this.props, editing);

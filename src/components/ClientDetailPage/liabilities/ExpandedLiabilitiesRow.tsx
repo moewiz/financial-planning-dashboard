@@ -51,7 +51,7 @@ const ExpandedLiabilitiesRow = (props: {
     <ExpandedAssetsGroups>
       <ExpandedAssetsInlineGroups>
         <ExpandedAssetsText>The deductibility of this ({get(LIABILITIES_TYPES, type)} Loan) is</ExpandedAssetsText>
-        <PrefixSingleGroup>
+        <PrefixSingleGroup percent={true}>
           <EditableCell
             record={record}
             dataIndex={'expandable.deductibility'}

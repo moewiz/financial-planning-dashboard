@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface PrefixProps {
   dollar?: boolean;
+  percent?: boolean;
 }
 export const PrefixGroup = styled.section<PrefixProps>`
   display: flex;
@@ -33,10 +34,9 @@ export const PrefixGroup = styled.section<PrefixProps>`
     /* margin: ${(props) => (props.dollar ? '0px 0px 0px -15px' : '0px 0px 0px 0px')}; */
     display: inline-block;
     background: transparent;
-    width: 65px;
-    text-align: center !important;
+    // width: 65px;
     font-weight: 600;
-    text-align: ${(props) => (props.dollar ? 'left!important' : 'right!important')};
+    // text-align: ${(props) => (props.dollar ? 'left!important' : 'right!important')};
   }
   &:hover {
     flex-basis: 145px;
@@ -79,7 +79,6 @@ export const PrefixChooseGroup = styled.div.attrs({
   }
 `;
 export const PrefixSingleGroup = styled.section<PrefixProps>`
-  width: 50px;
   position: relative;
   display: flex;
   align-items: center;
@@ -97,10 +96,15 @@ export const PrefixSingleGroup = styled.section<PrefixProps>`
   input {
     margin: 0px;
     font-weight: 700;
-    padding: ${(props) => (props.dollar ? '0px 0px 0px 15px' : '0px 15px 0px 0px')};
-    min-width: 35px;
-    max-width: 51px;
-    text-align: ${(props) => (props.dollar ? 'left' : 'center')};
+    ${(props) => {
+      let value = '0 5px';
+      if (props.dollar || props.percent) {
+        value = props.dollar ? '0px 5px 0px 15px' : '0px 15px 0px 5px';
+      }
+      return 'padding: ' + value;
+    }};
+    min-width: 40px;
+    text-align: left;
   }
 `;
 export const ExpandedAssetsGroups = styled.div.attrs({

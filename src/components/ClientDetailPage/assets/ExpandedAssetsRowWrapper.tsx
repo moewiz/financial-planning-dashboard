@@ -99,11 +99,11 @@ const ExpandedAssetsRow = (props: {
         <ExpandedAssetsBlock>
           <ExpandedAssetsInlineGroups>
             <ExpandedAssetsText>The value of this (Lifestyle Asset) will grow by</ExpandedAssetsText>
-            <PrefixSingleGroup>
+            <PrefixSingleGroup percent={true}>
               <EditableCell
                 record={record}
                 dataIndex={'expandable.growthRate'}
-                type={'text'}
+                type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
                 editable={true}
@@ -120,11 +120,11 @@ const ExpandedAssetsRow = (props: {
         <ExpandedAssetsGroups>
           <ExpandedAssetsInlineGroups>
             <ExpandedAssetsText>Rate terms of the (Direct Investment) are:</ExpandedAssetsText>
-            <PrefixSingleGroup>
+            <PrefixSingleGroup percent={true}>
               <EditableCell
                 record={record}
                 dataIndex={'expandable.growthRate'}
-                type={'text'}
+                type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
                 editable={true}
@@ -133,11 +133,11 @@ const ExpandedAssetsRow = (props: {
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
             <ExpandedAssetsText>annual growth,</ExpandedAssetsText>
-            <PrefixSingleGroup>
+            <PrefixSingleGroup percent={true}>
               <EditableCell
                 record={record}
                 dataIndex={'expandable.incomeGenerated'}
-                type={'text'}
+                type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
                 editable={true}
@@ -146,11 +146,11 @@ const ExpandedAssetsRow = (props: {
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
             <ExpandedAssetsText>annual income,</ExpandedAssetsText>
-            <PrefixSingleGroup>
+            <PrefixSingleGroup percent={true}>
               <EditableCell
                 record={record}
                 dataIndex={'expandable.frankedRate'}
-                type={'text'}
+                type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
                 editable={true}
@@ -167,7 +167,7 @@ const ExpandedAssetsRow = (props: {
               <EditableCell
                 record={record}
                 dataIndex={'expandable.costBase'}
-                type={'text'}
+                type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
                 editable={true}
@@ -209,11 +209,11 @@ const ExpandedAssetsRow = (props: {
 
           <ExpandedAssetsInlineGroups>
             <ExpandedAssetsText>The (Direct Investment) has product fees of</ExpandedAssetsText>
-            <PrefixSingleGroup>
+            <PrefixSingleGroup percent={true}>
               <EditableCell
                 record={record}
                 dataIndex={'expandable.productFees'}
-                type={'text'}
+                type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
                 editable={true}
@@ -235,19 +235,22 @@ const ExpandedAssetsRow = (props: {
                   expandedField={true}
                 />
               </PrefixChooseGroup>
-              <PrefixViewGroup>
-                <TypeDollarPrefix>$</TypeDollarPrefix>
+              <PrefixSingleGroup
+                percent={expandable.adviserFeeType !== 'dollar'}
+                dollar={expandable.adviserFeeType === 'dollar'}
+              >
+                {expandable.adviserFeeType === 'dollar' && <TypeDollarPrefix>$</TypeDollarPrefix>}
                 <EditableCell
                   record={record}
                   dataIndex={'expandable.adviserFeeValue'}
-                  type={'text'}
+                  type={'number'}
                   tableName={'assets'}
                   rowIndex={index}
                   editable={true}
                   expandedField={true}
                 />
-                <TypePercentPrefix>%</TypePercentPrefix>
-              </PrefixViewGroup>
+                {expandable.adviserFeeType !== 'dollar' && <TypePercentPrefix>%</TypePercentPrefix>}
+              </PrefixSingleGroup>
             </PrefixGroup>
           </ExpandedAssetsInlineGroups>
 
@@ -283,11 +286,11 @@ const ExpandedAssetsRow = (props: {
         <ExpandedAssetsGroups>
           <ExpandedAssetsInlineGroups>
             <ExpandedAssetsText>Rate terms of the (Super) are:</ExpandedAssetsText>
-            <PrefixSingleGroup>
+            <PrefixSingleGroup percent={true}>
               <EditableCell
                 record={record}
                 dataIndex={'expandable.growthRate'}
-                type={'text'}
+                type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
                 editable={true}
@@ -296,11 +299,11 @@ const ExpandedAssetsRow = (props: {
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
             <ExpandedAssetsText>annual growth,</ExpandedAssetsText>
-            <PrefixSingleGroup>
+            <PrefixSingleGroup percent={true}>
               <EditableCell
                 record={record}
                 dataIndex={'expandable.incomeGenerated'}
-                type={'text'}
+                type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
                 editable={true}
@@ -309,11 +312,11 @@ const ExpandedAssetsRow = (props: {
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
             <ExpandedAssetsText>annual income,</ExpandedAssetsText>
-            <PrefixSingleGroup>
+            <PrefixSingleGroup percent={true}>
               <EditableCell
                 record={record}
                 dataIndex={'expandable.frankedRate'}
-                type={'text'}
+                type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
                 editable={true}
@@ -330,7 +333,7 @@ const ExpandedAssetsRow = (props: {
               <EditableCell
                 record={record}
                 dataIndex={'expandable.taxableComponent'}
-                type={'text'}
+                type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
                 editable={true}
@@ -343,7 +346,7 @@ const ExpandedAssetsRow = (props: {
               <EditableCell
                 record={record}
                 dataIndex={'expandable.taxableComponent'}
-                type={'text'}
+                type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
                 editable={true}
@@ -383,11 +386,11 @@ const ExpandedAssetsRow = (props: {
 
           <ExpandedAssetsInlineGroups>
             <ExpandedAssetsText>The (Super) has product fees of</ExpandedAssetsText>
-            <PrefixSingleGroup>
+            <PrefixSingleGroup percent={true}>
               <EditableCell
                 record={record}
                 dataIndex={'expandable.productFees'}
-                type={'text'}
+                type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
                 editable={true}
@@ -416,7 +419,7 @@ const ExpandedAssetsRow = (props: {
                 <EditableCell
                   record={record}
                   dataIndex={'expandable.adviserFeeValue'}
-                  type={'text'}
+                  type={'number'}
                   tableName={'assets'}
                   rowIndex={index}
                   editable={true}
@@ -429,11 +432,11 @@ const ExpandedAssetsRow = (props: {
 
           <ExpandedAssetsInlineGroups>
             <ExpandedAssetsText>The (Super) has insurance cost of</ExpandedAssetsText>
-            <PrefixSingleGroup>
+            <PrefixSingleGroup percent={true}>
               <EditableCell
                 record={record}
-                dataIndex={'expandable.productFees'}
-                type={'text'}
+                dataIndex={'expandable.insuranceCost'}
+                type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
                 editable={true}
@@ -465,11 +468,11 @@ const ExpandedAssetsRow = (props: {
         <ExpandedAssetsGroups>
           <ExpandedAssetsInlineGroups>
             <ExpandedAssetsText>Rate terms of the (Pension) are:</ExpandedAssetsText>
-            <PrefixSingleGroup>
+            <PrefixSingleGroup percent={true}>
               <EditableCell
                 record={record}
                 dataIndex={'expandable.growthRate'}
-                type={'text'}
+                type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
                 editable={true}
@@ -478,11 +481,11 @@ const ExpandedAssetsRow = (props: {
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
             <ExpandedAssetsText>annual growth,</ExpandedAssetsText>
-            <PrefixSingleGroup>
+            <PrefixSingleGroup percent={true}>
               <EditableCell
                 record={record}
                 dataIndex={'expandable.incomeGenerated'}
-                type={'text'}
+                type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
                 editable={true}
@@ -491,11 +494,11 @@ const ExpandedAssetsRow = (props: {
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
             <ExpandedAssetsText>annual income,</ExpandedAssetsText>
-            <PrefixSingleGroup>
+            <PrefixSingleGroup percent={true}>
               <EditableCell
                 record={record}
                 dataIndex={'expandable.frankedRate'}
-                type={'text'}
+                type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
                 editable={true}
@@ -512,7 +515,7 @@ const ExpandedAssetsRow = (props: {
               <EditableCell
                 record={record}
                 dataIndex={'expandable.taxableComponent'}
-                type={'text'}
+                type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
                 editable={true}
@@ -525,7 +528,7 @@ const ExpandedAssetsRow = (props: {
               <EditableCell
                 record={record}
                 dataIndex={'expandable.taxableComponent'}
-                type={'text'}
+                type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
                 editable={true}
@@ -569,7 +572,7 @@ const ExpandedAssetsRow = (props: {
                   <EditableCell
                     record={record}
                     dataIndex={'expandable.deductibleAmount'}
-                    type={'text'}
+                    type={'number'}
                     tableName={'assets'}
                     rowIndex={index}
                     editable={true}
@@ -582,11 +585,11 @@ const ExpandedAssetsRow = (props: {
 
           <ExpandedAssetsInlineGroups>
             <ExpandedAssetsText>The (Pension) has product fees of</ExpandedAssetsText>
-            <PrefixSingleGroup>
+            <PrefixSingleGroup percent={true}>
               <EditableCell
                 record={record}
                 dataIndex={'expandable.productFees'}
-                type={'text'}
+                type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
                 editable={true}
@@ -615,7 +618,7 @@ const ExpandedAssetsRow = (props: {
                 <EditableCell
                   record={record}
                   dataIndex={'expandable.adviserFeeValue'}
-                  type={'text'}
+                  type={'number'}
                   tableName={'assets'}
                   rowIndex={index}
                   editable={true}
@@ -642,11 +645,11 @@ const ExpandedAssetsRow = (props: {
         <ExpandedAssetsGroups>
           <ExpandedAssetsInlineGroups>
             <ExpandedAssetsText>This (Property Asset) will grow by</ExpandedAssetsText>
-            <PrefixSingleGroup>
+            <PrefixSingleGroup percent={true}>
               <EditableCell
                 record={record}
                 dataIndex={'expandable.growthRate'}
-                type={'text'}
+                type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
                 editable={true}
@@ -663,7 +666,7 @@ const ExpandedAssetsRow = (props: {
               <EditableCell
                 record={record}
                 dataIndex={'expandable.costBase'}
-                type={'text'}
+                type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
                 editable={true}
@@ -678,7 +681,7 @@ const ExpandedAssetsRow = (props: {
               <EditableCell
                 record={record}
                 dataIndex={'expandable.rent'}
-                type={'text'}
+                type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
                 editable={true}
@@ -691,7 +694,7 @@ const ExpandedAssetsRow = (props: {
               <EditableCell
                 record={record}
                 dataIndex={'expandable.expenses'}
-                type={'text'}
+                type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
                 editable={true}
