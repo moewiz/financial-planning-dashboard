@@ -22,6 +22,7 @@ interface CoverDetailsProps {
   tableName: string;
   addRow: (index: number, tableName: string, row: any) => void;
   deleteRow: (index: number, tableName: string, key: number) => void;
+  dynamicCustomValue: object;
 }
 
 class CoverDetailsTable extends Component<CoverDetailsProps> {
@@ -98,7 +99,7 @@ class CoverDetailsTable extends Component<CoverDetailsProps> {
   }
 
   public render() {
-    const { data, index, tableName } = this.props;
+    const { data, index, tableName, dynamicCustomValue } = this.props;
     const columns = this.columns.map((col) => {
       const editable = col.key === 'operation' ? false : 'true';
 
@@ -137,6 +138,7 @@ class CoverDetailsTable extends Component<CoverDetailsProps> {
               expanded={expanded}
               insuranceIndex={index}
               coverDetails={data}
+              dynamicCustomValue={dynamicCustomValue}
             />
           )}
           pagination={false}

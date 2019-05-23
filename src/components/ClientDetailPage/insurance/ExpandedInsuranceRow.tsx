@@ -14,8 +14,9 @@ const ExpandedInsuranceRow = (props: {
   expanded: boolean;
   addRow: (index: number, tableName: string, row: any) => void;
   deleteRow: (index: number, tableName: string, key: number) => void;
+  dynamicCustomValue: object;
 }) => {
-  const { record, index, addRow, deleteRow } = props;
+  const { record, index, addRow, deleteRow, dynamicCustomValue } = props;
   const { coverDetails, premiumFeeDetails } = record;
 
   return (
@@ -26,6 +27,7 @@ const ExpandedInsuranceRow = (props: {
         tableName={'coverDetails'}
         addRow={addRow}
         deleteRow={deleteRow}
+        dynamicCustomValue={dynamicCustomValue}
       />
       <PremiumFeeDetailsTable
         data={premiumFeeDetails}

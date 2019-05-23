@@ -9,7 +9,6 @@ import {
   PrefixSingleGroup,
 } from '../assets/styled';
 import {
-  benefitDefaultAgeOptions,
   COVER_TYPE,
   incomeProtectionTypeOptions,
   standaloneLinkedOptions,
@@ -35,10 +34,15 @@ const ExpandedCoverDetailRow = (props: {
   indent: number;
   expanded: boolean;
   insuranceIndex: number;
+  dynamicCustomValue: {[key: string]: any};
 }) => {
-  const { record, index, insuranceIndex, coverDetails } = props;
+  const { record, index, insuranceIndex, coverDetails, dynamicCustomValue } = props;
   const { expandable, coverType } = record;
   const linkedProductOptions = loadLinkedProductOptions(coverDetails, record.key);
+  const benefitDefaultAgeOptions = [
+    { value: true, label: `to age ${dynamicCustomValue.benefitDefaultAge}` },
+    { value: false, label: 'to age' },
+  ];
 
   switch (COVER_TYPE[coverType]) {
     case COVER_TYPE.life:

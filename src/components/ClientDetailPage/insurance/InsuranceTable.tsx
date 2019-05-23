@@ -20,6 +20,7 @@ interface InsuranceTableProps {
   submitForm: () => void;
   addRow: (row: any) => void;
   deleteRow: (key: number) => void;
+  dynamicCustomValue: object;
 }
 
 class InsuranceTable extends PureComponent<InsuranceTableProps> {
@@ -146,7 +147,7 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
   }
 
   public render() {
-    const { loading, data, maritalState } = this.props;
+    const { loading, data, maritalState, dynamicCustomValue } = this.props;
     const columns = this.columns.map((col) => {
       const options = removePartnerOption(col, maritalState);
       const editable = col.editable === false ? false : 'true';
@@ -198,6 +199,7 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
               expanded={expanded}
               addRow={this.addRowInnerTable}
               deleteRow={this.removeRowInnerTable}
+              dynamicCustomValue={dynamicCustomValue}
             />
           )}
           className={`${this.tableName}-table`}

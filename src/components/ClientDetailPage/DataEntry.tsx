@@ -387,6 +387,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
                   deleteRow={deleteRow}
                   ref={this.insuranceForm}
                   maritalState={maritalState}
+                  dynamicCustomValue={dynamicCustomValue}
                 />
               </Form>
             );

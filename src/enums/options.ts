@@ -204,5 +204,3 @@ export const FREQUENCY = {
   monthly: 'Monthly',
 };
 export const frequencyOptions = mapOptionObjectToArray(FREQUENCY);
-
-export const benefitDefaultAgeOptions = [{ value: true, label: 'to age 65' }, { value: false, label: 'to age' }];
