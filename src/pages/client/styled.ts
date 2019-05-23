@@ -206,9 +206,18 @@ export const InnerTableContainer = styled.section`
   .ant-table-small {
     border: none;
     table {
-       margin-left: -32px;
+      margin-left: -20px;
+      .operation{
+        position: absolute;
+        .anticon-close-square{
+          position: absolute;
+          left: -16px;
+          top: 12px;
+        }
+      }
+       /* margin-left: -32px; */
        @media(max-width: 1369px){
-        margin-left: -21px;
+        /* margin-left: -21px; */
        }
      }
     & > .ant-table-content > .ant-table-body {
