@@ -116,7 +116,6 @@ export const indexationOptions = mapOptionObjectToArray(INDEXATION_OPTIONS);
 export const ASSET_TYPES: { [key: string]: string } = {
   lifestyle: 'Lifestyle',
   directInvestment: 'Direct Investment',
-  accountBased: 'Account Based',
   pension: 'Pension',
   super: 'Super',
   property: 'Property',

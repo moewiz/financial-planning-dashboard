@@ -15,6 +15,7 @@ import {
   ExpandedAssetsBlock,
   ExpandedSelectGroup,
 } from './styled';
+import { isOrNotOptions } from '../../../enums/options';
 
 export interface AssetProps {
   description: string;
@@ -29,26 +30,6 @@ export interface AssetProps {
   sgContribution?: object[];
   pensionIncome?: object[];
 }
-const reinvestOptions = [
-  {
-    value: true,
-    label: 'will',
-  },
-  {
-    value: false,
-    label: 'abc',
-  },
-];
-const isCentrelinkAssessableOptions = [
-  {
-    value: true,
-    label: 'is assessable',
-  },
-  {
-    value: false,
-    label: 'is not assessable',
-  },
-];
 const isDeemedOptions = [
   {
     value: true,
@@ -57,16 +38,6 @@ const isDeemedOptions = [
   {
     value: false,
     label: 'has a deductible',
-  },
-];
-const isCGTAssessableOptions = [
-  {
-    value: true,
-    label: 'is assessable',
-  },
-  {
-    value: false,
-    label: 'is not assessable',
   },
 ];
 const adviserFeeTypeOptions = [
@@ -181,13 +152,13 @@ const ExpandedAssetsRow = (props: {
                 dataIndex={'expandable.isCGTAssessable'}
                 type={'select'}
                 tableName={'assets'}
-                options={isCGTAssessableOptions}
+                options={isOrNotOptions}
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
               />
             </ExpandedSelectGroup>
-            <ExpandedAssetsText>for CGT</ExpandedAssetsText>
+            <ExpandedAssetsText>CGT assessable</ExpandedAssetsText>
           </ExpandedAssetsInlineGroups>
 
           <ExpandedAssetsInlineGroups>
@@ -198,13 +169,13 @@ const ExpandedAssetsRow = (props: {
                 dataIndex={'expandable.isCentrelinkAssessable'}
                 type={'select'}
                 tableName={'assets'}
-                options={isCentrelinkAssessableOptions}
+                options={isOrNotOptions}
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
               />
             </ExpandedSelectGroup>
-            <ExpandedAssetsText>by Centrelink</ExpandedAssetsText>
+            <ExpandedAssetsText>Centrelink assessable</ExpandedAssetsText>
           </ExpandedAssetsInlineGroups>
 
           <ExpandedAssetsInlineGroups>
@@ -262,13 +233,13 @@ const ExpandedAssetsRow = (props: {
                 dataIndex={'expandable.reinvest'}
                 type={'select'}
                 tableName={'assets'}
-                options={reinvestOptions}
+                options={isOrNotOptions}
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
               />
             </ExpandedSelectGroup>
-            <ExpandedAssetsText>be re-invested</ExpandedAssetsText>
+            <ExpandedAssetsText>reinvested</ExpandedAssetsText>
           </ExpandedAssetsInlineGroups>
           <ContributionWithdrawalsTable
             data={record.contributionWithdrawals || []}
@@ -360,16 +331,16 @@ const ExpandedAssetsRow = (props: {
             <ExpandedSelectGroup>
               <EditableCell
                 record={record}
-                dataIndex={'expandable.centrelink'}
+                dataIndex={'expandable.isCentrelinkAssessable'}
                 type={'select'}
                 tableName={'assets'}
-                options={isCentrelinkAssessableOptions}
+                options={isOrNotOptions}
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
               />
             </ExpandedSelectGroup>
-            <ExpandedAssetsText>by Centrelink</ExpandedAssetsText>
+            <ExpandedAssetsText>Centrelink assessable</ExpandedAssetsText>
             <ExpandedSelectGroup>
               <EditableCell
                 record={record}
@@ -545,13 +516,13 @@ const ExpandedAssetsRow = (props: {
                 dataIndex={'expandable.isCentrelinkAssessable'}
                 type={'select'}
                 tableName={'assets'}
-                options={isCentrelinkAssessableOptions}
+                options={isOrNotOptions}
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
               />
             </ExpandedSelectGroup>
-            <ExpandedAssetsText>by Centrelink and </ExpandedAssetsText>
+            <ExpandedAssetsText>Centrelink assessable and </ExpandedAssetsText>
             <ExpandedSelectGroup>
               <EditableCell
                 record={record}

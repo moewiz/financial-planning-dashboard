@@ -390,7 +390,7 @@
         "frankedRate": 13.26,
         "taxableComponent": 300000,
         "taxFreeComponent": 0,
-        "centrelink": false,
+        "isCentrelinkAssessable": false,
         "productFees": 0,
         "adviserFeeValue": 750.0,
         "adviserFeeType": "dollar",
