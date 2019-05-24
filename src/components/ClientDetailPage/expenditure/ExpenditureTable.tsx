@@ -11,11 +11,12 @@ import {
   indexationOptions,
   ownerWithJointOptions,
 } from '../../../enums/options';
-import { removePartnerOption } from '../../../utils/columnUtils';
+import { loadOptionsBaseOnCol } from '../../../utils/columnUtils';
 
 interface ExpenditureTableProps {
   data: object[];
   maritalState: string;
+  dynamicCustomValue: object;
   loading?: boolean;
 
   formProps?: FormikProps<any>;
@@ -157,9 +158,8 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps> {
   }
 
   public render() {
-    const { loading, data, maritalState } = this.props;
-    const columns = this.columns.map((col) => {
-      const options = removePartnerOption(col, maritalState);
+    const { loading, data, maritalState, dynamicCustomValue } = this.props;
+    const columns = this.columns.map((col: any) => {
       const editable = col.editable === false ? false : 'true';
       if (col.key === 'operation') {
         return {
@@ -177,17 +177,19 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps> {
 
       return {
         ...col,
-        options,
-        onCell: (record: any, rowIndex: number) => ({
-          ...col,
-          options,
-          rowIndex,
-          tableName: this.tableName,
-          type: col.type || 'text',
-          record,
-          editable,
-          handleSave: this.handleSave,
-        }),
+        onCell: (record: any, rowIndex: number) => {
+          const options = loadOptionsBaseOnCol(col, record, { maritalState, dynamicCustomValue });
+          return {
+            ...col,
+            options,
+            rowIndex,
+            tableName: this.tableName,
+            type: col.type || 'text',
+            record,
+            editable,
+            handleSave: this.handleSave,
+          };
+        },
       };
     });
 

@@ -58,6 +58,7 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
       dataIndex: 'interest',
       key: '4',
       width: '13%',
+      type: 'number',
     },
     {
       title: 'From',
