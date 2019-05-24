@@ -15,7 +15,15 @@ import {
   ExpandedAssetsBlock,
   ExpandedSelectGroup,
 } from './styled';
-import { isOrNotOptions } from '../../../enums/options';
+import {
+  CONTRIBUTION_WITHDRAWALS_TYPE,
+  contributionWithdrawalsTypeOptions,
+  from1Options,
+  isOrNotOptions,
+  MARITAL_STATE,
+  to1Options,
+  yesNoOptions,
+} from '../../../enums/options';
 
 export interface AssetProps {
   description: string;
@@ -50,6 +58,47 @@ const adviserFeeTypeOptions = [
     label: '%',
   },
 ];
+const defaultContributionWithdrawalColumns = [
+  {
+    key: 'operation',
+    editable: false,
+    width: 12,
+  },
+  {
+    title: 'Type',
+    dataIndex: 'type',
+    width: 140,
+    type: 'select',
+    options: contributionWithdrawalsTypeOptions,
+  },
+  {
+    title: 'Value',
+    dataIndex: 'value',
+    key: '1',
+    width: 120,
+    type: 'number',
+  },
+  {
+    title: 'From',
+    dataIndex: 'from',
+    key: '2',
+    width: 120,
+    type: 'date',
+    pickerType: 'custom',
+    options: from1Options,
+    className: 'table-expand-datepicker',
+  },
+  {
+    title: 'To',
+    dataIndex: 'to',
+    key: '3',
+    width: 120,
+    type: 'date',
+    pickerType: 'custom',
+    className: 'table-expand-datepicker',
+    options: to1Options,
+  },
+];
 
 const ExpandedAssetsRow = (props: {
   record: AssetProps;
@@ -63,6 +112,16 @@ const ExpandedAssetsRow = (props: {
 }) => {
   const { record, maritalState, index, addRow, deleteRow, dynamicCustomValue } = props;
   const { expandable, type } = record;
+  const contributionWithdrawalColumns = [...defaultContributionWithdrawalColumns];
+  if (MARITAL_STATE[maritalState] === MARITAL_STATE.single) {
+    const typeColumn = contributionWithdrawalColumns.find((column) => column.dataIndex === 'type');
+    if (typeColumn) {
+      typeColumn.options = contributionWithdrawalsTypeOptions.filter(
+        (contributionType) =>
+          CONTRIBUTION_WITHDRAWALS_TYPE[contributionType.value] !== CONTRIBUTION_WITHDRAWALS_TYPE.spouse,
+      );
+    }
+  }
 
   switch (type) {
     case 'lifestyle':
@@ -249,10 +308,21 @@ const ExpandedAssetsRow = (props: {
             maritalState={maritalState}
             addRow={addRow}
             deleteRow={deleteRow}
+            columns={contributionWithdrawalColumns}
           />
         </ExpandedAssetsGroups>
       );
     case 'super':
+      const superColumns = [
+        ...contributionWithdrawalColumns,
+        {
+          title: 'Increase to limit',
+          dataIndex: 'increaseToLimit',
+          width: 120,
+          type: 'select',
+          options: yesNoOptions,
+        },
+      ];
       return (
         <ExpandedAssetsGroups>
           <ExpandedAssetsInlineGroups>
@@ -417,7 +487,7 @@ const ExpandedAssetsRow = (props: {
             </PrefixSingleGroup>
           </ExpandedAssetsInlineGroups>
           <SGContributionTable
-            data={(record.sgContribution && [record.sgContribution]) || []}
+            data={(record.sgContribution && [{ key: 0, ...record.sgContribution }]) || []}
             index={index}
             tableName={'sgContribution'}
             titleTable={'SG Contribution'}
@@ -431,6 +501,7 @@ const ExpandedAssetsRow = (props: {
             maritalState={maritalState}
             addRow={addRow}
             deleteRow={deleteRow}
+            columns={superColumns}
           />
         </ExpandedAssetsGroups>
       );
@@ -608,6 +679,7 @@ const ExpandedAssetsRow = (props: {
             maritalState={maritalState}
             addRow={addRow}
             deleteRow={deleteRow}
+            columns={contributionWithdrawalColumns}
           />
         </ExpandedAssetsGroups>
       );

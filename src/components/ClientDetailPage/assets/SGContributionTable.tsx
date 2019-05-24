@@ -57,6 +57,7 @@ class SGContributionTable extends PureComponent<SGContributionTableProps, {}> {
             record,
             disableRowIndex: true,
             editable,
+            smallInput: true,
           };
         },
       };

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Icon, Popconfirm, Table } from 'antd';
+import {Icon, Popconfirm, Table} from 'antd';
 import { InnerTableContainer, HeaderTitleTable, TextTitle, DivideLine } from '../../../pages/client/styled';
 import { TweenOneGroup } from 'rc-tween-one';
-import { from1Options, to1Options } from '../../../enums/options';
 import { removePartnerOption } from '../../../utils/columnUtils';
 import EditableCell from './EditableCell';
 
 interface ContributionWithdrawalsTableProps {
+  columns: object[];
   maritalState: string;
   data: object[];
   index: number;
@@ -45,54 +45,6 @@ export const AnimTag = ($props: any) => {
 export const components = { body: { wrapper: AnimTag, cell: EditableCell } };
 
 class ContributionWithdrawalsTable extends Component<ContributionWithdrawalsTableProps, {}> {
-  public columns = [
-    {
-      title: '',
-      key: 'operation',
-      width: 12,
-      className: 'operation',
-      render: (text: any, record: any) => (
-        <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
-          <Icon type="close-square" theme="twoTone" style={{ fontSize: '16px' }} />
-        </Popconfirm>
-      ),
-    },
-    {
-      title: 'Type',
-      dataIndex: 'type',
-      width: 140,
-      type: 'select',
-      options: [{ value: 'contribution', label: 'Contribution' }, { value: 'withdrawals', label: 'Withdrawals' }],
-    },
-    {
-      title: 'Value',
-      dataIndex: 'value',
-      key: '1',
-      width: 120,
-      type: 'number',
-    },
-    {
-      title: 'From',
-      dataIndex: 'from',
-      key: '2',
-      width: 120,
-      type: 'date',
-      pickerType: 'custom',
-      options: from1Options,
-      className: 'table-expand-datepicker',
-    },
-    {
-      title: 'To',
-      dataIndex: 'to',
-      key: '3',
-      width: 120,
-      type: 'date',
-      pickerType: 'custom',
-      className: 'table-expand-datepicker',
-      options: to1Options,
-    },
-  ];
-
   public handleDelete = (key: number) => {
     const { index, tableName, deleteRow } = this.props;
     deleteRow(index, tableName, key);
@@ -117,8 +69,20 @@ class ContributionWithdrawalsTable extends Component<ContributionWithdrawalsTabl
   }
 
   public render(): React.ReactNode {
-    const { titleTable, data, maritalState, index, tableName } = this.props;
-    const columns = this.columns.map((col) => {
+    const { titleTable, data, maritalState, index, tableName, columns: columnsProps } = this.props;
+    const columns = columnsProps.map((col: any) => {
+      if (col.key === 'operation') {
+        return {
+          ...col,
+          title: '',
+          className: 'operation',
+          render: (text: any, record: any) => (
+            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+              <Icon type="close-square" theme="twoTone" style={{ fontSize: '16px' }} />
+            </Popconfirm>
+          ),
+        };
+      }
       const options = removePartnerOption(col, maritalState);
       const editable = col.key === 'operation' ? false : 'true';
 

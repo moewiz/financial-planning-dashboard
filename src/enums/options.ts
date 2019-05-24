@@ -10,7 +10,7 @@ function createRateOptions(step: number = 0.5, max: number = 10): object {
   return options;
 }
 
-export const MARITAL_STATE = {
+export const MARITAL_STATE: { [key: string]: string } = {
   married: 'Married',
   single: 'Single',
 };
@@ -203,3 +203,11 @@ export const FREQUENCY = {
   monthly: 'Monthly',
 };
 export const frequencyOptions = mapOptionObjectToArray(FREQUENCY);
+
+export const CONTRIBUTION_WITHDRAWALS_TYPE: { [key: string]: string } = {
+  salarySacrificePersonalDeductible: 'Salary Sacrifice / Personal Deductible Contributions',
+  pnc: 'Personal Non-Concessional Contributions',
+  spouse: 'Spouse Contributions',
+  lumpSum: 'Lump Sum Withdrawals',
+};
+export const contributionWithdrawalsTypeOptions = mapOptionObjectToArray(CONTRIBUTION_WITHDRAWALS_TYPE);
