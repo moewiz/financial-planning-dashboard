@@ -505,7 +505,8 @@ const ExpandedAssetsRow = (props: {
           />
         </ExpandedAssetsGroups>
       );
-    case 'pension':
+    case 'abp':
+    case 'ttr':
       return (
         <ExpandedAssetsGroups>
           <ExpandedAssetsInlineGroups>
