@@ -55,6 +55,7 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps> {
       dataIndex: 'value',
       key: '3',
       width: '13%',
+      type: 'number',
     },
     {
       title: 'Indexation',

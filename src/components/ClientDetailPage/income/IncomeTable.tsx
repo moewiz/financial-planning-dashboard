@@ -59,7 +59,7 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
       dataIndex: 'value',
       key: '3',
       width: '13%',
-      type: 'text',
+      type: 'number',
     },
     {
       title: 'Indexation',

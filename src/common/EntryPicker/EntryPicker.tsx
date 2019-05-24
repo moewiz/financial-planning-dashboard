@@ -214,10 +214,6 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
 
         return (
           <EntryPickerTable className={className}>
-            <div className="dropdown-value readOnly" onClick={!open ? this.openDatePicker : undefined}>
-              { yearValue && <span>{yearValue}</span> }
-              { type && <span>{get((options || []).find((option: Option) => option.value === type), 'label')}</span> }
-            </div>
             <DatePicker
               ref={this.myRef}
               {...props}
@@ -247,6 +243,10 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
               )}
               showToday={false}
             />
+            <div className="dropdown-value readOnly" onClick={!open ? this.openDatePicker : undefined}>
+              { yearValue && <span>{yearValue}</span> }
+              { type && <span>{get((options || []).find((option: Option) => option.value === type), 'label')}</span> }
+            </div>
           </EntryPickerTable>
         );
       }
