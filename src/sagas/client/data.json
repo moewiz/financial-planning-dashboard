@@ -228,8 +228,7 @@
     {
       "refId": 3,
       "description": "Pension",
-      "type": "pension",
-      "pensionType": "abp",
+      "type": "abp",
       "owner": "client",
       "value": 100000,
       "investment": "preservation",
@@ -300,8 +299,7 @@
     {
       "refId": 4,
       "description": "Pension_2",
-      "type": "pension",
-      "pensionType": "abp",
+      "type": "ttr",
       "owner": "client",
       "value": 30000.0,
       "investment": "preservation",
