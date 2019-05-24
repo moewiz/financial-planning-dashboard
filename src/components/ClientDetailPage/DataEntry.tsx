@@ -9,7 +9,7 @@ import InsuranceTable from './insurance/InsuranceTable';
 import { Form, Formik, FormikActions, FormikProps } from 'formik';
 import { connect } from 'react-redux';
 import { RootState, StandardAction } from '../../reducers/reducerTypes';
-import { find, map, isArray, pick } from 'lodash';
+import { find, map, isArray, pick, get } from 'lodash';
 import {
   Client,
   Tag,
@@ -92,10 +92,15 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
   }
 
   public componentDidUpdate(prevProps: Readonly<DataEntryProps>, prevState: Readonly<{}>, snapshot?: any): void {
-    const { clientId, tagName, tabName } = this.props;
+    const { clientId, tagName, tabName, loading, updateMaritalState, tables } = this.props;
 
     if (prevProps.clientId !== clientId || prevProps.tagName !== tagName || prevProps.tabName !== tabName) {
       this.fetchDataEntry({ clientId, tagName, tabName });
+    }
+
+    if (loading !== prevProps.loading && updateMaritalState) {
+      const maritalState = get(tables, 'basicInformation[0].maritalState');
+      updateMaritalState(maritalState);
     }
   }
 
