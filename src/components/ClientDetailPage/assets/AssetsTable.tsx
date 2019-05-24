@@ -120,6 +120,7 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
     const { addRow } = this.props;
     const newData = {
       key: Date.now(),
+      refId: Date.now(),
       description: 'Home',
       type: 'lifestyle',
       owner: 'client',

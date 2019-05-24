@@ -6,11 +6,11 @@ import ExpandedLiabilitiesRow, { LiabilityProps } from './ExpandedLiabilitiesRow
 import GeneralTable from '../GeneralTable';
 import { from1Options, to2Options, liabilitiesTypes, ownerOptions } from '../../../enums/options';
 import { removePartnerOption } from '../../../utils/columnUtils';
-import ExpandedAssetsRow from "../assets/ExpandedAssetsRowWrapper";
 
 interface LiabilitiesTableProps {
   data: object[];
   maritalState: string;
+  assets: Array<{ refId: number; description: string; type: string }>;
   loading?: boolean;
 
   setFieldValue: (field: string, value: any) => void;
@@ -184,7 +184,7 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
   }
 
   public render() {
-    const { loading, data, maritalState } = this.props;
+    const { loading, data, maritalState, assets } = this.props;
     const columns = this.columns.map((col) => {
       const options = removePartnerOption(col, maritalState);
       const editable = col.editable === false ? false : 'true';
@@ -235,6 +235,7 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
               indent={indent}
               expanded={expanded}
               maritalState={maritalState}
+              assets={assets}
               addRow={this.addRowInnerTable}
               deleteRow={this.removeRowInnerTable}
             />

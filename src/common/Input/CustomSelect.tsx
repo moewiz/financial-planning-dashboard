@@ -10,7 +10,6 @@ interface InputProps {
   value: any;
   defaultValue?: any;
   options: Array<{ value: any; label: string }>;
-  // onChange: FormikHandlers['handleChange'];
   onBlur: FormikHandlers['handleBlur'];
   placeholder?: string;
   prefix?: React.ReactNode;
@@ -83,9 +82,6 @@ class CustomSelect extends React.PureComponent<InputProps> {
 
   public render(): JSX.Element {
     const { placeholder, onBlur, options, ...props } = this.props;
-    if (props.name === 'insurance[0].coverDetails[4].expandable.waitingPeriodType') {
-      console.log('props', props);
-    }
 
     return (
       <InputWrapper>

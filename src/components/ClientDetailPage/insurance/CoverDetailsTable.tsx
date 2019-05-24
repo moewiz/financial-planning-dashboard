@@ -7,7 +7,7 @@ import ExpandedCoverDetailRow from './ExpandedCoverDetailRow';
 
 export interface CoverDetail {
   key: number;
-  refId?: string;
+  refId: number;
   coverType: string;
   policyOwner: string;
   benefitAmount: number;
@@ -85,6 +85,7 @@ class CoverDetailsTable extends Component<CoverDetailsProps> {
     const { index, tableName, addRow } = this.props;
     const newData = {
       key: Date.now(),
+      refId: Date.now(),
       coverType: 'life',
       policyOwner: 'superFund',
       benefitAmount: 200000.0,

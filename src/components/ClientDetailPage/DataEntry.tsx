@@ -19,6 +19,7 @@ import {
   Table,
   DataEntry,
   UpdateMaritalStateAction,
+  UpdateAssetsAction,
 } from '../../reducers/client';
 import { Button, Icon } from 'antd';
 import { ActionTableGeneral } from '../../pages/client/styled';
@@ -28,11 +29,13 @@ interface DataEntryProps {
   tagName: string;
   tabName: string;
   maritalState: string;
+  assets?: Array<{ refId: number; description: string; type: string }>;
 
   tables?: Table;
   loading?: boolean;
   fetchDataEntry?: (payload: FetchDataEntryPayload) => FetchDataEntryAction;
   updateMaritalState?: (maritalState: string) => UpdateMaritalStateAction;
+  updateAssets?: (assets: Array<{ refId: number; description: string; type: string }>) => UpdateAssetsAction;
 }
 
 interface DataEntryState {
@@ -92,15 +95,27 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
   }
 
   public componentDidUpdate(prevProps: Readonly<DataEntryProps>, prevState: Readonly<{}>, snapshot?: any): void {
-    const { clientId, tagName, tabName, loading, updateMaritalState, tables } = this.props;
+    const { clientId, tagName, tabName, loading, updateMaritalState, updateAssets, tables } = this.props;
 
     if (prevProps.clientId !== clientId || prevProps.tagName !== tagName || prevProps.tabName !== tabName) {
       this.fetchDataEntry({ clientId, tagName, tabName });
     }
 
-    if (loading !== prevProps.loading && updateMaritalState) {
+    if (loading !== prevProps.loading && updateMaritalState && updateAssets) {
       const maritalState = get(tables, 'basicInformation[0].maritalState');
+
       updateMaritalState(maritalState);
+      this.updateAssets();
+    }
+  }
+
+  public updateAssets = (assetsFormValue?: object[]) => {
+    const { tables, updateAssets } = this.props;
+    const assetsSource = assetsFormValue || get(tables, 'assets');
+    const assets = map(assetsSource, (asset: any) => pick(asset, ['refId', 'description', 'type']));
+
+    if (updateAssets) {
+      updateAssets(assets);
     }
   }
 
@@ -113,10 +128,11 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
   }
 
   public componentWillUnmount(): void {
-    const { updateMaritalState } = this.props;
+    const { updateMaritalState, updateAssets } = this.props;
     // update marital state in redux store
-    if (updateMaritalState) {
+    if (updateMaritalState && updateAssets) {
       updateMaritalState('');
+      updateAssets([]);
     }
   }
 
@@ -169,7 +185,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
   }
 
   public render() {
-    const { tables, loading, maritalState } = this.props;
+    const { tables, loading, maritalState, assets } = this.props;
     const dynamicCustomValue = pick(tables, ['inflationCPI', 'salaryInflation', 'sgcRate', 'benefitDefaultAge']);
 
     return (
@@ -294,15 +310,16 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
           enableReinitialize={true}
           render={(props: FormikProps<any>) => {
             const addRow = (row: any) => {
-              const assets = [...props.values.assets];
-              assets.unshift(row);
+              const assetsFormValue = [...props.values.assets];
+              assetsFormValue.unshift(row);
 
-              props.setFieldValue('assets', assets);
+              props.setFieldValue('assets', assetsFormValue);
+              this.updateAssets(assetsFormValue);
             };
             const deleteRow = (key: number) => {
-              const assets = props.values.assets.filter((asset: any) => asset.key !== key);
+              const assetsFormValue = props.values.assets.filter((asset: any) => asset.key !== key);
 
-              props.setFieldValue('assets', assets);
+              props.setFieldValue('assets', assetsFormValue);
             };
 
             return (
@@ -355,6 +372,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
                   deleteRow={deleteRow}
                   ref={this.liabilitiesForm}
                   maritalState={maritalState}
+                  assets={assets || []}
                 />
               </Form>
             );
@@ -416,6 +434,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
 const mapStateToProps = (state: RootState, ownProps: DataEntryProps) => {
   let tables;
   const clients = state.client.get('clients');
+  const assets = state.client.get('assets');
   const maritalState = state.client.get('maritalState');
   const loading = state.client.get('loading');
   const clientId = ownProps.clientId;
@@ -437,6 +456,7 @@ const mapStateToProps = (state: RootState, ownProps: DataEntryProps) => {
     tables,
     loading,
     maritalState,
+    assets,
   };
 };
 
@@ -445,6 +465,7 @@ const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>
     {
       fetchDataEntry: ClientActions.fetchDataEntry,
       updateMaritalState: ClientActions.updateMaritalState,
+      updateAssets: ClientActions.updateAssets,
     },
     dispatch,
   );

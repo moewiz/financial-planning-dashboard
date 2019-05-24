@@ -1,5 +1,5 @@
 import React from 'react';
-import { get } from 'lodash';
+import { get, map } from 'lodash';
 import DrawdownsTable from './DrawdownsTable';
 import {
   TypeDollarPrefix,
@@ -11,7 +11,7 @@ import {
   ExpandedAssetsText,
 } from '../assets/styled';
 import EditableCell from '../assets/EditableCell';
-import { LIABILITIES_TYPES, repaymentTypeOptions, waitingPeriodTypeOptions } from '../../../enums/options';
+import { ASSET_TYPES, LIABILITIES_TYPES, repaymentTypeOptions, waitingPeriodTypeOptions } from '../../../enums/options';
 
 export interface LiabilityProps {
   description: string;
@@ -26,11 +26,16 @@ const ExpandedLiabilitiesRow = (props: {
   indent: number;
   expanded: boolean;
   maritalState: string;
+  assets: Array<{ refId: number; description: string; type: string }>;
   addRow: (index: number, tableName: string, row: any) => void;
   deleteRow: (index: number, tableName: string, key: number) => void;
 }) => {
-  const { record, index, maritalState, addRow, deleteRow } = props;
+  const { record, index, maritalState, assets, addRow, deleteRow } = props;
   const { type } = record;
+  const directInvestmentsOptions = map(
+    assets.filter((asset) => ASSET_TYPES[asset.type] === ASSET_TYPES.directInvestment),
+    (asset) => ({ value: asset.refId, label: asset.description }),
+  );
 
   return (
     <ExpandedAssetsGroups>
@@ -119,10 +124,10 @@ const ExpandedLiabilitiesRow = (props: {
         <ExpandedSelectGroup>
           <EditableCell
             record={record}
-            dataIndex={'expandable.reinvest'}
+            dataIndex={'expandable.associatedAssetRefId'}
             type={'select'}
             tableName={'liabilities'}
-            options={repaymentTypeOptions}
+            options={directInvestmentsOptions}
             rowIndex={index}
             editable={true}
             expandedField={true}

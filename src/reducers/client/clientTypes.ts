@@ -33,6 +33,7 @@ export interface ClientState {
   loading?: boolean;
   error?: string;
   maritalState: string;
+  assets: Array<{ refId: number; description: string; type: string }>;
 
   [propsName: string]: any;
 }
@@ -59,6 +60,7 @@ export const defaultClientState: ClientState = {
       tagList: getDefaultTagList(),
     },
   ],
+  assets: [],
   maritalState: '',
   loading: false,
   error: '',
@@ -80,6 +82,7 @@ export enum ClientActionTypes {
   FETCH_DATA_ENTRY_SUCCESS = 'client/FETCH_DATA_ENTRY_SUCCESS',
   FETCH_DATA_ENTRY_FAILURE = 'client/FETCH_DATA_ENTRY_FAILURE',
   UPDATE_MARITAL_STATE = 'client/UPDATE_MARITAL_STATE',
+  UPDATE_ASSETS = 'client/UPDATE_ASSETS',
 }
 
 export interface FetchDataEntryPayload {
@@ -90,3 +93,7 @@ export interface FetchDataEntryPayload {
 
 export type FetchDataEntryAction = PayloadAction<ClientActionTypes.FETCH_DATA_ENTRY_REQUEST, FetchDataEntryPayload>;
 export type UpdateMaritalStateAction = PayloadAction<ClientActionTypes.UPDATE_MARITAL_STATE, string>;
+export type UpdateAssetsAction = PayloadAction<
+  ClientActionTypes.UPDATE_ASSETS,
+  Array<{ description: string; type: string; refId: number }>
+>;

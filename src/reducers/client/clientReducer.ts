@@ -25,6 +25,8 @@ export default class ClientReducer {
         return ClientReducer.fetchDataEntry(state, action);
       case ClientActionTypes.UPDATE_MARITAL_STATE:
         return ClientReducer.updateMaritalState(state, action);
+      case ClientActionTypes.UPDATE_ASSETS:
+        return ClientReducer.updateAssets(state, action);
       default:
         return state;
     }
@@ -92,5 +94,9 @@ export default class ClientReducer {
 
   private static updateMaritalState(state: ClientState, action: StandardAction<any>): ClientState {
     return state.set('maritalState', action.payload);
+  }
+
+  private static updateAssets(state: ClientState, action: StandardAction<any>): ClientState {
+    return state.set('assets', action.payload);
   }
 }

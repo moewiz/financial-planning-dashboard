@@ -93,7 +93,7 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
       ],
       coverDetails: [
         {
-          // refId: 0,
+          refId: 0,
           key: 0,
           coverType: 'life',
           policyOwner: 'superFund',

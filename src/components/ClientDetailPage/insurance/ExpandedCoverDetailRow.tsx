@@ -18,11 +18,11 @@ import {
 } from '../../../enums/options';
 import { CoverDetail } from './CoverDetailsTable';
 
-function loadLinkedProductOptions(coverDetails: CoverDetail[], key: number) {
+function loadLinkedProductOptions(coverDetails: CoverDetail[], refId: number) {
   return coverDetails
-    .filter((coverDetail: CoverDetail) => coverDetail.key !== key)
+    .filter((coverDetail: CoverDetail) => coverDetail.refId !== refId)
     .map((coverDetail) => ({
-      value: coverDetail.key,
+      value: coverDetail.refId,
       label: get(COVER_TYPE, coverDetail.coverType),
     }));
 }
@@ -38,7 +38,7 @@ const ExpandedCoverDetailRow = (props: {
 }) => {
   const { record, index, insuranceIndex, coverDetails, dynamicCustomValue } = props;
   const { expandable, coverType } = record;
-  const linkedProductOptions = loadLinkedProductOptions(coverDetails, record.key);
+  const linkedProductOptions = loadLinkedProductOptions(coverDetails, record.refId);
   const benefitDefaultAgeOptions = [
     { value: true, label: `to age ${dynamicCustomValue.benefitDefaultAge}` },
     { value: false, label: 'to age' },
