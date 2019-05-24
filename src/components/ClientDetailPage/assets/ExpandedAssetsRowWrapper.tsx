@@ -24,6 +24,7 @@ import {
   to1Options,
   yesNoOptions,
 } from '../../../enums/options';
+import PensionIncomeTable from './PensionIncomeTable';
 
 export interface AssetProps {
   description: string;
@@ -386,7 +387,7 @@ const ExpandedAssetsRow = (props: {
               <TypeDollarPrefix>$</TypeDollarPrefix>
               <EditableCell
                 record={record}
-                dataIndex={'expandable.taxableComponent'}
+                dataIndex={'expandable.taxFreeComponent'}
                 type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
@@ -570,7 +571,7 @@ const ExpandedAssetsRow = (props: {
               <TypeDollarPrefix>$</TypeDollarPrefix>
               <EditableCell
                 record={record}
-                dataIndex={'expandable.taxableComponent'}
+                dataIndex={'expandable.taxFreeComponent'}
                 type={'number'}
                 tableName={'assets'}
                 rowIndex={index}
@@ -672,7 +673,7 @@ const ExpandedAssetsRow = (props: {
             </PrefixGroup>
           </ExpandedAssetsInlineGroups>
 
-          <ContributionWithdrawalsTable
+          <PensionIncomeTable
             data={record.pensionIncome || []}
             index={index}
             titleTable={'Pension income'}
@@ -680,7 +681,6 @@ const ExpandedAssetsRow = (props: {
             maritalState={maritalState}
             addRow={addRow}
             deleteRow={deleteRow}
-            columns={contributionWithdrawalColumns}
           />
         </ExpandedAssetsGroups>
       );

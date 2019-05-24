@@ -129,7 +129,7 @@ export const INVESTMENT_TYPES = {
   preservation: 'Preservation',
   moderate: 'Moderate',
 };
-export const investmentTypes = mapOptionObjectToArray(INVESTMENT_TYPES);
+export const investmentTypeOptions = mapOptionObjectToArray(INVESTMENT_TYPES);
 
 export const LIABILITIES_TYPES = {
   nonDeductible: 'Non-Deductible',
@@ -212,6 +212,14 @@ export const CONTRIBUTION_WITHDRAWALS_TYPE: { [key: string]: string } = {
   lumpSum: 'Lump Sum Withdrawals',
 };
 export const contributionWithdrawalsTypeOptions = mapOptionObjectToArray(CONTRIBUTION_WITHDRAWALS_TYPE);
+
+export const PENSION_INCOME_TYPE: { [key: string]: string } = {
+  minimum: 'Minimum',
+  maximum: 'Maximum',
+  custom: 'Custom',
+  commute: 'Commute',
+};
+export const pensionIncomeTypeOptions = mapOptionObjectToArray(PENSION_INCOME_TYPE);
 
 export const REPAYMENT_TYPE = {
   principalInterest: 'Principal and Interest',

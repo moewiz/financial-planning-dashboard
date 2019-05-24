@@ -4,7 +4,7 @@ import { get, isFunction } from 'lodash';
 import { TableEntryContainer, HeaderTitleTable, TextTitle, ActionTableGeneral } from '../../../pages/client/styled';
 import ExpandedLiabilitiesRow, { LiabilityProps } from './ExpandedLiabilitiesRow';
 import GeneralTable from '../GeneralTable';
-import { from1Options, to2Options, liabilitiesTypes, ownerOptions } from '../../../enums/options';
+import { to2Options, liabilitiesTypes, ownerOptions, from2Options } from '../../../enums/options';
 import { removePartnerOption } from '../../../utils/columnUtils';
 
 interface LiabilitiesTableProps {
@@ -66,7 +66,7 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
       type: 'date',
       width: '13%',
       pickerType: 'custom',
-      options: from1Options,
+      options: from2Options,
       className: 'table-expand-datepicker',
     },
     {
