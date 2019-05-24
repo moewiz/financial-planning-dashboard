@@ -11,7 +11,7 @@ import {
   ExpandedAssetsText,
 } from '../assets/styled';
 import EditableCell from '../assets/EditableCell';
-import { LIABILITIES_TYPES, waitingPeriodTypeOptions } from '../../../enums/options';
+import { LIABILITIES_TYPES, repaymentTypeOptions, waitingPeriodTypeOptions } from '../../../enums/options';
 
 export interface LiabilityProps {
   description: string;
@@ -19,21 +19,6 @@ export interface LiabilityProps {
   expandable: object;
   drawdowns?: Array<{ value: number; from: object; to: object }>;
 }
-
-const repaymentTypeOptions = [
-  {
-    value: 'principalInterest',
-    label: 'Principal and Interest',
-  },
-  {
-    value: 'interest',
-    label: 'Interest Only',
-  },
-  {
-    value: 'interest',
-    label: 'Direct Investment',
-  },
-];
 
 const ExpandedLiabilitiesRow = (props: {
   record: LiabilityProps;

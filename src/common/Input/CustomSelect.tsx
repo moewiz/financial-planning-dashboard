@@ -8,6 +8,7 @@ const confirm = Modal.confirm;
 interface InputProps {
   name: string;
   value: any;
+  defaultValue?: any;
   options: Array<{ value: any; label: string }>;
   // onChange: FormikHandlers['handleChange'];
   onBlur: FormikHandlers['handleBlur'];
@@ -28,6 +29,13 @@ class CustomSelect extends React.PureComponent<InputProps> {
   public focusInput = () => {
     if (get(this.myRef, 'current.focus')) {
       this.myRef.current.focus();
+    }
+  }
+
+  public componentDidMount(): void {
+    const { value, defaultValue } = this.props;
+    if ((value === null || value === undefined) && defaultValue) {
+      this.handleChange(defaultValue);
     }
   }
 
@@ -75,15 +83,13 @@ class CustomSelect extends React.PureComponent<InputProps> {
 
   public render(): JSX.Element {
     const { placeholder, onBlur, options, ...props } = this.props;
+    if (props.name === 'insurance[0].coverDetails[4].expandable.waitingPeriodType') {
+      console.log('props', props);
+    }
 
     return (
       <InputWrapper>
-        <Select
-          {...props}
-          onSelect={this.handleSelect}
-          onBlur={this.handleBlur}
-          ref={this.myRef}
-        >
+        <Select {...props} onSelect={this.handleSelect} onBlur={this.handleBlur} ref={this.myRef}>
           {options &&
             options.length > 0 &&
             options.map((option) => (

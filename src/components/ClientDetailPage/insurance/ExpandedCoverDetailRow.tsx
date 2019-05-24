@@ -238,6 +238,7 @@ const ExpandedCoverDetailRow = (props: {
                 options={waitingPeriodTypeOptions}
                 editable={true}
                 expandedField={true}
+                defaultValue={'years'}
               />
             </ExpandedSelectGroup>
             <ExpandedAssetsText>and a benefit period of</ExpandedAssetsText>
