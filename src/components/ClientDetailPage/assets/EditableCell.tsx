@@ -65,7 +65,7 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
     if (fieldName && isFunction(handleSave)) {
       handleSave({ tableName, rowIndex, dataIndex, value, record });
     }
-    this.toggleEdit();
+    this.setState({ editing: false });
   }
 
   public getAppendedProps = (props: EditableProps, editing: boolean = false) => {
