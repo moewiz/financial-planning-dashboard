@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Icon, Popconfirm, Table} from 'antd';
+import { Icon, Popconfirm, Table } from 'antd';
 import { InnerTableContainer, HeaderTitleTable, TextTitle, DivideLine } from '../../../pages/client/styled';
 import { TweenOneGroup } from 'rc-tween-one';
 import { removePartnerOption } from '../../../utils/columnUtils';
@@ -42,7 +42,12 @@ export const AnimTag = ($props: any) => {
   return <TweenOneGroup component="tbody" enter={enterAnim} leave={leaveAnim} appear={false} exclusive {...$props} />;
 };
 
-export const components = { body: { wrapper: AnimTag, cell: EditableCell } };
+export const components = {
+  body: {
+    // wrapper: AnimTag,
+    cell: EditableCell,
+  },
+};
 
 class ContributionWithdrawalsTable extends Component<ContributionWithdrawalsTableProps, {}> {
   public handleDelete = (key: number) => {

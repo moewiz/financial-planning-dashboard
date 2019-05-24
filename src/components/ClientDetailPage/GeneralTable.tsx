@@ -38,7 +38,7 @@ function AnimTag($props: any) {
 }
 const components = {
   body: {
-    wrapper: AnimTag,
+    // wrapper: AnimTag,
     cell: EditableCell,
   },
 };
