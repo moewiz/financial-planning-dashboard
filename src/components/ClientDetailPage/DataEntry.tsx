@@ -320,6 +320,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
               const assetsFormValue = props.values.assets.filter((asset: any) => asset.key !== key);
 
               props.setFieldValue('assets', assetsFormValue);
+              this.updateAssets(assetsFormValue);
             };
 
             return (
@@ -335,6 +336,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
                   ref={this.assetsForm}
                   maritalState={maritalState}
                   dynamicCustomValue={dynamicCustomValue}
+                  updateAssets={this.updateAssets}
                 />
               </Form>
             );

@@ -42,10 +42,12 @@ class CustomSelect extends React.PureComponent<InputProps> {
     const { setFieldValue, name } = this.props;
 
     if (setFieldValue) {
-      // handle save editable cell
-      this.handleBlur(newValue.toString());
-
       setFieldValue(name, newValue);
+
+      setTimeout(() => {
+        // handle save editable cell
+        this.handleBlur(newValue.toString());
+      }, 0);
     }
   }
 

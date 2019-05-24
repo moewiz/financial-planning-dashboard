@@ -21,6 +21,7 @@ interface AssetsTableProps {
   submitForm: () => void;
   addRow: (row: any) => void;
   deleteRow: (key: number) => void;
+  updateAssets: (assets?: object[]) => void;
 }
 
 class AssetsTable extends PureComponent<AssetsTableProps> {
@@ -147,7 +148,13 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
     }
   }
 
-  public handleSave = (arg: { tableName: string; rowIndex: number; dataIndex: string; value: any; record: any }) => {};
+  public handleSave = (arg: { tableName: string; rowIndex: number; dataIndex: string; value: any; record: any }) => {
+    const { dataIndex } = arg;
+    if (dataIndex === 'type' || dataIndex === 'description') {
+      const { updateAssets, data } = this.props;
+      updateAssets(data);
+    }
+  }
 
   public handleResetForm = () => {
     const { resetForm } = this.props;
