@@ -5,7 +5,7 @@ function mapOptionObjectToArray(object: { [key: string]: any }) {
 function createRateOptions(step: number = 0.5, max: number = 10): object {
   const options: { [key: string]: any } = {};
   for (let i = 0; i <= max; i = i + step) {
-    options[`${i}%`] = `${i}%`;
+    options[`${i}`] = `${i}%`;
   }
   return options;
 }
@@ -116,7 +116,8 @@ export const indexationOptions = mapOptionObjectToArray(INDEXATION_OPTIONS);
 export const ASSET_TYPES: { [key: string]: string } = {
   lifestyle: 'Lifestyle',
   directInvestment: 'Direct Investment',
-  pension: 'Pension',
+  abp: 'Account Based Pension',
+  ttr: 'Transition to Retirement Pension',
   super: 'Super',
   property: 'Property',
 };
@@ -184,7 +185,7 @@ export const INCOME_PROTECTION_TYPE = {
 export const incomeProtectionTypeOptions = mapOptionObjectToArray(INCOME_PROTECTION_TYPE);
 
 export const WAITING_PERIOD_TYPE = {
-  days: 'days',
+  // days: 'days',
   months: 'months',
   years: 'years',
 };
@@ -211,3 +212,10 @@ export const CONTRIBUTION_WITHDRAWALS_TYPE: { [key: string]: string } = {
   lumpSum: 'Lump Sum Withdrawals',
 };
 export const contributionWithdrawalsTypeOptions = mapOptionObjectToArray(CONTRIBUTION_WITHDRAWALS_TYPE);
+
+export const REPAYMENT_TYPE = {
+  principalInterest: 'Principal and Interest',
+  interest: 'Interest Only',
+};
+
+export const repaymentTypeOptions = mapOptionObjectToArray(REPAYMENT_TYPE);
