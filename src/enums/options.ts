@@ -5,7 +5,7 @@ function mapOptionObjectToArray(object: { [key: string]: any }) {
 function createRateOptions(step: number = 0.5, max: number = 10): object {
   const options: { [key: string]: any } = {};
   for (let i = 0; i <= max; i = i + step) {
-    options[`${i}`] = `${i}%`;
+    options[`${i.toString()}`] = `${i}%`;
   }
   return options;
 }
