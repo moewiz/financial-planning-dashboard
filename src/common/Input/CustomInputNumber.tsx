@@ -43,12 +43,6 @@ class CustomInputNumber extends React.PureComponent<CustomInputNumberProps> {
     }
   }
 
-  // public formatter = (value: number | string | undefined): string => {
-  //   return numeral(value).format('0,0.00');
-  // }
-  // public parser = (displayValue: string | undefined): number => {
-  //   return numeral(displayValue).value();
-  // }
   public getOptionalProps = () => {
     const { value, calculateWidth, smallInput } = this.props;
     const optionalProps: { [key: string]: any } = {};
@@ -75,11 +69,12 @@ class CustomInputNumber extends React.PureComponent<CustomInputNumberProps> {
         <InputNumber
           {...props}
           onChange={this.handleChange}
+          onBlur={this.handleBlur}
           ref={this.myRef}
           formatter={(valueNumber) => `${valueNumber}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           // @ts-ignore
           parser={(displayValue) => displayValue.replace(/\$\s?|(,*)/g, '')}
-          onBlur={this.handleBlur}
+          precision={2}
           {...optionalProps}
         />
         {placeholder && <InputLabel>{placeholder}</InputLabel>}
