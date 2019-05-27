@@ -172,15 +172,19 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
     const columns = this.columns.map((col) => {
       return {
         ...col,
-        onCell: (record: any, rowIndex: number) => ({
-          ...col,
-          rowIndex,
-          tableName: this.tableName,
-          type: col.type || 'text',
-          record,
-          editable: 'true',
-          handleSave: this.handleSave,
-        }),
+        onCell: (record: any, rowIndex: number) => {
+          const editable = rowIndex === 1 && col.dataIndex === 'maritalState' ? false : 'true';
+
+          return {
+            ...col,
+            rowIndex,
+            tableName: this.tableName,
+            type: col.type || 'text',
+            record,
+            editable,
+            handleSave: this.handleSave,
+          };
+        },
       };
     });
 
