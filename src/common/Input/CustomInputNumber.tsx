@@ -74,7 +74,7 @@ class CustomInputNumber extends React.PureComponent<CustomInputNumberProps> {
           formatter={(valueNumber) => `${valueNumber}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           // @ts-ignore
           parser={(displayValue) => displayValue.replace(/\$\s?|(,*)/g, '')}
-          precision={2}
+          // precision={2}
           {...optionalProps}
         />
         {placeholder && <InputLabel>{placeholder}</InputLabel>}
