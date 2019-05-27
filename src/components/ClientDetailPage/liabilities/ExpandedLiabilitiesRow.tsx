@@ -45,11 +45,12 @@ const ExpandedLiabilitiesRow = (props: {
           <EditableCell
             record={record}
             dataIndex={'expandable.deductibility'}
-            type={'text'}
+            type={'number'}
             tableName={'liabilities'}
             rowIndex={index}
             editable={true}
             expandedField={true}
+            precision={1}
           />
           <TypePercentPrefix>%</TypePercentPrefix>
         </PrefixSingleGroup>
@@ -61,7 +62,7 @@ const ExpandedLiabilitiesRow = (props: {
           <EditableCell
             record={record}
             dataIndex={'expandable.repaymentAmount'}
-            type={'text'}
+            type={'number'}
             tableName={'liabilities'}
             rowIndex={index}
             editable={true}
@@ -86,11 +87,12 @@ const ExpandedLiabilitiesRow = (props: {
           <EditableCell
             record={record}
             dataIndex={'expandable.durationLength'}
-            type={'text'}
+            type={'number'}
             tableName={'liabilities'}
             rowIndex={index}
             editable={true}
             expandedField={true}
+            precision={0}
           />
         </PrefixSingleGroup>
         <ExpandedSelectGroup>
@@ -113,7 +115,7 @@ const ExpandedLiabilitiesRow = (props: {
           <EditableCell
             record={record}
             dataIndex={'expandable.creditLimit'}
-            type={'text'}
+            type={'number'}
             tableName={'liabilities'}
             rowIndex={index}
             editable={true}

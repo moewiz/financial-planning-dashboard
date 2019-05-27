@@ -139,6 +139,7 @@ const ExpandedAssetsRow = (props: {
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
+                precision={1}
               />
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
@@ -160,6 +161,7 @@ const ExpandedAssetsRow = (props: {
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
+                precision={1}
               />
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
@@ -173,6 +175,7 @@ const ExpandedAssetsRow = (props: {
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
+                precision={1}
               />
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
@@ -186,6 +189,7 @@ const ExpandedAssetsRow = (props: {
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
+                precision={1}
               />
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
@@ -249,6 +253,7 @@ const ExpandedAssetsRow = (props: {
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
+                precision={1}
               />
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
@@ -337,6 +342,7 @@ const ExpandedAssetsRow = (props: {
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
+                precision={1}
               />
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
@@ -350,6 +356,7 @@ const ExpandedAssetsRow = (props: {
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
+                precision={1}
               />
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
@@ -363,6 +370,7 @@ const ExpandedAssetsRow = (props: {
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
+                precision={1}
               />
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
@@ -437,6 +445,7 @@ const ExpandedAssetsRow = (props: {
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
+                precision={1}
               />
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
@@ -483,6 +492,7 @@ const ExpandedAssetsRow = (props: {
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
+                precision={1}
               />
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
@@ -521,6 +531,7 @@ const ExpandedAssetsRow = (props: {
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
+                precision={1}
               />
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
@@ -534,6 +545,7 @@ const ExpandedAssetsRow = (props: {
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
+                precision={1}
               />
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
@@ -547,6 +559,7 @@ const ExpandedAssetsRow = (props: {
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
+                precision={1}
               />
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
@@ -638,6 +651,7 @@ const ExpandedAssetsRow = (props: {
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
+                precision={1}
               />
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
@@ -698,6 +712,7 @@ const ExpandedAssetsRow = (props: {
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
+                precision={1}
               />
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
@@ -743,6 +758,7 @@ const ExpandedAssetsRow = (props: {
                 rowIndex={index}
                 editable={true}
                 expandedField={true}
+                precision={0}
               />
             </PrefixSingleGroup>
             <ExpandedAssetsText>per month</ExpandedAssetsText>

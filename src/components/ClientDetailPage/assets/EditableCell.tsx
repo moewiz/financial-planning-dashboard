@@ -13,6 +13,7 @@ interface EditableProps {
   handleSave?: (arg: object) => void;
   title?: string;
   editable?: boolean;
+  precision?: number;
   disableRowIndex?: boolean;
   tableName?: string;
   rowIndex?: number;
@@ -79,6 +80,7 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
       expandedField,
       calculateWidth,
       defaultValue,
+      precision,
     } = props;
     const appendProps = [];
 
@@ -89,6 +91,11 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
       }
       case 'date': {
         appendProps.push({ defaultOpen: editing, pickerType, options, disabledYear });
+        break;
+      }
+      case 'number': {
+        appendProps.push({ precision });
+        break;
       }
     }
 

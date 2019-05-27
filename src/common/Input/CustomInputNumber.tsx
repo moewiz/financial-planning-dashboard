@@ -1,7 +1,7 @@
 import React from 'react';
 import { InputWrapper, InputLabel } from './styled';
 import { InputNumber } from 'antd';
-import { get, isFunction } from 'lodash';
+import { get, isFunction, isNumber } from 'lodash';
 import { FormikHandlers } from 'formik';
 
 interface CustomInputNumberProps {
@@ -10,6 +10,7 @@ interface CustomInputNumberProps {
   setFieldValue?: (field: string, value: any) => void;
   placeholder?: string;
   autoFocus?: boolean;
+  precision?: number;
   calculateWidth?: boolean;
   smallInput?: boolean;
   ref?: React.RefObject<any>;
@@ -44,13 +45,18 @@ class CustomInputNumber extends React.PureComponent<CustomInputNumberProps> {
   }
 
   public getOptionalProps = () => {
-    const { value, calculateWidth, smallInput } = this.props;
+    const { value, calculateWidth, smallInput, precision: precisionProp } = this.props;
     const optionalProps: { [key: string]: any } = {};
     let valueLength = 1;
     if (calculateWidth) {
-      valueLength = value && value.toString().length ? value.toString().length + 1 : 1;
-      const numberSize = valueLength > 3 ? 14 : 15;
-      const width = valueLength * numberSize;
+      const intValue = Number.isNaN(Number.parseInt(value, 10)) ? 0 : Number.parseInt(value, 10);
+      valueLength = intValue.toString().length;
+      const precision = isNumber(precisionProp) && precisionProp >= 0 ? precisionProp : 2;
+      if (precision) {
+        valueLength += 1 + precision;
+      }
+      const numberSize = valueLength > 4 ? 12 : 15;
+      const width = valueLength * numberSize + 13;
       optionalProps.style = { width: `${width > 36 ? width : 36}px` };
     }
     if (smallInput) {
@@ -61,8 +67,9 @@ class CustomInputNumber extends React.PureComponent<CustomInputNumberProps> {
   }
 
   public render(): JSX.Element {
-    const { placeholder, setFieldValue, calculateWidth, ...props } = this.props;
+    const { placeholder, setFieldValue, calculateWidth, precision: precisionProp, ...props } = this.props;
     const optionalProps: { [key: string]: any } = this.getOptionalProps();
+    const precision = isNumber(precisionProp) && precisionProp >= 0 ? precisionProp : 2;
 
     return (
       <InputWrapper>
@@ -74,7 +81,7 @@ class CustomInputNumber extends React.PureComponent<CustomInputNumberProps> {
           formatter={(valueNumber) => `${valueNumber}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           // @ts-ignore
           parser={(displayValue) => displayValue.replace(/\$\s?|(,*)/g, '')}
-          // precision={2}
+          precision={precision}
           {...optionalProps}
         />
         {placeholder && <InputLabel>{placeholder}</InputLabel>}

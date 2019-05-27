@@ -59,6 +59,7 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
       key: '4',
       width: '13%',
       type: 'number',
+      precision: 1,
     },
     {
       title: 'From',
