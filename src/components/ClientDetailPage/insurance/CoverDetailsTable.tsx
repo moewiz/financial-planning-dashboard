@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { map } from 'lodash';
 import { Icon, Popconfirm, Table } from 'antd';
 import { InnerTableContainer, DivideLine, HeaderTitleTable, TextTitle } from '../../../pages/client/styled';
 import { components } from '../assets/ContributionWithdrawalsTable';
@@ -138,7 +139,7 @@ class CoverDetailsTable extends Component<CoverDetailsProps> {
           className={'cover-details-table'}
           dataSource={data}
           components={components}
-          defaultExpandAllRows={true}
+          expandedRowKeys={map(data, 'key')}
           expandedRowRender={(record: CoverDetail, expandedIndex: number, indent: number, expanded: boolean) => (
             <ExpandedCoverDetailRow
               record={record}

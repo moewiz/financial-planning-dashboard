@@ -20,6 +20,7 @@ import {
   contributionWithdrawalsTypeOptions,
   EMP_STATUS,
   from1Options,
+  INVESTMENT_TYPES,
   isOrNotOptions,
   MARITAL_STATE,
   to1Options,
@@ -30,6 +31,7 @@ import PensionIncomeTable from './PensionIncomeTable';
 export interface AssetProps {
   description: string;
   type: string;
+  investment: string;
   expandable: {
     riskProfile?: string;
     adviserFeeType?: string;
@@ -128,6 +130,10 @@ const ExpandedAssetsRow = (props: {
 
   switch (type) {
     case 'lifestyle':
+      if (INVESTMENT_TYPES[record.investment] !== INVESTMENT_TYPES.primaryResidence) {
+        return null;
+      }
+
       return (
         <ExpandedAssetsBlock>
           <ExpandedAssetsInlineGroups>
@@ -146,6 +152,35 @@ const ExpandedAssetsRow = (props: {
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
             <ExpandedAssetsText>each year</ExpandedAssetsText>
+          </ExpandedAssetsInlineGroups>
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>The (Lifestyle Asset) has a cost base of</ExpandedAssetsText>
+            <PrefixSingleGroup dollar={true}>
+              <TypeDollarPrefix>$</TypeDollarPrefix>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.costBase'}
+                type={'number'}
+                tableName={'assets'}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+            </PrefixSingleGroup>
+            <ExpandedAssetsText>and</ExpandedAssetsText>
+            <ExpandedSelectGroup>
+              <EditableCell
+                record={record}
+                dataIndex={'expandable.isCGTAssessable'}
+                type={'select'}
+                tableName={'assets'}
+                options={isOrNotOptions}
+                rowIndex={index}
+                editable={true}
+                expandedField={true}
+              />
+            </ExpandedSelectGroup>
+            <ExpandedAssetsText>CGT assessable</ExpandedAssetsText>
           </ExpandedAssetsInlineGroups>
         </ExpandedAssetsBlock>
       );

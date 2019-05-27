@@ -60,6 +60,12 @@ export const InputWrapper = styled.div`
       }
     }
   }
+  .ant-select-selection {
+    height: 35px;
+    &__rendered {
+      line-height: 35px;
+    }
+  }
 `;
 
 export const InputLogin = styled(Input)``;

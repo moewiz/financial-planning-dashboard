@@ -123,7 +123,7 @@ export const ASSET_TYPES: { [key: string]: string } = {
 };
 export const assetTypes = mapOptionObjectToArray(ASSET_TYPES);
 
-export const INVESTMENT_TYPES = {
+export const INVESTMENT_TYPES: { [key: string]: string } = {
   primaryResidence: 'Primary Residence',
   australianEquity: 'Australian Equity',
   preservation: 'Preservation',
