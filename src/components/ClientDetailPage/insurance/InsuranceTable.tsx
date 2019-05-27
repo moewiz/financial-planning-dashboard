@@ -200,6 +200,7 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
               addRow={this.addRowInnerTable}
               deleteRow={this.removeRowInnerTable}
               dynamicCustomValue={dynamicCustomValue}
+              maritalState={maritalState}
             />
           )}
           className={`${this.tableName}-table`}

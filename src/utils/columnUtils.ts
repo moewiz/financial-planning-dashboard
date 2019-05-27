@@ -1,4 +1,12 @@
-import { ASSET_TYPES, FROM_1, investmentTypeOptions, maritalStateOptions, OWNER } from '../enums/options';
+import {
+  ASSET_TYPES,
+  COVER_TYPE,
+  FROM_1,
+  investmentTypeOptions,
+  maritalStateOptions,
+  OWNER,
+  POLICY_OWNER,
+} from '../enums/options';
 
 export function addJointOption(
   col: { dataIndex: string },
@@ -34,6 +42,7 @@ export function removePartnerOption(
         result = result.filter((option: any) => option.label !== FROM_1.partnerRetirement);
         break;
       }
+      case 'policyOwner':
       case 'owner': {
         result = result.filter((option: any) => option.label !== OWNER.partner);
       }
@@ -98,9 +107,13 @@ function loadInvestmentOptions(record: { type: string }) {
   return investmentTypeOptions;
 }
 
+export function removeSuperFund(options: Array<{ value: any; label: any }>) {
+  return options.filter((option: any) => option.label !== POLICY_OWNER.superFund);
+}
+
 export function loadOptionsBaseOnCol(
   col: { dataIndex: string; options?: Array<{ value: any; label: any }> },
-  record: { type: string },
+  record: { type: string; coverType?: string },
   customValue: { maritalState?: string; dynamicCustomValue?: object },
 ) {
   const { maritalState, dynamicCustomValue } = customValue;
@@ -124,6 +137,14 @@ export function loadOptionsBaseOnCol(
     }
     if (col.dataIndex === 'investment' && record.type && options) {
       options = loadInvestmentOptions(record);
+    }
+    if (col.dataIndex === 'policyOwner' && options && record.coverType) {
+      if (
+        COVER_TYPE[record.coverType] === COVER_TYPE.trauma ||
+        COVER_TYPE[record.coverType] === COVER_TYPE.childTrauma
+      ) {
+        options = removeSuperFund(options);
+      }
     }
 
     return options;

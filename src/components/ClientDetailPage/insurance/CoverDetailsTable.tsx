@@ -4,6 +4,7 @@ import { InnerTableContainer, DivideLine, HeaderTitleTable, TextTitle } from '..
 import { components } from '../assets/ContributionWithdrawalsTable';
 import { coverTypeOptions, policyOwnerOptions, premiumTypeOptions } from '../../../enums/options';
 import ExpandedCoverDetailRow from './ExpandedCoverDetailRow';
+import { loadOptionsBaseOnCol } from '../../../utils/columnUtils';
 
 export interface CoverDetail {
   key: number;
@@ -23,6 +24,7 @@ interface CoverDetailsProps {
   addRow: (index: number, tableName: string, row: any) => void;
   deleteRow: (index: number, tableName: string, key: number) => void;
   dynamicCustomValue: object;
+  maritalState: string;
 }
 
 class CoverDetailsTable extends Component<CoverDetailsProps> {
@@ -100,22 +102,27 @@ class CoverDetailsTable extends Component<CoverDetailsProps> {
   }
 
   public render() {
-    const { data, index, tableName, dynamicCustomValue } = this.props;
-    const columns = this.columns.map((col) => {
+    const { data, index, tableName, dynamicCustomValue, maritalState } = this.props;
+    const columns = this.columns.map((col: any) => {
       const editable = col.key === 'operation' ? false : 'true';
 
       return {
         ...col,
         fixed: false,
-        onCell: (record: any, rowIndex: number) => ({
-          ...col,
-          rowIndex,
-          tableName: `insurance[${index}].${tableName}`,
-          type: col.type || 'text',
-          record,
-          editable,
-          smallInput: true,
-        }),
+        onCell: (record: any, rowIndex: number) => {
+          const options = loadOptionsBaseOnCol(col, record, { maritalState });
+
+          return {
+            ...col,
+            options,
+            rowIndex,
+            tableName: `insurance[${index}].${tableName}`,
+            type: col.type || 'text',
+            record,
+            editable,
+            smallInput: true,
+          };
+        },
       };
     });
 
