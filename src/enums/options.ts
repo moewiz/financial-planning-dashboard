@@ -35,7 +35,7 @@ export const OWNER_WITH_JOINT = {
 };
 export const ownerWithJointOptions = mapOptionObjectToArray(OWNER_WITH_JOINT);
 
-export const EMP_STATUS = {
+export const EMP_STATUS: { [key: string]: string } = {
   employed: 'Employed',
   selfEmployed: 'Self Employed',
   retired: 'Retired',

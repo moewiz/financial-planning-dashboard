@@ -33,6 +33,7 @@ export interface ClientState {
   loading?: boolean;
   error?: string;
   maritalState: string;
+  empStatus: string;
   assets: Array<{ refId: number; description: string; type: string }>;
 
   [propsName: string]: any;
@@ -62,6 +63,7 @@ export const defaultClientState: ClientState = {
   ],
   assets: [],
   maritalState: '',
+  empStatus: '',
   loading: false,
   error: '',
 };
@@ -75,13 +77,14 @@ export class ClientStateRecord extends Record(defaultClientState) implements Cli
 
 // Define action types
 export enum ClientActionTypes {
-  FETCH_CLIENT_REQUEST = 'client/FETCH_CLIENT_REQUEST',
-  FETCH_CLIENT_SUCCESS = 'client/FETCH_CLIENT_SUCCESS',
-  FETCH_CLIENT_FAILURE = 'client/FETCH_CLIENT_FAILURE',
+  FETCH_CLIENTS_REQUEST = 'client/FETCH_CLIENTS_REQUEST',
+  FETCH_CLIENTS_SUCCESS = 'client/FETCH_CLIENTS_SUCCESS',
+  FETCH_CLIENTS_FAILURE = 'client/FETCH_CLIENTS_FAILURE',
   FETCH_DATA_ENTRY_REQUEST = 'client/FETCH_DATA_ENTRY_REQUEST',
   FETCH_DATA_ENTRY_SUCCESS = 'client/FETCH_DATA_ENTRY_SUCCESS',
   FETCH_DATA_ENTRY_FAILURE = 'client/FETCH_DATA_ENTRY_FAILURE',
   UPDATE_MARITAL_STATE = 'client/UPDATE_MARITAL_STATE',
+  UPDATE_EMP_STATUS = 'client/UPDATE_EMP_STATUS',
   UPDATE_ASSETS = 'client/UPDATE_ASSETS',
 }
 
@@ -93,6 +96,7 @@ export interface FetchDataEntryPayload {
 
 export type FetchDataEntryAction = PayloadAction<ClientActionTypes.FETCH_DATA_ENTRY_REQUEST, FetchDataEntryPayload>;
 export type UpdateMaritalStateAction = PayloadAction<ClientActionTypes.UPDATE_MARITAL_STATE, string>;
+export type UpdateEmpStatus = PayloadAction<ClientActionTypes.UPDATE_EMP_STATUS, string>;
 export type UpdateAssetsAction = PayloadAction<
   ClientActionTypes.UPDATE_ASSETS,
   Array<{ description: string; type: string; refId: number }>

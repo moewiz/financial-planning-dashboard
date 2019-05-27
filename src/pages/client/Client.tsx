@@ -16,7 +16,7 @@ class Client extends React.PureComponent<RouteComponentProps> {
     const tabName = get(match, 'params.tabName');
 
     return tagName ? (
-      <DataEntryComponent clientId={clientId} tabName={tabName} tagName={tagName} />
+      <DataEntryComponent clientId={clientId} tabName={tabName} tagName={tagName} empStatus={''} />
     ) : (
       <HomePage select>
         <Content>

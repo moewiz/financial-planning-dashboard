@@ -12,6 +12,7 @@ interface AssetsTableProps {
   data: object[];
   maritalState: string;
   dynamicCustomValue: object;
+  empStatus: string;
   loading?: boolean;
 
   formProps?: FormikProps<any>;
@@ -165,8 +166,8 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
 
   public addRowInnerTable = (index: number, tableName: string, row: any) => {
     const { setFieldValue, data } = this.props;
-    const tableData = get(data[index], tableName);
-    tableData.unshift(row);
+    const tableData = get(data[index], tableName, []);
+    tableData.push(row);
 
     const newData: any = data;
     newData[index][tableName] = tableData;
@@ -185,7 +186,7 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
   }
 
   public render() {
-    const { loading, data, maritalState, dynamicCustomValue } = this.props;
+    const { loading, data, maritalState, dynamicCustomValue, empStatus } = this.props;
     const columns = this.columns.map((col: any) => {
       const editable = col.editable === false ? false : 'true';
       if (col.key === 'operation') {
@@ -242,6 +243,7 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
               addRow={this.addRowInnerTable}
               deleteRow={this.removeRowInnerTable}
               dynamicCustomValue={dynamicCustomValue}
+              empStatus={empStatus}
             />
           )}
           className={`${this.tableName}-table`}

@@ -18,6 +18,7 @@ import {
 import {
   CONTRIBUTION_WITHDRAWALS_TYPE,
   contributionWithdrawalsTypeOptions,
+  EMP_STATUS,
   from1Options,
   isOrNotOptions,
   MARITAL_STATE,
@@ -110,8 +111,9 @@ const ExpandedAssetsRow = (props: {
   addRow: (index: number, tableName: string, row: any) => void;
   deleteRow: (index: number, tableName: string, key: number) => void;
   dynamicCustomValue: object;
+  empStatus: string;
 }) => {
-  const { record, maritalState, index, addRow, deleteRow, dynamicCustomValue } = props;
+  const { record, maritalState, index, addRow, deleteRow, dynamicCustomValue, empStatus } = props;
   const { expandable, type } = record;
   const contributionWithdrawalColumns = [...defaultContributionWithdrawalColumns];
   if (MARITAL_STATE[maritalState] === MARITAL_STATE.single) {
@@ -497,13 +499,15 @@ const ExpandedAssetsRow = (props: {
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
           </ExpandedAssetsInlineGroups>
-          <SGContributionTable
-            data={(record.sgContribution && [{ key: 0, ...record.sgContribution }]) || []}
-            index={index}
-            tableName={'sgContribution'}
-            titleTable={'SG Contribution'}
-            dynamicCustomValue={dynamicCustomValue}
-          />
+          {EMP_STATUS[empStatus] === EMP_STATUS.employed && (
+            <SGContributionTable
+              data={(record.sgContribution && [{ key: 0, ...record.sgContribution }]) || []}
+              index={index}
+              tableName={'sgContribution'}
+              titleTable={'SG Contribution'}
+              dynamicCustomValue={dynamicCustomValue}
+            />
+          )}
           <ContributionWithdrawalsTable
             data={record.contributionWithdrawals || []}
             index={index}

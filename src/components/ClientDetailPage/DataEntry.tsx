@@ -20,6 +20,7 @@ import {
   DataEntry,
   UpdateMaritalStateAction,
   UpdateAssetsAction,
+  UpdateEmpStatus,
 } from '../../reducers/client';
 import { Button, Icon } from 'antd';
 import { ActionTableGeneral } from '../../pages/client/styled';
@@ -29,12 +30,14 @@ interface DataEntryProps {
   tagName: string;
   tabName: string;
   maritalState: string;
+  empStatus: string;
   assets?: Array<{ refId: number; description: string; type: string }>;
 
   tables?: Table;
   loading?: boolean;
   fetchDataEntry?: (payload: FetchDataEntryPayload) => FetchDataEntryAction;
   updateMaritalState?: (maritalState: string) => UpdateMaritalStateAction;
+  updateEmpStatus?: (empStatus: string) => UpdateEmpStatus;
   updateAssets?: (assets: Array<{ refId: number; description: string; type: string }>) => UpdateAssetsAction;
 }
 
@@ -95,16 +98,18 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
   }
 
   public componentDidUpdate(prevProps: Readonly<DataEntryProps>, prevState: Readonly<{}>, snapshot?: any): void {
-    const { clientId, tagName, tabName, loading, updateMaritalState, updateAssets, tables } = this.props;
+    const { clientId, tagName, tabName, loading, updateMaritalState, updateEmpStatus, tables } = this.props;
 
     if (prevProps.clientId !== clientId || prevProps.tagName !== tagName || prevProps.tabName !== tabName) {
       this.fetchDataEntry({ clientId, tagName, tabName });
     }
 
-    if (loading !== prevProps.loading && updateMaritalState && updateAssets) {
+    if (loading !== prevProps.loading && updateMaritalState && updateEmpStatus) {
       const maritalState = get(tables, 'basicInformation[0].maritalState');
+      const empStatus = get(tables, 'basicInformation[0].empStatus');
 
       updateMaritalState(maritalState);
+      updateEmpStatus(empStatus);
       this.updateAssets();
     }
   }
@@ -128,10 +133,12 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
   }
 
   public componentWillUnmount(): void {
-    const { updateMaritalState, updateAssets } = this.props;
-    // update marital state in redux store
-    if (updateMaritalState && updateAssets) {
+    const { updateMaritalState, updateEmpStatus, updateAssets } = this.props;
+
+    // update marital state, emp status, assets in redux store
+    if (updateMaritalState && updateEmpStatus && updateAssets) {
       updateMaritalState('');
+      updateEmpStatus('');
       updateAssets([]);
     }
   }
@@ -185,7 +192,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
   }
 
   public render() {
-    const { tables, loading, maritalState, assets } = this.props;
+    const { tables, loading, maritalState, assets, empStatus } = this.props;
     const dynamicCustomValue = pick(tables, ['inflationCPI', 'salaryInflation', 'sgcRate', 'benefitDefaultAge']);
 
     return (
@@ -236,7 +243,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
           render={(props: FormikProps<any>) => {
             const addRow = (row: any) => {
               const income = [...props.values.income];
-              income.unshift(row);
+              income.push(row);
 
               props.setFieldValue('income', income);
             };
@@ -274,7 +281,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
           render={(props: FormikProps<any>) => {
             const addRow = (row: any) => {
               const expenditure = [...props.values.expenditure];
-              expenditure.unshift(row);
+              expenditure.push(row);
 
               props.setFieldValue('expenditure', expenditure);
             };
@@ -312,7 +319,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
           render={(props: FormikProps<any>) => {
             const addRow = (row: any) => {
               const assetsFormValue = [...props.values.assets];
-              assetsFormValue.unshift(row);
+              assetsFormValue.push(row);
 
               props.setFieldValue('assets', assetsFormValue);
               this.updateAssets(assetsFormValue);
@@ -338,6 +345,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
                   maritalState={maritalState}
                   dynamicCustomValue={dynamicCustomValue}
                   updateAssets={this.updateAssets}
+                  empStatus={empStatus}
                 />
               </Form>
             );
@@ -353,7 +361,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
           render={(props: FormikProps<any>) => {
             const addRow = (row: any) => {
               const liabilities = [...props.values.liabilities];
-              liabilities.unshift(row);
+              liabilities.push(row);
 
               props.setFieldValue('liabilities', liabilities);
             };
@@ -391,7 +399,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
           render={(props: FormikProps<any>) => {
             const addRow = (row: any) => {
               const insurance = [...props.values.insurance];
-              insurance.unshift(row);
+              insurance.push(row);
 
               props.setFieldValue('insurance', insurance);
             };
@@ -439,6 +447,7 @@ const mapStateToProps = (state: RootState, ownProps: DataEntryProps) => {
   const clients = state.client.get('clients');
   const assets = state.client.get('assets');
   const maritalState = state.client.get('maritalState');
+  const empStatus = state.client.get('empStatus');
   const loading = state.client.get('loading');
   const clientId = ownProps.clientId;
   const tagName = ownProps.tagName;
@@ -460,6 +469,7 @@ const mapStateToProps = (state: RootState, ownProps: DataEntryProps) => {
     loading,
     maritalState,
     assets,
+    empStatus,
   };
 };
 
@@ -468,6 +478,7 @@ const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>
     {
       fetchDataEntry: ClientActions.fetchDataEntry,
       updateMaritalState: ClientActions.updateMaritalState,
+      updateEmpStatus: ClientActions.updateEmpStatus,
       updateAssets: ClientActions.updateAssets,
     },
     dispatch,
