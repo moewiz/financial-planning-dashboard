@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { get, map } from 'lodash';
+import { notification } from 'antd';
 import DrawdownsTable from './DrawdownsTable';
 import {
   TypeDollarPrefix,
@@ -11,13 +12,44 @@ import {
   ExpandedAssetsText,
 } from '../assets/styled';
 import EditableCell from '../assets/EditableCell';
-import { ASSET_TYPES, LIABILITIES_TYPES, repaymentTypeOptions, waitingPeriodTypeOptions } from '../../../enums/options';
+import {
+  ASSET_TYPES,
+  LIABILITIES_TYPES,
+  REPAYMENT_TYPE,
+  repaymentTypeOptions,
+  WAITING_PERIOD_TYPE,
+  waitingPeriodTypeOptions,
+} from '../../../enums/options';
 
 export interface LiabilityProps {
   description: string;
   type: string;
-  expandable: object;
+  value: number;
+  interest: number;
+  expandable: {
+    repaymentAmount: number;
+    repaymentType: string;
+    durationLength: number;
+    durationType: string;
+  };
   drawdowns?: Array<{ value: number; from: object; to: object }>;
+}
+
+function calculateMinimumRepaymentAmount(
+  repaymentType: string,
+  params: { value: number; interest: number; durationLength: number; durationType: string },
+) {
+  let PMT;
+  const { value, interest, durationLength, durationType } = params;
+  const n = WAITING_PERIOD_TYPE[durationType] === WAITING_PERIOD_TYPE.years ? durationLength : durationLength / 12;
+  const r = interest;
+  if (REPAYMENT_TYPE[repaymentType] === REPAYMENT_TYPE.interest) {
+    PMT = value * r;
+  } else {
+    PMT = value * r * (Math.pow(1 + r, n) / Math.pow(1 + r, n - 1));
+  }
+
+  return PMT;
 }
 
 const ExpandedLiabilitiesRow = (props: {
@@ -31,11 +63,46 @@ const ExpandedLiabilitiesRow = (props: {
   deleteRow: (index: number, tableName: string, key: number) => void;
 }) => {
   const { record, index, maritalState, assets, addRow, deleteRow } = props;
-  const { type } = record;
+  const {
+    type,
+    value,
+    interest,
+    expandable: { repaymentType, durationLength, durationType },
+  } = record;
   const directInvestmentsOptions = map(
     assets.filter((asset) => ASSET_TYPES[asset.type] === ASSET_TYPES.directInvestment),
     (asset) => ({ value: asset.refId, label: asset.description }),
   );
+  const [minimumRepaymentAmount, setMinimumRepaymentAmount] = useState(
+    calculateMinimumRepaymentAmount(repaymentType, { value, interest, durationLength, durationType }),
+  );
+  const handleBlur = (e: React.FocusEvent | number) => {
+    const minimum = calculateMinimumRepaymentAmount(repaymentType, {
+      value,
+      interest,
+      durationLength,
+      durationType,
+    });
+    setMinimumRepaymentAmount(minimum);
+
+    if (e < minimum) {
+      notification.error({
+        message: 'Error',
+        description: 'Specified repayment amount should be higher than the minimum',
+      });
+    }
+  };
+
+  // Update minimum repayment amount automatically
+  useEffect(() => {
+    const minimum = calculateMinimumRepaymentAmount(repaymentType, {
+      value,
+      interest,
+      durationLength,
+      durationType,
+    });
+    setMinimumRepaymentAmount(minimum);
+  });
 
   return (
     <ExpandedAssetsGroups>
@@ -67,6 +134,8 @@ const ExpandedLiabilitiesRow = (props: {
             rowIndex={index}
             editable={true}
             expandedField={true}
+            customMin={minimumRepaymentAmount}
+            handleBlur={handleBlur}
           />
         </PrefixSingleGroup>
         <ExpandedAssetsText>with repayment type of </ExpandedAssetsText>
@@ -93,6 +162,7 @@ const ExpandedLiabilitiesRow = (props: {
             editable={true}
             expandedField={true}
             precision={0}
+            min={1}
           />
         </PrefixSingleGroup>
         <ExpandedSelectGroup>

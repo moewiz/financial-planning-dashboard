@@ -184,7 +184,7 @@ export const INCOME_PROTECTION_TYPE = {
 };
 export const incomeProtectionTypeOptions = mapOptionObjectToArray(INCOME_PROTECTION_TYPE);
 
-export const WAITING_PERIOD_TYPE = {
+export const WAITING_PERIOD_TYPE: { [key: string]: string } = {
   // days: 'days',
   months: 'months',
   years: 'years',
@@ -221,7 +221,7 @@ export const PENSION_INCOME_TYPE: { [key: string]: string } = {
 };
 export const pensionIncomeTypeOptions = mapOptionObjectToArray(PENSION_INCOME_TYPE);
 
-export const REPAYMENT_TYPE = {
+export const REPAYMENT_TYPE: { [key: string]: string } = {
   principalInterest: 'Principal and Interest',
   interest: 'Interest Only',
 };
