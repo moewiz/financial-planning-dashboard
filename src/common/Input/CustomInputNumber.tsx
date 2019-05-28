@@ -11,6 +11,8 @@ interface CustomInputNumberProps {
   placeholder?: string;
   autoFocus?: boolean;
   precision?: number;
+  customMin?: number;
+  min?: number;
   calculateWidth?: boolean;
   smallInput?: boolean;
   ref?: React.RefObject<any>;
@@ -20,6 +22,19 @@ interface CustomInputNumberProps {
 
 class CustomInputNumber extends React.PureComponent<CustomInputNumberProps> {
   public readonly myRef = React.createRef<any>();
+
+  public componentDidUpdate(
+    prevProps: Readonly<CustomInputNumberProps>,
+    prevState: Readonly<{}>,
+    snapshot?: any,
+  ): void {
+    const { customMin, value } = this.props;
+    if (customMin !== prevProps.customMin) {
+      if (customMin && value < customMin) {
+        this.handleChange(customMin);
+      }
+    }
+  }
 
   public focusInput = () => {
     if (get(this.myRef, 'current.focus')) {
@@ -36,11 +51,16 @@ class CustomInputNumber extends React.PureComponent<CustomInputNumberProps> {
   }
 
   public handleBlur = (e: React.FocusEvent) => {
-    const { onBlur, handleBlur } = this.props;
+    const { onBlur, handleBlur, customMin, value } = this.props;
 
     onBlur(e);
+
     if (handleBlur && isFunction(handleBlur)) {
-      handleBlur(e);
+      handleBlur(value);
+    }
+
+    if (customMin && value < customMin) {
+      this.handleChange(customMin);
     }
   }
 
@@ -67,7 +87,7 @@ class CustomInputNumber extends React.PureComponent<CustomInputNumberProps> {
   }
 
   public render(): JSX.Element {
-    const { placeholder, setFieldValue, calculateWidth, precision: precisionProp, ...props } = this.props;
+    const { placeholder, setFieldValue, calculateWidth, precision: precisionProp, customMin, ...props } = this.props;
     const optionalProps: { [key: string]: any } = this.getOptionalProps();
     const precision = isNumber(precisionProp) && precisionProp >= 0 ? precisionProp : 2;
 

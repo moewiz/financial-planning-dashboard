@@ -11,6 +11,7 @@ interface EditableProps {
   record: any;
   dataIndex: string;
   handleSave?: (arg: object) => void;
+  handleBlur?: (e: React.FocusEvent) => void;
   title?: string;
   editable?: boolean;
   precision?: number;
@@ -28,6 +29,8 @@ interface EditableProps {
   disabledYear?: boolean;
   calculateWidth?: boolean;
   defaultValue?: any;
+  min?: number;
+  customMin?: number;
 }
 
 export default class EditableCell extends React.PureComponent<EditableProps> {
@@ -47,7 +50,7 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
   }
 
   public save = (e: any) => {
-    const { record, handleSave, rowIndex, tableName, dataIndex, ...props } = this.props;
+    const { record, handleSave, rowIndex, tableName, dataIndex, handleBlur, ...props } = this.props;
     const fieldName = `${tableName}[${rowIndex}].${dataIndex}`;
     let value;
 
@@ -66,6 +69,9 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
     if (fieldName && isFunction(handleSave)) {
       handleSave({ tableName, rowIndex, dataIndex, value, record });
     }
+    if (isFunction(handleBlur)) {
+      handleBlur(e);
+    }
     this.setState({ editing: false });
   }
 
@@ -81,6 +87,8 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
       calculateWidth,
       defaultValue,
       precision,
+      min,
+      customMin,
     } = props;
     const appendProps = [];
 
@@ -94,7 +102,7 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
         break;
       }
       case 'number': {
-        appendProps.push({ precision });
+        appendProps.push({ precision, min, customMin });
         break;
       }
     }
@@ -128,6 +136,8 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
       disabledYear,
       calculateWidth,
       defaultValue,
+      min,
+      customMin,
       ...restProps
     } = this.props;
     const appendedProps = this.getAppendedProps(this.props, editing);
