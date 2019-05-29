@@ -34,6 +34,7 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
       dataIndex: 'description',
       width: 'calc(15% - 20px)',
       type: 'text',
+      editable: false,
     },
     {
       title: 'First Name',
@@ -176,7 +177,8 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
       return {
         ...col,
         onCell: (record: any, rowIndex: number) => {
-          const editable = rowIndex === 1 && col.dataIndex === 'maritalState' ? false : 'true';
+          const editable =
+            col.editable === false ? false : rowIndex === 1 && col.dataIndex === 'maritalState' ? false : 'true';
 
           return {
             ...col,
