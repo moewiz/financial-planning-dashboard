@@ -67,17 +67,17 @@ class CustomInputNumber extends React.PureComponent<CustomInputNumberProps> {
   public getOptionalProps = () => {
     const { value, calculateWidth, smallInput, precision: precisionProp } = this.props;
     const optionalProps: { [key: string]: any } = {};
-    let valueLength = 1;
     if (calculateWidth) {
       const intValue = Number.isNaN(Number.parseInt(value, 10)) ? 0 : Number.parseInt(value, 10);
-      valueLength = intValue.toString().length;
+      let valueLength = intValue.toString().length;
       const precision = isNumber(precisionProp) && precisionProp >= 0 ? precisionProp : 2;
       if (precision) {
         valueLength += 1 + precision;
       }
-      const numberSize = valueLength > 4 ? 12 : 15;
-      const width = valueLength * numberSize + 13;
-      optionalProps.style = { width: `${width > 36 ? width : 36}px` };
+      const numberSize = valueLength < 6 ? 15 : 13;
+      // const numberSize = 14;
+      const width = valueLength * numberSize;
+      optionalProps.style = { width: `${width > 50 ? width : 50}px` };
     }
     if (smallInput) {
       optionalProps.size = 'small';
