@@ -53,14 +53,19 @@ class CustomSelect extends React.PureComponent<InputProps> {
 
   public handleSelect = (value: any) => {
     const { confirmTitle } = this.props;
-    if (confirmTitle && value === confirmTitle.fieldValue) {
-      confirm({
-        title: confirmTitle.title,
-        onOk: () => {
-          this.handleChange(value);
-        },
-        onCancel: () => {},
-      });
+    if (confirmTitle) {
+      const { fieldValue, ...confirmConfig } = confirmTitle;
+      if (fieldValue && value === fieldValue) {
+        confirm({
+          ...confirmConfig,
+          onOk: () => {
+            this.handleChange(value);
+          },
+          onCancel: () => {},
+        });
+      } else {
+        this.handleChange(value);
+      }
     } else {
       this.handleChange(value);
     }
