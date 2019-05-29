@@ -7,6 +7,7 @@ export const EntryPickerTable = styled.section`
   &.picker-year{
     width: 60px;
     input{
+      font-weight: 700;
       padding: 0px;
     }
   }
