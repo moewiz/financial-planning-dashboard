@@ -64,7 +64,7 @@ const ExpandedBasicInformationRow = (
                 expandedField={true}
               />
             </ExpandedSelectGroup>
-            <ExpandedAssetsText>have private health insurance</ExpandedAssetsText>
+            <ExpandedAssetsText>private health insurance</ExpandedAssetsText>
           </ExpandedAssetsInlineGroups>
 
           <ExpandedAssetsInlineGroups>
