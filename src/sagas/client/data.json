@@ -464,7 +464,7 @@
       "owner": "client",
       "value": 1250000.0,
       "type": "property",
-      "investment": "directInvestment",
+      "investment": "moderate",
       "from": {
         "type": "existing",
         "yearValue": null
