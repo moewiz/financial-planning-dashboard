@@ -163,6 +163,7 @@ const ExpandedLiabilitiesRow = (props: {
             expandedField={true}
             precision={0}
             min={1}
+            emptyIcon={true}
           />
         </PrefixSingleGroup>
         <ExpandedSelectGroup>

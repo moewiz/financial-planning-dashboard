@@ -104,7 +104,7 @@ export const PrefixSingleGroup = styled.section<PrefixProps>`
       }
       return 'padding: ' + value;
     }};
-    min-width: 40px;
+    min-width: 12px;
     text-align: left;
   }
 `;

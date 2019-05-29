@@ -28,6 +28,7 @@ interface EditableProps {
   smallInput?: boolean;
   disabledYear?: boolean;
   calculateWidth?: boolean;
+  emptyIcon?: boolean;
   defaultValue?: any;
   min?: number;
   customMin?: number;
@@ -87,6 +88,7 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
       calculateWidth,
       defaultValue,
       precision,
+      emptyIcon,
       min,
       customMin,
     } = props;
@@ -102,15 +104,19 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
         break;
       }
       case 'number': {
-        appendProps.push({ precision, min, customMin });
+        appendProps.push({
+          min,
+          customMin,
+          precision,
+          emptyIcon,
+          calculateWidth: calculateWidth || expandedField,
+          smallInput,
+        });
         break;
       }
     }
 
-    return reduce(appendProps, (accumulator, prop) => ({ ...accumulator, ...prop }), {
-      calculateWidth: calculateWidth || expandedField,
-      smallInput,
-    });
+    return reduce(appendProps, (accumulator, prop) => ({ ...accumulator, ...prop }), {});
   }
 
   public render() {
@@ -136,6 +142,7 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
       disabledYear,
       calculateWidth,
       defaultValue,
+      emptyIcon,
       min,
       customMin,
       ...restProps

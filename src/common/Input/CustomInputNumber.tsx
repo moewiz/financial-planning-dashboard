@@ -15,6 +15,7 @@ interface CustomInputNumberProps {
   min?: number;
   calculateWidth?: boolean;
   smallInput?: boolean;
+  emptyIcon?: boolean;
   ref?: React.RefObject<any>;
   onBlur: FormikHandlers['handleBlur'];
   handleBlur?: (e: React.FocusEvent) => void;
@@ -65,22 +66,36 @@ class CustomInputNumber extends React.PureComponent<CustomInputNumberProps> {
   }
 
   public getOptionalProps = () => {
-    const { value, calculateWidth, smallInput, precision: precisionProp } = this.props;
+    const { value, calculateWidth, precision: precisionProp, emptyIcon } = this.props;
     const optionalProps: { [key: string]: any } = {};
     if (calculateWidth) {
       const intValue = Number.isNaN(Number.parseInt(value, 10)) ? 0 : Number.parseInt(value, 10);
       let valueLength = intValue.toString().length;
       const precision = isNumber(precisionProp) && precisionProp >= 0 ? precisionProp : 2;
-      if (precision) {
-        valueLength += 1 + precision;
+      let extraWidth = 0;
+      let numberSize = 14;
+      let minimum = 24;
+      if (emptyIcon) {
+        numberSize = valueLength < 3 ? 17 : 16;
+        minimum = 24;
+      } else {
+        if (precision) {
+          valueLength += precision;
+          numberSize = valueLength < 5 ? 16 : 13;
+          extraWidth += 13 + (valueLength > 7 || valueLength === 4 ? -7 : 0);
+          extraWidth += valueLength === 5 ? 4 : 0;
+          minimum = 50;
+        } else {
+          numberSize = valueLength < 5 ? 18 : 16;
+          extraWidth = valueLength < 3 ? 8 : 0;
+          minimum = 34;
+        }
       }
-      const numberSize = valueLength < 6 ? 15 : 13;
-      // const numberSize = 14;
-      const width = valueLength * numberSize;
-      optionalProps.style = { width: `${width > 50 ? width : 50}px` };
-    }
-    if (smallInput) {
-      optionalProps.size = 'small';
+      const width = valueLength * numberSize + extraWidth;
+
+      optionalProps.style = {
+        width: `${width < minimum ? minimum : width}px`,
+      };
     }
 
     return optionalProps;
