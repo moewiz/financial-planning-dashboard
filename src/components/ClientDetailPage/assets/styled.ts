@@ -96,6 +96,7 @@ export const PrefixSingleGroup = styled.section<PrefixProps>`
   input {
     margin: -2px 0px 0px 0px;
     font-weight: 700;
+    padding: 0;
     ${(props) => {
       let value = '0 5px';
       if (props.dollar || props.percent) {
