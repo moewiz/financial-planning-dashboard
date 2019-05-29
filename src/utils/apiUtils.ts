@@ -83,6 +83,7 @@ ApiUtils.HTTP.interceptors.request.use((extendedConfig: RequestConfig) => {
       break;
     case ApiUtils.API_VERSION_1:
       endPoint = ApiUtils.BASE_URL + ApiUtils.API_VERSION_1;
+      break;
     default:
       endPoint = ApiUtils.BASE_URL + ApiUtils.API_VERSION_1;
       break;
