@@ -36,7 +36,7 @@ class CoverDetailsTable extends Component<CoverDetailsProps> {
       className: 'operation',
       width: 18,
       render: (text: any, record: any) => (
-        <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+        <Popconfirm title="Really delete?" onConfirm={() => this.handleDelete(record.key)}>
           <Icon type="close-square" theme="twoTone" style={{ fontSize: '16px' }} />
         </Popconfirm>
       ),

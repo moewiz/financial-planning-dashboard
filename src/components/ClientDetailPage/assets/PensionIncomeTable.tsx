@@ -89,7 +89,7 @@ class PensionIncomeTable extends Component<ContributionWithdrawalsTableProps, {}
           title: '',
           className: 'operation',
           render: (text: any, record: any) => (
-            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+            <Popconfirm title="Really delete?" onConfirm={() => this.handleDelete(record.key)}>
               <Icon type="close-square" theme="twoTone" style={{ fontSize: '16px' }} />
             </Popconfirm>
           ),

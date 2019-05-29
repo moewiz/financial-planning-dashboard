@@ -171,7 +171,7 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
           key: 'operation',
           width: '10%',
           render: (text: any, record: any) => (
-            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+            <Popconfirm title="Really delete?" onConfirm={() => this.handleDelete(record.key)}>
               <a href="javascript:">Delete</a>
             </Popconfirm>
           ),
