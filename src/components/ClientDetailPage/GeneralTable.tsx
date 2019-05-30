@@ -18,6 +18,10 @@ const enterAnim = [
     type: 'from',
     delay: 250,
     ease: 'easeOutQuad',
+    onComplete: (e: any) => {
+      const dom = e.target;
+      dom.style.height = 'auto';
+    },
   },
   {
     opacity: 1,
@@ -28,9 +32,9 @@ const enterAnim = [
   { delay: 1000, backgroundColor: '#fff' },
 ];
 const leaveAnim = [
-  { duration: 250, opacity: 0 },
-  { height: 0, duration: 200, ease: 'easeOutQuad' },
-  { delay: 100, display: 'none', backgroundColor: '#fff' },
+  { x: 0, duration: 0 },
+  { x: -30, opacity: 0, height: 0, duration: 200, ease: 'easeOutQuad' },
+  { delay: 200, display: 'none' },
 ];
 
 function AnimTag($props: any) {
