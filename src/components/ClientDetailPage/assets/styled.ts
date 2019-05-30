@@ -100,7 +100,7 @@ export const PrefixSingleGroup = styled.section<PrefixProps>`
     ${(props) => {
       let value = '0 5px';
       if (props.dollar || props.percent) {
-        value = props.dollar ? '0px 0px 0px 14px' : '0px 14px 0px 0px';
+        value = props.dollar ? '0px 0px 0px 14px' : '0px 14px 0px 5px';
       }
       return 'padding: ' + value;
     }};
