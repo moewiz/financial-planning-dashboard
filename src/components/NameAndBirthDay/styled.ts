@@ -13,7 +13,9 @@ export const ButtonModalFixed = styled(Button).attrs({
   width: 52px!important;
   height: 52px!important;;
   font-size: 19px;
-
+  position: fixed;
+  bottom: 47px;
+  right: 47px;
 `;
 export const TitleForm = styled.span`
     font-size: 22px;
