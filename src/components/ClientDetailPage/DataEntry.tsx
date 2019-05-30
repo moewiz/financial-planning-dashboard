@@ -243,7 +243,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
           render={(props: FormikProps<any>) => {
             const addRow = (row: any) => {
               const income = [...props.values.income];
-              income.push(row);
+              income.unshift(row);
 
               props.setFieldValue('income', income);
             };
@@ -281,7 +281,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
           render={(props: FormikProps<any>) => {
             const addRow = (row: any) => {
               const expenditure = [...props.values.expenditure];
-              expenditure.push(row);
+              expenditure.unshift(row);
 
               props.setFieldValue('expenditure', expenditure);
             };
@@ -319,7 +319,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
           render={(props: FormikProps<any>) => {
             const addRow = (row: any) => {
               const assetsFormValue = [...props.values.assets];
-              assetsFormValue.push(row);
+              assetsFormValue.unshift(row);
 
               props.setFieldValue('assets', assetsFormValue);
               this.updateAssets(assetsFormValue);
@@ -361,7 +361,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
           render={(props: FormikProps<any>) => {
             const addRow = (row: any) => {
               const liabilities = [...props.values.liabilities];
-              liabilities.push(row);
+              liabilities.unshift(row);
 
               props.setFieldValue('liabilities', liabilities);
             };
@@ -399,7 +399,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
           render={(props: FormikProps<any>) => {
             const addRow = (row: any) => {
               const insurance = [...props.values.insurance];
-              insurance.push(row);
+              insurance.unshift(row);
 
               props.setFieldValue('insurance', insurance);
             };

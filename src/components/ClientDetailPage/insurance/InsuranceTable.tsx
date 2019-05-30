@@ -128,7 +128,7 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
   public addRowInnerTable = (index: number, tableName: string, row: any) => {
     const { setFieldValue, data } = this.props;
     const tableData = get(data[index], tableName, []);
-    tableData.push(row);
+    tableData.unshift(row);
 
     const newData: any = data;
     newData[index][tableName] = tableData;
