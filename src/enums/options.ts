@@ -2,10 +2,10 @@ function mapOptionObjectToArray(object: { [key: string]: any }) {
   return Object.entries(object).map(([key, value]) => ({ value: key, label: value }));
 }
 
-function createRateOptions(step: number = 0.5, max: number = 10): object {
+function createRateOptions(step: number = 0.5, max: number = 10): { [key: string]: any } {
   const options: { [key: string]: any } = {};
-  for (let i = 0; i <= max; i = i + step) {
-    options[`${i.toString()}`] = `${i}%`;
+  for (let i = 0; i <= max; i += step) {
+    options[i.toString()] = `${i}%`;
   }
   return options;
 }

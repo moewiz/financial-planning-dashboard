@@ -13,7 +13,7 @@ export function addJointOption(
   record: { type: string },
   options: Array<{ value: any; label: any }>,
 ) {
-  const result = options;
+  const result = [...options];
   if (
     ASSET_TYPES[record.type] === ASSET_TYPES.lifestyle ||
     ASSET_TYPES[record.type] === ASSET_TYPES.directInvestment ||
@@ -34,7 +34,7 @@ export function removePartnerOption(
   maritalState: string,
   options?: Array<{ value: any; label: any }>,
 ) {
-  let result = options ? options : col.options;
+  let result = options ? [...options] : col && col.options ? [...col.options] : [];
   if (result && col.dataIndex) {
     switch (col.dataIndex) {
       case 'from':
@@ -53,16 +53,18 @@ export function removePartnerOption(
 }
 
 function addInflationOptions(options: any[], dynamicCustomValue: { [key: string]: any }) {
-  options.unshift(
+  const result = [...options];
+  result.unshift(
     { value: 'salaryInflation', label: `Salary Inflation (CPI) = ${dynamicCustomValue.salaryInflation}%` },
     { value: 'inflationCPI', label: `Inflation (CPI) = ${dynamicCustomValue.inflationCPI}%` },
   );
-  return options;
+  return result;
 }
 
 function addDefaultSgcRate(options: any[], dynamicCustomValue: { [key: string]: any }) {
-  options.unshift({ value: 'sgc', label: `Default SG rate = ${dynamicCustomValue.sgcRate}%` });
-  return options;
+  const result = [...options];
+  result.unshift({ value: 'sgc', label: `Default SG rate = ${dynamicCustomValue.sgcRate}%` });
+  return result;
 }
 
 function loadInvestmentOptions(record: { type: string }) {
@@ -108,7 +110,8 @@ function loadInvestmentOptions(record: { type: string }) {
 }
 
 export function removeSuperFund(options: Array<{ value: any; label: any }>) {
-  return options.filter((option: any) => option.label !== POLICY_OWNER.superFund);
+  const result = [...options];
+  return result.filter((option: any) => option.label !== POLICY_OWNER.superFund);
 }
 
 export function loadOptionsBaseOnCol(
