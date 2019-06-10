@@ -90,13 +90,17 @@ export default class AuthReducer {
           .set('error', '')
           .set('token', '')
           .set('refreshToken', '')
-          .set('expired', '');
+          .set('expired', '')
+          .set('fullName', '')
+          .set('avatarUrl', '');
 
       case AuthActionTypes.VERIFY_OTP_SUCCESS: {
         const userId = action.payload.userId;
         const token = action.payload.token;
         const expired = action.payload.expired;
         const refreshToken = action.payload.refreshToken;
+        const fullName = action.payload.fullName;
+        const avatarUrl = action.payload.avatarUrl;
 
         return state.merge(
           fromJS({
@@ -106,6 +110,8 @@ export default class AuthReducer {
             token,
             expired,
             refreshToken,
+            fullName,
+            avatarUrl,
           }),
         );
       }

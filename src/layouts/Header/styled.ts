@@ -29,4 +29,15 @@ export const TopSearch = styled.div`
 export const MenuItem = styled.div`
   display: flex;
   color: #515C83;
+  height: 100%;
+  align-items: center;
+  .ant-avatar {
+    margin-right: 10px;
+  }
+  .client-full-name {
+    font-size: 14px;
+    margin: 0;
+    height: 46px;
+    line-height: 46px;
+  }
 `;

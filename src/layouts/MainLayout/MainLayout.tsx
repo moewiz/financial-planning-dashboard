@@ -12,6 +12,8 @@ import { RootState } from '../../reducers/reducerTypes';
 
 interface MainLayoutProp {
   userId: string;
+  fullName: string;
+  avatarUrl: string;
   children: React.ReactNode;
 }
 
@@ -23,12 +25,13 @@ class MainLayout extends React.PureComponent<MainLayoutProp> {
   }
 
   public render(): React.ReactNode {
-    const { children } = this.props;
+    const { fullName, avatarUrl, children } = this.props;
+
     return (
       <LayoutMain>
         <Sidebar />
         <MainLayoutContent>
-          <Header />
+          <Header fullName={fullName} avatarUrl={avatarUrl} />
           <Content>{children}</Content>
         </MainLayoutContent>
       </LayoutMain>
@@ -38,6 +41,8 @@ class MainLayout extends React.PureComponent<MainLayoutProp> {
 
 const mapStateToProps = (state: RootState) => ({
   userId: state.auth.get('userId'),
+  fullName: state.auth.get('fullName'),
+  avatarUrl: state.auth.get('avatarUrl'),
 });
 
 export default connect(mapStateToProps)(MainLayout);

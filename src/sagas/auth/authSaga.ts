@@ -59,6 +59,8 @@ export default class AuthSaga {
             access_token: string;
             access_token_expires: number;
             refresh_token: string;
+            full_name: string;
+            avatar_url: string;
           };
         }
       > = yield call(AuthService.verifyOTP, otp);
@@ -67,12 +69,17 @@ export default class AuthSaga {
         const token = response.data.data.access_token;
         const expired = response.data.data.access_token_expires;
         const refreshToken = response.data.data.refresh_token;
+        const fullName = response.data.data.full_name;
+        const avatarUrl = response.data.data.avatar_url;
+
         yield put(
           AuthActions.verifyOTPCompleted({
             userId,
             token,
             expired,
             refreshToken,
+            fullName,
+            avatarUrl,
           }),
         );
       }

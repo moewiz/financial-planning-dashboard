@@ -11,6 +11,8 @@ export interface AuthState {
   token?: string;
   expired: number;
   refreshToken?: string;
+  fullName?: string;
+  avatarUrl?: string;
 
   [ propsName: string ]: any;
 }
@@ -24,6 +26,8 @@ export const defaultAuthState: AuthState = {
   token: '',
   expired: 0,
   refreshToken: '',
+  fullName: '',
+  avatarUrl: '',
 };
 
 export class AuthStateRecord extends Record(defaultAuthState) implements AuthState {
@@ -69,6 +73,8 @@ export interface TokenPayload {
   userId?: string;
   refreshToken?: string;
   expired?: number;
+  fullName?: string;
+  avatarUrl?: string;
 }
 
 export type CheckEmailAction = PayloadAction<AuthActionTypes.VERIFY_EMAIL_REQUEST, CheckEmailPayload>;

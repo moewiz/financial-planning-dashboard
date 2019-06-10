@@ -1,11 +1,19 @@
 import React from 'react';
 import { Layout, Icon, Avatar } from 'antd';
 import { InputSearch, TopSearch, TopMenu, MenuItem } from './styled';
+import { FullName } from '../Sidebar/styled';
 
 const AntHeader = Layout.Header;
 
-class Header extends React.PureComponent {
+interface HeaderProps {
+  fullName: string;
+  avatarUrl: string;
+}
+
+class Header extends React.PureComponent<HeaderProps> {
   public render(): JSX.Element {
+    const { fullName, avatarUrl } = this.props;
+
     return (
       <AntHeader className="header">
         <TopMenu className="topmenu">
@@ -16,7 +24,8 @@ class Header extends React.PureComponent {
             </TopSearch>
           </MenuItem>
           <MenuItem key="2">
-            <Avatar size={32} icon="user" />
+            <Avatar src={avatarUrl} size={32} icon="user" />
+            <FullName>{fullName}</FullName>
           </MenuItem>
         </TopMenu>
       </AntHeader>
