@@ -6,7 +6,7 @@ import ExpenditureTable from './expenditure/ExpenditureTable';
 import AssetsTable from './assets/AssetsTable';
 import LiabilitiesTable from './liabilities/LiabilitiesTable';
 import InsuranceTable from './insurance/InsuranceTable';
-import { Form, Formik, FormikActions, FormikProps } from 'formik';
+import {FieldArray, Form, Formik, FormikActions, FormikProps} from 'formik';
 import { connect } from 'react-redux';
 import { RootState, StandardAction } from '../../reducers/reducerTypes';
 import { find, map, isArray, pick, get } from 'lodash';
@@ -229,6 +229,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
                   deleteRow={deleteRow}
                   ref={this.basicInformationForm}
                 />
+                <FieldArray name={'basicInformation'} render={BasicInformationTable} />
               </Form>
             );
           }}

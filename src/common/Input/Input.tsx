@@ -1,11 +1,12 @@
 import React from 'react';
 import { InputWrapper, InputLogin, InputLabel } from './styled';
 import { FormikHandlers } from 'formik';
-import { get, isFunction } from 'lodash';
+import { get, isFunction, isEqual } from 'lodash';
 
 interface InputProps {
   name: string;
   value: any;
+  error?: any;
   onChange: FormikHandlers['handleChange'];
   onBlur: FormikHandlers['handleBlur'];
   placeholder?: string;
@@ -21,8 +22,15 @@ interface InputProps {
   onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>, value: any) => void;
 }
 
-class Input extends React.PureComponent<InputProps> {
+class Input extends React.Component<InputProps> {
   public readonly myRef = React.createRef<any>();
+
+  public shouldComponentUpdate(nextProps: InputProps) {
+    const { value, error } = this.props;
+    const { value: nextValue, error: nextError } = nextProps;
+
+    return !isEqual({ value, error }, { value: nextValue, error: nextError });
+  }
 
   public focusInput = () => {
     if (get(this.myRef, 'current.focus')) {

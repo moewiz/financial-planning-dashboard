@@ -159,6 +159,7 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
     } else {
       fieldName = `${tableName}[${rowIndex}].${dataIndex}`;
     }
+    console.log('EditableCell rendered, props', this.props)
 
     if (expandedField) {
       return editable ? (

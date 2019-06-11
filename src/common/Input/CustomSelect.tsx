@@ -1,13 +1,14 @@
 import React from 'react';
 import { InputWrapper, InputLabel } from './styled';
 import { FormikHandlers } from 'formik';
-import { get, isFunction, isBoolean, isNumber } from 'lodash';
+import { get, isFunction, isBoolean, isNumber, isEqual } from 'lodash';
 import { Select, Modal } from 'antd';
 const confirm = Modal.confirm;
 
 interface InputProps {
   name: string;
   value: any;
+  error?: any;
   defaultValue?: any;
   options: Array<{ value: any; label: string }>;
   onBlur: FormikHandlers['handleBlur'];
@@ -22,8 +23,15 @@ interface InputProps {
   confirmTitle?: { title: string; fieldValue: any };
 }
 
-class CustomSelect extends React.PureComponent<InputProps> {
+class CustomSelect extends React.Component<InputProps> {
   public readonly myRef = React.createRef<any>();
+
+  public shouldComponentUpdate(nextProps: InputProps) {
+    const { value, error } = this.props;
+    const { value: nextValue, error: nextError } = nextProps;
+
+    return !isEqual({ value, error }, { value: nextValue, error: nextError });
+  }
 
   public focusInput = () => {
     if (get(this.myRef, 'current.focus')) {

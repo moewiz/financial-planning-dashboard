@@ -192,6 +192,7 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
         },
       };
     });
+    console.log('BasicInformation table rendered, props', this.props);
 
     return (
       <TableEntryContainer>

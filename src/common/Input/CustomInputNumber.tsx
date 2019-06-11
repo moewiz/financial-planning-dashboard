@@ -1,12 +1,13 @@
 import React from 'react';
 import { InputWrapper, InputLabel } from './styled';
 import { InputNumber } from 'antd';
-import { get, isFunction, isNumber } from 'lodash';
+import { get, isFunction, isNumber, isEqual } from 'lodash';
 import { FormikHandlers } from 'formik';
 
 interface CustomInputNumberProps {
   name: string;
   value: any;
+  error?: any;
   setFieldValue?: (field: string, value: any) => void;
   placeholder?: string;
   sign?: string;
@@ -22,8 +23,16 @@ interface CustomInputNumberProps {
   handleBlur?: (e: React.FocusEvent) => void;
 }
 
-class CustomInputNumber extends React.PureComponent<CustomInputNumberProps> {
+class CustomInputNumber extends React.Component<CustomInputNumberProps> {
   public readonly myRef = React.createRef<any>();
+
+
+  public shouldComponentUpdate(nextProps: CustomInputNumberProps) {
+    const { value, error } = this.props;
+    const { value: nextValue, error: nextError } = nextProps;
+
+    return !isEqual({ value, error }, { value: nextValue, error: nextError });
+  }
 
   public componentDidUpdate(
     prevProps: Readonly<CustomInputNumberProps>,
