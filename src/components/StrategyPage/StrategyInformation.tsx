@@ -1,9 +1,7 @@
 import React, { PureComponent } from 'react';
-import { Icon } from 'antd';
-import { Line } from 'react-chartjs-2';
 import StatisticItem, { Statistic } from './StatisticItem';
-import { GraphCard, GraphTitle } from './styled';
 import { StrategyTypes } from '../../enums/strategies';
+import LineChart from './Graph/LineChart';
 import StandardText from './StandardText';
 import { StrategyInfoWrapper } from './styled';
 
@@ -18,13 +16,13 @@ const data = {
   labels: ['19', '20', '21', '22', '23', '24', '25'],
   datasets: [
     {
-      label: '',
+      label: 'a',
       fill: false,
       borderColor: '#FF5722',
       data: [165000, 159000, 120000, 165000, 235000, 120000, 140000],
     },
     {
-      label: '',
+      label: 'b',
       fill: false,
       borderColor: '#00BCD4',
       data: [85000, 45000, 70000, 65000, 100000, 150000, 135000],
@@ -55,20 +53,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
         return (
           <StrategyInfoWrapper>
             <StatisticItem {...statistic} title={'Accumulation balance'} subTitle={'At retirement'} />
-            <GraphCard>
-              <GraphTitle>
-                <Icon type="info-circle" theme="filled" />
-                Superannuation balance
-              </GraphTitle>
-              <Line
-                data={data}
-                options={{
-                  legend: {
-                    display: false,
-                  },
-                }}
-              />
-            </GraphCard>
+            <LineChart name="Superannuation balance" data={data} />
             <StandardText data={standardTextExample} />
           </StrategyInfoWrapper>
         );
@@ -77,20 +62,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
         return (
           <StrategyInfoWrapper>
             <StatisticItem {...statistic} title={'Average pension income'} subTitle={'Per annum paid until'} />
-            <GraphCard>
-              <GraphTitle>
-                <Icon type="info-circle" theme="filled" />
-                Superannuation balance
-              </GraphTitle>
-              <Line
-                data={data}
-                options={{
-                  legend: {
-                    display: false,
-                  },
-                }}
-              />
-            </GraphCard>
+            <LineChart name="Pension balance" data={data} />
             <StandardText data={standardTextExample} />
           </StrategyInfoWrapper>
         );
@@ -99,20 +71,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
         return (
           <StrategyInfoWrapper>
             <StatisticItem {...statistic} title={'Cash reserve'} subTitle={'At age'} />
-            <GraphCard>
-              <GraphTitle>
-                <Icon type="info-circle" theme="filled" />
-                Superannuation balance
-              </GraphTitle>
-              <Line
-                data={data}
-                options={{
-                  legend: {
-                    display: false,
-                  },
-                }}
-              />
-            </GraphCard>
+            <LineChart name="Investment (non-super) balance" data={data} />
             <StandardText data={standardTextExample} />
           </StrategyInfoWrapper>
         );
@@ -125,20 +84,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
               title={'Total interest cost'}
               subTitle={'non-deductible debt over loan period'}
             />
-            <GraphCard>
-              <GraphTitle>
-                <Icon type="info-circle" theme="filled" />
-                Superannuation balance
-              </GraphTitle>
-              <Line
-                data={data}
-                options={{
-                  legend: {
-                    display: false,
-                  },
-                }}
-              />
-            </GraphCard>
+            <LineChart name="Debt Value" data={data} />
             <StandardText data={standardTextExample} />
           </StrategyInfoWrapper>
         );
@@ -147,20 +93,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
         return (
           <StrategyInfoWrapper>
             <StatisticItem {...statistic} title={'Centrelink income'} />
-            <GraphCard>
-              <GraphTitle>
-                <Icon type="info-circle" theme="filled" />
-                Superannuation balance
-              </GraphTitle>
-              <Line
-                data={data}
-                options={{
-                  legend: {
-                    display: false,
-                  },
-                }}
-              />
-            </GraphCard>
+            <LineChart name="Centrelink income" data={data} />
             <StandardText data={standardTextExample} />
           </StrategyInfoWrapper>
         );

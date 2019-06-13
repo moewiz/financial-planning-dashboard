@@ -1,13 +1,12 @@
 import React from 'react';
-import { Line, Scatter } from 'react-chartjs-2';
-import { GraphCard, GraphTitle, StrategyHeaderWrapper } from './styled';
-import { Icon } from 'antd';
+import { StrategyHeaderWrapper } from './styled';
+import LineChart from './Graph/LineChart';
 
-const data = {
+const data1 = {
   labels: ['19', '20', '21', '22', '23', '24', '25'],
   datasets: [
     {
-      label: '',
+      label: 'a',
       fill: false,
       lineTension: 0.6,
       // backgroundColor: '#fff',
@@ -28,7 +27,7 @@ const data = {
       data: [30000, 200000, 80000, 155000, 166000, 220000, 380000],
     },
     {
-      label: '',
+      label: 'b',
       fill: false,
       lineTension: 0.6,
       // backgroundColor: '#fff',
@@ -49,7 +48,7 @@ const data = {
       data: [30000, 140000, 120000, 166000, 180000, 191000, 256000],
     },
     {
-      label: '',
+      label: 'c',
       fill: false,
       lineTension: 0.6,
       // backgroundColor: '#fff',
@@ -75,14 +74,14 @@ const data2 = {
   labels: ['19', '20', '21', '22', '23', '24', '25'],
   datasets: [
     {
-      label: '',
+      label: 'a',
       fill: false,
       borderColor: '#FF5722',
       steppedLine: true,
       data: [165000, 159000, 120000, 165000, 235000, 120000, 140000],
     },
     {
-      label: '',
+      label: 'b',
       fill: false,
       borderColor: '#00BCD4',
       steppedLine: true,
@@ -94,7 +93,7 @@ const data3 = {
   labels: ['19', '20', '21', '22', '23', '24', '25'],
   datasets: [
     {
-      label: '',
+      label: 'a',
       fill: false,
       lineTension: 0,
       borderColor: '#FF5722',
@@ -103,10 +102,11 @@ const data3 = {
   ],
 };
 
-const scatterData = {
+const data4 = {
+  labels: ['19', '20', '21', '22', '23', '24', '25'],
   datasets: [
     {
-      label: 'My First dataset',
+      label: 'a',
       type: 'bubble',
       fill: false,
       lineTension: 0.1,
@@ -120,32 +120,16 @@ const scatterData = {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: [
-        { x: 65, y: 75 },
-        { x: 59, y: 49 },
-        { x: 80, y: 90 },
-        { x: 81, y: 29 },
-        { x: 56, y: 36 },
-        { x: 55, y: 25 },
-        { x: 40, y: 18 },
-      ],
+      data: [65000, 59000, 80000, 91000, 135000, 120000, 140000],
     },
     {
-      label: '',
+      label: 'b',
       type: 'line',
       fill: false,
       borderColor: '#FF5722',
       backgroundColor: 'rgba(218,83,79, .7)',
       pointRadius: 0,
-      data: [
-        { x: 65, y: 75 },
-        { x: 59, y: 49 },
-        { x: 80, y: 90 },
-        { x: 81, y: 29 },
-        { x: 56, y: 36 },
-        { x: 55, y: 25 },
-        { x: 40, y: 18 },
-      ],
+      data: [65000, 59000, 80000, 91000, 135000, 120000, 140000],
     },
   ],
 };
@@ -153,70 +137,10 @@ const scatterData = {
 const StrategyHeader = () => {
   return (
     <StrategyHeaderWrapper>
-      <GraphCard>
-        <GraphTitle>
-          <Icon type="info-circle" theme="filled" />
-          Name 1
-        </GraphTitle>
-        <Line
-          data={data}
-          options={{
-            legend: {
-              display: false,
-            },
-          }}
-        />
-      </GraphCard>
-      <GraphCard>
-        <GraphTitle>
-          <Icon type="info-circle" theme="filled" />
-          Name 2
-        </GraphTitle>
-        <Line
-          data={data2}
-          options={{
-            legend: {
-              display: false,
-            },
-          }}
-        />
-      </GraphCard>
-      <GraphCard>
-        <GraphTitle>
-          <Icon type="info-circle" theme="filled" />
-          Name 3
-        </GraphTitle>
-        <Line
-          data={data3}
-          options={{
-            legend: {
-              display: false,
-            },
-          }}
-        />
-      </GraphCard>
-      <GraphCard>
-        <GraphTitle>
-          <Icon type="info-circle" theme="filled" />
-          Name 4
-        </GraphTitle>
-        <Scatter
-          data={scatterData}
-          options={{
-            legend: {
-              display: false,
-            },
-            scales: {
-              xAxes: [
-                {
-                  type: 'linear',
-                  position: 'bottom',
-                },
-              ],
-            },
-          }}
-        />
-      </GraphCard>
+      <LineChart name="Name 1" data={data1} />
+      <LineChart name="Name 2" data={data2} />
+      <LineChart name="Name 3" data={data3} />
+      <LineChart name="Name 4" data={data4} />
     </StrategyHeaderWrapper>
   );
 };
