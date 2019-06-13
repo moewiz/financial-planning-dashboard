@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
+import { get } from 'lodash';
 import StatisticItem, { Statistic } from './StatisticItem';
 import { StrategyTypes } from '../../enums/strategies';
 import LineChart from './Graph/LineChart';
+import AreaChart from './Graph/AreaChart';
 import StandardText from './StandardText';
 import { StrategyInfoWrapper } from './styled';
 
@@ -29,6 +31,29 @@ const data = {
     },
   ],
 };
+const colors = {
+  grey: {
+    fill: '#f1f1f1',
+    stoke: '#d0d0d0',
+  },
+  green: {
+    fill: '#e0eadf',
+    stroke: '#5eb84d',
+  },
+  lightBlue: {
+    fill: '#6fccdd',
+    stroke: '#6fccdd',
+  },
+  darkBlue: {
+    fill: '#3282bf',
+    stroke: '#3282bf',
+  },
+  purple: {
+    fill: '#8fa8c8',
+    stroke: '#75539e',
+  },
+};
+const superannuationChartColors = [colors.lightBlue, colors.darkBlue, colors.grey];
 
 class StrategyInformation extends PureComponent<StrategyInformationProps> {
   public render() {
@@ -50,10 +75,30 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
 
     switch (type) {
       case StrategyTypes.Superannuation: {
+        const datasets = [
+          ...data.datasets,
+          {
+            label: 'c',
+            fill: true,
+            borderColor: '#00BCD4',
+            data: [70000, 45000, 45000, 150000, 100000, 35000, 65000],
+          },
+        ];
+        const areaData = {
+          ...data,
+          datasets: datasets.map((dataset, index) => ({
+            ...dataset,
+            fill: true,
+            borderColor: '',
+            pointRadius: 0,
+            backgroundColor: get(superannuationChartColors[index], 'fill'),
+          })),
+        };
+
         return (
           <StrategyInfoWrapper>
             <StatisticItem {...statistic} title={'Accumulation balance'} subTitle={'At retirement'} />
-            <LineChart name="Superannuation balance" data={data} />
+            <AreaChart name="Superannuation balance" data={areaData} />
             <StandardText data={standardTextExample} />
           </StrategyInfoWrapper>
         );

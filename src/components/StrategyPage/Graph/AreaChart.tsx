@@ -27,6 +27,13 @@ const AreaChart = (props: GraphProps) => {
           legend: {
             display: false,
           },
+          scales: {
+            yAxes: [
+              {
+                stacked: true,
+              },
+            ],
+          },
         }}
       />
     </GraphCard>
