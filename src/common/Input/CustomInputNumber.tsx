@@ -19,7 +19,7 @@ interface CustomInputNumberProps {
   smallInput?: boolean;
   emptyIcon?: boolean;
   ref?: React.RefObject<any>;
-  onBlur: FormikHandlers['handleBlur'];
+  setFieldTouched: (field: string, isTouched?: boolean | undefined) => void;
   handleBlur?: (e: React.FocusEvent) => void;
 }
 
@@ -62,12 +62,12 @@ class CustomInputNumber extends React.Component<CustomInputNumberProps> {
   }
 
   public handleBlur = (e: React.FocusEvent) => {
-    const { onBlur, handleBlur, customMin, value } = this.props;
+    const { setFieldTouched, handleBlur, customMin, value, name } = this.props;
 
-    onBlur(e);
+    setFieldTouched(name);
 
     if (handleBlur && isFunction(handleBlur)) {
-      handleBlur(value);
+      handleBlur(name);
     }
 
     if (customMin && value < customMin) {

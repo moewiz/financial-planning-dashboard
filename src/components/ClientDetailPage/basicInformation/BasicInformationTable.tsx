@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
-import { Button, Icon } from 'antd';
+import { Icon } from 'antd';
 import ExpandedBasicInformationRow from './ExpandedBasicInformationRow';
-import { ActionTableGeneral, HeaderTitleTable, TableEntryContainer, TextTitle } from '../../../pages/client/styled';
+import { HeaderTitleTable, TableEntryContainer, TextTitle } from '../../../pages/client/styled';
 import GeneralTable from '../GeneralTable';
-import { FormikProps } from 'formik';
-import { isFunction } from 'lodash';
+import { get, isFunction } from 'lodash';
 import { connect } from 'react-redux';
 import { StandardAction } from '../../../reducers/reducerTypes';
 import { bindActionCreators, Dispatch } from 'redux';
@@ -12,16 +11,13 @@ import { ClientActions, UpdateEmpStatus, UpdateMaritalStatusAction } from '../..
 import { empStatusOptions, genderOptions, maritalStatusOptions } from '../../../enums/options';
 
 interface BasicInformationProps {
-  data: object[];
+  data?: object[];
   loading?: boolean;
 
-  formProps?: FormikProps<any>;
-  tableName?: string;
-  setFieldValue?: (field: string, value: any) => void;
-  resetForm: (nextValues?: any) => void;
-  submitForm: () => void;
   addRow: (row: any) => void;
-  deleteRow: (key: number) => void;
+  deleteRow: (index: number) => void;
+  setFieldValue: (field: string, value: any) => void;
+  setFieldTouched: (field: string, isTouched?: boolean | undefined) => void;
 
   updateMaritalStatus?: (maritalStatus: string) => UpdateMaritalStatusAction;
   updateEmpStatus?: (empStatus: string) => UpdateEmpStatus;
@@ -86,27 +82,19 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
 
   private tableName = 'basicInformation';
 
-  public resetForm = () => {
-    this.handleResetForm();
-  }
-
-  public submitForm = () => {
-    const { submitForm } = this.props;
-    submitForm();
-  }
-
-  public handleDelete = (key: number) => {
+  public handleDelete = (index: number) => {
     const { deleteRow } = this.props;
 
     // update formik
     if (isFunction(deleteRow)) {
-      deleteRow(key);
+      deleteRow(index);
     }
   }
 
   public handleAdd = () => {
     const { addRow, data } = this.props;
 
+    if (!data) return;
     // only 1 partner
     if (data.length === 1) {
       const newData = {
@@ -164,15 +152,8 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
     }
   }
 
-  public handleResetForm = () => {
-    const { resetForm } = this.props;
-    if (isFunction(resetForm)) {
-      resetForm();
-    }
-  }
-
   public render() {
-    const { loading, data } = this.props;
+    const { loading, data, setFieldValue, setFieldTouched } = this.props;
     const columns = this.columns.map((col) => {
       return {
         ...col,
@@ -186,6 +167,8 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
             tableName: this.tableName,
             type: col.type || 'text',
             record,
+            setFieldValue,
+            setFieldTouched,
             editable,
             handleSave: this.handleSave,
           };
@@ -203,21 +186,11 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
         <GeneralTable
           loading={loading || false}
           columns={columns}
-          dataSource={data}
+          dataSource={data || []}
           pagination={false}
           expandedRowRender={ExpandedBasicInformationRow}
           className={`${this.tableName}-table`}
         />
-        <ActionTableGeneral>
-          <Button htmlType={'button'} type={'default'} onClick={this.handleResetForm}>
-            <Icon type="close" />
-            <span>Discard</span>
-          </Button>
-          <Button htmlType={'submit'} type={'primary'}>
-            <Icon type="check" />
-            <span>Submit</span>
-          </Button>
-        </ActionTableGeneral>
       </TableEntryContainer>
     );
   }
@@ -232,7 +205,9 @@ const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>
     dispatch,
   );
 
-export default connect(
+export const EnhanceBasicInformationTable = connect(
   null,
   mapDispatchToProps,
 )(BasicInformationTable);
+
+export default BasicInformationTable;

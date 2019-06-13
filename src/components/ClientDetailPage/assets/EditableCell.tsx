@@ -1,15 +1,17 @@
 import React from 'react';
 import classNames from 'classnames';
-import { reduce, get, isFunction } from 'lodash';
-import { FormInput } from '../../Elements/FormInput';
-import { InputType } from '../../Elements/FormInput/FormInput';
+import { reduce, get, isFunction, isEqual } from 'lodash';
+import { InputType } from '../../Elements/OptimizedField/OptimizedField';
 import { PickerType } from '../../../common/EntryPicker/EntryPicker';
 
 import { EditableCellWrap, ValueEditCell } from '../styled';
+import OptimizedField from '../../Elements/OptimizedField/OptimizedField';
 interface EditableProps {
   type: InputType;
   record: any;
   dataIndex: string;
+  setFieldValue: (field: string, value: any) => void;
+  setFieldTouched: (field: string, isTouched?: boolean | undefined) => void;
   handleSave?: (arg: object) => void;
   handleBlur?: (e: React.FocusEvent) => void;
   title?: string;
@@ -33,12 +35,23 @@ interface EditableProps {
   customMin?: number;
 }
 
-export default class EditableCell extends React.PureComponent<EditableProps> {
+const getValue = (props: any) => get(props.record, [props.dataIndex]);
+
+export default class EditableCell extends React.Component<EditableProps> {
   public state = {
     editing: false,
   };
 
   public readonly input = React.createRef<any>();
+
+  public shouldComponentUpdate(nextProps: Readonly<EditableProps>, nextState: Readonly<{}>, nextContext: any): boolean {
+    const { options } = this.props;
+    const value = getValue(this.props);
+    const nextValue = getValue(nextProps);
+    const nextOptions = nextProps.options;
+
+    return !isEqual({ value, options }, { value: nextValue, options: nextOptions });
+  }
 
   public toggleEdit = () => {
     const editing = !this.state.editing;
@@ -91,6 +104,8 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
       min,
       customMin,
       sign,
+      setFieldValue,
+      setFieldTouched,
     } = props;
     const appendProps = [];
 
@@ -117,7 +132,12 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
       }
     }
 
-    return reduce(appendProps, (accumulator, prop) => ({ ...accumulator, ...prop }), {});
+    return reduce(appendProps, (accumulator, prop) => ({ ...accumulator, ...prop }), {
+      value: getValue(this.props),
+      // error: getError(this.props),
+      setFieldValue,
+      setFieldTouched,
+    });
   }
 
   public render() {
@@ -145,6 +165,8 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
       emptyIcon,
       min,
       customMin,
+      setFieldValue,
+      setFieldTouched,
       ...restProps
     } = this.props;
     const appendedProps = this.getAppendedProps(this.props, editing);
@@ -165,7 +187,7 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
       return editable ? (
         editing ? (
           <EditableCellWrap>
-            <FormInput
+            <OptimizedField
               type={type}
               name={fieldName}
               ref={this.input}
@@ -177,13 +199,18 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
         ) : (
           <EditableCellWrap onClick={this.toggleEdit}>
             <ValueEditCell>
-              <FormInput className={classNames({ readOnly: true })} type={type} name={fieldName} {...appendedProps} />
+              <OptimizedField
+                className={classNames({ readOnly: true })}
+                type={type}
+                name={fieldName}
+                {...appendedProps}
+              />
             </ValueEditCell>
           </EditableCellWrap>
         )
       ) : dataIndex ? (
         <EditableCellWrap>
-          <FormInput
+          <OptimizedField
             className={classNames({ readOnly: true, disabled: true })}
             disabled={true}
             type={type}
@@ -201,7 +228,7 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
         {editable ? (
           editing ? (
             <EditableCellWrap>
-              <FormInput
+              <OptimizedField
                 type={type}
                 name={fieldName}
                 ref={this.input}
@@ -213,7 +240,7 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
           ) : (
             <EditableCellWrap onClick={this.toggleEdit}>
               <ValueEditCell>
-                <FormInput
+                <OptimizedField
                   className={classNames({ readOnly: !smallInput, smallInput })}
                   type={type}
                   name={fieldName}
@@ -224,7 +251,7 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
           )
         ) : dataIndex ? (
           <EditableCellWrap>
-            <FormInput
+            <OptimizedField
               className={classNames({ readOnly: true, disabled: true })}
               disabled={true}
               type={type}

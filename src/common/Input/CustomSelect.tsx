@@ -19,7 +19,8 @@ interface InputProps {
   ref?: React.RefObject<any>;
   handleChange?: (e: any, name?: string, value?: any) => void;
   handleBlur?: (e: React.FocusEvent | string) => void;
-  setFieldValue?: (field: string, value: any) => void;
+  setFieldValue: (field: string, value: any) => void;
+  setFieldTouched: (field: string, isTouched?: boolean | undefined) => void;
   confirmTitle?: { title: string; fieldValue: any };
 }
 
@@ -90,7 +91,7 @@ class CustomSelect extends React.Component<InputProps> {
     if (value) {
       onBlur(value);
       if (handleBlur && isFunction(handleBlur)) {
-        handleBlur(value);
+        handleBlur(name);
       }
     }
   }

@@ -6,7 +6,7 @@ import ExpenditureTable from './expenditure/ExpenditureTable';
 import AssetsTable from './assets/AssetsTable';
 import LiabilitiesTable from './liabilities/LiabilitiesTable';
 import InsuranceTable from './insurance/InsuranceTable';
-import {FieldArray, Form, Formik, FormikActions, FormikProps} from 'formik';
+import { ArrayHelpers, FieldArray, Form, Formik, FormikActions, FormikProps } from 'formik';
 import { connect } from 'react-redux';
 import { RootState, StandardAction } from '../../reducers/reducerTypes';
 import { find, map, isArray, pick, get } from 'lodash';
@@ -191,8 +191,35 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
     }, 0);
   }
 
+
+
+  public renderTables = (formikProps: FormikProps<any>) => {
+    const { values, setFieldValue, setFieldTouched } = formikProps;
+    const { loading } = this.props;
+
+    return (
+      <Form>
+        <FieldArray
+          name={'basicInformation'}
+          validateOnChange={false}
+          render={(arrayHelpers: ArrayHelpers) => (
+            <BasicInformationTable
+              data={values.basicInformation}
+              loading={loading}
+              addRow={arrayHelpers.push}
+              deleteRow={arrayHelpers.remove}
+              setFieldValue={setFieldValue}
+              setFieldTouched={setFieldTouched}
+            />
+          )}
+        />
+                <FieldArray name={'basicInformation'} render={BasicInformationTable} />
+      </Form>
+    );
+  }
+
   public render() {
-    const { tables, loading, maritalStatus, assets, empStatus } = this.props;
+    const { tables, loading, maritalStatus, assets, empStatus, submitting } = this.props;
     const dynamicCustomValue = pick(tables, ['inflationCPI', 'salaryInflation', 'sgcRate', 'benefitDefaultAge']);
 
     return (
@@ -202,239 +229,214 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
             // set state
             this.updateFormData(values);
           }}
-          initialValues={{ basicInformation: tables ? addKeyToArray(tables.basicInformation || []) : [] }}
-          enableReinitialize={true}
-          render={(props: FormikProps<any>) => {
-            const addRow = (row: any) => {
-              const basicInformation = [...props.values.basicInformation];
-              basicInformation.push(row);
-
-              props.setFieldValue('basicInformation', basicInformation);
-            };
-            const deleteRow = (key: number) => {
-              const basicInformation = props.values.basicInformation.filter((info: any) => info.key !== key);
-
-              props.setFieldValue('basicInformation', basicInformation);
-            };
-
-            return (
-              <Form>
-                <BasicInformationTable
-                  submitForm={props.submitForm}
-                  resetForm={props.resetForm}
-                  setFieldValue={props.setFieldValue}
-                  data={(props && props.values && props.values.basicInformation) || []}
-                  loading={loading}
-                  addRow={addRow}
-                  deleteRow={deleteRow}
-                  ref={this.basicInformationForm}
-                />
-                <FieldArray name={'basicInformation'} render={BasicInformationTable} />
-              </Form>
-            );
+          initialValues={{
+            basicInformation: tables ? addKeyToArray(tables.basicInformation || []) : [],
           }}
+          enableReinitialize={true}
+          validateOnChange={false}
+          render={this.renderTables}
         />
-        <Formik
-          onSubmit={(values: any, actions: FormikActions<any>) => {
-            // set state
-            this.updateFormData(values);
-          }}
-          initialValues={{ income: tables ? addKeyToArray(tables.income || []) : [] }}
-          enableReinitialize={true}
-          render={(props: FormikProps<any>) => {
-            const addRow = (row: any) => {
-              const income = [...props.values.income];
-              income.unshift(row);
+        {/*<Formik*/}
+        {/*  onSubmit={(values: any, actions: FormikActions<any>) => {*/}
+        {/*    // set state*/}
+        {/*    this.updateFormData(values);*/}
+        {/*  }}*/}
+        {/*  initialValues={{ income: tables ? addKeyToArray(tables.income || []) : [] }}*/}
+        {/*  enableReinitialize={true}*/}
+        {/*  render={(props: FormikProps<any>) => {*/}
+        {/*    const addRow = (row: any) => {*/}
+        {/*      const income = [...props.values.income];*/}
+        {/*      income.unshift(row);*/}
 
-              props.setFieldValue('income', income);
-            };
-            const deleteRow = (key: number) => {
-              const income = props.values.income.filter((info: any) => info.key !== key);
+        {/*      props.setFieldValue('income', income);*/}
+        {/*    };*/}
+        {/*    const deleteRow = (key: number) => {*/}
+        {/*      const income = props.values.income.filter((info: any) => info.key !== key);*/}
 
-              props.setFieldValue('income', income);
-            };
+        {/*      props.setFieldValue('income', income);*/}
+        {/*    };*/}
 
-            return (
-              <Form>
-                <IncomeTable
-                  submitForm={props.submitForm}
-                  resetForm={props.resetForm}
-                  setFieldValue={props.setFieldValue}
-                  data={(props && props.values && props.values.income) || []}
-                  loading={loading}
-                  addRow={addRow}
-                  deleteRow={deleteRow}
-                  ref={this.incomeForm}
-                  maritalStatus={maritalStatus}
-                  dynamicCustomValue={dynamicCustomValue}
-                />
-              </Form>
-            );
-          }}
-        />
-        <Formik
-          onSubmit={(values: any, actions: FormikActions<any>) => {
-            // set state
-            this.updateFormData(values);
-          }}
-          initialValues={{ expenditure: tables ? addKeyToArray(tables.expenditure || []) : [] }}
-          enableReinitialize={true}
-          render={(props: FormikProps<any>) => {
-            const addRow = (row: any) => {
-              const expenditure = [...props.values.expenditure];
-              expenditure.unshift(row);
+        {/*    return (*/}
+        {/*      <Form>*/}
+        {/*        <IncomeTable*/}
+        {/*          submitForm={props.submitForm}*/}
+        {/*          resetForm={props.resetForm}*/}
+        {/*          setFieldValue={props.setFieldValue}*/}
+        {/*          data={(props && props.values && props.values.income) || []}*/}
+        {/*          loading={loading}*/}
+        {/*          addRow={addRow}*/}
+        {/*          deleteRow={deleteRow}*/}
+        {/*          ref={this.incomeForm}*/}
+        {/*          maritalStatus={maritalStatus}*/}
+        {/*          dynamicCustomValue={dynamicCustomValue}*/}
+        {/*        />*/}
+        {/*      </Form>*/}
+        {/*    );*/}
+        {/*  }}*/}
+        {/*/>*/}
+        {/*<Formik*/}
+        {/*  onSubmit={(values: any, actions: FormikActions<any>) => {*/}
+        {/*    // set state*/}
+        {/*    this.updateFormData(values);*/}
+        {/*  }}*/}
+        {/*  initialValues={{ expenditure: tables ? addKeyToArray(tables.expenditure || []) : [] }}*/}
+        {/*  enableReinitialize={true}*/}
+        {/*  render={(props: FormikProps<any>) => {*/}
+        {/*    const addRow = (row: any) => {*/}
+        {/*      const expenditure = [...props.values.expenditure];*/}
+        {/*      expenditure.unshift(row);*/}
 
-              props.setFieldValue('expenditure', expenditure);
-            };
-            const deleteRow = (key: number) => {
-              const expenditure = props.values.expenditure.filter((exp: any) => exp.key !== key);
+        {/*      props.setFieldValue('expenditure', expenditure);*/}
+        {/*    };*/}
+        {/*    const deleteRow = (key: number) => {*/}
+        {/*      const expenditure = props.values.expenditure.filter((exp: any) => exp.key !== key);*/}
 
-              props.setFieldValue('expenditure', expenditure);
-            };
+        {/*      props.setFieldValue('expenditure', expenditure);*/}
+        {/*    };*/}
 
-            return (
-              <Form>
-                <ExpenditureTable
-                  submitForm={props.submitForm}
-                  resetForm={props.resetForm}
-                  setFieldValue={props.setFieldValue}
-                  data={(props && props.values && props.values.expenditure) || []}
-                  loading={loading}
-                  addRow={addRow}
-                  deleteRow={deleteRow}
-                  ref={this.expenditureForm}
-                  maritalStatus={maritalStatus}
-                  dynamicCustomValue={dynamicCustomValue}
-                />
-              </Form>
-            );
-          }}
-        />
-        <Formik
-          onSubmit={(values: any, actions: FormikActions<any>) => {
-            // set state
-            this.updateFormData(values);
-          }}
-          initialValues={{ assets: tables ? addKeyToArray(tables.assets || []) : [] }}
-          enableReinitialize={true}
-          render={(props: FormikProps<any>) => {
-            const addRow = (row: any) => {
-              const assetsFormValue = [...props.values.assets];
-              assetsFormValue.unshift(row);
+        {/*    return (*/}
+        {/*      <Form>*/}
+        {/*        <ExpenditureTable*/}
+        {/*          submitForm={props.submitForm}*/}
+        {/*          resetForm={props.resetForm}*/}
+        {/*          setFieldValue={props.setFieldValue}*/}
+        {/*          data={(props && props.values && props.values.expenditure) || []}*/}
+        {/*          loading={loading}*/}
+        {/*          addRow={addRow}*/}
+        {/*          deleteRow={deleteRow}*/}
+        {/*          ref={this.expenditureForm}*/}
+        {/*          maritalStatus={maritalStatus}*/}
+        {/*          dynamicCustomValue={dynamicCustomValue}*/}
+        {/*        />*/}
+        {/*      </Form>*/}
+        {/*    );*/}
+        {/*  }}*/}
+        {/*/>*/}
+        {/*<Formik*/}
+        {/*  onSubmit={(values: any, actions: FormikActions<any>) => {*/}
+        {/*    // set state*/}
+        {/*    this.updateFormData(values);*/}
+        {/*  }}*/}
+        {/*  initialValues={{ assets: tables ? addKeyToArray(tables.assets || []) : [] }}*/}
+        {/*  enableReinitialize={true}*/}
+        {/*  render={(props: FormikProps<any>) => {*/}
+        {/*    const addRow = (row: any) => {*/}
+        {/*      const assetsFormValue = [...props.values.assets];*/}
+        {/*      assetsFormValue.unshift(row);*/}
 
-              props.setFieldValue('assets', assetsFormValue);
-              this.updateAssets(assetsFormValue);
-            };
-            const deleteRow = (key: number) => {
-              const assetsFormValue = props.values.assets.filter((asset: any) => asset.key !== key);
+        {/*      props.setFieldValue('assets', assetsFormValue);*/}
+        {/*      this.updateAssets(assetsFormValue);*/}
+        {/*    };*/}
+        {/*    const deleteRow = (key: number) => {*/}
+        {/*      const assetsFormValue = props.values.assets.filter((asset: any) => asset.key !== key);*/}
 
-              props.setFieldValue('assets', assetsFormValue);
-              this.updateAssets(assetsFormValue);
-            };
+        {/*      props.setFieldValue('assets', assetsFormValue);*/}
+        {/*      this.updateAssets(assetsFormValue);*/}
+        {/*    };*/}
 
-            return (
-              <Form>
-                <AssetsTable
-                  submitForm={props.submitForm}
-                  resetForm={props.resetForm}
-                  setFieldValue={props.setFieldValue}
-                  data={(props && props.values && props.values.assets) || []}
-                  loading={loading}
-                  addRow={addRow}
-                  deleteRow={deleteRow}
-                  ref={this.assetsForm}
-                  maritalStatus={maritalStatus}
-                  dynamicCustomValue={dynamicCustomValue}
-                  updateAssets={this.updateAssets}
-                  empStatus={empStatus}
-                />
-              </Form>
-            );
-          }}
-        />{' '}
-        <Formik
-          onSubmit={(values: any, actions: FormikActions<any>) => {
-            // set state
-            this.updateFormData(values);
-          }}
-          initialValues={{ liabilities: tables ? addKeyToArray(tables.liabilities || []) : [] }}
-          enableReinitialize={true}
-          render={(props: FormikProps<any>) => {
-            const addRow = (row: any) => {
-              const liabilities = [...props.values.liabilities];
-              liabilities.unshift(row);
+        {/*    return (*/}
+        {/*      <Form>*/}
+        {/*        <AssetsTable*/}
+        {/*          submitForm={props.submitForm}*/}
+        {/*          resetForm={props.resetForm}*/}
+        {/*          setFieldValue={props.setFieldValue}*/}
+        {/*          data={(props && props.values && props.values.assets) || []}*/}
+        {/*          loading={loading}*/}
+        {/*          addRow={addRow}*/}
+        {/*          deleteRow={deleteRow}*/}
+        {/*          ref={this.assetsForm}*/}
+        {/*          maritalStatus={maritalStatus}*/}
+        {/*          dynamicCustomValue={dynamicCustomValue}*/}
+        {/*          updateAssets={this.updateAssets}*/}
+        {/*          empStatus={empStatus}*/}
+        {/*        />*/}
+        {/*      </Form>*/}
+        {/*    );*/}
+        {/*  }}*/}
+        {/*/>{' '}*/}
+        {/*<Formik*/}
+        {/*  onSubmit={(values: any, actions: FormikActions<any>) => {*/}
+        {/*    // set state*/}
+        {/*    this.updateFormData(values);*/}
+        {/*  }}*/}
+        {/*  initialValues={{ liabilities: tables ? addKeyToArray(tables.liabilities || []) : [] }}*/}
+        {/*  enableReinitialize={true}*/}
+        {/*  render={(props: FormikProps<any>) => {*/}
+        {/*    const addRow = (row: any) => {*/}
+        {/*      const liabilities = [...props.values.liabilities];*/}
+        {/*      liabilities.unshift(row);*/}
 
-              props.setFieldValue('liabilities', liabilities);
-            };
-            const deleteRow = (key: number) => {
-              const liabilities = props.values.liabilities.filter((asset: any) => asset.key !== key);
+        {/*      props.setFieldValue('liabilities', liabilities);*/}
+        {/*    };*/}
+        {/*    const deleteRow = (key: number) => {*/}
+        {/*      const liabilities = props.values.liabilities.filter((asset: any) => asset.key !== key);*/}
 
-              props.setFieldValue('liabilities', liabilities);
-            };
+        {/*      props.setFieldValue('liabilities', liabilities);*/}
+        {/*    };*/}
 
-            return (
-              <Form>
-                <LiabilitiesTable
-                  submitForm={props.submitForm}
-                  resetForm={props.resetForm}
-                  setFieldValue={props.setFieldValue}
-                  data={(props && props.values && props.values.liabilities) || []}
-                  loading={loading}
-                  addRow={addRow}
-                  deleteRow={deleteRow}
-                  ref={this.liabilitiesForm}
-                  maritalStatus={maritalStatus}
-                  assets={assets || []}
-                />
-              </Form>
-            );
-          }}
-        />
-        <Formik
-          onSubmit={(values: any, actions: FormikActions<any>) => {
-            // set state
-            this.updateFormData(values);
-          }}
-          initialValues={{ insurance: tables ? addKeyToArray(tables.insurance || []) : [] }}
-          enableReinitialize={true}
-          render={(props: FormikProps<any>) => {
-            const addRow = (row: any) => {
-              const insurance = [...props.values.insurance];
-              insurance.unshift(row);
+        {/*    return (*/}
+        {/*      <Form>*/}
+        {/*        <LiabilitiesTable*/}
+        {/*          submitForm={props.submitForm}*/}
+        {/*          resetForm={props.resetForm}*/}
+        {/*          setFieldValue={props.setFieldValue}*/}
+        {/*          data={(props && props.values && props.values.liabilities) || []}*/}
+        {/*          loading={loading}*/}
+        {/*          addRow={addRow}*/}
+        {/*          deleteRow={deleteRow}*/}
+        {/*          ref={this.liabilitiesForm}*/}
+        {/*          maritalStatus={maritalStatus}*/}
+        {/*          assets={assets || []}*/}
+        {/*        />*/}
+        {/*      </Form>*/}
+        {/*    );*/}
+        {/*  }}*/}
+        {/*/>*/}
+        {/*<Formik*/}
+        {/*  onSubmit={(values: any, actions: FormikActions<any>) => {*/}
+        {/*    // set state*/}
+        {/*    this.updateFormData(values);*/}
+        {/*  }}*/}
+        {/*  initialValues={{ insurance: tables ? addKeyToArray(tables.insurance || []) : [] }}*/}
+        {/*  enableReinitialize={true}*/}
+        {/*  render={(props: FormikProps<any>) => {*/}
+        {/*    const addRow = (row: any) => {*/}
+        {/*      const insurance = [...props.values.insurance];*/}
+        {/*      insurance.unshift(row);*/}
 
-              props.setFieldValue('insurance', insurance);
-            };
-            const deleteRow = (key: number) => {
-              const insurance = props.values.insurance.filter((asset: any) => asset.key !== key);
+        {/*      props.setFieldValue('insurance', insurance);*/}
+        {/*    };*/}
+        {/*    const deleteRow = (key: number) => {*/}
+        {/*      const insurance = props.values.insurance.filter((asset: any) => asset.key !== key);*/}
 
-              props.setFieldValue('insurance', insurance);
-            };
+        {/*      props.setFieldValue('insurance', insurance);*/}
+        {/*    };*/}
 
-            return (
-              <Form>
-                <InsuranceTable
-                  submitForm={props.submitForm}
-                  resetForm={props.resetForm}
-                  setFieldValue={props.setFieldValue}
-                  data={(props && props.values && props.values.insurance) || []}
-                  loading={loading}
-                  addRow={addRow}
-                  deleteRow={deleteRow}
-                  ref={this.insuranceForm}
-                  maritalStatus={maritalStatus}
-                  dynamicCustomValue={dynamicCustomValue}
-                />
-              </Form>
-            );
-          }}
-        />
+        {/*    return (*/}
+        {/*      <Form>*/}
+        {/*        <InsuranceTable*/}
+        {/*          submitForm={props.submitForm}*/}
+        {/*          resetForm={props.resetForm}*/}
+        {/*          setFieldValue={props.setFieldValue}*/}
+        {/*          data={(props && props.values && props.values.insurance) || []}*/}
+        {/*          loading={loading}*/}
+        {/*          addRow={addRow}*/}
+        {/*          deleteRow={deleteRow}*/}
+        {/*          ref={this.insuranceForm}*/}
+        {/*          maritalStatus={maritalStatus}*/}
+        {/*          dynamicCustomValue={dynamicCustomValue}*/}
+        {/*        />*/}
+        {/*      </Form>*/}
+        {/*    );*/}
+        {/*  }}*/}
+        {/*/>*/}
         <ActionTableGeneral visible={true}>
           <Button htmlType={'button'} type={'default'} onClick={this.handleDiscardForm}>
             <Icon type="close" />
             <span>Discard</span>
           </Button>
           <Button htmlType={'submit'} type={'primary'} onClick={this.handleSubmitForm}>
-            <Icon type="check" />
+            {!submitting && <Icon type="check" />}
             <span>Submit</span>
           </Button>
         </ActionTableGeneral>
