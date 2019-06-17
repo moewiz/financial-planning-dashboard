@@ -76,7 +76,8 @@ function loadInvestmentOptions(record: { type: string }) {
         { value: 'motorVehicles', label: 'Motor Vehicles' },
       ];
     }
-    case ASSET_TYPES.directInvestment: {
+    case ASSET_TYPES.directInvestment:
+    case ASSET_TYPES.property: {
       return [
         { value: 'cash', label: 'Cash' },
         { value: 'fixedInterest', label: 'Fixed Interest' },
