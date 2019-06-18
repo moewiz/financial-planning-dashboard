@@ -13,7 +13,7 @@ export interface Table {
 
 export interface DataEntry {
   tabName: string;
-  tables: Table;
+  pageData: Table;
 }
 
 export interface Tag {
@@ -49,7 +49,7 @@ export const getDefaultTagList = () => {
     date: '20/03/2019',
     dataEntries: map(tabList, (tab) => ({
       tabName: tab,
-      tables: {},
+      pageData: {},
     })),
   }));
 };
