@@ -21,17 +21,19 @@ const slideInUp = keyframes`
   }
 `;
 
+export const StrategyPageWrapper = styled.div`
+  padding: 24px;
+`;
 export const StrategyHeaderWrapper = styled.div`
   display: flex;
 `;
+export const GraphWrapper = styled.div``;
 export const GraphCard = styled.div`
-  width: 250px;
+  width: 260px;
   overflow: hidden;
   position: relative;
-  padding: 20px 20px;
+  padding: 20px 20px 10px 10px;
   margin-right: 30px;
-  min-width: 280px;
-  height: 195px;
   background: #fff;
   border-radius: .35rem;
   box-shadow: 4px 4px 10px 3px rgba(100, 100, 101, 0.21), 0 0 15px rgba(115,162,208,0.06);

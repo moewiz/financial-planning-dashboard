@@ -3,6 +3,7 @@ import { Drawer } from 'antd';
 import StrategyHeader from './StrategyHeader';
 import StrategyContainer from './StrategyContainer';
 import { StrategyTypes } from '../../enums/strategies';
+import { StrategyPageWrapper } from './styled';
 
 interface StrategyPageProps {
   clientId: number;
@@ -11,7 +12,7 @@ interface StrategyPageProps {
 const StrategyPage = (props: StrategyPageProps) => {
   const [visible, setVisible] = useState(false);
   return (
-    <>
+    <StrategyPageWrapper>
       <StrategyHeader />
       <StrategyContainer
         type={StrategyTypes.Superannuation}
@@ -88,7 +89,7 @@ const StrategyPage = (props: StrategyPageProps) => {
         <p>Some contents...</p>
         <p>Some contents...</p>
       </Drawer>
-    </>
+    </StrategyPageWrapper>
   );
 };
 

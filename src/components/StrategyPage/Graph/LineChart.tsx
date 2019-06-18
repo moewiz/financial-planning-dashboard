@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from 'antd';
 import { Line } from 'react-chartjs-2';
-import { GraphCard, GraphTitle } from '../styled';
+import { GraphCard, GraphTitle, GraphWrapper } from '../styled';
 
 interface GraphProps {
   name: string;
@@ -16,20 +16,22 @@ const LineChart = (props: GraphProps) => {
   const { name, data } = props;
 
   return (
-    <GraphCard>
+    <GraphWrapper>
       <GraphTitle>
         <Icon type="info-circle" theme="filled" />
         {name}
       </GraphTitle>
-      <Line
-        data={data}
-        options={{
-          legend: {
-            display: false,
-          },
-        }}
-      />
-    </GraphCard>
+      <GraphCard>
+        <Line
+          data={data}
+          options={{
+            legend: {
+              display: false,
+            },
+          }}
+        />
+      </GraphCard>
+    </GraphWrapper>
   );
 };
 
