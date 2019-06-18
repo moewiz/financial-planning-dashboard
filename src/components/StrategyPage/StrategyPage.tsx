@@ -9,7 +9,7 @@ interface StrategyPageProps {
 }
 
 const StrategyPage = (props: StrategyPageProps) => {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   return (
     <>
       <StrategyHeader />
