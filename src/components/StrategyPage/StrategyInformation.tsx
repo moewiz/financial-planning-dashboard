@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react';
 import { Icon } from 'antd';
 import { Line } from 'react-chartjs-2';
-import { Typography } from 'antd';
 import StatisticItem, { Statistic } from './StatisticItem';
 import { GraphCard, GraphTitle } from './styled';
 import { StrategyTypes } from '../../enums/strategies';
-const { Paragraph } = Typography;
+import StandardText from './StandardText';
 
 interface StrategyInformationProps {
   type: StrategyTypes;
@@ -35,6 +34,21 @@ const data = {
 class StrategyInformation extends PureComponent<StrategyInformationProps> {
   public render() {
     const { statistic, type } = this.props;
+    const standardTextExample = [
+      {
+        text: 'Text line {{0}}',
+        params: ['one'],
+      },
+      {
+        text: 'Text line {{0}}',
+        params: ['two'],
+      },
+      {
+        text: 'Text line {{0}}',
+        params: ['three'],
+      },
+    ];
+
     switch (type) {
       case StrategyTypes.Superannuation: {
         return (
@@ -54,15 +68,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
                 }}
               />
             </GraphCard>
-            <div>
-              <Paragraph>
-                Superanuation funds will continue to be invested in line with your <b>xx</b> risk profile
-              </Paragraph>
-              <Paragraph>
-                Product fees of <b>x.x%</b> factored in superannuation value
-              </Paragraph>
-              <Paragraph>Funds transferred into pension phase at retirement</Paragraph>
-            </div>
+            <StandardText data={standardTextExample} />
           </div>
         );
       }
@@ -84,15 +90,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
                 }}
               />
             </GraphCard>
-            <div>
-              <Paragraph>
-                Superanuation funds will continue to be invested in line with your <b>xx</b> risk profile
-              </Paragraph>
-              <Paragraph>
-                Product fees of <b>x.x%</b> factored in superannuation value
-              </Paragraph>
-              <Paragraph>Funds transferred into pension phase at retirement</Paragraph>
-            </div>
+            <StandardText data={standardTextExample} />
           </div>
         );
       }
@@ -114,15 +112,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
                 }}
               />
             </GraphCard>
-            <div>
-              <Paragraph>
-                Superanuation funds will continue to be invested in line with your <b>xx</b> risk profile
-              </Paragraph>
-              <Paragraph>
-                Product fees of <b>x.x%</b> factored in superannuation value
-              </Paragraph>
-              <Paragraph>Funds transferred into pension phase at retirement</Paragraph>
-            </div>
+            <StandardText data={standardTextExample} />
           </div>
         );
       }
@@ -148,15 +138,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
                 }}
               />
             </GraphCard>
-            <div>
-              <Paragraph>
-                Superanuation funds will continue to be invested in line with your <b>xx</b> risk profile
-              </Paragraph>
-              <Paragraph>
-                Product fees of <b>x.x%</b> factored in superannuation value
-              </Paragraph>
-              <Paragraph>Funds transferred into pension phase at retirement</Paragraph>
-            </div>
+            <StandardText data={standardTextExample} />
           </div>
         );
       }
@@ -178,20 +160,12 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
                 }}
               />
             </GraphCard>
-            <div>
-              <Paragraph>
-                Superanuation funds will continue to be invested in line with your <b>xx</b> risk profile
-              </Paragraph>
-              <Paragraph>
-                Product fees of <b>x.x%</b> factored in superannuation value
-              </Paragraph>
-              <Paragraph>Funds transferred into pension phase at retirement</Paragraph>
-            </div>
+            <StandardText data={standardTextExample} />
           </div>
         );
       }
       default:
-        return <div>No data</div>;
+        return <div>No support for this type {{ type }}</div>;
     }
   }
 }
