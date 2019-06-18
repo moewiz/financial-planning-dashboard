@@ -4,8 +4,7 @@ import StrategyInformation from './StrategyInformation';
 import { StrategyTypes } from '../../enums/strategies';
 import StrategyTable from './StrategyTable';
 import { Statistic } from './StatisticItem';
-
-const Title = Typography.Title;
+import { StrategyWrapper, TitleStrategyBlock } from './styled';
 
 interface StrategyContainerProps {
   type: StrategyTypes;
@@ -38,11 +37,11 @@ class StrategyContainer extends PureComponent<StrategyContainerProps> {
   public render() {
     const { information, strategies, type } = this.props;
     return (
-      <div>
-        <Title level={4}>{getTitle(type)}</Title>
+      <StrategyWrapper>
+        <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
         <StrategyInformation {...information} type={type} />
         <StrategyTable strategies={strategies} />
-      </div>
+      </StrategyWrapper>
     );
   }
 }

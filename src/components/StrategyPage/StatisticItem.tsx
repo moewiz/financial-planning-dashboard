@@ -1,4 +1,7 @@
 import React from 'react';
+import { Icon } from 'antd';
+import { StatisticWrapper, StatisticLabel, StatisticGroup,
+  StatisticValue, StatisticSubValue, StatisticUpDown } from './styled';
 
 export interface Statistic {
   total: number;
@@ -15,19 +18,21 @@ interface StatisticItemProps {
 const StatisticItem = (props: StatisticItemProps & Statistic) => {
   const { title, total, isIncrease, differenceNumber, subTitle, subValue } = props;
   return (
-    <div>
-      <div>{title}:</div>
-      <div>$ {total}</div>
-      <div>
-        {isIncrease ? '^' : 'v'} ${differenceNumber}
-      </div>
-      {subTitle && subValue && (
-        <>
-          <div>{subTitle}:</div>
-          <div>(age {subValue})</div>
-        </>
-      )}
-    </div>
+    <StatisticWrapper>
+      <StatisticGroup className="active">
+        <StatisticLabel> {title}: </StatisticLabel>
+        <StatisticValue>$ {total}</StatisticValue>
+        <StatisticUpDown>
+          {isIncrease ? <Icon type="caret-up" /> : <Icon type="caret-down" />} ${differenceNumber}
+        </StatisticUpDown>
+        {subTitle && subValue && (
+          <>
+            <StatisticLabel>{subTitle}:</StatisticLabel>
+            <StatisticSubValue>(age {subValue})</StatisticSubValue>
+          </>
+        )}
+      </StatisticGroup>
+    </StatisticWrapper>
   );
 };
 
