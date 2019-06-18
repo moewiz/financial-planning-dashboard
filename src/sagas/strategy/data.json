@@ -1,0 +1,215 @@
+{
+  "name1": [],
+  "name2": [],
+  "name3": [],
+  "name4": [],
+  "superannuation": {
+    "kpi": [
+      {
+        "accumulationBalance": 9999999,
+        "isIncrease": true,
+        "delta": 21600,
+        "retirementYear": 2049
+      },
+      {
+        "accumulationBalance": 8888888,
+        "isIncrease": false,
+        "delta": 9500,
+        "retirementYear": 2049
+      }
+    ],
+    "graph": [[], []],
+    "standardText": [
+      {
+        "text": "Superannuation funds will continue to be invested in line with your {{0}} risk profile",
+        "params": ["xx"]
+      },
+      {
+        "text": "Product fees of {{xx}}% factored in superannuation value",
+        "params": ["xx"]
+      },
+      {
+        "text": "Funds transferred into pension phase at retirement"
+      }
+    ],
+    "strategies": []
+  },
+  "pension": {
+    "kpi": [
+      {
+        "averagePensionIncome": 9999999,
+        "isIncrease": false,
+        "delta": 19200,
+        "paidUntil": 2030
+      },
+      {
+        "averagePensionIncome": 8888888,
+        "isIncrease": false,
+        "delta": 3500,
+        "paidUntil": 2049
+      }
+    ],
+    "graph": [[], []],
+    "standardText": [
+      {
+        "text": "Pension funds will be invested in line with {{}} risk profile",
+        "params": ["xx"]
+      },
+      {
+        "text": "Product fees of {{}}% factored in pension value",
+        "params": ["xx"]
+      },
+      {
+        "text": "Income set to meet required expenses of ${{0}} per annum",
+        "params": ["xx,xx"]
+      }
+    ],
+    "strategies": []
+  },
+  "investments": {
+    "kpi": [
+      {
+        "cashReserve": 9999999,
+        "isIncrease": true,
+        "delta": 39200,
+        "atAge": 69
+      },
+      {
+        "averagePensionIncome": 8888888,
+        "isIncrease": false,
+        "delta": 3500,
+        "atAge": 60
+      }
+    ],
+    "graph": [[], []],
+    "standardText": [
+      {
+        "text": "{{0}} will be invested in line with {{1}} risk profile",
+        "params": ["Investment name 1", "xx"]
+      },
+      {
+        "text": "{{0}} will be invested in line with {{1}} risk profile",
+        "params": ["Investment name 2", "xx"]
+      },
+      {
+        "text": "Product fees of {{0}}% factored in investment value",
+        "params": ["xx"]
+      },
+      {
+        "text": "Investment income {{0}} for full period",
+        "params": ["re-invested"]
+      }
+    ],
+    "strategies": []
+  },
+  "debt": {
+    "kpi": [
+      {
+        "interestCost": 9999999,
+        "isIncrease": true,
+        "delta": 39200,
+        "atAge": 69
+      },
+      {
+        "interestCost": 8888888,
+        "isIncrease": false,
+        "delta": 3500,
+        "atAge": 60
+      }
+    ],
+    "graph": [[], []],
+    "standardText": [
+      {
+        "text": "Interest rate of {{0}}% assumed for {{1}}, with a maximum period of {{2}} years",
+        "params": ["x.xx", "loan name 1", "xx"]
+      },
+      {
+        "text": "Interest rate of {{0}}% assumed for {{1}}, with a maximum period of {{2}} years",
+        "params": ["x.xx", "loan name 2", "xx"]
+      },
+      {
+        "text": "All loans paid out at retirement age ({{0}})",
+        "params": ["xx"]
+      }
+    ],
+    "strategies": []
+  },
+  "centrelink": {
+    "kpi": [
+      {
+        "interestCost": 9999999,
+        "isIncrease": true,
+        "delta": 39200,
+        "atAge": 69
+      },
+      {
+        "interestCost": 8888888,
+        "isIncrease": false,
+        "delta": 3500,
+        "atAge": 60
+      }
+    ],
+    "graph": [[], []],
+    "standardText": [
+      {
+        "text": "Centrelink payments based on {{0}}",
+        "params": ["homeowner"]
+      }
+    ],
+    "strategies": []
+  },
+  "insurance": {
+    "kpi": [
+      {
+        "lifeInsurance": 9999999,
+        "isIncrease": true,
+        "delta": 39200
+      },
+      {
+        "lifeInsurance": 8888888,
+        "isIncrease": false,
+        "delta": 3500
+      }
+    ],
+    "graph": [[], []],
+    "standardText": [
+      {
+        "text": "Text line one"
+      },
+      {
+        "text": "Text line two"
+      },
+      {
+        "text": "Text line three"
+      }
+    ],
+    "strategies": []
+  },
+  "estatePlanning": {
+    "kpi": [
+      {
+        "kpiName": "",
+        "isIncrease": true,
+        "delta": 39200
+      },
+      {
+        "kpiName": "",
+        "isIncrease": false,
+        "delta": 3500
+      }
+    ],
+    "graph": [[], []],
+    "standardText": [
+      {
+        "text": "Text line one"
+      },
+      {
+        "text": "Text line two"
+      },
+      {
+        "text": "Text line three"
+      }
+    ],
+    "strategies": []
+  }
+}
