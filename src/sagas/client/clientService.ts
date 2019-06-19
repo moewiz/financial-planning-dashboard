@@ -1,5 +1,5 @@
 import ApiUtils, { RequestConfig } from '../../utils/apiUtils';
-import data from './data.json';
+import data from './strategy.json';
 
 export default class AuthService {
   public static async fetchClients(userId: string): Promise<any> {
@@ -12,6 +12,13 @@ export default class AuthService {
     const params = [clientId, tabNameValue].join('/');
     const url: string = `/currentPosition/${params}`;
 
+    if (tabNameValue === 2) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve({ status: 200, data: { data, error: null, message: null, success: true } });
+        }, 500);
+      });
+    }
     return ApiUtils.HTTP.get(url);
   }
 
