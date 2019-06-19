@@ -5,7 +5,8 @@ import { StrategyTypes } from '../../enums/strategies';
 import LineChart from './Graph/LineChart';
 import AreaChart from './Graph/AreaChart';
 import StandardText from './StandardText';
-import { StrategyInfoWrapper } from './styled';
+import { StrategyInfoWrapper, TitleStrategyBlock } from './styled';
+import {Col, Row} from 'antd';
 
 interface StrategyInformationProps {
   type: StrategyTypes;
@@ -13,6 +14,23 @@ interface StrategyInformationProps {
   graph: any;
   expandable: object;
 }
+
+const getTitle = (type: StrategyTypes) => {
+  switch (type) {
+    case StrategyTypes.Superannuation:
+      return 'Superannuation';
+    case StrategyTypes.Pensions:
+      return 'Pensions';
+    case StrategyTypes.Investments:
+      return 'Investments (non-super)';
+    case StrategyTypes.Debt:
+      return 'Debt';
+    case StrategyTypes.Centrelink:
+      return 'Centrelink';
+    default:
+      return '';
+  }
+};
 
 const data = {
   labels: ['19', '20', '21', '22', '23', '24', '25'],
@@ -97,8 +115,15 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
 
         return (
           <StrategyInfoWrapper>
-            <StatisticItem {...statistic} title={'Accumulation balance'} subTitle={'At retirement'} />
-            <AreaChart name="Superannuation balance" data={areaData} />
+            <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
+            <Row type="flex" justify="space-between" gutter={32}>
+              <Col span={12}>
+                <StatisticItem {...statistic} title={'Accumulation balance'} subTitle={'At retirement'} />
+              </Col>
+              <Col span={12}>
+                <AreaChart name="Superannuation balance" data={areaData} />
+              </Col>
+            </Row>
             <StandardText data={standardTextExample} />
           </StrategyInfoWrapper>
         );
@@ -106,8 +131,15 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
       case StrategyTypes.Pensions: {
         return (
           <StrategyInfoWrapper>
-            <StatisticItem {...statistic} title={'Average pension income'} subTitle={'Per annum paid until'} />
-            <LineChart name="Pension balance" data={data} />
+            <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
+            <Row type="flex" justify="space-between" gutter={32}>
+              <Col span={12}>
+                <StatisticItem {...statistic} title={'Average pension income'} subTitle={'Per annum paid until'} />
+              </Col>
+              <Col span={12}>
+                <LineChart name="Pension balance" data={data} />
+              </Col>
+            </Row>
             <StandardText data={standardTextExample} />
           </StrategyInfoWrapper>
         );
@@ -115,8 +147,15 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
       case StrategyTypes.Investments: {
         return (
           <StrategyInfoWrapper>
-            <StatisticItem {...statistic} title={'Cash reserve'} subTitle={'At age'} />
-            <LineChart name="Investment (non-super) balance" data={data} />
+            <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
+            <Row type="flex" justify="space-between" gutter={32}>
+              <Col span={12}>
+                <StatisticItem {...statistic} title={'Cash reserve'} subTitle={'At age'} />
+              </Col>
+              <Col span={12}>
+                <LineChart name="Investment (non-super) balance" data={data} />
+              </Col>
+            </Row>
             <StandardText data={standardTextExample} />
           </StrategyInfoWrapper>
         );
@@ -124,12 +163,19 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
       case StrategyTypes.Debt: {
         return (
           <StrategyInfoWrapper>
-            <StatisticItem
-              {...statistic}
-              title={'Total interest cost'}
-              subTitle={'non-deductible debt over loan period'}
-            />
-            <LineChart name="Debt Value" data={data} />
+            <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
+            <Row type="flex" justify="space-between" gutter={32}>
+              <Col span={12}>
+                <StatisticItem
+                  {...statistic}
+                  title={'Total interest cost'}
+                  subTitle={'non-deductible debt over loan period'}
+                />
+              </Col>
+              <Col span={12}>
+                <LineChart name="Debt Value" data={data} />
+              </Col>
+            </Row>
             <StandardText data={standardTextExample} />
           </StrategyInfoWrapper>
         );
@@ -137,8 +183,15 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
       case StrategyTypes.Centrelink: {
         return (
           <StrategyInfoWrapper>
-            <StatisticItem {...statistic} title={'Centrelink income'} />
-            <LineChart name="Centrelink income" data={data} />
+            <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
+            <Row type="flex" justify="space-between" gutter={32}>
+              <Col span={12}>
+                <StatisticItem {...statistic} title={'Centrelink income'} />
+              </Col>
+              <Col span={12}>
+                <LineChart name="Centrelink income" data={data} />
+              </Col>
+            </Row>
             <StandardText data={standardTextExample} />
           </StrategyInfoWrapper>
         );

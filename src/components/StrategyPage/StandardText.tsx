@@ -5,6 +5,7 @@ const StandardTextWrapper = styled.section`
   background-color: #f7f7f7;
   padding: 15px;
   min-height: 103px;
+  margin-top: 24px;
 `;
 const Statement = styled.div`
   margin-top: 5px;

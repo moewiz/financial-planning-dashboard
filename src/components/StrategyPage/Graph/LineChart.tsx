@@ -23,8 +23,10 @@ const LineChart = (props: GraphProps) => {
       </GraphTitle>
       <GraphCard>
         <Line
+          height={190}
           data={data}
           options={{
+            maintainAspectRatio: false,
             legend: {
               display: false,
             },

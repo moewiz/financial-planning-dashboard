@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
-import { Typography } from 'antd';
 import StrategyInformation from './StrategyInformation';
 import { StrategyTypes } from '../../enums/strategies';
 import StrategyTable from './StrategyTable';
 import { Statistic } from './StatisticItem';
-import { StrategyWrapper, TitleStrategyBlock } from './styled';
+import { StrategyWrapper } from './styled';
+import { Col, Row } from 'antd';
 
 interface StrategyContainerProps {
   type: StrategyTypes;
@@ -16,31 +16,19 @@ interface StrategyContainerProps {
   strategies: object[];
 }
 
-const getTitle = (type: StrategyTypes) => {
-  switch (type) {
-    case StrategyTypes.Superannuation:
-      return 'Superannuation';
-    case StrategyTypes.Pensions:
-      return 'Pensions';
-    case StrategyTypes.Investments:
-      return 'Investments (non-super)';
-    case StrategyTypes.Debt:
-      return 'Debt';
-    case StrategyTypes.Centrelink:
-      return 'Centrelink';
-    default:
-      return '';
-  }
-};
-
 class StrategyContainer extends PureComponent<StrategyContainerProps> {
   public render() {
     const { information, strategies, type } = this.props;
     return (
       <StrategyWrapper>
-        <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
-        <StrategyInformation {...information} type={type} />
-        <StrategyTable strategies={strategies} />
+        <Row>
+          <Col span={12}>
+            <StrategyInformation {...information} type={type} />
+          </Col>
+          <Col span={12}>
+            <StrategyTable strategies={strategies} />
+          </Col>
+        </Row>
       </StrategyWrapper>
     );
   }

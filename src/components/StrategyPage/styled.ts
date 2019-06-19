@@ -22,18 +22,16 @@ const slideInUp = keyframes`
 `;
 
 export const StrategyPageWrapper = styled.div`
-  padding: 24px;
+  padding: 32px 24px;
 `;
-export const StrategyHeaderWrapper = styled.div`
-  display: flex;
+export const GraphWrapper = styled.div`
+  margin-top: -34px;
 `;
-export const GraphWrapper = styled.div``;
 export const GraphCard = styled.div`
-  width: 260px;
+  height: 220px;
   overflow: hidden;
   position: relative;
   padding: 20px 20px 10px 10px;
-  margin-right: 30px;
   background: #fff;
   border-radius: .35rem;
   box-shadow: 4px 4px 10px 3px rgba(100, 100, 101, 0.21), 0 0 15px rgba(115,162,208,0.06);
@@ -58,7 +56,9 @@ export const GraphTitle = styled.div`
   }
 `;
 
-export const StrategyWrapper = styled.div``;
+export const StrategyWrapper = styled.div`
+  margin-top: 30px;
+`;
 
 export const TitleStrategyBlock = styled.h3`
   color: #4e5b86;
@@ -68,15 +68,14 @@ export const TitleStrategyBlock = styled.h3`
 // Style StrategyInfoWrapper
 export const StrategyInfoWrapper = styled.div`
   display: flex;
-  margin-bottom: 30px;
+  flex-direction: column;
+  margin-right: 24px;
 `;
 
 export const StatisticWrapper = styled.div`
   overflow: hidden;
   position: relative;
-  margin-right: 30px;
-  min-width: 320px;
-  height: 195px;
+  height: 220px;
   background: #fff;
   border-radius: 0.35rem;
   box-shadow: 4px 4px 10px 3px rgba(100, 100, 101, 0.21), 0 0 15px rgba(115, 162, 208, 0.06);
