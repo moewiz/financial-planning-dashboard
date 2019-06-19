@@ -45,9 +45,8 @@ export const StrategyInfoWrapper = styled.div`
 export const StatisticWrapper = styled.div`
   overflow: hidden;
   position: relative;
-  padding: 20px 20px;
   margin-right: 30px;
-  min-width: 280px;
+  min-width: 320px;
   height: 195px;
   background: #fff;
   border-radius: 0.35rem;
@@ -57,8 +56,9 @@ export const StatisticGroup = styled.div`
   animation-name: ${slideOutUp};
   animation-duration: 1s;
   animation-fill-mode: both;
-  top: 15px;
-  left: 20px;
+  padding: 20px 20px;
+  top: 0px;
+  left: 0px;
   margin: 0px;
   height: 100%;
   width: 100%;
