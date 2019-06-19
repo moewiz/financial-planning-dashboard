@@ -2,11 +2,10 @@ import React, { PureComponent } from 'react';
 import { get } from 'lodash';
 import StatisticItem, { Statistic } from './StatisticItem';
 import { StrategyTypes } from '../../enums/strategies';
-import LineChart from './Graph/LineChart';
-import AreaChart from './Graph/AreaChart';
 import StandardText from './StandardText';
 import { StrategyInfoWrapper, TitleStrategyBlock } from './styled';
 import { Col, Row } from 'antd';
+import GraphContainer, { GraphType } from './Graph/GraphContainer';
 
 interface StrategyInformationProps {
   type: StrategyTypes;
@@ -121,7 +120,12 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
                 <StatisticItem {...statistic} title={'Accumulation balance'} subTitle={'At retirement'} />
               </Col>
               <Col span={12}>
-                <AreaChart name="Superannuation balance" data={areaData} className={'marginTop'} />
+                <GraphContainer
+                  type={GraphType.Area}
+                  name="Superannuation balance"
+                  data={areaData}
+                  className={'marginTop'}
+                />
               </Col>
             </Row>
             <StandardText data={standardTextExample} />
@@ -137,7 +141,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
                 <StatisticItem {...statistic} title={'Average pension income'} subTitle={'Per annum paid until'} />
               </Col>
               <Col span={12}>
-                <LineChart name="Pension balance" data={data} className={'marginTop'} />
+                <GraphContainer type={GraphType.Line} name="Pension balance" data={data} className={'marginTop'} />
               </Col>
             </Row>
             <StandardText data={standardTextExample} />
@@ -153,7 +157,12 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
                 <StatisticItem {...statistic} title={'Cash reserve'} subTitle={'At age'} />
               </Col>
               <Col span={12}>
-                <LineChart name="Investment (non-super) balance" data={data} className={'marginTop'} />
+                <GraphContainer
+                  type={GraphType.Line}
+                  name="Investment (non-super) balance"
+                  data={data}
+                  className={'marginTop'}
+                />
               </Col>
             </Row>
             <StandardText data={standardTextExample} />
@@ -173,7 +182,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
                 />
               </Col>
               <Col span={12}>
-                <LineChart name="Debt Value" data={data} className={'marginTop'} />
+                <GraphContainer type={GraphType.Line} name="Debt Value" data={data} className={'marginTop'} />
               </Col>
             </Row>
             <StandardText data={standardTextExample} />
@@ -189,7 +198,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
                 <StatisticItem {...statistic} title={'Centrelink income'} />
               </Col>
               <Col span={12}>
-                <LineChart name="Centrelink income" data={data} className={'marginTop'} />
+                <GraphContainer type={GraphType.Line} name="Centrelink income" data={data} className={'marginTop'} />
               </Col>
             </Row>
             <StandardText data={standardTextExample} />

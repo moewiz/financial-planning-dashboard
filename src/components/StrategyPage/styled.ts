@@ -26,14 +26,14 @@ export const StrategyPageWrapper = styled.div`
 `;
 export const GraphWrapper = styled.div`
   &.marginTop {
-    margin-top: -34px;
+    margin-top: -31px;
   }
 `;
 export const GraphCard = styled.div`
   height: 220px;
   overflow: hidden;
   position: relative;
-  padding: 20px 20px 10px 10px;
+  padding: 10px 10px 6px 6px;
   background: #fff;
   border-radius: .35rem;
   box-shadow: 4px 4px 10px 3px rgba(100, 100, 101, 0.21), 0 0 15px rgba(115,162,208,0.06);

@@ -1,6 +1,6 @@
 import React from 'react';
-import LineChart from './Graph/LineChart';
 import { Col, Row } from 'antd';
+import GraphContainer, { GraphType } from './Graph/GraphContainer';
 
 const data1 = {
   labels: ['19', '20', '21', '22', '23', '24', '25'],
@@ -138,16 +138,16 @@ const StrategyHeader = () => {
   return (
     <Row gutter={32}>
       <Col span={6}>
-        <LineChart name="Name 1" data={data1} />
+        <GraphContainer type={GraphType.Line} name="Name 1" data={data1} />
       </Col>
       <Col span={6}>
-        <LineChart name="Name 2" data={data2} />
+        <GraphContainer type={GraphType.Line} name="Name 2" data={data2} />
       </Col>
       <Col span={6}>
-        <LineChart name="Name 3" data={data3} />
+        <GraphContainer type={GraphType.Line} name="Name 3" data={data3} />
       </Col>
       <Col span={6}>
-        <LineChart name="Name 4" data={data4} />
+        <GraphContainer type={GraphType.Line} name="Name 4" data={data4} />
       </Col>
     </Row>
   );
