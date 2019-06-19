@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Icon } from 'antd';
 import { Line } from 'react-chartjs-2';
-import { GraphCard, GraphTitle, GraphWrapper } from '../styled';
+import { GraphCard, GraphTitle, GraphWrapper, GraphGroup } from '../styled';
+import classNames from 'classnames';
 
 export enum GraphType {
   Line,
@@ -18,43 +19,128 @@ interface GraphProps {
   options?: object;
   className?: string;
 }
-
+const data1 = {
+  labels: ['19', '20', '21', '22', '23', '24', '25'],
+  datasets: [
+    {
+      label: 'a',
+      fill: false,
+      borderColor: '#FF5722',
+      data: [165000, 159000, 150000, 165000, 235000, 45000, 140000],
+    },
+    {
+      label: 'b',
+      fill: false,
+      borderColor: '#00BCD4',
+      data: [165000, 235000, 70000, 120000, 165000, 150000, 120000],
+    },
+  ],
+};
+const data2 = {
+  labels: ['19', '20', '21', '22', '23', '24', '25'],
+  datasets: [
+    {
+      label: 'a',
+      fill: false,
+      borderColor: '#FF5722',
+      data: [165000, 159000, 120000, 165000, 235000, 120000, 140000],
+    },
+    {
+      label: 'b',
+      fill: false,
+      borderColor: '#00BCD4',
+      data: [70000, 150000, 45000, 100000, 65000, 35000, 150000],
+    },
+  ],
+};
+const datasets1 = [
+  ...data1.datasets,
+  {
+    label: 'c',
+    fill: true,
+    borderColor: '#00BCD4',
+    data: [70000, 45000, 45000, 150000, 100000, 35000, 65000],
+  },
+];
+const areaData1 = {
+  ...data1,
+  datasets: datasets1.map((dataset, index) => ({
+    ...dataset,
+    fill: true,
+    borderColor: '',
+    pointRadius: 0,
+  })),
+};
+const datasets2 = [
+  ...data1.datasets,
+  {
+    label: 'c',
+    fill: true,
+    borderColor: '#00BCD4',
+    data: [150000, 24500, 32500, 75000, 63000, 31000, 13000],
+  },
+];
+const areaData2 = {
+  ...data1,
+  datasets: datasets2.map((dataset, index) => ({
+    ...dataset,
+    fill: true,
+    borderColor: '',
+    pointRadius: 0,
+  })),
+};
 const GraphContainer = (props: GraphProps) => {
   const { type, name, data, className } = props;
-  const renderGraph = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  // const listOfData = type === GraphType.Line ? [data1, data2] : [areaData1, areaData2];
+  const listOfData = [data, data];
+  const updateActiveIndex = () => {
+    const nextActiveIndex = activeIndex + 1 >= listOfData.length ? 0 : activeIndex + 1;
+    setActiveIndex(nextActiveIndex);
+  };
+  useEffect(() => {
+    const id = setInterval(updateActiveIndex, 6000);
+    return () => clearInterval(id);
+  }, [activeIndex]);
+
+  const renderGraph = (graphData: any, index: number) => {
     switch (type) {
       case GraphType.Area:
         return (
-          <Line
-            height={190}
-            data={data}
-            options={{
-              maintainAspectRatio: false,
-              legend: {
-                display: false,
-              },
-              scales: {
-                yAxes: [
-                  {
-                    stacked: true,
-                  },
-                ],
-              },
-            }}
-          />
+          <GraphCard className={classNames({ active: index === activeIndex })} key={index}>
+            <Line
+              height={190}
+              data={graphData}
+              options={{
+                maintainAspectRatio: false,
+                legend: {
+                  display: false,
+                },
+                scales: {
+                  yAxes: [
+                    {
+                      stacked: true,
+                    },
+                  ],
+                },
+              }}
+            />
+          </GraphCard>
         );
       case GraphType.Line:
         return (
-          <Line
-            height={190}
-            data={data}
-            options={{
-              maintainAspectRatio: false,
-              legend: {
-                display: false,
-              },
-            }}
-          />
+          <GraphCard className={classNames({ active: index === activeIndex })} key={index}>
+            <Line
+              height={190}
+              data={graphData}
+              options={{
+                maintainAspectRatio: false,
+                legend: {
+                  display: false,
+                },
+              }}
+            />
+          </GraphCard>
         );
       default:
         return null;
@@ -67,7 +153,9 @@ const GraphContainer = (props: GraphProps) => {
         <Icon type="info-circle" theme="filled" />
         {name}
       </GraphTitle>
-      <GraphCard>{renderGraph()}</GraphCard>
+      <GraphGroup>
+          {listOfData.map(renderGraph)}
+      </GraphGroup>
     </GraphWrapper>
   );
 };

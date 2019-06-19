@@ -29,22 +29,28 @@ export const GraphWrapper = styled.div`
     margin-top: -31px;
   }
 `;
-export const GraphCard = styled.div`
-  height: 220px;
+export const GraphGroup = styled.section`
   overflow: hidden;
   position: relative;
-  padding: 10px 10px 6px 6px;
   background: #fff;
-  border-radius: .35rem;
-  box-shadow: 4px 4px 10px 3px rgba(100, 100, 101, 0.21), 0 0 15px rgba(115,162,208,0.06);
+  height: 220px;
+  border-radius: 0.35rem;
+  box-shadow: 4px 4px 10px 3px rgba(100, 100, 101, 0.21), 0 0 15px rgba(115, 162, 208, 0.06);
   box-sizing: border-box;
+`;
+export const GraphCard = styled.div`
+  height: 220px;
+  width: 100%;
+  padding: 10px 10px 6px 6px;
+  overflow: hidden;
+  position: absolute;
   animation-duration: 1s;
   animation-fill-mode: both;
-  animation-name: slideOutUp;
-  &.active{
+  animation-name: ${slideOutUp};
+  &.active {
     animation-duration: 1s;
     animation-fill-mode: both;
-    animation-name: slideInUp;
+    animation-name: ${slideInUp};
   }
 `;
 export const GraphTitle = styled.div`
@@ -53,7 +59,7 @@ export const GraphTitle = styled.div`
   font-size: 14px;
   color: #4e5b86;
   margin-bottom: 10px;
-  .anticon-info-circle{
+  .anticon-info-circle {
     margin-right: 5px;
   }
 `;
