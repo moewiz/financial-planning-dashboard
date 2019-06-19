@@ -21,7 +21,7 @@ export default class ClientSaga {
               clientId,
               tagName,
               tabName,
-              dataEntry: response.data.data,
+              pageData: response.data.data,
             },
           });
         }
@@ -50,7 +50,7 @@ export default class ClientSaga {
             clientId: payload.clientId,
             tagName,
             tabName,
-            dataEntry: response.data.data,
+            pageData: response.data.data,
           },
         });
       }

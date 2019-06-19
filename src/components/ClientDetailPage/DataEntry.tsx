@@ -416,7 +416,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
             <span>Discard</span>
           </Button>
           <Button htmlType={'submit'} type={'primary'} onClick={this.handleSubmitForm} loading={submitting}>
-            { !submitting && <Icon type="check" /> }
+            {!submitting && <Icon type="check" />}
             <span>Submit</span>
           </Button>
         </ActionTableGeneral>

@@ -102,7 +102,7 @@ export default class ClientReducer {
 
               return {
                 tabName,
-                pageData: action.payload.dataEntry,
+                pageData: action.payload.pageData,
               };
             }),
           };

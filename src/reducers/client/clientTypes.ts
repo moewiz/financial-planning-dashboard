@@ -10,10 +10,18 @@ export interface Table {
   liabilities?: object[];
   insurance?: object[];
 }
+export interface Strategy {
+  superannuation?: object;
+  pension?: object;
+  investments?: object;
+  debt?: object;
+  centrelink?: object;
+  estatePlanning?: object;
+}
 
 export interface DataEntry {
   tabName: string;
-  pageData: Table;
+  pageData: any;
 }
 
 export interface Tag {
