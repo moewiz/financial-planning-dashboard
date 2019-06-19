@@ -22,7 +22,7 @@ const slideInUp = keyframes`
 `;
 
 export const StrategyPageWrapper = styled.div`
-  padding: 24px 24px;
+  padding: 48px 24px;
 `;
 export const GraphWrapper = styled.div`
   &.marginTop {
@@ -65,19 +65,19 @@ export const GraphTitle = styled.div`
 `;
 
 export const StrategyWrapper = styled.div`
-  margin-top: 30px;
+  margin-top: 64px;
 `;
 
 export const TitleStrategyBlock = styled.h3`
   color: #4e5b86;
   font-size: 21px;
   font-weight: 600;
+  margin-bottom: 20px;
 `;
 // Style StrategyInfoWrapper
 export const StrategyInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: 24px;
 `;
 
 export const StatisticWrapper = styled.div`

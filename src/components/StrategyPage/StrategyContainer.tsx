@@ -21,7 +21,7 @@ class StrategyContainer extends PureComponent<StrategyContainerProps> {
     const { information, strategies, type } = this.props;
     return (
       <StrategyWrapper>
-        <Row>
+        <Row gutter={24}>
           <Col span={12}>
             <StrategyInformation {...information} type={type} />
           </Col>
