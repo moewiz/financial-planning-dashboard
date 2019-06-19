@@ -13,8 +13,6 @@ import { find, map, isArray, isFunction, pick, get } from 'lodash';
 import {
   Client,
   Tag,
-  FetchDataEntryPayload,
-  FetchDataEntryAction,
   ClientActions,
   Table,
   DataEntry,
@@ -38,7 +36,6 @@ interface DataEntryProps {
   pageData?: Table;
   loading?: boolean;
   submitting?: boolean;
-  fetchDataEntry?: (payload: FetchDataEntryPayload) => FetchDataEntryAction;
   updateDataEntry?: (payload: UpdateDataEntryPayload) => UpdateDataEntryAction;
   updateMaritalStatus?: (maritalStatus: string) => UpdateMaritalStatusAction;
   updateEmpStatus?: (empStatus: string) => UpdateEmpStatus;
@@ -93,20 +90,8 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
     });
   }
 
-  public componentDidMount() {
-    const { clientId, tagName, tabName, fetchDataEntry } = this.props;
-
-    if (clientId && tagName && tabName && fetchDataEntry) {
-      this.fetchDataEntry({ clientId, tagName, tabName });
-    }
-  }
-
   public componentDidUpdate(prevProps: Readonly<DataEntryProps>, prevState: Readonly<{}>, snapshot?: any): void {
-    const { clientId, tagName, tabName, loading, updateMaritalStatus, updateEmpStatus, pageData } = this.props;
-
-    if (prevProps.clientId !== clientId || prevProps.tagName !== tagName || prevProps.tabName !== tabName) {
-      this.fetchDataEntry({ clientId, tagName, tabName });
-    }
+    const { loading, updateMaritalStatus, updateEmpStatus, pageData } = this.props;
 
     if (loading !== prevProps.loading && updateMaritalStatus && updateEmpStatus) {
       const maritalStatus = get(pageData, 'basicInformation[0].maritalStatus');
@@ -125,14 +110,6 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
 
     if (updateAssets) {
       updateAssets(assets);
-    }
-  }
-
-  public fetchDataEntry = (params: { clientId: number; tagName: string; tabName: string }) => {
-    const { fetchDataEntry } = this.props;
-
-    if (fetchDataEntry) {
-      fetchDataEntry(params);
     }
   }
 
@@ -484,7 +461,6 @@ const mapStateToProps = (state: RootState, ownProps: DataEntryProps) => {
 const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>
   bindActionCreators(
     {
-      fetchDataEntry: ClientActions.fetchDataEntry,
       updateDataEntry: ClientActions.updateDataEntry,
       updateMaritalStatus: ClientActions.updateMaritalStatus,
       updateEmpStatus: ClientActions.updateEmpStatus,

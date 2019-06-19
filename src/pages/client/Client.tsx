@@ -61,7 +61,7 @@ class Client extends React.PureComponent<RouteComponentProps & ClientProps> {
     if (fetchDataEntry) {
       fetchDataEntry(params);
     }
-  };
+  }
 
   public render(): JSX.Element {
     const { match } = this.props;
