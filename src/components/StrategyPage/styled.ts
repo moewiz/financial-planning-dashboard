@@ -29,9 +29,7 @@ export const GraphCard = styled.div`
 `;
 export const GraphTitle = styled.div``;
 
-
-export const StrategyWrapper = styled.div`
-`;
+export const StrategyWrapper = styled.div``;
 
 export const TitleStrategyBlock = styled.h3`
   color: #4e5b86;
@@ -44,7 +42,6 @@ export const StrategyInfoWrapper = styled.div`
   margin-bottom: 30px;
 `;
 
-
 export const StatisticWrapper = styled.div`
   overflow: hidden;
   position: relative;
@@ -53,8 +50,8 @@ export const StatisticWrapper = styled.div`
   min-width: 280px;
   height: 195px;
   background: #fff;
-  border-radius: .35rem;
-  box-shadow: 4px 4px 10px 3px rgba(100, 100, 101, 0.21), 0 0 15px rgba(115,162,208,0.06);
+  border-radius: 0.35rem;
+  box-shadow: 4px 4px 10px 3px rgba(100, 100, 101, 0.21), 0 0 15px rgba(115, 162, 208, 0.06);
 `;
 export const StatisticGroup = styled.div`
   animation-name: ${slideOutUp};
@@ -68,7 +65,7 @@ export const StatisticGroup = styled.div`
   overflow: hidden;
   position: absolute;
   z-index: 20;
-  &.active{
+  &.active {
     animation-duration: 1s;
     animation-fill-mode: both;
     animation-name: ${slideInUp};
@@ -80,7 +77,6 @@ export const StatisticLabel = styled.span`
   width: 100%;
   font-size: 16px;
   color: #4e5b86;
-
 `;
 export const StatisticValue = styled.span`
   display: inline-block;
@@ -102,10 +98,10 @@ export const StatisticUpDown = styled.span`
   display: inline-block;
   margin-bottom: 14px;
   width: 100%;
-  .anticon-caret-up{
+  .anticon-caret-up {
     color: #29c308;
   }
-  .anticon-caret-down{
+  .anticon-caret-down {
     color: #ff0000;
   }
 `;

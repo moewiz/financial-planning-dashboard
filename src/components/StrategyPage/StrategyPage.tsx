@@ -19,7 +19,7 @@ const StrategyPage = (props: StrategyPageProps) => {
           statistic: {
             total: 20140404,
             isIncrease: true,
-            differenceNumber: 21640,
+            delta: 21640,
             subValue: 69,
           },
           graph: {},
@@ -33,7 +33,7 @@ const StrategyPage = (props: StrategyPageProps) => {
           statistic: {
             total: 20140404,
             isIncrease: true,
-            differenceNumber: 21640,
+            delta: 21640,
             subValue: 69,
           },
           graph: {},
@@ -47,7 +47,7 @@ const StrategyPage = (props: StrategyPageProps) => {
           statistic: {
             total: 20140404,
             isIncrease: true,
-            differenceNumber: 21640,
+            delta: 21640,
             subValue: 69,
           },
           graph: {},
@@ -61,7 +61,7 @@ const StrategyPage = (props: StrategyPageProps) => {
           statistic: {
             total: 20140404,
             isIncrease: true,
-            differenceNumber: 21640,
+            delta: 21640,
             subValue: 69,
           },
           graph: {},
@@ -75,7 +75,7 @@ const StrategyPage = (props: StrategyPageProps) => {
           statistic: {
             total: 20140404,
             isIncrease: true,
-            differenceNumber: 21640,
+            delta: 21640,
             subValue: 69,
           },
           graph: {},

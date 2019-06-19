@@ -5,10 +5,7 @@ import StatisticItem, { Statistic } from './StatisticItem';
 import { GraphCard, GraphTitle } from './styled';
 import { StrategyTypes } from '../../enums/strategies';
 import StandardText from './StandardText';
-import {
-  StrategyInfoWrapper
-} from './styled';
-
+import { StrategyInfoWrapper } from './styled';
 
 interface StrategyInformationProps {
   type: StrategyTypes;
