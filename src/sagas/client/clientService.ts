@@ -16,7 +16,7 @@ export default class AuthService {
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve({ status: 200, data: { data, error: null, message: null, success: true } });
-        }, 500);
+        }, 1000);
       });
     }
     return ApiUtils.HTTP.get(url);
