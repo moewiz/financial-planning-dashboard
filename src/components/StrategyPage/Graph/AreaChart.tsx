@@ -10,13 +10,14 @@ interface GraphProps {
     datasets: object[];
   };
   options?: object;
+  className?: string;
 }
 
 const AreaChart = (props: GraphProps) => {
-  const { name, data } = props;
+  const { name, data, className } = props;
 
   return (
-    <GraphWrapper>
+    <GraphWrapper className={className}>
       <GraphTitle>
         <Icon type="info-circle" theme="filled" />
         {name}

@@ -22,10 +22,12 @@ const slideInUp = keyframes`
 `;
 
 export const StrategyPageWrapper = styled.div`
-  padding: 32px 24px;
+  padding: 24px 24px;
 `;
 export const GraphWrapper = styled.div`
-  margin-top: -34px;
+  &.marginTop {
+    margin-top: -34px;
+  }
 `;
 export const GraphCard = styled.div`
   height: 220px;
@@ -48,7 +50,7 @@ export const GraphCard = styled.div`
 export const GraphTitle = styled.div`
   display: inline-block;
   width: 100%;
-  font-size: 16px;
+  font-size: 14px;
   color: #4e5b86;
   margin-bottom: 10px;
   .anticon-info-circle{
@@ -103,25 +105,25 @@ export const StatisticGroup = styled.div`
 export const StatisticLabel = styled.span`
   display: inline-block;
   width: 100%;
-  font-size: 16px;
+  font-size: 14px;
   color: #4e5b86;
 `;
 export const StatisticValue = styled.span`
   display: inline-block;
   width: 100%;
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 700;
   color: #4e5b86;
 `;
 export const StatisticSubValue = styled.span`
   display: inline-block;
   width: 100%;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   color: #4e5b86;
 `;
 export const StatisticUpDown = styled.span`
-  font-size: 18px;
+  font-size: 16px;
   color: #4e5b86;
   display: inline-block;
   margin-bottom: 14px;
