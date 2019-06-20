@@ -1,4 +1,5 @@
 import React, { memo, useEffect, useState } from 'react';
+import numeral from 'numeral';
 import { Icon } from 'antd';
 import classNames from 'classnames';
 
@@ -41,9 +42,9 @@ const StatisticItem = (props: StatisticItemProps) => {
       {listOfKpi.map((kpi, index) => (
         <StatisticGroup key={index} className={classNames({ active: index === activeIndex })}>
           <StatisticLabel> {title}: </StatisticLabel>
-          <StatisticValue>$ {kpi.total}</StatisticValue>
+          <StatisticValue>$ {numeral(kpi.total).format('0,0')}</StatisticValue>
           <StatisticUpDown>
-            {kpi.isIncrease ? <Icon type="caret-up" /> : <Icon type="caret-down" />} ${kpi.delta}
+            {kpi.isIncrease ? <Icon type="caret-up" /> : <Icon type="caret-down" />} ${numeral(kpi.delta).format('0,0')}
           </StatisticUpDown>
           {subTitle && kpi.subValue && (
             <>

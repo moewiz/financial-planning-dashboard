@@ -9,13 +9,13 @@
         "accumulationBalance": 9999999,
         "isIncrease": true,
         "delta": 21600,
-        "retirementYear": 2049
+        "retirementYear": 65
       },
       {
         "accumulationBalance": 8888888,
         "isIncrease": false,
         "delta": 9500,
-        "retirementYear": 2049
+        "retirementYear": 68
       }
     ],
     "graph": [[], []],
