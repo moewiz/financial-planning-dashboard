@@ -12,7 +12,7 @@ export interface Table {
 }
 export interface StandardText {
   text: string;
-  params?: [string];
+  params?: string[];
 }
 export interface Strategy {
   kpi: object[];

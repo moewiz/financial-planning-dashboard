@@ -17,6 +17,20 @@ const StrategyPage = (props: StrategyPageProps) => {
   const [visible, setVisible] = useState(false);
   const { pageData } = props;
   const superannuation = get(pageData, 'superannuation');
+  const standardText = [
+    {
+      text: 'Pension funds will be invested in line with {{0}} risk profile',
+      params: ['xx'],
+    },
+    {
+      text: 'Product fees of {{0}} factored in pension value',
+      params: ['xx%'],
+    },
+    {
+      text: 'Income set to meet required expenses of {{0}} per annum',
+      params: ['$xx,xx'],
+    },
+  ];
 
   return (
     <StrategyPageWrapper>
@@ -38,9 +52,15 @@ const StrategyPage = (props: StrategyPageProps) => {
               delta: 21640,
               subValue: 69,
             },
+            {
+              total: 20140404,
+              isIncrease: true,
+              delta: 21640,
+              subValue: 69,
+            },
           ],
           graph: {},
-          standardText: [],
+          standardText,
         }}
         strategies={[]}
       />
@@ -54,9 +74,15 @@ const StrategyPage = (props: StrategyPageProps) => {
               delta: 21640,
               subValue: 69,
             },
+            {
+              total: 20140404,
+              isIncrease: true,
+              delta: 21640,
+              subValue: 69,
+            },
           ],
           graph: {},
-          standardText: [],
+          standardText,
         }}
         strategies={[]}
       />
@@ -70,9 +96,15 @@ const StrategyPage = (props: StrategyPageProps) => {
               delta: 21640,
               subValue: 69,
             },
+            {
+              total: 20140404,
+              isIncrease: true,
+              delta: 21640,
+              subValue: 69,
+            },
           ],
           graph: {},
-          standardText: [],
+          standardText,
         }}
         strategies={[]}
       />
@@ -86,9 +118,15 @@ const StrategyPage = (props: StrategyPageProps) => {
               delta: 21640,
               subValue: 69,
             },
+            {
+              total: 20140404,
+              isIncrease: true,
+              delta: 21640,
+              subValue: 69,
+            },
           ],
           graph: {},
-          standardText: [],
+          standardText,
         }}
         strategies={[]}
       />

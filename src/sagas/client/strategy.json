@@ -25,8 +25,8 @@
         "params": ["xx"]
       },
       {
-        "text": "Product fees of {{0}}% factored in superannuation value",
-        "params": ["xx"]
+        "text": "Product fees of {{0}} factored in superannuation value",
+        "params": ["xx%"]
       },
       {
         "text": "Funds transferred into pension phase at retirement"
@@ -56,12 +56,12 @@
         "params": ["xx"]
       },
       {
-        "text": "Product fees of {{0}}% factored in pension value",
-        "params": ["xx"]
+        "text": "Product fees of {{0}} factored in pension value",
+        "params": ["xx%"]
       },
       {
-        "text": "Income set to meet required expenses of ${{0}} per annum",
-        "params": ["xx,xx"]
+        "text": "Income set to meet required expenses of {{0}} per annum",
+        "params": ["$xx,xx"]
       }
     ],
     "strategies": []
@@ -92,8 +92,8 @@
         "params": ["Investment name 2", "xx"]
       },
       {
-        "text": "Product fees of {{0}}% factored in investment value",
-        "params": ["xx"]
+        "text": "Product fees of {{0}} factored in investment value",
+        "params": ["xx%"]
       },
       {
         "text": "Investment income {{0}} for full period",
@@ -120,12 +120,12 @@
     "graph": [[], []],
     "standardText": [
       {
-        "text": "Interest rate of {{0}}% assumed for {{1}}, with a maximum period of {{2}} years",
-        "params": ["x.xx", "loan name 1", "xx"]
+        "text": "Interest rate of {{0}} assumed for {{1}}, with a maximum period of {{2}} years",
+        "params": ["x.xx%", "loan name 1", "xx"]
       },
       {
-        "text": "Interest rate of {{0}}% assumed for {{1}}, with a maximum period of {{2}} years",
-        "params": ["x.xx", "loan name 2", "xx"]
+        "text": "Interest rate of {{0}} assumed for {{1}}, with a maximum period of {{2}} years",
+        "params": ["x.xx%", "loan name 2", "xx"]
       },
       {
         "text": "All loans paid out at retirement age ({{0}})",

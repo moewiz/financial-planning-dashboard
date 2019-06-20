@@ -126,7 +126,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
             <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
-                <StatisticItem listOfKpi={[]} title={'Average pension income'} subTitle={'Per annum paid until'} />
+                <StatisticItem listOfKpi={kpi} title={'Average pension income'} subTitle={'Per annum paid until'} />
               </Col>
               <Col span={12}>
                 <GraphContainer type={GraphType.Line} name="Pension balance" data={data} className={'marginTop'} />
@@ -142,7 +142,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
             <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
-                <StatisticItem listOfKpi={[]} title={'Cash reserve'} subTitle={'At age'} />
+                <StatisticItem listOfKpi={kpi} title={'Cash reserve'} subTitle={'At age'} />
               </Col>
               <Col span={12}>
                 <GraphContainer
@@ -164,7 +164,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
                 <StatisticItem
-                  listOfKpi={[]}
+                  listOfKpi={kpi}
                   title={'Total interest cost'}
                   subTitle={'non-deductible debt over loan period'}
                 />
@@ -183,7 +183,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
             <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
-                <StatisticItem listOfKpi={[]} title={'Centrelink income'} />
+                <StatisticItem listOfKpi={kpi} title={'Centrelink income'} />
               </Col>
               <Col span={12}>
                 <GraphContainer type={GraphType.Line} name="Centrelink income" data={data} className={'marginTop'} />
