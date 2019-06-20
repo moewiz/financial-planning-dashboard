@@ -25,7 +25,7 @@
         "params": ["xx"]
       },
       {
-        "text": "Product fees of {{xx}}% factored in superannuation value",
+        "text": "Product fees of {{0}}% factored in superannuation value",
         "params": ["xx"]
       },
       {
@@ -52,11 +52,11 @@
     "graph": [[], []],
     "standardText": [
       {
-        "text": "Pension funds will be invested in line with {{}} risk profile",
+        "text": "Pension funds will be invested in line with {{0}} risk profile",
         "params": ["xx"]
       },
       {
-        "text": "Product fees of {{}}% factored in pension value",
+        "text": "Product fees of {{0}}% factored in pension value",
         "params": ["xx"]
       },
       {

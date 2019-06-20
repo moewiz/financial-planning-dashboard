@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { isFunction } from 'lodash';
 import { StandardText as IStandardText } from '../../reducers/client';
 
 const StandardTextWrapper = styled.section`
@@ -28,21 +29,46 @@ interface StandardTextProp {
   data: IStandardText[];
 }
 
+const formatString = (
+  text: string,
+  formattingFunc?: (value: number | string, i: number) => React.ReactNode,
+  ...values: Array<number | string>
+) => {
+  const templateSplit = new RegExp(/{{(\d)}}/g);
+  const isNumber = new RegExp(/^\d+$/);
+  const splitText = text.split(templateSplit);
+  return splitText.map((sentence, index) => {
+    if (isNumber.test(sentence)) {
+      const value = values[Number(sentence)];
+      return isFunction(formattingFunc) ? formattingFunc(value, index) : value;
+    }
+    return sentence;
+  });
+};
+
 const StandardText = (props: StandardTextProp) => {
+  const { data } = props;
   return (
     <StandardTextWrapper>
-      <Statement>
-        <Text>Superannuation funds will continue to be invested in line with your</Text> <Param>xx</Param>{' '}
-        <Text>risk profile</Text>
-      </Statement>
-      <Statement>
-        <Text>Product fees of</Text> <Param>x.x%</Param> <Text>factored in superannuation value</Text>
-      </Statement>
-      <Statement>
-        <Text>Funds transferred into pension phase at retirement</Text>
-      </Statement>
+      {data.map((statement: IStandardText, index) => (
+        <Statement key={index}>
+          {statement.params && statement.params.length > 0 ? (
+            <Text>
+              {formatString(
+                statement.text,
+                (value, i) => (
+                  <Param key={i}>{value}</Param>
+                ),
+                ...statement.params,
+              )}
+            </Text>
+          ) : (
+            <Text>{statement.text}</Text>
+          )}
+        </Statement>
+      ))}
     </StandardTextWrapper>
   );
 };
 
-export default StandardText;
+export default React.memo(StandardText);
