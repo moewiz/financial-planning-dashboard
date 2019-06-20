@@ -18,6 +18,7 @@ interface GraphProps {
   };
   options?: object;
   className?: string;
+  flipping?: boolean;
 }
 const data1 = {
   labels: ['19', '20', '21', '22', '23', '24', '25'],
@@ -90,10 +91,9 @@ const areaData2 = {
   })),
 };
 const GraphContainer = (props: GraphProps) => {
-  const { type, name, data, className } = props;
+  const { type, name, data, className, flipping = true } = props;
   const [activeIndex, setActiveIndex] = useState(0);
-  // const listOfData = type === GraphType.Line ? [data1, data2] : [areaData1, areaData2];
-  const listOfData = [data, data];
+  const listOfData = flipping ? [data, data] : [data];
   const updateActiveIndex = () => {
     const nextActiveIndex = activeIndex + 1 >= listOfData.length ? 0 : activeIndex + 1;
     setActiveIndex(nextActiveIndex);
@@ -153,9 +153,7 @@ const GraphContainer = (props: GraphProps) => {
         <Icon type="info-circle" theme="filled" />
         {name}
       </GraphTitle>
-      <GraphGroup>
-          {listOfData.map(renderGraph)}
-      </GraphGroup>
+      <GraphGroup>{listOfData.map(renderGraph)}</GraphGroup>
     </GraphWrapper>
   );
 };

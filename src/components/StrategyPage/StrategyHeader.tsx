@@ -138,16 +138,16 @@ const StrategyHeader = () => {
   return (
     <Row gutter={32}>
       <Col span={6}>
-        <GraphContainer type={GraphType.Line} name="Name 1" data={data1} />
+        <GraphContainer type={GraphType.Line} name="Name 1" data={data1} flipping={false} />
       </Col>
       <Col span={6}>
-        <GraphContainer type={GraphType.Line} name="Name 2" data={data2} />
+        <GraphContainer type={GraphType.Line} name="Name 2" data={data2} flipping={false} />
       </Col>
       <Col span={6}>
-        <GraphContainer type={GraphType.Line} name="Name 3" data={data3} />
+        <GraphContainer type={GraphType.Line} name="Name 3" data={data3} flipping={false} />
       </Col>
       <Col span={6}>
-        <GraphContainer type={GraphType.Line} name="Name 4" data={data4} />
+        <GraphContainer type={GraphType.Line} name="Name 4" data={data4} flipping={false} />
       </Col>
     </Row>
   );
