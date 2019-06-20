@@ -2,16 +2,16 @@ import React, { PureComponent } from 'react';
 import StrategyInformation from './StrategyInformation';
 import { StrategyTypes } from '../../enums/strategies';
 import StrategyTable from './StrategyTable';
-import { Statistic } from './StatisticItem';
 import { StrategyWrapper } from './styled';
 import { Col, Row } from 'antd';
+import { StandardText } from '../../reducers/client';
 
 interface StrategyContainerProps {
   type: StrategyTypes;
   information: {
-    statistic: Statistic;
+    kpi: any[];
     graph: any;
-    expandable: object;
+    standardText: StandardText[];
   };
   strategies: object[];
 }

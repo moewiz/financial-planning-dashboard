@@ -1,17 +1,18 @@
 import React, { PureComponent } from 'react';
-import { get } from 'lodash';
+import { get, map } from 'lodash';
 import StatisticItem, { Statistic } from './StatisticItem';
 import { StrategyTypes } from '../../enums/strategies';
 import StandardText from './StandardText';
 import { StrategyInfoWrapper, TitleStrategyBlock } from './styled';
 import { Col, Row } from 'antd';
 import GraphContainer, { GraphType } from './Graph/GraphContainer';
+import { StandardText as IStandardText } from '../../reducers/client/clientTypes';
 
 interface StrategyInformationProps {
   type: StrategyTypes;
-  statistic: Statistic;
+  kpi: Statistic[];
   graph: any;
-  expandable: object;
+  standardText: IStandardText[];
 }
 
 const getTitle = (type: StrategyTypes) => {
@@ -74,21 +75,7 @@ const superannuationChartColors = [colors.lightBlue, colors.darkBlue, colors.gre
 
 class StrategyInformation extends PureComponent<StrategyInformationProps> {
   public render() {
-    const { statistic, type } = this.props;
-    const standardTextExample = [
-      {
-        text: 'Text line {{0}}',
-        params: ['one'],
-      },
-      {
-        text: 'Text line {{0}}',
-        params: ['two'],
-      },
-      {
-        text: 'Text line {{0}}',
-        params: ['three'],
-      },
-    ];
+    const { kpi, type, standardText } = this.props;
 
     switch (type) {
       case StrategyTypes.Superannuation: {
@@ -111,13 +98,14 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
             backgroundColor: get(superannuationChartColors[index], 'fill'),
           })),
         };
+        const listOfKpi = map(kpi, (i: any) => ({ ...i, total: i.accumulationBalance, subValue: i.retirementYear }));
 
         return (
           <StrategyInfoWrapper>
             <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
-                <StatisticItem {...statistic} title={'Accumulation balance'} subTitle={'At retirement'} />
+                <StatisticItem listOfKpi={listOfKpi} title={'Accumulation balance'} subTitle={'At retirement'} />
               </Col>
               <Col span={12}>
                 <GraphContainer
@@ -128,7 +116,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
                 />
               </Col>
             </Row>
-            <StandardText data={standardTextExample} />
+            <StandardText data={standardText} />
           </StrategyInfoWrapper>
         );
       }
@@ -138,13 +126,13 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
             <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
-                <StatisticItem {...statistic} title={'Average pension income'} subTitle={'Per annum paid until'} />
+                <StatisticItem listOfKpi={[]} title={'Average pension income'} subTitle={'Per annum paid until'} />
               </Col>
               <Col span={12}>
                 <GraphContainer type={GraphType.Line} name="Pension balance" data={data} className={'marginTop'} />
               </Col>
             </Row>
-            <StandardText data={standardTextExample} />
+            <StandardText data={standardText} />
           </StrategyInfoWrapper>
         );
       }
@@ -154,7 +142,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
             <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
-                <StatisticItem {...statistic} title={'Cash reserve'} subTitle={'At age'} />
+                <StatisticItem listOfKpi={[]} title={'Cash reserve'} subTitle={'At age'} />
               </Col>
               <Col span={12}>
                 <GraphContainer
@@ -165,7 +153,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
                 />
               </Col>
             </Row>
-            <StandardText data={standardTextExample} />
+            <StandardText data={standardText} />
           </StrategyInfoWrapper>
         );
       }
@@ -176,7 +164,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
                 <StatisticItem
-                  {...statistic}
+                  listOfKpi={[]}
                   title={'Total interest cost'}
                   subTitle={'non-deductible debt over loan period'}
                 />
@@ -185,7 +173,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
                 <GraphContainer type={GraphType.Line} name="Debt Value" data={data} className={'marginTop'} />
               </Col>
             </Row>
-            <StandardText data={standardTextExample} />
+            <StandardText data={standardText} />
           </StrategyInfoWrapper>
         );
       }
@@ -195,13 +183,13 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
             <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
-                <StatisticItem {...statistic} title={'Centrelink income'} />
+                <StatisticItem listOfKpi={[]} title={'Centrelink income'} />
               </Col>
               <Col span={12}>
                 <GraphContainer type={GraphType.Line} name="Centrelink income" data={data} className={'marginTop'} />
               </Col>
             </Row>
-            <StandardText data={standardTextExample} />
+            <StandardText data={standardText} />
           </StrategyInfoWrapper>
         );
       }

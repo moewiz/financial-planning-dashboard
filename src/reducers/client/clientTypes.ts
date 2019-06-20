@@ -10,13 +10,23 @@ export interface Table {
   liabilities?: object[];
   insurance?: object[];
 }
+export interface StandardText {
+  text: string;
+  params?: [string];
+}
 export interface Strategy {
-  superannuation?: object;
-  pension?: object;
-  investments?: object;
-  debt?: object;
-  centrelink?: object;
-  estatePlanning?: object;
+  kpi: object[];
+  graph: [];
+  standardText: StandardText[];
+  strategies: [];
+}
+export interface StrategyEntry {
+  superannuation?: Strategy;
+  pension?: Strategy;
+  investments?: Strategy;
+  debt?: Strategy;
+  centrelink?: Strategy;
+  estatePlanning?: Strategy;
 }
 
 export interface DataEntry {

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { StandardText as IStandardText } from '../../reducers/client';
 
 const StandardTextWrapper = styled.section`
   background-color: #f7f7f7;
@@ -24,7 +25,7 @@ const Param = styled.span`
 `;
 
 interface StandardTextProp {
-  data: Array<{ text: string; params?: string[] }>;
+  data: IStandardText[];
 }
 
 const StandardText = (props: StandardTextProp) => {

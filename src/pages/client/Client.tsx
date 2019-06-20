@@ -1,10 +1,17 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { bindActionCreators, Dispatch } from 'redux';
-import { StandardAction } from '../../reducers/reducerTypes';
-import { ClientActions, FetchDataEntryAction, FetchDataEntryPayload } from '../../reducers/client';
+import { RootState, StandardAction } from '../../reducers/reducerTypes';
+import {
+  Client as IClient,
+  ClientActions,
+  DataEntry,
+  FetchDataEntryAction,
+  FetchDataEntryPayload,
+  Tag,
+} from '../../reducers/client';
 import { connect } from 'react-redux';
-import { get, isEqual } from 'lodash';
+import { get, isEqual, find } from 'lodash';
 import { Layout, Icon } from 'antd';
 const { Content } = Layout;
 import Heading from '../../components/Heading/Heading';
@@ -23,6 +30,7 @@ const getParams = (params: { clientId?: string; tagName?: string; tabName?: stri
 };
 
 interface ClientProps {
+  pageData: any;
   fetchDataEntry?: (payload: FetchDataEntryPayload) => FetchDataEntryAction;
 }
 
@@ -64,7 +72,7 @@ class Client extends React.PureComponent<RouteComponentProps & ClientProps> {
   }
 
   public render(): JSX.Element {
-    const { match } = this.props;
+    const { match, pageData } = this.props;
     const { clientId, tagName, tabName } = getParams(match.params);
 
     if (clientId && tagName && tabName) {
@@ -73,7 +81,7 @@ class Client extends React.PureComponent<RouteComponentProps & ClientProps> {
           return <DataEntryComponent clientId={clientId} tabName={tabName} tagName={tagName} empStatus={''} />;
         }
         case Tab.Strategy: {
-          return <StrategyPage clientId={clientId} />;
+          return <StrategyPage clientId={clientId} pageData={pageData} />;
         }
         default: {
           return (
@@ -105,6 +113,28 @@ class Client extends React.PureComponent<RouteComponentProps & ClientProps> {
   }
 }
 
+const mapStateToProps = (state: RootState, ownProps: RouteComponentProps & ClientProps) => {
+  let pageData;
+  const clients = state.client.get('clients');
+  const { clientId, tagName, tabName } = getParams(ownProps.match.params);
+  const client: IClient | undefined = find(clients, (c: IClient) => c.clientId === clientId);
+
+  if (tabName && client && client.tagList && client.tagList.length > 0) {
+    const tag: Tag | undefined = find(client.tagList, (t: Tag) => t.name === tagName);
+    if (tag && tag.dataEntries && tag.dataEntries.length > 0) {
+      const dataEntry: DataEntry | undefined = find(tag.dataEntries, (d: DataEntry) => d.tabName === tabName);
+      if (dataEntry) {
+        pageData = dataEntry.pageData;
+      }
+    }
+  }
+
+  return {
+    pageData,
+    loading: state.client.get('loading'),
+  };
+};
+
 const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>
   bindActionCreators(
     {
@@ -114,6 +144,6 @@ const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>
   );
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(Client);
