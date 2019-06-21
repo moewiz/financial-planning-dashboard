@@ -19,6 +19,7 @@ const StrategyPage = (props: StrategyPageProps) => {
   const superannuation = get(pageData, 'superannuation');
   const pension = get(pageData, 'pension');
   const investments = get(pageData, 'investments');
+  const debt = get(pageData, 'debt');
   const standardText = [
     {
       text: 'Pension funds will be invested in line with {{0}} risk profile',
@@ -58,28 +59,13 @@ const StrategyPage = (props: StrategyPageProps) => {
           strategies={investments.strategies}
         />
       )}
+      {debt && (
       <StrategyContainer
         type={StrategyTypes.Debt}
-        information={{
-          kpi: [
-            {
-              total: 20140404,
-              isIncrease: true,
-              delta: 21640,
-              subValue: 69,
-            },
-            {
-              total: 20140404,
-              isIncrease: true,
-              delta: 21640,
-              subValue: 69,
-            },
-          ],
-          graph: {},
-          standardText,
-        }}
-        strategies={[]}
+        information={debt}
+        strategies={debt.strategies}
       />
+      )}
       <StrategyContainer
         type={StrategyTypes.Centrelink}
         information={{

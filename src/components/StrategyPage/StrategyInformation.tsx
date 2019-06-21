@@ -166,13 +166,15 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
         );
       }
       case StrategyTypes.Debt: {
+        const listOfKpi = map(kpi, (i: any) => ({ ...i, total: i.interestCost, subValue: i.atAge }));
+
         return (
           <StrategyInfoWrapper>
             <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
                 <StatisticItem
-                  listOfKpi={kpi}
+                  listOfKpi={listOfKpi}
                   title={'Total interest cost'}
                   subTitle={'non-deductible debt over loan period'}
                 />
