@@ -220,7 +220,12 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
                 <StatisticItem listOfKpi={listOfKpi} title={'Life insurance'} />
               </Col>
               <Col span={12}>
-                <GraphContainer type={GraphType.Line} name="[Graph Name]" data={data} className={'marginTop'} />
+                <GraphContainer
+                  type={GraphType.HorizontalBar}
+                  name="[Graph Name]"
+                  data={data}
+                  className={'marginTop'}
+                />
               </Col>
             </Row>
             <StandardText data={standardText} />
@@ -238,7 +243,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
                 <StatisticItem listOfKpi={listOfKpi} title={'[KPI Name]'} />
               </Col>
               <Col span={12}>
-                <GraphContainer type={GraphType.Line} name="[Graph Name]" data={data} className={'marginTop'} />
+                <GraphContainer type={GraphType.Bar} name="[Graph Name]" data={data} className={'marginTop'} />
               </Col>
             </Row>
             <StandardText data={standardText} />

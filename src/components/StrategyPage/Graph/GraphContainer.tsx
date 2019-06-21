@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Icon } from 'antd';
-import { Line } from 'react-chartjs-2';
+import { Bar, HorizontalBar, Line } from 'react-chartjs-2';
 import { GraphCard, GraphTitle, GraphWrapper, GraphGroup } from '../styled';
 import classNames from 'classnames';
 
 export enum GraphType {
   Line,
   Area,
+  Bar,
+  HorizontalBar,
 }
 
 interface GraphProps {
@@ -131,6 +133,36 @@ const GraphContainer = (props: GraphProps) => {
         return (
           <GraphCard className={classNames({ active: index === activeIndex })} key={index}>
             <Line
+              height={190}
+              data={graphData}
+              options={{
+                maintainAspectRatio: false,
+                legend: {
+                  display: false,
+                },
+              }}
+            />
+          </GraphCard>
+        );
+      case GraphType.Bar:
+        return (
+          <GraphCard className={classNames({ active: index === activeIndex })} key={index}>
+            <Bar
+              height={190}
+              data={graphData}
+              options={{
+                maintainAspectRatio: false,
+                legend: {
+                  display: false,
+                },
+              }}
+            />
+          </GraphCard>
+        );
+      case GraphType.HorizontalBar:
+        return (
+          <GraphCard className={classNames({ active: index === activeIndex })} key={index}>
+            <HorizontalBar
               height={190}
               data={graphData}
               options={{
