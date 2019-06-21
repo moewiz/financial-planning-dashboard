@@ -40,13 +40,13 @@
         "averagePensionIncome": 9999999,
         "isIncrease": false,
         "delta": 19200,
-        "paidUntil": 2030
+        "paidUntil": 65
       },
       {
         "averagePensionIncome": 8888888,
         "isIncrease": false,
         "delta": 3500,
-        "paidUntil": 2049
+        "paidUntil": 69
       }
     ],
     "graph": [[], []],
@@ -75,7 +75,7 @@
         "atAge": 69
       },
       {
-        "averagePensionIncome": 8888888,
+        "cashReserve": 8888888,
         "isIncrease": false,
         "delta": 3500,
         "atAge": 60
