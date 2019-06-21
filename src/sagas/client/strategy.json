@@ -139,14 +139,12 @@
       {
         "interestCost": 9999999,
         "isIncrease": true,
-        "delta": 39200,
-        "atAge": 69
+        "delta": 39200
       },
       {
         "interestCost": 8888888,
         "isIncrease": false,
-        "delta": 3500,
-        "atAge": 60
+        "delta": 3500
       }
     ],
     "graph": [[], []],

@@ -188,12 +188,14 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
         );
       }
       case StrategyTypes.Centrelink: {
+        const listOfKpi = map(kpi, (i: any) => ({ ...i, total: i.interestCost }));
+
         return (
           <StrategyInfoWrapper>
             <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
-                <StatisticItem listOfKpi={kpi} title={'Centrelink income'} />
+                <StatisticItem listOfKpi={listOfKpi} title={'Centrelink income'} />
               </Col>
               <Col span={12}>
                 <GraphContainer type={GraphType.Line} name="Centrelink income" data={data} className={'marginTop'} />
