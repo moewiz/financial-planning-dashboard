@@ -186,13 +186,13 @@
   "estatePlanning": {
     "kpi": [
       {
-        "kpiName": "",
-        "isIncrease": true,
+        "kpiName": 1234567,
+        "isIncrease": false,
         "delta": 39200
       },
       {
-        "kpiName": "",
-        "isIncrease": false,
+        "kpiName": 3456789,
+        "isIncrease": true,
         "delta": 3500
       }
     ],
