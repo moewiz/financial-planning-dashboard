@@ -4,4 +4,6 @@ export enum StrategyTypes {
   Investments = 'Investment',
   Debt = 'debt',
   Centrelink = 'centrelink',
+  Insurance = 'insurance',
+  EstatePlanning = 'estatePlanning',
 }

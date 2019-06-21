@@ -27,6 +27,8 @@ const getTitle = (type: StrategyTypes) => {
       return 'Debt';
     case StrategyTypes.Centrelink:
       return 'Centrelink';
+    case StrategyTypes.Insurance:
+      return 'Insurance';
     default:
       return '';
   }
@@ -199,6 +201,24 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
               </Col>
               <Col span={12}>
                 <GraphContainer type={GraphType.Line} name="Centrelink income" data={data} className={'marginTop'} />
+              </Col>
+            </Row>
+            <StandardText data={standardText} />
+          </StrategyInfoWrapper>
+        );
+      }
+      case StrategyTypes.Insurance: {
+        const listOfKpi = map(kpi, (i: any) => ({ ...i, total: i.lifeInsurance }));
+
+        return (
+          <StrategyInfoWrapper>
+            <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
+            <Row type="flex" justify="space-between" gutter={32}>
+              <Col span={12}>
+                <StatisticItem listOfKpi={listOfKpi} title={'Life insurance'} />
+              </Col>
+              <Col span={12}>
+                <GraphContainer type={GraphType.Line} name="[Graph name]" data={data} className={'marginTop'} />
               </Col>
             </Row>
             <StandardText data={standardText} />

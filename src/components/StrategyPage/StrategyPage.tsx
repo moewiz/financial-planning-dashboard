@@ -21,6 +21,7 @@ const StrategyPage = (props: StrategyPageProps) => {
   const investments = get(pageData, 'investments');
   const debt = get(pageData, 'debt');
   const centrelink = get(pageData, 'centrelink');
+  const insurance = get(pageData, 'insurance');
 
   return (
     <StrategyPageWrapper>
@@ -49,6 +50,9 @@ const StrategyPage = (props: StrategyPageProps) => {
           information={centrelink}
           strategies={centrelink.strategies}
         />
+      )}
+      {insurance && (
+        <StrategyContainer type={StrategyTypes.Insurance} information={insurance} strategies={insurance.strategies} />
       )}
       <Drawer title="Your insurance needs" width={720} onClose={() => setVisible(false)} visible={visible}>
         <p>Some contents...</p>
