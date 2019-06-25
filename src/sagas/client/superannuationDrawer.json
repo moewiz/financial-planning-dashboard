@@ -44,7 +44,7 @@
         "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         "tooltip": "Assessable taxable income: $xx,xxx"
       },
-      "Spouse Contribution": {
+      "spouseContribution": {
         "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         "editable": true
       }
