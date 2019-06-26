@@ -1,296 +1,487 @@
 {
-  "title": "Your insurance needs",
-  "description": "Our insurance recommendation are based on our analysis of your circumstances and ...",
-  "footnote": "Note: Recommended sums insured have been rounded to take advantage of pricing point discounts ...",
-  "columns": [
-    "2019/20",
-    "2020/21",
-    "2021/22",
-    "2022/23",
-    "2023/24",
-    "2024/25",
-    "2025/26",
-    "2026/27",
-    "2027/28",
-    "2028/29"
-  ],
   "client": {
-    "openingValue": {
-      "bold": true,
-      "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      "children": {
-        "taxable": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        },
-        "taxFree": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        }
-      }
-    },
-    "contributions": {
-      "children": {
-        "employerContribution": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "editable": true
-        },
-        "salarySacrificeContribution": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "editable": true
-        },
-        "personalDeductibleContribution": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "editable": true
-        },
-        "nonConcessionalContribution": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "editable": true
-        },
-        "governmentCoContribution": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "tooltip": "Assessable taxable income: $xx,xxx"
-        },
-        "spouseContribution": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "editable": true
-        }
-      }
-    },
-    "earnings": {
-      "children": {
-        "growth": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        },
-        "income": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        },
-        "frankingCredits": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        }
-      }
-    },
-    "ongoingCosts": {
-      "children": {
-        "investmentCosts": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        },
-        "adviserFees": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "editable": true
-        },
-        "insurancePremiums": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "editable": true
-        }
-      }
-    },
-    "withdrawalsTransfers": {
-      "children": {
-        "lumpSumWithdrawal": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "editable": true
-        },
-        "contributionSplitting": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "editable": true
-        },
-        "pensionRollover": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "editable": true
-        }
-      }
-    },
-    "excessContributions": {
-      "children": {
-        "excessNonConcessional ": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "children": {
-            "override": {
-              "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-              "editable": true
-            }
+    "title": "Your insurance needs",
+    "subTitle": "Our insurance recommendation are based on our analysis of your circumstances and ...",
+    "footnote": "Note: Recommended sums insured have been rounded to take advantage of pricing point discounts ...",
+    "columns": [
+      "2019/20",
+      "2020/21",
+      "2021/22",
+      "2022/23",
+      "2023/24",
+      "2024/25",
+      "2025/26",
+      "2026/27",
+      "2027/28",
+      "2028/29"
+    ],
+    "tableData": [
+      {
+        "key": "openingValue",
+        "title": "Opening Value",
+        "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "children": [
+          {
+            "key": "taxable",
+            "title": "Taxable Component",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          },
+          {
+            "key": "taxFree",
+            "title": "Tax Free Component",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           }
-        },
-        "excessConcessional ": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "children": {
-            "override": {
-              "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-              "editable": true
-            }
+        ]
+      },
+      {
+        "key": "contributions",
+        "title": "Contributions",
+        "children": [
+          {
+            "key": "employerContribution",
+            "title": "Employer Contribution (SG)",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "editable": true
+          },
+          {
+            "key": "salarySacrificeContribution",
+            "title": "Salary Sacrifice Contribution",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "editable": true
+          },
+          {
+            "key": "personalDeductibleContribution",
+            "title": "Personal Deductible Contribution",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "editable": true
+          },
+          {
+            "key": "nonConcessionalContribution",
+            "title": "Non-concessional Contribution",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "editable": true
+          },
+          {
+            "key": "governmentCoContribution",
+            "title": "Government Co-contribution",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "tooltip": "Assessable taxable income: $xx,xxx"
+          },
+          {
+            "key": "spouseContribution",
+            "title": "Spouse Contribution",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "editable": true
           }
-        }
+        ]
+      },
+      {
+        "key": "earnings",
+        "title": "Earnings",
+        "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "children": [
+          {
+            "key": "growth",
+            "title": "Growth",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          },
+          {
+            "key": "income",
+            "title": "Income",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          },
+          {
+            "key": "frankingCredits",
+            "title": "Franking Credits",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          }
+        ]
+      },
+      {
+        "key": "ongoingCosts",
+        "title": "Ongoing Costs",
+        "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "children": [
+          {
+            "key": "investmentCosts",
+            "title": "Investment Costs",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          },
+          {
+            "key": "adviserFees",
+            "title": "Adviser Fees",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "editable": true
+          },
+          {
+            "key": "insurancePremiums",
+            "title": "Insurance Premiums",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "editable": true
+          }
+        ]
+      },
+      {
+        "key": "withdrawalsTransfers",
+        "title": "Withdrawals / Transfers",
+        "children": [
+          {
+            "key": "lumpSumWithdrawal",
+            "title": "Lump sum withdrawal",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "editable": true
+          },
+          {
+            "key": "contributionSplitting",
+            "title": "Contribution splitting",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "editable": true
+          },
+          {
+            "key": "pensionRollover",
+            "title": "Pension rollover",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "editable": true
+          }
+        ]
+      },
+      {
+        "key": "excessContributions",
+        "title": "Excess Contributions (assessed for personal tax)",
+        "children": [
+          {
+            "key": "excessNonConcessional",
+            "title": "Excess non-concessional",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "children": [
+              {
+                "key": "override",
+                "title": "Override",
+                "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                "editable": true
+              }
+            ]
+          },
+          {
+            "key": "excessConcessional",
+            "title": "Excess concessional",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "children": [
+              {
+                "key": "override",
+                "title": "Override",
+                "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                "editable": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "taxPayable",
+        "title": "Tax Payable",
+        "children": [
+          {
+            "key": "taxOnInvestmentEarnings",
+            "title": "Tax on investment earnings",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          },
+          {
+            "key": "taxOnContributions",
+            "title": "Tax on contributions",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          },
+          {
+            "key": "contributionsSurcharge",
+            "title": "Contributions surcharge",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          },
+          {
+            "key": "manualAdjustmentOverrideTax",
+            "title": "Manual adjustment / override tax",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "editable": true
+          }
+        ]
+      },
+      {
+        "key": "closingValue",
+        "title": "Closing Value",
+        "children": [
+          {
+            "key": "taxableComponent",
+            "title": "Taxable Component",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          },
+          {
+            "key": "taxFreeComponent",
+            "title": "Tax Free Component",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          }
+        ]
+      },
+      {
+        "key": "closingValuePV",
+        "title": "Closing Value (PV)",
+        "children": [
+          {
+            "key": "taxableComponent",
+            "title": "Taxable Component",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          },
+          {
+            "key": "taxFreeComponent",
+            "title": "Tax Free Component",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          }
+        ]
       }
-    },
-    "taxPayable": {
-      "children": {
-        "taxOnInvestmentEarnings": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        },
-        "taxOnContributions": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        },
-        "contributionsSurcharge": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        },
-        "manualAdjustmentOverrideTax": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "editable": true
-        }
-      }
-    },
-    "closingValue": {
-      "children": {
-        "taxableComponent": {
-          "bold": true,
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        },
-        "taxFreeComponent": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        }
-      }
-    },
+    ],
     "closingValuePV": {
-      "bold": true,
+      "boldText": true,
       "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     }
   },
   "partner": {
-    "openingValue": {
-      "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      "children": {
-        "taxable": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        },
-        "taxFree": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        }
-      }
-    },
-    "contributions": {
-      "children": {
-        "employerContribution": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "editable": true
-        },
-        "salarySacrificeContribution": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "editable": true
-        },
-        "personalDeductibleContribution": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "editable": true
-        },
-        "nonConcessionalContribution": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "editable": true
-        },
-        "governmentCoContribution": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "tooltip": "Assessable taxable income: $xx,xxx"
-        },
-        "spouseContribution": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "editable": true
-        }
-      }
-    },
-    "earnings": {
-      "children": {
-        "growth": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        },
-        "income": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        },
-        "frankingCredits": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        }
-      }
-    },
-    "ongoingCosts": {
-      "children": {
-        "investmentCosts": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        },
-        "adviserFees": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "editable": true
-        },
-        "insurancePremiums": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "editable": true
-        }
-      }
-    },
-    "withdrawalsTransfers": {
-      "children": {
-        "lumpSumWithdrawal": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "editable": true
-        },
-        "contributionSplitting": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "editable": true
-        },
-        "pensionRollover": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "editable": true
-        }
-      }
-    },
-    "excessContributions": {
-      "children": {
-        "excessNonConcessional ": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "children": {
-            "override": {
-              "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-              "editable": true
-            }
+    "title": "Your insurance needs",
+    "subTitle": "Our insurance recommendation are based on our analysis of your circumstances and ...",
+    "footnote": "Note: Recommended sums insured have been rounded to take advantage of pricing point discounts ...",
+    "columns": [
+      "2019/20",
+      "2020/21",
+      "2021/22",
+      "2022/23",
+      "2023/24",
+      "2024/25",
+      "2025/26",
+      "2026/27",
+      "2027/28",
+      "2028/29"
+    ],
+    "tableData": [
+      {
+        "key": "openingValue",
+        "title": "Opening Value",
+        "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "children": [
+          {
+            "key": "taxable",
+            "title": "Taxable Component",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          },
+          {
+            "key": "taxFree",
+            "title": "Tax Free Component",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           }
-        },
-        "excessConcessional ": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "children": {
-            "override": {
-              "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-              "editable": true
-            }
+        ]
+      },
+      {
+        "key": "contributions",
+        "title": "Contributions",
+        "children": [
+          {
+            "key": "employerContribution",
+            "title": "Employer Contribution (SG)",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "editable": true
+          },
+          {
+            "key": "salarySacrificeContribution",
+            "title": "Salary Sacrifice Contribution",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "editable": true
+          },
+          {
+            "key": "personalDeductibleContribution",
+            "title": "Personal Deductible Contribution",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "editable": true
+          },
+          {
+            "key": "nonConcessionalContribution",
+            "title": "Non-concessional Contribution",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "editable": true
+          },
+          {
+            "key": "governmentCoContribution",
+            "title": "Government Co-contribution",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "tooltip": "Assessable taxable income: $xx,xxx"
+          },
+          {
+            "key": "spouseContribution",
+            "title": "Spouse Contribution",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "editable": true
           }
-        }
+        ]
+      },
+      {
+        "key": "earnings",
+        "title": "Earnings",
+        "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "children": [
+          {
+            "key": "growth",
+            "title": "Growth",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          },
+          {
+            "key": "income",
+            "title": "Income",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          },
+          {
+            "key": "frankingCredits",
+            "title": "Franking Credits",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          }
+        ]
+      },
+      {
+        "key": "ongoingCosts",
+        "title": "Ongoing Costs",
+        "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "children": [
+          {
+            "key": "investmentCosts",
+            "title": "Investment Costs",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          },
+          {
+            "key": "adviserFees",
+            "title": "Adviser Fees",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "editable": true
+          },
+          {
+            "key": "insurancePremiums",
+            "title": "Insurance Premiums",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "editable": true
+          }
+        ]
+      },
+      {
+        "key": "withdrawalsTransfers",
+        "title": "Withdrawals / Transfers",
+        "children": [
+          {
+            "key": "lumpSumWithdrawal",
+            "title": "Lump sum withdrawal",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "editable": true
+          },
+          {
+            "key": "contributionSplitting",
+            "title": "Contribution splitting",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "editable": true
+          },
+          {
+            "key": "pensionRollover",
+            "title": "Pension rollover",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "editable": true
+          }
+        ]
+      },
+      {
+        "key": "excessContributions",
+        "title": "Excess Contributions (assessed for personal tax)",
+        "children": [
+          {
+            "key": "excessNonConcessional",
+            "title": "Excess non-concessional",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "children": [
+              {
+                "key": "override",
+                "title": "Override",
+                "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                "editable": true
+              }
+            ]
+          },
+          {
+            "key": "excessConcessional",
+            "title": "Excess concessional",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "children": [
+              {
+                "key": "override",
+                "title": "Override",
+                "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                "editable": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "taxPayable",
+        "title": "Tax Payable",
+        "children": [
+          {
+            "key": "taxOnInvestmentEarnings",
+            "title": "Tax on investment earnings",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          },
+          {
+            "key": "taxOnContributions",
+            "title": "Tax on contributions",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          },
+          {
+            "key": "contributionsSurcharge",
+            "title": "Contributions surcharge",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          },
+          {
+            "key": "manualAdjustmentOverrideTax",
+            "title": "Manual adjustment / override tax",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "editable": true
+          }
+        ]
+      },
+      {
+        "key": "closingValue",
+        "title": "Closing Value",
+        "children": [
+          {
+            "key": "taxableComponent",
+            "title": "Taxable Component",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          },
+          {
+            "key": "taxFreeComponent",
+            "title": "Tax Free Component",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          }
+        ]
+      },
+      {
+        "key": "closingValuePV",
+        "title": "Closing Value (PV)",
+        "children": [
+          {
+            "key": "taxableComponent",
+            "title": "Taxable Component",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          },
+          {
+            "key": "taxFreeComponent",
+            "title": "Tax Free Component",
+            "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          }
+        ]
       }
-    },
-    "taxPayable": {
-      "children": {
-        "taxOnInvestmentEarnings": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        },
-        "taxOnContributions": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        },
-        "contributionsSurcharge": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        },
-        "manualAdjustmentOverrideTax": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          "editable": true
-        }
-      }
-    },
-    "closingValue": {
-      "bold": true,
-      "children": {
-        "taxableComponent": {
-          "bold": true,
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        },
-        "taxFreeComponent": {
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        }
-      }
-    },
+    ],
     "closingValuePV": {
-      "bold": true,
+      "boldText": true,
       "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     }
   }
