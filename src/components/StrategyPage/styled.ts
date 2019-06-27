@@ -143,12 +143,37 @@ export const StatisticUpDown = styled.span`
 `;
 export const DrawerTableWrapper = styled.div`
   .columns {
-    margin-left: 250px;
-    span {
-      margin: 0 2px;
+    padding: 6px 4px;
+    background: #dcdcdc;
+    text-align: right;
+  }
+    .parent {
+    .title {
+      font-weight: 500;
+    }
+  }
+  .title {
+    float: left;
+    .bold-text {
+      font-weight: 500;
     }
   }
   .list {
     margin-left: 25px;
+    clear: both;
+  }
+  .drawer-item {
+  }
+  .item {
+  }
+  .values {
+    text-align: right;
+    padding-right: 6px;
+  }
+  .cell {
+    display: inline-block;
+    width: 60px;
+    margin: 0 5px;
+    text-align: center;
   }
 `;

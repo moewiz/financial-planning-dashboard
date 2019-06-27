@@ -21,27 +21,81 @@ class DrawerTable extends PureComponent {
       <DrawerTableWrapper>
         <div className="columns">
           {map(columns, (column: string, index: number) => (
-            <span key={index}>{column}</span>
+            <span className={'cell'} key={index}>{column}</span>
           ))}
         </div>
         <div className={'drawer-item'}>
-          <div className={'parent'}>Opening Value</div>
+          <div className={'parent'}>
+            <div className="title">Opening Value</div>
+          </div>
           <div className="list">
-            <div className="item">Taxable Component</div>
-            <div className="item">Tax Free Component</div>
+            <div className="item">
+              <div className="title bold-text">Taxable Component</div>
+              <div className="values">
+                {map(columns, (column: string, index: number) => (
+                  <span className={'cell'} key={index}>0</span>
+                ))}
+              </div>
+            </div>
+            <div className="item">
+              <div className="title bold-text">Tax Free Component</div>
+              <div className="values">
+                {map(columns, (column: string, index: number) => (
+                  <span className={'cell'} key={index}>0</span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
         <div className={'drawer-item'}>
           <div className={'parent'}>Excess Contributions</div>
           <div className="list">
-            <div className="item">Excess non-concessional </div>
-            <div className="list">
-              <div className="item">Override</div>
+            <div className="item">
+              <div className="title">Excess non-concessional</div>
+              <div className="values">
+                {map(columns, (column: string, index: number) => (
+                  <span className={'cell'} key={index}>0</span>
+                ))}
+              </div>
             </div>
-            <div className="item">Excess concessional</div>
             <div className="list">
-              <div className="item">Override</div>
+              <div className="item">
+                <div className="title">Override</div>
+                <div className="values">
+                  {map(columns, (column: string, index: number) => (
+                    <span className={'cell'} key={index}>0</span>
+                  ))}
+                </div>
+              </div>
             </div>
+            <div className="item">
+              <div className="title">Excess concessional</div>
+              <div className="values">
+                {map(columns, (column: string, index: number) => (
+                  <span className={'cell'} key={index}>0</span>
+                ))}
+              </div>
+            </div>
+            <div className="list">
+              <div className="item">
+                <div className="title">Override</div>
+                <div className="values">
+                  {map(columns, (column: string, index: number) => (
+                    <span className={'cell'} key={index}>0</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="drawer-item">
+          <div className="parent">
+            <div className="title">Closing Value (PV)</div>
+          </div>
+          <div className="values">
+            {map(columns, (column: string, index: number) => (
+              <span className={'cell'} key={index}>0</span>
+            ))}
           </div>
         </div>
       </DrawerTableWrapper>
