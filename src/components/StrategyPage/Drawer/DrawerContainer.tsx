@@ -3,7 +3,7 @@ import { Drawer, Icon, Button, Pagination, Spin } from 'antd';
 import { isFunction } from 'lodash';
 import { RootState, StandardAction } from '../../../reducers/reducerTypes';
 import { bindActionCreators, Dispatch } from 'redux';
-import { ClientActions, CloseDrawerAction } from '../../../reducers/client';
+import { ClientActions, CloseDrawerAction, StrategyEntry } from '../../../reducers/client';
 import { connect } from 'react-redux';
 import MainDrawerContent from './MainDrawerContent';
 
