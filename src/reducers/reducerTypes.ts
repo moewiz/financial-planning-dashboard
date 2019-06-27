@@ -25,6 +25,6 @@ export type MetaAction<Type, Meta, Error> = Action<Type> & {
   error?: Error;
 };
 
-export type PayloadAction<Type, Payload, Meta = void, Error = void> = MetaAction<Type, Meta, Error> & {
+export type PayloadAction<Type, Payload = void, Meta = void, Error = void> = MetaAction<Type, Meta, Error> & {
   readonly payload: Payload;
 };
