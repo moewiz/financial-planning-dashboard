@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { Dispatch, bindActionCreators } from 'redux';
 import { get, map } from 'lodash';
 import StatisticItem, { Statistic } from './StatisticItem';
 import { StrategyTypes } from '../../enums/strategies';
@@ -6,13 +8,16 @@ import StandardText from './StandardText';
 import { StrategyInfoWrapper, TitleStrategyBlock } from './styled';
 import { Col, Row } from 'antd';
 import GraphContainer, { GraphType } from './Graph/GraphContainer';
-import { StandardText as IStandardText } from '../../reducers/client/clientTypes';
+import { OpenDrawerAction, StandardText as IStandardText } from '../../reducers/client/clientTypes';
+import { StandardAction } from '../../reducers/reducerTypes';
+import { ClientActions } from '../../reducers/client';
 
 interface StrategyInformationProps {
   type: StrategyTypes;
   kpi: Statistic[];
   graph: any;
   standardText: IStandardText[];
+  openDrawer: (title: string) => OpenDrawerAction;
 }
 
 const getTitle = (type: StrategyTypes) => {
@@ -78,6 +83,14 @@ const colors = {
 const superannuationChartColors = [colors.lightBlue, colors.darkBlue, colors.grey];
 
 class StrategyInformation extends PureComponent<StrategyInformationProps> {
+  public onGraphClick = (e: React.SyntheticEvent) => {
+    if (e && e.preventDefault) {
+      e.preventDefault();
+    }
+
+    const { openDrawer } = this.props;
+    openDrawer('Superannuation');
+  }
   public render() {
     const { kpi, type, standardText } = this.props;
 
@@ -117,6 +130,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
                   name="Superannuation balance"
                   data={areaData}
                   className={'marginTop'}
+                  onGraphClick={this.onGraphClick}
                 />
               </Col>
             </Row>
@@ -139,7 +153,13 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
                 />
               </Col>
               <Col span={12}>
-                <GraphContainer type={GraphType.Line} name="Pension balance" data={data} className={'marginTop'} />
+                <GraphContainer
+                  type={GraphType.Line}
+                  name="Pension balance"
+                  data={data}
+                  className={'marginTop'}
+                  onGraphClick={this.onGraphClick}
+                />
               </Col>
             </Row>
             <StandardText data={standardText} />
@@ -162,6 +182,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
                   name="Investment (non-super) balance"
                   data={data}
                   className={'marginTop'}
+                  onGraphClick={this.onGraphClick}
                 />
               </Col>
             </Row>
@@ -184,7 +205,13 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
                 />
               </Col>
               <Col span={12}>
-                <GraphContainer type={GraphType.Line} name="Debt Value" data={data} className={'marginTop'} />
+                <GraphContainer
+                  type={GraphType.Line}
+                  name="Debt Value"
+                  data={data}
+                  className={'marginTop'}
+                  onGraphClick={this.onGraphClick}
+                />
               </Col>
             </Row>
             <StandardText data={standardText} />
@@ -202,7 +229,13 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
                 <StatisticItem listOfKpi={listOfKpi} title={'Centrelink income'} />
               </Col>
               <Col span={12}>
-                <GraphContainer type={GraphType.Line} name="Centrelink income" data={data} className={'marginTop'} />
+                <GraphContainer
+                  type={GraphType.Line}
+                  name="Centrelink income"
+                  data={data}
+                  className={'marginTop'}
+                  onGraphClick={this.onGraphClick}
+                />
               </Col>
             </Row>
             <StandardText data={standardText} />
@@ -225,6 +258,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
                   name="[Graph Name]"
                   data={data}
                   className={'marginTop'}
+                  onGraphClick={this.onGraphClick}
                 />
               </Col>
             </Row>
@@ -243,7 +277,13 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
                 <StatisticItem listOfKpi={listOfKpi} title={'[KPI Name]'} />
               </Col>
               <Col span={12}>
-                <GraphContainer type={GraphType.Bar} name="[Graph Name]" data={data} className={'marginTop'} />
+                <GraphContainer
+                  type={GraphType.Bar}
+                  name="[Graph Name]"
+                  data={data}
+                  className={'marginTop'}
+                  onGraphClick={this.onGraphClick}
+                />
               </Col>
             </Row>
             <StandardText data={standardText} />
@@ -256,4 +296,15 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
   }
 }
 
-export default StrategyInformation;
+const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>
+  bindActionCreators(
+    {
+      openDrawer: ClientActions.openDrawer,
+    },
+    dispatch,
+  );
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(StrategyInformation);

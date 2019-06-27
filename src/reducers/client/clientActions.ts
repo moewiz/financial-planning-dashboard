@@ -1,12 +1,14 @@
 import {
   ClientActionTypes,
+  CloseDrawerAction,
   FetchDataEntryAction,
   FetchDataEntryPayload,
-  UpdateMaritalStatusAction,
+  OpenDrawerAction,
   UpdateAssetsAction,
-  UpdateEmpStatus,
-  UpdateDataEntryPayload,
   UpdateDataEntryAction,
+  UpdateDataEntryPayload,
+  UpdateEmpStatus,
+  UpdateMaritalStatusAction,
 } from './clientTypes';
 import { createPayloadAction } from '../reducerHelpers';
 
@@ -22,4 +24,8 @@ export default class ClientActions {
   public static updateAssets = (
     assets: Array<{ refId: number; description: string; type: string }>,
   ): UpdateAssetsAction => createPayloadAction(ClientActionTypes.UPDATE_ASSETS, assets)
+  public static openDrawer = (title: string = 'Superannuation'): OpenDrawerAction =>
+    createPayloadAction(ClientActionTypes.OPEN_DRAWER, title)
+  public static closeDrawer = (title = ''): CloseDrawerAction =>
+    createPayloadAction(ClientActionTypes.CLOSE_DRAWER, title)
 }

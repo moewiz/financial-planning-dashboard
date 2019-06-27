@@ -21,6 +21,7 @@ interface GraphProps {
   options?: object;
   className?: string;
   flipping?: boolean;
+  onGraphClick?: (e: React.SyntheticEvent) => void;
 }
 const data1 = {
   labels: ['19', '20', '21', '22', '23', '24', '25'],
@@ -93,7 +94,7 @@ const areaData2 = {
   })),
 };
 const GraphContainer = (props: GraphProps) => {
-  const { type, name, data, className, flipping = true } = props;
+  const { type, name, data, className, flipping = true, onGraphClick } = props;
   const [activeIndex, setActiveIndex] = useState(0);
   const listOfData = flipping ? [data, data] : [data];
   const updateActiveIndex = () => {
@@ -185,7 +186,7 @@ const GraphContainer = (props: GraphProps) => {
         <Icon type="info-circle" theme="filled" />
         {name}
       </GraphTitle>
-      <GraphGroup>{listOfData.map(renderGraph)}</GraphGroup>
+      <GraphGroup onClick={onGraphClick}>{listOfData.map(renderGraph)}</GraphGroup>
     </GraphWrapper>
   );
 };
