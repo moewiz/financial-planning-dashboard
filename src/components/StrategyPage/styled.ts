@@ -141,3 +141,14 @@ export const StatisticUpDown = styled.span`
     color: #ff0000;
   }
 `;
+export const DrawerTableWrapper = styled.div`
+  .columns {
+    margin-left: 250px;
+    span {
+      margin: 0 2px;
+    }
+  }
+  .list {
+    margin-left: 25px;
+  }
+`;
