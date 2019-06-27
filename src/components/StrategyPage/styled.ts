@@ -151,16 +151,13 @@ export const DrawerTableWrapper = styled.div`
     background: #dcdcdc;
     text-align: right;
   }
-    .parent {
+  .parent {
     .title {
-      font-weight: 500;
+      font-weight: 600;
     }
   }
   .title {
     float: left;
-    .bold-text {
-      font-weight: 500;
-    }
   }
   .list {
     margin-left: 25px;
@@ -179,5 +176,13 @@ export const DrawerTableWrapper = styled.div`
     width: 60px;
     margin: 0 5px;
     text-align: center;
+  }
+  .bold-text {
+    .title {
+      font-weight: 600;
+    }
+    .cell {
+      font-weight: 600;
+    }
   }
 `;
