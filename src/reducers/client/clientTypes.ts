@@ -146,5 +146,5 @@ export type UpdateAssetsAction = PayloadAction<
   ClientActionTypes.UPDATE_ASSETS,
   Array<{ description: string; type: string; refId: number }>
 >;
-export type OpenDrawerAction = PayloadAction<ClientActionTypes.UPDATE_MARITAL_STATE, string>;
-export type CloseDrawerAction = PayloadAction<ClientActionTypes.CLOSE_DRAWER>;
+export type OpenDrawerAction = PayloadAction<ClientActionTypes.OPEN_DRAWER, string>;
+export type CloseDrawerAction = PayloadAction<ClientActionTypes.CLOSE_DRAWER, string>;

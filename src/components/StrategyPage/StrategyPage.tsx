@@ -1,19 +1,29 @@
 import React from 'react';
 import { get } from 'lodash';
+import { Drawer } from 'antd';
+import { bindActionCreators, Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import { isFunction } from 'lodash';
 import StrategyHeader from './StrategyHeader';
 import StrategyContainer from './StrategyContainer';
 import { StrategyTypes } from '../../enums/strategies';
 import { StrategyPageWrapper } from './styled';
-import { StrategyEntry } from '../../reducers/client';
+import { StrategyEntry, ClientActions } from '../../reducers/client';
 import DrawerContainer from './Drawer/DrawerContainer';
+import { StandardAction, RootState } from '../../reducers/reducerTypes';
+import { CloseDrawerAction } from '../../reducers/drawer';
 
 interface StrategyPageProps {
   clientId: number;
+  drawerOpen: boolean;
+  drawerTitle: string;
 
   pageData: StrategyEntry;
+  closeDrawer?: (title: string) => CloseDrawerAction;
 }
 
 const StrategyPage = (props: StrategyPageProps) => {
+  const { drawerOpen, drawerTitle, closeDrawer } = props;
   const { pageData } = props;
   const superannuation = get(pageData, 'superannuation');
   const pension = get(pageData, 'pension');
@@ -22,6 +32,11 @@ const StrategyPage = (props: StrategyPageProps) => {
   const centrelink = get(pageData, 'centrelink');
   const insurance = get(pageData, 'insurance');
   const estatePlanning = get(pageData, 'estatePlanning');
+  const onCloseDrawer = () => {
+    if (isFunction(closeDrawer)) {
+      closeDrawer('');
+    }
+  };
 
   return (
     <StrategyPageWrapper>
@@ -66,4 +81,20 @@ const StrategyPage = (props: StrategyPageProps) => {
   );
 };
 
-export default StrategyPage;
+const mapStateToProps = (state: RootState) => ({
+  drawerOpen: state.client.get('drawerOpen'),
+  drawerTitle: state.client.get('drawerTitle'),
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>
+  bindActionCreators(
+    {
+      closeDrawer: ClientActions.closeDrawer,
+    },
+    dispatch,
+  );
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(StrategyPage);

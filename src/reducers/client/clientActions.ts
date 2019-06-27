@@ -1,7 +1,9 @@
 import {
   ClientActionTypes,
+  CloseDrawerAction,
   FetchDataEntryAction,
   FetchDataEntryPayload,
+  OpenDrawerAction,
   UpdateAssetsAction,
   UpdateDataEntryAction,
   UpdateDataEntryPayload,
@@ -22,4 +24,8 @@ export default class ClientActions {
   public static updateAssets = (
     assets: Array<{ refId: number; description: string; type: string }>,
   ): UpdateAssetsAction => createPayloadAction(ClientActionTypes.UPDATE_ASSETS, assets)
+  public static openDrawer = (title: string = 'Superannuation'): OpenDrawerAction =>
+    createPayloadAction(ClientActionTypes.OPEN_DRAWER, title)
+  public static closeDrawer = (title = ''): CloseDrawerAction =>
+    createPayloadAction(ClientActionTypes.CLOSE_DRAWER, title)
 }
