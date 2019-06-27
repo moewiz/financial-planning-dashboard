@@ -30,7 +30,7 @@ class DrawerTable extends PureComponent {
           </div>
           <div className="list">
             <div className="item">
-              <div className="title bold-text">Taxable Component</div>
+              <div className="title">Taxable Component</div>
               <div className="values">
                 {map(columns, (column: string, index: number) => (
                   <span className={'cell'} key={index}>0</span>
@@ -48,7 +48,9 @@ class DrawerTable extends PureComponent {
           </div>
         </div>
         <div className={'drawer-item'}>
-          <div className={'parent'}>Excess Contributions</div>
+          <div className={'parent'}>
+            <div className="title">Excess Contributions</div>
+          </div>
           <div className="list">
             <div className="item">
               <div className="title">Excess non-concessional</div>
@@ -59,7 +61,7 @@ class DrawerTable extends PureComponent {
               </div>
             </div>
             <div className="list">
-              <div className="item">
+              <div className="item bold-text">
                 <div className="title">Override</div>
                 <div className="values">
                   {map(columns, (column: string, index: number) => (
@@ -77,7 +79,7 @@ class DrawerTable extends PureComponent {
               </div>
             </div>
             <div className="list">
-              <div className="item">
+              <div className="item bold-text">
                 <div className="title">Override</div>
                 <div className="values">
                   {map(columns, (column: string, index: number) => (
@@ -89,13 +91,13 @@ class DrawerTable extends PureComponent {
           </div>
         </div>
         <div className="drawer-item">
-          <div className="parent">
+          <div className="parent bold-text">
             <div className="title">Closing Value (PV)</div>
-          </div>
-          <div className="values">
-            {map(columns, (column: string, index: number) => (
-              <span className={'cell'} key={index}>0</span>
-            ))}
+            <div className="values">
+              {map(columns, (column: string, index: number) => (
+                <span className={'cell'} key={index}>0</span>
+              ))}
+            </div>
           </div>
         </div>
       </DrawerTableWrapper>
