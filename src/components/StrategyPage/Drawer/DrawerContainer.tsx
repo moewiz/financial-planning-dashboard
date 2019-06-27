@@ -17,7 +17,6 @@ interface DrawerContainerProps {
 
   closeDrawer?: (title: string) => CloseDrawerAction;
 }
-
 class DrawerContainer extends PureComponent<DrawerContainerProps> {
   public onCloseDrawer = () => {
     const { closeDrawer } = this.props;
