@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react';
-import { Tabs } from 'antd';
 import DrawerTable from './DrawerTable';
-
-const { TabPane } = Tabs;
+import { MainDrawerSection, TabsCustomized, TabsPaneCustomized } from './styled';
 
 const columns = [
   '2019/20',
@@ -232,14 +230,16 @@ class MainDrawerContent extends PureComponent {
 
   public render() {
     return (
-      <Tabs defaultActiveKey="1" onChange={this.callback}>
-        <TabPane tab="Client" key="1">
-          <DrawerTable columns={columns} rows={rows} />
-        </TabPane>
-        <TabPane tab="Partner" key="2">
-          <DrawerTable columns={columns} rows={rows} />
-        </TabPane>
-      </Tabs>
+      <MainDrawerSection>
+        <TabsCustomized defaultActiveKey="1" onChange={this.callback}>
+          <TabsPaneCustomized tab="Client" key="1">
+            <DrawerTable columns={columns} rows={rows} />
+          </TabsPaneCustomized>
+          <TabsPaneCustomized tab="Partner" key="2">
+            <DrawerTable columns={columns} rows={rows} />
+          </TabsPaneCustomized>
+        </TabsCustomized>
+      </MainDrawerSection>
     );
   }
 }
