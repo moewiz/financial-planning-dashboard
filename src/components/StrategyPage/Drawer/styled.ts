@@ -221,7 +221,6 @@ export const DrawerTableListItems = styled.div`
       font-weight: 600;
     }
   }
-   
 `;
 
 export const DrawerTableSubList = styled.div.attrs({
@@ -268,4 +267,9 @@ export const DrawerFooter = styled.div`
   p {
     flex: 0 0 500px;
   }
+`;
+
+export const ActionDrawerBlock = styled.div`
+  display: flex;
+  align-items: center;
 `;
