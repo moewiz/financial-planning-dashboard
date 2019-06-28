@@ -1,31 +1,49 @@
 import React, { Component } from 'react';
 import { isEqual } from 'lodash';
+import { InputNumber } from 'antd';
 
 interface EditCellProps {
   name: string;
   value: number;
   onChange: (value: any) => void;
+  className?: string;
 }
 
-class EditCell extends Component<EditCellProps> {
-  public shouldComponentUpdate(nextProps: Readonly<EditCellProps>, nextState: Readonly<{}>, nextContext: any): boolean {
-    const { value } = this.props;
-    const { value: nextValue } = nextProps;
+interface EditaCellState {
+  value: any;
+}
+
+class EditCell extends Component<EditCellProps, EditaCellState> {
+  public state = {
+    value: 0,
+  };
+
+  public shouldComponentUpdate(
+    nextProps: Readonly<EditCellProps>,
+    nextState: Readonly<EditaCellState>,
+    nextContext: any,
+  ): boolean {
+    // const { value } = this.props;
+    // const { value: nextValue } = nextProps;
+    const { value } = this.state;
+    const { value: nextValue } = nextState;
 
     return !isEqual(value, nextValue);
   }
 
-  public onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  public onChange = (value: number | undefined) => {
     const { onChange } = this.props;
-    const value = e.target && e.target.value;
+    // const value = e.target && e.target.value;
 
+    this.setState({ value });
     onChange(value);
   }
 
   public render() {
-    const { name, value } = this.props;
+    const { name } = this.props;
+    const { value } = this.state;
 
-    return <input type="number" name={name} onChange={this.onChange} value={value} />;
+    return <InputNumber name={name} onChange={this.onChange} value={value} className={'edit-cell'} />;
   }
 }
 

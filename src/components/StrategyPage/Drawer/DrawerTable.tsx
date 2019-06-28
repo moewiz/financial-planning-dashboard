@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import { map } from 'lodash';
 import { DrawerTableWrapper } from '../styled';
-import {Icon} from "antd";
+import { Icon } from 'antd';
+import EditCell from './EditCell';
 
 interface RowData {
   key: string;
@@ -50,8 +51,8 @@ class DrawerTable extends PureComponent<DrawerTableProps> {
               <div className="values">
                 {map(columns, (column: string, index: number) => (
                   <span className={'cell'} key={index}>
-                    0
-                  </span>
+                      0
+                    </span>
                 ))}
               </div>
             </div>
@@ -78,9 +79,12 @@ class DrawerTable extends PureComponent<DrawerTableProps> {
                 <div className="title">Override</div>
                 <div className="values">
                   {map(columns, (column: string, index: number) => (
-                    <span className={'cell'} key={index}>
-                      0
-                    </span>
+                    <EditCell
+                      name={`${index}`}
+                      key={index}
+                      onChange={(value: any) => console.log(value)}
+                      value={0}
+                    />
                   ))}
                 </div>
               </div>

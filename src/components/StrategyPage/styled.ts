@@ -176,6 +176,35 @@ export const DrawerTableWrapper = styled.div`
     margin: 0 5px;
     text-align: center;
   }
+  .edit-cell {
+    width: 69px;
+    margin-right: 1px;
+    border: 1px solid;
+    border-color: transparent;
+    &:hover {
+      border-color: #dcdcdc;
+    }
+  }
+  .ant-input-number {
+    &:focus {
+      border: 1px solid #dcdcdc !important;
+      box-shadow: none;
+      outline: 0;
+    }
+    &-handler-wrap {
+      display: none;
+    }
+    &-input-wrap {
+      &:focus {
+        outline: 0;
+      }
+    }
+    &-input {
+      text-align: center;
+      font-weight: 600;
+      padding: 0 5px;
+    }
+  }
   .bold-text {
     .title {
       font-weight: 600;
