@@ -1,7 +1,7 @@
-import ApiUtils, { RequestConfig } from '../../utils/apiUtils';
+import ApiUtils from '../../utils/apiUtils';
 import data from './strategy.json';
 
-export default class AuthService {
+export default class ClientService {
   public static async fetchClients(userId: string): Promise<any> {
     const url: string = `/homescreen/${userId}`;
 

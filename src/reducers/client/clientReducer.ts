@@ -33,11 +33,6 @@ export default class ClientReducer {
         return ClientReducer.updateEmpStatus(state, action);
       case ClientActionTypes.UPDATE_ASSETS:
         return ClientReducer.updateAssets(state, action);
-      case ClientActionTypes.OPEN_DRAWER:
-        const title = action.payload;
-        return state.set('drawerOpen', true).set('drawerTitle', title);
-      case ClientActionTypes.CLOSE_DRAWER:
-        return state.set('drawerOpen', false).set('drawerTitle', '');
       default:
         return state;
     }

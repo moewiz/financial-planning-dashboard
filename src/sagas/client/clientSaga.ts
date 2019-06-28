@@ -61,7 +61,6 @@ export default class ClientSaga {
       });
     }
   }
-
   public static *watchFetchDataEntry() {
     // @ts-ignore
     yield takeLatest(ClientActionTypes.FETCH_DATA_ENTRY_REQUEST, ClientSaga.fetchDataEntry);

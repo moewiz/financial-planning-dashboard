@@ -8,9 +8,9 @@ import StandardText from './StandardText';
 import { StrategyInfoWrapper, TitleStrategyBlock } from './styled';
 import { Col, Row } from 'antd';
 import GraphContainer, { GraphType } from './Graph/GraphContainer';
-import { OpenDrawerAction, StandardText as IStandardText } from '../../reducers/client/clientTypes';
+import { StandardText as IStandardText } from '../../reducers/client/clientTypes';
 import { StandardAction } from '../../reducers/reducerTypes';
-import { ClientActions } from '../../reducers/client';
+import { DrawerActions, FetchDrawerDataAction, OpenDrawerAction } from '../../reducers/drawer';
 
 interface StrategyInformationProps {
   type: StrategyTypes;
@@ -18,6 +18,7 @@ interface StrategyInformationProps {
   graph: any;
   standardText: IStandardText[];
   openDrawer: (title: string) => OpenDrawerAction;
+  fetchDrawerData: (type: string) => FetchDrawerDataAction;
 }
 
 const getTitle = (type: StrategyTypes) => {
@@ -88,9 +89,11 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
       e.preventDefault();
     }
 
-    const { openDrawer } = this.props;
-    openDrawer('Superannuation');
+    const { openDrawer, type, fetchDrawerData } = this.props;
+    openDrawer(getTitle(type));
+    fetchDrawerData(type);
   }
+
   public render() {
     const { kpi, type, standardText } = this.props;
 
@@ -299,7 +302,8 @@ class StrategyInformation extends PureComponent<StrategyInformationProps> {
 const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>
   bindActionCreators(
     {
-      openDrawer: ClientActions.openDrawer,
+      openDrawer: DrawerActions.openDrawer,
+      fetchDrawerData: DrawerActions.fetchDrawerData,
     },
     dispatch,
   );

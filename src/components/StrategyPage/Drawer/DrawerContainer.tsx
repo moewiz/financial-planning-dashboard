@@ -3,13 +3,13 @@ import { Drawer, Icon, Button, Pagination, Spin } from 'antd';
 import { isFunction } from 'lodash';
 import { RootState, StandardAction } from '../../../reducers/reducerTypes';
 import { bindActionCreators, Dispatch } from 'redux';
-import { ClientActions, CloseDrawerAction } from '../../../reducers/client';
 import { connect } from 'react-redux';
 import MainDrawerContent from './MainDrawerContent';
 
 import { DrawerTitle, DrawerSubContent, DrawerNote,
   ActionDrawerGeneral, DrawerFooter,
  } from './styled';
+import { CloseDrawerAction, DrawerActions } from '../../../reducers/drawer';
 
 interface DrawerContainerProps {
   drawerOpen: boolean;
@@ -62,14 +62,14 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-  drawerOpen: state.client.get('drawerOpen'),
-  drawerTitle: state.client.get('drawerTitle'),
+  drawerOpen: state.drawer.get('drawerOpen'),
+  drawerTitle: state.drawer.get('drawerTitle'),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>
   bindActionCreators(
     {
-      closeDrawer: ClientActions.closeDrawer,
+      closeDrawer: DrawerActions.closeDrawer,
     },
     dispatch,
   );

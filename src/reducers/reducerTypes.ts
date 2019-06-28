@@ -1,6 +1,7 @@
 import { AuthState } from './auth';
 import { Action, ReducersMapObject } from 'redux';
 import { ClientState } from './client';
+import { DrawerState } from './drawer';
 
 export interface StandardAction<T> {
   type: string;
@@ -12,6 +13,7 @@ export interface StandardAction<T> {
 export interface RootState {
   readonly auth: AuthState;
   readonly client: ClientState;
+  readonly drawer: DrawerState;
 }
 
 export type Reducers = ReducersMapObject<RootState>;
