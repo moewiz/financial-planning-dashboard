@@ -189,3 +189,11 @@ export const DrawerTableWrapper = styled.div`
     }
   }
 `;
+
+export const DrawerFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  p {
+    flex: 0 0 500px;
+  }
+`;
