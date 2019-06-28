@@ -25,7 +25,7 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
   public render() {
     const { drawerOpen, drawerTitle } = this.props;
     return (
-      <Drawer width={1000} onClose={this.onCloseDrawer} visible={drawerOpen}>
+      <Drawer width={1100} onClose={this.onCloseDrawer} visible={drawerOpen}>
         <h4>{drawerTitle}</h4>
         <p>
           Our insurance recommendations are based on our analysis of your circumstances and financial situation. The
