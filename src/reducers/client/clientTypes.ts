@@ -53,8 +53,6 @@ export interface ClientState {
   error?: string;
   maritalStatus: string;
   empStatus: string;
-  drawerOpen: boolean;
-  drawerTitle: string;
   assets: Array<{ refId: number; description: string; type: string }>;
 
   [key: string]: any;
@@ -88,8 +86,6 @@ export const defaultClientState: ClientState = {
   loading: false,
   submitting: false,
   error: '',
-  drawerOpen: false,
-  drawerTitle: '',
 };
 
 export class ClientStateRecord extends Record(defaultClientState) implements ClientState {
@@ -113,8 +109,6 @@ export enum ClientActionTypes {
   UPDATE_MARITAL_STATE = 'client/UPDATE_MARITAL_STATE',
   UPDATE_EMP_STATUS = 'client/UPDATE_EMP_STATUS',
   UPDATE_ASSETS = 'client/UPDATE_ASSETS',
-  OPEN_DRAWER = 'client/OPEN_DRAWER',
-  CLOSE_DRAWER = 'client/CLOSE_DRAWER',
 }
 
 export interface FetchDataEntryPayload {
@@ -146,5 +140,3 @@ export type UpdateAssetsAction = PayloadAction<
   ClientActionTypes.UPDATE_ASSETS,
   Array<{ description: string; type: string; refId: number }>
 >;
-export type OpenDrawerAction = PayloadAction<ClientActionTypes.OPEN_DRAWER, string>;
-export type CloseDrawerAction = PayloadAction<ClientActionTypes.CLOSE_DRAWER, string>;
