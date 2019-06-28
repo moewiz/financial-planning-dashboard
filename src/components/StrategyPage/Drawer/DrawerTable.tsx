@@ -122,9 +122,12 @@ class DrawerTable extends PureComponent<DrawerTableProps> {
                 <DrawerRowSubTitle>Tax Free Component</DrawerRowSubTitle>
                 <div className="values">
                   {map(columns, (column: string, index: number) => (
-                    <span className={'cell'} key={index}>
-                      0
-                    </span>
+                    <EditCell
+                      name={`${index}`}
+                      key={index}
+                      onChange={(value: any) => console.log(value)}
+                      value={0}
+                    />
                   ))}
                 </div>
               </DrawerTableListItems>
@@ -256,9 +259,12 @@ class DrawerTable extends PureComponent<DrawerTableProps> {
               <DrawerRowTitle>Closing Value (PV)</DrawerRowTitle>
               <div className="values">
                 {map(columns, (column: string, index: number) => (
-                  <span className={'cell'} key={index}>
-                    0
-                  </span>
+                  <EditCell
+                    name={`${index}`}
+                    key={index}
+                    onChange={(value: any) => console.log(value)}
+                    value={0}
+                  />
                 ))}
               </div>
             </DrawerTableParent>
