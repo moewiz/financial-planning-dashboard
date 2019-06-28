@@ -104,9 +104,12 @@ class DrawerTable extends PureComponent<DrawerTableProps> {
                 <div className="title">Override</div>
                 <div className="values">
                   {map(columns, (column: string, index: number) => (
-                    <span className={'cell'} key={index}>
-                      0
-                    </span>
+                    <EditCell
+                      name={`${index}`}
+                      key={index}
+                      onChange={(value: any) => console.log(value)}
+                      value={0}
+                    />
                   ))}
                 </div>
               </div>
@@ -123,9 +126,12 @@ class DrawerTable extends PureComponent<DrawerTableProps> {
               <div className="title">Employer Contribution (SG)</div>
               <div className="values">
                 {map(columns, (column: string, index: number) => (
-                  <span className={'cell'} key={index}>
-                    0
-                  </span>
+                  <EditCell
+                    name={`${index}`}
+                    key={index}
+                    onChange={(value: any) => console.log(value)}
+                    value={0}
+                  />
                 ))}
               </div>
             </div>
@@ -133,9 +139,12 @@ class DrawerTable extends PureComponent<DrawerTableProps> {
               <div className="title">Salary Sacrifice Contribution</div>
               <div className="values">
                 {map(columns, (column: string, index: number) => (
-                  <span className={'cell'} key={index}>
-                    0
-                  </span>
+                  <EditCell
+                    name={`${index}`}
+                    key={index}
+                    onChange={(value: any) => console.log(value)}
+                    value={0}
+                  />
                 ))}
               </div>
             </div>
@@ -143,9 +152,12 @@ class DrawerTable extends PureComponent<DrawerTableProps> {
               <div className="title">Personal Deductible Contribution</div>
               <div className="values">
                 {map(columns, (column: string, index: number) => (
-                  <span className={'cell'} key={index}>
-                    0
-                  </span>
+                  <EditCell
+                    name={`${index}`}
+                    key={index}
+                    onChange={(value: any) => console.log(value)}
+                    value={0}
+                  />
                 ))}
               </div>
             </div>
@@ -153,9 +165,12 @@ class DrawerTable extends PureComponent<DrawerTableProps> {
               <div className="title">Non-concessional Contribution</div>
               <div className="values">
                 {map(columns, (column: string, index: number) => (
-                  <span className={'cell'} key={index}>
-                    0
-                  </span>
+                  <EditCell
+                    name={`${index}`}
+                    key={index}
+                    onChange={(value: any) => console.log(value)}
+                    value={0}
+                  />
                 ))}
               </div>
             </div>
@@ -173,9 +188,12 @@ class DrawerTable extends PureComponent<DrawerTableProps> {
               <div className="title">Spouse Contribution</div>
               <div className="values">
                 {map(columns, (column: string, index: number) => (
-                  <span className={'cell'} key={index}>
-                    0
-                  </span>
+                  <EditCell
+                    name={`${index}`}
+                    key={index}
+                    onChange={(value: any) => console.log(value)}
+                    value={0}
+                  />
                 ))}
               </div>
             </div>
@@ -187,9 +205,12 @@ class DrawerTable extends PureComponent<DrawerTableProps> {
             <div className="title">Closing Value (PV)</div>
             <div className="values">
               {map(columns, (column: string, index: number) => (
-                <span className={'cell'} key={index}>
-                  0
-                </span>
+                <EditCell
+                  name={`${index}`}
+                  key={index}
+                  onChange={(value: any) => console.log(value)}
+                  value={0}
+                />
               ))}
             </div>
           </div>
