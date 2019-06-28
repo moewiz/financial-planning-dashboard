@@ -1,10 +1,15 @@
 // Define action types
 import { PayloadAction } from '../reducerTypes';
 import { Record } from 'immutable';
+import { RowData } from '../../components/StrategyPage/Drawer/DrawerItem';
 
 export interface DrawerState {
   drawerOpen: boolean;
   drawerTitle: string;
+  loading: boolean;
+  error?: string;
+  client: RowData[];
+  partner?: RowData[];
 
   [key: string]: any;
 }
@@ -12,6 +17,9 @@ export interface DrawerState {
 export const defaultDrawerState: DrawerState = {
   drawerOpen: false,
   drawerTitle: '',
+  loading: false,
+  error: '',
+  client: [],
 };
 
 export class DrawerStateRecord extends Record(defaultDrawerState) implements DrawerState {

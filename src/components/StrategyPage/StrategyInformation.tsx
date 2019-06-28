@@ -11,6 +11,7 @@ import GraphContainer, { GraphType } from './Graph/GraphContainer';
 import { StandardText as IStandardText } from '../../reducers/client/clientTypes';
 import { StandardAction } from '../../reducers/reducerTypes';
 import { DrawerActions, FetchDrawerDataAction, OpenDrawerAction } from '../../reducers/drawer';
+import { RouteComponentProps, withRouter } from 'react-router';
 
 interface StrategyInformationProps {
   type: StrategyTypes;
@@ -83,7 +84,7 @@ const colors = {
 };
 const superannuationChartColors = [colors.lightBlue, colors.darkBlue, colors.grey];
 
-class StrategyInformation extends PureComponent<StrategyInformationProps> {
+class StrategyInformation extends PureComponent<StrategyInformationProps & RouteComponentProps> {
   public onGraphClick = (e: React.SyntheticEvent) => {
     if (e && e.preventDefault) {
       e.preventDefault();
@@ -311,4 +312,4 @@ const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>
 export default connect(
   null,
   mapDispatchToProps,
-)(StrategyInformation);
+)(withRouter(StrategyInformation));
