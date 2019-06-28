@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { map } from 'lodash';
 import { Collapse, Icon } from 'antd';
 import EditCell from './EditCell';
@@ -18,78 +18,91 @@ export interface RowData {
 
 interface DrawerItemProps {
   columns: string[];
-  rowData: RowData;
+  row: RowData;
 }
 
-const DrawerItem = (props: DrawerItemProps) => {
-  const { columns } = props;
+class DrawerItem extends PureComponent<DrawerItemProps> {
+  public render() {
+    const { columns, row } = this.props;
 
-  return (
-    <DrawerItemStyled className={'drawer-item'}>
-      <Collapse
-        defaultActiveKey={['1']}
-        bordered={false}
-        expandIcon={(panelProps: any) =>
-          panelProps.isActive ? <Icon type="minus-square" /> : <Icon type="plus-square" />
-        }
-      >
-        <Panel header="Contributions" key="1">
-          <div className="list">
-            <div className="item bold-text">
-              <div className="title">Employer Contribution (SG)</div>
-              <div className="values">
-                {map(columns, (column: string, index: number) => (
-                  <EditCell name={`${index}`} key={index} onChange={(value: any) => console.log(value)} value={0} />
-                ))}
-              </div>
-            </div>
-            <div className="item bold-text">
-              <div className="title">Salary Sacrifice Contribution</div>
-              <div className="values">
-                {map(columns, (column: string, index: number) => (
-                  <EditCell name={`${index}`} key={index} onChange={(value: any) => console.log(value)} value={0} />
-                ))}
-              </div>
-            </div>
-            <div className="item bold-text">
-              <div className="title">Personal Deductible Contribution</div>
-              <div className="values">
-                {map(columns, (column: string, index: number) => (
-                  <EditCell name={`${index}`} key={index} onChange={(value: any) => console.log(value)} value={0} />
-                ))}
-              </div>
-            </div>
-            <div className="item bold-text">
-              <div className="title">Non-concessional Contribution</div>
-              <div className="values">
-                {map(columns, (column: string, index: number) => (
-                  <EditCell name={`${index}`} key={index} onChange={(value: any) => console.log(value)} value={0} />
-                ))}
-              </div>
-            </div>
-            <div className="item">
-              <div className="title">Government Co-contribution</div>
-              <div className="values">
-                {map(columns, (column: string, index: number) => (
-                  <span className={'cell'} key={index}>
-                    0
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div className="item bold-text">
-              <div className="title">Spouse Contribution</div>
-              <div className="values">
-                {map(columns, (column: string, index: number) => (
-                  <EditCell name={`${index}`} key={index} onChange={(value: any) => console.log(value)} value={0} />
-                ))}
-              </div>
+    return (
+      <DrawerItemStyled className={'drawer-item'}>
+        {row.values ? (
+          <div className={'parent'}>
+            <div className="title">{row.title}</div>
+            <div className="values">
+              {map(columns, (column: string, index: number) => (
+                <EditCell name={`${index}`} key={index} onChange={(value: any) => console.log(value)} value={0} />
+              ))}
             </div>
           </div>
-        </Panel>
-      </Collapse>
-    </DrawerItemStyled>
-  );
-};
+        ) : (
+          <Collapse
+            defaultActiveKey={['1']}
+            bordered={false}
+            expandIcon={(panelProps: any) =>
+              panelProps.isActive ? <Icon type="minus-square" /> : <Icon type="plus-square" />
+            }
+          >
+            <Panel header={row.title} key="1">
+              <div className="list">
+                <div className="item bold-text">
+                  <div className="title">Employer Contribution (SG)</div>
+                  <div className="values">
+                    {map(columns, (column: string, index: number) => (
+                      <EditCell name={`${index}`} key={index} onChange={(value: any) => console.log(value)} value={0} />
+                    ))}
+                  </div>
+                </div>
+                <div className="item bold-text">
+                  <div className="title">Salary Sacrifice Contribution</div>
+                  <div className="values">
+                    {map(columns, (column: string, index: number) => (
+                      <EditCell name={`${index}`} key={index} onChange={(value: any) => console.log(value)} value={0} />
+                    ))}
+                  </div>
+                </div>
+                <div className="item bold-text">
+                  <div className="title">Personal Deductible Contribution</div>
+                  <div className="values">
+                    {map(columns, (column: string, index: number) => (
+                      <EditCell name={`${index}`} key={index} onChange={(value: any) => console.log(value)} value={0} />
+                    ))}
+                  </div>
+                </div>
+                <div className="item bold-text">
+                  <div className="title">Non-concessional Contribution</div>
+                  <div className="values">
+                    {map(columns, (column: string, index: number) => (
+                      <EditCell name={`${index}`} key={index} onChange={(value: any) => console.log(value)} value={0} />
+                    ))}
+                  </div>
+                </div>
+                <div className="item">
+                  <div className="title">Government Co-contribution</div>
+                  <div className="values">
+                    {map(columns, (column: string, index: number) => (
+                      <span className={'cell'} key={index}>
+                        0
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="item bold-text">
+                  <div className="title">Spouse Contribution</div>
+                  <div className="values">
+                    {map(columns, (column: string, index: number) => (
+                      <EditCell name={`${index}`} key={index} onChange={(value: any) => console.log(value)} value={0} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Panel>
+          </Collapse>
+        )}
+      </DrawerItemStyled>
+    );
+  }
+}
 
 export default DrawerItem;

@@ -20,7 +20,6 @@ const rows = [
   {
     key: 'openingValue',
     title: 'Opening Value',
-    values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     children: [
       {
         key: 'taxable',
@@ -79,7 +78,6 @@ const rows = [
   {
     key: 'earnings',
     title: 'Earnings',
-    values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     children: [
       {
         key: 'growth',
@@ -101,7 +99,6 @@ const rows = [
   {
     key: 'ongoingCosts',
     title: 'Ongoing Costs',
-    values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     children: [
       {
         key: 'investmentCosts',
@@ -224,18 +221,7 @@ const rows = [
   {
     key: 'closingValuePV',
     title: 'Closing Value (PV)',
-    children: [
-      {
-        key: 'taxableComponent',
-        title: 'Taxable Component',
-        values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      },
-      {
-        key: 'taxFreeComponent',
-        title: 'Tax Free Component',
-        values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      },
-    ],
+    values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   },
 ];
 

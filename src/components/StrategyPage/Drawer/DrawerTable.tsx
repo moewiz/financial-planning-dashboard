@@ -22,7 +22,7 @@ class DrawerTable extends PureComponent<DrawerTableProps> {
           ))}
         </div>
         {map(rows, (row: RowData, index: number) => (
-          <DrawerItem columns={columns} rowData={row} key={index} />
+          <DrawerItem columns={columns} row={row} key={index} />
         ))}
       </DrawerTableWrapper>
     );
