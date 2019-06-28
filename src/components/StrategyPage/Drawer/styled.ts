@@ -221,7 +221,6 @@ export const DrawerTableListItems = styled.div`
       font-weight: 600;
     }
   }
-   
 `;
 
 export const DrawerTableSubList = styled.div.attrs({

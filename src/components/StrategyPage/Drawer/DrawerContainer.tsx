@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import MainDrawerContent from './MainDrawerContent';
 
 import { DrawerTitle, DrawerSubContent, DrawerNote,
-  ActionDrawerGeneral, DrawerFooter,
+  ActionDrawerGeneral, ActionDrawerBlock, DrawerFooter,
  } from './styled';
 import { CloseDrawerAction, DrawerActions } from '../../../reducers/drawer';
 
@@ -40,10 +40,12 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
         </DrawerSubContent>
         <MainDrawerContent />
         <DrawerFooter>
-          <DrawerNote>
-            Note: Recommended sums insured have been rounded to take advantage of pricing point discounts with
-            insurance companies. In addition, Life cover must be equal to or greater than TPD recommended cover.
-          </DrawerNote>
+          <ActionDrawerBlock>
+            <DrawerNote>
+              Note: Recommended sums insured have been rounded to take advantage of pricing point discounts with insurance
+              companies. In addition, Life cover must be equal to or greater than TPD recommended cover.
+            </DrawerNote>
+          </ActionDrawerBlock>
           <Pagination defaultCurrent={1} total={50} />
         </DrawerFooter>
         <ActionDrawerGeneral>
