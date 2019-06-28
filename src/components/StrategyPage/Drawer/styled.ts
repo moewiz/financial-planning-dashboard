@@ -5,15 +5,18 @@ const { TabPane } = Tabs;
 export const DrawerTitle = styled.h4`
   display: inline-block;
   width: 100%;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
   color: #4e5b86;
   margin-bottom: 10px;
+  .ant-spin-spinning{
+    margin-left: 10px;
+  }
 `;
 
 export const DrawerSubContent = styled.p`
   display: inline-block;
-  width: 100%;
+  width: 65%;
   font-size: 13px;
   color: #4e5b86;
   margin-bottom: 25px;
@@ -80,11 +83,11 @@ export const DrawerTableWrapper = styled.div`
   }
   .cell {
     display: inline-block;
-    width: 65px;
+    width: 60px;
     margin: 0 5px;
     text-align: center;
     color: #4e5d86;
-    /* font-weight: 600; */
+    font-size: 13px;
   }
   .bold-text {
     .title {
@@ -98,6 +101,63 @@ export const DrawerTableWrapper = styled.div`
 export const DrawerTableRows = styled.div`
   margin-bottom: 10px;
   border-bottom: 1px solid #ededed;
+  .edit-cell {
+    width: 69px;
+    margin-right: 1px;
+    border: 1px solid;
+    border-color: transparent;
+    &:hover {
+      border-color: #dcdcdc;
+    }
+  }
+  .ant-input-number {
+    &:focus {
+      border: 1px solid #dcdcdc !important;
+      box-shadow: none;
+      outline: 0;
+    }
+    &-focused {
+      border: 1px solid #dcdcdc !important;
+      box-shadow: none;
+      outline: 0;
+    }
+    &-handler-wrap {
+      display: none;
+    }
+    &-input-wrap {
+      &:focus {
+        outline: 0;
+      }
+    }
+    &-input {
+      text-align: center;
+      font-weight: 600;
+      padding: 0 5px;
+      color: #4e5d86;
+    }
+  }
+  .ant-collapse {
+    &-item {
+      border-bottom: none !important;
+    }
+    &-header {
+      padding: 0px 0px 0px 20px !important;
+      color: #4e5d86 !important;
+      display: flex;
+      align-items: center;
+      min-height: 45px;
+      border-bottom: 1px solid #ededed;
+      font-weight: 600;
+      i {
+        left: 0 !important;
+      }
+    }
+    .ant-collapse-content > .ant-collapse-content-box {
+      padding: 0px;
+    }
+    &-content {
+    }
+  }
 `;
 
 export const DrawerTableParent = styled.div`
@@ -118,22 +178,26 @@ export const DrawerRowTitle = styled.span.attrs({
 })`
   font-weight: 600;
   flex: 1;
+  padding-left: 20px;
 `;
 
 export const DrawerRowSubTitle = styled.span.attrs({
   className: 'drawer-title-sub-row',
 })`
   flex: 1;
-  padding-left: 50px;
+  color: #4e5d86;
+  /* padding-left: 50px; */
 `;
 
-export const DrawerTableList = styled.div`
-  &.bold-text{
-    .drawer-table-sub-list{
-      font-weight: 600;
-    }
-     .drawer-title-sub-row{
-      font-weight: 600;
+export const DrawerTableList = styled.div.attrs({
+  className: 'drawer-table-list',
+})`
+  .drawer-title-sub-row{
+    padding-left: 50px;
+  }
+  .drawer-table-list{
+    .drawer-title-sub-row{
+      padding-left: 70px;
     }
   }
 `;
@@ -157,6 +221,7 @@ export const DrawerTableListItems = styled.div`
       font-weight: 600;
     }
   }
+   
 `;
 
 export const DrawerTableSubList = styled.div.attrs({
@@ -195,13 +260,11 @@ export const ActionDrawerGeneral = styled.section<{ visible?: boolean }>`
     border-radius: 18px;
   }
 `;
-export const ActionDrawerBlock = styled.div`
-  display: flex;
-  align-items: center;
-`;
+
 export const DrawerFooter = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-top: 20px;
   p {
     flex: 0 0 500px;
   }

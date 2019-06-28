@@ -2,7 +2,14 @@ import React, { PureComponent } from 'react';
 import { map } from 'lodash';
 import { Collapse, Icon } from 'antd';
 import EditCell from './EditCell';
-import { DrawerItemStyled } from '../styled';
+import {
+  DrawerTableRows,
+  DrawerRowTitle,
+  DrawerTableParent,
+  DrawerTableList,
+  DrawerTableListItems,
+  DrawerRowSubTitle,
+} from './styled';
 const { Panel } = Collapse;
 
 export interface RowData {
@@ -26,16 +33,17 @@ class DrawerItem extends PureComponent<DrawerItemProps> {
     const { columns, row } = this.props;
 
     return (
-      <DrawerItemStyled className={'drawer-item'}>
+      // <DrawerItemStyled className={'drawer-item'}>
+      <DrawerTableRows>
         {row.values ? (
-          <div className={'parent'}>
-            <div className="title">{row.title}</div>
+          <DrawerTableParent>
+            <DrawerRowTitle>{row.title}</DrawerRowTitle>
             <div className="values">
               {map(columns, (column: string, index: number) => (
                 <EditCell name={`${index}`} key={index} onChange={(value: any) => console.log(value)} value={0} />
               ))}
             </div>
-          </div>
+          </DrawerTableParent>
         ) : (
           <Collapse
             defaultActiveKey={['1']}
@@ -45,41 +53,41 @@ class DrawerItem extends PureComponent<DrawerItemProps> {
             }
           >
             <Panel header={row.title} key="1">
-              <div className="list">
-                <div className="item bold-text">
-                  <div className="title">Employer Contribution (SG)</div>
+              <DrawerTableList>
+                <DrawerTableListItems className="bold-text">
+                  <DrawerRowSubTitle>Employer Contribution (SG)</DrawerRowSubTitle>
                   <div className="values">
                     {map(columns, (column: string, index: number) => (
                       <EditCell name={`${index}`} key={index} onChange={(value: any) => console.log(value)} value={0} />
                     ))}
                   </div>
-                </div>
-                <div className="item bold-text">
-                  <div className="title">Salary Sacrifice Contribution</div>
+                </DrawerTableListItems>
+                <DrawerTableListItems className="bold-text">
+                  <DrawerRowSubTitle>Salary Sacrifice Contribution</DrawerRowSubTitle>
                   <div className="values">
                     {map(columns, (column: string, index: number) => (
                       <EditCell name={`${index}`} key={index} onChange={(value: any) => console.log(value)} value={0} />
                     ))}
                   </div>
-                </div>
-                <div className="item bold-text">
-                  <div className="title">Personal Deductible Contribution</div>
+                </DrawerTableListItems>
+                <DrawerTableListItems className="bold-text">
+                  <DrawerRowSubTitle>Personal Deductible Contribution</DrawerRowSubTitle>
                   <div className="values">
                     {map(columns, (column: string, index: number) => (
                       <EditCell name={`${index}`} key={index} onChange={(value: any) => console.log(value)} value={0} />
                     ))}
                   </div>
-                </div>
-                <div className="item bold-text">
-                  <div className="title">Non-concessional Contribution</div>
+                </DrawerTableListItems>
+                <DrawerTableListItems className="bold-text">
+                  <DrawerRowSubTitle>Non-concessional Contribution</DrawerRowSubTitle>
                   <div className="values">
                     {map(columns, (column: string, index: number) => (
                       <EditCell name={`${index}`} key={index} onChange={(value: any) => console.log(value)} value={0} />
                     ))}
                   </div>
-                </div>
-                <div className="item">
-                  <div className="title">Government Co-contribution</div>
+                </DrawerTableListItems>
+                <DrawerTableListItems>
+                  <DrawerRowSubTitle>Government Co-contribution</DrawerRowSubTitle>
                   <div className="values">
                     {map(columns, (column: string, index: number) => (
                       <span className={'cell'} key={index}>
@@ -87,20 +95,20 @@ class DrawerItem extends PureComponent<DrawerItemProps> {
                       </span>
                     ))}
                   </div>
-                </div>
-                <div className="item bold-text">
-                  <div className="title">Spouse Contribution</div>
+                </DrawerTableListItems>
+                <DrawerTableListItems className="bold-text">
+                  <DrawerRowSubTitle>Spouse Contribution</DrawerRowSubTitle>
                   <div className="values">
                     {map(columns, (column: string, index: number) => (
                       <EditCell name={`${index}`} key={index} onChange={(value: any) => console.log(value)} value={0} />
                     ))}
                   </div>
-                </div>
-              </div>
+                </DrawerTableListItems>
+              </DrawerTableList>
             </Panel>
           </Collapse>
         )}
-      </DrawerItemStyled>
+      </DrawerTableRows>
     );
   }
 }

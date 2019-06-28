@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Drawer, Icon, Button, Pagination } from 'antd';
+import { Drawer, Icon, Button, Pagination, Spin } from 'antd';
 import { isFunction } from 'lodash';
 import { RootState, StandardAction } from '../../../reducers/reducerTypes';
 import { bindActionCreators, Dispatch } from 'redux';
@@ -30,7 +30,10 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
     const { drawerOpen, drawerTitle } = this.props;
     return (
       <Drawer width={1100} onClose={this.onCloseDrawer} visible={drawerOpen}>
-        <DrawerTitle>{drawerTitle}</DrawerTitle>
+        <DrawerTitle>
+          {drawerTitle} <Spin size="small" />
+        </DrawerTitle>
+
         <DrawerSubContent>
           Our insurance recommendations are based on our analysis of your circumstances and financial situation. The
           following table illustrates your required level of cover.
@@ -38,8 +41,8 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
         <MainDrawerContent />
         <DrawerFooter>
           <DrawerNote>
-            Note: Recommended sums insured have been rounded to take advantage of pricing point discounts with insurance
-            companies. In addition, Life cover must be equal to or greater than TPD recommended cover.
+            Note: Recommended sums insured have been rounded to take advantage of pricing point discounts with
+            insurance companies. In addition, Life cover must be equal to or greater than TPD recommended cover.
           </DrawerNote>
           <Pagination defaultCurrent={1} total={50} />
         </DrawerFooter>
@@ -53,7 +56,6 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
             <span>Save</span>
           </Button>
         </ActionDrawerGeneral>
-
       </Drawer>
     );
   }
