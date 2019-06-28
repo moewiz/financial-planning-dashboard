@@ -148,6 +148,9 @@ export const DrawerTableWrapper = styled.div`
     text-align: right;
   }
   .parent {
+    i {
+      float: left;
+    }
     .title {
       font-weight: 600;
     }

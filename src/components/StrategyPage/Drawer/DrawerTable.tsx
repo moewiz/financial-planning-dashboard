@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { map } from 'lodash';
 import { DrawerTableWrapper } from '../styled';
+import {Icon} from "antd";
 
 interface RowData {
   key: string;
@@ -30,6 +31,7 @@ class DrawerTable extends PureComponent<DrawerTableProps> {
         </div>
         <div className={'drawer-item'}>
           <div className={'parent'}>
+            <Icon type="minus-square" />
             <div className="title">Opening Value</div>
           </div>
           <div className="list">
@@ -57,6 +59,7 @@ class DrawerTable extends PureComponent<DrawerTableProps> {
         </div>
         <div className={'drawer-item'}>
           <div className={'parent'}>
+            <Icon type="minus-square" />
             <div className="title">Excess Contributions</div>
           </div>
           <div className="list">
@@ -108,6 +111,7 @@ class DrawerTable extends PureComponent<DrawerTableProps> {
         </div>
         <div className={'drawer-item'}>
           <div className={'parent'}>
+            <Icon type="minus-square" />
             <div className="title">Contributions</div>
           </div>
           <div className="list">
@@ -175,6 +179,7 @@ class DrawerTable extends PureComponent<DrawerTableProps> {
         </div>
         <div className="drawer-item">
           <div className="parent bold-text">
+            <Icon type="plus-square" />
             <div className="title">Closing Value (PV)</div>
             <div className="values">
               {map(columns, (column: string, index: number) => (
