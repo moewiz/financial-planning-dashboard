@@ -2,10 +2,23 @@ import React, { PureComponent } from 'react';
 import DrawerTable from './DrawerTable';
 import { MainDrawerSection, TabsCustomized, TabsPaneCustomized } from './styled';
 
+const columns = [
+  '2019/20',
+  '2020/21',
+  '2021/22',
+  '2022/23',
+  '2023/24',
+  '2024/25',
+  '2025/26',
+  '2026/27',
+  '2027/28',
+  '2028/29',
+];
 const rows = [
   {
     key: 'openingValue',
     title: 'Opening Value',
+    values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     children: [
       {
         key: 'taxable',
@@ -64,6 +77,7 @@ const rows = [
   {
     key: 'earnings',
     title: 'Earnings',
+    values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     children: [
       {
         key: 'growth',
@@ -85,6 +99,7 @@ const rows = [
   {
     key: 'ongoingCosts',
     title: 'Ongoing Costs',
+    values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     children: [
       {
         key: 'investmentCosts',
@@ -207,21 +222,19 @@ const rows = [
   {
     key: 'closingValuePV',
     title: 'Closing Value (PV)',
-    values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    children: [
+      {
+        key: 'taxableComponent',
+        title: 'Taxable Component',
+        values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      },
+      {
+        key: 'taxFreeComponent',
+        title: 'Tax Free Component',
+        values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      },
+    ],
   },
-];
-
-const columns = [
-  '2019/20',
-  '2020/21',
-  '2021/22',
-  '2022/23',
-  '2023/24',
-  '2024/25',
-  '2025/26',
-  '2026/27',
-  '2027/28',
-  '2028/29',
 ];
 
 class MainDrawerContent extends PureComponent {
