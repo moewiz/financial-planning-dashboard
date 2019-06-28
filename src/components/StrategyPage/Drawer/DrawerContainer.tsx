@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import MainDrawerContent from './MainDrawerContent';
 
 import { DrawerTitle, DrawerSubContent, DrawerNote,
-  ActionDrawerGeneral, ActionDrawerBlock, DrawerFooter,
+  ActionDrawerGeneral, DrawerFooter,
  } from './styled';
 
 interface DrawerContainerProps {
@@ -37,12 +37,10 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
         </DrawerSubContent>
         <MainDrawerContent />
         <DrawerFooter>
-          <ActionDrawerBlock>
-            <DrawerNote>
-              Note: Recommended sums insured have been rounded to take advantage of pricing point discounts with insurance
-              companies. In addition, Life cover must be equal to or greater than TPD recommended cover.
-            </DrawerNote>
-          </ActionDrawerBlock>
+          <DrawerNote>
+            Note: Recommended sums insured have been rounded to take advantage of pricing point discounts with insurance
+            companies. In addition, Life cover must be equal to or greater than TPD recommended cover.
+          </DrawerNote>
           <Pagination defaultCurrent={1} total={50} />
         </DrawerFooter>
         <ActionDrawerGeneral>

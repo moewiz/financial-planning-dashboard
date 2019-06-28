@@ -1,12 +1,19 @@
 import React, { PureComponent } from 'react';
 import { map } from 'lodash';
 // import DrawerItem, { RowData } from './DrawerItem';
-import { DrawerTableWrapper, DrawerTableHeader,
-  DrawerTableContent, DrawerTableRows, DrawerTableParent,
-  DrawerRowTitle, DrawerTableList, DrawerTableListItems,
-  DrawerRowSubTitle, DrawerTableSubList,
+import {
+  DrawerTableWrapper,
+  DrawerTableHeader,
+  DrawerTableContent,
+  DrawerTableRows,
+  DrawerTableParent,
+  DrawerRowTitle,
+  DrawerTableList,
+  DrawerTableListItems,
+  DrawerRowSubTitle,
+  DrawerTableSubList,
 } from './styled';
-import {Icon} from 'antd';
+import { Icon } from 'antd';
 
 interface RowData {
   key: string;
@@ -34,7 +41,7 @@ class DrawerTable extends PureComponent<DrawerTableProps> {
               {column}
             </span>
           ))}
-        {/* {map(rows, (row: RowData, index: number) => (
+          {/* {map(rows, (row: RowData, index: number) => (
           <DrawerItem columns={columns} row={row} key={index} />
         ))} */}
         </DrawerTableHeader>
@@ -200,9 +207,9 @@ class DrawerTable extends PureComponent<DrawerTableProps> {
               </div>
             </DrawerTableParent>
           </DrawerTableRows>
-        </DrawerTableContent>;
-      </DrawerTableWrapper >;
-    )
+        </DrawerTableContent>
+      </DrawerTableWrapper>
+    );
   }
 }
 
