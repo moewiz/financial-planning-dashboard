@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
-import { Drawer } from 'antd';
+import { Drawer, Pagination } from 'antd';
 import { isFunction } from 'lodash';
 import { RootState, StandardAction } from '../../../reducers/reducerTypes';
 import { bindActionCreators, Dispatch } from 'redux';
 import { ClientActions, CloseDrawerAction } from '../../../reducers/client';
 import { connect } from 'react-redux';
 import MainDrawerContent from './MainDrawerContent';
+import { DrawerFooter } from '../styled';
 
 interface DrawerContainerProps {
   drawerOpen: boolean;
@@ -32,10 +33,13 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
           following table illustrates your required level of cover.
         </p>
         <MainDrawerContent />
-        <p>
-          Note: Recommended sums insured have been rounded to take advantage of pricing point discounts with insurance
-          companies. In addition, Life cover must be equal to or greater than TPD recommended cover.
-        </p>
+        <DrawerFooter>
+          <p>
+            Note: Recommended sums insured have been rounded to take advantage of pricing point discounts with insurance
+            companies. In addition, Life cover must be equal to or greater than TPD recommended cover.
+          </p>
+          <Pagination defaultCurrent={1} total={50} />
+        </DrawerFooter>
       </Drawer>
     );
   }
