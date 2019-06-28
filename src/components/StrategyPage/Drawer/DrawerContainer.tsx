@@ -41,8 +41,8 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
         <MainDrawerContent />
         <DrawerFooter>
           <DrawerNote>
-            Note: Recommended sums insured have been rounded to take advantage of pricing point discounts with insurance
-            companies. In addition, Life cover must be equal to or greater than TPD recommended cover.
+            Note: Recommended sums insured have been rounded to take advantage of pricing point discounts with
+            insurance companies. In addition, Life cover must be equal to or greater than TPD recommended cover.
           </DrawerNote>
           <Pagination defaultCurrent={1} total={50} />
         </DrawerFooter>

@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
 import { map } from 'lodash';
-import { RowData } from './DrawerItem';
+import { Collapse } from 'antd';
+const { Panel } = Collapse;
+
+import DrawerItem, { RowData } from './DrawerItem';
 import {
   DrawerTableWrapper,
   DrawerTableHeader,
@@ -32,12 +35,71 @@ class DrawerTable extends PureComponent<DrawerTableProps> {
               {column}
             </span>
           ))}
-          {/* {map(rows, (row: RowData, index: number) => (
-          <DrawerItem columns={columns} row={row} key={index} />
-        ))} */}
         </DrawerTableHeader>
         <DrawerTableContent>
+          {map(rows, (row: RowData, index: number) => (
+            <DrawerItem columns={columns} row={row} key={index} />
+          ))}
+
           <DrawerTableRows>
+            <Collapse
+              defaultActiveKey={['1']}
+              bordered={false}
+              expandIcon={(panelProps: any) =>
+                panelProps.isActive ? <Icon type="minus-square" /> : <Icon type="plus-square" />
+              }
+            >
+              <Panel header={'Excess Contributions'} key="1">
+                <DrawerTableList>
+                  <DrawerTableListItems>
+                    <DrawerRowSubTitle>Excess non-concessional</DrawerRowSubTitle>
+                    <div className="values">
+                      {map(columns, (column: string, index: number) => (
+                        <span className={'cell'} key={index}>
+                          0
+                        </span>
+                      ))}
+                    </div>
+                  </DrawerTableListItems>
+                  <DrawerTableList>
+                    <DrawerTableListItems className="bold-text">
+                      <DrawerRowSubTitle>Override</DrawerRowSubTitle>
+                      <div className="values">
+                        {map(columns, (column: string, index: number) => (
+                          <span className={'cell'} key={index}>
+                            0
+                          </span>
+                        ))}
+                      </div>
+                    </DrawerTableListItems>
+                  </DrawerTableList>
+                  <DrawerTableListItems>
+                    <DrawerRowSubTitle>Excess concessional</DrawerRowSubTitle>
+                    <div className="values">
+                      {map(columns, (column: string, index: number) => (
+                        <span className={'cell'} key={index}>
+                          0
+                        </span>
+                      ))}
+                    </div>
+                  </DrawerTableListItems>
+                  <DrawerTableList>
+                    <DrawerTableListItems className="bold-text">
+                      <DrawerRowSubTitle>Override</DrawerRowSubTitle>
+                      <div className="values">
+                        {map(columns, (column: string, index: number) => (
+                          <span className={'cell'} key={index}>
+                            0
+                          </span>
+                        ))}
+                      </div>
+                    </DrawerTableListItems>
+                  </DrawerTableList>
+                </DrawerTableList>
+              </Panel>
+            </Collapse>
+          </DrawerTableRows>
+          {/* <DrawerTableRows>
             <DrawerTableParent>
               <Icon type="minus-square" />
               <DrawerRowTitle>Opening Value</DrawerRowTitle>
@@ -197,7 +259,7 @@ class DrawerTable extends PureComponent<DrawerTableProps> {
                 ))}
               </div>
             </DrawerTableParent>
-          </DrawerTableRows>
+          </DrawerTableRows> */}
         </DrawerTableContent>
       </DrawerTableWrapper>
     );
