@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { Collapse } from 'antd';
 
 const slideOutUp = keyframes`
   from {
@@ -163,6 +164,7 @@ export const DrawerTableWrapper = styled.div`
     clear: both;
   }
   .drawer-item {
+    clear: both;
   }
   .item {
   }
@@ -220,5 +222,27 @@ export const DrawerFooter = styled.div`
   justify-content: space-between;
   p {
     flex: 0 0 500px;
+  }
+`;
+
+export const DrawerItemStyled = styled.section`
+  .ant-collapse {
+    &-item {
+      border-bottom: none !important;
+    }
+    &-header {
+      background: #fff;
+      padding: 0px 0px 0px 15px !important;
+      color: rgba(0, 0, 0, 0.65) !important;
+      font-weight: 600;
+      i {
+        left: 0 !important;
+      }
+    }
+    .ant-collapse-content > .ant-collapse-content-box {
+      padding: 0px;
+    }
+    &-content {
+    }
   }
 `;
