@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import { map } from 'lodash';
+import { map, get, isNumber } from 'lodash';
 import { Collapse, Icon } from 'antd';
-import EditCell from './EditCell';
+import EditCell, { EditCellType } from './EditCell';
 import {
   DrawerTableRows,
   DrawerRowTitle,
@@ -29,6 +29,38 @@ interface DrawerItemProps {
 }
 
 class DrawerItem extends PureComponent<DrawerItemProps> {
+  public renderEditCell = (column: string, index: number) => {
+    const { row } = this.props;
+    const value = get(row.values, [index], '');
+    const type = isNumber(value) ? EditCellType.number : EditCellType.number;
+
+    return (
+      <EditCell name={`${index}`} key={index} onChange={(val: any) => console.log(val)} value={value} type={type} />
+    );
+  }
+
+  public renderValue = (column: string, index: number) => {
+    const { row } = this.props;
+    const value = get(row.values, [index], '');
+    return (
+      <span className={'cell'} key={index}>
+        {value}
+      </span>
+    );
+  }
+
+  public renderValues = () => {
+    const { row, columns } = this.props;
+    let renderer;
+    if (row.editable) {
+      renderer = this.renderEditCell;
+    } else {
+      renderer = this.renderValue;
+    }
+
+    return map(columns, renderer);
+  }
+
   public render() {
     const { columns, row } = this.props;
 
@@ -37,11 +69,7 @@ class DrawerItem extends PureComponent<DrawerItemProps> {
         {row.values ? (
           <DrawerTableParent>
             <DrawerRowTitle>{row.title}</DrawerRowTitle>
-            <div className="values">
-              {map(columns, (column: string, index: number) => (
-                <EditCell name={`${index}`} key={index} onChange={(value: any) => console.log(value)} value={0} />
-              ))}
-            </div>
+            <div className="values">{this.renderValues()}</div>
           </DrawerTableParent>
         ) : (
           <Collapse

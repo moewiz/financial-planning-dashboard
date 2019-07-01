@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { isEqual } from 'lodash';
-import { InputNumber } from 'antd';
+import { Input, InputNumber } from 'antd';
 
 interface EditCellProps {
   name: string;
-  value: number;
+  type?: EditCellType;
+  value: any;
   onChange: (value: any) => void;
   className?: string;
 }
@@ -13,9 +14,14 @@ interface EditaCellState {
   value: any;
 }
 
+export enum EditCellType {
+  text,
+  number,
+}
+
 class EditCell extends Component<EditCellProps, EditaCellState> {
   public state = {
-    value: 0,
+    value: this.props.value,
   };
 
   public shouldComponentUpdate(
@@ -33,17 +39,28 @@ class EditCell extends Component<EditCellProps, EditaCellState> {
 
   public onChange = (value: number | undefined) => {
     const { onChange } = this.props;
-    // const value = e.target && e.target.value;
 
     this.setState({ value });
     onChange(value);
-  }
+  };
+
+  public onChangeText = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { onChange } = this.props;
+    const value = e.target.value;
+
+    this.setState({ value });
+    onChange(value);
+  };
 
   public render() {
-    const { name } = this.props;
+    const { name, type = EditCellType.text } = this.props;
     const { value } = this.state;
 
-    return <InputNumber name={name} onChange={this.onChange} value={value} className={'edit-cell'} />;
+    if (type === EditCellType.number) {
+      return <InputNumber name={name} onChange={this.onChange} value={value} className={'edit-cell'} />;
+    }
+
+    return <Input name={name} value={value} onChange={this.onChangeText} className={'edit-cell text'} />;
   }
 }
 

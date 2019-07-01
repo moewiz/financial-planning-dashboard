@@ -105,6 +105,15 @@ export const DrawerTableRows = styled.div`
     &:hover {
       border-color: #dcdcdc;
     }
+    &.text {
+      font-weight: 600;
+      text-align: center;
+      &:focus {
+        border: 1px solid #dcdcdc !important;
+        box-shadow: none;
+        outline: 0;
+      }
+    }
   }
   .ant-input-number {
     &:focus {
