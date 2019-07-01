@@ -20,6 +20,7 @@ export const defaultDrawerState: DrawerState = {
   loading: false,
   error: '',
   client: [],
+  partner: [],
 };
 
 export class DrawerStateRecord extends Record(defaultDrawerState) implements DrawerState {

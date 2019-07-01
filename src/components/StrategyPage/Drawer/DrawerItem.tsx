@@ -33,7 +33,6 @@ class DrawerItem extends PureComponent<DrawerItemProps> {
     const { columns, row } = this.props;
 
     return (
-      // <DrawerItemStyled className={'drawer-item'}>
       <DrawerTableRows>
         {row.values ? (
           <DrawerTableParent>

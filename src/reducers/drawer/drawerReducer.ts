@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { fromJS } from 'immutable';
+import { get } from 'lodash';
 
 import { StandardAction } from '../reducerTypes';
 import { defaultDrawerState, DrawerActionTypes, DrawerState, DrawerStateRecord } from './drawerTypes';
@@ -33,14 +33,11 @@ export default class DrawerReducer {
 
       case DrawerActionTypes.FETCH_DRAWER_DATA_SUCCESS: {
         const { payload } = action;
-        return state.merge(
-          fromJS({
-            loading: false,
-            client: payload.client || [],
-            partner: payload.partner || [],
-            error: '',
-          }),
-        );
+        return state
+          .set('loading', false)
+          .set('error', '')
+          .set('client', get(payload, 'client', []))
+          .set('partner', get(payload, 'partner', []));
       }
 
       case DrawerActionTypes.FETCH_DRAWER_DATA_FAILURE:

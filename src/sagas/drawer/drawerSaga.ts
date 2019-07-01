@@ -1,4 +1,5 @@
-import { all, takeLatest, call, put, select } from 'redux-saga/effects';
+import { all, takeLatest, call, put } from 'redux-saga/effects';
+import { get } from 'lodash';
 import { AxiosResponse } from 'axios';
 
 import { APIResponse, getAPIErrorMessage } from '../../utils/apiUtils';
@@ -9,21 +10,14 @@ export default class DrawerSaga {
   public static *fetchDrawerData({ payload }: { payload: string }) {
     try {
       const type: string = payload;
-      // const {} = yield select((state: RootState) => {
-      //   return {
-      //     clientId:
-      //   }
-      // });
       if (type) {
         const response: AxiosResponse<APIResponse> = yield call(DrawerService.fetchDrawerData);
         if (response.status === 200 && response.data.success) {
           yield put({
             type: DrawerActionTypes.FETCH_DRAWER_DATA_SUCCESS,
             payload: {
-              // clientId,
-              // tagName,
-              // tabName,
-              pageData: response.data.data,
+              client: get(response.data.data, 'client', []),
+              partner: get(response.data.data, 'partner', []),
             },
           });
         }
