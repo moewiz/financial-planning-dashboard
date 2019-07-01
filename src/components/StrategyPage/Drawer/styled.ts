@@ -96,7 +96,6 @@ export const DrawerTableWrapper = styled.div`
   }
 `;
 export const DrawerTableRows = styled.div`
-  margin-bottom: 10px;
   border-bottom: 1px solid #ededed;
   .edit-cell {
     width: 69px;
@@ -142,7 +141,7 @@ export const DrawerTableRows = styled.div`
       color: #4e5d86 !important;
       display: flex;
       align-items: center;
-      min-height: 45px;
+      min-height: 50px;
       border-bottom: 1px solid #ededed;
       font-weight: 600;
       i {
@@ -151,8 +150,7 @@ export const DrawerTableRows = styled.div`
     }
     .ant-collapse-content > .ant-collapse-content-box {
       padding: 0px;
-    }
-    &-content {
+      padding-top: 0px !important;
     }
   }
 `;

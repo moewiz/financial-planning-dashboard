@@ -78,7 +78,6 @@
         {
           "key": "earnings",
           "title": "Earnings",
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           "children": [
             {
               "key": "growth",
@@ -100,7 +99,6 @@
         {
           "key": "ongoingCosts",
           "title": "Ongoing Costs",
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           "children": [
             {
               "key": "investmentCosts",
@@ -288,7 +286,6 @@
         {
           "key": "earnings",
           "title": "Earnings",
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           "children": [
             {
               "key": "growth",
@@ -310,7 +307,6 @@
         {
           "key": "ongoingCosts",
           "title": "Ongoing Costs",
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           "children": [
             {
               "key": "investmentCosts",
@@ -517,7 +513,6 @@
         {
           "key": "earnings",
           "title": "Earnings",
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           "children": [
             {
               "key": "growth",
@@ -539,7 +534,6 @@
         {
           "key": "ongoingCosts",
           "title": "Ongoing Costs",
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           "children": [
             {
               "key": "investmentCosts",
@@ -727,7 +721,6 @@
         {
           "key": "earnings",
           "title": "Earnings",
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           "children": [
             {
               "key": "growth",
@@ -749,7 +742,6 @@
         {
           "key": "ongoingCosts",
           "title": "Ongoing Costs",
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           "children": [
             {
               "key": "investmentCosts",
