@@ -158,8 +158,7 @@ export const DrawerTableRows = styled.div`
 export const DrawerTableParent = styled.div`
   display: flex;
   align-items: center;
-  min-height: 45px;
-  padding-bottom: 5px;
+  min-height: 50px;
   border-bottom: 1px solid #ededed;
   font-weight: 600;
   i {

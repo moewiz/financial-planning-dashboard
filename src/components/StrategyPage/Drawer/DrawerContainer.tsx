@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import MainDrawerContent from './MainDrawerContent';
 
 import { DrawerTitle, DrawerSubContent, DrawerNote, ActionDrawerGeneral, DrawerFooter } from './styled';
-import { ActiveTabAction, CloseDrawerAction, DrawerActions } from '../../../reducers/drawer';
+import { ActiveTabAction, CloseDrawerAction, DrawerActions, ChangePageAction } from '../../../reducers/drawer';
 
 export interface DrawerData {
   title: string;
@@ -26,6 +26,7 @@ interface DrawerContainerProps {
 
   closeDrawer?: (tabActive: string) => CloseDrawerAction;
   activeTab: (tabActive: string) => ActiveTabAction;
+  changePage: (page: number) => ChangePageAction;
 }
 
 class DrawerContainer extends PureComponent<DrawerContainerProps> {
@@ -36,9 +37,16 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
     }
   }
 
+  public onPageChange: (page: number, pageSize?: number) => void = (page) => {
+    const { changePage } = this.props;
+    changePage(page);
+  }
+
   public renderDrawer = () => {
     const { drawerData, loading, activeTab, tabActive, page } = this.props;
     const { title, subTitle, footnote } = drawerData;
+    const total = drawerData.tableData && drawerData.tableData.length ? drawerData.tableData.length * 10 : 10;
+
     return (
       <>
         <DrawerTitle>
@@ -52,7 +60,7 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
 
         <DrawerFooter>
           <DrawerNote>{footnote}</DrawerNote>
-          <Pagination defaultCurrent={1} total={50} />
+          <Pagination defaultCurrent={page} total={total} onChange={this.onPageChange} />
         </DrawerFooter>
         <ActionDrawerGeneral>
           <Button htmlType={'button'} type={'default'}>
@@ -98,6 +106,7 @@ const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>
     {
       closeDrawer: DrawerActions.closeDrawer,
       activeTab: DrawerActions.activeTab,
+      changePage: DrawerActions.changePage,
     },
     dispatch,
   );

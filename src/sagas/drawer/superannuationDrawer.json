@@ -232,7 +232,7 @@
             {
               "key": "taxable",
               "title": "Taxable Component",
-              "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+              "values": [2, 0, 2, 0, 2, 0, 2, 0, 2, 0]
             },
             {
               "key": "taxFree",
@@ -429,7 +429,7 @@
         {
           "key": "closingValuePV",
           "title": "Closing Value (PV)",
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          "values": [0, 1, 0, 2, 0, 2, 0, 1, 0, 1]
         }
       ]
     ]
@@ -667,7 +667,7 @@
             {
               "key": "taxable",
               "title": "Taxable Component",
-              "values": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+              "values": [3, 1, 3, 1, 1, 3, 1, 1, 3, 1]
             },
             {
               "key": "taxFree",
@@ -864,7 +864,7 @@
         {
           "key": "closingValuePV",
           "title": "Closing Value (PV)",
-          "values": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+          "values": [3, 1, 3, 1, 3, 1, 4, 1, 2, 1]
         }
       ]
     ]

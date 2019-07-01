@@ -36,6 +36,7 @@ export enum DrawerActionTypes {
   OPEN_DRAWER = 'client/OPEN_DRAWER',
   CLOSE_DRAWER = 'client/CLOSE_DRAWER',
   ACTIVE_TAB = 'client/ACTIVE_TAB',
+  CHANGE_PAGE = 'client/CHANGE_PAGE',
   FETCH_DRAWER_DATA_REQUEST = 'client/FETCH_DRAWER_DATA_REQUEST',
   FETCH_DRAWER_DATA_SUCCESS = 'client/FETCH_DRAWER_DATA_SUCCESS',
   FETCH_DRAWER_DATA_FAILURE = 'client/FETCH_DRAWER_DATA_FAILURE',
@@ -43,5 +44,6 @@ export enum DrawerActionTypes {
 
 export type OpenDrawerAction = PayloadAction<DrawerActionTypes.OPEN_DRAWER, string>;
 export type CloseDrawerAction = PayloadAction<DrawerActionTypes.CLOSE_DRAWER, string>;
+export type ChangePageAction = PayloadAction<DrawerActionTypes.CHANGE_PAGE, number>;
 export type ActiveTabAction = PayloadAction<DrawerActionTypes.ACTIVE_TAB, string>;
 export type FetchDrawerDataAction = PayloadAction<DrawerActionTypes.FETCH_DRAWER_DATA_REQUEST, string>;

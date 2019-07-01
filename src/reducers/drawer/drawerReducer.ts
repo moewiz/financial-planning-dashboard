@@ -14,6 +14,8 @@ export default class DrawerReducer {
         return state.set('drawerOpen', true).set('tabActive', action.payload).set('page', 1);
       case DrawerActionTypes.CLOSE_DRAWER:
         return state.set('drawerOpen', false).set('tabActive', '').set('page', 1);
+      case DrawerActionTypes.CHANGE_PAGE:
+        return state.set('page', action.payload);
       case DrawerActionTypes.FETCH_DRAWER_DATA_REQUEST:
       case DrawerActionTypes.FETCH_DRAWER_DATA_SUCCESS:
       case DrawerActionTypes.FETCH_DRAWER_DATA_FAILURE:

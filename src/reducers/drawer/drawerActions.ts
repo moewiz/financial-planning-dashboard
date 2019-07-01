@@ -1,5 +1,6 @@
 import {
   ActiveTabAction,
+  ChangePageAction,
   CloseDrawerAction,
   DrawerActionTypes,
   FetchDrawerDataAction,
@@ -14,6 +15,7 @@ export default class ClientActions {
     createPayloadAction(DrawerActionTypes.CLOSE_DRAWER, title)
   public static activeTab = (tabActive = ''): ActiveTabAction =>
     createPayloadAction(DrawerActionTypes.ACTIVE_TAB, tabActive)
+  public static changePage = (page = 1): ChangePageAction => createPayloadAction(DrawerActionTypes.CHANGE_PAGE, page);
   public static fetchDrawerData = (type = ''): FetchDrawerDataAction =>
     createPayloadAction(DrawerActionTypes.FETCH_DRAWER_DATA_REQUEST, type)
 }
