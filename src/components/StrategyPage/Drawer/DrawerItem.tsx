@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import { map, get, isNumber } from 'lodash';
-import { Collapse, Icon } from 'antd';
+import { Collapse, Icon, Tooltip } from 'antd';
 import EditCell, { EditCellType } from './EditCell';
 import {
   DrawerTableRows,
@@ -58,7 +58,13 @@ class DrawerItem extends PureComponent<DrawerItemProps> {
     return (
       <React.Fragment key={index}>
         <DrawerTableListItems className={classNames({ 'bold-text': innerRow.editable })} key={index}>
-          <DrawerRowSubTitle>{innerRow.title}</DrawerRowSubTitle>
+          {innerRow.tooltip ? (
+            <Tooltip title={innerRow.tooltip}>
+              <DrawerRowSubTitle>{innerRow.title}</DrawerRowSubTitle>
+            </Tooltip>
+          ) : (
+            <DrawerRowSubTitle>{innerRow.title}</DrawerRowSubTitle>
+          )}
           {innerRow.values && <div className="values">{this.renderValues(innerRow.values, innerRow.editable)}</div>}
         </DrawerTableListItems>
         {innerRow.children && innerRow.children.length > 0 && (
@@ -75,7 +81,13 @@ class DrawerItem extends PureComponent<DrawerItemProps> {
       <DrawerTableRows>
         {row.values ? (
           <DrawerTableParent>
-            <DrawerRowTitle>{row.title}</DrawerRowTitle>
+            {row.tooltip ? (
+              <Tooltip title={row.tooltip}>
+                <DrawerRowSubTitle>{row.title}</DrawerRowSubTitle>
+              </Tooltip>
+            ) : (
+              <DrawerRowSubTitle>{row.title}</DrawerRowSubTitle>
+            )}
             <div className="values">{this.renderValues(row.values, row.editable)}</div>
           </DrawerTableParent>
         ) : (
