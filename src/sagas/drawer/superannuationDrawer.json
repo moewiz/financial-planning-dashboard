@@ -20,7 +20,6 @@
         {
           "key": "openingValue",
           "title": "Opening Value",
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           "children": [
             {
               "key": "taxable",
@@ -224,25 +223,13 @@
         {
           "key": "closingValuePV",
           "title": "Closing Value (PV)",
-          "children": [
-            {
-              "key": "taxableComponent",
-              "title": "Taxable Component",
-              "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-            },
-            {
-              "key": "taxFreeComponent",
-              "title": "Tax Free Component",
-              "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-            }
-          ]
+          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         }
       ],
       [
         {
           "key": "openingValue",
           "title": "Opening Value",
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           "children": [
             {
               "key": "taxable",
@@ -446,18 +433,7 @@
         {
           "key": "closingValuePV",
           "title": "Closing Value (PV)",
-          "children": [
-            {
-              "key": "taxableComponent",
-              "title": "Taxable Component",
-              "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-            },
-            {
-              "key": "taxFreeComponent",
-              "title": "Tax Free Component",
-              "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-            }
-          ]
+          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         }
       ]
     ]
@@ -483,12 +459,11 @@
         {
           "key": "openingValue",
           "title": "Opening Value",
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           "children": [
             {
               "key": "taxable",
               "title": "Taxable Component",
-              "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+              "values": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
             },
             {
               "key": "taxFree",
@@ -687,30 +662,18 @@
         {
           "key": "closingValuePV",
           "title": "Closing Value (PV)",
-          "children": [
-            {
-              "key": "taxableComponent",
-              "title": "Taxable Component",
-              "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-            },
-            {
-              "key": "taxFreeComponent",
-              "title": "Tax Free Component",
-              "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-            }
-          ]
+          "values": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         }
       ],
       [
         {
           "key": "openingValue",
           "title": "Opening Value",
-          "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           "children": [
             {
               "key": "taxable",
               "title": "Taxable Component",
-              "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+              "values": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
             },
             {
               "key": "taxFree",
@@ -909,18 +872,7 @@
         {
           "key": "closingValuePV",
           "title": "Closing Value (PV)",
-          "children": [
-            {
-              "key": "taxableComponent",
-              "title": "Taxable Component",
-              "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-            },
-            {
-              "key": "taxFreeComponent",
-              "title": "Tax Free Component",
-              "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-            }
-          ]
+          "values": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         }
       ]
     ]

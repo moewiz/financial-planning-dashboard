@@ -7,6 +7,7 @@ export interface DrawerState {
   drawerOpen: boolean;
   tabActive: string;
   loading: boolean;
+  page: number;
   error?: string;
   client: RowData[];
   partner?: RowData[];
@@ -17,6 +18,7 @@ export interface DrawerState {
 export const defaultDrawerState: DrawerState = {
   drawerOpen: false,
   tabActive: '',
+  page: 1,
   loading: false,
   error: '',
   client: [],

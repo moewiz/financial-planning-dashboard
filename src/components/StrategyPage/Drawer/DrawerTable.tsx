@@ -9,12 +9,9 @@ import {
   DrawerTableHeader,
   DrawerTableContent,
   DrawerTableRows,
-  DrawerTableParent,
-  DrawerRowTitle,
   DrawerTableList,
   DrawerTableListItems,
   DrawerRowSubTitle,
-  DrawerTableSubList,
 } from './styled';
 import { Icon } from 'antd';
 

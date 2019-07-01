@@ -9,7 +9,7 @@ import MainDrawerContent from './MainDrawerContent';
 import { DrawerTitle, DrawerSubContent, DrawerNote, ActionDrawerGeneral, DrawerFooter } from './styled';
 import { ActiveTabAction, CloseDrawerAction, DrawerActions } from '../../../reducers/drawer';
 
-interface DrawerData {
+export interface DrawerData {
   title: string;
   subTitle?: string;
   footnote?: string;
@@ -22,6 +22,7 @@ interface DrawerContainerProps {
   loading: boolean;
   drawerData: DrawerData;
   tabActive: string;
+  page: number;
 
   closeDrawer?: (tabActive: string) => CloseDrawerAction;
   activeTab: (tabActive: string) => ActiveTabAction;
@@ -36,7 +37,7 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
   }
 
   public renderDrawer = () => {
-    const { drawerData, loading, activeTab, tabActive } = this.props;
+    const { drawerData, loading, activeTab, tabActive, page } = this.props;
     const { title, subTitle, footnote } = drawerData;
     return (
       <>
@@ -47,7 +48,7 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
         <DrawerSubContent>{subTitle}</DrawerSubContent>
 
         {/* Drawer Table */}
-        <MainDrawerContent activeTab={activeTab} tabActive={tabActive} />
+        <MainDrawerContent activeTab={activeTab} tabActive={tabActive} drawerData={drawerData} page={page} />
 
         <DrawerFooter>
           <DrawerNote>{footnote}</DrawerNote>
@@ -80,12 +81,14 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
 
 const mapStateToProps = (state: RootState) => {
   const tabActive = state.drawer.get('tabActive');
+  const page = state.drawer.get('page');
   const drawerData: DrawerData = state.drawer.get(tabActive);
 
   return {
     drawerOpen: state.drawer.get('drawerOpen'),
     loading: state.drawer.get('loading'),
     tabActive: state.drawer.get('tabActive'),
+    page,
     drawerData,
   };
 };
