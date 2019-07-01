@@ -6,7 +6,7 @@ export default class DrawerService {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve({ status: 200, data: { data: superannuationDrawer, error: null, message: null, success: true } });
-      }, 1500);
+      }, 300);
     });
   }
 }

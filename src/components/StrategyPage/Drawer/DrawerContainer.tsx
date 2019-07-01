@@ -6,16 +6,24 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import MainDrawerContent from './MainDrawerContent';
 
-import { DrawerTitle, DrawerSubContent, DrawerNote,
-  ActionDrawerGeneral, DrawerFooter,
- } from './styled';
+import { DrawerTitle, DrawerSubContent, DrawerNote, ActionDrawerGeneral, DrawerFooter } from './styled';
 import { CloseDrawerAction, DrawerActions } from '../../../reducers/drawer';
+
+interface DrawerData {
+  title: string;
+  subTitle?: string;
+  footnote?: string;
+  columns: string[];
+  tableData: object[][];
+}
 
 interface DrawerContainerProps {
   drawerOpen: boolean;
-  drawerTitle: string;
+  loading: boolean;
+  drawerData: DrawerData;
+  tabActive: string;
 
-  closeDrawer?: (title: string) => CloseDrawerAction;
+  closeDrawer?: (tabActive: string) => CloseDrawerAction;
 }
 
 class DrawerContainer extends PureComponent<DrawerContainerProps> {
@@ -26,24 +34,19 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
     }
   }
 
-  public render() {
-    const { drawerOpen, drawerTitle } = this.props;
+  public renderDrawer = () => {
+    const { drawerData, loading } = this.props;
+    const { title, subTitle, footnote } = drawerData;
     return (
-      <Drawer width={1100} onClose={this.onCloseDrawer} visible={drawerOpen}>
+      <>
         <DrawerTitle>
-          {drawerTitle} <Spin size="small" />
+          {title} {loading && <Spin size="small" />}
         </DrawerTitle>
 
-        <DrawerSubContent>
-          Our insurance recommendations are based on our analysis of your circumstances and financial situation. The
-          following table illustrates your required level of cover.
-        </DrawerSubContent>
+        <DrawerSubContent>{subTitle}</DrawerSubContent>
         <MainDrawerContent />
         <DrawerFooter>
-          <DrawerNote>
-            Note: Recommended sums insured have been rounded to take advantage of pricing point discounts with
-            insurance companies. In addition, Life cover must be equal to or greater than TPD recommended cover.
-          </DrawerNote>
+          <DrawerNote>{footnote}</DrawerNote>
           <Pagination defaultCurrent={1} total={50} />
         </DrawerFooter>
         <ActionDrawerGeneral>
@@ -56,15 +59,32 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
             <span>Save</span>
           </Button>
         </ActionDrawerGeneral>
+      </>
+    );
+  }
+
+  public render() {
+    const { drawerOpen, drawerData, loading } = this.props;
+
+    return (
+      <Drawer width={1100} onClose={this.onCloseDrawer} visible={drawerOpen} destroyOnClose={true}>
+        {loading ? <Spin size="small" /> : drawerData ? this.renderDrawer() : null}
       </Drawer>
     );
   }
 }
 
-const mapStateToProps = (state: RootState) => ({
-  drawerOpen: state.drawer.get('drawerOpen'),
-  drawerTitle: state.drawer.get('drawerTitle'),
-});
+const mapStateToProps = (state: RootState) => {
+  const tabActive = state.drawer.get('tabActive');
+  const drawerData: DrawerData = state.drawer.get(tabActive);
+
+  return {
+    drawerOpen: state.drawer.get('drawerOpen'),
+    loading: state.drawer.get('loading'),
+    tabActive: state.drawer.get('tabActive'),
+    drawerData,
+  };
+};
 
 const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>
   bindActionCreators(

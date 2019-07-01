@@ -18,7 +18,7 @@ interface StrategyInformationProps {
   kpi: Statistic[];
   graph: any;
   standardText: IStandardText[];
-  openDrawer: (title: string) => OpenDrawerAction;
+  openDrawer: (tabActive: string) => OpenDrawerAction;
   fetchDrawerData: (type: string) => FetchDrawerDataAction;
 }
 
@@ -91,7 +91,7 @@ class StrategyInformation extends PureComponent<StrategyInformationProps & Route
     }
 
     const { openDrawer, type, fetchDrawerData } = this.props;
-    openDrawer(getTitle(type));
+    openDrawer('client');
     fetchDrawerData(type);
   }
 

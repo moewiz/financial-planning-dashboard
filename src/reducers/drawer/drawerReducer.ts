@@ -11,10 +11,9 @@ export default class DrawerReducer {
   ): DrawerState => {
     switch (action.type) {
       case DrawerActionTypes.OPEN_DRAWER:
-        const title = action.payload;
-        return state.set('drawerOpen', true).set('drawerTitle', title);
+        return state.set('drawerOpen', true).set('tabActive', action.payload);
       case DrawerActionTypes.CLOSE_DRAWER:
-        return state.set('drawerOpen', false).set('drawerTitle', '');
+        return state.set('drawerOpen', false).set('tabActive', '');
       case DrawerActionTypes.FETCH_DRAWER_DATA_REQUEST:
       case DrawerActionTypes.FETCH_DRAWER_DATA_SUCCESS:
       case DrawerActionTypes.FETCH_DRAWER_DATA_FAILURE:
@@ -32,12 +31,11 @@ export default class DrawerReducer {
         return state.set('loading', true).set('error', '');
 
       case DrawerActionTypes.FETCH_DRAWER_DATA_SUCCESS: {
-        const { payload } = action;
         return state
           .set('loading', false)
           .set('error', '')
-          .set('client', get(payload, 'client', []))
-          .set('partner', get(payload, 'partner', []));
+          .set('client', get(action.payload, 'client', []))
+          .set('partner', get(action.payload, 'partner', []));
       }
 
       case DrawerActionTypes.FETCH_DRAWER_DATA_FAILURE:
