@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { isEqual } from 'lodash';
 import { Input, InputNumber } from 'antd';
 
@@ -19,30 +19,36 @@ export enum EditCellType {
   number,
 }
 
-class EditCell extends Component<EditCellProps, EditaCellState> {
+class EditCell extends PureComponent<EditCellProps, EditaCellState> {
   public state = {
     value: this.props.value,
   };
 
-  public shouldComponentUpdate(
-    nextProps: Readonly<EditCellProps>,
-    nextState: Readonly<EditaCellState>,
-    nextContext: any,
-  ): boolean {
-    // const { value } = this.props;
-    // const { value: nextValue } = nextProps;
-    const { value } = this.state;
-    const { value: nextValue } = nextState;
-
-    return !isEqual(value, nextValue);
+  public componentWillReceiveProps(nextProps: Readonly<EditCellProps>, nextContext: any): void {
+    if (!isEqual(this.props.value, nextProps.value)) {
+      this.setState({ value: nextProps.value });
+    }
   }
+
+  // public shouldComponentUpdate(
+  //   nextProps: Readonly<EditCellProps>,
+  //   nextState: Readonly<EditaCellState>,
+  //   nextContext: any,
+  // ): boolean {
+  //   // const { value } = this.props;
+  //   // const { value: nextValue } = nextProps;
+  //   const { value } = this.state;
+  //   const { value: nextValue } = nextState;
+  //
+  //   return !isEqual(value, nextValue);
+  // }
 
   public onChange = (value: number | undefined) => {
     const { onChange } = this.props;
 
     this.setState({ value });
     onChange(value);
-  };
+  }
 
   public onChangeText = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { onChange } = this.props;
@@ -50,7 +56,7 @@ class EditCell extends Component<EditCellProps, EditaCellState> {
 
     this.setState({ value });
     onChange(value);
-  };
+  }
 
   public render() {
     const { name, type = EditCellType.text } = this.props;

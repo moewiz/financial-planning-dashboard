@@ -265,7 +265,7 @@ export const ActionDrawerGeneral = styled.section<{ visible?: boolean }>`
 export const DrawerFooter = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 25px;
   p {
     flex: 0 0 500px;
   }

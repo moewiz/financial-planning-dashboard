@@ -60,7 +60,7 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
 
         <DrawerFooter>
           <DrawerNote>{footnote}</DrawerNote>
-          <Pagination defaultCurrent={page} total={total} onChange={this.onPageChange} />
+          <Pagination current={page} total={total} onChange={this.onPageChange} />
         </DrawerFooter>
         <ActionDrawerGeneral>
           <Button htmlType={'button'} type={'default'}>

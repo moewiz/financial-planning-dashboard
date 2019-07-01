@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import classNames from 'classnames';
 import { map, get, isNumber } from 'lodash';
 import { Collapse, Icon } from 'antd';
 import EditCell, { EditCellType } from './EditCell';
@@ -29,47 +30,53 @@ interface DrawerItemProps {
 }
 
 class DrawerItem extends PureComponent<DrawerItemProps> {
-  public renderEditCell = (column: string, index: number) => {
-    const { row } = this.props;
-    const value = get(row.values, [index], '');
-    const type = isNumber(value) ? EditCellType.number : EditCellType.number;
+  public renderValues = (values: any[], editable?: boolean) => {
+    const { columns } = this.props;
 
-    return (
-      <EditCell name={`${index}`} key={index} onChange={(val: any) => console.log(val)} value={value} type={type} />
-    );
-  }
+    if (editable) {
+      return map(columns, (column: string, index: number) => {
+        const value = get(values, [index], '');
+        const type = isNumber(value) ? EditCellType.number : EditCellType.number;
 
-  public renderValue = (column: string, index: number) => {
-    const { row } = this.props;
-    const value = get(row.values, [index], '');
-    return (
-      <span className={'cell'} key={index}>
-        {value}
-      </span>
-    );
-  }
-
-  public renderValues = () => {
-    const { row, columns } = this.props;
-    let renderer;
-    if (row.editable) {
-      renderer = this.renderEditCell;
+        return (
+          <EditCell name={`${index}`} key={index} onChange={(val: any) => console.log(val)} value={value} type={type} />
+        );
+      });
     } else {
-      renderer = this.renderValue;
+      return map(columns, (column: string, index: number) => {
+        const value = get(values, [index], '');
+        return (
+          <span className={'cell'} key={index}>
+            {value}
+          </span>
+        );
+      });
     }
+  }
 
-    return map(columns, renderer);
+  public renderChild = (innerRow: RowData, index: string) => {
+    return (
+      <React.Fragment key={index}>
+        <DrawerTableListItems className={classNames({ 'bold-text': innerRow.editable })} key={index}>
+          <DrawerRowSubTitle>{innerRow.title}</DrawerRowSubTitle>
+          {innerRow.values && <div className="values">{this.renderValues(innerRow.values, innerRow.editable)}</div>}
+        </DrawerTableListItems>
+        {innerRow.children && innerRow.children.length > 0 && (
+          <DrawerTableList>{map(innerRow.children, this.renderChild)}</DrawerTableList>
+        )}
+      </React.Fragment>
+    );
   }
 
   public render() {
-    const { columns, row } = this.props;
+    const { row } = this.props;
 
     return (
       <DrawerTableRows>
         {row.values ? (
           <DrawerTableParent>
             <DrawerRowTitle>{row.title}</DrawerRowTitle>
-            <div className="values">{this.renderValues()}</div>
+            <div className="values">{this.renderValues(row.values, row.editable)}</div>
           </DrawerTableParent>
         ) : (
           <Collapse
@@ -80,58 +87,9 @@ class DrawerItem extends PureComponent<DrawerItemProps> {
             }
           >
             <Panel header={row.title} key="1">
-              <DrawerTableList>
-                <DrawerTableListItems className="bold-text">
-                  <DrawerRowSubTitle>Employer Contribution (SG)</DrawerRowSubTitle>
-                  <div className="values">
-                    {map(columns, (column: string, index: number) => (
-                      <EditCell name={`${index}`} key={index} onChange={(value: any) => console.log(value)} value={0} />
-                    ))}
-                  </div>
-                </DrawerTableListItems>
-                <DrawerTableListItems className="bold-text">
-                  <DrawerRowSubTitle>Salary Sacrifice Contribution</DrawerRowSubTitle>
-                  <div className="values">
-                    {map(columns, (column: string, index: number) => (
-                      <EditCell name={`${index}`} key={index} onChange={(value: any) => console.log(value)} value={0} />
-                    ))}
-                  </div>
-                </DrawerTableListItems>
-                <DrawerTableListItems className="bold-text">
-                  <DrawerRowSubTitle>Personal Deductible Contribution</DrawerRowSubTitle>
-                  <div className="values">
-                    {map(columns, (column: string, index: number) => (
-                      <EditCell name={`${index}`} key={index} onChange={(value: any) => console.log(value)} value={0} />
-                    ))}
-                  </div>
-                </DrawerTableListItems>
-                <DrawerTableListItems className="bold-text">
-                  <DrawerRowSubTitle>Non-concessional Contribution</DrawerRowSubTitle>
-                  <div className="values">
-                    {map(columns, (column: string, index: number) => (
-                      <EditCell name={`${index}`} key={index} onChange={(value: any) => console.log(value)} value={0} />
-                    ))}
-                  </div>
-                </DrawerTableListItems>
-                <DrawerTableListItems>
-                  <DrawerRowSubTitle>Government Co-contribution</DrawerRowSubTitle>
-                  <div className="values">
-                    {map(columns, (column: string, index: number) => (
-                      <span className={'cell'} key={index}>
-                        0
-                      </span>
-                    ))}
-                  </div>
-                </DrawerTableListItems>
-                <DrawerTableListItems className="bold-text">
-                  <DrawerRowSubTitle>Spouse Contribution</DrawerRowSubTitle>
-                  <div className="values">
-                    {map(columns, (column: string, index: number) => (
-                      <EditCell name={`${index}`} key={index} onChange={(value: any) => console.log(value)} value={0} />
-                    ))}
-                  </div>
-                </DrawerTableListItems>
-              </DrawerTableList>
+              {row.children && row.children.length > 0 && (
+                <DrawerTableList>{map(row.children, this.renderChild)}</DrawerTableList>
+              )}
             </Panel>
           </Collapse>
         )}
