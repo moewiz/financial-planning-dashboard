@@ -8,8 +8,8 @@ import {
 import { createPayloadAction } from '../reducerHelpers';
 
 export default class ClientActions {
-  public static openDrawer = (title: string = 'client'): OpenDrawerAction =>
-    createPayloadAction(DrawerActionTypes.OPEN_DRAWER, title)
+  public static openDrawer = (tabActive: string = 'client'): OpenDrawerAction =>
+    createPayloadAction(DrawerActionTypes.OPEN_DRAWER, tabActive)
   public static closeDrawer = (title = ''): CloseDrawerAction =>
     createPayloadAction(DrawerActionTypes.CLOSE_DRAWER, title)
   public static activeTab = (tabActive = ''): ActiveTabAction =>

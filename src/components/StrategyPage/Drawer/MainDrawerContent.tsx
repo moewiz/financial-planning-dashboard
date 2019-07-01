@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import DrawerTable from './DrawerTable';
 import { MainDrawerSection, TabsCustomized, TabsPaneCustomized } from './styled';
+import { ActiveTabAction } from '../../../reducers/drawer';
 
 const rows = [
   {
@@ -224,19 +225,27 @@ const columns = [
   '2028/29',
 ];
 
-class MainDrawerContent extends PureComponent {
-  public callback = (key: any) => {
-    console.log(key);
+interface MainDrawerContentProps {
+  tabActive: string;
+  activeTab: (tabActive: string) => ActiveTabAction;
+}
+
+class MainDrawerContent extends PureComponent<MainDrawerContentProps> {
+  public callback = (tabActive: string) => {
+    const { activeTab } = this.props;
+    activeTab(tabActive);
   }
 
   public render() {
+    const { tabActive } = this.props;
+
     return (
       <MainDrawerSection>
-        <TabsCustomized defaultActiveKey="1" onChange={this.callback}>
-          <TabsPaneCustomized tab="Client" key="1">
+        <TabsCustomized defaultActiveKey={tabActive} onChange={this.callback}>
+          <TabsPaneCustomized tab="Client" key="client">
             <DrawerTable columns={columns} rows={rows} />
           </TabsPaneCustomized>
-          <TabsPaneCustomized tab="Partner" key="2">
+          <TabsPaneCustomized tab="Partner" key="partner">
             <DrawerTable columns={columns} rows={rows} />
           </TabsPaneCustomized>
         </TabsCustomized>

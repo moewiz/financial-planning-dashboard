@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import MainDrawerContent from './MainDrawerContent';
 
 import { DrawerTitle, DrawerSubContent, DrawerNote, ActionDrawerGeneral, DrawerFooter } from './styled';
-import { CloseDrawerAction, DrawerActions } from '../../../reducers/drawer';
+import { ActiveTabAction, CloseDrawerAction, DrawerActions } from '../../../reducers/drawer';
 
 interface DrawerData {
   title: string;
@@ -24,6 +24,7 @@ interface DrawerContainerProps {
   tabActive: string;
 
   closeDrawer?: (tabActive: string) => CloseDrawerAction;
+  activeTab: (tabActive: string) => ActiveTabAction;
 }
 
 class DrawerContainer extends PureComponent<DrawerContainerProps> {
@@ -35,7 +36,7 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
   }
 
   public renderDrawer = () => {
-    const { drawerData, loading } = this.props;
+    const { drawerData, loading, activeTab, tabActive } = this.props;
     const { title, subTitle, footnote } = drawerData;
     return (
       <>
@@ -44,7 +45,10 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
         </DrawerTitle>
 
         <DrawerSubContent>{subTitle}</DrawerSubContent>
-        <MainDrawerContent />
+
+        {/* Drawer Table */}
+        <MainDrawerContent activeTab={activeTab} tabActive={tabActive} />
+
         <DrawerFooter>
           <DrawerNote>{footnote}</DrawerNote>
           <Pagination defaultCurrent={1} total={50} />
@@ -90,6 +94,7 @@ const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>
   bindActionCreators(
     {
       closeDrawer: DrawerActions.closeDrawer,
+      activeTab: DrawerActions.activeTab,
     },
     dispatch,
   );
