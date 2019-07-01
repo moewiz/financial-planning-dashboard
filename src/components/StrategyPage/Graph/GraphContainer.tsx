@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { isFunction } from 'lodash';
 import { Icon } from 'antd';
 import { Bar, HorizontalBar, Line } from 'react-chartjs-2';
 import { GraphCard, GraphTitle, GraphWrapper, GraphGroup } from '../styled';
@@ -179,6 +180,7 @@ const GraphContainer = (props: GraphProps) => {
         return null;
     }
   };
+  const hasOnClick = isFunction(onGraphClick);
 
   return (
     <GraphWrapper className={className}>
@@ -186,7 +188,9 @@ const GraphContainer = (props: GraphProps) => {
         <Icon type="info-circle" theme="filled" />
         {name}
       </GraphTitle>
-      <GraphGroup onClick={onGraphClick}>{listOfData.map(renderGraph)}</GraphGroup>
+      <GraphGroup onClick={onGraphClick} className={classNames({ hasOnClick })}>
+        {listOfData.map(renderGraph)}
+      </GraphGroup>
     </GraphWrapper>
   );
 };

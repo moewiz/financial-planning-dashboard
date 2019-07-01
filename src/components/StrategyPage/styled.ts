@@ -38,6 +38,9 @@ export const GraphGroup = styled.section`
   border-radius: 0.35rem;
   box-shadow: 4px 4px 10px 3px rgba(100, 100, 101, 0.21), 0 0 15px rgba(115, 162, 208, 0.06);
   box-sizing: border-box;
+  &.hasOnClick {
+    cursor: pointer;
+  }
 `;
 export const GraphCard = styled.div`
   height: 220px;
