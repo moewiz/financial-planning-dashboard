@@ -55,9 +55,11 @@ class DrawerItem extends PureComponent<DrawerItemProps> {
       <React.Fragment key={index}>
         <DrawerTableListItems className={classNames({ 'bold-text': row.editable })} key={index}>
           {row.tooltip ? (
-            <Tooltip title={row.tooltip}>
-              <DrawerRowSubTitle>{row.title}</DrawerRowSubTitle>
-            </Tooltip>
+            <DrawerRowSubTitle>
+              <Tooltip title={row.tooltip} placement="topLeft">
+                {row.title}
+              </Tooltip>
+            </DrawerRowSubTitle>
           ) : (
             <DrawerRowSubTitle>{row.title}</DrawerRowSubTitle>
           )}
@@ -80,9 +82,11 @@ class DrawerItem extends PureComponent<DrawerItemProps> {
         {row.values ? (
           <DrawerTableParent>
             {row.tooltip ? (
-              <Tooltip title={row.tooltip}>
-                <DrawerRowSubTitle>{row.title}</DrawerRowSubTitle>
-              </Tooltip>
+              <DrawerRowSubTitle>
+                <Tooltip title={row.tooltip} placement="topLeft">
+                  {row.title}
+                </Tooltip>
+              </DrawerRowSubTitle>
             ) : (
               <DrawerRowSubTitle>{row.title}</DrawerRowSubTitle>
             )}
