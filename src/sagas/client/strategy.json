@@ -32,7 +32,36 @@
         "text": "Funds transferred into pension phase at retirement"
       }
     ],
-    "strategies": []
+    "strategies": [
+      {
+        "isChecked": true,
+        "statement": {
+          "text": "salarySacrifice.maximise",
+          "params": ["20/10/2019", "10/11/2020"]
+        }
+      },
+      {
+        "isChecked": true,
+        "statement": {
+          "text": "salarySacrifice.fixedRegular",
+          "params": [100, "month", "20/10/2019", "10/11/2020"]
+        }
+      },
+      {
+        "isChecked": true,
+        "statement": {
+          "text": "salarySacrifice.customOneOff",
+          "params": [100, 2020]
+        }
+      },
+      {
+        "isChecked": true,
+        "statement": {
+          "text": "recontribution.oneOff",
+          "params": [300, "fullValue", 2030]
+        }
+      }
+    ]
   },
   "pension": {
     "kpi": [
@@ -64,7 +93,22 @@
         "params": ["$xx,xx"]
       }
     ],
-    "strategies": []
+    "strategies": [
+      {
+        "isChecked": true,
+        "statement": {
+          "text": "commenceAccount.minimum",
+          "params": [1000]
+        }
+      },
+      {
+        "isChecked": false,
+        "statement": {
+          "text": "commenceTransition.specified",
+          "params": [1000, 2000]
+        }
+      }
+    ]
   },
   "investments": {
     "kpi": [
@@ -100,7 +144,22 @@
         "params": ["re-invested"]
       }
     ],
-    "strategies": []
+    "strategies": [
+      {
+        "isChecked": true,
+        "statement": {
+          "text": "establish.reinvest",
+          "params": [1000, "investment1"]
+        }
+      },
+      {
+        "isChecked": false,
+        "statement": {
+          "text": "funds.lumpSum",
+          "params": [1000, "investment1", "investment2"]
+        }
+      }
+    ]
   },
   "debt": {
     "kpi": [
@@ -132,7 +191,22 @@
         "params": ["xx"]
       }
     ],
-    "strategies": []
+    "strategies": [
+      {
+        "isChecked": true,
+        "statement": {
+          "text": "payDown.oneOff",
+          "params": [1000, "investment1", "eliminate", "loan1"]
+        }
+      },
+      {
+        "isChecked": false,
+        "statement": {
+          "text": "reduce.ongoing",
+          "params": ["loan1", 1000, "annum"]
+        }
+      }
+    ]
   },
   "centrelink": {
     "kpi": [
@@ -154,7 +228,22 @@
         "params": ["homeowner"]
       }
     ],
-    "strategies": []
+    "strategies": [
+      {
+        "isChecked": true,
+        "statement": {
+          "text": "payment.age",
+          "params": [2030, 1000]
+        }
+      },
+      {
+        "isChecked": false,
+        "statement": {
+          "text": "gifting.ongoing",
+          "params": [1000, "investment1", 2020]
+        }
+      }
+    ]
   },
   "insurance": {
     "kpi": [
