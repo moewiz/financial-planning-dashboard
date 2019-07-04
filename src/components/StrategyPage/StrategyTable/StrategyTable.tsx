@@ -65,7 +65,7 @@ class StrategyTable extends PureComponent<StrategyTableProps> {
                 </svg>
               </StrategyTableIcon>
               <StrategyTableIconDel>
-                <Popconfirm title="Really delete?" okText="Yes" cancelText="No">
+                <Popconfirm title="Really delete?" okText="Yes" cancelText="No" placement="topRight">
                   <Icon type="close-square" />
                 </Popconfirm>
               </StrategyTableIconDel>
@@ -101,7 +101,7 @@ class StrategyTable extends PureComponent<StrategyTableProps> {
                 </svg>
               </StrategyTableIcon>
               <StrategyTableIconDel>
-                <Popconfirm title="Really delete?" okText="Yes" cancelText="No">
+                <Popconfirm title="Really delete?" okText="Yes" cancelText="No" placement="topRight">
                   <Icon type="close-square" />
                 </Popconfirm>
               </StrategyTableIconDel>
@@ -143,7 +143,7 @@ class StrategyTable extends PureComponent<StrategyTableProps> {
               </svg>
             </StrategyTableIcon>
             <StrategyTableIconDel>
-              <Popconfirm title="Really delete?" okText="Yes" cancelText="No">
+              <Popconfirm title="Really delete?" okText="Yes" cancelText="No" placement="topRight">
                 <Icon type="close-square" />
               </Popconfirm>
             </StrategyTableIconDel>
@@ -173,7 +173,7 @@ class StrategyTable extends PureComponent<StrategyTableProps> {
               </svg>
             </StrategyTableIcon>
             <StrategyTableIconDel>
-              <Popconfirm title="Really delete?" okText="Yes" cancelText="No">
+              <Popconfirm title="Really delete?" okText="Yes" cancelText="No" placement="topRight">
                 <Icon type="close-square" />
               </Popconfirm>
             </StrategyTableIconDel>
@@ -203,7 +203,7 @@ class StrategyTable extends PureComponent<StrategyTableProps> {
               </svg>
             </StrategyTableIcon>
             <StrategyTableIconDel>
-              <Popconfirm title="Really delete?" okText="Yes" cancelText="No">
+              <Popconfirm title="Really delete?" okText="Yes" cancelText="No" placement="topRight">
                 <Icon type="close-square" />
               </Popconfirm>
             </StrategyTableIconDel>

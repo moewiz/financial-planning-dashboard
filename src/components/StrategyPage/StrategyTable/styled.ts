@@ -91,7 +91,7 @@ export const StrategyTableText = styled.span`
 
 export const StrategyTableIcon = styled.span`
   color: #586488;
-  font-size: 16px;
+  font-size: 18px;
   cursor: pointer;
   flex: 0 0 55px;
   text-align: right;
