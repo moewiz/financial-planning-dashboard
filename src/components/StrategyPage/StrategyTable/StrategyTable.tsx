@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
-import { Checkbox, Icon, Popconfirm } from 'antd';
-import { HeaderTitleTable, TextTitle } from '../../../pages/client/styled';
+import { Checkbox, Icon, Popconfirm, Cascader } from 'antd';
+import { TextTitle } from '../../../pages/client/styled';
 import { StrategyTypes } from '../../../enums/strategies';
 import {
   StrategyTableContent,
@@ -14,13 +14,169 @@ import {
   HeaderTitleMark,
   HeaderTitleStrategy,
 } from './styled';
+import { CascaderOptionType } from 'antd/lib/cascader';
 
 interface StrategyTableProps {
   type: StrategyTypes;
   strategies: object[];
 }
 
+const options = [
+  {
+    value: 'client',
+    label: 'Client',
+    children: [
+      {
+        value: 'salarySacrifice',
+        label: 'Salary Sacrifice',
+        children: [
+          {
+            value: 'maximise',
+            label: 'Maximise',
+          },
+          {
+            value: 'fixedRegular',
+            label: 'Fixed - regular',
+          },
+          {
+            value: 'customOneOff',
+            label: 'Custom - one off',
+          },
+        ],
+      },
+      {
+        value: 'nonConcessional contribution',
+        label: 'Non-concessional contribution',
+        children: [
+          {
+            value: 'maximise',
+            label: 'Maximise',
+          },
+          {
+            value: 'fixedRegular',
+            label: 'Fixed - regular',
+          },
+          {
+            value: 'customOneOff',
+            label: 'Custom - one off',
+          },
+        ],
+      },
+      {
+        value: 'personalDeductible',
+        label: 'Personal deductible contributions',
+        children: [
+          {
+            value: 'maximise',
+            label: 'Maximise',
+          },
+          {
+            value: 'fixedRegular',
+            label: 'Fixed - regular',
+          },
+          {
+            value: 'customOneOff',
+            label: 'Custom - one off',
+          },
+        ],
+      },
+      {
+        value: 'spouse',
+        label: 'Spouse contribution',
+        children: [
+          {
+            value: 'oneOff',
+            label: 'One off',
+          },
+          {
+            value: 'regular',
+            label: 'Regular',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    value: 'partner',
+    label: 'Partner',
+    children: [
+      {
+        value: 'salarySacrifice',
+        label: 'Salary Sacrifice',
+        children: [
+          {
+            value: 'maximise',
+            label: 'Maximise',
+          },
+          {
+            value: 'fixedRegular',
+            label: 'Fixed - regular',
+          },
+          {
+            value: 'customOneOff',
+            label: 'Custom - one off',
+          },
+        ],
+      },
+      {
+        value: 'nonConcessional contribution',
+        label: 'Non-concessional contribution',
+        children: [
+          {
+            value: 'maximise',
+            label: 'Maximise',
+          },
+          {
+            value: 'fixedRegular',
+            label: 'Fixed - regular',
+          },
+          {
+            value: 'customOneOff',
+            label: 'Custom - one off',
+          },
+        ],
+      },
+      {
+        value: 'personalDeductible',
+        label: 'Personal deductible contributions',
+        children: [
+          {
+            value: 'maximise',
+            label: 'Maximise',
+          },
+          {
+            value: 'fixedRegular',
+            label: 'Fixed - regular',
+          },
+          {
+            value: 'customOneOff',
+            label: 'Custom - one off',
+          },
+        ],
+      },
+      {
+        value: 'spouse',
+        label: 'Spouse contribution',
+        children: [
+          {
+            value: 'oneOff',
+            label: 'One off',
+          },
+          {
+            value: 'regular',
+            label: 'Regular',
+          },
+        ],
+      },
+    ],
+  },
+];
+
 class StrategyTable extends PureComponent<StrategyTableProps> {
+  public onChange = (value: string[], selectedOptions?: CascaderOptionType[]): void => {
+    console.log(value);
+  }
+
   public render() {
     const { type } = this.props;
 
@@ -28,7 +184,15 @@ class StrategyTable extends PureComponent<StrategyTableProps> {
       return (
         <>
           <HeaderTitleStrategy>
-            <Icon type={'plus-square'} theme={'filled'} />
+            <Cascader
+              popupClassName="cascader-customize"
+              options={options}
+              onChange={this.onChange}
+              value={[]}
+              expandTrigger="hover"
+            >
+              <Icon type={'plus-square'} theme={'filled'} />
+            </Cascader>
             <TextTitle small={true}>Strategy</TextTitle>
             <HeaderTitleMark>Mark</HeaderTitleMark>
             <HeaderTitleMargin>Margin</HeaderTitleMargin>
@@ -114,7 +278,15 @@ class StrategyTable extends PureComponent<StrategyTableProps> {
     return (
       <>
         <HeaderTitleStrategy>
-          <Icon type={'plus-square'} theme={'filled'} />
+          <Cascader
+            popupClassName="cascader-customize"
+            options={options}
+            onChange={this.onChange}
+            value={[]}
+            expandTrigger="hover"
+          >
+            <Icon type={'plus-square'} theme={'filled'} />
+          </Cascader>
           <TextTitle small={true}>Strategy</TextTitle>
         </HeaderTitleStrategy>
         <StrategyTableContent>

@@ -103,11 +103,6 @@ body .ant-select-dropdown.ant-select-dropdown--single.ant-select-dropdown-placem
   color: #737d9c!important;  
 }
 
-.cascader-customize .ant-cascader-menu-item span:first-child {
-  display: inline-block;
-  width: 110%;
-}
-
 .cascader-customize .ant-cascader-menu-item:hover {
   background: #e9eefe!important;
   font-weight: 600;
