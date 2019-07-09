@@ -43,7 +43,7 @@ export const strategyChoices: StrategyChoice = {
               label: 'Maximise',
             },
             {
-              value: 'fixedRegular',
+              value: 'customRegular',
               label: 'Fixed - regular',
             },
             {
@@ -202,6 +202,10 @@ export const strategyChoices: StrategyChoice = {
               value: 'meetExpenses',
               label: 'Pension income to meet expenses',
             },
+            {
+              value: 'fullyCustomized',
+              label: 'Fully customized',
+            },
           ],
         },
         {
@@ -248,6 +252,10 @@ export const strategyChoices: StrategyChoice = {
               value: 'meetExpenses',
               label: 'Pension income to meet expenses',
             },
+            {
+              value: 'fullyCustomized',
+              label: 'Fully customized',
+            },
           ],
         },
         {
@@ -281,7 +289,7 @@ export const strategyChoices: StrategyChoice = {
       label: 'Client',
       children: [
         {
-          value: 'new',
+          value: 'newInvestment',
           label: 'Establish a new investment portfolio',
           children: [
             {
@@ -295,7 +303,7 @@ export const strategyChoices: StrategyChoice = {
           ],
         },
         {
-          value: 'existing',
+          value: 'existingInvestment',
           label: 'Add funds into existing investment portfolio',
           children: [
             {
@@ -309,7 +317,7 @@ export const strategyChoices: StrategyChoice = {
           ],
         },
         {
-          value: 'withdraw',
+          value: 'withdrawFunds',
           label: 'Withdraw funds from investment portfolio',
           children: [
             {
@@ -329,7 +337,7 @@ export const strategyChoices: StrategyChoice = {
       label: 'Partner',
       children: [
         {
-          value: 'new',
+          value: 'newInvestment',
           label: 'Establish a new investment portfolio',
           children: [
             {
@@ -343,7 +351,7 @@ export const strategyChoices: StrategyChoice = {
           ],
         },
         {
-          value: 'existing',
+          value: 'existingInvestment',
           label: 'Add funds into existing investment portfolio',
           children: [
             {
@@ -357,7 +365,7 @@ export const strategyChoices: StrategyChoice = {
           ],
         },
         {
-          value: 'withdraw',
+          value: 'withdrawFunds',
           label: 'Withdraw funds from investment portfolio',
           children: [
             {
@@ -377,7 +385,7 @@ export const strategyChoices: StrategyChoice = {
       label: 'Joint',
       children: [
         {
-          value: 'new',
+          value: 'newInvestment',
           label: 'Establish a new investment portfolio',
           children: [
             {
@@ -391,7 +399,7 @@ export const strategyChoices: StrategyChoice = {
           ],
         },
         {
-          value: 'existing',
+          value: 'existingInvestment',
           label: 'Add funds into existing investment portfolio',
           children: [
             {
@@ -405,7 +413,7 @@ export const strategyChoices: StrategyChoice = {
           ],
         },
         {
-          value: 'withdraw',
+          value: 'withdrawFunds',
           label: 'Withdraw funds from investment portfolio',
           children: [
             {
@@ -427,7 +435,7 @@ export const strategyChoices: StrategyChoice = {
       label: 'Client',
       children: [
         {
-          value: 'payDown',
+          value: 'payDownLoan',
           label: 'Pay down loan',
           children: [
             {
@@ -441,7 +449,7 @@ export const strategyChoices: StrategyChoice = {
           ],
         },
         {
-          value: 'reduce',
+          value: 'reduceLoan',
           label: 'Reduce loan repayments',
           children: [
             {
@@ -457,7 +465,7 @@ export const strategyChoices: StrategyChoice = {
       label: 'Partner',
       children: [
         {
-          value: 'payDown',
+          value: 'payDownLoan',
           label: 'Pay down loan',
           children: [
             {
@@ -471,7 +479,7 @@ export const strategyChoices: StrategyChoice = {
           ],
         },
         {
-          value: 'reduce',
+          value: 'reduceLoan',
           label: 'Reduce loan repayments',
           children: [
             {
@@ -486,8 +494,8 @@ export const strategyChoices: StrategyChoice = {
       value: 'joint',
       label: 'Joint',
       children: [
-        {
-          value: 'payDown',
+{
+          value: 'payDownLoan',
           label: 'Pay down loan',
           children: [
             {
@@ -501,7 +509,7 @@ export const strategyChoices: StrategyChoice = {
           ],
         },
         {
-          value: 'reduce',
+          value: 'reduceLoan',
           label: 'Reduce loan repayments',
           children: [
             {
@@ -548,6 +556,10 @@ export const strategyChoices: StrategyChoice = {
               value: 'oneOff',
               label: 'One-off',
             },
+            {
+              value: 'ongoing',
+              label: 'Ongoing',
+            },
           ],
         },
         {
@@ -600,6 +612,10 @@ export const strategyChoices: StrategyChoice = {
               value: 'oneOff',
               label: 'One-off',
             },
+            {
+              value: 'ongoing',
+              label: 'Ongoing',
+            },
           ],
         },
         {
@@ -651,6 +667,10 @@ export const strategyChoices: StrategyChoice = {
             {
               value: 'oneOff',
               label: 'One-off',
+            },
+            {
+              value: 'ongoing',
+              label: 'Ongoing',
             },
           ],
         },

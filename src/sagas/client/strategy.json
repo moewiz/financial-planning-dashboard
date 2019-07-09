@@ -1,4 +1,17 @@
 {
+  "defaultFullValue": 2210,
+  "client": {
+    "name": "John Samual",
+    "superannuation": [],
+    "investments": [],
+    "loans": []
+  },
+  "partner": {
+    "name": "Susan Boyle",
+    "superannuation": [],
+    "investments": [],
+    "loans": []
+  },
   "name1": [],
   "name2": [],
   "name3": [],
