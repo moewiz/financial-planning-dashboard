@@ -13,6 +13,9 @@ export const HeaderTitleStrategy = styled.div.attrs({})<HeaderTitleStrategyProps
     font-size: ${(props) => (props.small ? '16px' : '22px')};
     color: #072074;
     margin-right: 10px;
+    &:focus {
+      outline: none;
+    }
   }
 `;
 export const HeaderTitleMargin = styled.span`
