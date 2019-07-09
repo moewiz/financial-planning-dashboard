@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import StrategyInformation from './StrategyInformation';
 import { StrategyTypes } from '../../enums/strategies';
-import StrategyTable from './StrategyTable/StrategyTable';
+import StrategyTable, { StrategyItem } from './StrategyTable/StrategyTable';
 import { StrategyWrapper } from './styled';
 import { Col, Row } from 'antd';
 import { StandardText } from '../../reducers/client';
@@ -13,7 +13,7 @@ interface StrategyContainerProps {
     graph: any;
     standardText: StandardText[];
   };
-  strategies: object[];
+  strategies: StrategyItem[];
 }
 
 class StrategyContainer extends PureComponent<StrategyContainerProps> {
