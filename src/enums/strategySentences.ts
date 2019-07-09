@@ -240,7 +240,7 @@ export default {
   reduceLoan: {
     ongoing: {
       statement: '%name%, reduce your {{0}} repayments to {{1}} per {{2}}.',
-      types: [SentenceInputType.select, SentenceInputType.select, SentenceInputType.number],
+      types: [SentenceInputType.select, SentenceInputType.number, SentenceInputType.select],
       options: ['+loans', '', periodTypes],
     },
   },
