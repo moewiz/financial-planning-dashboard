@@ -6,7 +6,7 @@ import { StrategyTypes } from '../../enums/strategies';
 import { StrategyPageWrapper } from './styled';
 import { StrategyEntry } from '../../reducers/client';
 import DrawerContainer from './Drawer/DrawerContainer';
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikProps } from 'formik';
 import { Button, Icon } from 'antd';
 import { ActionTableGeneral } from '../../pages/client/styled';
 
@@ -29,51 +29,61 @@ const StrategyPage = (props: StrategyPageProps) => {
   return (
     <StrategyPageWrapper>
       <Formik
-        onSubmit={(values: any) => {
+        onSubmit={(values: StrategyEntry) => {
           console.log('submitted', values);
         }}
         initialValues={{ superannuation, pension, investments, debt, centrelink, insurance, estatePlanning }}
         enableReinitialize={true}
-        render={() => (
+        render={(formikProps: FormikProps<StrategyEntry>) => (
           <Form>
             <StrategyHeader />
-            {superannuation && (
+            {formikProps.values.superannuation && (
               <StrategyContainer
                 type={StrategyTypes.Superannuation}
-                information={superannuation}
-                strategies={superannuation.strategies}
+                information={formikProps.values.superannuation}
+                strategies={formikProps.values.superannuation.strategies}
               />
             )}
-            {pension && (
-              <StrategyContainer type={StrategyTypes.Pensions} information={pension} strategies={pension.strategies} />
+            {formikProps.values.pension && (
+              <StrategyContainer
+                type={StrategyTypes.Pensions}
+                information={formikProps.values.pension}
+                strategies={formikProps.values.pension.strategies}
+              />
             )}
-            {investments && (
+            {formikProps.values.investments && (
               <StrategyContainer
                 type={StrategyTypes.Investments}
-                information={investments}
-                strategies={investments.strategies}
+                information={formikProps.values.investments}
+                strategies={formikProps.values.investments.strategies}
               />
             )}
-            {debt && <StrategyContainer type={StrategyTypes.Debt} information={debt} strategies={debt.strategies} />}
-            {centrelink && (
+            {formikProps.values.debt && (
+              <StrategyContainer
+                type={StrategyTypes.Debt}
+                information={formikProps.values.debt}
+                strategies={formikProps.values.debt.strategies}
+              />
+            )}
+            {formikProps.values.centrelink && (
               <StrategyContainer
                 type={StrategyTypes.Centrelink}
-                information={centrelink}
-                strategies={centrelink.strategies}
+                information={formikProps.values.centrelink}
+                strategies={formikProps.values.centrelink.strategies}
               />
             )}
-            {insurance && (
+            {formikProps.values.insurance && (
               <StrategyContainer
                 type={StrategyTypes.Insurance}
-                information={insurance}
-                strategies={insurance.strategies}
+                information={formikProps.values.insurance}
+                strategies={formikProps.values.insurance.strategies}
               />
             )}
-            {estatePlanning && (
+            {formikProps.values.estatePlanning && (
               <StrategyContainer
                 type={StrategyTypes.EstatePlanning}
-                information={estatePlanning}
-                strategies={estatePlanning.strategies}
+                information={formikProps.values.estatePlanning}
+                strategies={formikProps.values.estatePlanning.strategies}
               />
             )}
             <ActionTableGeneral visible>

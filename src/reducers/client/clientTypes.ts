@@ -26,6 +26,7 @@ export interface StrategyEntry {
   investments?: Strategy;
   debt?: Strategy;
   centrelink?: Strategy;
+  insurance?: Strategy;
   estatePlanning?: Strategy;
 }
 
