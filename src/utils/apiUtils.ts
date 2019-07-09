@@ -40,6 +40,7 @@ class ApiUtils {
 
   public static getAccessToken(): string | undefined {
     const rootState = store.getState();
+    return 'asd';
     return rootState.auth && rootState.auth.get('token');
   }
 
