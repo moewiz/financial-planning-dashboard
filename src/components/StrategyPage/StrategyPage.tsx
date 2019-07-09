@@ -4,10 +4,11 @@ import StrategyHeader from './StrategyHeader';
 import StrategyContainer from './StrategyContainer';
 import { StrategyTypes } from '../../enums/strategies';
 import { StrategyPageWrapper } from './styled';
-import { StrategyEntry, ClientActions } from '../../reducers/client';
+import { StrategyEntry } from '../../reducers/client';
 import DrawerContainer from './Drawer/DrawerContainer';
-import { StandardAction, RootState } from '../../reducers/reducerTypes';
-import { CloseDrawerAction } from '../../reducers/drawer';
+import { Form, Formik } from 'formik';
+import { Button, Icon } from 'antd';
+import { ActionTableGeneral } from '../../pages/client/styled';
 
 interface StrategyPageProps {
   clientId: number;
@@ -27,42 +28,63 @@ const StrategyPage = (props: StrategyPageProps) => {
 
   return (
     <StrategyPageWrapper>
-      <StrategyHeader />
-      {superannuation && (
-        <StrategyContainer
-          type={StrategyTypes.Superannuation}
-          information={superannuation}
-          strategies={superannuation.strategies}
-        />
-      )}
-      {pension && (
-        <StrategyContainer type={StrategyTypes.Pensions} information={pension} strategies={pension.strategies} />
-      )}
-      {investments && (
-        <StrategyContainer
-          type={StrategyTypes.Investments}
-          information={investments}
-          strategies={investments.strategies}
-        />
-      )}
-      {debt && <StrategyContainer type={StrategyTypes.Debt} information={debt} strategies={debt.strategies} />}
-      {centrelink && (
-        <StrategyContainer
-          type={StrategyTypes.Centrelink}
-          information={centrelink}
-          strategies={centrelink.strategies}
-        />
-      )}
-      {insurance && (
-        <StrategyContainer type={StrategyTypes.Insurance} information={insurance} strategies={insurance.strategies} />
-      )}
-      {estatePlanning && (
-        <StrategyContainer
-          type={StrategyTypes.EstatePlanning}
-          information={estatePlanning}
-          strategies={estatePlanning.strategies}
-        />
-      )}
+      <Formik
+        onSubmit={(values: any) => {
+          console.log('submitted', values);
+        }}
+        initialValues={{ superannuation, pension, investments, debt, centrelink, insurance, estatePlanning }}
+        enableReinitialize={true}
+        render={() => (
+          <Form>
+            <StrategyHeader />
+            {superannuation && (
+              <StrategyContainer
+                type={StrategyTypes.Superannuation}
+                information={superannuation}
+                strategies={superannuation.strategies}
+              />
+            )}
+            {pension && (
+              <StrategyContainer type={StrategyTypes.Pensions} information={pension} strategies={pension.strategies} />
+            )}
+            {investments && (
+              <StrategyContainer
+                type={StrategyTypes.Investments}
+                information={investments}
+                strategies={investments.strategies}
+              />
+            )}
+            {debt && <StrategyContainer type={StrategyTypes.Debt} information={debt} strategies={debt.strategies} />}
+            {centrelink && (
+              <StrategyContainer
+                type={StrategyTypes.Centrelink}
+                information={centrelink}
+                strategies={centrelink.strategies}
+              />
+            )}
+            {insurance && (
+              <StrategyContainer
+                type={StrategyTypes.Insurance}
+                information={insurance}
+                strategies={insurance.strategies}
+              />
+            )}
+            {estatePlanning && (
+              <StrategyContainer
+                type={StrategyTypes.EstatePlanning}
+                information={estatePlanning}
+                strategies={estatePlanning.strategies}
+              />
+            )}
+            <ActionTableGeneral visible>
+              <Button htmlType={'submit'} type={'primary'}>
+                <Icon type="check" />
+                <span>Submit</span>
+              </Button>
+            </ActionTableGeneral>
+          </Form>
+        )}
+      />
       <DrawerContainer />
     </StrategyPageWrapper>
   );
