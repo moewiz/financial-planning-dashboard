@@ -6,7 +6,7 @@ import { StrategyTypes } from '../../enums/strategies';
 import { StrategyPageWrapper } from './styled';
 import { StrategyEntry } from '../../reducers/client';
 import DrawerContainer from './Drawer/DrawerContainer';
-import { Form, Formik, FormikProps } from 'formik';
+import { Form, Formik, FormikActions, FormikProps } from 'formik';
 import { Button, Icon } from 'antd';
 import { ActionTableGeneral } from '../../pages/client/styled';
 
@@ -29,8 +29,9 @@ const StrategyPage = (props: StrategyPageProps) => {
   return (
     <StrategyPageWrapper>
       <Formik
-        onSubmit={(values: StrategyEntry) => {
+        onSubmit={(values: StrategyEntry, actions: FormikActions<StrategyEntry>) => {
           console.log('submitted', values);
+          actions.setSubmitting(false);
         }}
         initialValues={{ superannuation, pension, investments, debt, centrelink, insurance, estatePlanning }}
         enableReinitialize={true}
@@ -87,7 +88,7 @@ const StrategyPage = (props: StrategyPageProps) => {
               />
             )}
             <ActionTableGeneral visible>
-              <Button htmlType={'submit'} type={'primary'}>
+              <Button htmlType={'submit'} type={'primary'} disabled={formikProps.isSubmitting || !formikProps.dirty}>
                 <Icon type="check" />
                 <span>Submit</span>
               </Button>

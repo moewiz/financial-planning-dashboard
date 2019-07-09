@@ -125,37 +125,31 @@
     ],
     "strategies": [
       {
-        "id": 1,
         "check": true,
         "sentence": "client.salarySacrifice.maximise",
         "values": ["2019-07-09T12:00:00", "2020-07-10T12:00:00"]
       },
       {
-        "id": 2,
         "check": true,
         "sentence": "partner.salarySacrifice.fixedRegular",
         "values": [3500, "annum", "2019-07-09T12:00:00", "2020-07-10T12:00:00"]
       },
       {
-        "id": 3,
         "check": true,
         "sentence": "client.nonConcessional.customRegular",
         "values": [199.99, "month", "2019-07-09T12:00:00", "2020-07-10T12:00:00"]
       },
       {
-        "id": 4,
         "check": false,
         "sentence": "partner.salarySacrifice.customOneOff",
         "values": [2500, 2020]
       },
       {
-        "id": 5,
         "check": true,
         "sentence": "client.spouse.oneOff",
         "values": [2500, 2020]
       },
       {
-        "id": 6,
         "check": true,
         "sentence": "client.recontribution.oneOff",
         "values": ["full_value", 1369.99, 2023]
@@ -194,19 +188,16 @@
     ],
     "strategies": [
       {
-        "id": 1,
         "check": false,
         "sentence": "client.commenceAccount.minimum",
         "values": ["2020-07-10T12:00:00", 1369.99, 2]
       },
       {
-        "id": 2,
         "check": true,
         "sentence": "client.commenceAccount.fullyCustomized",
         "values": ["2020-07-10T12:00:00", 1369.5, [299.99, 499.99, 699.99], 1500.0]
       },
       {
-        "id": 3,
         "check": true,
         "sentence": "partner.commenceAccount.minimum",
         "values": ["2020-07-10T12:00:00", 1369.99, 2]
@@ -249,19 +240,16 @@
     ],
     "strategies": [
       {
-        "id": 1,
         "check": true,
         "sentence": "client.newInvestment.reinvest",
         "values": [1369.99, 5, "2020-07-10T12:00:00"]
       },
       {
-        "id": 2,
         "check": false,
         "sentence": "partner.existingInvestment.lumpSum",
         "values": [1500.0, 2, 6]
       },
       {
-        "id": 3,
         "check": true,
         "sentence": "client.withdrawFunds.regular",
         "values": [1369.99, "annum", "2020-07-10T12:00:00", "2020-07-10T12:00:00", 3, 2]
@@ -300,19 +288,16 @@
     ],
     "strategies": [
       {
-        "id": 1,
         "check": true,
         "sentence": "client.payDownLoan.oneOff",
         "values": [1369.99, 5, "eliminate", 2, "2020-07-10T12:00:00"]
       },
       {
-        "id": 2,
         "check": false,
         "sentence": "partner.reduceLoan.ongoing",
         "values": [3, 150, "month"]
       },
       {
-        "id": 3,
         "check": true,
         "sentence": "partner.payDownLoan.regular",
         "values": [1, 460, "month"]
@@ -341,31 +326,26 @@
     ],
     "strategies": [
       {
-        "id": 1,
         "check": true,
         "sentence": "client.centrelinkPayment.agePension",
         "values": ["2020-07-10T12:00:00"]
       },
       {
-        "id": 2,
         "check": false,
         "sentence": "client.centrelinkPayment.disabilitySupportPension",
         "values": ["2020-07-10T12:00:00"]
       },
       {
-        "id": 3,
         "check": true,
         "sentence": "partner.funeralBond.new",
         "values": [150, 2]
       },
       {
-        "id": 4,
         "check": true,
         "sentence": "partner.giftingStrategy.oneOff",
         "values": [350, 1, "2020-07-10T12:00:00"]
       },
       {
-        "id": 5,
         "check": false,
         "sentence": "client.giftingStrategy.ongoing",
         "values": [250, "month", 2, 4.5]

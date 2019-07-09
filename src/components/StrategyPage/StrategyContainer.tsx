@@ -19,7 +19,7 @@ interface StrategyContainerProps {
 }
 
 class StrategyContainer extends PureComponent<StrategyContainerProps> {
-  public addItem = (arrayHelpers: ArrayHelpers) => (data: any) => {
+  public addItem = (arrayHelpers: ArrayHelpers) => (data: StrategyItemI) => {
     arrayHelpers.unshift(data);
   }
 

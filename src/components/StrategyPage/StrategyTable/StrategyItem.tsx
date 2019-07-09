@@ -10,21 +10,28 @@ import {
 } from './styled';
 
 export interface StrategyItemI {
-  id: number;
   check: boolean;
   sentence: string;
   values?: any[];
 }
 
 interface StrategyItemProps {
+  index: number;
+  strategy: StrategyItemI;
+  removeItem: (index: number) => void;
   mark?: boolean;
   margin?: boolean;
-  strategy: StrategyItemI;
 }
 
 class StrategyItem extends Component<StrategyItemProps> {
+  public removeItem = () => {
+    const { index, removeItem } = this.props;
+    removeItem(index);
+  }
+
   public render() {
     const { strategy, mark, margin } = this.props;
+
     return (
       <StrategyTableItems>
         <CheckboxCustomize>
@@ -59,7 +66,13 @@ class StrategyItem extends Component<StrategyItemProps> {
           </svg>
         </StrategyTableIcon>
         <StrategyTableIconDel>
-          <Popconfirm title="Really delete?" okText="Yes" cancelText="No" placement="topRight">
+          <Popconfirm
+            title="Really delete?"
+            okText="Yes"
+            cancelText="No"
+            placement="topRight"
+            onConfirm={this.removeItem}
+          >
             <Icon type="close-square" />
           </Popconfirm>
         </StrategyTableIconDel>
