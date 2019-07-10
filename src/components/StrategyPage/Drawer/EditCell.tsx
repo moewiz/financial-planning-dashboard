@@ -16,6 +16,7 @@ interface EditCellProps {
   className?: string;
   options?: any;
   defaultFullValue?: any;
+  calculateWidth?: boolean;
 }
 
 interface EditaCellState {
@@ -150,36 +151,59 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
                 ),
             )}
         </Select>
-        {selectValue !== 'full_value' && (
-          <InputNumber name={name} onChange={this.onChange} value={value} className={'edit-cell'} />
-        )}
+        {selectValue !== 'full_value' && <InputNumber onChange={this.onChange} value={value} className={'edit-cell'} />}
       </DDFreeText>
     );
   }
 
-  public render() {
-    const { name, type } = this.props;
+  public renderInputNumber = () => {
+    const { options } = this.props;
     const { value: stateValue } = this.state;
+    const value = stateValue ? stateValue : 0;
+    const precision = options.precision ? options.precision : 2;
+    const optionalProps: { [key: string]: any } = {};
+    if (options.integer) {
+      optionalProps.formatter = undefined;
+      optionalProps.parser = undefined;
+    } else {
+      optionalProps.formatter = (valueNumber: number) => `$${valueNumber}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      optionalProps.parser = (displayValue: string) => displayValue.replace(/\$\s?|(,*)/g, '');
+    }
+
+    return (
+      <InputNumber
+        onChange={this.onChange}
+        value={value}
+        className={'edit-cell'}
+        {...options}
+        {...optionalProps}
+        precision={precision}
+      />
+    );
+  }
+
+  public renderInputText = () => {
+    const { value: stateValue } = this.state;
+    const value = stateValue ? stateValue : '';
+    return <Input value={value} onChange={this.onChangeText} className={'edit-cell text'} />;
+  }
+
+  public render() {
+    const { type } = this.props;
 
     switch (type) {
-      case EditCellType.number: {
-        const value = stateValue ? stateValue : 0;
-        return <InputNumber name={name} onChange={this.onChange} value={value} className={'edit-cell'} />;
-      }
+      case EditCellType.number:
+        return this.renderInputNumber();
       case EditCellType.select:
         return this.renderSelect();
       case EditCellType.date:
         return this.renderDate();
       case EditCellType.dropdownFreeText:
         return this.renderDropdownFreeText();
-      case EditCellType.text: {
-        const value = stateValue ? stateValue : '';
-        return <Input name={name} value={value} onChange={this.onChangeText} className={'edit-cell text'} />;
-      }
-      default: {
-        const value = stateValue ? stateValue : '';
-        return <Input name={name} value={value} onChange={this.onChangeText} className={'edit-cell text'} />;
-      }
+      case EditCellType.text:
+        return this.renderInputText();
+      default:
+        return this.renderInputText();
     }
   }
 }

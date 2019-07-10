@@ -124,6 +124,7 @@ class StrategyItem extends Component<StrategyItemProps> {
                   console.log(val);
                 }}
                 defaultFullValue={defaultFullValue}
+                calculateWidth={true}
               />
             </DrawerTableRows>
           );

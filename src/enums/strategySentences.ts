@@ -92,14 +92,14 @@ const strategySentences: any = {
   },
   spouse: {
     oneOff: {
-      statement: "%name%, maximise a spouse contributions of {{0}} in {{1}} into partner's superannuation account",
+      statement: '%name%, maximise a spouse contributions of {{0}} in {{1}} into partner\'s superannuation account',
       types: [EditCellType.number, EditCellType.select],
       options: ['', 'year'],
     },
     regular: {
       statement:
         '%name%, make a spouse contribution of {{0}} per {{1}}' +
-        "into partner's superannuation account from {{2}} to {{3}}",
+        'into partner\'s superannuation account from {{2}} to {{3}}',
       types: [EditCellType.number, EditCellType.select, EditCellType.date, EditCellType.date],
       options: ['', periodTypes],
     },
@@ -231,7 +231,7 @@ const strategySentences: any = {
     },
     regular: {
       statement: '%name%, increase your {{0}} repayments to {{1}} per {{2}}.',
-      types: [EditCellType.select, EditCellType.select, EditCellType.select],
+      types: [EditCellType.select, EditCellType.number, EditCellType.select],
       options: ['+loans', '', periodTypes],
     },
   },
@@ -269,7 +269,7 @@ const strategySentences: any = {
     ongoing: {
       statement: '%name%, consider gifting {{0}} per {{1}} from {{2}} over the next {{3}} years',
       types: [EditCellType.number, EditCellType.select, EditCellType.select, EditCellType.number],
-      options: ['', periodTypes, '+investments', { precision: 1 }],
+      options: ['', periodTypes, '+investments', { precision: 1, integer: true, min: 1, max: 100 }],
     },
   },
   funeralBond: {
