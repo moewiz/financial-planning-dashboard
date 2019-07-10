@@ -200,7 +200,7 @@ const strategySentences: any = {
     },
     regular: {
       statement:
-        '%name%, make a regular withdawal of {{0}} per {{1}} from {{2}} to {{3}} to your {{4}}.' +
+        '%name%, make a regular withdawal of {{0}} per {{1}} from {{2}} to {{3}} to your {{4}}. ' +
         'Direct to proceeds into {{5}}',
       types: [
         EditCellType.number,

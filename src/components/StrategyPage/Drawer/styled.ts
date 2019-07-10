@@ -164,8 +164,46 @@ export const DrawerTableRows = styled.div<{ noBorder?: boolean }>`
   }
   &.strategy-item {
     display: inline-block;
-    .edit-cell {
-      // width: auto;
+    input {
+      font-weight: 600;
+      color: #4e5d86;
+    }
+    .ant-calendar-picker {
+      .ant-calendar-picker-input {
+        border-color: transparent;
+        width: 70px;
+        padding: 4px;
+        text-align: center;
+        &:hover {
+          border-color: #dcdcdc;
+        }
+      }
+      .anticon-calendar{
+        display: none;
+      }
+    }
+    .ant-select {
+      color: #4e5d86;
+      font-weight: 600;
+      &-selection {
+        border-color: transparent;
+        height: 32px;
+        margin: 0 -1px;
+        &:hover {
+          border-color: #dcdcdc;
+        }
+        &-selected-value {
+          padding-right: 0px;
+        }
+        &__rendered {
+          line-height: 30px;
+          margin: 0px;
+          padding: 0 2px;
+        }
+      }
+      &-arrow {
+        display: none;
+      }
     }
   }
 `;

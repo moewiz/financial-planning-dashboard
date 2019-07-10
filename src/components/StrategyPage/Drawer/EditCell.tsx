@@ -76,17 +76,15 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
     const { value } = this.state;
 
     return (
-      <InputWrapper>
-        <Select onChange={this.handleSelect} value={value}>
-          {options &&
-            options.length > 0 &&
-            options.map((option: { value: any; label: string }) => (
-              <Select.Option value={option.value} key={option.value}>
-                {option.label}
-              </Select.Option>
-            ))}
-        </Select>
-      </InputWrapper>
+      <Select onChange={this.handleSelect} value={value}>
+        {options &&
+          options.length > 0 &&
+          options.map((option: { value: any; label: string }) => (
+            <Select.Option value={option.value} key={option.value}>
+              {option.label}
+            </Select.Option>
+          ))}
+      </Select>
     );
   }
 
@@ -108,6 +106,7 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
           onChange={this.handleChangeDate}
           placeholder={'Select month, year'}
           format={format}
+          allowClear={false}
         />
       </EntryPickerTable>
     );

@@ -127,7 +127,7 @@ export const strategyChoices: StrategyChoice = {
               label: 'Maximise',
             },
             {
-              value: 'fixedRegular',
+              value: 'customRegular',
               label: 'Fixed - regular',
             },
             {
