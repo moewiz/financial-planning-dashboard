@@ -160,9 +160,9 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
     const { options } = this.props;
     const { value: stateValue } = this.state;
     const value = stateValue ? stateValue : 0;
-    const precision = options.precision ? options.precision : 2;
+    const precision = options && options.precision ? options.precision : 2;
     const optionalProps: { [key: string]: any } = {};
-    if (options.integer) {
+    if (options && options.integer) {
       optionalProps.formatter = undefined;
       optionalProps.parser = undefined;
     } else {
