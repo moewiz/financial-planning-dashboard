@@ -19,7 +19,7 @@ const Text = styled.span`
   color: #5f698d;
   font-size: 13px;
 `;
-const Param = styled.span`
+export const Param = styled.span`
   color: #5f698d;
   font-size: 13px;
   font-weight: 700;
@@ -40,7 +40,7 @@ export const formatString = (
   return splitText.map((sentence, index) => {
     if (isNumber.test(sentence)) {
       const value = values[Number(sentence)];
-      return isFunction(formattingFunc) ? formattingFunc(value, index) : value;
+      return isFunction(formattingFunc) ? formattingFunc(value, sentence) : value;
     }
     return sentence;
   });

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { isFunction, trim, head, slice, get, replace } from 'lodash';
+import { trim, head, slice, get, replace } from 'lodash';
 import { Checkbox, Icon, Popconfirm } from 'antd';
 import {
   CheckboxCustomize,
@@ -11,6 +11,7 @@ import {
 } from './styled';
 import { DynamicData } from '../../../reducers/client';
 import strategySentences from '../../../enums/strategySentences';
+import { formatString, Param } from '../StandardText';
 
 export interface StrategyItemI {
   check: boolean;
@@ -70,7 +71,15 @@ class StrategyItem extends Component<StrategyItemProps> {
       return this.renderCustom();
     }
     if (context && strategySentence && strategySentence.statement) {
-      return replaceDynamicValues(strategySentence.statement, { context, client, partner });
+      const stringReplacedByName = replaceDynamicValues(strategySentence.statement, { context, client, partner });
+      if (strategy.values) {
+        return formatString(stringReplacedByName, strategy.values, (value: any, index: number) => {
+          console.log('index', index);
+          return <Param key={index}>{value}</Param>;
+        });
+      }
+
+      return stringReplacedByName;
     }
     console.log('missing sentence key for:', sentenceKey);
     return null;
