@@ -167,6 +167,7 @@ export const DrawerTableRows = styled.div<{ noBorder?: boolean }>`
     input {
       font-weight: 600;
       color: #4e5d86;
+      padding: 0px;
     }
     .ant-calendar-picker {
       .ant-calendar-picker-input {

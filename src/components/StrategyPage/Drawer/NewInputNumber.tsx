@@ -57,9 +57,8 @@ class NewInputNumber extends PureComponent<NewInputNumberProps> {
       } else {
         if (precision) {
           valueLength += precision;
-          numberSize = valueLength < 5 ? 15 : 13;
+          numberSize = valueLength < 4 ? 15 : 12;
           extraWidth += 13 + (valueLength > 7 || valueLength === 4 ? -7 : 0);
-          extraWidth += valueLength === 5 ? 4 : 0;
           minimum = 50;
         } else {
           numberSize = valueLength < 5 ? 18 : 14;
