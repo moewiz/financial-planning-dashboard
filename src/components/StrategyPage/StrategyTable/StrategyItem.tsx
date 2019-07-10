@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { isFunction, trim, head, slice, get, replace } from 'lodash';
 import { Checkbox, Icon, Popconfirm } from 'antd';
 import {
   CheckboxCustomize,
@@ -8,6 +9,8 @@ import {
   StrategyTableItems,
   StrategyTableText,
 } from './styled';
+import { DynamicData } from '../../../reducers/client';
+import strategySentences from '../../../enums/strategySentences';
 
 export interface StrategyItemI {
   check: boolean;
@@ -19,14 +22,58 @@ interface StrategyItemProps {
   index: number;
   strategy: StrategyItemI;
   removeItem: (index: number) => void;
+  client: DynamicData;
+  partner: DynamicData;
   mark?: boolean;
   margin?: boolean;
 }
+
+export const replaceDynamicValues = (
+  text: string,
+  values: { context: string; client: DynamicData; partner: DynamicData },
+) => {
+  const templateSplit = new RegExp(/%([a-z]+)%/g);
+  const { context, client, partner } = values;
+  return replace(text, templateSplit, (match: string) => {
+    if (context === 'client') {
+      return get(client, trim(match, '%'));
+    }
+    if (context === 'partner') {
+      return get(partner, trim(match, '%'));
+    }
+    if (context === 'joint') {
+      return get(client, trim(match, '%')) + ' and ' + get(partner, trim(match, '%'));
+    }
+    return null;
+  });
+};
 
 class StrategyItem extends Component<StrategyItemProps> {
   public removeItem = () => {
     const { index, removeItem } = this.props;
     removeItem(index);
+  }
+
+  public renderCustom = () => {
+    const { strategy, client, partner } = this.props;
+
+    return 'Fully customized';
+  }
+
+  public renderText = () => {
+    const { strategy, client, partner } = this.props;
+    const strategySentenceKeys = strategy.sentence.split('.');
+    const context = head(strategySentenceKeys);
+    const sentenceKey = slice(strategySentenceKeys, 1).join('.');
+    const strategySentence = get(strategySentences, sentenceKey);
+    if (sentenceKey === 'commenceAccount.fullyCustomized') {
+      return this.renderCustom();
+    }
+    if (context && strategySentence && strategySentence.statement) {
+      return replaceDynamicValues(strategySentence.statement, { context, client, partner });
+    }
+    console.log('missing sentence key for:', sentenceKey);
+    return null;
   }
 
   public render() {
@@ -37,7 +84,7 @@ class StrategyItem extends Component<StrategyItemProps> {
         <CheckboxCustomize>
           <Checkbox checked={strategy.check} />
         </CheckboxCustomize>
-        <StrategyTableText>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, quia?</StrategyTableText>
+        <StrategyTableText>{this.renderText()}</StrategyTableText>
         {mark && (
           <CheckboxCustomizeX>
             <Checkbox />

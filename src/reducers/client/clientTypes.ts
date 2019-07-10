@@ -20,6 +20,21 @@ export interface Strategy {
   standardText: StandardText[];
   strategies: [];
 }
+export interface DynamicData {
+  name: string;
+  superannuation: {
+    value: any;
+    label: string;
+  };
+  investments: {
+    value: any;
+    label: string;
+  };
+  loans: {
+    value: any;
+    label: string;
+  };
+}
 export interface StrategyEntry {
   superannuation?: Strategy;
   pension?: Strategy;
@@ -28,6 +43,8 @@ export interface StrategyEntry {
   centrelink?: Strategy;
   insurance?: Strategy;
   estatePlanning?: Strategy;
+  client?: DynamicData;
+  partner?: DynamicData;
 }
 
 export interface DataEntry {

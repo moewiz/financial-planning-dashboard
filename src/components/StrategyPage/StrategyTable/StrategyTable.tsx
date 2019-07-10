@@ -7,12 +7,15 @@ import { HeaderTitleMargin, HeaderTitleMark, HeaderTitleStrategy, StrategyTableC
 import { CascaderOptionType } from 'antd/lib/cascader';
 import StrategyItem, { StrategyItemI } from './StrategyItem';
 import { strategyChoices } from '../../../enums/strategyChoices';
+import { DynamicData } from '../../../reducers/client';
 
 interface StrategyTableProps {
   type: StrategyTypes;
   strategies: StrategyItemI[];
   addItem: (data: StrategyItemI) => void;
   removeItem: (index: number) => void;
+  client: DynamicData;
+  partner: DynamicData;
 }
 
 class StrategyTable extends PureComponent<StrategyTableProps> {
@@ -28,7 +31,7 @@ class StrategyTable extends PureComponent<StrategyTableProps> {
   }
 
   public render() {
-    const { strategies, type, removeItem } = this.props;
+    const { strategies, type, removeItem, client, partner } = this.props;
     const shouldShowMarkAndMargin = type === StrategyTypes.EstatePlanning;
 
     return (
@@ -61,6 +64,8 @@ class StrategyTable extends PureComponent<StrategyTableProps> {
                 margin={shouldShowMarkAndMargin}
                 mark={shouldShowMarkAndMargin}
                 removeItem={removeItem}
+                client={client}
+                partner={partner}
               />
             ))
           ) : (

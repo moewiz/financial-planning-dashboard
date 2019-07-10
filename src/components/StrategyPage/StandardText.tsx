@@ -29,10 +29,10 @@ interface StandardTextProp {
   data: IStandardText[];
 }
 
-const formatString = (
+export const formatString = (
   text: string,
+  values: Array<number | string>,
   formattingFunc?: (value: number | string, i: number) => React.ReactNode,
-  ...values: Array<number | string>
 ) => {
   const templateSplit = new RegExp(/{{(\d)}}/g);
   const isNumber = new RegExp(/^\d+$/);
@@ -54,13 +54,9 @@ const StandardText = (props: StandardTextProp) => {
         <Statement key={index}>
           {statement.params && statement.params.length > 0 ? (
             <Text>
-              {formatString(
-                statement.text,
-                (value, i) => (
-                  <Param key={i}>{value}</Param>
-                ),
-                ...statement.params,
-              )}
+              {formatString(statement.text, statement.params, (value, i) => (
+                <Param key={i}>{value}</Param>
+              ))}
             </Text>
           ) : (
             <Text>{statement.text}</Text>

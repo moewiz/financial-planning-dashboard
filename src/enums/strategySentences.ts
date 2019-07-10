@@ -27,7 +27,7 @@ export enum SentenceInputType {
   dropdownFreeText,
 }
 
-export default {
+const strategySentences: any = {
   salarySacrifice: {
     maximise: {
       statement: '%name%, maximise salary sacrifice contributions from {{0}} to {{1}}',
@@ -287,3 +287,5 @@ export default {
     },
   },
 };
+
+export default strategySentences;

@@ -25,6 +25,8 @@ const StrategyPage = (props: StrategyPageProps) => {
   const centrelink = get(pageData, 'centrelink');
   const insurance = get(pageData, 'insurance');
   const estatePlanning = get(pageData, 'estatePlanning');
+  const client = pageData.client;
+  const partner = pageData.partner;
 
   return (
     <StrategyPageWrapper>
@@ -38,53 +40,67 @@ const StrategyPage = (props: StrategyPageProps) => {
         render={(formikProps: FormikProps<StrategyEntry>) => (
           <Form>
             <StrategyHeader />
-            {formikProps.values.superannuation && (
+            {formikProps.values.superannuation && client && partner && (
               <StrategyContainer
                 type={StrategyTypes.Superannuation}
                 information={formikProps.values.superannuation}
                 strategies={formikProps.values.superannuation.strategies}
+                client={client}
+                partner={partner}
               />
             )}
-            {formikProps.values.pension && (
+            {formikProps.values.pension && client && partner && (
               <StrategyContainer
                 type={StrategyTypes.Pensions}
                 information={formikProps.values.pension}
                 strategies={formikProps.values.pension.strategies}
+                client={client}
+                partner={partner}
               />
             )}
-            {formikProps.values.investments && (
+            {formikProps.values.investments && client && partner && (
               <StrategyContainer
                 type={StrategyTypes.Investments}
                 information={formikProps.values.investments}
                 strategies={formikProps.values.investments.strategies}
+                client={client}
+                partner={partner}
               />
             )}
-            {formikProps.values.debt && (
+            {formikProps.values.debt && client && partner && (
               <StrategyContainer
                 type={StrategyTypes.Debt}
                 information={formikProps.values.debt}
                 strategies={formikProps.values.debt.strategies}
+                client={client}
+                partner={partner}
               />
             )}
-            {formikProps.values.centrelink && (
+            {formikProps.values.centrelink && client && partner && (
               <StrategyContainer
                 type={StrategyTypes.Centrelink}
                 information={formikProps.values.centrelink}
                 strategies={formikProps.values.centrelink.strategies}
+                client={client}
+                partner={partner}
               />
             )}
-            {formikProps.values.insurance && (
+            {formikProps.values.insurance && client && partner && (
               <StrategyContainer
                 type={StrategyTypes.Insurance}
                 information={formikProps.values.insurance}
                 strategies={formikProps.values.insurance.strategies}
+                client={client}
+                partner={partner}
               />
             )}
-            {formikProps.values.estatePlanning && (
+            {formikProps.values.estatePlanning && client && partner && (
               <StrategyContainer
                 type={StrategyTypes.EstatePlanning}
                 information={formikProps.values.estatePlanning}
                 strategies={formikProps.values.estatePlanning.strategies}
+                client={client}
+                partner={partner}
               />
             )}
             <ActionTableGeneral visible>

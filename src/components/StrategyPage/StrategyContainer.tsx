@@ -4,7 +4,7 @@ import { StrategyTypes } from '../../enums/strategies';
 import StrategyTable from './StrategyTable/StrategyTable';
 import { StrategyWrapper } from './styled';
 import { Col, Row } from 'antd';
-import { StandardText } from '../../reducers/client';
+import { DynamicData, StandardText } from '../../reducers/client';
 import { StrategyItemI } from './StrategyTable/StrategyItem';
 import { ArrayHelpers, FieldArray } from 'formik';
 
@@ -16,6 +16,8 @@ interface StrategyContainerProps {
     standardText: StandardText[];
   };
   strategies: StrategyItemI[];
+  client: DynamicData;
+  partner: DynamicData;
 }
 
 class StrategyContainer extends PureComponent<StrategyContainerProps> {
@@ -28,7 +30,7 @@ class StrategyContainer extends PureComponent<StrategyContainerProps> {
   }
 
   public renderStrategyTable = (arrayHelpers: ArrayHelpers) => {
-    const { strategies, type } = this.props;
+    const { strategies, type, client, partner } = this.props;
 
     return (
       <StrategyTable
@@ -36,6 +38,8 @@ class StrategyContainer extends PureComponent<StrategyContainerProps> {
         type={type}
         addItem={this.addItem(arrayHelpers)}
         removeItem={this.removeItem(arrayHelpers)}
+        client={client}
+        partner={partner}
       />
     );
   }
