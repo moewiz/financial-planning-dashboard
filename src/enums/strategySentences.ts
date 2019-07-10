@@ -269,7 +269,7 @@ const strategySentences: any = {
     ongoing: {
       statement: '%name%, consider gifting {{0}} per {{1}} from {{2}} over the next {{3}} years',
       types: [EditCellType.number, EditCellType.select, EditCellType.select, EditCellType.number],
-      options: ['', periodTypes, '+investments', { precision: 1, integer: true, min: 1, max: 100 }],
+      options: ['', periodTypes, '+investments', { precision: 1, integer: true, min: 0, max: 100 }],
     },
   },
   funeralBond: {

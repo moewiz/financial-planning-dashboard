@@ -2,10 +2,11 @@ import React, { PureComponent } from 'react';
 import moment, { Moment } from 'moment';
 import numeral from 'numeral';
 import { isEqual } from 'lodash';
-import { DatePicker, Input, InputNumber, Select } from 'antd';
+import { DatePicker, Input, Select } from 'antd';
 import { EntryPickerTable } from '../../../common/EntryPicker/styled';
 import { ddFreeTextOptions } from '../../../enums/strategySentences';
 import { DDFreeText } from './styled';
+import NewInputNumber from './NewInputNumber';
 const { MonthPicker } = DatePicker;
 
 interface EditCellProps {
@@ -152,32 +153,17 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
                 ),
             )}
         </Select>
-        {selectValue !== 'full_value' && <InputNumber onChange={this.onChange} value={value} className={'edit-cell'} />}
+        {selectValue !== 'full_value' && (
+          <NewInputNumber value={value} onChange={this.onChange} {...this.props} dollar={true} calculateWidth={true} />
+        )}
       </DDFreeText>
     );
   }
 
   public renderInputNumber = () => {
-    const { options, dollar, calculateWidth } = this.props;
     const { value: stateValue } = this.state;
     const value = stateValue ? stateValue : 0;
-    const optionalProps: { [key: string]: any } = {};
-
-    if (dollar) {
-      optionalProps.formatter = (valueNumber: number) => `$${valueNumber}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-      optionalProps.parser = (displayValue: string) => displayValue.replace(/\$\s?|(,*)/g, '');
-      optionalProps.precision = 2;
-    }
-    if (options) {
-      if (options.integer) {
-        optionalProps.formatter = undefined;
-        optionalProps.parser = undefined;
-      }
-    }
-
-    return (
-      <InputNumber onChange={this.onChange} value={value} className={'edit-cell'} {...options} {...optionalProps} />
-    );
+    return <NewInputNumber value={value} onChange={this.onChange} {...this.props} />;
   }
 
   public renderInputText = () => {
