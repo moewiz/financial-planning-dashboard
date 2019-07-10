@@ -16,6 +16,7 @@ interface EditCellProps {
   className?: string;
   options?: any;
   defaultFullValue?: any;
+  dollar?: boolean;
   calculateWidth?: boolean;
 }
 
@@ -157,28 +158,25 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
   }
 
   public renderInputNumber = () => {
-    const { options } = this.props;
+    const { options, dollar, calculateWidth } = this.props;
     const { value: stateValue } = this.state;
     const value = stateValue ? stateValue : 0;
-    const precision = options && options.precision ? options.precision : 2;
     const optionalProps: { [key: string]: any } = {};
-    if (options && options.integer) {
-      optionalProps.formatter = undefined;
-      optionalProps.parser = undefined;
-    } else {
+
+    if (dollar) {
       optionalProps.formatter = (valueNumber: number) => `$${valueNumber}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
       optionalProps.parser = (displayValue: string) => displayValue.replace(/\$\s?|(,*)/g, '');
+      optionalProps.precision = 2;
+    }
+    if (options) {
+      if (options.integer) {
+        optionalProps.formatter = undefined;
+        optionalProps.parser = undefined;
+      }
     }
 
     return (
-      <InputNumber
-        onChange={this.onChange}
-        value={value}
-        className={'edit-cell'}
-        {...options}
-        {...optionalProps}
-        precision={precision}
-      />
+      <InputNumber onChange={this.onChange} value={value} className={'edit-cell'} {...options} {...optionalProps} />
     );
   }
 

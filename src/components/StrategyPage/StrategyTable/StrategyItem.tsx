@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { isString, get, head, replace, slice, trim } from 'lodash';
+import { get, head, isString, replace, slice, trim } from 'lodash';
 import { Checkbox, Icon, Popconfirm } from 'antd';
 import {
   CheckboxCustomize,
@@ -85,6 +85,7 @@ class StrategyItem extends Component<StrategyItemProps> {
       const stringReplacedByName = replaceDynamicValues(strategySentence.statement, { context, client, partner });
       const values = strategy.values || [];
       return formatString(stringReplacedByName, values, (value: any, index: number) => {
+        const optionalProps: { [key: string]: any } = {};
         if (strategySentence.types) {
           const type = strategySentence.types[index];
           let options = get(strategySentence, ['options', index], []);
@@ -112,6 +113,10 @@ class StrategyItem extends Component<StrategyItemProps> {
               }
             }
           }
+          if (type === EditCellType.number) {
+            optionalProps.dollar = true;
+            optionalProps.calculateWidth = true;
+          }
 
           return (
             <DrawerTableRows noBorder key={index} className={'strategy-item'}>
@@ -124,7 +129,7 @@ class StrategyItem extends Component<StrategyItemProps> {
                   console.log(val);
                 }}
                 defaultFullValue={defaultFullValue}
-                calculateWidth={true}
+                {...optionalProps}
               />
             </DrawerTableRows>
           );
