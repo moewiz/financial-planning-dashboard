@@ -59,7 +59,8 @@ class StrategyTable extends PureComponent<StrategyTableProps> {
             map(strategies, (strategy: StrategyItemI, index: number) => (
               <StrategyItem
                 key={index}
-                index={index}
+                strategyType={type}
+                strategyIndex={index}
                 strategy={strategy}
                 margin={shouldShowMarkAndMargin}
                 mark={shouldShowMarkAndMargin}

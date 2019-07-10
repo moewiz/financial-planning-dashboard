@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { trim, head, slice, get, replace } from 'lodash';
+import moment from 'moment';
+import { isString, get, head, replace, slice, trim } from 'lodash';
 import { Checkbox, Icon, Popconfirm } from 'antd';
 import {
   CheckboxCustomize,
@@ -12,6 +13,8 @@ import {
 import { DynamicData } from '../../../reducers/client';
 import strategySentences from '../../../enums/strategySentences';
 import { formatString, Param } from '../StandardText';
+import EditCell, { EditCellType } from '../Drawer/EditCell';
+import { DrawerTableRows } from '../Drawer/styled';
 
 export interface StrategyItemI {
   check: boolean;
@@ -19,8 +22,15 @@ export interface StrategyItemI {
   values?: any[];
 }
 
+interface Sentence {
+  statement: string;
+  types: EditCellType[];
+  options?: any[];
+}
+
 interface StrategyItemProps {
-  index: number;
+  strategyIndex: number;
+  strategyType: string;
   strategy: StrategyItemI;
   removeItem: (index: number) => void;
   client: DynamicData;
@@ -51,8 +61,8 @@ export const replaceDynamicValues = (
 
 class StrategyItem extends Component<StrategyItemProps> {
   public removeItem = () => {
-    const { index, removeItem } = this.props;
-    removeItem(index);
+    const { strategyIndex, removeItem } = this.props;
+    removeItem(strategyIndex);
   }
 
   public renderCustom = () => {
@@ -62,11 +72,11 @@ class StrategyItem extends Component<StrategyItemProps> {
   }
 
   public renderText = () => {
-    const { strategy, client, partner } = this.props;
+    const { strategy, client, partner, strategyType, strategyIndex } = this.props;
     const strategySentenceKeys = strategy.sentence.split('.');
     const context = head(strategySentenceKeys);
     const sentenceKey = slice(strategySentenceKeys, 1).join('.');
-    const strategySentence = get(strategySentences, sentenceKey);
+    const strategySentence: Sentence = get(strategySentences, sentenceKey);
     if (sentenceKey === 'commenceAccount.fullyCustomized') {
       return this.renderCustom();
     }
@@ -74,7 +84,48 @@ class StrategyItem extends Component<StrategyItemProps> {
       const stringReplacedByName = replaceDynamicValues(strategySentence.statement, { context, client, partner });
       if (strategy.values) {
         return formatString(stringReplacedByName, strategy.values, (value: any, index: number) => {
-          console.log('index', index);
+          if (strategySentence.types) {
+            const type = strategySentence.types[index];
+            let options = get(strategySentence, ['options', index], []);
+            const name = `${strategyType}.strategies[${strategyIndex}].values[${index}]`;
+            if (type === EditCellType.select) {
+              if (isString(options)) {
+                if (options !== 'year') {
+                  if (options[0] === '+') {
+                    const option = options.slice(1);
+                    options = [...get(client, option), ...get(partner, option)];
+                  } else {
+                    if (context === 'client') {
+                      options = get(client, options);
+                    }
+                    if (context === 'partner') {
+                      options = get(partner, options);
+                    }
+                  }
+                } else {
+                  options = [];
+                  const nowYear = moment().year();
+                  for (let i = nowYear; i < nowYear + 10; i++) {
+                    options.push({ value: i, label: `${i}/${i + 1} Financial Year` });
+                  }
+                }
+              }
+            }
+
+            return (
+              <DrawerTableRows noBorder key={index} className={'strategy-item'}>
+                <EditCell
+                  name={name}
+                  type={type}
+                  value={value}
+                  options={options}
+                  onChange={(val) => {
+                    console.log(val);
+                  }}
+                />
+              </DrawerTableRows>
+            );
+          }
           return <Param key={index}>{value}</Param>;
         });
       }

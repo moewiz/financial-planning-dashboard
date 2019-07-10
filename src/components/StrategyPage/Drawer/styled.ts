@@ -95,8 +95,8 @@ export const DrawerTableWrapper = styled.div`
     }
   }
 `;
-export const DrawerTableRows = styled.div`
-  border-bottom: 1px solid #ededed;
+export const DrawerTableRows = styled.div<{ noBorder?: boolean }>`
+  border-bottom: ${(props) => (props.noBorder ? 'none' : '1px solid #ededed')};
   .edit-cell {
     width: 69px;
     margin-right: 1px;
@@ -160,6 +160,12 @@ export const DrawerTableRows = styled.div`
     .ant-collapse-content > .ant-collapse-content-box {
       padding: 0px;
       padding-top: 0px !important;
+    }
+  }
+  &.strategy-item {
+    display: inline-block;
+    .edit-cell {
+      // width: auto;
     }
   }
 `;

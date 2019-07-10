@@ -33,7 +33,7 @@ export const EditableCellWrap = styled.section.attrs({
   }
   .ant-select-selection-selected-value {
     color: #5f698d;
-    /* Using margin because when hover border 1px and no hover border tranparent hidden */
+    /* Using margin because when hover border 1px and no hover border transparent hidden */
     margin-top: -2px;
     padding-right: 8px;
   }

@@ -31,7 +31,7 @@ class DrawerItem extends PureComponent<DrawerItemProps> {
       return map(columns, (column: string, index: number) => {
         const value = get(values, [index], '');
         const name = `${key}[${index}]`;
-        const type = isNumber(value) ? EditCellType.number : EditCellType.number;
+        const type = isNumber(value) ? EditCellType.number : EditCellType.text;
 
         return <EditCell name={name} key={index} onChange={(val: any) => console.log(val)} value={value} type={type} />;
       });

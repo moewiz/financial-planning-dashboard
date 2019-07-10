@@ -200,7 +200,7 @@
       {
         "check": true,
         "sentence": "partner.commenceAccount.minimum",
-        "values": ["2020-07-10T12:00:00", 1369.99, 2]
+        "values": ["2020-07-10T12:00:00", 1369.99, 5]
       }
     ]
   },
@@ -247,7 +247,7 @@
       {
         "check": false,
         "sentence": "partner.existingInvestment.lumpSum",
-        "values": [1500.0, 2, 6]
+        "values": [1500.0, "2020-07-10T12:00:00", 6, 3]
       },
       {
         "check": true,
