@@ -63,7 +63,7 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
           <Pagination current={page} total={total} onChange={this.onPageChange} />
         </DrawerFooter>
         <ActionDrawerGeneral>
-          <Button htmlType={'button'} type={'default'}>
+          <Button htmlType={'button'} type={'default'} onClick={this.onCloseDrawer}>
             <Icon type="close" />
             <span>Discard</span>
           </Button>
