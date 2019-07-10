@@ -73,7 +73,8 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
 
   public renderSelect = () => {
     const { options } = this.props;
-    const { value } = this.state;
+    const { value: stateValue } = this.state;
+    const value = stateValue ? stateValue : options[0].value;
 
     return (
       <Select onChange={this.handleSelect} value={value}>
@@ -114,19 +115,25 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
 
   public render() {
     const { name, type } = this.props;
-    const { value } = this.state;
+    const { value: stateValue } = this.state;
 
     switch (type) {
-      case EditCellType.number:
+      case EditCellType.number: {
+        const value = stateValue ? stateValue : 0;
         return <InputNumber name={name} onChange={this.onChange} value={value} className={'edit-cell'} />;
+      }
       case EditCellType.select:
         return this.renderSelect();
       case EditCellType.date:
         return this.renderDate();
-      case EditCellType.text:
+      case EditCellType.text: {
+        const value = stateValue ? stateValue : '';
         return <Input name={name} value={value} onChange={this.onChangeText} className={'edit-cell text'} />;
-      default:
+      }
+      default: {
+        const value = stateValue ? stateValue : '';
         return <Input name={name} value={value} onChange={this.onChangeText} className={'edit-cell text'} />;
+      }
     }
   }
 }

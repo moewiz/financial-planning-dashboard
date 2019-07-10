@@ -82,55 +82,52 @@ class StrategyItem extends Component<StrategyItemProps> {
     }
     if (context && strategySentence && strategySentence.statement) {
       const stringReplacedByName = replaceDynamicValues(strategySentence.statement, { context, client, partner });
-      if (strategy.values) {
-        return formatString(stringReplacedByName, strategy.values, (value: any, index: number) => {
-          if (strategySentence.types) {
-            const type = strategySentence.types[index];
-            let options = get(strategySentence, ['options', index], []);
-            const name = `${strategyType}.strategies[${strategyIndex}].values[${index}]`;
-            if (type === EditCellType.select) {
-              if (isString(options)) {
-                if (options !== 'year') {
-                  if (options[0] === '+') {
-                    const option = options.slice(1);
-                    options = [...get(client, option), ...get(partner, option)];
-                  } else {
-                    if (context === 'client') {
-                      options = get(client, options);
-                    }
-                    if (context === 'partner') {
-                      options = get(partner, options);
-                    }
-                  }
+      const values = strategy.values || [];
+      return formatString(stringReplacedByName, values, (value: any, index: number) => {
+        if (strategySentence.types) {
+          const type = strategySentence.types[index];
+          let options = get(strategySentence, ['options', index], []);
+          const name = `${strategyType}.strategies[${strategyIndex}].values[${index}]`;
+          if (type === EditCellType.select) {
+            if (isString(options)) {
+              if (options !== 'year') {
+                if (options[0] === '+') {
+                  const option = options.slice(1);
+                  options = [...get(client, option), ...get(partner, option)];
                 } else {
-                  options = [];
-                  const nowYear = moment().year();
-                  for (let i = nowYear; i < nowYear + 10; i++) {
-                    options.push({ value: i, label: `${i}/${i + 1} Financial Year` });
+                  if (context === 'client') {
+                    options = get(client, options);
                   }
+                  if (context === 'partner') {
+                    options = get(partner, options);
+                  }
+                }
+              } else {
+                options = [];
+                const nowYear = moment().year();
+                for (let i = nowYear; i < nowYear + 10; i++) {
+                  options.push({ value: i, label: `${i}/${i + 1} Financial Year` });
                 }
               }
             }
-
-            return (
-              <DrawerTableRows noBorder key={index} className={'strategy-item'}>
-                <EditCell
-                  name={name}
-                  type={type}
-                  value={value}
-                  options={options}
-                  onChange={(val) => {
-                    console.log(val);
-                  }}
-                />
-              </DrawerTableRows>
-            );
           }
-          return <Param key={index}>{value}</Param>;
-        });
-      }
 
-      return stringReplacedByName;
+          return (
+            <DrawerTableRows noBorder key={index} className={'strategy-item'}>
+              <EditCell
+                name={name}
+                type={type}
+                value={value}
+                options={options}
+                onChange={(val) => {
+                  console.log(val);
+                }}
+              />
+            </DrawerTableRows>
+          );
+        }
+        return <Param key={index}>{value}</Param>;
+      });
     }
     console.log('missing sentence key for:', sentenceKey);
     return null;
