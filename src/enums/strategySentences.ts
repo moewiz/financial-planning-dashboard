@@ -221,7 +221,7 @@ const strategySentences: any = {
     },
     regular: {
       statement: '%name%, increase your {{0}} repayments to {{1}} per {{2}}.',
-      types: [EditCellType.select, EditCellType.select, EditCellType.number],
+      types: [EditCellType.select, EditCellType.select, EditCellType.select],
       options: ['+loans', '', periodTypes],
     },
   },

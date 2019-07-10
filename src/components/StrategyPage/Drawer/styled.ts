@@ -171,11 +171,15 @@ export const DrawerTableRows = styled.div<{ noBorder?: boolean }>`
     .ant-calendar-picker {
       .ant-calendar-picker-input {
         border-color: transparent;
-        width: 75px;
+        width: 78px;
         padding: 4px;
         text-align: center;
         &:hover {
           border-color: #dcdcdc;
+        }
+        &:focus {
+          ouline: none;
+          box-shadow: none;
         }
       }
       .anticon-calendar{
@@ -191,6 +195,10 @@ export const DrawerTableRows = styled.div<{ noBorder?: boolean }>`
         margin: 0 -1px;
         &:hover {
           border-color: #dcdcdc;
+        }
+        &:focus {
+          outline: none;
+          box-shadow: none;
         }
         &-selected-value {
           padding-right: 0px;
