@@ -189,12 +189,21 @@ export const DrawerTableRows = styled.div<{ noBorder?: boolean }>`
     .ant-select {
       color: #4e5d86;
       font-weight: 600;
+      width: auto;
       &-selection {
         border-color: transparent;
         height: 32px;
-        margin: 0 -1px;
+        margin: 0px;
+        .ant-select-arrow {
+          display: none;
+          // right: 4px;
+        }
         &:hover {
           border-color: #dcdcdc;
+          // padding-right: 16px;
+          // .ant-select-arrow {
+          //   display: inline-block;
+          // }
         }
         &:focus {
           outline: none;
@@ -209,11 +218,12 @@ export const DrawerTableRows = styled.div<{ noBorder?: boolean }>`
           padding: 0 2px;
         }
       }
-      &-arrow {
-        display: none;
-      }
     }
   }
+`;
+
+export const DDFreeText = styled.div`
+  display: flex;
 `;
 
 export const DrawerTableParent = styled.div`

@@ -1,5 +1,15 @@
 import { EditCellType } from '../components/StrategyPage/Drawer/EditCell';
 
+export const ddFreeTextOptions = [
+  {
+    value: 'customAmount',
+    label: 'Custom amount',
+  },
+  {
+    value: 'full_value',
+    label: 'Full value',
+  },
+];
 export const periodTypes = [
   {
     value: 'month',
@@ -82,14 +92,14 @@ const strategySentences: any = {
   },
   spouse: {
     oneOff: {
-      statement: '%name%, maximise a spouse contributions of {{0}} in {{1}} into partner\'s superannuation account',
+      statement: "%name%, maximise a spouse contributions of {{0}} in {{1}} into partner's superannuation account",
       types: [EditCellType.number, EditCellType.select],
       options: ['', 'year'],
     },
     regular: {
       statement:
         '%name%, make a spouse contribution of {{0}} per {{1}}' +
-        'into partner\'s superannuation account from {{2}} to {{3}}',
+        "into partner's superannuation account from {{2}} to {{3}}",
       types: [EditCellType.number, EditCellType.select, EditCellType.date, EditCellType.date],
       options: ['', periodTypes],
     },

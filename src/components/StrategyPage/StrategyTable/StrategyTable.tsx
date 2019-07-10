@@ -16,6 +16,7 @@ interface StrategyTableProps {
   removeItem: (index: number) => void;
   client: DynamicData;
   partner: DynamicData;
+  defaultFullValue: any;
 }
 
 class StrategyTable extends PureComponent<StrategyTableProps> {
@@ -31,7 +32,7 @@ class StrategyTable extends PureComponent<StrategyTableProps> {
   }
 
   public render() {
-    const { strategies, type, removeItem, client, partner } = this.props;
+    const { strategies, type, removeItem, client, partner, defaultFullValue } = this.props;
     const shouldShowMarkAndMargin = type === StrategyTypes.EstatePlanning;
 
     return (
@@ -67,6 +68,7 @@ class StrategyTable extends PureComponent<StrategyTableProps> {
                 removeItem={removeItem}
                 client={client}
                 partner={partner}
+                defaultFullValue={defaultFullValue}
               />
             ))
           ) : (

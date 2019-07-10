@@ -37,6 +37,7 @@ interface StrategyItemProps {
   partner: DynamicData;
   mark?: boolean;
   margin?: boolean;
+  defaultFullValue: any;
 }
 
 export const replaceDynamicValues = (
@@ -72,7 +73,7 @@ class StrategyItem extends Component<StrategyItemProps> {
   }
 
   public renderText = () => {
-    const { strategy, client, partner, strategyType, strategyIndex } = this.props;
+    const { strategy, client, partner, strategyType, strategyIndex, defaultFullValue } = this.props;
     const strategySentenceKeys = strategy.sentence.split('.');
     const context = head(strategySentenceKeys);
     const sentenceKey = slice(strategySentenceKeys, 1).join('.');
@@ -122,6 +123,7 @@ class StrategyItem extends Component<StrategyItemProps> {
                 onChange={(val) => {
                   console.log(val);
                 }}
+                defaultFullValue={defaultFullValue}
               />
             </DrawerTableRows>
           );

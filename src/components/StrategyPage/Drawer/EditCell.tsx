@@ -1,9 +1,11 @@
 import React, { PureComponent } from 'react';
 import moment, { Moment } from 'moment';
+import numeral from 'numeral';
 import { isEqual } from 'lodash';
 import { DatePicker, Input, InputNumber, Select } from 'antd';
-import { InputWrapper } from '../../../common/Input/styled';
 import { EntryPickerTable } from '../../../common/EntryPicker/styled';
+import { ddFreeTextOptions } from '../../../enums/strategySentences';
+import { DDFreeText } from './styled';
 const { MonthPicker } = DatePicker;
 
 interface EditCellProps {
@@ -13,6 +15,7 @@ interface EditCellProps {
   onChange: (value: any) => void;
   className?: string;
   options?: any;
+  defaultFullValue?: any;
 }
 
 interface EditaCellState {
@@ -71,6 +74,14 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
     this.setState({ value });
   }
 
+  public handleDropdownFreeText = (value: any) => {
+    if (value === 'customAmount') {
+      this.setState({ value: 0 });
+    } else {
+      this.setState({ value });
+    }
+  }
+
   public renderSelect = () => {
     const { options } = this.props;
     const { value: stateValue } = this.state;
@@ -113,6 +124,39 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
     );
   }
 
+  public renderDropdownFreeText = () => {
+    const { defaultFullValue } = this.props;
+    const { value: stateValue } = this.state;
+    const value = stateValue ? stateValue : 0;
+    const options = ddFreeTextOptions.map((option: { value: string; label: string }) => {
+      if (option.value === 'full_value') {
+        return { value: option.value, label: `${option.label} (${numeral(defaultFullValue).format('$0,0.00')})` };
+      }
+      return option;
+    });
+    const selectValue = value === 'full_value' ? 'full_value' : 'customAmount';
+
+    return (
+      <DDFreeText>
+        <Select onChange={this.handleDropdownFreeText} value={selectValue}>
+          {options &&
+            options.length > 0 &&
+            options.map(
+              (option) =>
+                option && (
+                  <Select.Option value={option.value} key={option.value}>
+                    {option.label}
+                  </Select.Option>
+                ),
+            )}
+        </Select>
+        {selectValue !== 'full_value' && (
+          <InputNumber name={name} onChange={this.onChange} value={value} className={'edit-cell'} />
+        )}
+      </DDFreeText>
+    );
+  }
+
   public render() {
     const { name, type } = this.props;
     const { value: stateValue } = this.state;
@@ -126,6 +170,8 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
         return this.renderSelect();
       case EditCellType.date:
         return this.renderDate();
+      case EditCellType.dropdownFreeText:
+        return this.renderDropdownFreeText();
       case EditCellType.text: {
         const value = stateValue ? stateValue : '';
         return <Input name={name} value={value} onChange={this.onChangeText} className={'edit-cell text'} />;

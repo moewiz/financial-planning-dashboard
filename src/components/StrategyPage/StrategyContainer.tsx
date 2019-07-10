@@ -18,6 +18,7 @@ interface StrategyContainerProps {
   strategies: StrategyItemI[];
   client: DynamicData;
   partner: DynamicData;
+  defaultFullValue: any;
 }
 
 class StrategyContainer extends PureComponent<StrategyContainerProps> {
@@ -30,7 +31,7 @@ class StrategyContainer extends PureComponent<StrategyContainerProps> {
   }
 
   public renderStrategyTable = (arrayHelpers: ArrayHelpers) => {
-    const { strategies, type, client, partner } = this.props;
+    const { strategies, type, client, partner, defaultFullValue } = this.props;
 
     return (
       <StrategyTable
@@ -40,6 +41,7 @@ class StrategyContainer extends PureComponent<StrategyContainerProps> {
         removeItem={this.removeItem(arrayHelpers)}
         client={client}
         partner={partner}
+        defaultFullValue={defaultFullValue}
       />
     );
   }
