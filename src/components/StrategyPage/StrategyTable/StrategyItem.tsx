@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { get, head, isString, map, replace, slice, trim } from 'lodash';
-import { Checkbox, Icon, Popconfirm } from 'antd';
+import { Icon, Popconfirm } from 'antd';
 import {
-  CheckboxCustomize,
-  CheckboxCustomizeX,
   StrategyTableIcon,
   StrategyTableIconDel,
   StrategyTableItems,
@@ -14,7 +12,8 @@ import { DynamicData } from '../../../reducers/client';
 import strategySentences from '../../../enums/strategySentences';
 import { formatString, Param } from '../StandardText';
 import EditCell, { EditCellType } from '../Drawer/EditCell';
-import {DrawerTableRows, FullyCustomized} from '../Drawer/styled';
+import { DrawerTableRows, FullyCustomized } from '../Drawer/styled';
+import CheckboxInput from '../Drawer/CheckboxInput';
 
 export interface StrategyItemI {
   check: boolean;
@@ -202,20 +201,10 @@ class StrategyItem extends Component<StrategyItemProps> {
 
     return (
       <StrategyTableItems>
-        <CheckboxCustomize>
-          <Checkbox checked={strategy.check} />
-        </CheckboxCustomize>
+        <CheckboxInput value={strategy.check} onChange={(val) => console.log(val)} />
         <StrategyTableText>{this.renderText()}</StrategyTableText>
-        {mark && (
-          <CheckboxCustomizeX>
-            <Checkbox />
-          </CheckboxCustomizeX>
-        )}
-        {margin && (
-          <CheckboxCustomizeX>
-            <Checkbox />
-          </CheckboxCustomizeX>
-        )}
+        {mark && <CheckboxInput value={strategy.check} onChange={(val) => console.log(val)} custom={true} />}
+        {margin && <CheckboxInput value={strategy.check} onChange={(val) => console.log(val)} custom={true} />}
         <StrategyTableIcon>
           <svg
             xmlns="http://www.w3.org/2000/svg"
