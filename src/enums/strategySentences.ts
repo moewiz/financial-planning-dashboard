@@ -46,7 +46,7 @@ const strategySentences: any = {
       types: [EditCellType.number, EditCellType.select, EditCellType.date, EditCellType.date],
       /**
        * - option is a string, we understand the option is a key of client/partner object in JSON,
-       *  for example: superannuation, investment, loans,...
+       *  for example: superannuation, investments, loans,...
        * - options is `year`, we should use a custom options
        * - options is an array, we set the values of option as a options of select
        */

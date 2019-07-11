@@ -1,4 +1,5 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import { isEqual } from 'lodash';
 import StrategyInformation from './StrategyInformation';
 import { StrategyTypes } from '../../enums/strategies';
 import StrategyTable from './StrategyTable/StrategyTable';
@@ -21,7 +22,17 @@ interface StrategyContainerProps {
   defaultFullValue: any;
 }
 
-class StrategyContainer extends PureComponent<StrategyContainerProps> {
+class StrategyContainer extends Component<StrategyContainerProps> {
+  public shouldComponentUpdate(
+    nextProps: Readonly<StrategyContainerProps>,
+    nextState: Readonly<{}>,
+    nextContext: any,
+  ): boolean {
+    const { strategies: nextStrategies } = nextProps;
+    const { strategies } = this.props;
+    return !isEqual(nextStrategies.length, strategies.length);
+  }
+
   public addItem = (arrayHelpers: ArrayHelpers) => (data: StrategyItemI) => {
     arrayHelpers.unshift(data);
   }

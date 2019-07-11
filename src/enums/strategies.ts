@@ -1,7 +1,7 @@
 export enum StrategyTypes {
   Superannuation = 'superannuation',
   Pensions = 'pension',
-  Investments = 'investment',
+  Investments = 'investments',
   Debt = 'debt',
   Centrelink = 'centrelink',
   Insurance = 'insurance',

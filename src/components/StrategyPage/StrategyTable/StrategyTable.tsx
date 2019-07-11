@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react';
-import { map } from 'lodash';
+import React, { Component } from 'react';
+import { map, isEqual } from 'lodash';
 import { Cascader, Empty, Icon } from 'antd';
 import { TextTitle } from '../../../pages/client/styled';
 import { StrategyTypes } from '../../../enums/strategies';
@@ -19,7 +19,17 @@ interface StrategyTableProps {
   defaultFullValue: any;
 }
 
-class StrategyTable extends PureComponent<StrategyTableProps> {
+class StrategyTable extends Component<StrategyTableProps> {
+  public shouldComponentUpdate(
+    nextProps: Readonly<StrategyTableProps>,
+    nextState: Readonly<{}>,
+    nextContext: any,
+  ): boolean {
+    const { strategies: nextStrategies } = nextProps;
+    const { strategies } = this.props;
+    return !isEqual(nextStrategies.length, strategies.length);
+  }
+
   public onChange = (value: string[], selectedOptions?: CascaderOptionType[]): void => {
     const { addItem } = this.props;
 
