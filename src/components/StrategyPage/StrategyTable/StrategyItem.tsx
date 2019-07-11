@@ -98,7 +98,7 @@ class StrategyItem extends Component<StrategyItemProps> {
           />
         </DrawerTableRows>
         <span>
-          with <b>{get(strategy, ['values', 1])}</b> from:{' '}
+          with <b>{get(strategy, ['values', 1], 0)}</b> from:{' '}
         </span>
         <ul>
           {map(options, (option: { value: any; label: string }, index: number) => (
@@ -121,7 +121,7 @@ class StrategyItem extends Component<StrategyItemProps> {
           ))}
         </ul>
         <span>
-          Drawdown minimum pension income per month of <b>{get(strategy, ['values', 3])}</b>
+          Drawdown minimum pension income per month of <b>{get(strategy, ['values', 3], 0)}</b>
         </span>
       </FullyCustomized>
     );
