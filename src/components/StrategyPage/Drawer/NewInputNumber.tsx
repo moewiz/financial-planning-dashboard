@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { get, isEqual } from 'lodash';
 import { InputNumber } from 'antd';
+
 interface NewInputNumberProps {
   value: any;
   onChange: (value: any) => void;
@@ -8,11 +9,18 @@ interface NewInputNumberProps {
   dollar?: boolean;
   calculateWidth?: boolean;
 }
-class NewInputNumber extends PureComponent<NewInputNumberProps> {
-  public state = {
-    value: this.props.value,
-    open: false,
-  };
+
+interface NewInputNumberState {
+  value: any;
+}
+
+class NewInputNumber extends PureComponent<NewInputNumberProps, NewInputNumberState> {
+  constructor(props: NewInputNumberProps) {
+    super(props);
+    this.state = {
+      value: props.value,
+    };
+  }
 
   public componentWillReceiveProps(nextProps: Readonly<NewInputNumberProps>, nextContext: any): void {
     if (!isEqual(this.props.value, nextProps.value)) {

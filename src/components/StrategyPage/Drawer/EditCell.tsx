@@ -153,8 +153,8 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
                 ),
             )}
         </Select>
-        {selectValue !== 'full_value' && (
-          <NewInputNumber value={value} onChange={this.onChange} {...this.props} dollar={true} calculateWidth={true} />
+        {selectValue === 'customAmount' && (
+          <NewInputNumber {...this.props} value={value} onChange={this.onChange} dollar={true} calculateWidth={true} />
         )}
       </DDFreeText>
     );
@@ -163,12 +163,13 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
   public renderInputNumber = () => {
     const { value: stateValue } = this.state;
     const value = stateValue ? stateValue : 0;
-    return <NewInputNumber value={value} onChange={this.onChange} {...this.props} />;
+    return <NewInputNumber {...this.props} value={value} onChange={this.onChange} />;
   }
 
   public renderInputText = () => {
     const { value: stateValue } = this.state;
     const value = stateValue ? stateValue : '';
+
     return <Input value={value} onChange={this.onChangeText} className={'edit-cell text'} />;
   }
 
