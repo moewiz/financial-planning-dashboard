@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { get, head, isString, replace, slice, trim } from 'lodash';
+import { get, head, isString, map, replace, slice, trim } from 'lodash';
 import { Checkbox, Icon, Popconfirm } from 'antd';
 import {
   CheckboxCustomize,
@@ -14,7 +14,7 @@ import { DynamicData } from '../../../reducers/client';
 import strategySentences from '../../../enums/strategySentences';
 import { formatString, Param } from '../StandardText';
 import EditCell, { EditCellType } from '../Drawer/EditCell';
-import { DrawerTableRows } from '../Drawer/styled';
+import {DrawerTableRows, FullyCustomized} from '../Drawer/styled';
 
 export interface StrategyItemI {
   check: boolean;
@@ -39,6 +39,21 @@ interface StrategyItemProps {
   margin?: boolean;
   defaultFullValue: any;
 }
+
+const getOptions = (context: string, object: { client: any; partner: any }, option: string) => {
+  const { client, partner } = object;
+  if (context === 'joint') {
+    return [...get(client, option), ...get(partner, option)];
+  }
+  if (context === 'client') {
+    return get(client, option);
+  }
+  if (context === 'partner') {
+    return get(partner, option);
+  }
+
+  return [];
+};
 
 export const replaceDynamicValues = (
   text: string,
@@ -66,10 +81,51 @@ class StrategyItem extends Component<StrategyItemProps> {
     removeItem(strategyIndex);
   }
 
-  public renderCustom = () => {
-    const { strategy, client, partner } = this.props;
+  public renderCustom = (context: string) => {
+    const { strategy, client, partner, strategyType, strategyIndex } = this.props;
+    const options = getOptions(context, { client, partner }, 'superannuation');
 
-    return 'Fully customized';
+    return (
+      <FullyCustomized>
+        Client, commence an account based pension in
+        <DrawerTableRows noBorder className={'strategy-item'}>
+          <EditCell
+            name={`${strategyType}.strategies[${strategyIndex}].values[0]`}
+            type={EditCellType.date}
+            value={get(strategy, 'values[0]')}
+            onChange={(val) => {
+              console.log(val);
+            }}
+          />
+        </DrawerTableRows>
+        <span>
+          with <b>{get(strategy, ['values', 1])}</b> from:{' '}
+        </span>
+        <ul>
+          {map(options, (option: { value: any; label: string }, index: number) => (
+            <li key={index}>
+              {option.label} (
+              <DrawerTableRows noBorder key={index} className={'strategy-item'}>
+                <EditCell
+                  name={`${strategyType}.strategies[${strategyIndex}].values[2][${index}]`}
+                  type={EditCellType.number}
+                  value={get(strategy, ['values', 2, index])}
+                  onChange={(val) => {
+                    console.log(val);
+                  }}
+                  dollar={true}
+                  calculateWidth={true}
+                />
+              </DrawerTableRows>
+              )
+            </li>
+          ))}
+        </ul>
+        <span>
+          Drawdown minimum pension income per month of <b>{get(strategy, ['values', 3])}</b>
+        </span>
+      </FullyCustomized>
+    );
   }
 
   public renderText = () => {
@@ -78,8 +134,8 @@ class StrategyItem extends Component<StrategyItemProps> {
     const context = head(strategySentenceKeys);
     const sentenceKey = slice(strategySentenceKeys, 1).join('.');
     const strategySentence: Sentence = get(strategySentences, sentenceKey);
-    if (sentenceKey === 'commenceAccount.fullyCustomized') {
-      return this.renderCustom();
+    if (context && sentenceKey === 'commenceAccount.fullyCustomized') {
+      return this.renderCustom(context);
     }
     if (context && strategySentence && strategySentence.statement) {
       const stringReplacedByName = replaceDynamicValues(strategySentence.statement, { context, client, partner });

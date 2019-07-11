@@ -183,7 +183,7 @@ export const DrawerTableRows = styled.div<{ noBorder?: boolean }>`
           box-shadow: none;
         }
       }
-      .anticon-calendar{
+      .anticon-calendar {
         display: none;
       }
     }
@@ -288,24 +288,6 @@ export const DrawerTableListItems = styled.div`
   }
 `;
 
-export const DrawerTableSubList = styled.div.attrs({
-  className: 'drawer-table-sub-list',
-})`
-  display: flex;
-  align-items: center;
-  min-height: 35px;
-  border-bottom: 1px solid #ededed;
-  &:last-child {
-    border: none;
-  }
-  &:first-child {
-    border-bottom: 1px solid #ededed;
-  }
-  .drawer-title-sub-row {
-    padding-left: 75px;
-  }
-`;
-
 export const ActionDrawerGeneral = styled.section<{ visible?: boolean }>`
   display: flex;
   margin: 20px 0;
@@ -334,7 +316,19 @@ export const DrawerFooter = styled.div`
   }
 `;
 
-export const ActionDrawerBlock = styled.div`
-  display: flex;
-  align-items: center;
+export const FullyCustomized = styled.div`
+  ul {
+    padding-left: 30px;
+    list-style: none;
+    margin-left: 0;
+    margin-bottom: 0;
+    li {
+      &:before {
+        display: inline-block;
+        content: '-';
+        width: 1em;
+        margin-left: -1em;
+      }
+    }
+  }
 `;
