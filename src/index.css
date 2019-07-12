@@ -1,7 +1,8 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -44,13 +45,13 @@ code {
   margin-left: 20px;
 }
 
-.table-enter-leave .ant-table-tbody>tr,
-.table-enter-leave .ant-table-thead>tr {
+.table-enter-leave .ant-table-tbody > tr,
+.table-enter-leave .ant-table-thead > tr {
   transition: height 200ms ease;
 }
 
-.ant-table .ant-table-tbody>tr,
-.ant-table .ant-table-thead>tr {
+.ant-table .ant-table-tbody > tr,
+.ant-table .ant-table-thead > tr {
   transition: none;
 }
 
@@ -72,6 +73,20 @@ body .ant-select-dropdown.ant-select-dropdown--single.ant-select-dropdown-placem
   color: #40a9ff;
   background: #e6faff;
   cursor: pointer;
+}
+
+.ant-dropdown-menu-item-active .ant-dropdown-menu-item,
+.ant-dropdown-menu-submenu-active .ant-dropdown-menu-submenu-title
+{
+  background: #edeef2 !important;
+  font-weight: 500;
+}
+
+.ant-dropdown-menu .ant-dropdown-menu-item:hover,
+.ant-dropdown-menu .ant-dropdown-menu-submenu-title:hover
+{
+  background: #e9eefe !important;
+  font-weight: 500;
 }
 
 .cascader-customize {
@@ -115,7 +130,7 @@ body .ant-select-dropdown.ant-select-dropdown--single.ant-select-dropdown-placem
 .cascader-customize .ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled):hover {
   font-weight: 400;
   text-shadow: 0.2px 0.2px 0 #737d9b, -0.2px -0.2px 0 #737d9b, -0.1px -0.1px 0 #737d9b;
-   background: #edeef2;
+  background: #edeef2;
 }
 
 .cascader-customize .ant-cascader-menu-item-expand .ant-cascader-menu-item-expand-icon,
