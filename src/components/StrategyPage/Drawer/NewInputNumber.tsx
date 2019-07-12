@@ -41,10 +41,11 @@ class NewInputNumber extends PureComponent<NewInputNumberProps, NewInputNumberSt
     const value = stateValue ? stateValue : 0;
     const optionalProps: { [key: string]: any } = {};
 
+    optionalProps.precision = 0;
     if (dollar) {
       optionalProps.formatter = (valueNumber: number) => `$${valueNumber}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
       optionalProps.parser = (displayValue: string) => displayValue.replace(/\$\s?|(,*)/g, '');
-      optionalProps.precision = 2;
+      // optionalProps.precision = 2;
     }
     if (options && options.integer) {
       optionalProps.formatter = undefined;
@@ -69,7 +70,7 @@ class NewInputNumber extends PureComponent<NewInputNumberProps, NewInputNumberSt
           extraWidth += 13 + (valueLength > 7 || valueLength === 4 ? -7 : 0);
           minimum = 50;
         } else {
-          numberSize = valueLength < 5 ? 18 : 14;
+          numberSize = valueLength < 5 ? 16 : 13;
           extraWidth = valueLength < 3 ? 8 : 1;
           minimum = 30;
         }
