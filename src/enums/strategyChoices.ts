@@ -1,6 +1,6 @@
 import { StrategyTypes } from './strategies';
 
-interface Choice {
+export interface Choice {
   value: string;
   label: string;
   children?: Choice[];

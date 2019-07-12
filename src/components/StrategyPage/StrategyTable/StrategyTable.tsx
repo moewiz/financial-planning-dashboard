@@ -1,14 +1,15 @@
 import React, { PureComponent } from 'react';
 import { get, map } from 'lodash';
-import { Cascader, Empty, Icon } from 'antd';
+import { Dropdown, Empty, Icon, Menu } from 'antd';
 import { TextTitle } from '../../../pages/client/styled';
 import { StrategyTypes } from '../../../enums/strategies';
 import { HeaderTitleMargin, HeaderTitleMark, HeaderTitleStrategy, StrategyTableContent } from './styled';
-import { CascaderOptionType } from 'antd/lib/cascader';
 import StrategyItem, { StrategyItemI } from './StrategyItem';
-import { strategyChoices } from '../../../enums/strategyChoices';
+import { Choice, strategyChoices } from '../../../enums/strategyChoices';
 import { DynamicData, StrategyEntry } from '../../../reducers/client';
 import { connect, FormikContext } from 'formik';
+
+const { SubMenu, Item } = Menu;
 
 interface FormikPartProps {
   formik: FormikContext<StrategyEntry>;
@@ -24,7 +25,7 @@ interface StrategyTableProps {
 }
 
 class StrategyTable extends PureComponent<FormikPartProps & StrategyTableProps> {
-  public addItem = (value: string[], selectedOptions?: CascaderOptionType[]): void => {
+  public addItem = (value: string[]): void => {
     const { addItem } = this.props;
 
     addItem({ check: true, sentence: value.join('.') });
@@ -35,6 +36,35 @@ class StrategyTable extends PureComponent<FormikPartProps & StrategyTableProps> 
     return strategyChoices[type] || [];
   }
 
+  public renderItem = (option: Choice, index: number | string, parentKeys: string[] = []) => {
+    if (option.children && option.children.length > 0) {
+      return (
+        <SubMenu title={option.label} key={index}>
+          {map(option.children, (otp: Choice, idx: number) =>
+            this.renderItem(otp, `${index}.${idx}`, [...parentKeys, option.value]),
+          )}
+        </SubMenu>
+      );
+    }
+    const onClickItem = () => {
+      const values = [...parentKeys, option.value];
+      this.addItem(values);
+    };
+
+    return (
+      <Item onClick={onClickItem} key={index}>
+        {option.label}
+      </Item>
+    );
+  }
+
+  public renderMenu = () => {
+    const options = this.getOptions();
+    const menu = map(options, (option: Choice, index: number) => this.renderItem(option, index, []));
+
+    return <Menu>{menu}</Menu>;
+  }
+
   public render() {
     const { type, removeItem, client, partner, defaultFullValue, formik } = this.props;
     const shouldShowMarkAndMargin = type === StrategyTypes.EstatePlanning;
@@ -43,15 +73,9 @@ class StrategyTable extends PureComponent<FormikPartProps & StrategyTableProps> 
     return (
       <>
         <HeaderTitleStrategy>
-          <Cascader
-            popupClassName="cascader-customize"
-            options={this.getOptions()}
-            onChange={this.addItem}
-            value={[]}
-            expandTrigger="hover"
-          >
+          <Dropdown overlay={this.renderMenu()} trigger={['click']}>
             <Icon type={'plus-square'} theme={'filled'} />
-          </Cascader>
+          </Dropdown>
           <TextTitle small={true}>Strategy</TextTitle>
           {shouldShowMarkAndMargin && (
             <>
