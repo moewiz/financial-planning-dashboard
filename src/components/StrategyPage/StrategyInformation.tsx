@@ -1,23 +1,24 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
+import { connect as connectFormik, FormikContext } from 'formik';
 import { get, map } from 'lodash';
-import StatisticItem, { Statistic } from './StatisticItem';
+import StatisticItem from './StatisticItem';
 import { StrategyTypes } from '../../enums/strategies';
 import StandardText from './StandardText';
 import { StrategyInfoWrapper, TitleStrategyBlock } from './styled';
 import { Col, Row } from 'antd';
 import GraphContainer, { GraphType } from './Graph/GraphContainer';
-import { StandardText as IStandardText } from '../../reducers/client/clientTypes';
+import { StrategyEntry } from '../../reducers/client/clientTypes';
 import { StandardAction } from '../../reducers/reducerTypes';
 import { DrawerActions, FetchDrawerDataAction, OpenDrawerAction } from '../../reducers/drawer';
-import { RouteComponentProps, withRouter } from 'react-router';
+
+interface FormikPartProps {
+  formik: FormikContext<StrategyEntry>;
+}
 
 interface StrategyInformationProps {
   type: StrategyTypes;
-  kpi: Statistic[];
-  graph: any;
-  standardText: IStandardText[];
   openDrawer: (tabActive: string) => OpenDrawerAction;
   fetchDrawerData: (type: string) => FetchDrawerDataAction;
 }
@@ -84,7 +85,7 @@ const colors = {
 };
 const superannuationChartColors = [colors.lightBlue, colors.darkBlue, colors.grey];
 
-class StrategyInformation extends PureComponent<StrategyInformationProps & RouteComponentProps> {
+class StrategyInformation extends PureComponent<FormikPartProps & StrategyInformationProps> {
   public onGraphClick = (e: React.SyntheticEvent) => {
     if (e && e.preventDefault) {
       e.preventDefault();
@@ -96,7 +97,10 @@ class StrategyInformation extends PureComponent<StrategyInformationProps & Route
   }
 
   public render() {
-    const { kpi, type, standardText } = this.props;
+    const { type } = this.props;
+    const kpi = get(this.props, ['formik.values', type, 'kpi'], []);
+    const graph = get(this.props, ['formik.values', type, 'graph'], []);
+    const standardText = get(this.props, ['formik.values', type, 'standardText'], []);
 
     switch (type) {
       case StrategyTypes.Superannuation: {
@@ -312,4 +316,4 @@ const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>
 export default connect(
   null,
   mapDispatchToProps,
-)(withRouter(StrategyInformation));
+)(connectFormik<StrategyInformationProps, StrategyEntry>(StrategyInformation));

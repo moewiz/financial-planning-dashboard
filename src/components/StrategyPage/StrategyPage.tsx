@@ -44,8 +44,6 @@ const StrategyPage = (props: StrategyPageProps) => {
             {formikProps.values.superannuation && client && partner && defaultFullValue && (
               <StrategyContainer
                 type={StrategyTypes.Superannuation}
-                information={formikProps.values.superannuation}
-                strategies={formikProps.values.superannuation.strategies}
                 client={client}
                 partner={partner}
                 defaultFullValue={defaultFullValue}
@@ -54,8 +52,6 @@ const StrategyPage = (props: StrategyPageProps) => {
             {formikProps.values.pension && client && partner && defaultFullValue && (
               <StrategyContainer
                 type={StrategyTypes.Pensions}
-                information={formikProps.values.pension}
-                strategies={formikProps.values.pension.strategies}
                 client={client}
                 partner={partner}
                 defaultFullValue={defaultFullValue}
@@ -64,8 +60,6 @@ const StrategyPage = (props: StrategyPageProps) => {
             {formikProps.values.investments && client && partner && defaultFullValue && (
               <StrategyContainer
                 type={StrategyTypes.Investments}
-                information={formikProps.values.investments}
-                strategies={formikProps.values.investments.strategies}
                 client={client}
                 partner={partner}
                 defaultFullValue={defaultFullValue}
@@ -74,8 +68,6 @@ const StrategyPage = (props: StrategyPageProps) => {
             {formikProps.values.debt && client && partner && defaultFullValue && (
               <StrategyContainer
                 type={StrategyTypes.Debt}
-                information={formikProps.values.debt}
-                strategies={formikProps.values.debt.strategies}
                 client={client}
                 partner={partner}
                 defaultFullValue={defaultFullValue}
@@ -84,8 +76,6 @@ const StrategyPage = (props: StrategyPageProps) => {
             {formikProps.values.centrelink && client && partner && defaultFullValue && (
               <StrategyContainer
                 type={StrategyTypes.Centrelink}
-                information={formikProps.values.centrelink}
-                strategies={formikProps.values.centrelink.strategies}
                 client={client}
                 partner={partner}
                 defaultFullValue={defaultFullValue}
@@ -94,8 +84,6 @@ const StrategyPage = (props: StrategyPageProps) => {
             {formikProps.values.insurance && client && partner && defaultFullValue && (
               <StrategyContainer
                 type={StrategyTypes.Insurance}
-                information={formikProps.values.insurance}
-                strategies={formikProps.values.insurance.strategies}
                 client={client}
                 partner={partner}
                 defaultFullValue={defaultFullValue}
@@ -104,8 +92,6 @@ const StrategyPage = (props: StrategyPageProps) => {
             {formikProps.values.estatePlanning && client && partner && defaultFullValue && (
               <StrategyContainer
                 type={StrategyTypes.EstatePlanning}
-                information={formikProps.values.estatePlanning}
-                strategies={formikProps.values.estatePlanning.strategies}
                 client={client}
                 partner={partner}
                 defaultFullValue={defaultFullValue}

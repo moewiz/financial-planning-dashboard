@@ -2,12 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { get, head, isString, map, replace, slice, trim } from 'lodash';
 import { Icon, Popconfirm } from 'antd';
-import {
-  StrategyTableIcon,
-  StrategyTableIconDel,
-  StrategyTableItems,
-  StrategyTableText,
-} from './styled';
+import { StrategyTableIcon, StrategyTableIconDel, StrategyTableItems, StrategyTableText } from './styled';
 import { DynamicData } from '../../../reducers/client';
 import strategySentences from '../../../enums/strategySentences';
 import { formatString, Param } from '../StandardText';
@@ -37,6 +32,7 @@ interface StrategyItemProps {
   mark?: boolean;
   margin?: boolean;
   defaultFullValue: any;
+  setFieldValue: (field: string, value: any) => void;
 }
 
 const getOptions = (context: string, object: { client: any; partner: any }, option: string) => {
@@ -163,7 +159,7 @@ class StrategyItem extends Component<StrategyItemProps> {
                 options = [];
                 const nowYear = moment().year();
                 for (let i = nowYear; i < nowYear + 10; i++) {
-                  options.push({ value: i, label: `${i}/${i + 1} Financial Year` });
+                  options.push({ value: i, renderedLabel: `Year ${i}`, label: `${i}/${i + 1} Financial Year` });
                 }
               }
             }
@@ -196,12 +192,19 @@ class StrategyItem extends Component<StrategyItemProps> {
     return null;
   }
 
+  public onChangeCheck = (check: boolean) => {
+    const { setFieldValue, strategyType, strategyIndex } = this.props;
+    const fieldName = `${strategyType}.strategies[${strategyIndex}].check`;
+
+    setFieldValue(fieldName, check);
+  }
+
   public render() {
     const { strategy, mark, margin } = this.props;
 
     return (
       <StrategyTableItems>
-        <CheckboxInput value={strategy.check} onChange={(val) => console.log(val)} />
+        <CheckboxInput value={strategy.check} onChange={this.onChangeCheck} />
         <StrategyTableText>{this.renderText()}</StrategyTableText>
         {mark && <CheckboxInput value={strategy.check} onChange={(val) => console.log(val)} custom={true} />}
         {margin && <CheckboxInput value={strategy.check} onChange={(val) => console.log(val)} custom={true} />}

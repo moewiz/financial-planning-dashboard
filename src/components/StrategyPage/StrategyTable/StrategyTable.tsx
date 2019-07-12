@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { map, isEqual } from 'lodash';
+import React, { PureComponent } from 'react';
+import { get, map } from 'lodash';
 import { Cascader, Empty, Icon } from 'antd';
 import { TextTitle } from '../../../pages/client/styled';
 import { StrategyTypes } from '../../../enums/strategies';
@@ -7,11 +7,15 @@ import { HeaderTitleMargin, HeaderTitleMark, HeaderTitleStrategy, StrategyTableC
 import { CascaderOptionType } from 'antd/lib/cascader';
 import StrategyItem, { StrategyItemI } from './StrategyItem';
 import { strategyChoices } from '../../../enums/strategyChoices';
-import { DynamicData } from '../../../reducers/client';
+import { DynamicData, StrategyEntry } from '../../../reducers/client';
+import { connect, FormikContext } from 'formik';
+
+interface FormikPartProps {
+  formik: FormikContext<StrategyEntry>;
+}
 
 interface StrategyTableProps {
   type: StrategyTypes;
-  strategies: StrategyItemI[];
   addItem: (data: StrategyItemI) => void;
   removeItem: (index: number) => void;
   client: DynamicData;
@@ -19,18 +23,8 @@ interface StrategyTableProps {
   defaultFullValue: any;
 }
 
-class StrategyTable extends Component<StrategyTableProps> {
-  public shouldComponentUpdate(
-    nextProps: Readonly<StrategyTableProps>,
-    nextState: Readonly<{}>,
-    nextContext: any,
-  ): boolean {
-    const { strategies: nextStrategies } = nextProps;
-    const { strategies } = this.props;
-    return !isEqual(nextStrategies.length, strategies.length);
-  }
-
-  public onChange = (value: string[], selectedOptions?: CascaderOptionType[]): void => {
+class StrategyTable extends PureComponent<FormikPartProps & StrategyTableProps> {
+  public addItem = (value: string[], selectedOptions?: CascaderOptionType[]): void => {
     const { addItem } = this.props;
 
     addItem({ check: true, sentence: value.join('.') });
@@ -42,8 +36,9 @@ class StrategyTable extends Component<StrategyTableProps> {
   }
 
   public render() {
-    const { strategies, type, removeItem, client, partner, defaultFullValue } = this.props;
+    const { type, removeItem, client, partner, defaultFullValue, formik } = this.props;
     const shouldShowMarkAndMargin = type === StrategyTypes.EstatePlanning;
+    const strategies = get(this.props, ['formik', 'values', type, 'strategies'], []);
 
     return (
       <>
@@ -51,7 +46,7 @@ class StrategyTable extends Component<StrategyTableProps> {
           <Cascader
             popupClassName="cascader-customize"
             options={this.getOptions()}
-            onChange={this.onChange}
+            onChange={this.addItem}
             value={[]}
             expandTrigger="hover"
           >
@@ -79,6 +74,7 @@ class StrategyTable extends Component<StrategyTableProps> {
                 client={client}
                 partner={partner}
                 defaultFullValue={defaultFullValue}
+                setFieldValue={formik.setFieldValue}
               />
             ))
           ) : (
@@ -90,4 +86,4 @@ class StrategyTable extends Component<StrategyTableProps> {
   }
 }
 
-export default StrategyTable;
+export default connect<StrategyTableProps, StrategyEntry>(StrategyTable);
