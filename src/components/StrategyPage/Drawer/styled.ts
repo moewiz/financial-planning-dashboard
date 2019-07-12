@@ -30,6 +30,10 @@ export const MainDrawerSection = styled.section``;
 export const TabsCustomized = styled(Tabs).attrs({
   className: 'tabs-customized',
 })`
+ .ant-tabs-content{
+    height: calc(100vh - 305px);
+    overflow: overlay;
+  }
   .ant-tabs-nav {
     .ant-tabs-tab {
       font-size: 13px;
@@ -46,7 +50,8 @@ export const TabsCustomized = styled(Tabs).attrs({
 `;
 export const TabsPaneCustomized = styled(TabPane).attrs({
   className: 'tabs-pane-customized',
-})``;
+})`
+`;
 
 export const DrawerTableHeader = styled.div`
   padding: 10px 5px;
@@ -58,6 +63,7 @@ export const DrawerTableHeader = styled.div`
 `;
 export const DrawerTableContent = styled.section`
   color: #4e5d86;
+
 `;
 export const DrawerTableWrapper = styled.div`
   .parent {
@@ -290,7 +296,7 @@ export const DrawerTableListItems = styled.div`
 
 export const ActionDrawerGeneral = styled.section<{ visible?: boolean }>`
   display: flex;
-  margin: 20px 0;
+  margin: 20px 0 0px 0px;
   flex: 0 0 100%;
   justify-content: flex-end;
   .ant-btn-default {
