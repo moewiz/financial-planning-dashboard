@@ -2,6 +2,26 @@ import styled, { keyframes } from 'styled-components';
 import { Tabs } from 'antd';
 const { TabPane } = Tabs;
 
+export const slideInLeft = keyframes`
+  from {
+    transform: translate3d(-100 %, 0, 0);
+    visibility: visible;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+`;
+export const slideInRight = keyframes`
+  from {
+    transform: translate3d(100%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+`;
+
 export const DrawerTitle = styled.h4`
   display: inline-block;
   width: 100%;
@@ -33,7 +53,23 @@ export const TabsCustomized = styled(Tabs).attrs({
  .ant-tabs-content{
    .ant-tabs-tabpane-active{
     height: calc(100vh - 305px);
+    padding-right: 15px;
     overflow: overlay;
+    .vienpn-left {
+      animation-duration: 1s;
+      animation-fill-mode: both;
+      animation-name: ${slideInLeft};
+      animation-delay: 1s;
+      animation-duration: 800ms;
+    }
+    .vienpn-right {
+      animation-duration: 1s;
+      animation-fill-mode: both;
+      animation-name: ${slideInRight};
+      animation-iteration-count: infinite;
+      animation-duration: 1s;
+      animation-fill-mode: both;
+    }
    }
   }
   .ant-tabs-nav {
@@ -326,17 +362,8 @@ export const DrawerFooter = styled.div`
 
 export const FullyCustomized = styled.div`
   ul {
-    padding-left: 30px;
+    padding: 0px;
     list-style: none;
-    margin-left: 0;
-    margin-bottom: 0;
-    li {
-      &:before {
-        display: inline-block;
-        content: '-';
-        width: 1em;
-        margin-left: -1em;
-      }
-    }
+    margin: 0;
   }
 `;
