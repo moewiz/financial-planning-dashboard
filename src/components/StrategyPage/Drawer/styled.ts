@@ -31,8 +31,10 @@ export const TabsCustomized = styled(Tabs).attrs({
   className: 'tabs-customized',
 })`
  .ant-tabs-content{
+   .ant-tabs-tabpane-active{
     height: calc(100vh - 305px);
     overflow: overlay;
+   }
   }
   .ant-tabs-nav {
     .ant-tabs-tab {
