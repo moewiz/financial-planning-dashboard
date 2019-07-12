@@ -31,6 +31,8 @@ export const HeaderTitleMark = styled.span`
 `;
 export const StrategyTableContent = styled.div`
   color: #5f698d;
+  max-height: 500px;
+  overflow: scroll;
 `;
 export const StrategyTableItems = styled.div`
   display: flex;
