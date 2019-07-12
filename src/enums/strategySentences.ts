@@ -107,7 +107,7 @@ const strategySentences: any = {
   recontribution: {
     oneOff: {
       statement:
-        '%name%, withdraw {{0}} from superannuation and recontribute {{1}}' + 'back into superannuation in {{3}}',
+        '%name%, withdraw {{0}} from superannuation and recontribute {{1}}' + 'back into superannuation in {{2}}',
       types: [EditCellType.dropdownFreeText, EditCellType.dropdownFreeText, EditCellType.select],
       options: ['', '', 'year'],
     },

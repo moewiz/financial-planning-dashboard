@@ -167,10 +167,11 @@ class StrategyItem extends Component<StrategyItemProps> {
                   }
                 }
               } else {
+                optionalProps.yearFi = true;
                 options = [];
                 const nowYear = moment().year();
                 for (let i = nowYear; i < nowYear + 10; i++) {
-                  options.push({ value: i, renderedLabel: `Year ${i}`, label: `${i}/${i + 1} Financial Year` });
+                  options.push({ value: i, label: `Year ${i}`, renderedLabel: `${i}/${i + 1} Financial Year` });
                 }
               }
             }
