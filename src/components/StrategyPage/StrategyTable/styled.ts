@@ -35,7 +35,7 @@ export const StrategyTableContent = styled.div`
 export const StrategyTableItems = styled.div`
   display: flex;
   align-items: center;
-  padding: 15px 0px;
+  padding: 10px 0px;
   border-bottom: 1px solid rgb(232, 232, 232);
   &:first-child {
     padding-top: 5px;
@@ -43,6 +43,8 @@ export const StrategyTableItems = styled.div`
 `;
 export const CheckboxCustomize = styled.div`
   margin-left: 1px;
+  align-self: flex-start;
+  padding-top: 6px;
   .ant-checkbox-checked .ant-checkbox-inner {
     background-color: #fff;
     border-color: #9198af;
@@ -52,6 +54,7 @@ export const CheckboxCustomize = styled.div`
     width: 6px;
     height: 11px;
     top: 45%;
+    left: 5px;
   }
   .ant-checkbox-checked::after {
     border-color: #9198af;
@@ -79,6 +82,7 @@ export const CheckboxCustomizeX = styled.div`
     border-color: #20317b;
     width: 6px;
     height: 11px;
+    left: 5px;
     top: 45%;
   }
   .ant-checkbox-checked::after {
@@ -103,6 +107,8 @@ export const StrategyTableText = styled.span`
 
 export const StrategyTableIcon = styled.span`
   color: #586488;
+  align-self: flex-start;
+  padding-top: 6px;
   font-size: 18px;
   cursor: pointer;
   flex: 0 0 55px;
@@ -115,6 +121,8 @@ export const StrategyTableIcon = styled.span`
 `;
 export const StrategyTableIconDel = styled.span`
   flex: 0 0 55px;
+  align-self: flex-start;
+  padding-top: 6px;
   color: #4b8ee2;
   cursor: pointer;
   font-size: 16px;
