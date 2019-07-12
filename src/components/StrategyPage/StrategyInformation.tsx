@@ -98,9 +98,9 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
 
   public render() {
     const { type } = this.props;
-    const kpi = get(this.props, ['formik.values', type, 'kpi'], []);
-    const graph = get(this.props, ['formik.values', type, 'graph'], []);
-    const standardText = get(this.props, ['formik.values', type, 'standardText'], []);
+    const kpi = get(this.props, ['formik', 'values', type, 'kpi'], []);
+    const graph = get(this.props, ['formik', 'values', type, 'graph'], []);
+    const standardText = get(this.props, ['formik', 'values', type, 'standardText'], []);
 
     switch (type) {
       case StrategyTypes.Superannuation: {

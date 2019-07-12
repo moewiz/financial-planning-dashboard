@@ -79,10 +79,21 @@ class StrategyItem extends Component<StrategyItemProps> {
   public renderCustom = (context: string) => {
     const { strategy, client, partner, strategyType, strategyIndex } = this.props;
     const options = getOptions(context, { client, partner }, 'superannuation');
+    const getName = () => {
+      if (context === 'client') {
+        return get(client, 'name');
+      }
+      if (context === 'partner') {
+        return get(partner, 'name');
+      }
+      if (context === 'joint') {
+        return get(client, 'name') + ' and ' + get(partner, 'name');
+      }
+    };
 
     return (
       <FullyCustomized>
-        Client, commence an account based pension in
+        {getName()}, commence an account based pension in
         <DrawerTableRows noBorder className={'strategy-item'}>
           <EditCell
             name={`${strategyType}.strategies[${strategyIndex}].values[0]`}
