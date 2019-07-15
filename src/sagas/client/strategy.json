@@ -5,43 +5,43 @@
     "superannuation": [
       {
         "value": 1,
-        "label": "Cras non dolor sed"
+        "label": "Superannuation Product 1"
       },
       {
         "value": 2,
-        "label": "Mauris posuere justo"
+        "label": "Superannuation Product 2"
       },
       {
         "value": 3,
-        "label": "Integer et arcu sit amet"
+        "label": "Superannuation Product 3"
       }
     ],
     "investments": [
       {
         "value": 1,
-        "label": "Donec eu magna"
+        "label": "Investment Product 1"
       },
       {
         "value": 2,
-        "label": "Quisque varius dolor at"
+        "label": "Investment Product 2"
       },
       {
         "value": 3,
-        "label": "Proin id lorem at elit"
+        "label": "Investment Product 3"
       }
     ],
     "loans": [
       {
         "value": 1,
-        "label": "Nunc accumsan diam"
+        "label": "Loan 1"
       },
       {
         "value": 2,
-        "label": "Maecenas suscipit erat eu"
+        "label": "Loan 2"
       },
       {
         "value": 3,
-        "label": "Ut ullamcorper dui"
+        "label": "Loan 3"
       }
     ]
   },
@@ -50,43 +50,43 @@
     "superannuation": [
       {
         "value": 4,
-        "label": "Proin a arcu eget"
+        "label": "Superannuation Product 4"
       },
       {
         "value": 5,
-        "label": "Curabitur ultrices leo"
+        "label": "Superannuation Product 5"
       },
       {
         "value": 6,
-        "label": "Vivamus interdum lorem"
+        "label": "Superannuation Product 6"
       }
     ],
     "investments": [
       {
         "value": 4,
-        "label": "Cras vel felis iaculis"
+        "label": "Investment Product 4"
       },
       {
         "value": 5,
-        "label": "Phasellus congue risus"
+        "label": "Investment Product 5"
       },
       {
         "value": 6,
-        "label": "In et turpis mattis"
+        "label": "Investment Product 6"
       }
     ],
     "loans": [
       {
         "value": 4,
-        "label": "Sed ut turpis ac nulla"
+        "label": "Loan 4"
       },
       {
         "value": 5,
-        "label": "Aliquam tincidunt"
+        "label": "Loan 5"
       },
       {
         "value": 6,
-        "label": "Donec efficitur urna"
+        "label": "Loan 6"
       }
     ]
   },
