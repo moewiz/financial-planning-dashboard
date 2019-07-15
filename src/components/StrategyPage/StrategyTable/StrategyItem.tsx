@@ -20,6 +20,7 @@ interface Sentence {
   statement: string;
   types: EditCellType[];
   options?: any[];
+  custom?: boolean;
 }
 
 interface StrategyItemProps {
@@ -140,7 +141,7 @@ class StrategyItem extends Component<StrategyItemProps> {
     const context = head(strategySentenceKeys);
     const sentenceKey = slice(strategySentenceKeys, 1).join('.');
     const strategySentence: Sentence = get(strategySentences, sentenceKey);
-    if (context && sentenceKey === 'commenceAccount.fullyCustomized') {
+    if (context && strategySentence.custom) {
       return this.renderCustom(context);
     }
     if (context && strategySentence && strategySentence.statement) {
