@@ -112,76 +112,9 @@ const strategySentences: any = {
       options: ['', '', 'year'],
     },
   },
-  commenceAccount: {
-    minimum: {
-      statement: '%name%, commence an account based pension in {{0}} with {{1}} from your {{2}}.',
-      types: [EditCellType.date, EditCellType.dropdownFreeText, EditCellType.select],
-      options: ['', '', 'superannuation'],
-    },
-    specified: {
-      statement:
-        '%name%, commence an account based pension in {{0}} with {{1}} from your {{2}}. ' +
-        'Drawdown pension income of {{3}} per {{4}}.',
-      types: [
-        EditCellType.date,
-        EditCellType.dropdownFreeText,
-        EditCellType.select,
-        EditCellType.number,
-        EditCellType.select,
-      ],
-      options: ['', '', 'superannuation', '', periodTypes],
-    },
-    meetExpenses: {
-      statement: '%name%, commence an account based pension in {{0}} with {{1}} from your {{2}}.',
-      types: [EditCellType.date, EditCellType.dropdownFreeText, EditCellType.select],
-      options: ['', '', 'superannuation'],
-    },
-    // custom handle
-    fullyCustomized: {},
-  },
-  commenceTransition: {
-    minimum: {
-      statement: '%name%, commence a TTR pension in {{0}} with {{1}} from your {{2}}.',
-      types: [EditCellType.date, EditCellType.dropdownFreeText, EditCellType.select],
-      options: ['', '', 'superannuation'],
-    },
-    specified: {
-      statement:
-        '%name%, commence a TTR pension in {{0}} with {{1}} from your {{2}}.' +
-        'Drawdown pension income of {{3}} per {{4}}.',
-      types: [
-        EditCellType.date,
-        EditCellType.dropdownFreeText,
-        EditCellType.select,
-        EditCellType.number,
-        EditCellType.select,
-      ],
-      options: ['', '', 'superannuation', '', periodTypes],
-    },
-    meetExpenses: {
-      statement: '%name%, commence a TTR pension in {{0}} with {{1}} from your {{2}}.',
-      types: [EditCellType.date, EditCellType.dropdownFreeText, EditCellType.select],
-      options: ['', '', 'superannuation'],
-    },
-    maximum: {
-      statement: '%name%, commence a TTR pension in {{0}} with {{1}} from your {{2}}.',
-      types: [EditCellType.date, EditCellType.dropdownFreeText, EditCellType.select],
-      options: ['', '', 'superannuation'],
-    },
-  },
-  newInvestment: {
-    reinvest: {
-      statement:
-        '%name%, utilise {{0}} from your {{1}}, to establish a new investment portfolio in {{2}}. Reinvest income.',
-      types: [EditCellType.number, EditCellType.select, EditCellType.date],
-      options: ['', '+investments', ''],
-    },
-    income: {
-      statement: '%name%, utilise {{0}} from your {{1}}, to establish a new investment portfolio in {{2}}.',
-      types: [EditCellType.number, EditCellType.select, EditCellType.date],
-      options: ['', '+investments', ''],
-    },
-  },
+  commenceAccount: { custom: true },
+  commenceTransition: { custom: true },
+  newInvestment: { custom: true },
   existingInvestment: {
     lumpSum: {
       statement: '%name%, withdraw {{0}} in {{1}} from your {{2}} and invest the proceeds to your {{3}}',
