@@ -136,7 +136,7 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
     const value = stateValue ? stateValue : 0;
     const options = ddFreeTextOptions.map((option: { value: string; label: string }) => {
       if (option.value === 'full_value') {
-        return { value: option.value, label: `${option.label} (${numeral(defaultFullValue).format('$0,0.00')})` };
+        return { value: option.value, label: `${numeral(defaultFullValue).format('$0,0.00')} (${option.label})` };
       }
       return option;
     });
