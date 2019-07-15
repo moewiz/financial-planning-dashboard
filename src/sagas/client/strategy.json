@@ -43,7 +43,9 @@
         "value": 3,
         "label": "Loan 3"
       }
-    ]
+    ],
+    "minimumPensionIncome": 1000,
+    "maximumPensionIncome": 5000
   },
   "partner": {
     "name": "Susan Boyle",
@@ -88,7 +90,9 @@
         "value": 6,
         "label": "Loan 6"
       }
-    ]
+    ],
+    "minimumPensionIncome": 1000,
+    "maximumPensionIncome": 5000
   },
   "name1": [],
   "name2": [],
@@ -190,7 +194,7 @@
       {
         "check": false,
         "sentence": "client.commenceAccount",
-        "values": ["2020-07-10T12:00:00", 1369.99, 2]
+        "values": ["2020-07-10T12:00:00", 1, 1369.99, 2]
       },
       {
         "check": true,
