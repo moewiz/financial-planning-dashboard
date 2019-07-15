@@ -4,7 +4,7 @@ const { TabPane } = Tabs;
 
 export const slideInLeft = keyframes`
   from {
-    transform: translate3d(-100 %, 0, 0);
+    transform: translate3d(-100%, 0, 0);
     visibility: visible;
   }
   to {
@@ -52,9 +52,6 @@ export const TabsCustomized = styled(Tabs).attrs({
 })`
  .ant-tabs-content{
    .ant-tabs-tabpane-active{
-    height: calc(100vh - 305px);
-    padding-right: 15px;
-    overflow: overlay;
     .vienpn-left {
       animation-duration: 1s;
       animation-fill-mode: both;
@@ -101,6 +98,11 @@ export const DrawerTableHeader = styled.div`
 `;
 export const DrawerTableContent = styled.section`
   color: #4e5d86;
+  height: calc(100vh - 350px);
+  overflow: overlay;
+  @media(max-height: 450px){
+    height: auto
+  }
 
 `;
 export const DrawerTableWrapper = styled.div`
