@@ -52,19 +52,17 @@ export const TabsCustomized = styled(Tabs).attrs({
 })`
  .ant-tabs-content{
    .ant-tabs-tabpane-active{
-    .vienpn-left {
+    .slide-left {
       animation-duration: 1s;
       animation-fill-mode: both;
       animation-name: ${slideInLeft};
-      animation-delay: 1s;
-      animation-duration: 800ms;
+      animation-duration: 500ms;
     }
-    .vienpn-right {
+    .slide-right {
       animation-duration: 1s;
       animation-fill-mode: both;
       animation-name: ${slideInRight};
-      animation-iteration-count: infinite;
-      animation-duration: 1s;
+      animation-duration: 500ms;
       animation-fill-mode: both;
     }
    }
