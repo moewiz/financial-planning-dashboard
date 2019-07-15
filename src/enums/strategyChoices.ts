@@ -189,10 +189,6 @@ export const strategyChoices: StrategyChoice = {
         {
           value: 'commenceAccount',
           label: 'Commence account based pension',
-            {
-              value: 'fullyCustomized',
-              label: 'Fully customized',
-            },
         },
         {
           value: 'commenceTransition',
@@ -207,10 +203,6 @@ export const strategyChoices: StrategyChoice = {
         {
           value: 'commenceAccount',
           label: 'Commence account based pension',
-            {
-              value: 'fullyCustomized',
-              label: 'Fully customized',
-            },
         },
         {
           value: 'commenceTransition',
