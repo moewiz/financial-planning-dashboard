@@ -189,46 +189,10 @@ export const strategyChoices: StrategyChoice = {
         {
           value: 'commenceAccount',
           label: 'Commence account based pension',
-          children: [
-            {
-              value: 'minimum',
-              label: 'Minimum pension income',
-            },
-            {
-              value: 'specified',
-              label: 'Specified pension income',
-            },
-            {
-              value: 'meetExpenses',
-              label: 'Pension income to meet expenses',
-            },
-            {
-              value: 'fullyCustomized',
-              label: 'Fully customized',
-            },
-          ],
         },
         {
           value: 'commenceTransition',
           label: 'Commence transition to retirement pension',
-          children: [
-            {
-              value: 'minimum',
-              label: 'Minimum pension income',
-            },
-            {
-              value: 'specified',
-              label: 'Specified pension income',
-            },
-            {
-              value: 'meetExpenses',
-              label: 'Pension income to meet expenses',
-            },
-            {
-              value: 'maximum',
-              label: 'Maximum pension income',
-            },
-          ],
         },
       ],
     },
@@ -239,46 +203,10 @@ export const strategyChoices: StrategyChoice = {
         {
           value: 'commenceAccount',
           label: 'Commence account based pension',
-          children: [
-            {
-              value: 'minimum',
-              label: 'Minimum pension income',
-            },
-            {
-              value: 'specified',
-              label: 'Specified pension income',
-            },
-            {
-              value: 'meetExpenses',
-              label: 'Pension income to meet expenses',
-            },
-            {
-              value: 'fullyCustomized',
-              label: 'Fully customized',
-            },
-          ],
         },
         {
           value: 'commenceTransition',
           label: 'Commence transition to retirement pension',
-          children: [
-            {
-              value: 'minimum',
-              label: 'Minimum pension income',
-            },
-            {
-              value: 'specified',
-              label: 'Specified pension income',
-            },
-            {
-              value: 'meetExpenses',
-              label: 'Pension income to meet expenses',
-            },
-            {
-              value: 'maximum',
-              label: 'Maximum pension income',
-            },
-          ],
         },
       ],
     },
@@ -291,16 +219,6 @@ export const strategyChoices: StrategyChoice = {
         {
           value: 'newInvestment',
           label: 'Establish a new investment portfolio',
-          children: [
-            {
-              value: 'reinvest',
-              label: 'Reinvest income',
-            },
-            {
-              value: 'income',
-              label: 'Income paid out',
-            },
-          ],
         },
         {
           value: 'existingInvestment',
@@ -339,16 +257,6 @@ export const strategyChoices: StrategyChoice = {
         {
           value: 'newInvestment',
           label: 'Establish a new investment portfolio',
-          children: [
-            {
-              value: 'reinvest',
-              label: 'Reinvest income',
-            },
-            {
-              value: 'income',
-              label: 'Income paid out',
-            },
-          ],
         },
         {
           value: 'existingInvestment',
@@ -387,16 +295,6 @@ export const strategyChoices: StrategyChoice = {
         {
           value: 'newInvestment',
           label: 'Establish a new investment portfolio',
-          children: [
-            {
-              value: 'reinvest',
-              label: 'Reinvest income',
-            },
-            {
-              value: 'income',
-              label: 'Income paid out',
-            },
-          ],
         },
         {
           value: 'existingInvestment',
