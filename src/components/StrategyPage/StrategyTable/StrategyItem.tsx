@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { get, head, isString, map, replace, slice, trim } from 'lodash';
+import { get, head, isString, replace, slice, trim } from 'lodash';
 import { Icon, Popconfirm } from 'antd';
 import { StrategyTableIcon, StrategyTableIconDel, StrategyTableItems, StrategyTableText } from './styled';
 import { DynamicData } from '../../../reducers/client';
 import strategySentences from '../../../enums/strategySentences';
 import { formatString, Param } from '../StandardText';
 import EditCell, { EditCellType } from '../Drawer/EditCell';
-import { DrawerTableRows, FullyCustomized } from '../Drawer/styled';
 import CheckboxInput from '../Drawer/CheckboxInput';
+import CustomizedPension from './CustomizedPension';
 
 export interface StrategyItemI {
   check: boolean;
@@ -23,7 +23,7 @@ interface Sentence {
   custom?: boolean;
 }
 
-interface StrategyItemProps {
+export interface StrategyItemProps {
   strategyIndex: number;
   strategyType: string;
   strategy: StrategyItemI;
@@ -36,7 +36,7 @@ interface StrategyItemProps {
   setFieldValue: (field: string, value: any) => void;
 }
 
-const getOptions = (context: string, object: { client: any; partner: any }, option: string) => {
+export const getOptions = (context: string, object: { client: any; partner: any }, option: string) => {
   const { client, partner } = object;
   if (context === 'joint') {
     return [...get(client, option), ...get(partner, option)];
@@ -77,9 +77,8 @@ class StrategyItem extends Component<StrategyItemProps> {
     removeItem(strategyIndex);
   }
 
-  public renderCustom = (context: string) => {
-    const { strategy, client, partner, strategyType, strategyIndex } = this.props;
-    const options = getOptions(context, { client, partner }, 'superannuation');
+  public renderCustom = (context: string, sentenceKey: string) => {
+    const { client, partner, defaultFullValue } = this.props;
     const getName = () => {
       if (context === 'client') {
         return get(client, 'name');
@@ -90,49 +89,25 @@ class StrategyItem extends Component<StrategyItemProps> {
       if (context === 'joint') {
         return get(client, 'name') + ' and ' + get(partner, 'name');
       }
+      return '';
     };
 
-    return (
-      <FullyCustomized>
-        {getName()}, commence an account based pension in
-        <DrawerTableRows noBorder className={'strategy-item'}>
-          <EditCell
-            name={`${strategyType}.strategies[${strategyIndex}].values[0]`}
-            type={EditCellType.date}
-            value={get(strategy, 'values[0]')}
-            onChange={(val) => {
-              console.log(val);
-            }}
+    switch (sentenceKey) {
+      case 'commenceAccount':
+      case 'commenceTransition': {
+        return (
+          <CustomizedPension
+            {...this.props}
+            name={getName()}
+            context={context}
+            sentenceKey={sentenceKey}
+            defaultFullValue={defaultFullValue}
           />
-        </DrawerTableRows>
-        <span>
-          with <b>{get(strategy, ['values', 1], 0)}</b> from:{' '}
-        </span>
-        <ul>
-          {map(options, (option: { value: any; label: string }, index: number) => (
-            <li key={index}>
-              {option.label} (
-              <DrawerTableRows noBorder key={index} className={'strategy-item'}>
-                <EditCell
-                  name={`${strategyType}.strategies[${strategyIndex}].values[2][${index}]`}
-                  type={EditCellType.number}
-                  value={get(strategy, ['values', 2, index])}
-                  onChange={(val) => {
-                    console.log(val);
-                  }}
-                  dollar={true}
-                  calculateWidth={true}
-                />
-              </DrawerTableRows>
-              )
-            </li>
-          ))}
-        </ul>
-        <span>
-          Drawdown minimum pension income per month of <b>{get(strategy, ['values', 3], 0)}</b>
-        </span>
-      </FullyCustomized>
-    );
+        );
+      }
+      default:
+        return null;
+    }
   }
 
   public renderText = () => {
@@ -142,7 +117,7 @@ class StrategyItem extends Component<StrategyItemProps> {
     const sentenceKey = slice(strategySentenceKeys, 1).join('.');
     const strategySentence: Sentence = get(strategySentences, sentenceKey);
     if (context && strategySentence.custom) {
-      return this.renderCustom(context);
+      return this.renderCustom(context, sentenceKey);
     }
     if (context && strategySentence && strategySentence.statement) {
       const stringReplacedByName = replaceDynamicValues(strategySentence.statement, { context, client, partner });
@@ -183,19 +158,18 @@ class StrategyItem extends Component<StrategyItemProps> {
           }
 
           return (
-            <DrawerTableRows noBorder key={index} className={'strategy-item'}>
-              <EditCell
-                name={name}
-                type={type}
-                value={value}
-                options={options}
-                onChange={(val) => {
-                  console.log(val);
-                }}
-                defaultFullValue={defaultFullValue}
-                {...optionalProps}
-              />
-            </DrawerTableRows>
+            <EditCell
+              key={index}
+              name={name}
+              type={type}
+              value={value}
+              options={options}
+              onChange={(val) => {
+                console.log(val);
+              }}
+              defaultFullValue={defaultFullValue}
+              {...optionalProps}
+            />
           );
         }
         return <Param key={index}>{value}</Param>;

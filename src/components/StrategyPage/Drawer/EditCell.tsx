@@ -5,7 +5,7 @@ import { isEqual } from 'lodash';
 import { DatePicker, Input, Select } from 'antd';
 import { EntryPickerTable } from '../../../common/EntryPicker/styled';
 import { ddFreeTextOptions } from '../../../enums/strategySentences';
-import { DDFreeText } from './styled';
+import { DDFreeText, DrawerTableRows } from './styled';
 import NewInputNumber from './NewInputNumber';
 
 const { MonthPicker } = DatePicker;
@@ -78,6 +78,8 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
 
   public handleSelect = (value: any) => {
     this.setState({ value });
+    const { onChange } = this.props;
+    onChange(value);
   }
 
   public handleDropdownFreeText = (value: any) => {
@@ -136,7 +138,7 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
     const value = stateValue ? stateValue : 0;
     const options = ddFreeTextOptions.map((option: { value: string; label: string }) => {
       if (option.value === 'full_value') {
-        return { value: option.value, label: `${numeral(defaultFullValue).format('$0,0.00')} (${option.label})` };
+        return { value: option.value, label: `$${numeral(defaultFullValue).format('0,0')} (${option.label})` };
       }
       return option;
     });
@@ -178,21 +180,33 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
 
   public render() {
     const { type } = this.props;
+    let input = this.renderInputText();
 
     switch (type) {
       case EditCellType.number:
-        return this.renderInputNumber();
+        input = this.renderInputNumber();
+        break;
       case EditCellType.select:
-        return this.renderSelect();
+        input = this.renderSelect();
+        break;
       case EditCellType.date:
-        return this.renderDate();
+        input = this.renderDate();
+        break;
       case EditCellType.dropdownFreeText:
-        return this.renderDropdownFreeText();
+        input = this.renderDropdownFreeText();
+        break;
       case EditCellType.text:
-        return this.renderInputText();
+        input = this.renderInputText();
+        break;
       default:
-        return this.renderInputText();
+        break;
     }
+
+    return (
+      <DrawerTableRows noBorder className={'strategy-item'}>
+        {input}
+      </DrawerTableRows>
+    );
   }
 }
 
