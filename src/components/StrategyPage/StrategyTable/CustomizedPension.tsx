@@ -1,10 +1,10 @@
 import React from 'react';
+import numeral from 'numeral';
 import { DrawerTableRows, FullyCustomized } from '../Drawer/styled';
 import EditCell, { EditCellType } from '../Drawer/EditCell';
-import { get, dropRight, isString, find, map, replace, slice, trim, random } from 'lodash';
+import { dropRight, find, get, map, random } from 'lodash';
 import { getOptions, StrategyItemProps } from './StrategyItem';
-
-const defaultFullValues = [1000, 2000, 3000, 4000];
+import { periodTypes } from '../../../enums/strategySentences';
 
 const CustomizedPension = (
   props: StrategyItemProps & { name: string; context: string; sentenceKey: string; defaultFullValue: number },
@@ -20,16 +20,25 @@ const CustomizedPension = (
     strategyType,
     defaultFullValue,
   } = props;
+  const pensionIncomeOptions = map(getOptions(context, { client, partner }, 'pensionIncome'), (option) => ({
+    ...option,
+    label: option.income ? `${option.label} $(${numeral(option.income).format('0,0')})` : option.label,
+  }));
   const superannuationOptions = map(
     getOptions(context, { client, partner }, 'superannuation'),
     (option, index: number) => ({
       ...option,
-      fullValue: get(defaultFullValues, index, 0),
+      fullValue: get(strategy, ['values', 3, index], 0),
     }),
   );
-  superannuationOptions.push({ value: 'customisedRollover', label: 'Customised Rollover' });
+  superannuationOptions.push({
+    value: 'customisedRollover',
+    label: 'Customised Rollover',
+    fullValue: defaultFullValue,
+  });
   const title = sentenceKey === 'commenceAccount' ? 'an account based pension' : 'a TTR pension';
   const [superValue, setSuperValue] = React.useState<any>(get(strategy, 'values[1]'));
+  const [pensionIncome, setPensionIncome] = React.useState<any>(get(strategy, 'values[4][0]'));
   const isCustomisedRollover = superValue === 'customisedRollover';
   const [fullValue, setDefaultFullValue] = React.useState<number>(
     get(find(superannuationOptions, { value: superValue }), 'fullValue', defaultFullValue),
@@ -72,7 +81,7 @@ const CustomizedPension = (
         onChange={updateFullValue}
       />
       <span>
-        with {/*<b>{get(strategy, ['values', 2], 0)}</b>*/}
+        with{' '}
         {isCustomisedRollover ? (
           <b>{fullValue}</b>
         ) : (
@@ -85,29 +94,57 @@ const CustomizedPension = (
           />
         )}
       </span>
-      {isCustomisedRollover && (
+      {isCustomisedRollover ? (
         <ul>
           {map(dropRight(superannuationOptions, 1), (option: { value: any; label: string }, index: number) => (
             <li key={index}>
               {option.label} (
-              <DrawerTableRows noBorder key={index} className={'strategy-item'}>
-                <EditCell
-                  name={`${strategyType}.strategies[${strategyIndex}].values[3][${index}]`}
-                  type={EditCellType.number}
-                  value={get(strategy, ['values', 3, index])}
-                  onChange={(val) => {
-                    asyncUpdateFullValue(val);
-                  }}
-                  dollar={true}
-                  calculateWidth={true}
-                />
-              </DrawerTableRows>
+              <EditCell
+                key={index}
+                name={`${strategyType}.strategies[${strategyIndex}].values[3][${index}]`}
+                type={EditCellType.number}
+                value={get(strategy, ['values', 3, index])}
+                onChange={(val) => {
+                  asyncUpdateFullValue(val);
+                }}
+                dollar={true}
+                calculateWidth={true}
+              />
               )
             </li>
           ))}
         </ul>
+      ) : (
+        <br />
       )}
-      <span>Drawdown pension income of $xx per month/annum</span>
+      <span>
+        Drawdown{' '}
+        <EditCell
+          name={`${strategyType}.strategies[${strategyIndex}].values[4][0]`}
+          value={pensionIncome}
+          type={EditCellType.select}
+          options={pensionIncomeOptions}
+          onChange={(val) => setPensionIncome(val)}
+        />{' '}
+        {pensionIncome === 2 && (
+          <EditCell
+            name={`${strategyType}.strategies[${strategyIndex}].values[4][1]`}
+            value={get(strategy, 'values[4][1]')}
+            type={EditCellType.number}
+            onChange={(val) => console.log(val)}
+            dollar={true}
+            calculateWidth={true}
+          />
+        )}
+        per
+        <EditCell
+          name={`${strategyType}.strategies[${strategyIndex}].values[5]`}
+          value={get(strategy, 'values[5]')}
+          onChange={(val) => console.log(val)}
+          type={EditCellType.select}
+          options={periodTypes}
+        />
+      </span>
     </FullyCustomized>
   );
 };
