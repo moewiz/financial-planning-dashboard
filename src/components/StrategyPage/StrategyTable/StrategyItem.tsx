@@ -9,6 +9,7 @@ import { formatString, Param } from '../StandardText';
 import EditCell, { EditCellType } from '../Drawer/EditCell';
 import CheckboxInput from '../Drawer/CheckboxInput';
 import CustomizedPension from './CustomizedPension';
+import CustomizedInvestment from "./CustomizedInvestment";
 
 export interface StrategyItemI {
   check: boolean;
@@ -39,7 +40,7 @@ export interface StrategyItemProps {
 export const getOptions = (context: string, object: { client: any; partner: any }, option: string) => {
   const { client, partner } = object;
   if (context === 'joint') {
-    return [...get(client, option), ...get(partner, option)];
+    return [...get(client, option, []), ...get(partner, option, [])];
   }
   if (context === 'client') {
     return get(client, option);
@@ -97,6 +98,17 @@ class StrategyItem extends Component<StrategyItemProps> {
       case 'commenceTransition': {
         return (
           <CustomizedPension
+            {...this.props}
+            name={getName()}
+            context={context}
+            sentenceKey={sentenceKey}
+            defaultFullValue={defaultFullValue}
+          />
+        );
+      }
+      case 'newInvestment': {
+        return (
+          <CustomizedInvestment
             {...this.props}
             name={getName()}
             context={context}
