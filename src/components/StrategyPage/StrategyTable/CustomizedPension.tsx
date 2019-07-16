@@ -142,7 +142,7 @@ const CustomizedPension = (
           type={EditCellType.select}
           options={periodTypes}
         />
-      </span>.
+      </span>
     </FullyCustomized>
   );
 };

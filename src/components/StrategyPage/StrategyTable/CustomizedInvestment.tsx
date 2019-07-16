@@ -121,7 +121,7 @@ const CustomizedInvestment = (
         type={EditCellType.select}
         options={reinvestIncomeOptions}
         onChange={(val) => console.log(val)}
-      />.
+      />
     </FullyCustomized>
   );
 };
