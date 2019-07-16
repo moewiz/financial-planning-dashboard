@@ -1,6 +1,6 @@
 import React from 'react';
 import numeral from 'numeral';
-import { DrawerTableRows, FullyCustomized } from '../Drawer/styled';
+import { FullyCustomized } from '../Drawer/styled';
 import EditCell, { EditCellType } from '../Drawer/EditCell';
 import { dropRight, find, get, map, random } from 'lodash';
 import { getOptions, StrategyItemProps } from './StrategyItem';
@@ -62,16 +62,14 @@ const CustomizedPension = (
   return (
     <FullyCustomized>
       {name}, commence {title} in
-      <DrawerTableRows noBorder className={'strategy-item'}>
-        <EditCell
-          name={`${strategyType}.strategies[${strategyIndex}].values[0]`}
-          type={EditCellType.date}
-          value={get(strategy, 'values[0]')}
-          onChange={(val) => {
-            console.log(val);
-          }}
-        />
-      </DrawerTableRows>
+      <EditCell
+        name={`${strategyType}.strategies[${strategyIndex}].values[0]`}
+        type={EditCellType.date}
+        value={get(strategy, 'values[0]')}
+        onChange={(val) => {
+          console.log(val);
+        }}
+      />
       <span>{isCustomisedRollover ? 'as a' : 'from your'}</span>
       <EditCell
         name={`${strategyType}.strategies[${strategyIndex}].values[1]`}
@@ -144,7 +142,7 @@ const CustomizedPension = (
           type={EditCellType.select}
           options={periodTypes}
         />
-      </span>
+      </span>.
     </FullyCustomized>
   );
 };

@@ -137,7 +137,7 @@ const strategySentences: any = {
   },
   withdrawFunds: {
     lumpSum: {
-      statement: '%name%, make a lump sum withdawal of {{0}} in {{1}} from your {{2}}. Direct the proceeds into {{3}}.',
+      statement: '%name%, make a lump sum withdawal of {{0}} in {{1}} from your {{2}}. Direct the proceeds into {{3}}',
       types: [EditCellType.number, EditCellType.date, EditCellType.select, EditCellType.select],
       options: ['', '', '+investments', '+investments'],
     },
@@ -158,38 +158,38 @@ const strategySentences: any = {
   },
   payDownLoan: {
     oneOff: {
-      statement: '%name%, utilise {{0}} from your {{1}}, to {{2}} your {{3}} in {{4}}.',
+      statement: '%name%, utilise {{0}} from your {{1}}, to {{2}} your {{3}} in {{4}}',
       types: [EditCellType.number, EditCellType.select, EditCellType.select, EditCellType.select, EditCellType.date],
       options: ['', '+investments', paydownOptions, '+loans'],
     },
     regular: {
-      statement: '%name%, increase your {{0}} repayments to {{1}} per {{2}}.',
+      statement: '%name%, increase your {{0}} repayments to {{1}} per {{2}}',
       types: [EditCellType.select, EditCellType.number, EditCellType.select],
       options: ['+loans', '', periodTypes],
     },
   },
   reduceLoan: {
     ongoing: {
-      statement: '%name%, reduce your {{0}} repayments to {{1}} per {{2}}.',
+      statement: '%name%, reduce your {{0}} repayments to {{1}} per {{2}}',
       types: [EditCellType.select, EditCellType.number, EditCellType.select],
       options: ['+loans', '', periodTypes],
     },
   },
   centrelinkPayment: {
     agePension: {
-      statement: '%name%, apply for age pension from Centrelink in {{0}}.',
+      statement: '%name%, apply for age pension from Centrelink in {{0}}',
       types: [EditCellType.date],
     },
     disabilitySupportPension: {
-      statement: '%name%, apply for disability support pension from Centrelink in {{0}}.',
+      statement: '%name%, apply for disability support pension from Centrelink in {{0}}',
       types: [EditCellType.date],
     },
     newstartAllowance: {
-      statement: '%name%, apply for newstart allowance from Centrelink in {{0}}.',
+      statement: '%name%, apply for newstart allowance from Centrelink in {{0}}',
       types: [EditCellType.date],
     },
     rentAssistance: {
-      statement: '%name%, apply for rent assistance from Centrelink in {{0}}.',
+      statement: '%name%, apply for rent assistance from Centrelink in {{0}}',
       types: [EditCellType.date],
     },
   },
