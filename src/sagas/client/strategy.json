@@ -194,17 +194,17 @@
       {
         "check": false,
         "sentence": "client.commenceAccount",
-        "values": ["2020-07-10T12:00:00", 1, 1369.99, 2]
+        "values": ["2020-07-10T12:00:00", 1, 1370, [299, 399, 799], 2]
       },
       {
         "check": true,
         "sentence": "client.commenceAccount",
-        "values": ["2020-07-10T12:00:00", 1369.5, [299.99, 499.99, 699.99], 1500.0]
+        "values": ["2020-07-10T12:00:00", "customisedRollover", 1500, [250, 420, 500], 2]
       },
       {
         "check": true,
-        "sentence": "partner.commenceAccount",
-        "values": ["2020-07-10T12:00:00", 1369.99, 5]
+        "sentence": "partner.commenceTransition",
+        "values": ["2020-07-10T12:00:00", 1, 950, [250, 150, 400], 2]
       }
     ]
   },
