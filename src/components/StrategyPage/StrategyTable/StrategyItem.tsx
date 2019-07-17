@@ -9,7 +9,9 @@ import { formatString, Param } from '../StandardText';
 import EditCell, { EditCellType } from '../Drawer/EditCell';
 import CheckboxInput from '../Drawer/CheckboxInput';
 import CustomizedPension from './CustomizedPension';
-import CustomizedInvestment from "./CustomizedInvestment";
+import CustomizedInvestment from './CustomizedInvestment';
+import CustomizedExistingInvestment from './CustomizedExistingInvestment';
+import CustomizedWithdrawFunds from './CustomizedWithdrawFunds';
 
 export interface StrategyItemI {
   check: boolean;
@@ -109,6 +111,30 @@ class StrategyItem extends Component<StrategyItemProps> {
       case 'newInvestment': {
         return (
           <CustomizedInvestment
+            {...this.props}
+            name={getName()}
+            context={context}
+            sentenceKey={sentenceKey}
+            defaultFullValue={defaultFullValue}
+          />
+        );
+      }
+      case 'existingInvestment.lumpSum':
+      case 'existingInvestment.regular': {
+        return (
+          <CustomizedExistingInvestment
+            {...this.props}
+            name={getName()}
+            context={context}
+            sentenceKey={sentenceKey}
+            defaultFullValue={defaultFullValue}
+          />
+        );
+      }
+      case 'withdrawFunds.lumpSum':
+      case 'withdrawFunds.regular': {
+        return (
+          <CustomizedWithdrawFunds
             {...this.props}
             name={getName()}
             context={context}
