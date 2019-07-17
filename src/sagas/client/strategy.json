@@ -183,7 +183,7 @@
       },
       {
         "check": true,
-        "sentence": "client.recontribution.oneOff",
+        "sentence": "client.recontribution",
         "values": ["full_value", 1369.99, 2023]
       }
     ]
