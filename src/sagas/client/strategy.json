@@ -274,12 +274,12 @@
       {
         "check": true,
         "sentence": "client.newInvestment",
-        "values": ["specific", 5123, 2, "2020-07-10T12:00:00", "reinvest"]
+        "values": ["2020-07-10T12:00:00", "specific", 5123, 2, "2020-07-10T12:00:00", "reinvest"]
       },
       {
         "check": false,
         "sentence": "client.newInvestment",
-        "values": ["custom", 9123, [1234, 5678], "2020-07-10T12:00:00", "paidOut"]
+        "values": ["2020-07-10T12:00:00", "custom", 9123, [1234, 5678], "2020-07-10T12:00:00", "paidOut"]
       },
       {
         "check": false,
