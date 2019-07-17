@@ -2,57 +2,92 @@ import React from 'react';
 import numeral from 'numeral';
 import { FullyCustomized } from '../Drawer/styled';
 import EditCell, { EditCellType } from '../Drawer/EditCell';
-import { find, get, map, random } from 'lodash';
+import { find, get } from 'lodash';
 import { getOptions, StrategyItemProps } from './StrategyItem';
-
-const specificOptions = [{ value: 'specific', label: 'Specific' }, { value: 'custom', label: 'Custom' }];
-const reinvestIncome = [
-  {
-    value: 'reinvest',
-    label: 'Reinvest Income',
-  },
-  {
-    value: 'paidOut',
-    label: 'Investment income paid out',
-  },
-];
-const investmentIncomePaidOut = 5678;
 
 const CustomizedExistingInvestment = (
   props: StrategyItemProps & { name: string; context: string; sentenceKey: string; defaultFullValue: number },
 ) => {
-  const { name, context, client, partner, strategy, strategyIndex, strategyType, defaultFullValue } = props;
-  const reinvestIncomeOptions = map(reinvestIncome, (option) => ({
-    ...option,
-    label:
-      option.value === 'paidOut'
-        ? `${option.label} $(${numeral(investmentIncomePaidOut).format('0,0')})`
-        : option.label,
-  }));
+  const { name, context, client, partner, strategy, strategyIndex, strategyType, sentenceKey } = props;
+  const isRegular = sentenceKey === 'existingInvestment.regular';
   const investmentOptions = getOptions(context, { client, partner }, 'investments');
-  const [specificValue, setSpecificValue] = React.useState<any>(get(strategy, 'values[1]'));
-  const [investmentValues, setInvestmentValues] = React.useState<any>(get(strategy, 'values[3]'));
-  const isCustomSpecific = specificValue === 'custom';
-  const [fullValue, setDefaultFullValue] = React.useState<number>(
-    get(find(investmentOptions, { value: specificValue }), 'fullValue', defaultFullValue),
+  const investmentOptions2 = [...investmentOptions, { value: 'cashflow', label: 'Cashflow' }];
+  const [fullValue, setFullValue] = React.useState<number>(
+    get(find(investmentOptions, { value: get(strategy, 'values[2]') }), 'fullValue', 0),
   );
-  const updateSpecific = (value: any) => {
-    setSpecificValue(value);
-    if (value === 'specific') {
-      setInvestmentValues(get(investmentOptions, [0, 'value']));
-    } else {
-      setInvestmentValues([]);
-    }
+  const updateFullValue = (val: any) => {
+    setFullValue(get(find(investmentOptions, { value: val }), 'fullValue', 0));
   };
-  const asyncUpdateFullValue = (val: any) => {
-    // Call API and set response to full value
-    setDefaultFullValue(random(1000, 5000));
-  };
+
+  if (isRegular) {
+    return (
+      <FullyCustomized>
+        {name}, make a regular contribution into{' '}
+        <EditCell
+          name={`${strategyType}.strategies[${strategyIndex}].values[0]`}
+          value={get(strategy, 'values[0]')}
+          type={EditCellType.select}
+          options={investmentOptions}
+          onChange={(val) => console.log(val)}
+        />
+        from
+        <EditCell
+          name={`${strategyType}.strategies[${strategyIndex}].values[1]`}
+          value={get(strategy, 'values[1]')}
+          type={EditCellType.date}
+          onChange={(val) => console.log(val)}
+        />
+        to
+        <EditCell
+          name={`${strategyType}.strategies[${strategyIndex}].values[2]`}
+          value={get(strategy, 'values[2]')}
+          type={EditCellType.date}
+          onChange={(val) => console.log(val)}
+        />
+        <br />
+        <span>
+          The contributions are to be funded from
+          <EditCell
+            name={`${strategyType}.strategies[${strategyIndex}].values[3]`}
+            value={get(strategy, 'values[3]')}
+            type={EditCellType.select}
+            options={investmentOptions2}
+            onChange={(val) => console.log(val)}
+          />
+        </span>
+      </FullyCustomized>
+    );
+  }
 
   return (
     <FullyCustomized>
-      Client, make a lump sum contribution into Investment account 2 in Jan 2020 Make a Specific withdrawal from your
-      Investment account 1 worth $1,920 and invest the proceeds in the recommended portfolio.
+      {name}, make a lump sum contribution into{' '}
+      <EditCell
+        name={`${strategyType}.strategies[${strategyIndex}].values[0]`}
+        value={get(strategy, 'values[0]')}
+        type={EditCellType.select}
+        options={investmentOptions}
+        onChange={(val) => console.log(val)}
+      />
+      <span>in</span>
+      <EditCell
+        name={`${strategyType}.strategies[${strategyIndex}].values[1]`}
+        value={get(strategy, 'values[1]')}
+        type={EditCellType.date}
+        onChange={(val) => console.log(val)}
+      />
+      <br />
+      <span>
+        Make a Specific withdrawal from your
+        <EditCell
+          name={`${strategyType}.strategies[${strategyIndex}].values[2]`}
+          value={get(strategy, 'values[2]')}
+          type={EditCellType.select}
+          options={investmentOptions}
+          onChange={updateFullValue}
+        />
+        worth <b>${numeral(fullValue).format('0,0')}</b> and invest the proceeds in the recommended portfolio.
+      </span>
     </FullyCustomized>
   );
 };
