@@ -87,12 +87,6 @@ export const strategyChoices: StrategyChoice = {
         {
           value: 'recontribution',
           label: 'Recontribution',
-          children: [
-            {
-              value: 'oneOff',
-              label: 'One off',
-            },
-          ],
         },
       ],
     },
@@ -171,12 +165,6 @@ export const strategyChoices: StrategyChoice = {
         {
           value: 'recontribution',
           label: 'Recontribution',
-          children: [
-            {
-              value: 'oneOff',
-              label: 'One off',
-            },
-          ],
         },
       ],
     },
@@ -392,7 +380,7 @@ export const strategyChoices: StrategyChoice = {
       value: 'joint',
       label: 'Joint',
       children: [
-{
+        {
           value: 'payDownLoan',
           label: 'Pay down loan',
           children: [

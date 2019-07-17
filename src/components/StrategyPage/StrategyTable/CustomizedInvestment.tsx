@@ -30,8 +30,8 @@ const CustomizedInvestment = (
         : option.label,
   }));
   const investmentOptions = getOptions(context, { client, partner }, 'investments');
-  const [specificValue, setSpecificValue] = React.useState<any>(get(strategy, 'values[0]'));
-  const [investmentValues, setInvestmentValues] = React.useState<any>(get(strategy, 'values[2]'));
+  const [specificValue, setSpecificValue] = React.useState<any>(get(strategy, 'values[1]'));
+  const [investmentValues, setInvestmentValues] = React.useState<any>(get(strategy, 'values[3]'));
   const isCustomSpecific = specificValue === 'custom';
   const [fullValue, setDefaultFullValue] = React.useState<number>(
     get(find(investmentOptions, { value: specificValue }), 'fullValue', defaultFullValue),
@@ -51,9 +51,22 @@ const CustomizedInvestment = (
 
   return (
     <FullyCustomized>
-      {name}, make
+      <span>Establish a new investment portfolio</span>
+      <br />
+      <span>
+        {name}, establish a new investment portfolio in{' '}
+        <EditCell
+          name={`${strategyType}.strategies[${strategyIndex}].values[0]`}
+          value={get(strategy, '[values[0]]')}
+          type={EditCellType.date}
+          onChange={(val) => console.log(val)}
+        />
+        .
+      </span>
+      <br />
+      <span>Make a</span>
       <EditCell
-        name={`${strategyType}.strategies[${strategyIndex}].values[0]`}
+        name={`${strategyType}.strategies[${strategyIndex}].values[1]`}
         value={specificValue}
         type={EditCellType.select}
         options={specificOptions}
@@ -61,11 +74,11 @@ const CustomizedInvestment = (
       />
       widthdrawals worth
       {isCustomSpecific ? (
-        <b> {fullValue} </b>
+        <b> ${numeral(fullValue).format('0,0')} </b>
       ) : (
         <EditCell
-          name={`${strategyType}.strategies[${strategyIndex}].values[1]`}
-          value={get(strategy, 'values[1]')}
+          name={`${strategyType}.strategies[${strategyIndex}].values[2]`}
+          value={get(strategy, 'values[2]')}
           type={EditCellType.number}
           onChange={(val) => console.log(val)}
           dollar={true}
@@ -80,9 +93,9 @@ const CustomizedInvestment = (
               {option.label} (
               <EditCell
                 key={index}
-                name={`${strategyType}.strategies[${strategyIndex}].values[2][${index}]`}
+                name={`${strategyType}.strategies[${strategyIndex}].values[3][${index}]`}
                 type={EditCellType.number}
-                value={get(strategy, ['values', 2, index], 0)}
+                value={get(strategy, ['values', 3, index], 0)}
                 onChange={(val) => {
                   asyncUpdateFullValue(val);
                 }}
@@ -96,7 +109,7 @@ const CustomizedInvestment = (
       ) : (
         <>
           <EditCell
-            name={`${strategyType}.strategies[${strategyIndex}].values[3]`}
+            name={`${strategyType}.strategies[${strategyIndex}].values[4]`}
             value={investmentValues}
             options={investmentOptions}
             type={EditCellType.select}
@@ -107,17 +120,17 @@ const CustomizedInvestment = (
       )}
       <span>to establish a new investment portfolio in</span>
       <EditCell
-        name={`${strategyType}.strategies[${strategyIndex}].values[3]`}
+        name={`${strategyType}.strategies[${strategyIndex}].values[4]`}
         type={EditCellType.date}
-        value={get(strategy, 'values[3]')}
+        value={get(strategy, 'values[4]')}
         onChange={(val) => {
           console.log(val);
         }}
       />
       <br />
       <EditCell
-        name={`${strategyType}.strategies[${strategyIndex}].values[4]`}
-        value={get(strategy, 'values[4]')}
+        name={`${strategyType}.strategies[${strategyIndex}].values[5]`}
+        value={get(strategy, 'values[5]')}
         type={EditCellType.select}
         options={reinvestIncomeOptions}
         onChange={(val) => console.log(val)}

@@ -105,23 +105,23 @@ const strategySentences: any = {
     },
   },
   recontribution: {
-    oneOff: {
-      statement:
-        '%name%, withdraw {{0}} from superannuation and recontribute {{1}}' + 'back into superannuation in {{2}}',
-      types: [EditCellType.dropdownFreeText, EditCellType.dropdownFreeText, EditCellType.select],
-      options: ['', '', 'year'],
-    },
+    statement:
+      '%name%, withdraw {{0}} from superannuation and recontribute {{1}}' + 'back into superannuation in {{2}}',
+    types: [EditCellType.dropdownFreeText, EditCellType.dropdownFreeText, EditCellType.select],
+    options: ['', '', 'year'],
   },
   commenceAccount: { custom: true },
   commenceTransition: { custom: true },
   newInvestment: { custom: true },
   existingInvestment: {
     lumpSum: {
+      custom: true,
       statement: '%name%, withdraw {{0}} in {{1}} from your {{2}} and invest the proceeds to your {{3}}',
       types: [EditCellType.number, EditCellType.date, EditCellType.select, EditCellType.select],
       options: ['', '', '+investments', '+investments'],
     },
     regular: {
+      custom: true,
       statement:
         '%name%, make a regular contribution of {{0}} per {{1}} from {{2}} to {{3}} into your {{4}} from {{5}}',
       types: [
@@ -137,11 +137,13 @@ const strategySentences: any = {
   },
   withdrawFunds: {
     lumpSum: {
+      custom: true,
       statement: '%name%, make a lump sum withdawal of {{0}} in {{1}} from your {{2}}. Direct the proceeds into {{3}}',
       types: [EditCellType.number, EditCellType.date, EditCellType.select, EditCellType.select],
       options: ['', '', '+investments', '+investments'],
     },
     regular: {
+      custom: true,
       statement:
         '%name%, make a regular withdawal of {{0}} per {{1}} from {{2}} to {{3}} to your {{4}}. ' +
         'Direct to proceeds into {{5}}',
