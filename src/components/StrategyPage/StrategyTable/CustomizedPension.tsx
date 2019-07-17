@@ -81,7 +81,7 @@ const CustomizedPension = (
       <span>
         with{' '}
         {isCustomisedRollover ? (
-          <b>{fullValue}</b>
+          <b>${numeral(fullValue).format('0,0')}</b>
         ) : (
           <EditCell
             name={`${strategyType}.strategies[${strategyIndex}].values[2]`}
