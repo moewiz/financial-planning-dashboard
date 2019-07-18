@@ -24,21 +24,15 @@ const CustomizedPension = (
     ...option,
     label: option.income ? `${option.label} $(${numeral(option.income).format('0,0')})` : option.label,
   }));
-  const superannuationOptions = map(
-    getOptions(context, { client, partner }, 'superannuation'),
-    (option, index: number) => ({
-      ...option,
-      fullValue: get(strategy, ['values', 3, index], 0),
-    }),
-  );
+  const superannuationOptions = map(getOptions(context, { client, partner }, 'superannuation'));
   superannuationOptions.push({
     value: 'customisedRollover',
     label: 'Customised Rollover',
     fullValue: defaultFullValue,
   });
   const title = sentenceKey === 'commenceAccount' ? 'an account based pension' : 'a TTR pension';
-  const [superValue, setSuperValue] = React.useState<any>(get(strategy, 'values[1]'));
-  const [pensionIncome, setPensionIncome] = React.useState<any>(get(strategy, 'values[4][0]'));
+  const [superValue, setSuperValue] = React.useState<any>(get(strategy, 'values[2]'));
+  const [pensionIncome, setPensionIncome] = React.useState<any>(get(strategy, 'values[5][0]'));
   const isCustomisedRollover = superValue === 'customisedRollover';
   const [fullValue, setDefaultFullValue] = React.useState<number>(
     get(find(superannuationOptions, { value: superValue }), 'fullValue', defaultFullValue),
@@ -61,18 +55,29 @@ const CustomizedPension = (
 
   return (
     <FullyCustomized>
-      {name}, commence {title} in
+      {name}, commence {title}
       <EditCell
         name={`${strategyType}.strategies[${strategyIndex}].values[0]`}
-        type={EditCellType.date}
+        type={EditCellType.text}
         value={get(strategy, 'values[0]')}
+        onChange={(val) => {
+          console.log(val);
+        }}
+        calculateWidth={true}
+        placeholder={'Enter pension name'}
+      />
+      in
+      <EditCell
+        name={`${strategyType}.strategies[${strategyIndex}].values[1]`}
+        type={EditCellType.date}
+        value={get(strategy, 'values[1]')}
         onChange={(val) => {
           console.log(val);
         }}
       />
       <span>{isCustomisedRollover ? 'as a' : 'from your'}</span>
       <EditCell
-        name={`${strategyType}.strategies[${strategyIndex}].values[1]`}
+        name={`${strategyType}.strategies[${strategyIndex}].values[2]`}
         value={superValue}
         type={EditCellType.select}
         options={superannuationOptions}
@@ -84,8 +89,8 @@ const CustomizedPension = (
           <b>${numeral(fullValue).format('0,0')}</b>
         ) : (
           <EditCell
-            name={`${strategyType}.strategies[${strategyIndex}].values[2]`}
-            value={get(strategy, 'values[2]')}
+            name={`${strategyType}.strategies[${strategyIndex}].values[3]`}
+            value={get(strategy, 'values[3]')}
             type={EditCellType.dropdownFreeText}
             onChange={(val) => console.log(val)}
             defaultFullValue={fullValue}
@@ -99,9 +104,9 @@ const CustomizedPension = (
               {option.label} (
               <EditCell
                 key={index}
-                name={`${strategyType}.strategies[${strategyIndex}].values[3][${index}]`}
+                name={`${strategyType}.strategies[${strategyIndex}].values[4][${index}]`}
                 type={EditCellType.number}
-                value={get(strategy, ['values', 3, index])}
+                value={get(strategy, ['values', 4, index])}
                 onChange={(val) => {
                   asyncUpdateFullValue(val);
                 }}
@@ -118,16 +123,16 @@ const CustomizedPension = (
       <span>
         Drawdown{' '}
         <EditCell
-          name={`${strategyType}.strategies[${strategyIndex}].values[4][0]`}
+          name={`${strategyType}.strategies[${strategyIndex}].values[5][0]`}
           value={pensionIncome}
           type={EditCellType.select}
           options={pensionIncomeOptions}
           onChange={(val) => setPensionIncome(val)}
         />{' '}
-        {pensionIncome === 2 && (
+        {pensionIncome === 'specific' && (
           <EditCell
-            name={`${strategyType}.strategies[${strategyIndex}].values[4][1]`}
-            value={get(strategy, 'values[4][1]')}
+            name={`${strategyType}.strategies[${strategyIndex}].values[5][1]`}
+            value={get(strategy, 'values[5][1]')}
             type={EditCellType.number}
             onChange={(val) => console.log(val)}
             dollar={true}
@@ -136,8 +141,8 @@ const CustomizedPension = (
         )}
         per
         <EditCell
-          name={`${strategyType}.strategies[${strategyIndex}].values[5]`}
-          value={get(strategy, 'values[5]')}
+          name={`${strategyType}.strategies[${strategyIndex}].values[6]`}
+          value={get(strategy, 'values[6]')}
           onChange={(val) => console.log(val)}
           type={EditCellType.select}
           options={periodTypes}

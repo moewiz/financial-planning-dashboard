@@ -17,6 +17,7 @@ interface EditCellProps {
   value: any;
   onChange: (value: any) => void;
   className?: string;
+  placeholder?: string;
   options?: any;
   defaultFullValue?: any;
   dollar?: boolean;
@@ -172,10 +173,33 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
   }
 
   public renderInputText = () => {
+    const { calculateWidth, placeholder } = this.props;
     const { value: stateValue } = this.state;
     const value = stateValue ? stateValue : '';
+    const optionalProps: { [key: string]: any } = {};
 
-    return <Input value={value} onChange={this.onChangeText} className={'edit-cell text'} />;
+    if (calculateWidth) {
+      const valueLength = value.length;
+      const numberSize = valueLength > 7 ? 8 : 10;
+      const minimum = 30;
+      const extraWidth = valueLength > 7 && valueLength < 12 ? 6 : 4;
+      const width = valueLength * numberSize + extraWidth;
+
+      optionalProps.style = {
+        // if empty and placeholder is set
+        width: valueLength === 0 && placeholder ? '140px' : `${width < minimum ? minimum : width}px`,
+      };
+    }
+
+    return (
+      <Input
+        value={value}
+        onChange={this.onChangeText}
+        className={'edit-cell text'}
+        {...optionalProps}
+        placeholder={placeholder}
+      />
+    );
   }
 
   public render() {
