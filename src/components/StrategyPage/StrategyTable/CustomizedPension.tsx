@@ -52,6 +52,9 @@ const CustomizedPension = (
     // Call API and set response to full value
     setDefaultFullValue(random(1000, 5000));
   };
+  const updateListOfCurrentSuperannuation = (val: string) => {
+    // setFieldValue
+  }
 
   return (
     <FullyCustomized>
@@ -60,9 +63,7 @@ const CustomizedPension = (
         name={`${strategyType}.strategies[${strategyIndex}].values[0]`}
         type={EditCellType.text}
         value={get(strategy, 'values[0]')}
-        onChange={(val) => {
-          console.log(val);
-        }}
+        onChange={updateListOfCurrentSuperannuation}
         calculateWidth={true}
         placeholder={'Enter pension name'}
         quotationMark={true}

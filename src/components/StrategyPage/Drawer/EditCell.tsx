@@ -140,7 +140,8 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
     const value = stateValue ? stateValue : 0;
     const options = ddFreeTextOptions.map((option: { value: string; label: string }) => {
       if (option.value === 'full_value') {
-        return { value: option.value, label: `$${numeral(defaultFullValue).format('0,0')} (${option.label})` };
+        const renderedLabel = `$${numeral(defaultFullValue).format('0,0')} (${option.label})`;
+        return { value: option.value, label: renderedLabel, renderedLabel };
       }
       return option;
     });
@@ -148,21 +149,21 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
 
     return (
       <DDFreeText>
-        <Select onChange={this.handleDropdownFreeText} value={selectValue} showArrow={false}>
-          {options &&
-            options.length > 0 &&
-            options.map(
-              (option) =>
-                option && (
-                  <Select.Option value={option.value} key={option.value}>
-                    {option.label}
-                  </Select.Option>
-                ),
-            )}
-        </Select>
         {selectValue === 'customAmount' && (
           <NewInputNumber {...this.props} value={value} onChange={this.onChange} dollar={true} calculateWidth={true} />
         )}
+        <Select onChange={this.handleDropdownFreeText} value={selectValue} showArrow={false} optionLabelProp="title">
+          {options &&
+            options.length > 0 &&
+            options.map(
+              (option: { value: any; label: string; renderedLabel?: string }) =>
+                option && (
+                  <Option value={option.value} key={option.value} title={option.renderedLabel}>
+                    {option.label}
+                  </Option>
+                ),
+            )}
+        </Select>
       </DDFreeText>
     );
   }

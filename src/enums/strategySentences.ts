@@ -4,6 +4,7 @@ export const ddFreeTextOptions = [
   {
     value: 'customAmount',
     label: 'Custom amount',
+    renderedLabel: '(Custom amount)',
   },
   {
     value: 'full_value',
