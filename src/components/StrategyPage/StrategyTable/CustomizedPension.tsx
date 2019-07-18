@@ -65,6 +65,7 @@ const CustomizedPension = (
         }}
         calculateWidth={true}
         placeholder={'Enter pension name'}
+        quotationMark={true}
       />
       in
       <EditCell

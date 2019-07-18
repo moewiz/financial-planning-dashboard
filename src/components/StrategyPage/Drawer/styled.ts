@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { Tabs } from 'antd';
 const { TabPane } = Tabs;
 
@@ -50,22 +50,22 @@ export const MainDrawerSection = styled.section``;
 export const TabsCustomized = styled(Tabs).attrs({
   className: 'tabs-customized',
 })`
- .ant-tabs-content{
-   .ant-tabs-tabpane-active{
-    .slide-left {
-      animation-duration: 1s;
-      animation-fill-mode: both;
-      animation-name: ${slideInLeft};
-      animation-duration: 500ms;
+  .ant-tabs-content {
+    .ant-tabs-tabpane-active {
+      .slide-left {
+        animation-duration: 1s;
+        animation-fill-mode: both;
+        animation-name: ${slideInLeft};
+        animation-duration: 500ms;
+      }
+      .slide-right {
+        animation-duration: 1s;
+        animation-fill-mode: both;
+        animation-name: ${slideInRight};
+        animation-duration: 500ms;
+        animation-fill-mode: both;
+      }
     }
-    .slide-right {
-      animation-duration: 1s;
-      animation-fill-mode: both;
-      animation-name: ${slideInRight};
-      animation-duration: 500ms;
-      animation-fill-mode: both;
-    }
-   }
   }
   .ant-tabs-nav {
     .ant-tabs-tab {
@@ -83,8 +83,7 @@ export const TabsCustomized = styled(Tabs).attrs({
 `;
 export const TabsPaneCustomized = styled(TabPane).attrs({
   className: 'tabs-pane-customized',
-})`
-`;
+})``;
 
 export const DrawerTableHeader = styled.div`
   padding: 10px 5px;
@@ -98,10 +97,9 @@ export const DrawerTableContent = styled.section`
   color: #4e5d86;
   height: calc(100vh - 350px);
   overflow: overlay;
-  @media(max-height: 450px){
-    height: auto
+  @media (max-height: 450px) {
+    height: auto;
   }
-
 `;
 export const DrawerTableWrapper = styled.div`
   .parent {
@@ -365,5 +363,35 @@ export const FullyCustomized = styled.div`
     padding: 0px;
     list-style: none;
     margin: 0;
+  }
+`;
+
+export const QuotationMark = styled.span<{ hideQuotationMark?: boolean }>`
+  position: relative;
+  margin: 0 2px;
+  &:before {
+    content: '"';
+    position: absolute;
+    font-weight: 600;
+    top: -5px;
+    left: 0px;
+    z-index: 1;
+    ${(props) =>
+      props.hideQuotationMark &&
+      css`
+        display: none;
+      `}
+  }
+  &:after {
+    content: '"';
+    position: absolute;
+    right: 0px;
+    top: -5px;
+    font-weight: 600;
+    ${(props) =>
+      props.hideQuotationMark &&
+      css`
+        display: none;
+      `}
   }
 `;
