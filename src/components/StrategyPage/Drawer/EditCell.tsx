@@ -1,11 +1,11 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, ReactNode } from 'react';
 import moment, { Moment } from 'moment';
 import numeral from 'numeral';
 import { isEqual } from 'lodash';
 import { DatePicker, Input, Select } from 'antd';
 import { EntryPickerTable } from '../../../common/EntryPicker/styled';
 import { ddFreeTextOptions } from '../../../enums/strategySentences';
-import { DDFreeText, DrawerTableRows } from './styled';
+import { DDFreeText, DrawerTableRows, QuotationMark } from './styled';
 import NewInputNumber from './NewInputNumber';
 
 const { MonthPicker } = DatePicker;
@@ -18,6 +18,7 @@ interface EditCellProps {
   onChange: (value: any) => void;
   className?: string;
   placeholder?: string;
+  quotationMark?: boolean;
   options?: any;
   defaultFullValue?: any;
   dollar?: boolean;
@@ -173,7 +174,7 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
   }
 
   public renderInputText = () => {
-    const { calculateWidth, placeholder } = this.props;
+    const { calculateWidth, placeholder, quotationMark } = this.props;
     const { value: stateValue } = this.state;
     const value = stateValue ? stateValue : '';
     const optionalProps: { [key: string]: any } = {};
@@ -189,6 +190,20 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
         // if empty and placeholder is set
         width: valueLength === 0 && placeholder ? '140px' : `${width < minimum ? minimum : width}px`,
       };
+    }
+
+    if (quotationMark) {
+      return (
+        <QuotationMark hideQuotationMark={value.length === 0}>
+          <Input
+            value={value}
+            onChange={this.onChangeText}
+            className={'edit-cell text'}
+            {...optionalProps}
+            placeholder={placeholder}
+          />
+        </QuotationMark>
+      );
     }
 
     return (
