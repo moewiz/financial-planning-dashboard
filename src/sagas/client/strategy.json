@@ -5,15 +5,18 @@
     "superannuation": [
       {
         "value": 1,
-        "label": "Superannuation Product 1"
+        "label": "Superannuation Product 1",
+        "fullValue": 1920
       },
       {
         "value": 2,
-        "label": "Superannuation Product 2"
+        "label": "Superannuation Product 2",
+        "fullValue": 3254
       },
       {
         "value": 3,
-        "label": "Superannuation Product 3"
+        "label": "Superannuation Product 3",
+        "fullValue": 5747
       }
     ],
     "investments": [
@@ -49,16 +52,16 @@
     ],
     "pensionIncome": [
       {
-        "value": 1,
+        "value": "minimum",
         "label": "Minimum Pension income",
         "income": 1000
       },
       {
-        "value": 2,
+        "value": "specific",
         "label": "Specific Pension income"
       },
       {
-        "value": 3,
+        "value": "maximum",
         "label": "Maximum Pension income",
         "income": 5000
       }
@@ -113,18 +116,18 @@
     ],
     "pensionIncome": [
       {
-        "value": 1,
+        "value": "minimum",
         "label": "Minimum Pension income",
-        "income": 1000
+        "income": 1500
       },
       {
-        "value": 2,
+        "value": "specific",
         "label": "Specific Pension income"
       },
       {
-        "value": 3,
+        "value": "maximum",
         "label": "Maximum Pension income",
-        "income": 5000
+        "income": 4000
       }
     ]
   },
@@ -228,17 +231,25 @@
       {
         "check": false,
         "sentence": "client.commenceAccount",
-        "values": ["2020-07-10T12:00:00", 1, 1370, [299, 399, 799], [3], "month"]
+        "values": ["My new pension 1", "2020-07-10T12:00:00", 1, 1370, [299, 399, 799], ["maximum"], "month"]
       },
       {
         "check": true,
         "sentence": "client.commenceAccount",
-        "values": ["2020-07-10T12:00:00", "customisedRollover", 1500, [250, 420, 500], [1], "annum"]
+        "values": [
+          "My new pension 2",
+          "2020-07-10T12:00:00",
+          "customisedRollover",
+          1500,
+          [250, 420, 500],
+          ["minimum"],
+          "annum"
+        ]
       },
       {
         "check": true,
         "sentence": "partner.commenceTransition",
-        "values": ["2020-07-10T12:00:00", 5, 950, [250, 150, 400], [2, 1234], "month"]
+        "values": ["My new pension 1", "2020-07-10T12:00:00", 5, 950, [250, 150, 400], ["specific", 1234], "month"]
       }
     ]
   },
