@@ -237,7 +237,7 @@
         "check": true,
         "sentence": "client.commenceAccount",
         "values": [
-          "My new pension 1",
+          "My new pension 2",
           "2020-07-10T12:00:00",
           "customisedRollover",
           1500,
