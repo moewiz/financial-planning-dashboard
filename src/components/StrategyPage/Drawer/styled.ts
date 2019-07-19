@@ -273,6 +273,10 @@ export const DrawerTableRows = styled.div<{ noBorder?: boolean; maximumWidth?: b
     resize: none;
     border: 1px solid;
     border-color: transparent;
+    color: #5f698d;
+    padding: 4px 5px;
+    margin-bottom: 0;
+    margin-left: -5px;
     &:hover {
       border-color: #dcdcdc;
     }
