@@ -268,6 +268,19 @@ export const DrawerTableRows = styled.div<{ noBorder?: boolean; maximumWidth?: b
       }
     }
   }
+  textarea.ant-input {
+    border: none;
+    resize: none;
+    border: 1px solid;
+    border-color: transparent;
+    &:hover {
+      border-color: #dcdcdc;
+    }
+    &:focus {
+      box-shadow: none;
+      border-color: #dcdcdc;
+    }
+  }
 `;
 
 export const DDFreeText = styled.div`
