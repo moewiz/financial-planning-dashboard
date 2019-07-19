@@ -3,38 +3,21 @@
   "client": {
     "name": "John Samual",
     "superannuation": [
+      { "value": 1, "label": "Superannuation Product 1", "fullValue": 1920 },
+      { "value": 2, "label": "Superannuation Product 2", "fullValue": 3254 },
+      { "value": 3, "label": "Superannuation Product 3", "fullValue": 5747 },
       {
-        "value": 1,
-        "label": "Superannuation Product 1",
-        "fullValue": 1920
+        "id": "abc",
+        "value": "abc",
+        "label": "My new pension 1",
+        "fullValue": 1370
       },
-      {
-        "value": 2,
-        "label": "Superannuation Product 2",
-        "fullValue": 3254
-      },
-      {
-        "value": 3,
-        "label": "Superannuation Product 3",
-        "fullValue": 5747
-      }
+      { "id": "def", "value": "def", "label": "My new pension 2", "fullValue": 1500 }
     ],
     "investments": [
-      {
-        "value": 1,
-        "label": "Investment Product 1",
-        "fullValue": 1920
-      },
-      {
-        "value": 2,
-        "label": "Investment Product 2",
-        "fullValue": 3811
-      },
-      {
-        "value": 3,
-        "label": "Investment Product 3",
-        "fullValue": 7600
-      }
+      { "value": 1, "label": "Investment Product 1", "fullValue": 1920 },
+      { "value": 2, "label": "Investment Product 2", "fullValue": 3811 },
+      { "value": 3, "label": "Investment Product 3", "fullValue": 7600 }
     ],
     "loans": [
       {
@@ -70,35 +53,15 @@
   "partner": {
     "name": "Susan Boyle",
     "superannuation": [
-      {
-        "value": 4,
-        "label": "Superannuation Product 4"
-      },
-      {
-        "value": 5,
-        "label": "Superannuation Product 5"
-      },
-      {
-        "value": 6,
-        "label": "Superannuation Product 6"
-      }
+      { "value": 4, "label": "Superannuation Product 4" },
+      { "value": 5, "label": "Superannuation Product 5" },
+      { "value": 6, "label": "Superannuation Product 6" },
+      { "id": "xyz", "value": "xyz", "label": "My new pension 1", "fullValue": 950 }
     ],
     "investments": [
-      {
-        "value": 4,
-        "label": "Investment Product 4",
-        "fullValue": 2190
-      },
-      {
-        "value": 5,
-        "label": "Investment Product 5",
-        "fullValue": 1183
-      },
-      {
-        "value": 6,
-        "label": "Investment Product 6",
-        "fullValue": 4620
-      }
+      { "value": 4, "label": "Investment Product 4", "fullValue": 2190 },
+      { "value": 5, "label": "Investment Product 5", "fullValue": 1183 },
+      { "value": 6, "label": "Investment Product 6", "fullValue": 4620 }
     ],
     "loans": [
       {
@@ -229,11 +192,13 @@
     ],
     "strategies": [
       {
+        "id": "abc",
         "check": false,
         "sentence": "client.commenceAccount",
         "values": ["My new pension 1", "2020-07-10T12:00:00", 1, 1370, [299, 399, 799], ["maximum"], "month"]
       },
       {
+        "id": "def",
         "check": true,
         "sentence": "client.commenceAccount",
         "values": [
@@ -247,6 +212,7 @@
         ]
       },
       {
+        "id": "xyz",
         "check": true,
         "sentence": "partner.commenceTransition",
         "values": ["My new pension 1", "2020-07-10T12:00:00", 5, 950, [250, 150, 400], ["specific", 1234], "month"]

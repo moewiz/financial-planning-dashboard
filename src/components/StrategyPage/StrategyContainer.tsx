@@ -4,14 +4,11 @@ import { StrategyTypes } from '../../enums/strategies';
 import StrategyTable from './StrategyTable/StrategyTable';
 import { StrategyWrapper } from './styled';
 import { Col, Row } from 'antd';
-import { DynamicData } from '../../reducers/client';
 import { StrategyItemI } from './StrategyTable/StrategyItem';
 import { ArrayHelpers, FieldArray } from 'formik';
 
 interface StrategyContainerProps {
   type: StrategyTypes;
-  client: DynamicData;
-  partner: DynamicData;
   defaultFullValue: any;
 }
 
@@ -25,15 +22,13 @@ class StrategyContainer extends PureComponent<StrategyContainerProps> {
   }
 
   public renderStrategyTable = (arrayHelpers: ArrayHelpers) => {
-    const { type, client, partner, defaultFullValue } = this.props;
+    const { type, defaultFullValue } = this.props;
 
     return (
       <StrategyTable
         type={type}
         addItem={this.addItem(arrayHelpers)}
         removeItem={this.removeItem(arrayHelpers)}
-        client={client}
-        partner={partner}
         defaultFullValue={defaultFullValue}
       />
     );
