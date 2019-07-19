@@ -2,7 +2,7 @@ import React from 'react';
 import numeral from 'numeral';
 import { FullyCustomized } from '../Drawer/styled';
 import EditCell, { EditCellType } from '../Drawer/EditCell';
-import { dropRight, find, get, map, random } from 'lodash';
+import { dropRight, find, get, map, random, findIndex } from 'lodash';
 import { getOptions, StrategyItemProps } from './StrategyItem';
 import { periodTypes } from '../../../enums/strategySentences';
 
@@ -53,8 +53,19 @@ const CustomizedPension = (
     setDefaultFullValue(random(1000, 5000));
   };
   const updateListOfCurrentSuperannuation = (val: string) => {
-    // setFieldValue
-  }
+    if (context === 'joint') { return; }
+    const { setFieldValue } = props;
+    const currentSuperannuation = get(props, [context, 'superannuation'], []);
+    const id = strategy.id || `${strategyIndex}-superannuation`;
+    const existingSuperannuationIndex = findIndex(currentSuperannuation, { id });
+    if (existingSuperannuationIndex !== -1) {
+      currentSuperannuation[existingSuperannuationIndex].label = val;
+    } else {
+      currentSuperannuation.push({ id, value: id, label: val });
+    }
+
+    setFieldValue(`${context}.superannuation`, currentSuperannuation);
+  };
 
   return (
     <FullyCustomized>

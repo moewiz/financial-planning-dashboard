@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { get, head, isString, replace, slice, trim } from 'lodash';
+import { get, head, isString, replace, slice, trim, filter } from 'lodash';
 import { Dropdown, Icon, Menu, Popconfirm } from 'antd';
 import { ClickParam } from 'antd/lib/menu';
 import { StrategyTableIcon, StrategyTableItems, StrategyTableText } from './styled';
@@ -15,6 +15,7 @@ import CustomizedExistingInvestment from './CustomizedExistingInvestment';
 import CustomizedWithdrawFunds from './CustomizedWithdrawFunds';
 
 export interface StrategyItemI {
+  id?: string;
   check: boolean;
   sentence: string;
   values?: any[];
@@ -49,10 +50,10 @@ export const getOptions = (context: string, object: { client: any; partner: any 
     return [...get(client, option, []), ...get(partner, option, [])];
   }
   if (context === 'client') {
-    return get(client, option);
+    return get(client, option, []);
   }
   if (context === 'partner') {
-    return get(partner, option);
+    return get(partner, option, []);
   }
 
   return [];
@@ -98,7 +99,26 @@ const Projections = () => (
 
 class StrategyItem extends Component<StrategyItemProps> {
   public removeItem = () => {
-    const { strategyIndex, removeItem } = this.props;
+    const { strategy, strategyIndex, removeItem, setFieldValue } = this.props;
+    const strategySentenceKeys = strategy.sentence.split('.');
+    const context = head(strategySentenceKeys);
+    if (context && context !== 'joint' && strategy.id) {
+      const sentenceKey = slice(strategySentenceKeys, 1).join('.');
+      const remove = (key = 'superannuation') => {
+        const newValues = filter(get(this.props, [context, key], []), ({ id }) => id !== strategy.id);
+        setFieldValue(`${context}.${key}`, newValues);
+      };
+      // remove superannuation from the <list of current superannuation accounts>
+      const superannuationAccounts = ['commenceAccount', 'commenceTransition'];
+      if (superannuationAccounts.includes(sentenceKey)) {
+        remove('superannuation');
+      }
+      // remove investment from the <list of JOINT investment accounts>
+      const investmentAccounts = ['newInvestment'];
+      if (investmentAccounts.includes(sentenceKey)) {
+        remove('investments');
+      }
+    }
     removeItem(strategyIndex);
   }
 

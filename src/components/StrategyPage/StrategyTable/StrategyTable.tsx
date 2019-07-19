@@ -6,8 +6,9 @@ import { StrategyTypes } from '../../../enums/strategies';
 import { HeaderTitleMargin, HeaderTitleMark, HeaderTitleStrategy, StrategyTableContent } from './styled';
 import StrategyItem, { StrategyItemI } from './StrategyItem';
 import { Choice, strategyChoices } from '../../../enums/strategyChoices';
-import { DynamicData, StrategyEntry } from '../../../reducers/client';
+import { StrategyEntry } from '../../../reducers/client';
 import { connect, FormikContext } from 'formik';
+import uuidv1 from 'uuid/v1';
 
 const { SubMenu, Item } = Menu;
 
@@ -19,8 +20,6 @@ interface StrategyTableProps {
   type: StrategyTypes;
   addItem: (data: StrategyItemI) => void;
   removeItem: (index: number) => void;
-  client: DynamicData;
-  partner: DynamicData;
   defaultFullValue: any;
 }
 
@@ -28,7 +27,7 @@ class StrategyTable extends PureComponent<FormikPartProps & StrategyTableProps> 
   public addItem = (value: string[]): void => {
     const { addItem } = this.props;
 
-    addItem({ check: true, sentence: value.join('.') });
+    addItem({ id: uuidv1(), check: true, sentence: value.join('.') });
   }
 
   public getOptions = () => {
@@ -66,9 +65,11 @@ class StrategyTable extends PureComponent<FormikPartProps & StrategyTableProps> 
   }
 
   public render() {
-    const { type, removeItem, client, partner, defaultFullValue, formik } = this.props;
+    const { type, removeItem, defaultFullValue, formik } = this.props;
     const shouldShowMarkAndMargin = type === StrategyTypes.EstatePlanning;
     const strategies = get(this.props, ['formik', 'values', type, 'strategies'], []);
+    const client = get(this.props, ['formik', 'values', 'client'], {});
+    const partner = get(this.props, ['formik', 'values', 'partner'], {});
 
     return (
       <>

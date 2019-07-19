@@ -36,66 +36,41 @@ const StrategyPage = (props: StrategyPageProps) => {
           console.log('submitted', values);
           actions.setSubmitting(false);
         }}
-        initialValues={{ superannuation, pension, investments, debt, centrelink, insurance, estatePlanning }}
+        initialValues={{
+          superannuation,
+          pension,
+          investments,
+          debt,
+          centrelink,
+          insurance,
+          estatePlanning,
+          client,
+          partner,
+        }}
         enableReinitialize={true}
         render={(formikProps: FormikProps<StrategyEntry>) => (
           <Form>
             <StrategyHeader />
             {formikProps.values.superannuation && client && partner && defaultFullValue && (
-              <StrategyContainer
-                type={StrategyTypes.Superannuation}
-                client={client}
-                partner={partner}
-                defaultFullValue={defaultFullValue}
-              />
+              <StrategyContainer type={StrategyTypes.Superannuation} defaultFullValue={defaultFullValue} />
             )}
             {formikProps.values.pension && client && partner && defaultFullValue && (
-              <StrategyContainer
-                type={StrategyTypes.Pensions}
-                client={client}
-                partner={partner}
-                defaultFullValue={defaultFullValue}
-              />
+              <StrategyContainer type={StrategyTypes.Pensions} defaultFullValue={defaultFullValue} />
             )}
             {formikProps.values.investments && client && partner && defaultFullValue && (
-              <StrategyContainer
-                type={StrategyTypes.Investments}
-                client={client}
-                partner={partner}
-                defaultFullValue={defaultFullValue}
-              />
+              <StrategyContainer type={StrategyTypes.Investments} defaultFullValue={defaultFullValue} />
             )}
             {formikProps.values.debt && client && partner && defaultFullValue && (
-              <StrategyContainer
-                type={StrategyTypes.Debt}
-                client={client}
-                partner={partner}
-                defaultFullValue={defaultFullValue}
-              />
+              <StrategyContainer type={StrategyTypes.Debt} defaultFullValue={defaultFullValue} />
             )}
             {formikProps.values.centrelink && client && partner && defaultFullValue && (
-              <StrategyContainer
-                type={StrategyTypes.Centrelink}
-                client={client}
-                partner={partner}
-                defaultFullValue={defaultFullValue}
-              />
+              <StrategyContainer type={StrategyTypes.Centrelink} defaultFullValue={defaultFullValue} />
             )}
             {formikProps.values.insurance && client && partner && defaultFullValue && (
-              <StrategyContainer
-                type={StrategyTypes.Insurance}
-                client={client}
-                partner={partner}
-                defaultFullValue={defaultFullValue}
-              />
+              <StrategyContainer type={StrategyTypes.Insurance} defaultFullValue={defaultFullValue} />
             )}
             {formikProps.values.estatePlanning && client && partner && defaultFullValue && (
-              <StrategyContainer
-                type={StrategyTypes.EstatePlanning}
-                client={client}
-                partner={partner}
-                defaultFullValue={defaultFullValue}
-              />
+              <StrategyContainer type={StrategyTypes.EstatePlanning} defaultFullValue={defaultFullValue} />
             )}
             <ActionTableGeneral visible>
               <Button htmlType={'submit'} type={'primary'} disabled={formikProps.isSubmitting || !formikProps.dirty}>
