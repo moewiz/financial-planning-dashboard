@@ -88,6 +88,10 @@ export const strategyChoices: StrategyChoice = {
           value: 'recontribution',
           label: 'Recontribution',
         },
+        {
+          value: 'customStrategy',
+          label: 'Custom Strategy',
+        },
       ],
     },
     {
@@ -166,6 +170,10 @@ export const strategyChoices: StrategyChoice = {
           value: 'recontribution',
           label: 'Recontribution',
         },
+        {
+          value: 'customStrategy',
+          label: 'Custom Strategy',
+        },
       ],
     },
   ],
@@ -182,6 +190,10 @@ export const strategyChoices: StrategyChoice = {
           value: 'commenceTransition',
           label: 'Commence transition to retirement pension',
         },
+        {
+          value: 'customStrategy',
+          label: 'Custom Strategy',
+        },
       ],
     },
     {
@@ -195,6 +207,10 @@ export const strategyChoices: StrategyChoice = {
         {
           value: 'commenceTransition',
           label: 'Commence transition to retirement pension',
+        },
+        {
+          value: 'customStrategy',
+          label: 'Custom Strategy',
         },
       ],
     },
@@ -236,6 +252,10 @@ export const strategyChoices: StrategyChoice = {
             },
           ],
         },
+        {
+          value: 'customStrategy',
+          label: 'Custom Strategy',
+        },
       ],
     },
     {
@@ -274,6 +294,10 @@ export const strategyChoices: StrategyChoice = {
             },
           ],
         },
+        {
+          value: 'customStrategy',
+          label: 'Custom Strategy',
+        },
       ],
     },
     {
@@ -311,6 +335,10 @@ export const strategyChoices: StrategyChoice = {
               label: 'Regular drawdowns',
             },
           ],
+        },
+        {
+          value: 'customStrategy',
+          label: 'Custom Strategy',
         },
       ],
     },
@@ -344,6 +372,10 @@ export const strategyChoices: StrategyChoice = {
             },
           ],
         },
+        {
+          value: 'customStrategy',
+          label: 'Custom Strategy',
+        },
       ],
     },
     {
@@ -374,6 +406,10 @@ export const strategyChoices: StrategyChoice = {
             },
           ],
         },
+        {
+          value: 'customStrategy',
+          label: 'Custom Strategy',
+        },
       ],
     },
     {
@@ -403,6 +439,10 @@ export const strategyChoices: StrategyChoice = {
               label: 'Ongoing repayments',
             },
           ],
+        },
+        {
+          value: 'customStrategy',
+          label: 'Custom Strategy',
         },
       ],
     },
@@ -462,6 +502,10 @@ export const strategyChoices: StrategyChoice = {
             },
           ],
         },
+        {
+          value: 'customStrategy',
+          label: 'Custom Strategy',
+        },
       ],
     },
     {
@@ -518,6 +562,10 @@ export const strategyChoices: StrategyChoice = {
             },
           ],
         },
+        {
+          value: 'customStrategy',
+          label: 'Custom Strategy',
+        },
       ],
     },
     {
@@ -573,6 +621,76 @@ export const strategyChoices: StrategyChoice = {
               label: 'Add to existing funeral bond',
             },
           ],
+        },
+        {
+          value: 'customStrategy',
+          label: 'Custom Strategy',
+        },
+      ],
+    },
+  ],
+  [StrategyTypes.Insurance]: [
+    {
+      value: 'client',
+      label: 'Client',
+      children: [
+        {
+          value: 'customStrategy',
+          label: 'Custom Strategy',
+        },
+      ],
+    },
+    {
+      value: 'partner',
+      label: 'Partner',
+      children: [
+        {
+          value: 'customStrategy',
+          label: 'Custom Strategy',
+        },
+      ],
+    },
+  ],
+  [StrategyTypes.Insurance]: [
+    {
+      value: 'client',
+      label: 'Client',
+      children: [
+        {
+          value: 'customStrategy',
+          label: 'Custom Strategy',
+        },
+      ],
+    },
+    {
+      value: 'partner',
+      label: 'Partner',
+      children: [
+        {
+          value: 'customStrategy',
+          label: 'Custom Strategy',
+        },
+      ],
+    },
+  ],
+  [StrategyTypes.EstatePlanning]: [
+    {
+      value: 'client',
+      label: 'Client',
+      children: [
+        {
+          value: 'customStrategy',
+          label: 'Custom Strategy',
+        },
+      ],
+    },
+    {
+      value: 'partner',
+      label: 'Partner',
+      children: [
+        {
+          value: 'customStrategy',
+          label: 'Custom Strategy',
         },
       ],
     },

@@ -17,6 +17,8 @@ export interface StrategyItemI {
   check: boolean;
   sentence: string;
   values?: any[];
+  mark?: boolean;
+  margin?: boolean;
 }
 
 interface Sentence {
@@ -194,6 +196,9 @@ class StrategyItem extends Component<StrategyItemProps> {
             optionalProps.dollar = true;
             optionalProps.calculateWidth = true;
           }
+          if (type === EditCellType.text) {
+            optionalProps.calculateWidth = true;
+          }
 
           return (
             <EditCell
@@ -224,6 +229,20 @@ class StrategyItem extends Component<StrategyItemProps> {
     setFieldValue(fieldName, check);
   }
 
+  public onChangeCheckMark = (check: boolean) => {
+    const { setFieldValue, strategyType, strategyIndex } = this.props;
+    const fieldName = `${strategyType}.strategies[${strategyIndex}].mark`;
+
+    setFieldValue(fieldName, check);
+  }
+
+  public onChangeCheckMargin = (check: boolean) => {
+    const { setFieldValue, strategyType, strategyIndex } = this.props;
+    const fieldName = `${strategyType}.strategies[${strategyIndex}].margin`;
+
+    setFieldValue(fieldName, check);
+  }
+
   public render() {
     const { strategy, mark, margin } = this.props;
 
@@ -231,8 +250,10 @@ class StrategyItem extends Component<StrategyItemProps> {
       <StrategyTableItems>
         <CheckboxInput value={strategy.check} onChange={this.onChangeCheck} />
         <StrategyTableText>{this.renderText()}</StrategyTableText>
-        {mark && <CheckboxInput value={strategy.check} onChange={(val) => console.log(val)} custom={true} />}
-        {margin && <CheckboxInput value={strategy.check} onChange={(val) => console.log(val)} custom={true} />}
+        {mark && <CheckboxInput value={strategy.mark || false} onChange={this.onChangeCheckMark} custom={true} />}
+        {margin && (
+          <CheckboxInput value={strategy.margin || false} onChange={this.onChangeCheckMargin} custom={true} />
+        )}
         <StrategyTableIcon>
           <svg
             xmlns="http://www.w3.org/2000/svg"

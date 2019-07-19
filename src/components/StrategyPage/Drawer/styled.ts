@@ -137,8 +137,13 @@ export const DrawerTableWrapper = styled.div`
     }
   }
 `;
-export const DrawerTableRows = styled.div<{ noBorder?: boolean }>`
+export const DrawerTableRows = styled.div<{ noBorder?: boolean; maximumWidth?: boolean }>`
   border-bottom: ${(props) => (props.noBorder ? 'none' : '1px solid #ededed')};
+  ${(props) =>
+    props.maximumWidth &&
+    css`
+      width: 100%;
+    `}
   .edit-cell {
     width: 69px;
     margin-right: 1px;

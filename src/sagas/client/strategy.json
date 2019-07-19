@@ -449,7 +449,13 @@
         "text": "Text line three"
       }
     ],
-    "strategies": []
+    "strategies": [
+      {
+        "check": true,
+        "sentence": "client.customStrategy",
+        "values": ["Custom strategy"]
+      }
+    ]
   },
   "estatePlanning": {
     "kpi": [
@@ -476,6 +482,14 @@
         "text": "Text line three"
       }
     ],
-    "strategies": []
+    "strategies": [
+      {
+        "check": false,
+        "sentence": "partner.customStrategy",
+        "values": ["Custom strategy"],
+        "mark": false,
+        "margin": true
+      }
+    ]
   }
 }

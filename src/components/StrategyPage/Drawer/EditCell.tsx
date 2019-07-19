@@ -1,4 +1,4 @@
-import React, { PureComponent, ReactNode } from 'react';
+import React, { PureComponent } from 'react';
 import moment, { Moment } from 'moment';
 import numeral from 'numeral';
 import { isEqual } from 'lodash';
@@ -10,6 +10,7 @@ import NewInputNumber from './NewInputNumber';
 
 const { MonthPicker } = DatePicker;
 const { Option } = Select;
+const { TextArea } = Input;
 
 interface EditCellProps {
   name: string;
@@ -36,6 +37,7 @@ export enum EditCellType {
   date,
   select,
   dropdownFreeText,
+  textarea,
 }
 
 class EditCell extends PureComponent<EditCellProps, EditaCellState> {
@@ -75,6 +77,14 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
     const value = e.target.value;
 
     this.setState({ value });
+    onChange(value);
+  }
+
+  public onChangeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { onChange } = this.props;
+    const value = e.target.value;
+    this.setState({ value });
+
     onChange(value);
   }
 
@@ -218,6 +228,11 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
     );
   }
 
+  public renderInputTextArea = () => {
+    const value = this.state.value || '';
+    return <TextArea value={value} onChange={this.onChangeTextArea} autosize />;
+  }
+
   public render() {
     const { type } = this.props;
     let input = this.renderInputText();
@@ -238,12 +253,15 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
       case EditCellType.text:
         input = this.renderInputText();
         break;
+      case EditCellType.textarea:
+        input = this.renderInputTextArea();
+        break;
       default:
         break;
     }
 
     return (
-      <DrawerTableRows noBorder className={'strategy-item'}>
+      <DrawerTableRows noBorder className={'strategy-item'} maximumWidth={EditCellType.textarea === type}>
         {input}
       </DrawerTableRows>
     );

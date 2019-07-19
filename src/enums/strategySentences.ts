@@ -220,6 +220,10 @@ const strategySentences: any = {
       options: ['', '+investments', '+investments'],
     },
   },
+  customStrategy: {
+    statement: '{{0}}',
+    types: [EditCellType.textarea],
+  },
 };
 
 export default strategySentences;
