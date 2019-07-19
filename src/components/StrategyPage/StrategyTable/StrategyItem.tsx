@@ -102,7 +102,7 @@ class StrategyItem extends Component<StrategyItemProps> {
     const { strategy, strategyIndex, removeItem, setFieldValue } = this.props;
     const strategySentenceKeys = strategy.sentence.split('.');
     const context = head(strategySentenceKeys);
-    if (context && context !== 'joint' && strategy.id) {
+    if (context && strategy.id) {
       const sentenceKey = slice(strategySentenceKeys, 1).join('.');
       const remove = (key = 'superannuation') => {
         const newValues = filter(get(this.props, [context, key], []), ({ id }) => id !== strategy.id);

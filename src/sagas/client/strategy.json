@@ -17,7 +17,9 @@
     "investments": [
       { "value": 1, "label": "Investment Product 1", "fullValue": 1920 },
       { "value": 2, "label": "Investment Product 2", "fullValue": 3811 },
-      { "value": 3, "label": "Investment Product 3", "fullValue": 7600 }
+      { "value": 3, "label": "Investment Product 3", "fullValue": 7600 },
+      { "id": "abc", "value": "abc", "label": "My new portfolio 1", "fullValue": 5123 },
+      { "id": "def", "value": "def", "label": "My new portfolio 2", "fullValue": 9123 }
     ],
     "loans": [
       {
@@ -93,6 +95,9 @@
         "income": 4000
       }
     ]
+  },
+  "joint": {
+    "investments": []
   },
   "name1": [],
   "name2": [],
@@ -255,11 +260,13 @@
     ],
     "strategies": [
       {
+        "id": "abc",
         "check": true,
         "sentence": "client.newInvestment",
         "values": ["My new portfolio 1", "2020-07-10T12:00:00", "specific", 5123, 2, "2020-07-10T12:00:00", "reinvest"]
       },
       {
+        "id": "def",
         "check": false,
         "sentence": "client.newInvestment",
         "values": [

@@ -2,7 +2,7 @@ import React from 'react';
 import numeral from 'numeral';
 import { FullyCustomized } from '../Drawer/styled';
 import EditCell, { EditCellType } from '../Drawer/EditCell';
-import { find, get, map, random } from 'lodash';
+import { find, get, map, random, findIndex } from 'lodash';
 import { getOptions, StrategyItemProps } from './StrategyItem';
 
 const specificOptions = [{ value: 'specific', label: 'Specific' }, { value: 'custom', label: 'Custom' }];
@@ -48,6 +48,19 @@ const CustomizedInvestment = (
     // Call API and set response to full value
     setDefaultFullValue(random(1000, 5000));
   };
+  const updateListOfInvestmentAccounts = (val: string) => {
+    const { setFieldValue } = props;
+    const currentInvestmentAccounts = get(props, [context, 'investments'], []);
+    const id = strategy.id || `${strategyIndex}-investment`;
+    const existingInvestmentIndex = findIndex(currentInvestmentAccounts, { id });
+    if (existingInvestmentIndex !== -1) {
+      currentInvestmentAccounts[existingInvestmentIndex].label = val;
+    } else {
+      currentInvestmentAccounts.push({ id, value: id, label: val });
+    }
+
+    setFieldValue(`${context}.investments`, currentInvestmentAccounts);
+  };
 
   return (
     <FullyCustomized>
@@ -57,9 +70,7 @@ const CustomizedInvestment = (
           name={`${strategyType}.strategies[${strategyIndex}].values[0]`}
           type={EditCellType.text}
           value={get(strategy, 'values[0]')}
-          onChange={(val) => {
-            console.log(val);
-          }}
+          onChange={updateListOfInvestmentAccounts}
           calculateWidth={true}
           placeholder={'Enter portfolio name'}
           quotationMark={true}

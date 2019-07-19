@@ -27,6 +27,7 @@ const StrategyPage = (props: StrategyPageProps) => {
   const estatePlanning = get(pageData, 'estatePlanning');
   const client = pageData.client;
   const partner = pageData.partner;
+  const joint = pageData.joint;
   const defaultFullValue = pageData.defaultFullValue;
 
   return (
@@ -46,30 +47,31 @@ const StrategyPage = (props: StrategyPageProps) => {
           estatePlanning,
           client,
           partner,
+          joint,
         }}
         enableReinitialize={true}
         render={(formikProps: FormikProps<StrategyEntry>) => (
           <Form>
             <StrategyHeader />
-            {formikProps.values.superannuation && client && partner && defaultFullValue && (
+            {formikProps.values.superannuation && defaultFullValue && (
               <StrategyContainer type={StrategyTypes.Superannuation} defaultFullValue={defaultFullValue} />
             )}
-            {formikProps.values.pension && client && partner && defaultFullValue && (
+            {formikProps.values.pension && defaultFullValue && (
               <StrategyContainer type={StrategyTypes.Pensions} defaultFullValue={defaultFullValue} />
             )}
-            {formikProps.values.investments && client && partner && defaultFullValue && (
+            {formikProps.values.investments && defaultFullValue && (
               <StrategyContainer type={StrategyTypes.Investments} defaultFullValue={defaultFullValue} />
             )}
-            {formikProps.values.debt && client && partner && defaultFullValue && (
+            {formikProps.values.debt && defaultFullValue && (
               <StrategyContainer type={StrategyTypes.Debt} defaultFullValue={defaultFullValue} />
             )}
-            {formikProps.values.centrelink && client && partner && defaultFullValue && (
+            {formikProps.values.centrelink && defaultFullValue && (
               <StrategyContainer type={StrategyTypes.Centrelink} defaultFullValue={defaultFullValue} />
             )}
-            {formikProps.values.insurance && client && partner && defaultFullValue && (
+            {formikProps.values.insurance && defaultFullValue && (
               <StrategyContainer type={StrategyTypes.Insurance} defaultFullValue={defaultFullValue} />
             )}
-            {formikProps.values.estatePlanning && client && partner && defaultFullValue && (
+            {formikProps.values.estatePlanning && defaultFullValue && (
               <StrategyContainer type={StrategyTypes.EstatePlanning} defaultFullValue={defaultFullValue} />
             )}
             <ActionTableGeneral visible>

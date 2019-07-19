@@ -45,6 +45,7 @@ export interface StrategyEntry {
   estatePlanning?: Strategy;
   client?: DynamicData;
   partner?: DynamicData;
+  joint?: DynamicData;
   defaultFullValue?: any;
 }
 
