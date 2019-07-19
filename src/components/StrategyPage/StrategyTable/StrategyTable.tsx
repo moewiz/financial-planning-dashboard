@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import { get, map } from 'lodash';
-import {Dropdown, Empty, Icon, Menu} from 'antd';
+import { Dropdown, Empty, Icon, Menu } from 'antd';
 import { TextTitle } from '../../../pages/client/styled';
 import { StrategyTypes } from '../../../enums/strategies';
-import { HeaderTitleMargin, HeaderTitleMark, HeaderTitleStrategy, StrategyTableContent} from './styled';
+import { HeaderTitleMargin, HeaderTitleMark, HeaderTitleStrategy, StrategyTableContent } from './styled';
 import StrategyItem, { StrategyItemI } from './StrategyItem';
 import { Choice, strategyChoices } from '../../../enums/strategyChoices';
 import { DynamicData, StrategyEntry } from '../../../reducers/client';

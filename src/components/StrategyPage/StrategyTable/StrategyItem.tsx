@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { get, head, isString, replace, slice, trim } from 'lodash';
-import { Icon, Popconfirm } from 'antd';
-import { StrategyTableIcon, StrategyTableIconDel, StrategyTableItems, StrategyTableText } from './styled';
+import { Dropdown, Icon, Menu, Popconfirm } from 'antd';
+import { ClickParam } from 'antd/lib/menu';
+import { StrategyTableIcon, StrategyTableItems, StrategyTableText } from './styled';
 import { DynamicData } from '../../../reducers/client';
 import strategySentences from '../../../enums/strategySentences';
 import { formatString, Param } from '../StandardText';
@@ -76,10 +77,32 @@ export const replaceDynamicValues = (
   });
 };
 
+const Projections = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="10" y1="14" x2="21" y2="3" />
+  </svg>
+);
+
 class StrategyItem extends Component<StrategyItemProps> {
   public removeItem = () => {
     const { strategyIndex, removeItem } = this.props;
     removeItem(strategyIndex);
+  }
+
+  public handleMenuClick: (param: ClickParam) => void = (e) => {
+    console.log('click param', e);
   }
 
   public renderCustom = (context: string, sentenceKey: string) => {
@@ -251,37 +274,32 @@ class StrategyItem extends Component<StrategyItemProps> {
         <CheckboxInput value={strategy.check} onChange={this.onChangeCheck} />
         <StrategyTableText>{this.renderText()}</StrategyTableText>
         {mark && <CheckboxInput value={strategy.mark || false} onChange={this.onChangeCheckMark} custom={true} />}
-        {margin && (
-          <CheckboxInput value={strategy.margin || false} onChange={this.onChangeCheckMargin} custom={true} />
-        )}
+        {margin && <CheckboxInput value={strategy.margin || false} onChange={this.onChangeCheckMargin} custom={true} />}
         <StrategyTableIcon>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+          <Dropdown
+            overlay={
+              <Menu onClick={this.handleMenuClick}>
+                <Menu.Item key="1" className="delete-action">
+                  <Popconfirm title="Really delete?" okText="Yes" cancelText="No" onConfirm={this.removeItem}>
+                    <Icon type="close-square" />
+                    Delete
+                  </Popconfirm>
+                </Menu.Item>
+                <Menu.Item key="2">
+                  <Icon component={Projections} />
+                  Projections
+                </Menu.Item>
+                <Menu.Item key="3">
+                  <Icon type="plus" />
+                  Custom note
+                </Menu.Item>
+              </Menu>
+            }
+            overlayClassName="more-dropdown"
           >
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-            <polyline points="15 3 21 3 21 9" />
-            <line x1="10" y1="14" x2="21" y2="3" />
-          </svg>
+            <Icon type="more" />
+          </Dropdown>
         </StrategyTableIcon>
-        <StrategyTableIconDel>
-          <Popconfirm
-            title="Really delete?"
-            okText="Yes"
-            cancelText="No"
-            placement="topRight"
-            onConfirm={this.removeItem}
-          >
-            <Icon type="close-square" />
-          </Popconfirm>
-        </StrategyTableIconDel>
       </StrategyTableItems>
     );
   }

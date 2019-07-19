@@ -123,17 +123,3 @@ export const StrategyTableIcon = styled.span`
     }
   }
 `;
-export const StrategyTableIconDel = styled.span`
-  flex: 0 0 55px;
-  align-self: flex-start;
-  padding-top: 6px;
-  color: #4b8ee2;
-  cursor: pointer;
-  font-size: 16px;
-  text-align: right;
-  i {
-    &:hover {
-      opacity: 0.7;
-    }
-  }
-`;

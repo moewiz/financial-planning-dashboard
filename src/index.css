@@ -75,67 +75,35 @@ body .ant-select-dropdown.ant-select-dropdown--single.ant-select-dropdown-placem
   cursor: pointer;
 }
 
-.ant-dropdown-menu-item-active .ant-dropdown-menu-item,
-.ant-dropdown-menu-submenu-active .ant-dropdown-menu-submenu-title
-{
+.ant-dropdown-menu-submenu-active .ant-dropdown-menu-submenu-title,
+.ant-dropdown-menu-item-active .ant-dropdown-menu-item {
   background: #edeef2 !important;
   font-weight: 500;
 }
 
-.ant-dropdown-menu .ant-dropdown-menu-item:hover,
-.ant-dropdown-menu .ant-dropdown-menu-submenu-title:hover
-{
+.ant-dropdown-menu .ant-dropdown-menu-submenu-title:hover,
+.ant-dropdown-menu .ant-dropdown-menu-item:hover {
   background: #e9eefe !important;
   font-weight: 500;
 }
 
-.cascader-customize {
-  background: transparent !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
+.more-dropdown .ant-dropdown-menu-item-active .ant-dropdown-menu-submenu-title,
+.more-dropdown .ant-dropdown-menu-submenu-active .ant-dropdown-menu-item {
+  font-weight: normal;
 }
 
-.cascader-customize .ant-cascader-menu {
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  border-right: none !important;
-  margin-right: 2px !important;
-  height: auto !important;
+.more-dropdown .ant-dropdown-menu .ant-dropdown-menu-submenu-title:hover,
+.more-dropdown .ant-dropdown-menu .ant-dropdown-menu-item:hover {
+  font-weight: normal;
 }
-
-.cascader-customize .ant-cascader-menu:nth-child(2) {
-  /* width: 290px; */
+.more-dropdown .delete-action {
+  padding: 0;
 }
-
-.cascader-customize .ant-cascader-menu:first-child {
-  border-radius: 0 !important;
+.more-dropdown .delete-action > span {
+  display: block;
+  padding: 5px 12px;
 }
-
-.cascader-customize .ant-cascader-menu:last-child {
-  border-radius: 0 !important;
-}
-
-.cascader-customize .ant-cascader-menu-item {
-  padding: 9px 35px 9px 15px !important;
-  color: #737d9c !important;
-}
-
-.cascader-customize .ant-cascader-menu-item:hover {
-  background: #e9eefe !important;
-  text-shadow: 0.2px 0.2px 0 #737d9b, -0.2px -0.2px 0 #737d9b, -0.1px -0.1px 0 #737d9b;
-  font-weight: 400;
-}
-
-.cascader-customize .ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled),
-.cascader-customize .ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled):hover {
-  font-weight: 400;
-  text-shadow: 0.2px 0.2px 0 #737d9b, -0.2px -0.2px 0 #737d9b, -0.1px -0.1px 0 #737d9b;
-  background: #edeef2;
-}
-
-.cascader-customize .ant-cascader-menu-item-expand .ant-cascader-menu-item-expand-icon,
-.cascader-customize.ant-cascader-menu-item-expand .ant-cascader-menu-item-loading-icon {
-  right: 9px !important;
-  color: #072074 !important;
-  font-size: 14px !important;
+.more-dropdown .delete-action i {
+  min-width: 12px;
+  margin-right: 8px;
 }
