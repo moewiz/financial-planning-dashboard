@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import moment from 'moment';
-import {get, head, isString, replace, slice, trim} from 'lodash';
-import {Dropdown, Icon, Menu, Popconfirm} from 'antd';
-import {ClickParam} from 'antd/lib/menu';
-import {StrategyTableIcon, StrategyTableItems, StrategyTableText} from './styled';
-import {DynamicData} from '../../../reducers/client';
+import { get, head, isString, replace, slice, trim } from 'lodash';
+import { Dropdown, Icon, Menu, Popconfirm } from 'antd';
+import { ClickParam } from 'antd/lib/menu';
+import { StrategyTableIcon, StrategyTableItems, StrategyTableText } from './styled';
+import { DynamicData } from '../../../reducers/client';
 import strategySentences from '../../../enums/strategySentences';
-import {formatString, Param} from '../StandardText';
-import EditCell, {EditCellType} from '../Drawer/EditCell';
+import { formatString, Param } from '../StandardText';
+import EditCell, { EditCellType } from '../Drawer/EditCell';
 import CheckboxInput from '../Drawer/CheckboxInput';
 import CustomizedPension from './CustomizedPension';
 import CustomizedInvestment from './CustomizedInvestment';
@@ -105,9 +105,11 @@ class StrategyItem extends Component<StrategyItemProps> {
   public handleMenuClick: (param: ClickParam) => void = (e) => {
     if (e && e.key === '3') {
       // add Custom note to the current row.
-      const { setFieldValue, strategyIndex, strategyType } = this.props;
-      const customNoteName = `${strategyType}.strategies[${strategyIndex}].customNote`;
-      setFieldValue(customNoteName, '');
+      const { strategy, setFieldValue, strategyIndex, strategyType } = this.props;
+      if (typeof strategy.customNote === 'undefined') {
+        const customNoteName = `${strategyType}.strategies[${strategyIndex}].customNote`;
+        setFieldValue(customNoteName, '');
+      }
     }
   }
 
