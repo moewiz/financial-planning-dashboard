@@ -223,6 +223,7 @@ const strategySentences: any = {
   customStrategy: {
     statement: '{{0}}',
     types: [EditCellType.textarea],
+    options: [{ placeholder: 'Enter custom strategy' }],
   },
 };
 

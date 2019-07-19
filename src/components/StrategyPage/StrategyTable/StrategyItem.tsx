@@ -20,6 +20,7 @@ export interface StrategyItemI {
   values?: any[];
   mark?: boolean;
   margin?: boolean;
+  customNote?: string;
 }
 
 interface Sentence {
@@ -102,7 +103,14 @@ class StrategyItem extends Component<StrategyItemProps> {
   }
 
   public handleMenuClick: (param: ClickParam) => void = (e) => {
-    console.log('click param', e);
+    if (e && e.key === '3') {
+      // add Custom note to the current row.
+      const { strategy, setFieldValue, strategyIndex, strategyType } = this.props;
+      if (typeof strategy.customNote === 'undefined') {
+        const customNoteName = `${strategyType}.strategies[${strategyIndex}].customNote`;
+        setFieldValue(customNoteName, '');
+      }
+    }
   }
 
   public renderCustom = (context: string, sentenceKey: string) => {
@@ -185,42 +193,49 @@ class StrategyItem extends Component<StrategyItemProps> {
     if (context && strategySentence && strategySentence.statement) {
       const stringReplacedByName = replaceDynamicValues(strategySentence.statement, { context, client, partner });
       const values = strategy.values || [];
-      return formatString(stringReplacedByName, values, (value: any, index: number) => {
+      const arrayStatements = formatString(stringReplacedByName, values, (value: any, index: number) => {
         const optionalProps: { [key: string]: any } = {};
         if (strategySentence.types) {
           const type = strategySentence.types[index];
           let options = get(strategySentence, ['options', index], []);
           const name = `${strategyType}.strategies[${strategyIndex}].values[${index}]`;
-          if (type === EditCellType.select) {
-            if (isString(options)) {
-              if (options !== 'year') {
-                if (options[0] === '+') {
-                  const option = options.slice(1);
-                  options = [...get(client, option), ...get(partner, option)];
+          switch (type) {
+            case EditCellType.select: {
+              if (isString(options)) {
+                if (options !== 'year') {
+                  if (options[0] === '+') {
+                    const option = options.slice(1);
+                    options = [...get(client, option), ...get(partner, option)];
+                  } else {
+                    if (context === 'client') {
+                      options = get(client, options);
+                    }
+                    if (context === 'partner') {
+                      options = get(partner, options);
+                    }
+                  }
                 } else {
-                  if (context === 'client') {
-                    options = get(client, options);
+                  optionalProps.yearFi = true;
+                  options = [];
+                  const nowYear = moment().year();
+                  for (let i = nowYear; i < nowYear + 10; i++) {
+                    options.push({ value: i, label: `Year ${i}`, renderedLabel: `${i}/${i + 1} Financial Year` });
                   }
-                  if (context === 'partner') {
-                    options = get(partner, options);
-                  }
-                }
-              } else {
-                optionalProps.yearFi = true;
-                options = [];
-                const nowYear = moment().year();
-                for (let i = nowYear; i < nowYear + 10; i++) {
-                  options.push({ value: i, label: `Year ${i}`, renderedLabel: `${i}/${i + 1} Financial Year` });
                 }
               }
+              break;
             }
-          }
-          if (type === EditCellType.number) {
-            optionalProps.dollar = true;
-            optionalProps.calculateWidth = true;
-          }
-          if (type === EditCellType.text) {
-            optionalProps.calculateWidth = true;
+            case EditCellType.number: {
+              optionalProps.dollar = true;
+              optionalProps.calculateWidth = true;
+              break;
+            }
+            case EditCellType.text: {
+              optionalProps.calculateWidth = true;
+              break;
+            }
+            default:
+              break;
           }
 
           return (
@@ -240,6 +255,8 @@ class StrategyItem extends Component<StrategyItemProps> {
         }
         return <Param key={index}>{value}</Param>;
       });
+      arrayStatements.push(<br key={arrayStatements.length} />);
+      return arrayStatements;
     }
     console.log('missing sentence key for:', sentenceKey);
     return null;
@@ -267,12 +284,23 @@ class StrategyItem extends Component<StrategyItemProps> {
   }
 
   public render() {
-    const { strategy, mark, margin } = this.props;
+    const { strategy, mark, margin, strategyType, strategyIndex } = this.props;
 
     return (
       <StrategyTableItems>
         <CheckboxInput value={strategy.check} onChange={this.onChangeCheck} />
-        <StrategyTableText>{this.renderText()}</StrategyTableText>
+        <StrategyTableText>
+          {this.renderText()}
+          {typeof strategy.customNote !== 'undefined' && (
+            <EditCell
+              name={`${strategyType}.strategies[${strategyIndex}].customNote`}
+              value={strategy.customNote}
+              type={EditCellType.textarea}
+              onChange={(val) => console.log(val)}
+              placeholder="Enter custom note"
+            />
+          )}
+        </StrategyTableText>
         {mark && <CheckboxInput value={strategy.mark || false} onChange={this.onChangeCheckMark} custom={true} />}
         {margin && <CheckboxInput value={strategy.margin || false} onChange={this.onChangeCheckMargin} custom={true} />}
         <StrategyTableIcon>
@@ -281,7 +309,7 @@ class StrategyItem extends Component<StrategyItemProps> {
               <Menu onClick={this.handleMenuClick}>
                 <Menu.Item key="1" className="delete-action">
                   <Popconfirm title="Really delete?" okText="Yes" cancelText="No" onConfirm={this.removeItem}>
-                    <Icon type="close-square" />
+                    <Icon type="close" />
                     Delete
                   </Popconfirm>
                 </Menu.Item>
