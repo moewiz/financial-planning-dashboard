@@ -230,7 +230,8 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
 
   public renderInputTextArea = () => {
     const value = this.state.value || '';
-    return <TextArea value={value} onChange={this.onChangeTextArea} autosize />;
+    const placeholder = value ? '' : 'Enter custom strategy';
+    return <TextArea value={value} placeholder={placeholder} onChange={this.onChangeTextArea} autosize />;
   }
 
   public render() {
