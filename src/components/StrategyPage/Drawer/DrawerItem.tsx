@@ -22,6 +22,21 @@ interface DrawerItemProps {
   row: RowData;
 }
 
+interface EditCellContainerProps {
+  value: any;
+  index: number;
+  keyString?: string;
+  type: EditCellType;
+}
+
+const EditCellContainer = (props: EditCellContainerProps) => {
+  const { index, value: propValue, keyString: key, type } = props;
+  const [value, setValue] = React.useState<any>(propValue);
+  const name = `${key}[${index}]`;
+
+  return <EditCell name={name} key={index} onChange={(val) => setValue(val)} value={value} type={type} />;
+};
+
 class DrawerItem extends PureComponent<DrawerItemProps> {
   public renderValues = (row: RowData, key?: string) => {
     const { values, editable } = row;
@@ -30,10 +45,9 @@ class DrawerItem extends PureComponent<DrawerItemProps> {
     if (editable) {
       return map(columns, (column: string, index: number) => {
         const value = get(values, [index], '');
-        const name = `${key}[${index}]`;
         const type = isNumber(value) ? EditCellType.number : EditCellType.text;
 
-        return <EditCell name={name} key={index} onChange={(val: any) => console.log(val)} value={value} type={type} />;
+        return <EditCellContainer key={index} keyString={key} index={index} value={value} type={type} />;
       });
     } else {
       return map(columns, (column: string, index: number) => {

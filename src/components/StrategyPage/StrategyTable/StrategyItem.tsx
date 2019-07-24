@@ -203,14 +203,16 @@ class StrategyItem extends Component<StrategyItemProps> {
   }
 
   public renderText = () => {
-    const { strategy, client, partner, strategyType, strategyIndex, defaultFullValue } = this.props;
+    const { strategy, client, partner, strategyType, strategyIndex, defaultFullValue, setFieldValue } = this.props;
     const strategySentenceKeys = strategy.sentence.split('.');
     const context = head(strategySentenceKeys);
     const sentenceKey = slice(strategySentenceKeys, 1).join('.');
     const strategySentence: Sentence = get(strategySentences, sentenceKey);
+
     if (context && strategySentence.custom) {
       return this.renderCustom(context, sentenceKey);
     }
+
     if (context && strategySentence && strategySentence.statement) {
       const stringReplacedByName = replaceDynamicValues(strategySentence.statement, { context, client, partner });
       const values = strategy.values || [];
@@ -265,24 +267,25 @@ class StrategyItem extends Component<StrategyItemProps> {
 
           return (
             <EditCell
-              key={index}
+              key={name}
               name={name}
               type={type}
               value={value}
               options={options}
-              onChange={(val) => {
-                console.log(val);
-              }}
+              onChange={(val) => setFieldValue(name, val)}
               defaultFullValue={defaultFullValue}
               {...optionalProps}
             />
           );
         }
+
         return <Param key={index}>{value}</Param>;
       });
+
       arrayStatements.push(<br key={arrayStatements.length} />);
       return arrayStatements;
     }
+
     console.log('missing sentence key for:', sentenceKey);
     return null;
   }
@@ -309,7 +312,8 @@ class StrategyItem extends Component<StrategyItemProps> {
   }
 
   public render() {
-    const { strategy, mark, margin, strategyType, strategyIndex } = this.props;
+    const { strategy, mark, margin, strategyType, strategyIndex, setFieldValue } = this.props;
+    const customNoteName = `${strategyType}.strategies[${strategyIndex}].customNote`;
 
     return (
       <StrategyTableItems>
@@ -318,10 +322,10 @@ class StrategyItem extends Component<StrategyItemProps> {
           {this.renderText()}
           {typeof strategy.customNote !== 'undefined' && (
             <EditCell
-              name={`${strategyType}.strategies[${strategyIndex}].customNote`}
+              name={customNoteName}
               value={strategy.customNote}
               type={EditCellType.textarea}
-              onChange={(val) => console.log(val)}
+              onChange={(val) => setFieldValue(customNoteName, val)}
               placeholder="Enter custom note"
             />
           )}

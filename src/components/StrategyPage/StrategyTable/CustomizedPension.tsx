@@ -19,6 +19,7 @@ const CustomizedPension = (
     strategyIndex,
     strategyType,
     defaultFullValue,
+    setFieldValue,
   } = props;
   const id = strategy.id || `${strategyIndex}-superannuation`;
   const pensionIncomeOptions = map(getOptions(context, { client, partner }, 'pensionIncome'), (option) => ({
@@ -27,7 +28,8 @@ const CustomizedPension = (
   }));
   const superannuationOptions = filter(
     map(getOptions(context, { client, partner }, 'superannuation')),
-    (superannuation: any) => superannuation.id !== id);
+    (superannuation: any) => superannuation.id !== id,
+  );
   superannuationOptions.push({
     value: 'customisedRollover',
     label: 'Customised Rollover',
@@ -56,7 +58,9 @@ const CustomizedPension = (
     setDefaultFullValue(random(1000, 5000));
   };
   const updateListOfCurrentSuperannuation = (val: string) => {
-    if (context === 'joint') { return; }
+    if (context === 'joint') {
+      return;
+    }
     const { setFieldValue } = props;
     const currentSuperannuation = get(props, [context, 'superannuation'], []);
     const existingSuperannuationIndex = findIndex(currentSuperannuation, { id });
@@ -86,9 +90,7 @@ const CustomizedPension = (
         name={`${strategyType}.strategies[${strategyIndex}].values[1]`}
         type={EditCellType.date}
         value={get(strategy, 'values[1]')}
-        onChange={(val) => {
-          console.log(val);
-        }}
+        onChange={(val, fieldName) => setFieldValue(fieldName, val)}
       />
       <span>{isCustomisedRollover ? 'as a' : 'from your'}</span>
       <EditCell
@@ -103,14 +105,14 @@ const CustomizedPension = (
         {isCustomisedRollover ? (
           <b>${numeral(fullValue).format('0,0')}</b>
         ) : (
-            <EditCell
-              name={`${strategyType}.strategies[${strategyIndex}].values[3]`}
-              value={get(strategy, 'values[3]')}
-              type={EditCellType.dropdownFreeText}
-              onChange={(val) => console.log(val)}
-              defaultFullValue={fullValue}
-            />
-          )}
+          <EditCell
+            name={`${strategyType}.strategies[${strategyIndex}].values[3]`}
+            value={get(strategy, 'values[3]')}
+            type={EditCellType.dropdownFreeText}
+            onChange={(val, fieldName) => setFieldValue(fieldName, val)}
+            defaultFullValue={fullValue}
+          />
+        )}
       </span>
       {isCustomisedRollover ? (
         <ul>
@@ -133,8 +135,8 @@ const CustomizedPension = (
           ))}
         </ul>
       ) : (
-          <br />
-        )}
+        <br />
+      )}
       <span>
         Drawdown{' '}
         <EditCell
@@ -149,7 +151,7 @@ const CustomizedPension = (
             name={`${strategyType}.strategies[${strategyIndex}].values[5][1]`}
             value={get(strategy, 'values[5][1]')}
             type={EditCellType.number}
-            onChange={(val) => console.log(val)}
+            onChange={(val, fieldName) => setFieldValue(fieldName, val)}
             dollar={true}
             calculateWidth={true}
           />
@@ -158,7 +160,7 @@ const CustomizedPension = (
         <EditCell
           name={`${strategyType}.strategies[${strategyIndex}].values[6]`}
           value={get(strategy, 'values[6]')}
-          onChange={(val) => console.log(val)}
+          onChange={(val, fieldName) => setFieldValue(fieldName, val)}
           type={EditCellType.select}
           options={periodTypes}
         />

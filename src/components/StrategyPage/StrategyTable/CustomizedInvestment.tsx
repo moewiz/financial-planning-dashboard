@@ -21,7 +21,17 @@ const investmentIncomePaidOut = 5678;
 const CustomizedInvestment = (
   props: StrategyItemProps & { name: string; context: string; sentenceKey: string; defaultFullValue: number },
 ) => {
-  const { name, context, client, partner, strategy, strategyIndex, strategyType, defaultFullValue } = props;
+  const {
+    name,
+    context,
+    client,
+    partner,
+    strategy,
+    strategyIndex,
+    strategyType,
+    defaultFullValue,
+    setFieldValue,
+  } = props;
   const reinvestIncomeOptions = map(reinvestIncome, (option) => ({
     ...option,
     label:
@@ -83,7 +93,7 @@ const CustomizedInvestment = (
           name={`${strategyType}.strategies[${strategyIndex}].values[1]`}
           value={get(strategy, 'values[1]')}
           type={EditCellType.date}
-          onChange={(val) => console.log(val)}
+          onChange={(val, fieldName) => setFieldValue(fieldName, val)}
         />
         .
       </span>
@@ -104,7 +114,7 @@ const CustomizedInvestment = (
           name={`${strategyType}.strategies[${strategyIndex}].values[3]`}
           value={get(strategy, 'values[3]')}
           type={EditCellType.number}
-          onChange={(val) => console.log(val)}
+          onChange={(val, fieldName) => setFieldValue(fieldName, val)}
           dollar={true}
           calculateWidth={true}
         />
@@ -137,7 +147,7 @@ const CustomizedInvestment = (
             value={investmentValues}
             options={investmentOptions}
             type={EditCellType.select}
-            onChange={(val) => console.log(val)}
+            onChange={(val, fieldName) => setFieldValue(fieldName, val)}
           />
           ,{' '}
         </>
@@ -157,7 +167,7 @@ const CustomizedInvestment = (
         value={get(strategy, 'values[6]')}
         type={EditCellType.select}
         options={reinvestIncomeOptions}
-        onChange={(val) => console.log(val)}
+        onChange={(val, fieldName) => setFieldValue(fieldName, val)}
       />
     </FullyCustomized>
   );
