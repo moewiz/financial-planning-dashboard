@@ -2,7 +2,7 @@ import React from 'react';
 import numeral from 'numeral';
 import { FullyCustomized } from '../Drawer/styled';
 import EditCell, { EditCellType } from '../Drawer/EditCell';
-import { dropRight, find, get, map, random, findIndex } from 'lodash';
+import { dropRight, find, get, map, random, findIndex, filter } from 'lodash';
 import { getOptions, StrategyItemProps } from './StrategyItem';
 import { periodTypes } from '../../../enums/strategySentences';
 
@@ -20,11 +20,14 @@ const CustomizedPension = (
     strategyType,
     defaultFullValue,
   } = props;
+  const id = strategy.id || `${strategyIndex}-superannuation`;
   const pensionIncomeOptions = map(getOptions(context, { client, partner }, 'pensionIncome'), (option) => ({
     ...option,
     label: option.income ? `${option.label} $(${numeral(option.income).format('0,0')})` : option.label,
   }));
-  const superannuationOptions = map(getOptions(context, { client, partner }, 'superannuation'));
+  const superannuationOptions = filter(
+    map(getOptions(context, { client, partner }, 'superannuation')),
+    (superannuation: any) => superannuation.id !== id);
   superannuationOptions.push({
     value: 'customisedRollover',
     label: 'Customised Rollover',
@@ -56,7 +59,6 @@ const CustomizedPension = (
     if (context === 'joint') { return; }
     const { setFieldValue } = props;
     const currentSuperannuation = get(props, [context, 'superannuation'], []);
-    const id = strategy.id || `${strategyIndex}-superannuation`;
     const existingSuperannuationIndex = findIndex(currentSuperannuation, { id });
     if (existingSuperannuationIndex !== -1) {
       currentSuperannuation[existingSuperannuationIndex].label = val;
@@ -101,14 +103,14 @@ const CustomizedPension = (
         {isCustomisedRollover ? (
           <b>${numeral(fullValue).format('0,0')}</b>
         ) : (
-          <EditCell
-            name={`${strategyType}.strategies[${strategyIndex}].values[3]`}
-            value={get(strategy, 'values[3]')}
-            type={EditCellType.dropdownFreeText}
-            onChange={(val) => console.log(val)}
-            defaultFullValue={fullValue}
-          />
-        )}
+            <EditCell
+              name={`${strategyType}.strategies[${strategyIndex}].values[3]`}
+              value={get(strategy, 'values[3]')}
+              type={EditCellType.dropdownFreeText}
+              onChange={(val) => console.log(val)}
+              defaultFullValue={fullValue}
+            />
+          )}
       </span>
       {isCustomisedRollover ? (
         <ul>
@@ -131,8 +133,8 @@ const CustomizedPension = (
           ))}
         </ul>
       ) : (
-        <br />
-      )}
+          <br />
+        )}
       <span>
         Drawdown{' '}
         <EditCell
