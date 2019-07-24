@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { isFunction } from 'lodash';
+import htmlParser from 'react-html-parser';
 import { StandardText as IStandardText } from '../../reducers/client';
 
 const StandardTextWrapper = styled.section`
@@ -42,7 +43,7 @@ export const formatString = (
       const value = values[Number(sentence)];
       return isFunction(formattingFunc) ? formattingFunc(value, Number(sentence)) : value;
     }
-    return sentence;
+    return htmlParser(sentence);
   });
 };
 

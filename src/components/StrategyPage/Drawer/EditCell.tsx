@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import moment, { Moment } from 'moment';
 import numeral from 'numeral';
-import { isEqual } from 'lodash';
+import { isEqual, get } from 'lodash';
 import { DatePicker, Input, Select } from 'antd';
 import { EntryPickerTable } from '../../../common/EntryPicker/styled';
 import { ddFreeTextOptions } from '../../../enums/strategySentences';
@@ -130,7 +130,7 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
   public renderSelect = () => {
     const { options, yearFi } = this.props;
     const { value: stateValue } = this.state;
-    const value = stateValue ? stateValue : options[0].value;
+    const value = stateValue ? stateValue : get(options, [0, 'value']);
 
     return (
       <Select onChange={this.handleSelect} value={value} optionLabelProp={yearFi ? 'title' : ''} showArrow={false}>

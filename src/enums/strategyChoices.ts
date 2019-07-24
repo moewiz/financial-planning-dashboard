@@ -72,7 +72,7 @@ export const strategyChoices: StrategyChoice = {
         },
         {
           value: 'spouse',
-          label: 'Spouse contribution',
+          label: 'Spouse contributions',
           children: [
             {
               value: 'oneOff',
@@ -154,7 +154,7 @@ export const strategyChoices: StrategyChoice = {
         },
         {
           value: 'spouse',
-          label: 'Spouse contribution',
+          label: 'Spouse contributions',
           children: [
             {
               value: 'oneOff',
