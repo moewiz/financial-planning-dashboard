@@ -7,7 +7,7 @@ import { getOptions, StrategyItemProps } from './StrategyItem';
 const CustomizedWithdrawFunds = (
   props: StrategyItemProps & { name: string; context: string; sentenceKey: string; defaultFullValue: number },
 ) => {
-  const { name, context, client, partner, strategy, strategyIndex, strategyType, sentenceKey } = props;
+  const { name, context, client, partner, strategy, strategyIndex, strategyType, sentenceKey, setFieldValue } = props;
   const investmentOptions = getOptions(context, { client, partner }, 'investments');
   const investmentOptions2 = [...investmentOptions, { value: 'cashflow', label: 'Cashflow' }];
   const isRegular = sentenceKey === 'withdrawFunds.regular';
@@ -20,14 +20,14 @@ const CustomizedWithdrawFunds = (
         value={get(strategy, 'values[0]')}
         type={EditCellType.select}
         options={investmentOptions}
-        onChange={(val) => console.log(val)}
+        onChange={(val, fieldName) => setFieldValue(fieldName, val)}
       />
       <span>for</span>
       <EditCell
         name={`${strategyType}.strategies[${strategyIndex}].values[1]`}
         value={get(strategy, 'values[1]')}
         type={EditCellType.number}
-        onChange={(val) => console.log(val)}
+        onChange={(val, fieldName) => setFieldValue(fieldName, val)}
         dollar={true}
         calculateWidth={true}
       />
@@ -39,7 +39,7 @@ const CustomizedWithdrawFunds = (
           value={get(strategy, 'values[2]')}
           type={EditCellType.select}
           options={investmentOptions2}
-          onChange={(val) => console.log(val)}
+          onChange={(val, fieldName) => setFieldValue(fieldName, val)}
         />
       </span>
     </FullyCustomized>

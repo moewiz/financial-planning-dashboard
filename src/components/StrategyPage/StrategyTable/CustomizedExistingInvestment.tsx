@@ -8,7 +8,17 @@ import { getOptions, StrategyItemProps } from './StrategyItem';
 const CustomizedExistingInvestment = (
   props: StrategyItemProps & { name: string; context: string; sentenceKey: string; defaultFullValue: number },
 ) => {
-  const { name, context, client, partner, strategy, strategyIndex, strategyType, sentenceKey } = props;
+  const {
+    name: fullName,
+    context,
+    client,
+    partner,
+    strategy,
+    strategyIndex,
+    strategyType,
+    sentenceKey,
+    setFieldValue,
+  } = props;
   const isRegular = sentenceKey === 'existingInvestment.regular';
   const investmentOptions = getOptions(context, { client, partner }, 'investments');
   const investmentOptions2 = [...investmentOptions, { value: 'cashflow', label: 'Cashflow' }];
@@ -22,27 +32,27 @@ const CustomizedExistingInvestment = (
   if (isRegular) {
     return (
       <FullyCustomized>
-        {name}, make a regular contribution into{' '}
+        {fullName}, make a regular contribution into{' '}
         <EditCell
           name={`${strategyType}.strategies[${strategyIndex}].values[0]`}
           value={get(strategy, 'values[0]')}
           type={EditCellType.select}
           options={investmentOptions}
-          onChange={(val) => console.log(val)}
+          onChange={(val, name) => setFieldValue(name, val)}
         />
         from
         <EditCell
           name={`${strategyType}.strategies[${strategyIndex}].values[1]`}
           value={get(strategy, 'values[1]')}
           type={EditCellType.date}
-          onChange={(val) => console.log(val)}
+          onChange={(val, name) => setFieldValue(name, val)}
         />
         to
         <EditCell
           name={`${strategyType}.strategies[${strategyIndex}].values[2]`}
           value={get(strategy, 'values[2]')}
           type={EditCellType.date}
-          onChange={(val) => console.log(val)}
+          onChange={(val, name) => setFieldValue(name, val)}
         />
         <br />
         <span>
@@ -52,7 +62,7 @@ const CustomizedExistingInvestment = (
             value={get(strategy, 'values[3]')}
             type={EditCellType.select}
             options={investmentOptions2}
-            onChange={(val) => console.log(val)}
+            onChange={(val, name) => setFieldValue(name, val)}
           />
         </span>
       </FullyCustomized>
@@ -67,14 +77,14 @@ const CustomizedExistingInvestment = (
         value={get(strategy, 'values[0]')}
         type={EditCellType.select}
         options={investmentOptions}
-        onChange={(val) => console.log(val)}
+        onChange={(val, name) => setFieldValue(val, name)}
       />
       <span>in</span>
       <EditCell
         name={`${strategyType}.strategies[${strategyIndex}].values[1]`}
         value={get(strategy, 'values[1]')}
         type={EditCellType.date}
-        onChange={(val) => console.log(val)}
+        onChange={(val, name) => setFieldValue(val, name)}
       />
       <br />
       <span>
