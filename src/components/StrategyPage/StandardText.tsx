@@ -40,7 +40,7 @@ export const formatString = (
   return splitText.map((sentence, index) => {
     if (isNumber.test(sentence)) {
       const value = values[Number(sentence)];
-      return isFunction(formattingFunc) ? formattingFunc(value, sentence) : value;
+      return isFunction(formattingFunc) ? formattingFunc(value, Number(sentence)) : value;
     }
     return sentence;
   });

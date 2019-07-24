@@ -42,7 +42,7 @@ export enum EditCellType {
 
 class EditCell extends PureComponent<EditCellProps, EditaCellState> {
   public state = {
-    value: this.props.value,
+    value: '',
     open: false,
   };
 
@@ -61,7 +61,7 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
   //   // const { value: nextValue } = nextProps;
   //   const { value } = this.state;
   //   const { value: nextValue } = nextState;
-  //
+
   //   return !isEqual(value, nextValue);
   // }
 
@@ -110,8 +110,9 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
 
   public renderDate = () => {
     const { value } = this.state;
+    const momentInput = value ? value : undefined;
     const format = 'MMM YYYY';
-    const momentValue = moment(value);
+    const momentValue = moment(momentInput);
 
     return (
       <EntryPickerTable>
