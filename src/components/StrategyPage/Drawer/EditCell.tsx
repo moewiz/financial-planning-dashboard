@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import moment, { Moment } from 'moment';
 import numeral from 'numeral';
-import { isEqual } from 'lodash';
+import { isEqual, get } from 'lodash';
 import { DatePicker, Input, Select } from 'antd';
 import { EntryPickerTable } from '../../../common/EntryPicker/styled';
 import { ddFreeTextOptions } from '../../../enums/strategySentences';
@@ -42,7 +42,7 @@ export enum EditCellType {
 
 class EditCell extends PureComponent<EditCellProps, EditaCellState> {
   public state = {
-    value: this.props.value,
+    value: '',
     open: false,
   };
 
@@ -61,7 +61,7 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
   //   // const { value: nextValue } = nextProps;
   //   const { value } = this.state;
   //   const { value: nextValue } = nextState;
-  //
+
   //   return !isEqual(value, nextValue);
   // }
 
@@ -110,8 +110,9 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
 
   public renderDate = () => {
     const { value } = this.state;
+    const momentInput = value ? value : undefined;
     const format = 'MMM YYYY';
-    const momentValue = moment(value);
+    const momentValue = moment(momentInput);
 
     return (
       <EntryPickerTable>
@@ -129,7 +130,7 @@ class EditCell extends PureComponent<EditCellProps, EditaCellState> {
   public renderSelect = () => {
     const { options, yearFi } = this.props;
     const { value: stateValue } = this.state;
-    const value = stateValue ? stateValue : options[0].value;
+    const value = stateValue ? stateValue : get(options, [0, 'value']);
 
     return (
       <Select onChange={this.handleSelect} value={value} optionLabelProp={yearFi ? 'title' : ''} showArrow={false}>

@@ -40,7 +40,12 @@ class ApiUtils {
 
   public static getAccessToken(): string | undefined {
     const rootState = store.getState();
-    return rootState.auth && rootState.auth.get('token');
+    const token = rootState.auth && rootState.auth.get('token');
+    if (!token && location.hostname === 'localhost') {
+      return 'dev_token';
+    }
+
+    return token;
   }
 
   public static getExpiredAt(): number | null {

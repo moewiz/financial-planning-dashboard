@@ -13,6 +13,7 @@ import CustomizedPension from './CustomizedPension';
 import CustomizedInvestment from './CustomizedInvestment';
 import CustomizedExistingInvestment from './CustomizedExistingInvestment';
 import CustomizedWithdrawFunds from './CustomizedWithdrawFunds';
+import { StrategyTypes } from '../../../enums/strategies';
 
 export interface StrategyItemI {
   id?: string;
@@ -223,8 +224,9 @@ class StrategyItem extends Component<StrategyItemProps> {
             case EditCellType.select: {
               if (isString(options)) {
                 if (options !== 'year') {
+                  let option = options;
                   if (options[0] === '+') {
-                    const option = options.slice(1);
+                    option = options.slice(1);
                     options = [...get(client, option), ...get(partner, option)];
                   } else {
                     if (context === 'client') {
@@ -233,6 +235,9 @@ class StrategyItem extends Component<StrategyItemProps> {
                     if (context === 'partner') {
                       options = get(partner, options);
                     }
+                  }
+                  if (option === 'investments' && strategyType === StrategyTypes.Superannuation) {
+                    options = [...options, { value: 'cashflow', label: 'Cashflow' }];
                   }
                 } else {
                   optionalProps.yearFi = true;
