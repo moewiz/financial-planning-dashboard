@@ -57,11 +57,10 @@ const CustomizedPension = (
     // Call API and set response to full value
     setDefaultFullValue(random(1000, 5000));
   };
-  const updateListOfCurrentSuperannuation = (val: string) => {
+  const updateListOfCurrentSuperannuation = (val: string, fieldName: string) => {
     if (context === 'joint') {
       return;
     }
-    const { setFieldValue } = props;
     const currentSuperannuation = get(props, [context, 'superannuation'], []);
     const existingSuperannuationIndex = findIndex(currentSuperannuation, { id });
     if (existingSuperannuationIndex !== -1) {
@@ -70,6 +69,7 @@ const CustomizedPension = (
       currentSuperannuation.push({ id, value: id, label: val });
     }
 
+    setFieldValue(fieldName, val);
     setFieldValue(`${context}.superannuation`, currentSuperannuation);
   };
 

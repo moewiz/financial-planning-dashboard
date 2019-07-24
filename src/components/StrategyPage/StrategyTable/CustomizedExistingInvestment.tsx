@@ -71,7 +71,7 @@ const CustomizedExistingInvestment = (
 
   return (
     <FullyCustomized>
-      {name}, make a lump sum contribution into{' '}
+      {fullName}, make a lump sum contribution into{' '}
       <EditCell
         name={`${strategyType}.strategies[${strategyIndex}].values[0]`}
         value={get(strategy, 'values[0]')}
