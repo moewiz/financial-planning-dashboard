@@ -4,8 +4,8 @@ import { FullyCustomized } from '../Drawer/styled';
 import EditCell, { EditCellType } from '../Drawer/EditCell';
 import { find, get, map, random, findIndex } from 'lodash';
 import { getOptions, StrategyItemProps } from './StrategyItem';
+import { specificOptions } from '../../../enums/strategySentences';
 
-const specificOptions = [{ value: 'specific', label: 'Specific' }, { value: 'custom', label: 'Custom' }];
 const reinvestIncome = [
   {
     value: 'reinvest',
@@ -40,14 +40,14 @@ const CustomizedInvestment = (
         : option.label,
   }));
   const investmentOptions = getOptions(context, { client, partner }, 'investments');
-  const [specificValue, setSpecificValue] = React.useState<any>(get(strategy, 'values[2]'));
+  const specificValue = get(strategy, 'values[2]');
   const [investmentValues, setInvestmentValues] = React.useState<any>(get(strategy, 'values[4]'));
   const isCustomSpecific = specificValue === 'custom';
   const [fullValue, setDefaultFullValue] = React.useState<number>(
     get(find(investmentOptions, { value: specificValue }), 'fullValue', defaultFullValue),
   );
-  const updateSpecific = (value: any) => {
-    setSpecificValue(value);
+  const updateSpecific = (value: any, fieldName: string) => {
+    setFieldValue(fieldName, value);
     if (value === 'specific') {
       setInvestmentValues(get(investmentOptions, [0, 'value']));
     } else {
@@ -58,8 +58,7 @@ const CustomizedInvestment = (
     // Call API and set response to full value
     setDefaultFullValue(random(1000, 5000));
   };
-  const updateListOfInvestmentAccounts = (val: string) => {
-    const { setFieldValue } = props;
+  const updateListOfInvestmentAccounts = (val: string, fieldName: string) => {
     const currentInvestmentAccounts = get(props, [context, 'investments'], []);
     const id = strategy.id || `${strategyIndex}-investment`;
     const existingInvestmentIndex = findIndex(currentInvestmentAccounts, { id });
@@ -69,13 +68,14 @@ const CustomizedInvestment = (
       currentInvestmentAccounts.push({ id, value: id, label: val });
     }
 
+    setFieldValue(fieldName, val);
     setFieldValue(`${context}.investments`, currentInvestmentAccounts);
   };
 
   return (
     <FullyCustomized>
       <span>
-        Establish a new investment portfolio{' '}
+        {name}, establish a new investment portfolio
         <EditCell
           name={`${strategyType}.strategies[${strategyIndex}].values[0]`}
           type={EditCellType.text}
@@ -85,10 +85,7 @@ const CustomizedInvestment = (
           placeholder={'Enter portfolio name'}
           quotationMark={true}
         />
-      </span>
-      <br />
-      <span>
-        {name}, establish a new investment portfolio in{' '}
+        in{' '}
         <EditCell
           name={`${strategyType}.strategies[${strategyIndex}].values[1]`}
           value={get(strategy, 'values[1]')}
@@ -119,7 +116,7 @@ const CustomizedInvestment = (
           calculateWidth={true}
         />
       )}
-      <span>{isCustomSpecific ? 'from' : 'from your'}</span>
+      <span>{isCustomSpecific ? '(as below) to fund the recommended portfolio' : 'from your'}</span>
       {isCustomSpecific ? (
         <ul>
           {map(investmentOptions, (option: { value: any; label: string }, index: number) => (
@@ -149,19 +146,9 @@ const CustomizedInvestment = (
             type={EditCellType.select}
             onChange={(val, fieldName) => setFieldValue(fieldName, val)}
           />
-          ,{' '}
+          <br />
         </>
       )}
-      <span>to establish a new investment portfolio in</span>
-      <EditCell
-        name={`${strategyType}.strategies[${strategyIndex}].values[5]`}
-        type={EditCellType.date}
-        value={get(strategy, 'values[5]')}
-        onChange={(val) => {
-          console.log(val);
-        }}
-      />
-      <br />
       <EditCell
         name={`${strategyType}.strategies[${strategyIndex}].values[6]`}
         value={get(strategy, 'values[6]')}
