@@ -282,7 +282,7 @@
       {
         "check": true,
         "sentence": "partner.existingInvestment.lumpSum",
-        "values": [4, "2020-07-10T12:00:00", 6]
+        "values": [4, "2020-07-10T12:00:00", "specific", 6]
       },
       {
         "check": false,

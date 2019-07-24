@@ -1,5 +1,6 @@
 import { EditCellType } from '../components/StrategyPage/Drawer/EditCell';
 
+export const specificOptions = [{ value: 'specific', label: 'Specific' }, { value: 'custom', label: 'Custom' }];
 export const ddFreeTextOptions = [
   {
     value: 'customAmount',

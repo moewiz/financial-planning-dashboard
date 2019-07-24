@@ -37,13 +37,11 @@ export enum EditCellType {
 }
 
 class EditCell extends Component<EditCellProps> {
-  public shouldComponentUpdate(
-    nextProps: Readonly<EditCellProps>,
-  ): boolean {
-    const { value } = this.props;
-    const { value: nextValue } = nextProps;
+  public shouldComponentUpdate(nextProps: Readonly<EditCellProps>): boolean {
+    const { value, defaultFullValue } = this.props;
+    const { value: nextValue, defaultFullValue: nextDefaultFullValue } = nextProps;
 
-    return !isEqual(value, nextValue);
+    return !isEqual({ value, defaultFullValue }, { value: nextValue, defaultFullValue: nextDefaultFullValue });
   }
 
   public onChange = (value: number | undefined) => {

@@ -4,8 +4,8 @@ import { FullyCustomized } from '../Drawer/styled';
 import EditCell, { EditCellType } from '../Drawer/EditCell';
 import { find, get, map, random, findIndex } from 'lodash';
 import { getOptions, StrategyItemProps } from './StrategyItem';
+import { specificOptions } from '../../../enums/strategySentences';
 
-const specificOptions = [{ value: 'specific', label: 'Specific' }, { value: 'custom', label: 'Custom' }];
 const reinvestIncome = [
   {
     value: 'reinvest',
@@ -40,14 +40,14 @@ const CustomizedInvestment = (
         : option.label,
   }));
   const investmentOptions = getOptions(context, { client, partner }, 'investments');
-  const [specificValue, setSpecificValue] = React.useState<any>(get(strategy, 'values[2]'));
+  const specificValue = get(strategy, 'values[2]');
   const [investmentValues, setInvestmentValues] = React.useState<any>(get(strategy, 'values[4]'));
   const isCustomSpecific = specificValue === 'custom';
   const [fullValue, setDefaultFullValue] = React.useState<number>(
     get(find(investmentOptions, { value: specificValue }), 'fullValue', defaultFullValue),
   );
-  const updateSpecific = (value: any) => {
-    setSpecificValue(value);
+  const updateSpecific = (value: any, fieldName: string) => {
+    setFieldValue(fieldName, value);
     if (value === 'specific') {
       setInvestmentValues(get(investmentOptions, [0, 'value']));
     } else {
