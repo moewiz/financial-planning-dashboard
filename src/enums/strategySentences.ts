@@ -121,9 +121,10 @@ const strategySentences: any = {
   },
   recontribution: {
     statement:
-      '%name%, withdraw {{0}} from superannuation and recontribute {{1}}' + 'back into superannuation in {{2}}',
-    types: [EditCellType.dropdownFreeText, EditCellType.dropdownFreeText, EditCellType.select],
-    options: ['', '', 'year'],
+      '%name%, withdraw {{0}} from superannuation and recontribute {{1}}' + 'back into superannuation in {{2}}. ' +
+      'This contribution is to be funded from {{3}}',
+    types: [EditCellType.dropdownFreeText, EditCellType.dropdownFreeText, EditCellType.select, EditCellType.select],
+    options: ['', '', 'year', 'superannuation'],
   },
   commenceAccount: { custom: true },
   commenceTransition: { custom: true },
