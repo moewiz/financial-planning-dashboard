@@ -12,7 +12,7 @@ const { MonthPicker } = DatePicker;
 const { Option } = Select;
 const { TextArea } = Input;
 
-interface EditCellProps {
+export interface EditCellProps {
   name: string;
   type?: EditCellType;
   value: any;
@@ -37,10 +37,27 @@ export enum EditCellType {
 
 class EditCell extends Component<EditCellProps> {
   public shouldComponentUpdate(nextProps: Readonly<EditCellProps>): boolean {
-    const { value, defaultFullValue } = this.props;
-    const { value: nextValue, defaultFullValue: nextDefaultFullValue } = nextProps;
+    const { value, defaultFullValue, type, options } = this.props;
+    const {
+      value: nextValue,
+      defaultFullValue: nextDefaultFullValue,
+      type: nextType,
+      options: nextOptions,
+    } = nextProps;
 
-    return !isEqual({ value, defaultFullValue }, { value: nextValue, defaultFullValue: nextDefaultFullValue });
+    if (type === EditCellType.select) {
+      return true;
+    }
+
+    return !isEqual(
+      { value, defaultFullValue, type, options: JSON.stringify(options) },
+      {
+        value: nextValue,
+        defaultFullValue: nextDefaultFullValue,
+        type: nextType,
+        options: JSON.stringify(nextOptions),
+      },
+    );
   }
 
   public onChange = (value: number | undefined) => {
@@ -165,7 +182,7 @@ class EditCell extends Component<EditCellProps> {
     if (calculateWidth) {
       // if empty and placeholder is set
       const valueLength = value.length === 0 && options.placeholder ? get(options, 'placeholder.length') : value.length;
-      const numberSize = valueLength > 7 ?  8 : 10;
+      const numberSize = valueLength > 7 ? 8 : 10;
       const minimum = 30;
       const extraWidth = valueLength > 20 ? -15 : valueLength > 7 && valueLength < 12 ? 6 : 4;
       const width = valueLength * numberSize + extraWidth;

@@ -50,7 +50,8 @@
         "label": "Maximum Pension income",
         "income": 5000
       }
-    ]
+    ],
+    "funeralBond": []
   },
   "partner": {
     "name": "Susan Boyle",
@@ -94,10 +95,12 @@
         "label": "Maximum Pension income",
         "income": 4000
       }
-    ]
+    ],
+    "funeralBond": []
   },
   "joint": {
-    "investments": []
+    "investments": [],
+    "funeralBond": []
   },
   "name1": [],
   "name2": [],
@@ -381,6 +384,7 @@
         "values": ["2020-07-10T12:00:00"]
       },
       {
+        "id": "c86a0f80-aead-11e9-aa31-114c7337aa7a",
         "check": true,
         "sentence": "partner.funeralBond.new",
         "values": [150, 2]

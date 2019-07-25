@@ -226,14 +226,15 @@ const strategySentences: any = {
   },
   funeralBond: {
     new: {
+      custom: true,
       statement: '%name%, utilise {{0}} from {{1}} to purchase a new funeral bond {{2}}',
       types: [EditCellType.number, EditCellType.select, EditCellType.text],
-      options: ['', '+investments', { placeholder: 'Enter your funeral bond name', quotationMark: true }],
+      options: ['', '+investments', { placeholder: 'Enter funeral bond name', quotationMark: true }],
     },
     existing: {
       statement: '%name%, utilise {{0}} from {{1}} to top up your {{2}}',
       types: [EditCellType.date, EditCellType.select, EditCellType.select],
-      options: ['', '+investments', '+investments'],
+      options: ['', '+investments', 'funeralBond'],
     },
   },
   customStrategy: {

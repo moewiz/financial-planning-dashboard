@@ -14,6 +14,7 @@ import CustomizedInvestment from './CustomizedInvestment';
 import CustomizedExistingInvestment from './CustomizedExistingInvestment';
 import CustomizedWithdrawFunds from './CustomizedWithdrawFunds';
 import { StrategyTypes } from '../../../enums/strategies';
+import CustomizedFuneralBond from './CustomizedFuneralBond';
 
 export interface StrategyItemI {
   id?: string;
@@ -197,6 +198,17 @@ class StrategyItem extends Component<StrategyItemProps> {
           />
         );
       }
+      case 'funeralBond.new': {
+        return (
+          <CustomizedFuneralBond
+            {...this.props}
+            name={getName()}
+            context={context}
+            sentenceKey={sentenceKey}
+            defaultFullValue={defaultFullValue}
+          />
+        );
+      }
       default:
         return null;
     }
@@ -231,12 +243,7 @@ class StrategyItem extends Component<StrategyItemProps> {
                     option = options.slice(1);
                     options = [...get(client, option), ...get(partner, option)];
                   } else {
-                    if (context === 'client') {
-                      options = get(client, options);
-                    }
-                    if (context === 'partner') {
-                      options = get(partner, options);
-                    }
+                    options = getOptions(context, { client, partner }, options);
                   }
                   if (option === 'investments' && strategyType === StrategyTypes.Superannuation) {
                     options = [...options, { value: 'cashflow', label: 'Cashflow' }];

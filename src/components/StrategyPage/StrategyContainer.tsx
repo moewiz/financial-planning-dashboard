@@ -44,7 +44,7 @@ class StrategyContainer extends PureComponent<StrategyContainerProps> {
             <StrategyInformation type={type} />
           </Col>
           <Col span={12}>
-            <FieldArray name={type + '.strategies'} render={this.renderStrategyTable} />
+            <FieldArray name={type + '.strategies'} render={this.renderStrategyTable} validateOnChange={false} />
           </Col>
         </Row>
       </StrategyWrapper>
