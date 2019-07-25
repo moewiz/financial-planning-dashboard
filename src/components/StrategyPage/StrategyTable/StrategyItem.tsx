@@ -209,6 +209,18 @@ class StrategyItem extends Component<StrategyItemProps> {
           />
         );
       }
+      case 'funeralBond.existing': {
+        return (
+          <CustomizedFuneralBond
+            {...this.props}
+            name={getName()}
+            context={context}
+            sentenceKey={sentenceKey}
+            defaultFullValue={defaultFullValue}
+            existingFuneralBond={true}
+          />
+        );
+      }
       default:
         return null;
     }

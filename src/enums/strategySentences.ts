@@ -232,6 +232,7 @@ const strategySentences: any = {
       options: ['', '+investments', { placeholder: 'Enter funeral bond name', quotationMark: true }],
     },
     existing: {
+      custom: true,
       statement: '%name%, utilise {{0}} from {{1}} to top up your {{2}}',
       types: [EditCellType.date, EditCellType.select, EditCellType.select],
       options: ['', '+investments', 'funeralBond'],

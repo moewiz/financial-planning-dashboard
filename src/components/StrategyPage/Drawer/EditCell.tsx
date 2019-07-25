@@ -125,8 +125,8 @@ class EditCell extends Component<EditCellProps> {
       <Select onChange={this.handleSelect} value={value} optionLabelProp={yearFi ? 'title' : ''} showArrow={false}>
         {options &&
           options.length > 0 &&
-          options.map((option: { value: any; label: string; renderedLabel?: string }) => (
-            <Option value={option.value} key={option.value} title={option.renderedLabel}>
+          options.map((option: { value: any; label: string; renderedLabel?: string; disabled?: boolean }) => (
+            <Option value={option.value} key={option.value} title={option.renderedLabel} disabled={option.disabled}>
               {option.label}
             </Option>
           ))}
