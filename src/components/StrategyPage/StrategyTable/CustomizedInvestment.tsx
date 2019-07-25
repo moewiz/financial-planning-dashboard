@@ -82,8 +82,10 @@ const CustomizedInvestment = (
           value={get(strategy, 'values[0]')}
           onChange={updateListOfInvestmentAccounts}
           calculateWidth={true}
-          placeholder={'Enter portfolio name'}
-          quotationMark={true}
+          options={{
+            placeholder: 'Enter portfolio name',
+            quotationMark: true,
+          }}
         />
         in{' '}
         <EditCell

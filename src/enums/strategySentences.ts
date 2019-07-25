@@ -1,4 +1,4 @@
-import { EditCellType } from '../components/StrategyPage/Drawer/EditCell';
+import {EditCellType} from '../components/StrategyPage/Drawer/EditCell';
 
 export const specificOptions = [{ value: 'specific', label: 'Specific' }, { value: 'custom', label: 'Custom' }];
 export const ddFreeTextOptions = [
@@ -226,9 +226,9 @@ const strategySentences: any = {
   },
   funeralBond: {
     new: {
-      statement: '%name%, utilise {{0}} from {{1}} to purchase a new funeral bond',
-      types: [EditCellType.number, EditCellType.select],
-      options: ['', '+investments'],
+      statement: '%name%, utilise {{0}} from {{1}} to purchase a new funeral bond {{2}}',
+      types: [EditCellType.number, EditCellType.select, EditCellType.text],
+      options: ['', '+investments', { placeholder: 'Enter your funeral bond name', quotationMark: true }],
     },
     existing: {
       statement: '%name%, utilise {{0}} from {{1}} to top up your {{2}}',

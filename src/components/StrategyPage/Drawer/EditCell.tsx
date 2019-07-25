@@ -19,7 +19,6 @@ interface EditCellProps {
   onChange: (value: any, name: string) => void;
   className?: string;
   placeholder?: string;
-  quotationMark?: boolean;
   options?: any;
   defaultFullValue?: any;
   dollar?: boolean;
@@ -158,20 +157,21 @@ class EditCell extends Component<EditCellProps> {
   }
 
   public renderInputText = () => {
-    const { calculateWidth, placeholder, quotationMark, value: propValue } = this.props;
+    const { calculateWidth, value: propValue, options: customOptions } = this.props;
+    const { quotationMark = false, ...options } = customOptions || {};
     const value = propValue ? propValue : '';
     const optionalProps: { [key: string]: any } = {};
 
     if (calculateWidth) {
-      const valueLength = value.length;
-      const numberSize = valueLength > 7 ? 8 : 10;
+      // if empty and placeholder is set
+      const valueLength = value.length === 0 && options.placeholder ? get(options, 'placeholder.length') : value.length;
+      const numberSize = valueLength > 7 ?  8 : 10;
       const minimum = 30;
-      const extraWidth = valueLength > 7 && valueLength < 12 ? 6 : 4;
+      const extraWidth = valueLength > 20 ? -15 : valueLength > 7 && valueLength < 12 ? 6 : 4;
       const width = valueLength * numberSize + extraWidth;
 
       optionalProps.style = {
-        // if empty and placeholder is set
-        width: valueLength === 0 && placeholder ? '140px' : `${width < minimum ? minimum : width}px`,
+        width: `${width < minimum ? minimum : width}px`,
       };
     }
 
@@ -183,20 +183,14 @@ class EditCell extends Component<EditCellProps> {
             onChange={this.onChangeText}
             className={'edit-cell text'}
             {...optionalProps}
-            placeholder={placeholder}
+            {...options}
           />
         </QuotationMark>
       );
     }
 
     return (
-      <Input
-        value={value}
-        onChange={this.onChangeText}
-        className={'edit-cell text'}
-        {...optionalProps}
-        placeholder={placeholder}
-      />
+      <Input value={value} onChange={this.onChangeText} className={'edit-cell text'} {...optionalProps} {...options} />
     );
   }
 
