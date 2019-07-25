@@ -2,7 +2,7 @@ import React from 'react';
 import numeral from 'numeral';
 import { FullyCustomized } from '../Drawer/styled';
 import EditCell, { EditCellType } from '../Drawer/EditCell';
-import { find, get, map, random, findIndex } from 'lodash';
+import { filter, find, get, map, random, findIndex } from 'lodash';
 import { getOptions, StrategyItemProps } from './StrategyItem';
 import { specificOptions } from '../../../enums/strategySentences';
 
@@ -39,7 +39,11 @@ const CustomizedInvestment = (
         ? `${option.label} $(${numeral(investmentIncomePaidOut).format('0,0')})`
         : option.label,
   }));
-  const investmentOptions = getOptions(context, { client, partner }, 'investments');
+  const id = strategy.id || `${strategyIndex}-investment`;
+  const investmentOptions = filter(
+    getOptions(context, { client, partner }, 'investments'),
+    (investment: any) => investment.id !== id,
+  );
   const specificValue = get(strategy, 'values[2]');
   const [investmentValues, setInvestmentValues] = React.useState<any>(get(strategy, 'values[4]'));
   const isCustomSpecific = specificValue === 'custom';
@@ -60,7 +64,6 @@ const CustomizedInvestment = (
   };
   const updateListOfInvestmentAccounts = (val: string, fieldName: string) => {
     const currentInvestmentAccounts = get(props, [context, 'investments'], []);
-    const id = strategy.id || `${strategyIndex}-investment`;
     const existingInvestmentIndex = findIndex(currentInvestmentAccounts, { id });
     if (existingInvestmentIndex !== -1) {
       currentInvestmentAccounts[existingInvestmentIndex].label = val;
