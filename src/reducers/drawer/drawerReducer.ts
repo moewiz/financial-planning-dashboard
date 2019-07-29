@@ -38,8 +38,8 @@ export default class DrawerReducer {
         return state
           .set('loading', false)
           .set('error', '')
-          .set('client', get(action.payload, 'client', []))
-          .set('partner', get(action.payload, 'partner', []));
+          .set('client', get(action.payload, 'client', {}))
+          .set('partner', get(action.payload, 'partner', {}));
       }
 
       case DrawerActionTypes.FETCH_DRAWER_DATA_FAILURE:

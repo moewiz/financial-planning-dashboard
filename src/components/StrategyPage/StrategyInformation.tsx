@@ -9,9 +9,15 @@ import StandardText from './StandardText';
 import { StrategyInfoWrapper, TitleStrategyBlock } from './styled';
 import { Col, Row } from 'antd';
 import GraphContainer, { GraphType } from './Graph/GraphContainer';
-import { StrategyEntry } from '../../reducers/client/clientTypes';
+import { StrategyEntry } from '../../reducers/client';
 import { StandardAction } from '../../reducers/reducerTypes';
-import { DrawerActions, FetchDrawerDataAction, OpenDrawerAction } from '../../reducers/drawer';
+import {
+  DrawerActions,
+  DrawerPayload,
+  FetchDrawerDataAction,
+  FetchDrawerDataSuccessAction,
+  OpenDrawerAction,
+} from '../../reducers/drawer';
 
 interface FormikPartProps {
   formik: FormikContext<StrategyEntry>;
@@ -21,6 +27,7 @@ interface StrategyInformationProps {
   type: StrategyTypes;
   openDrawer: (tabActive: string) => OpenDrawerAction;
   fetchDrawerData: (type: string) => FetchDrawerDataAction;
+  fetchDrawerSuccess: (drawerData: DrawerPayload) => FetchDrawerDataSuccessAction;
 }
 
 const getTitle = (type: StrategyTypes) => {
@@ -91,9 +98,10 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
       e.preventDefault();
     }
 
-    const { openDrawer, type, fetchDrawerData } = this.props;
+    const { openDrawer, type, fetchDrawerSuccess } = this.props;
     openDrawer('client');
-    fetchDrawerData(type);
+    const drawerData = get(this.props, ['formik', 'values', type, 'drawer'], {});
+    fetchDrawerSuccess(drawerData);
   }
 
   public render() {
@@ -309,6 +317,7 @@ const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>
     {
       openDrawer: DrawerActions.openDrawer,
       fetchDrawerData: DrawerActions.fetchDrawerData,
+      fetchDrawerSuccess: DrawerActions.fetchDrawerSuccess,
     },
     dispatch,
   );

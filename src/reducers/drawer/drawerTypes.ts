@@ -2,6 +2,7 @@
 import { PayloadAction } from '../reducerTypes';
 import { Record } from 'immutable';
 import { RowData } from '../../components/StrategyPage/Drawer/DrawerItem';
+import {DrawerData} from "../../components/StrategyPage/Drawer/DrawerContainer";
 
 export interface DrawerState {
   drawerOpen: boolean;
@@ -42,8 +43,14 @@ export enum DrawerActionTypes {
   FETCH_DRAWER_DATA_FAILURE = 'client/FETCH_DRAWER_DATA_FAILURE',
 }
 
+export interface DrawerPayload {
+  client: DrawerData;
+  partner: DrawerData;
+}
+
 export type OpenDrawerAction = PayloadAction<DrawerActionTypes.OPEN_DRAWER, string>;
 export type CloseDrawerAction = PayloadAction<DrawerActionTypes.CLOSE_DRAWER, string>;
 export type ChangePageAction = PayloadAction<DrawerActionTypes.CHANGE_PAGE, number>;
 export type ActiveTabAction = PayloadAction<DrawerActionTypes.ACTIVE_TAB, string>;
 export type FetchDrawerDataAction = PayloadAction<DrawerActionTypes.FETCH_DRAWER_DATA_REQUEST, string>;
+export type FetchDrawerDataSuccessAction = PayloadAction<DrawerActionTypes.FETCH_DRAWER_DATA_SUCCESS, DrawerPayload>;
