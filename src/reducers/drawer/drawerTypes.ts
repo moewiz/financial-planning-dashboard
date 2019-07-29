@@ -2,7 +2,7 @@
 import { PayloadAction } from '../reducerTypes';
 import { Record } from 'immutable';
 import { RowData } from '../../components/StrategyPage/Drawer/DrawerItem';
-import {DrawerData} from "../../components/StrategyPage/Drawer/DrawerContainer";
+import { DrawerData } from '../../components/StrategyPage/Drawer/DrawerContainer';
 
 export interface DrawerState {
   drawerOpen: boolean;
