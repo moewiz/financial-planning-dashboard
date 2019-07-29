@@ -3,9 +3,24 @@
   "client": {
     "name": "John Samual",
     "superannuation": [
-      { "value": 1, "label": "Superannuation Product 1", "fullValue": 1920 },
-      { "value": 2, "label": "Superannuation Product 2", "fullValue": 3254 },
-      { "value": 3, "label": "Superannuation Product 3", "fullValue": 5747 },
+      {
+        "id": 1,
+        "value": 1,
+        "label": "Superannuation Product 1",
+        "fullValue": 1920
+      },
+      {
+        "id": 2,
+        "value": 2,
+        "label": "Superannuation Product 2",
+        "fullValue": 3254
+      },
+      {
+        "id": 3,
+        "value": 3,
+        "label": "Superannuation Product 3",
+        "fullValue": 5747
+      },
       {
         "id": "abc",
         "value": "abc",
@@ -15,22 +30,40 @@
       { "id": "def", "value": "def", "label": "My new pension 2", "fullValue": 1500 }
     ],
     "investments": [
-      { "value": 1, "label": "Investment Product 1", "fullValue": 1920 },
-      { "value": 2, "label": "Investment Product 2", "fullValue": 3811 },
-      { "value": 3, "label": "Investment Product 3", "fullValue": 7600 },
+      {
+        "id": 1,
+        "value": 1,
+        "label": "Investment Product 1",
+        "fullValue": 1920
+      },
+      {
+        "id": 2,
+        "value": 2,
+        "label": "Investment Product 2",
+        "fullValue": 3811
+      },
+      {
+        "id": 3,
+        "value": 3,
+        "label": "Investment Product 3",
+        "fullValue": 7600
+      },
       { "id": "abc", "value": "abc", "label": "My new portfolio 1", "fullValue": 5123 },
       { "id": "def", "value": "def", "label": "My new portfolio 2", "fullValue": 9123 }
     ],
     "loans": [
       {
+        "id": 1,
         "value": 1,
         "label": "Loan 1"
       },
       {
+        "id": 2,
         "value": 2,
         "label": "Loan 2"
       },
       {
+        "id": 3,
         "value": 3,
         "label": "Loan 3"
       }
@@ -96,7 +129,13 @@
         "income": 4000
       }
     ],
-    "funeralBond": []
+    "funeralBond": [
+      {
+        "id": "c86a0f80-aead-11e9-aa31-114c7337aa7a",
+        "value": "c86a0f80-aead-11e9-aa31-114c7337aa7a",
+        "label": "My funeral bond 1"
+      }
+    ]
   },
   "joint": {
     "investments": [],
@@ -149,7 +188,7 @@
       {
         "check": true,
         "sentence": "client.nonConcessional.customRegular",
-        "values": [199.99, "month", "2019-07-09T12:00:00", "2020-07-10T12:00:00"]
+        "values": [199.99, "month", "2019-07-09T12:00:00", "2020-07-10T12:00:00", "abc"]
       },
       {
         "check": false,
@@ -159,12 +198,12 @@
       {
         "check": true,
         "sentence": "client.spouse.oneOff",
-        "values": [2500, 2020]
+        "values": [2500, 2020, "cashflow"]
       },
       {
         "check": true,
         "sentence": "client.recontribution",
-        "values": ["full_value", 1369.99, 2023]
+        "values": ["full_value", 1369.99, 2023, 2]
       }
     ],
     "drawer": {
@@ -1104,7 +1143,7 @@
     ],
     "drawer": {
       "client": {
-        "title": "Title of Drawer for Pension section",
+        "title": "Client Title of Drawer for Pension section",
         "subTitle": "Our insurance recommendation are based on our analysis of your circumstances and ...",
         "footnote": "Note: Recommended sums insured have been rounded to take advantage of pricing point discounts ...",
         "columns": [
@@ -1541,7 +1580,7 @@
         ]
       },
       "partner": {
-        "title": "Your insurance needs",
+        "title": "Partner Title of Drawer for Pension section",
         "subTitle": "Our insurance recommendation are based on our analysis of your circumstances and ...",
         "footnote": "Note: Recommended sums insured have been rounded to take advantage of pricing point discounts ...",
         "columns": [
@@ -2057,7 +2096,7 @@
     ],
     "drawer": {
       "client": {
-        "title": "Title of Drawer for Investments section",
+        "title": "Client Title of Drawer for Investments section",
         "subTitle": "Our insurance recommendation are based on our analysis of your circumstances and ...",
         "footnote": "Note: Recommended sums insured have been rounded to take advantage of pricing point discounts ...",
         "columns": [
@@ -2494,7 +2533,7 @@
         ]
       },
       "partner": {
-        "title": "Your insurance needs",
+        "title": "Partner Title of Drawer for Investments section",
         "subTitle": "Our insurance recommendation are based on our analysis of your circumstances and ...",
         "footnote": "Note: Recommended sums insured have been rounded to take advantage of pricing point discounts ...",
         "columns": [
@@ -2981,7 +3020,7 @@
     ],
     "drawer": {
       "client": {
-        "title": "Title of Drawer for Debt section",
+        "title": "Client Title of Drawer for Debt section",
         "subTitle": "Our insurance recommendation are based on our analysis of your circumstances and ...",
         "footnote": "Note: Recommended sums insured have been rounded to take advantage of pricing point discounts ...",
         "columns": [
@@ -3418,7 +3457,7 @@
         ]
       },
       "partner": {
-        "title": "Your insurance needs",
+        "title": "Partner Title of Drawer for Debt section",
         "subTitle": "Our insurance recommendation are based on our analysis of your circumstances and ...",
         "footnote": "Note: Recommended sums insured have been rounded to take advantage of pricing point discounts ...",
         "columns": [
@@ -3891,7 +3930,7 @@
         "id": "c86a0f80-aead-11e9-aa31-114c7337aa7a",
         "check": true,
         "sentence": "partner.funeralBond.new",
-        "values": [150, 2]
+        "values": [150, 2, "My funeral bond 1"]
       },
       {
         "check": true,
@@ -3906,7 +3945,7 @@
     ],
     "drawer": {
       "client": {
-        "title": "Title of Drawer for Centrelink section",
+        "title": "Client Title of Drawer for Centrelink section",
         "subTitle": "Our insurance recommendation are based on our analysis of your circumstances and ...",
         "footnote": "Note: Recommended sums insured have been rounded to take advantage of pricing point discounts ...",
         "columns": [
@@ -4343,7 +4382,7 @@
         ]
       },
       "partner": {
-        "title": "Your insurance needs",
+        "title": "Partner Title of Drawer for Centrelink section",
         "subTitle": "Our insurance recommendation are based on our analysis of your circumstances and ...",
         "footnote": "Note: Recommended sums insured have been rounded to take advantage of pricing point discounts ...",
         "columns": [
