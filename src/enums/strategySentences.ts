@@ -1,4 +1,4 @@
-import {EditCellType} from '../components/StrategyPage/Drawer/EditCell';
+import { EditCellType } from '../components/StrategyPage/Drawer/EditCell';
 
 export const specificOptions = [{ value: 'specific', label: 'Specific' }, { value: 'custom', label: 'Custom' }];
 export const ddFreeTextOptions = [
@@ -36,28 +36,29 @@ export const paydownOptions = [
 const strategySentences: any = {
   salarySacrifice: {
     maximise: {
-      statement: '%name%, maximise salary sacrifice contributions from {{0}} to {{1}}',
-      types: [EditCellType.date, EditCellType.date],
+      statement: '%name%, maximise salary sacrifice contributions into {{0}} from {{1}} to {{2}}',
+      types: [EditCellType.select, EditCellType.date, EditCellType.date],
+      options: ['superannuation'],
     },
     fixedRegular: {
       /**
        * %name%, name is a key of client/partner object in JSON, we will render the value of this key to layout
        * {{0}} indicate to input
        */
-      statement: '%name%, salary sacrifice {{0}} per {{1}} from {{2}} to {{3}}',
-      types: [EditCellType.number, EditCellType.select, EditCellType.date, EditCellType.date],
+      statement: '%name%, salary sacrifice {{0}} per {{1}} into {{2}} from {{3}} to {{4}}',
+      types: [EditCellType.number, EditCellType.select, EditCellType.select, EditCellType.date, EditCellType.date],
       /**
        * - option is a string, we understand the option is a key of client/partner object in JSON,
        *  for example: superannuation, investments, loans,...
        * - options is `year`, we should use a custom options
        * - options is an array, we set the values of option as a options of select
        */
-      options: ['', periodTypes],
+      options: ['', periodTypes, 'superannuation'],
     },
     customOneOff: {
-      statement: '%name%, salary sacrifice {{0}} in {{1}}',
-      types: [EditCellType.number, EditCellType.select],
-      options: ['', 'year'],
+      statement: '%name%, salary sacrifice {{0}} into {{1}} in {{2}}',
+      types: [EditCellType.number, EditCellType.select, EditCellType.select],
+      options: ['', 'superannuation', 'year'],
     },
   },
   nonConcessional: {
@@ -122,7 +123,8 @@ const strategySentences: any = {
   },
   recontribution: {
     statement:
-      '%name%, withdraw {{0}} from superannuation and recontribute {{1}}' + 'back into superannuation in {{2}}. ' +
+      '%name%, withdraw {{0}} from superannuation and recontribute {{1}}' +
+      'back into superannuation in {{2}}. ' +
       'This contribution is to be funded from {{3}}',
     types: [EditCellType.dropdownFreeText, EditCellType.dropdownFreeText, EditCellType.select, EditCellType.select],
     options: ['', '', 'year', 'superannuation'],

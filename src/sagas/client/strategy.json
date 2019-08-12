@@ -180,12 +180,12 @@
       {
         "check": true,
         "sentence": "client.salarySacrifice.maximise",
-        "values": ["2019-07-09T12:00:00", "2020-07-10T12:00:00"]
+        "values": [1, "2019-07-09T12:00:00", "2020-07-10T12:00:00"]
       },
       {
         "check": true,
         "sentence": "partner.salarySacrifice.fixedRegular",
-        "values": [3500, "annum", "2019-07-09T12:00:00", "2020-07-10T12:00:00"]
+        "values": [3500, "annum", 4, "2019-07-09T12:00:00", "2020-07-10T12:00:00"]
       },
       {
         "check": true,
@@ -195,7 +195,7 @@
       {
         "check": false,
         "sentence": "partner.salarySacrifice.customOneOff",
-        "values": [2500, 2020]
+        "values": [2500, 5, 2020]
       },
       {
         "check": true,
