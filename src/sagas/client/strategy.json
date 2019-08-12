@@ -1,4 +1,6 @@
 {
+  "clientId": 5,
+  "soaId": 1,
   "defaultFullValue": 2210,
   "client": {
     "name": "John Samual",
