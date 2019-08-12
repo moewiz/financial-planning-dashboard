@@ -135,46 +135,17 @@ const strategySentences: any = {
   existingInvestment: {
     lumpSum: {
       custom: true,
-      statement: '%name%, withdraw {{0}} in {{1}} from your {{2}} and invest the proceeds to your {{3}}',
-      types: [EditCellType.number, EditCellType.date, EditCellType.select, EditCellType.select],
-      options: ['', '', '+investments', '+investments'],
     },
     regular: {
       custom: true,
-      statement:
-        '%name%, make a regular contribution of {{0}} per {{1}} from {{2}} to {{3}} into your {{4}} from {{5}}',
-      types: [
-        EditCellType.number,
-        EditCellType.select,
-        EditCellType.date,
-        EditCellType.date,
-        EditCellType.select,
-        EditCellType.select,
-      ],
-      options: ['', periodTypes, '', '', '+investments', '+investments'],
     },
   },
   withdrawFunds: {
     lumpSum: {
       custom: true,
-      statement: '%name%, make a lump sum withdawal of {{0}} in {{1}} from your {{2}}. Direct the proceeds into {{3}}',
-      types: [EditCellType.number, EditCellType.date, EditCellType.select, EditCellType.select],
-      options: ['', '', '+investments', '+investments'],
     },
     regular: {
       custom: true,
-      statement:
-        '%name%, make a regular withdawal of {{0}} per {{1}} from {{2}} to {{3}} to your {{4}}. ' +
-        'Direct to proceeds into {{5}}',
-      types: [
-        EditCellType.number,
-        EditCellType.select,
-        EditCellType.date,
-        EditCellType.date,
-        EditCellType.select,
-        EditCellType.select,
-      ],
-      options: ['', periodTypes, '', '', '+investments', '+investments'],
     },
   },
   payDownLoan: {

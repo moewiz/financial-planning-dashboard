@@ -2083,7 +2083,7 @@
       {
         "check": false,
         "sentence": "client.existingInvestment.regular",
-        "values": [2, "2020-07-10T12:00:00", "2022-07-10T12:00:00", 3]
+        "values": [300, "month", 2, "2020-07-10T12:00:00", "2022-07-10T12:00:00", 3]
       },
       {
         "check": true,

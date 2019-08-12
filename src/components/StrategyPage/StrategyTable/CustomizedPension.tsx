@@ -22,7 +22,7 @@ const CustomizedPension = (
     setFieldValue,
   } = props;
   const id = strategy.id || `${strategyIndex}-superannuation`;
-  const pensionIncomeOptions = map(getOptions(context, { client, partner }, 'pensionIncome'), option => ({
+  const pensionIncomeOptions = map(getOptions(context, { client, partner }, 'pensionIncome'), (option) => ({
     ...option,
     label: option.income ? `${option.label} $(${numeral(option.income).format('0,0')})` : option.label,
   }));
@@ -126,7 +126,7 @@ const CustomizedPension = (
                 name={`${strategyType}.strategies[${strategyIndex}].values[4][${index}]`}
                 type={EditCellType.number}
                 value={get(strategy, ['values', 4, index])}
-                onChange={val => {
+                onChange={(val) => {
                   asyncUpdateFullValue(val);
                 }}
                 dollar={true}
@@ -146,7 +146,7 @@ const CustomizedPension = (
           value={pensionIncome}
           type={EditCellType.select}
           options={pensionIncomeOptions}
-          onChange={val => setPensionIncome(val)}
+          onChange={(val) => setPensionIncome(val)}
         />{' '}
         {pensionIncome === 'specific' && (
           <EditCell

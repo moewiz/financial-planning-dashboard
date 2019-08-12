@@ -4,7 +4,7 @@ import { FullyCustomized } from '../Drawer/styled';
 import EditCell, { EditCellType } from '../Drawer/EditCell';
 import { find, get, random, map } from 'lodash';
 import { getOptions, StrategyItemProps } from './StrategyItem';
-import { specificOptions } from '../../../enums/strategySentences';
+import { periodTypes, specificOptions } from '../../../enums/strategySentences';
 
 const CustomizedExistingInvestment = (
   props: StrategyItemProps & { name: string; context: string; sentenceKey: string; defaultFullValue: number },
@@ -24,7 +24,7 @@ const CustomizedExistingInvestment = (
   const investmentOptions = getOptions(context, { client, partner }, 'investments');
   const investmentOptions2 = [...investmentOptions, { value: 'cashflow', label: 'Cashflow' }];
   const [fullValue, setFullValue] = React.useState<number>(
-    get(find(investmentOptions, { value: get(strategy, 'values[3]') }), 'fullValue', 0),
+    get(find(investmentOptions, { value: get(strategy, ['values', isRegular ? 5 : 3]) }), 'fullValue', 0),
   );
   const updateFullValue = (val: any, fieldName: string) => {
     setFieldValue(fieldName, val);
@@ -34,25 +34,42 @@ const CustomizedExistingInvestment = (
   if (isRegular) {
     return (
       <FullyCustomized>
-        {fullName}, make a regular contribution into{' '}
+        {fullName}, make a regular contribution of
         <EditCell
           name={`${strategyType}.strategies[${strategyIndex}].values[0]`}
           value={get(strategy, 'values[0]')}
+          type={EditCellType.number}
+          onChange={(val, fieldName) => setFieldValue(fieldName, val)}
+          dollar={true}
+          calculateWidth={true}
+        />
+        per
+        <EditCell
+          name={`${strategyType}.strategies[${strategyIndex}].values[1]`}
+          value={get(strategy, 'values[1]')}
+          onChange={(val, fieldName) => setFieldValue(fieldName, val)}
+          type={EditCellType.select}
+          options={periodTypes}
+        />
+        into
+        <EditCell
+          name={`${strategyType}.strategies[${strategyIndex}].values[2]`}
+          value={get(strategy, 'values[2]')}
           type={EditCellType.select}
           options={investmentOptions}
           onChange={(val, name) => setFieldValue(name, val)}
         />
         from
         <EditCell
-          name={`${strategyType}.strategies[${strategyIndex}].values[1]`}
-          value={get(strategy, 'values[1]')}
+          name={`${strategyType}.strategies[${strategyIndex}].values[3]`}
+          value={get(strategy, 'values[3]')}
           type={EditCellType.date}
           onChange={(val, name) => setFieldValue(name, val)}
         />
         to
         <EditCell
-          name={`${strategyType}.strategies[${strategyIndex}].values[2]`}
-          value={get(strategy, 'values[2]')}
+          name={`${strategyType}.strategies[${strategyIndex}].values[4]`}
+          value={get(strategy, 'values[4]')}
           type={EditCellType.date}
           onChange={(val, name) => setFieldValue(name, val)}
         />
@@ -60,8 +77,8 @@ const CustomizedExistingInvestment = (
         <span>
           The contributions are to be funded from
           <EditCell
-            name={`${strategyType}.strategies[${strategyIndex}].values[3]`}
-            value={get(strategy, 'values[3]')}
+            name={`${strategyType}.strategies[${strategyIndex}].values[5]`}
+            value={get(strategy, 'values[5]')}
             type={EditCellType.select}
             options={investmentOptions2}
             onChange={(val, name) => setFieldValue(name, val)}
