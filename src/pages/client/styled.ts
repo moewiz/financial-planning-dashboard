@@ -29,6 +29,22 @@ export const TableEntryContainer = styled.section.attrs({
       }
     }
   }
+  .product-optimizer-table{
+    .ant-table-thead{
+      tr{
+        th:first-child{
+          padding-left: 36px
+        }
+      }
+    }
+    .ant-table-tbody{
+      tr{
+        td:first-child{
+          padding-left: 36px;
+        }
+      }
+    }
+  }
   /* table layout here */
   .table-general{
     table{

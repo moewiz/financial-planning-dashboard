@@ -1,6 +1,11 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { bindActionCreators, Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import { get, isEqual, find } from 'lodash';
+import { Layout, Icon } from 'antd';
+const { Content } = Layout;
+
 import { RootState, StandardAction } from '../../reducers/reducerTypes';
 import {
   Client as IClient,
@@ -10,16 +15,13 @@ import {
   FetchDataEntryPayload,
   Tag,
 } from '../../reducers/client';
-import { connect } from 'react-redux';
-import { get, isEqual, find } from 'lodash';
-import { Layout, Icon } from 'antd';
-const { Content } = Layout;
+import { Tab } from '../../enums/client';
 import Heading from '../../components/Heading/Heading';
 import { ButtonModalFixed } from '../../components/NameAndBirthDay/styled';
 import { HomeDesc, HomePage } from '../home/styled';
 import DataEntryComponent from '../../components/ClientDetailPage/DataEntry';
 import StrategyPage from '../../components/StrategyPage/StrategyPage';
-import { Tab } from '../../enums/client';
+import ProductOptimizer from './productOptimizer';
 
 const getParams = (params: { clientId?: string; tagName?: string; tabName?: string }) => {
   return {
@@ -82,6 +84,9 @@ class Client extends React.PureComponent<RouteComponentProps & ClientProps> {
         }
         case Tab.Strategy: {
           return <StrategyPage clientId={clientId} pageData={pageData} />;
+        }
+        case Tab.ProductOptimizer: {
+          return <ProductOptimizer clientId={clientId} pageData={pageData} />;
         }
         default: {
           return (
