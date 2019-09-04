@@ -1,16 +1,21 @@
 import React, { PureComponent } from 'react';
+import { Icon, Table } from 'antd';
+
 import { HeaderTitleTable, TableEntryContainer, TextTitle } from '../../pages/client/styled';
-import { Icon } from 'antd';
-import GeneralTable from '../../components/ClientDetailPage/GeneralTable';
+import { Projections } from '../../components/Icons';
 
 const data = [
   {
-    description: 'product A',
-    value: 5000,
+    description: 'Product A',
+    value: '10,000',
   },
   {
-    description: 'product B',
-    value: 3000,
+    description: 'Product B',
+    value: '10,000',
+  },
+  {
+    description: 'Product C',
+    value: '10,000',
   },
 ];
 
@@ -24,6 +29,7 @@ class CurrentProduct extends PureComponent {
       dataIndex: 'description',
       type: 'text',
       key: '0',
+      editable: true,
     },
     {
       title: 'Value',
@@ -31,8 +37,19 @@ class CurrentProduct extends PureComponent {
       type: 'number',
       key: '1',
     },
+    {
+      title: '',
+      key: 'operation',
+      render: (text: any, record: any) => (
+        <>
+          <Icon component={Projections} style={{ marginRight: 10 }} />
+          <Icon type="close-square" style={{ fontSize: '16px' }} />
+        </>
+      ),
+      width: 60,
+    },
   ];
-  private tableName = 'product-optimizer';
+  private tableName = 'current-product';
 
   public handleAdd = () => {
     console.log('add new current product');
@@ -47,12 +64,11 @@ class CurrentProduct extends PureComponent {
           <Icon type={'plus-square'} theme={'filled'} onClick={this.handleAdd} />
           <TextTitle small={true}>Current</TextTitle>
         </HeaderTitleTable>
-        <GeneralTable
-          loading={loading || false}
+        <Table
+          className={`table-general ${this.tableName}-table`}
           columns={this.columns}
           dataSource={data}
           pagination={false}
-          className={`${this.tableName}-table`}
         />
       </TableEntryContainer>
     );

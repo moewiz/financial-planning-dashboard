@@ -29,7 +29,7 @@ export const TableEntryContainer = styled.section.attrs({
       }
     }
   }
-  .product-optimizer-table{
+  .current-product-table{
     .ant-table-thead{
       tr{
         th:first-child{
@@ -44,6 +44,18 @@ export const TableEntryContainer = styled.section.attrs({
         }
       }
     }
+  }
+  .proposed-product-table{
+    .ant-table-thead{
+      tr{
+        th:first-child{
+          padding-left: 36px
+        }
+      }
+    }
+  }
+  .text-align-center {
+    text-align: center;
   }
   /* table layout here */
   .table-general{
@@ -74,9 +86,9 @@ export const TableEntryContainer = styled.section.attrs({
         }
       }
     }
-    .ant-select{
-      margin-left: -10px;
-    }
+  .ant-select{
+    margin-left: -10px;
+  }
   .ant-table-expand-icon-col{
     width: 40px;
   }
