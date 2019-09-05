@@ -4,6 +4,7 @@ import { Icon, Table } from 'antd';
 import { HeaderTitleTable, TableEntryContainer, TextTitle } from '../../pages/client/styled';
 import { Projections } from '../../components/Icons';
 import NewProposedProduct from '../../components/ProductOptimizer/NewProposedProduct';
+import { ProductProps } from '../../pages/client/productOptimizer/ProductOptimizer';
 
 const data = [
   {
@@ -12,7 +13,7 @@ const data = [
   },
 ];
 
-class ProposedProduct extends PureComponent {
+class ProposedProduct extends PureComponent<ProductProps> {
   public columns = [
     {
       title: '',
@@ -39,7 +40,7 @@ class ProposedProduct extends PureComponent {
       key: 'operation',
       render: (text: any, record: any) => (
         <>
-          <Icon component={Projections} style={{ marginRight: 10 }} />
+          <Icon component={Projections} style={{ marginRight: 10 }} onClick={this.openDrawer} />
           <Icon type="close-square" style={{ fontSize: '16px' }} />
         </>
       ),
@@ -48,7 +49,12 @@ class ProposedProduct extends PureComponent {
   ];
   private tableName = 'proposed-product';
 
-  onAdd = (data: any) => {
+  public openDrawer = () => {
+    const { openDrawer } = this.props;
+    openDrawer();
+  }
+
+  public onAdd = (data: any) => {
     console.log('add', data);
   }
 

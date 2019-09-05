@@ -3,6 +3,7 @@ import { Icon, Table } from 'antd';
 
 import { HeaderTitleTable, TableEntryContainer, TextTitle } from '../../pages/client/styled';
 import { Projections } from '../../components/Icons';
+import { ProductProps } from '../../pages/client/productOptimizer/ProductOptimizer';
 
 const data = [
   {
@@ -19,7 +20,7 @@ const data = [
   },
 ];
 
-class CurrentProduct extends PureComponent {
+class CurrentProduct extends PureComponent<ProductProps> {
   public state = {
     loading: false,
   };
@@ -42,7 +43,7 @@ class CurrentProduct extends PureComponent {
       key: 'operation',
       render: (text: any, record: any) => (
         <>
-          <Icon component={Projections} style={{ marginRight: 10 }} />
+          <Icon component={Projections} style={{ marginRight: 10 }} onClick={this.openDrawer} />
           <Icon type="close-square" style={{ fontSize: '16px' }} />
         </>
       ),
@@ -53,6 +54,11 @@ class CurrentProduct extends PureComponent {
 
   public handleAdd = () => {
     console.log('add new current product');
+  }
+
+  public openDrawer = () => {
+    const { openDrawer } = this.props;
+    openDrawer();
   }
 
   public render() {
