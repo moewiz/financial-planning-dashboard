@@ -3,6 +3,7 @@ import { Icon, Table } from 'antd';
 
 import { HeaderTitleTable, TableEntryContainer, TextTitle } from '../../pages/client/styled';
 import { Projections } from '../../components/Icons';
+import NewProposedProduct from '../../components/ProductOptimizer/NewProposedProduct';
 
 const data = [
   {
@@ -12,17 +13,12 @@ const data = [
 ];
 
 class ProposedProduct extends PureComponent {
-  public state = {
-    loading: false,
-  };
   public columns = [
     {
       title: '',
       key: 'link',
       className: 'text-align-center',
-      render: (text: any, record: any) => (
-        <Icon type="link" style={{ transform: 'rotate(45deg)' }} />
-      ),
+      render: (text: any, record: any) => <Icon type="link" style={{ transform: 'rotate(45deg)' }} />,
       width: 30,
     },
     {
@@ -52,19 +48,14 @@ class ProposedProduct extends PureComponent {
   ];
   private tableName = 'proposed-product';
 
-  public handleAdd = () => {
-    console.log('add new proposed product');
+  onAdd = (data: any) => {
+    console.log('add', data);
   }
 
   public render() {
-    const { loading } = this.state;
-
     return (
       <TableEntryContainer>
-        <HeaderTitleTable>
-          <Icon type={'plus-square'} theme={'filled'} onClick={this.handleAdd} />
-          <TextTitle small={true}>Proposed</TextTitle>
-        </HeaderTitleTable>
+        <NewProposedProduct onAdd={this.onAdd} />
         <Table
           className={`table-general ${this.tableName}-table`}
           columns={this.columns}
