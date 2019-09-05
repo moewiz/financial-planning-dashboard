@@ -33,6 +33,10 @@ const getParams = (params: { clientId?: string; tagName?: string; tabName?: stri
 
 interface ClientProps {
   pageData: any;
+  client?: {
+    clientId: number;
+    clientName: string;
+  };
   fetchDataEntry?: (payload: FetchDataEntryPayload) => FetchDataEntryAction;
 }
 
@@ -74,10 +78,10 @@ class Client extends React.PureComponent<RouteComponentProps & ClientProps> {
   }
 
   public render(): JSX.Element {
-    const { match, pageData } = this.props;
+    const { match, pageData, client } = this.props;
     const { clientId, tagName, tabName } = getParams(match.params);
 
-    if (clientId && tagName && tabName) {
+    if (client && clientId && tagName && tabName) {
       switch (tabName) {
         case Tab.Current: {
           return <DataEntryComponent clientId={clientId} tabName={tabName} tagName={tagName} empStatus={''} />;
@@ -92,7 +96,7 @@ class Client extends React.PureComponent<RouteComponentProps & ClientProps> {
           return (
             <HomePage select>
               <Content>
-                <Heading level={2} className="subHeading" titleText="Hi John we missed you." />
+                <Heading level={2} className="subHeading" titleText={`Hi ${client.clientName} we missed you.`} />
                 <HomeDesc>Click the plus button to start your advice</HomeDesc>
                 <ButtonModalFixed size="large" shape="circle" type="primary">
                   <Icon type="plus" />
@@ -107,7 +111,7 @@ class Client extends React.PureComponent<RouteComponentProps & ClientProps> {
     return (
       <HomePage select>
         <Content>
-          <Heading level={2} className="subHeading" titleText="Hi John we missed you." />
+          <Heading level={2} className="subHeading" titleText={`Hi ${client && client.clientName} we missed you.`} />
           <HomeDesc>Click the plus button to start your advice</HomeDesc>
           <ButtonModalFixed size="large" shape="circle" type="primary">
             <Icon type="plus" />
@@ -137,6 +141,7 @@ const mapStateToProps = (state: RootState, ownProps: RouteComponentProps & Clien
   return {
     pageData,
     loading: state.client.get('loading'),
+    client,
   };
 };
 

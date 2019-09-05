@@ -99,6 +99,11 @@ export const defaultClientState: ClientState = {
       clientName: 'John Samual',
       tagList: getDefaultTagList(),
     },
+    {
+      clientId: 999,
+      clientName: 'Jane Empty',
+      tagList: getDefaultTagList(),
+    },
   ],
   assets: [],
   maritalStatus: '',
