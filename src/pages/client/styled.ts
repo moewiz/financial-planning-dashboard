@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface HeaderTitleTableProps {
   small?: boolean;
@@ -10,8 +10,14 @@ interface TextTitleProps {
 
 export const TableEntryContainer = styled.section.attrs({
   className: 'table-entry-container',
-})`
+})<{ drawer?: boolean }>`
   padding: 20px;
+  ${(props) =>
+    props.drawer &&
+    css`
+      margin-top: 40px;
+      padding: 20px 0;
+    `}
   .expenditure-table,
   .income-table{
     .ant-table-thead{
@@ -41,6 +47,25 @@ export const TableEntryContainer = styled.section.attrs({
       tr{
         td:first-child{
           padding-left: 36px;
+        }
+      }
+    }
+  }
+  .drawer-fund-table {
+    .ant-table-thead{
+      tr{
+        th:first-child{
+          padding-left: 36px
+        }
+      }
+    }
+    .ant-table-tbody{
+      tr{
+        td:first-child{
+          padding-left: 36px;
+        }
+        &:last-child {
+          font-weight: 600;
         }
       }
     }
@@ -138,10 +163,10 @@ export const HeaderTitleTable = styled.div.attrs({
     font-size: ${(props) => (props.small ? '16px' : '24px')};
     color: #072074;
     margin-right: 10px;
-    &:focus{
+    &:focus {
       outline: none;
     }
-     &:hover{
+    &:hover {
       opacity: 0.7;
     }
   }
@@ -165,7 +190,7 @@ export const InnerTableNoDelContainer = styled.section`
   color: #072074;
   font-size: 21px;
   margin-bottom: 20px;
-  .SGContribution-table{
+  .SGContribution-table {
     // max-width: 640px;
     // width: 100%
   }
@@ -204,71 +229,71 @@ export const InnerTableContainer = styled.section`
   color: #072074;
   margin-top: 10px;
   font-size: 21px;
-  .contribution-withdrawals-table{
+  .contribution-withdrawals-table {
     // max-width: 700px;
     // width: 100%
   }
 
   .ant-table-wrapper {
-    &.cover-details-table{
+    &.cover-details-table {
       table {
-        colgroup{
-          .ant-table-expand-icon-col{
+        colgroup {
+          .ant-table-expand-icon-col {
             display: none;
           }
         }
-        .ant-table-thead > tr > th{
-          &:first-child{
+        .ant-table-thead > tr > th {
+          &:first-child {
             display: none;
           }
         }
-        .ant-table-tbody > tr > td{
-          &:first-child{
+        .ant-table-tbody > tr > td {
+          &:first-child {
             display: none;
           }
         }
       }
-      .ant-table-row-expand-icon-cell{
+      .ant-table-row-expand-icon-cell {
         opacity: 0;
         visibility: hidden;
       }
       tr.ant-table-expanded-row,
-      tr.ant-table-expanded-row:hover{
+      tr.ant-table-expanded-row:hover {
         background: transparent;
       }
     }
   }
-  .ant-input-number.ant-input-number-sm.smallInput{
+  .ant-input-number.ant-input-number-sm.smallInput {
     border: none;
   }
   .ant-table-small {
     border: none;
     table {
       margin-left: -24px;
-      .table-expand-datepicker{
-        .dropdown-value{
+      .table-expand-datepicker {
+        .dropdown-value {
           border: 1px solid #d9d9d9;
-          &:hover{
+          &:hover {
             border: 1px solid #515c83;
           }
         }
-        .has-none .anticon-calendar{
+        .has-none .anticon-calendar {
           // display: block;
         }
       }
-      .operation{
+      .operation {
         position: relative;
-        .anticon-close-square{
+        .anticon-close-square {
           position: absolute;
           left: -9px;
           top: 12px;
         }
       }
-       /* margin-left: -32px; */
-       @media(max-width: 1369px){
+      /* margin-left: -32px; */
+      @media (max-width: 1369px) {
         /* margin-left: -21px; */
-       }
-     }
+      }
+    }
     & > .ant-table-content > .ant-table-body {
       margin: 0;
     }

@@ -352,11 +352,17 @@ export const DrawerTableListItems = styled.div`
   }
 `;
 
-export const ActionDrawerGeneral = styled.section<{ visible?: boolean }>`
+export const ActionDrawerGeneral = styled.section<{ visible?: boolean; drawer?: boolean }>`
   display: flex;
   margin: 20px 0 0px 0px;
   flex: 0 0 100%;
   justify-content: flex-end;
+  ${(props) =>
+    props.drawer &&
+    css`
+      flex-direction: column;
+      justify-content: flex-start;
+    `}
   .ant-btn-default {
     background-color: #212121;
     color: #fff;

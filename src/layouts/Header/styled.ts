@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Input } from 'antd';
 
 export const TopMenu = styled.div`
@@ -12,7 +12,6 @@ export const TopMenu = styled.div`
 
 export const InputSearch = styled(Input)`
   border: none;
-  margin-left: 10px;
   color: #515C83;
   &:focus{
     outline: none;
@@ -21,9 +20,18 @@ export const InputSearch = styled(Input)`
   }
 `;
 
-export const TopSearch = styled.div`
+export const TopSearch = styled.div<{ border?: boolean }>`
   display: flex;
   align-items: center;
+  ${(props) =>
+    props.border &&
+    css`
+      border: 1px solid #999;
+      margin-top: 20px;
+      padding: 0 0 0 10px;
+      width: 340px;
+    `
+  }
 `;
 
 export const MenuItem = styled.div`
