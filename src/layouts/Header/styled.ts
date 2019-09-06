@@ -28,9 +28,16 @@ export const TopSearch = styled.div<{ border?: boolean }>`
     css`
       border: 1px solid #999;
       margin-top: 20px;
-      padding: 0 0 0 10px;
+      padding: 0 10px;
       max-width: 340px;
     `
+  }
+  .custom-select {
+    width: 100%;
+    .ant-select-selection {
+      border: none;
+      box-shadow: none;
+    }
   }
 `;
 

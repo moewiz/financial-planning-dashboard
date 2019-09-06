@@ -7,6 +7,7 @@ import { DrawerTitle, ActionDrawerGeneral, DrawerSubContent } from '../../Strate
 import { InputSearch, TopSearch } from '../../../layouts/Header/styled';
 import FundTable from './FundTable';
 import { DrawerProductWrapper, FundBlock, FundTabContent, HorizontalScrollable } from '../styled';
+import CustomSearch from './CustomSearch';
 
 export interface Product {
   id?: number;
@@ -68,26 +69,14 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
       <>
         <FundTabContent>
           <FundBlock>
-            <TopSearch border>
-              <Icon type="search" />
-              <InputSearch placeholder="Search Product" />
-            </TopSearch>
-            <TopSearch border>
-              <Icon type="search" />
-              <InputSearch placeholder="Search Proposed Fund" />
-            </TopSearch>
+            <CustomSearch placeholder="Search Product" />
+            <CustomSearch placeholder="Search Proposed Fund" />
           </FundBlock>
           <HorizontalScrollable>
             {map(product.links, (linkedProduct: Product) => (
               <FundBlock key={linkedProduct.id}>
-                <TopSearch border>
-                  <Icon type="search" />
-                  <InputSearch placeholder="Search Product" />
-                </TopSearch>
-                <TopSearch border>
-                  <Icon type="search" />
-                  <InputSearch placeholder="Search Proposed Fund" />
-                </TopSearch>
+                <CustomSearch placeholder="Search Product" />
+                <CustomSearch placeholder="Search Proposed Fund" />
               </FundBlock>
             ))}
           </HorizontalScrollable>
@@ -132,14 +121,8 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
       <DrawerProductWrapper>
         <DrawerTitle>My Product</DrawerTitle>
         <ActionDrawerGeneral drawer>
-          <TopSearch border>
-            <Icon type="search" />
-            <InputSearch placeholder="Search Product" />
-          </TopSearch>
-          <TopSearch border>
-            <Icon type="search" />
-            <InputSearch placeholder="Search Fund" />
-          </TopSearch>
+          <CustomSearch placeholder="Search Product" />
+          <CustomSearch placeholder="Search Fund" />
         </ActionDrawerGeneral>
 
         <FundTable columns={this.columns} data={data} />
