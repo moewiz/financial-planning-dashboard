@@ -22,3 +22,26 @@ export const ProposePopup = styled.div`
 export const ProposeItem = styled.div`
   margin: 4px 0;
 `;
+
+export const DrawerProductWrapper = styled.div`
+  .ant-tabs-bar {
+    margin: 0;
+  }
+`;
+
+export const FundTabContent = styled.div`
+  display: flex;
+`;
+
+export const FundBlock = styled.div`
+  flex: 0 0 340px;
+  margin: 0 8px;
+`;
+
+export const HorizontalScrollable = styled.div`
+  flex: 1;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  display: flex;
+  overflow: overlay;
+`;

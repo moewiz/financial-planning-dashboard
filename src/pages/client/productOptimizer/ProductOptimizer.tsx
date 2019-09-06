@@ -8,7 +8,7 @@ import { TabPanStyled } from './styled';
 import DrawerProduct from '../../../components/ProductOptimizer/Drawer/DrawerProduct';
 
 export interface ProductProps {
-  openDrawer: () => void;
+  openDrawer: (record?: any) => void;
 }
 
 interface ProductOptimizerProps {
@@ -19,8 +19,10 @@ interface ProductOptimizerProps {
 
 const ProductOptimizer = (props: ProductOptimizerProps) => {
   const [isOpen, setDrawerVisible] = React.useState<boolean>(false);
-  const openDrawer = () => {
+  const [product, setProduct] = React.useState<any>(undefined);
+  const openDrawer = (record?: any) => {
     setDrawerVisible(true);
+    setProduct(record);
   };
   const closeDrawer = () => {
     setDrawerVisible(false);
@@ -38,7 +40,7 @@ const ProductOptimizer = (props: ProductOptimizerProps) => {
           <ProposedProduct openDrawer={openDrawer} />
         </TabPanStyled>
       </Tabs>
-      <DrawerProduct isOpen={isOpen} close={closeDrawer} />
+      <DrawerProduct isOpen={isOpen} close={closeDrawer} product={product} />
     </StrategyPageWrapper>
   );
 };

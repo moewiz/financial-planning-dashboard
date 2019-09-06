@@ -29,7 +29,7 @@ export const TopSearch = styled.div<{ border?: boolean }>`
       border: 1px solid #999;
       margin-top: 20px;
       padding: 0 0 0 10px;
-      width: 340px;
+      max-width: 340px;
     `
   }
 `;

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Icon, Table } from 'antd';
 
-import { HeaderTitleTable, TableEntryContainer, TextTitle } from '../../pages/client/styled';
+import { TableEntryContainer } from '../../pages/client/styled';
 import { Projections } from '../../components/Icons';
 import NewProposedProduct from '../../components/ProductOptimizer/NewProposedProduct';
 import { ProductProps } from '../../pages/client/productOptimizer/ProductOptimizer';
@@ -10,6 +10,16 @@ const data = [
   {
     description: 'New proposed 1',
     value: '10,000',
+  },
+  {
+    description: 'Proposed 2',
+    value: '10,000',
+    links: [
+      {
+        id: 1,
+        description: 'Product C',
+      },
+    ],
   },
 ];
 
@@ -40,7 +50,7 @@ class ProposedProduct extends PureComponent<ProductProps> {
       key: 'operation',
       render: (text: any, record: any) => (
         <>
-          <Icon component={Projections} style={{ marginRight: 10 }} onClick={this.openDrawer} />
+          <Icon component={Projections} style={{ marginRight: 10 }} onClick={() => this.openDrawer(record)} />
           <Icon type="close-square" style={{ fontSize: '16px' }} />
         </>
       ),
@@ -49,9 +59,9 @@ class ProposedProduct extends PureComponent<ProductProps> {
   ];
   private tableName = 'proposed-product';
 
-  public openDrawer = () => {
+  public openDrawer = (record: any) => {
     const { openDrawer } = this.props;
-    openDrawer();
+    openDrawer(record);
   }
 
   public onAdd = (data: any) => {

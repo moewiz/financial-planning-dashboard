@@ -362,6 +362,7 @@ export const ActionDrawerGeneral = styled.section<{ visible?: boolean; drawer?: 
     css`
       flex-direction: column;
       justify-content: flex-start;
+      margin: 0;
     `}
   .ant-btn-default {
     background-color: #212121;
@@ -370,7 +371,7 @@ export const ActionDrawerGeneral = styled.section<{ visible?: boolean; drawer?: 
   .ant-btn {
     font-weight: 600;
     margin-right: 15px;
-    width: 135px;
+    min-width: 135px;
     opacity: ${(props) => (props.visible ? '1' : '0.7')};
     height: 38px;
     border-radius: 18px;

@@ -1,13 +1,24 @@
 import React, { PureComponent } from 'react';
-import { Button, Drawer, Icon, Table } from 'antd';
+import { map } from 'lodash';
+import { Button, Drawer, Icon, Tabs } from 'antd';
+const { TabPane } = Tabs;
 
-import { DrawerTitle, ActionDrawerGeneral } from '../../StrategyPage/Drawer/styled';
+import { DrawerTitle, ActionDrawerGeneral, DrawerSubContent } from '../../StrategyPage/Drawer/styled';
 import { InputSearch, TopSearch } from '../../../layouts/Header/styled';
-import { TableEntryContainer } from '../../../pages/client/styled';
+import FundTable from './FundTable';
+import { DrawerProductWrapper, FundBlock, FundTabContent, HorizontalScrollable } from '../styled';
+
+export interface Product {
+  id?: number;
+  description: string;
+  value: number;
+  links?: Product[];
+}
 
 interface DrawerProductProps {
   isOpen: boolean;
   close: () => void;
+  product?: any;
 }
 
 const data = [
@@ -42,21 +53,83 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
   ];
 
   public renderDrawer = () => {
+    const { product } = this.props;
+    if (product && product.links && product.links.length > 0) {
+      return this.renderLinkedDrawer();
+    }
+
     return this.renderNewDrawer();
   }
 
-  // tslint:disable-next-line:no-empty
-  public renderLinkedDrawer = () => {};
-
-  public renderNewDrawer = () => {
-    const total = {
-      name: 'Total',
-      value: '10,000',
-      percentage: '100%',
-    };
+  public renderFundTab = () => {
+    const { product } = this.props;
 
     return (
       <>
+        <FundTabContent>
+          <FundBlock>
+            <TopSearch border>
+              <Icon type="search" />
+              <InputSearch placeholder="Search Product" />
+            </TopSearch>
+            <TopSearch border>
+              <Icon type="search" />
+              <InputSearch placeholder="Search Proposed Fund" />
+            </TopSearch>
+          </FundBlock>
+          <HorizontalScrollable>
+            {map(product.links, (linkedProduct: Product) => (
+              <FundBlock key={linkedProduct.id}>
+                <TopSearch border>
+                  <Icon type="search" />
+                  <InputSearch placeholder="Search Product" />
+                </TopSearch>
+                <TopSearch border>
+                  <Icon type="search" />
+                  <InputSearch placeholder="Search Proposed Fund" />
+                </TopSearch>
+              </FundBlock>
+            ))}
+          </HorizontalScrollable>
+        </FundTabContent>
+
+        <ActionDrawerGeneral visible>
+          <Button htmlType={'button'} type={'default'}>
+            <span>Add comparison product</span>
+          </Button>
+          <Button htmlType={'submit'} type={'primary'}>
+            <span>Save</span>
+          </Button>
+        </ActionDrawerGeneral>
+      </>
+    );
+  }
+
+  // tslint:disable-next-line:no-empty
+  public renderLinkedDrawer = () => {
+    return (
+      <DrawerProductWrapper>
+        <DrawerTitle>Title</DrawerTitle>
+        <DrawerSubContent>
+          Detail text goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua.
+        </DrawerSubContent>
+
+        <Tabs defaultActiveKey="1">
+          <TabPane tab="Fund" key="1">
+            {this.renderFundTab()}
+          </TabPane>
+          <TabPane tab="Assets Allocation" key="2">
+            Coming soon
+          </TabPane>
+        </Tabs>
+      </DrawerProductWrapper>
+    );
+  }
+
+  public renderNewDrawer = () => {
+    return (
+      <DrawerProductWrapper>
         <DrawerTitle>My Product</DrawerTitle>
         <ActionDrawerGeneral drawer>
           <TopSearch border>
@@ -68,20 +141,15 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
             <InputSearch placeholder="Search Fund" />
           </TopSearch>
         </ActionDrawerGeneral>
-        <TableEntryContainer drawer>
-          <Table
-            className={`table-general drawer-fund-table`}
-            columns={this.columns}
-            dataSource={[...data, total]}
-            pagination={false}
-          />
-        </TableEntryContainer>
+
+        <FundTable columns={this.columns} data={data} />
+
         <ActionDrawerGeneral visible>
           <Button htmlType={'submit'} type={'primary'}>
             <span>Save</span>
           </Button>
         </ActionDrawerGeneral>
-      </>
+      </DrawerProductWrapper>
     );
   }
 
