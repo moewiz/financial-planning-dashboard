@@ -59,9 +59,26 @@ code {
   position: relative;
 }
 
-body .ant-select-dropdown.ant-select-dropdown--single.ant-select-dropdown-placement-bottomLeft {
+body .custom-menu-width.ant-select-dropdown.ant-select-dropdown--single.ant-select-dropdown-placement-bottomLeft {
   min-width: 145px;
   width: auto !important;
+}
+
+.custom-search-menu li.ant-select-dropdown-menu-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.custom-search-menu .ant-select-dropdown-menu-item .text {
+  /*flex: 1;*/
+}
+
+.custom-search-menu .ant-select-selection-selected-value .code {
+  display: none;
+}
+
+.custom-search-menu.ant-select-dropdown--empty li.ant-select-dropdown-menu-item {
+  justify-content: center;
 }
 
 .no-year-selected .ant-calendar-year-panel-selected-cell .ant-calendar-year-panel-year {

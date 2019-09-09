@@ -28,15 +28,40 @@ export const TopSearch = styled.div<{ border?: boolean }>`
     css`
       border: 1px solid #999;
       margin-top: 20px;
-      padding: 0 10px;
       max-width: 340px;
+      position: relative;
+      height: 34px;
     `
   }
   .custom-select {
     width: 100%;
+    position: absolute;
+    left: 0;
+    padding: 0 25px;
     .ant-select-selection {
       border: none;
       box-shadow: none;
+      &__rendered {
+        line-height: 32px;
+      }
+    }
+    .ant-select-selection-selected-value {
+      .code {
+        display: none;
+      }
+    }
+  }
+  .anticon {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    z-index: 3;
+
+    &.anticon-search {
+      left: 10px;
+      right: unset;
+      font-size: 18px;
+      cursor: default;
     }
   }
 `;

@@ -122,7 +122,13 @@ class EditCell extends Component<EditCellProps> {
     const value = propValue ? propValue : get(options, [0, 'value']);
 
     return (
-      <Select onChange={this.handleSelect} value={value} optionLabelProp={yearFi ? 'title' : ''} showArrow={false}>
+      <Select
+        onChange={this.handleSelect}
+        value={value}
+        optionLabelProp={yearFi ? 'title' : ''}
+        showArrow={false}
+        dropdownClassName="custom-menu-width"
+      >
         {options &&
           options.length > 0 &&
           options.map((option: { value: any; label: string; renderedLabel?: string; disabled?: boolean }) => (
