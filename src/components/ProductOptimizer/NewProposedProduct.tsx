@@ -31,7 +31,7 @@ const treeData = [
 ];
 
 interface NewProposedProductProps {
-  onAdd: (data: any) => void;
+  onAdd: (data?: any) => void;
 }
 
 interface NewProposedProductState {
@@ -85,6 +85,13 @@ class NewProposedProduct extends PureComponent<NewProposedProductProps, NewPropo
     this.setState({ value });
   }
 
+  public addNew = (e: React.SyntheticEvent) => {
+    const { onAdd } = this.props;
+
+    onAdd();
+    this.closePopover();
+  }
+
   public render() {
     const tProps = {
       treeData,
@@ -108,7 +115,7 @@ class NewProposedProduct extends PureComponent<NewProposedProductProps, NewPropo
         </HeaderTitleTable>
         {this.state.open && (
           <ProposePopup onClick={this.onPopoverClick}>
-            <ProposeItem>Add new propose product</ProposeItem>
+            <ProposeItem onClick={this.addNew}>Add new propose product</ProposeItem>
             <ProposeItem>Copy from current</ProposeItem>
             <TreeSelect {...tProps} dropdownClassName="new-proposed-product" />
           </ProposePopup>

@@ -6,24 +6,31 @@ import { Projections } from '../../components/Icons';
 import NewProposedProduct from '../../components/ProductOptimizer/NewProposedProduct';
 import { ProductProps } from '../../pages/client/productOptimizer/ProductOptimizer';
 
-const data = [
-  {
-    description: 'New proposed 1',
-    value: '10,000',
-  },
-  {
-    description: 'Proposed 2',
-    value: '10,000',
-    links: [
+interface ProposedProductState {
+  loading: boolean;
+  dataList: object[];
+}
+
+class ProposedProduct extends PureComponent<ProductProps, ProposedProductState> {
+  public state = {
+    loading: false,
+    dataList: [
       {
-        id: 1,
-        description: 'Product C',
+        description: 'New proposed 1',
+        value: '10,000',
+      },
+      {
+        description: 'Proposed 2',
+        value: '10,000',
+        links: [
+          {
+            id: 1,
+            description: 'Product C',
+          },
+        ],
       },
     ],
-  },
-];
-
-class ProposedProduct extends PureComponent<ProductProps> {
+  };
   public columns = [
     {
       title: '',
@@ -64,18 +71,20 @@ class ProposedProduct extends PureComponent<ProductProps> {
     openDrawer(record);
   }
 
-  public onAdd = (data: any) => {
-    console.log('add', data);
+  public onAdd = (product: any) => {
+    this.setState(({ dataList: dataList }) => ({ dataList: [...dataList, { description: '', value: undefined }] }));
   }
 
   public render() {
+    const { dataList } = this.state;
+
     return (
       <TableEntryContainer>
         <NewProposedProduct onAdd={this.onAdd} />
         <Table
           className={`table-general ${this.tableName}-table`}
           columns={this.columns}
-          dataSource={data}
+          dataSource={dataList}
           pagination={false}
         />
       </TableEntryContainer>

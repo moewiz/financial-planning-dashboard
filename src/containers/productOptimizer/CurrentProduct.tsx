@@ -7,13 +7,13 @@ import { ProductProps } from '../../pages/client/productOptimizer/ProductOptimiz
 
 interface CurrentProductState {
   loading: boolean;
-  data: object[];
+  dataList: object[];
 }
 
 class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
   public state = {
     loading: false,
-    data: [
+    dataList: [
       {
         description: 'Product A',
         value: '10,000',
@@ -57,9 +57,7 @@ class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
   private tableName = 'current-product';
 
   public handleAdd = () => {
-    this.setState(({ data }) => {
-      return { data: [...data, { description: '', value: undefined }] };
-    });
+    this.setState(({ dataList }) => ({ dataList: [...dataList, { description: '', value: undefined }] }));
   }
 
   public openDrawer = () => {
@@ -68,7 +66,7 @@ class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
   }
 
   public render() {
-    const { data, loading } = this.state;
+    const { dataList, loading } = this.state;
 
     return (
       <TableEntryContainer>
@@ -79,7 +77,7 @@ class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
         <Table
           className={`table-general ${this.tableName}-table`}
           columns={this.columns}
-          dataSource={data}
+          dataSource={dataList}
           pagination={false}
         />
       </TableEntryContainer>

@@ -21,6 +21,7 @@ export const ProposePopup = styled.div`
 
 export const ProposeItem = styled.div`
   margin: 4px 0;
+  cursor: pointer;
 `;
 
 export const DrawerProductWrapper = styled.div`
