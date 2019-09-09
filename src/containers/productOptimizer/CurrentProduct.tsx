@@ -5,24 +5,28 @@ import { HeaderTitleTable, TableEntryContainer, TextTitle } from '../../pages/cl
 import { Projections } from '../../components/Icons';
 import { ProductProps } from '../../pages/client/productOptimizer/ProductOptimizer';
 
-const data = [
-  {
-    description: 'Product A',
-    value: '10,000',
-  },
-  {
-    description: 'Product B',
-    value: '10,000',
-  },
-  {
-    description: 'Product C',
-    value: '10,000',
-  },
-];
+interface CurrentProductState {
+  loading: boolean;
+  data: object[];
+}
 
-class CurrentProduct extends PureComponent<ProductProps> {
+class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
   public state = {
     loading: false,
+    data: [
+      {
+        description: 'Product A',
+        value: '10,000',
+      },
+      {
+        description: 'Product B',
+        value: '10,000',
+      },
+      {
+        description: 'Product C',
+        value: '10,000',
+      },
+    ],
   };
   public columns = [
     {
@@ -53,7 +57,9 @@ class CurrentProduct extends PureComponent<ProductProps> {
   private tableName = 'current-product';
 
   public handleAdd = () => {
-    console.log('add new current product');
+    this.setState(({ data }) => {
+      return { data: [...data, { description: '', value: undefined }] };
+    });
   }
 
   public openDrawer = () => {
@@ -62,7 +68,7 @@ class CurrentProduct extends PureComponent<ProductProps> {
   }
 
   public render() {
-    const { loading } = this.state;
+    const { data, loading } = this.state;
 
     return (
       <TableEntryContainer>

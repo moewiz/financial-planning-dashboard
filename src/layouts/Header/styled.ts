@@ -31,6 +31,19 @@ export const TopSearch = styled.div<{ border?: boolean }>`
       max-width: 340px;
       position: relative;
       height: 34px;
+      .anticon {
+        position: absolute;
+        right: 10px;
+        cursor: pointer;
+        z-index: 3;
+
+        &.anticon-search {
+          left: 10px;
+          right: unset;
+          font-size: 18px;
+          cursor: default;
+        }
+      }
     `
   }
   .custom-select {
@@ -49,19 +62,6 @@ export const TopSearch = styled.div<{ border?: boolean }>`
       .code {
         display: none;
       }
-    }
-  }
-  .anticon {
-    position: absolute;
-    right: 10px;
-    cursor: pointer;
-    z-index: 3;
-
-    &.anticon-search {
-      left: 10px;
-      right: unset;
-      font-size: 18px;
-      cursor: default;
     }
   }
 `;
