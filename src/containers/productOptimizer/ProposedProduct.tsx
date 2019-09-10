@@ -1,14 +1,16 @@
 import React, { PureComponent } from 'react';
-import { Icon, Table } from 'antd';
+import { Icon, Popconfirm, Table } from 'antd';
+import cn from 'classnames';
 
 import { TableEntryContainer } from '../../pages/client/styled';
 import { Projections } from '../../components/Icons';
 import NewProposedProduct from '../../components/ProductOptimizer/NewProposedProduct';
 import { ProductProps } from '../../pages/client/productOptimizer/ProductOptimizer';
+import { Product } from '../../components/ProductOptimizer/Drawer/DrawerProduct';
 
 interface ProposedProductState {
   loading: boolean;
-  dataList: object[];
+  dataList: Product[];
 }
 
 class ProposedProduct extends PureComponent<ProductProps, ProposedProductState> {
@@ -16,16 +18,19 @@ class ProposedProduct extends PureComponent<ProductProps, ProposedProductState> 
     loading: false,
     dataList: [
       {
+        id: 1,
         description: 'New proposed 1',
         value: '10,000',
       },
       {
+        id: 2,
         description: 'Proposed 2',
         value: '10,000',
         links: [
           {
             id: 1,
             description: 'Product C',
+            value: '10,000',
           },
         ],
       },
@@ -55,12 +60,25 @@ class ProposedProduct extends PureComponent<ProductProps, ProposedProductState> 
     {
       title: '',
       key: 'operation',
-      render: (text: any, record: any) => (
-        <>
-          <Icon component={Projections} style={{ marginRight: 10 }} onClick={() => this.openDrawer(record)} />
-          <Icon type="close-square" style={{ fontSize: '16px' }} />
-        </>
-      ),
+      render: (text: any, record: any) => {
+        const isDisable = !record || !record.id;
+        return (
+          <>
+            <Icon
+              className={cn('projection', { disabled: isDisable })}
+              component={Projections}
+              onClick={() => !isDisable && this.openDrawer(record)}
+            />
+            {isDisable ? (
+              <Icon className={'remove disabled'} type="close-square" />
+            ) : (
+              <Popconfirm title="Really delete?" onConfirm={() => this.onRemove(record)}>
+                <Icon className="remove" type="close-square" />
+              </Popconfirm>
+            )}
+          </>
+        );
+      },
       width: 60,
     },
   ];
@@ -72,7 +90,13 @@ class ProposedProduct extends PureComponent<ProductProps, ProposedProductState> 
   }
 
   public onAdd = (product: any) => {
-    this.setState(({ dataList: dataList }) => ({ dataList: [...dataList, { description: '', value: undefined }] }));
+    this.setState(({ dataList: dataList }) => ({ dataList: [...dataList, { description: '', value: '' }] }));
+  }
+
+  public onRemove = (record: any) => {
+    if (record && record.id) {
+      this.setState(({ dataList }) => ({ dataList: dataList.filter(({ id }) => id !== record.id) }));
+    }
   }
 
   public render() {

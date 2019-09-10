@@ -88,13 +88,25 @@ export const TableEntryContainer = styled.section.attrs({
       table-layout: fixed;
     }
     .ant-table{
-     &.ant-table-small{
-      font-size: 13px;
-      .ant-select{
+      &.ant-table-small{
         font-size: 13px;
-       }
+        .ant-select{
+          font-size: 13px;
+        }
       }
-     }
+    }
+    .anticon {
+      &.projection {
+        margin-right: 10px;
+      }
+      &.remove {
+        font-size: 16px;
+      }
+      &.disabled {
+        opacity: 0.6;
+        cursor: default;
+      }
+    }
     .ant-row.ant-form-item{
       margin: 0px;
       width: 100%;

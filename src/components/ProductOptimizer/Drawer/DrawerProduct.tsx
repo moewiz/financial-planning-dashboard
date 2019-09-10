@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
 import { map } from 'lodash';
-import { Button, Drawer, Icon, Tabs } from 'antd';
+import { Button, Drawer, Tabs } from 'antd';
 const { TabPane } = Tabs;
 
 import { DrawerTitle, ActionDrawerGeneral, DrawerSubContent } from '../../StrategyPage/Drawer/styled';
-import { InputSearch, TopSearch } from '../../../layouts/Header/styled';
 import FundTable from './FundTable';
 import { DrawerProductWrapper, FundBlock, FundTabContent, HorizontalScrollable } from '../styled';
 import CustomSearch from './CustomSearch';
@@ -12,7 +11,7 @@ import CustomSearch from './CustomSearch';
 export interface Product {
   id?: number;
   description: string;
-  value: number;
+  value: number | string;
   links?: Product[];
 }
 

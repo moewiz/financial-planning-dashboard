@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { Icon, TreeSelect } from 'antd';
-import { isFunction } from 'lodash';
 
 import { NewProposedProductStyled, ProposeItem, ProposePopup } from './styled';
 import { HeaderTitleTable, TextTitle } from '../../pages/client/styled';

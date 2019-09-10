@@ -1,13 +1,15 @@
 import React, { PureComponent } from 'react';
-import { Icon, Table } from 'antd';
+import { Icon, Table, Popconfirm } from 'antd';
+import cn from 'classnames';
 
 import { HeaderTitleTable, TableEntryContainer, TextTitle } from '../../pages/client/styled';
-import { Projections } from '../../components/Icons';
 import { ProductProps } from '../../pages/client/productOptimizer/ProductOptimizer';
+import { Projections } from '../../components/Icons';
+import { Product } from '../../components/ProductOptimizer/Drawer/DrawerProduct';
 
 interface CurrentProductState {
   loading: boolean;
-  dataList: object[];
+  dataList: Product[];
 }
 
 class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
@@ -15,14 +17,17 @@ class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
     loading: false,
     dataList: [
       {
+        id: 1,
         description: 'Product A',
         value: '10,000',
       },
       {
+        id: 2,
         description: 'Product B',
         value: '10,000',
       },
       {
+        id: 3,
         description: 'Product C',
         value: '10,000',
       },
@@ -45,24 +50,43 @@ class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
     {
       title: '',
       key: 'operation',
-      render: (text: any, record: any) => (
-        <>
-          <Icon component={Projections} style={{ marginRight: 10 }} onClick={this.openDrawer} />
-          <Icon type="close-square" style={{ fontSize: '16px' }} />
-        </>
-      ),
+      render: (text: any, record: any) => {
+        const isDisable = !record || !record.id;
+        return (
+          <>
+            <Icon
+              className={cn('projection', { disabled: isDisable })}
+              component={Projections}
+              onClick={() => !isDisable && this.openDrawer()}
+            />
+            {isDisable ? (
+              <Icon className={'remove disabled'} type="close-square" />
+            ) : (
+              <Popconfirm title="Really delete?" onConfirm={() => this.onRemove(record)}>
+                <Icon className="remove" type="close-square" />
+              </Popconfirm>
+            )}
+          </>
+        );
+      },
       width: 60,
     },
   ];
   private tableName = 'current-product';
 
   public handleAdd = () => {
-    this.setState(({ dataList }) => ({ dataList: [...dataList, { description: '', value: undefined }] }));
+    this.setState(({ dataList }) => ({ dataList: [...dataList, { description: '', value: '' }] }));
   }
 
   public openDrawer = () => {
     const { openDrawer } = this.props;
     openDrawer();
+  }
+
+  public onRemove = (record: any) => {
+    if (record && record.id) {
+      this.setState(({ dataList }) => ({ dataList: dataList.filter(({ id }) => id !== record.id) }));
+    }
   }
 
   public render() {
