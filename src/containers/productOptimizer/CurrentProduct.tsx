@@ -1,16 +1,35 @@
 import React, { PureComponent } from 'react';
 import { Icon, Table, Popconfirm } from 'antd';
 import cn from 'classnames';
+import { get } from 'lodash';
 
 import { HeaderTitleTable, TableEntryContainer, TextTitle } from '../../pages/client/styled';
 import { ProductProps } from '../../pages/client/productOptimizer/ProductOptimizer';
 import { Projections } from '../../components/Icons';
 import { Product } from '../../components/ProductOptimizer/Drawer/DrawerProduct';
+import EditCell, { EditCellType } from '../../components/StrategyPage/Drawer/EditCell';
 
 interface CurrentProductState {
   loading: boolean;
   dataList: Product[];
 }
+
+const EditCellContainer = (props: any) => {
+  const { dataIndex, record, type, editable } = props;
+  const [value, setValue] = React.useState<any>(get(record, dataIndex));
+
+  return (
+    <td>
+      {editable ? <EditCell {...props} value={value} onChange={(val) => setValue(val)} type={type} /> : props.children}
+    </td>
+  );
+};
+
+const components = {
+  body: {
+    cell: EditCellContainer,
+  },
+};
 
 class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
   public state = {
@@ -19,17 +38,17 @@ class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
       {
         id: 1,
         description: 'Product A',
-        value: '10,000',
+        value: 10000,
       },
       {
         id: 2,
         description: 'Product B',
-        value: '10,000',
+        value: 10000,
       },
       {
         id: 3,
         description: 'Product C',
-        value: '10,000',
+        value: 10000,
       },
     ],
   };
@@ -37,15 +56,16 @@ class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
     {
       title: 'Product',
       dataIndex: 'description',
-      type: 'text',
+      type: EditCellType.text,
       key: '0',
       editable: true,
     },
     {
       title: 'Value',
       dataIndex: 'value',
-      type: 'number',
+      type: EditCellType.number,
       key: '1',
+      editable: true,
     },
     {
       title: '',
@@ -89,6 +109,24 @@ class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
     }
   }
 
+  public getColumns = () => {
+    return this.columns.map((col) => {
+      if (col.editable) {
+        return {
+          ...col,
+          onCell: (record: any, rowIndex: number) => ({
+            ...col,
+            record,
+            rowIndex,
+            type: col.type || 'text',
+          }),
+        };
+      }
+
+      return col;
+    });
+  }
+
   public render() {
     const { dataList, loading } = this.state;
 
@@ -99,10 +137,11 @@ class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
           <TextTitle small={true}>Current</TextTitle>
         </HeaderTitleTable>
         <Table
-          className={`table-general ${this.tableName}-table`}
-          columns={this.columns}
+          className={`table-general optimizer-table ${this.tableName}-table`}
+          columns={this.getColumns()}
           dataSource={dataList}
           pagination={false}
+          components={components}
         />
       </TableEntryContainer>
     );

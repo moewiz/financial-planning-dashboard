@@ -39,14 +39,14 @@ export const TableEntryContainer = styled.section.attrs({
     .ant-table-thead{
       tr{
         th:first-child{
-          padding-left: 36px
+          padding-left: 24px
         }
       }
     }
     .ant-table-tbody{
       tr{
         td:first-child{
-          padding-left: 36px;
+          padding-left: 24px;
         }
       }
     }
@@ -81,6 +81,22 @@ export const TableEntryContainer = styled.section.attrs({
   }
   .text-align-center {
     text-align: center;
+  }
+  .optimizer-table {
+    .ant-table-thead > tr > th {
+      text-align: center;
+    }
+    .ant-table-tbody .ant-table-row .strategy-item {
+      width: 100%;
+
+      .edit-cell {
+        width: 100%;
+        font-weight: normal;
+        .ant-input-number-input {
+          font-weight: normal;
+        }
+      }
+    }
   }
   /* table layout here */
   .table-general{
