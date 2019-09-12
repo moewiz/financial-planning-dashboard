@@ -376,6 +376,12 @@ export const ActionDrawerGeneral = styled.section<{ visible?: boolean; drawer?: 
     height: 38px;
     border-radius: 18px;
   }
+  .ant-btn.ant-btn-default[disabled] {
+    opacity: 0.6;
+    &:hover {
+      background-color: #212121;
+    }
+  }
 `;
 
 export const DrawerFooter = styled.div`

@@ -15,14 +15,14 @@ interface CurrentProductState {
 }
 
 const EditCellContainer = (props: any) => {
-  const { dataIndex, record, type, editable } = props;
+  const { dataIndex, record, type, editable, onEdit } = props;
   const [value, setValue] = React.useState<any>(get(record, dataIndex));
+  const onChange: (value: any, name: string) => void = (val) => {
+    onEdit(val, name, record);
+    setValue(val);
+  };
 
-  return (
-    <td>
-      {editable ? <EditCell {...props} value={value} onChange={(val) => setValue(val)} type={type} /> : props.children}
-    </td>
-  );
+  return <td>{editable ? <EditCell {...props} value={value} onChange={onChange} type={type} /> : props.children}</td>;
 };
 
 const components = {
@@ -56,6 +56,9 @@ class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
     {
       title: 'Product',
       dataIndex: 'description',
+      options: {
+        placeholder: 'Enter Description',
+      },
       type: EditCellType.text,
       key: '0',
       editable: true,
@@ -63,6 +66,9 @@ class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
     {
       title: 'Value',
       dataIndex: 'value',
+      options: {
+        placeholder: 'Enter Value',
+      },
       type: EditCellType.number,
       key: '1',
       editable: true,
@@ -109,6 +115,15 @@ class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
     }
   }
 
+  public onEdit = (value: any, name: string, record: any) => {
+    if (record && record.id) {
+      return;
+    }
+
+    console.log('setFieldValue here');
+    console.log({ value, name, record });
+  }
+
   public getColumns = () => {
     return this.columns.map((col) => {
       if (col.editable) {
@@ -119,12 +134,19 @@ class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
             record,
             rowIndex,
             type: col.type || 'text',
+            onEdit: this.onEdit,
           }),
         };
       }
 
       return col;
     });
+  }
+
+  public getDataList = () => {
+    const { dataList } = this.state;
+
+    return [...dataList, { description: '', value: '' }];
   }
 
   public render() {
@@ -139,7 +161,7 @@ class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
         <Table
           className={`table-general optimizer-table ${this.tableName}-table`}
           columns={this.getColumns()}
-          dataSource={dataList}
+          dataSource={this.getDataList()}
           pagination={false}
           components={components}
         />
