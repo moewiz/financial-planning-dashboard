@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Icon, Table, Popconfirm } from 'antd';
 import cn from 'classnames';
 import { get, debounce } from 'lodash';
+import uuidv1 from 'uuid/v1';
 
 import { HeaderTitleTable, TableEntryContainer, TextTitle } from '../../pages/client/styled';
 import { ProductTable } from '../../pages/client/productOptimizer/ProductOptimizer';
@@ -97,9 +98,9 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
   ];
   private tableName = 'current-product';
 
-  public handleAdd = () => {
+  public handleAdd: (row?: Product) => void = (row = { description: '', value: '' }) => {
     const { fieldArrayRenderProps } = this.props;
-    fieldArrayRenderProps.push({ description: '', value: '' });
+    fieldArrayRenderProps.push(row);
   }
 
   public openDrawer = () => {
@@ -115,10 +116,18 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
   }
 
   public onEdit = (value: any, name: string, rowIndex: number) => {
-    const { fieldArrayRenderProps } = this.props;
-    const fieldName = `${fieldArrayRenderProps.name}[${rowIndex}].${name}`;
-    console.log('setFieldValue', { value, name, rowIndex });
+    const { fieldArrayRenderProps, dataList } = this.props;
+    const rowName = `${fieldArrayRenderProps.name}[${rowIndex}]`;
+    const fieldName = `${rowName}.${name}`;
     fieldArrayRenderProps.form.setFieldValue(fieldName, value);
+
+    const record = dataList[rowIndex];
+    const remainingFieldName = name === 'description' ? 'value' : 'description';
+    if (record && value && record[remainingFieldName]) {
+      const id = uuidv1();
+      fieldArrayRenderProps.form.setFieldValue(`${rowName}.id`, id);
+      this.handleAdd();
+    }
   }
 
   public getColumns = () => {
@@ -140,13 +149,9 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
     });
   }
 
-  public getDataList = () => {
+  public render() {
     const { dataList } = this.props;
 
-    return [...dataList, { description: '', value: '' }];
-  }
-
-  public render() {
     return (
       <TableEntryContainer>
         <HeaderTitleTable>
@@ -156,7 +161,7 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
           rowKey={(rowKey) => (rowKey.id ? rowKey.id.toString() : 'new')}
           className={`table-general optimizer-table ${this.tableName}-table`}
           columns={this.getColumns()}
-          dataSource={this.getDataList()}
+          dataSource={dataList}
           pagination={false}
           components={components}
         />

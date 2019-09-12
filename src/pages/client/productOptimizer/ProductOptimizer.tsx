@@ -44,6 +44,7 @@ const client = {
       description: 'Product C',
       value: 10000,
     },
+    { description: '', value: '' },
   ],
   proposed: [
     {
@@ -63,6 +64,7 @@ const client = {
         },
       ],
     },
+    { description: '', value: '' },
   ],
 };
 
@@ -83,6 +85,7 @@ const partner = {
       description: 'Product C',
       value: 10000,
     },
+    { description: '', value: '' },
   ],
   proposed: [
     {
@@ -102,6 +105,7 @@ const partner = {
         },
       ],
     },
+    { description: '', value: '' },
   ],
 };
 
