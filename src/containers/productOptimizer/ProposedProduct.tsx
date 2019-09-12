@@ -10,31 +10,11 @@ import { Product } from '../../components/ProductOptimizer/Drawer/DrawerProduct'
 
 interface ProposedProductState {
   loading: boolean;
-  dataList: Product[];
 }
 
 class ProposedProduct extends PureComponent<ProductProps, ProposedProductState> {
   public state = {
     loading: false,
-    dataList: [
-      {
-        id: 1,
-        description: 'New proposed 1',
-        value: '10,000',
-      },
-      {
-        id: 2,
-        description: 'Proposed 2',
-        value: '10,000',
-        links: [
-          {
-            id: 1,
-            description: 'Product C',
-            value: '10,000',
-          },
-        ],
-      },
-    ],
   };
   public columns = [
     {
@@ -90,22 +70,23 @@ class ProposedProduct extends PureComponent<ProductProps, ProposedProductState> 
   }
 
   public onAdd = (product: any) => {
-    this.setState(({ dataList: dataList }) => ({ dataList: [...dataList, { description: '', value: '' }] }));
+    // this.setState(({ dataList: dataList }) => ({ dataList: [...dataList, { description: '', value: '' }] }));
   }
 
   public onRemove = (record: any) => {
     if (record && record.id) {
-      this.setState(({ dataList }) => ({ dataList: dataList.filter(({ id }) => id !== record.id) }));
+      // this.setState(({ dataList }) => ({ dataList: dataList.filter(({ id }) => id !== record.id) }));
     }
   }
 
   public render() {
-    const { dataList } = this.state;
+    const { dataList } = this.props;
 
     return (
       <TableEntryContainer>
         <NewProposedProduct onAdd={this.onAdd} />
         <Table
+          rowKey={(rowKey) => rowKey.id ? rowKey.id.toString() : 'new'}
           className={`table-general ${this.tableName}-table`}
           columns={this.columns}
           dataSource={dataList}

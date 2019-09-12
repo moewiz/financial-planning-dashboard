@@ -1,15 +1,17 @@
 import React from 'react';
 import { Tabs, Button } from 'antd';
 import { Form, Formik, FormikProps } from 'formik';
+import { get } from 'lodash';
 
 import { ProductOptimizerPage } from '../../../reducers/client';
 import { StrategyPageWrapper } from '../../../components/StrategyPage/styled';
 import { CurrentProduct, ProposedProduct } from '../../../containers/productOptimizer';
 import { TabPanStyled } from './styled';
-import DrawerProduct from '../../../components/ProductOptimizer/Drawer/DrawerProduct';
+import DrawerProduct, { Product } from '../../../components/ProductOptimizer/Drawer/DrawerProduct';
 import { ActionDrawerGeneral } from '../../../components/StrategyPage/Drawer/styled';
 
 export interface ProductProps {
+  dataList: Product[];
   openDrawer: (record?: any) => void;
 }
 
@@ -19,7 +21,7 @@ interface ProductOptimizerProps {
   pageData: ProductOptimizerPage;
 }
 
-const dummyData = {
+const client = {
   current: [
     {
       id: 1,
@@ -39,23 +41,67 @@ const dummyData = {
   ],
   proposed: [
     {
-      id: 1,
+      id: 4,
       description: 'New proposed 1',
       value: '10,000',
     },
     {
-      id: 2,
+      id: 5,
       description: 'Proposed 2',
       value: '10,000',
       links: [
         {
           id: 1,
+          description: 'Product A',
+          value: '10,000',
+        },
+      ],
+    },
+  ],
+};
+
+const partner = {
+  current: [
+    {
+      id: 6,
+      description: 'Product A',
+      value: 10000,
+    },
+    {
+      id: 7,
+      description: 'Product B',
+      value: 10000,
+    },
+    {
+      id: 8,
+      description: 'Product C',
+      value: 10000,
+    },
+  ],
+  proposed: [
+    {
+      id: 9,
+      description: 'New proposed 1',
+      value: '10,000',
+    },
+    {
+      id: 10,
+      description: 'Proposed 2',
+      value: '10,000',
+      links: [
+        {
+          id: 8,
           description: 'Product C',
           value: '10,000',
         },
       ],
     },
   ],
+}
+
+const dummyProductOptimizerData = {
+  client,
+  partner,
 };
 
 const ProductOptimizer = (props: ProductOptimizerProps) => {
@@ -78,21 +124,18 @@ const ProductOptimizer = (props: ProductOptimizerProps) => {
             actions.setSubmitting(false);
           }, 300);
         }}
-        initialValues={{
-          client: dummyData,
-          partner: dummyData,
-        }}
+        initialValues={dummyProductOptimizerData}
         render={(formikProps: FormikProps<ProductOptimizerPage>) => {
           return (
             <Form>
               <Tabs defaultActiveKey="1">
                 <TabPanStyled tab="Client" key="1">
-                  <CurrentProduct openDrawer={openDrawer} />
-                  <ProposedProduct openDrawer={openDrawer} />
+                  <CurrentProduct openDrawer={openDrawer} dataList={get(formikProps, 'values.client.current', [])} />
+                  <ProposedProduct openDrawer={openDrawer} dataList={get(formikProps, 'values.client.proposed', [])} />
                 </TabPanStyled>
                 <TabPanStyled tab="Partner" key="2">
-                  <CurrentProduct openDrawer={openDrawer} />
-                  <ProposedProduct openDrawer={openDrawer} />
+                  <CurrentProduct openDrawer={openDrawer} dataList={get(formikProps, 'values.partner.current', [])} />
+                  <ProposedProduct openDrawer={openDrawer} dataList={get(formikProps, 'values.partner.proposed', [])} />
                 </TabPanStyled>
               </Tabs>
               <ActionDrawerGeneral visible>

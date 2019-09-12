@@ -11,7 +11,6 @@ import EditCell, { EditCellType } from '../../components/StrategyPage/Drawer/Edi
 
 interface CurrentProductState {
   loading: boolean;
-  dataList: Product[];
 }
 
 const EditCellContainer = (props: any) => {
@@ -34,24 +33,8 @@ const components = {
 class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
   public state = {
     loading: false,
-    dataList: [
-      {
-        id: 1,
-        description: 'Product A',
-        value: 10000,
-      },
-      {
-        id: 2,
-        description: 'Product B',
-        value: 10000,
-      },
-      {
-        id: 3,
-        description: 'Product C',
-        value: 10000,
-      },
-    ],
   };
+
   public columns = [
     {
       title: 'Product',
@@ -101,7 +84,7 @@ class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
   private tableName = 'current-product';
 
   public handleAdd = () => {
-    this.setState(({ dataList }) => ({ dataList: [...dataList, { description: '', value: '' }] }));
+    // this.setState(({ dataList }) => ({ dataList: [...dataList, { description: '', value: '' }] }));
   }
 
   public openDrawer = () => {
@@ -111,7 +94,7 @@ class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
 
   public onRemove = (record: any) => {
     if (record && record.id) {
-      this.setState(({ dataList }) => ({ dataList: dataList.filter(({ id }) => id !== record.id) }));
+      // this.setState(({ dataList }) => ({ dataList: dataList.filter(({ id }) => id !== record.id) }));
     }
   }
 
@@ -144,14 +127,12 @@ class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
   }
 
   public getDataList = () => {
-    const { dataList } = this.state;
+    const { dataList } = this.props;
 
     return [...dataList, { description: '', value: '' }];
   }
 
   public render() {
-    const { dataList, loading } = this.state;
-
     return (
       <TableEntryContainer>
         <HeaderTitleTable>
@@ -159,6 +140,7 @@ class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
           <TextTitle small={true}>Current</TextTitle>
         </HeaderTitleTable>
         <Table
+          rowKey={(rowKey) => rowKey.id ? rowKey.id.toString() : 'new'}
           className={`table-general optimizer-table ${this.tableName}-table`}
           columns={this.getColumns()}
           dataSource={this.getDataList()}
