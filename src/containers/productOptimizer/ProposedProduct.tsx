@@ -5,14 +5,14 @@ import cn from 'classnames';
 import { TableEntryContainer } from '../../pages/client/styled';
 import { Projections } from '../../components/Icons';
 import NewProposedProduct from '../../components/ProductOptimizer/NewProposedProduct';
-import { ProductProps } from '../../pages/client/productOptimizer/ProductOptimizer';
+import { ProductTable } from '../../pages/client/productOptimizer/ProductOptimizer';
 import { Product } from '../../components/ProductOptimizer/Drawer/DrawerProduct';
 
 interface ProposedProductState {
   loading: boolean;
 }
 
-class ProposedProduct extends PureComponent<ProductProps, ProposedProductState> {
+class ProposedProduct extends PureComponent<ProductTable, ProposedProductState> {
   public state = {
     loading: false,
   };
@@ -40,7 +40,7 @@ class ProposedProduct extends PureComponent<ProductProps, ProposedProductState> 
     {
       title: '',
       key: 'operation',
-      render: (text: any, record: any) => {
+      render: (text: any, record: any, index: number) => {
         const isDisable = !record || !record.id;
         return (
           <>
@@ -52,7 +52,7 @@ class ProposedProduct extends PureComponent<ProductProps, ProposedProductState> 
             {isDisable ? (
               <Icon className={'remove disabled'} type="close-square" />
             ) : (
-              <Popconfirm title="Really delete?" onConfirm={() => this.onRemove(record)}>
+              <Popconfirm title="Really delete?" onConfirm={() => this.onRemove(record, index)}>
                 <Icon className="remove" type="close-square" />
               </Popconfirm>
             )}
@@ -70,12 +70,14 @@ class ProposedProduct extends PureComponent<ProductProps, ProposedProductState> 
   }
 
   public onAdd = (product: any) => {
-    // this.setState(({ dataList: dataList }) => ({ dataList: [...dataList, { description: '', value: '' }] }));
+    const { fieldArrayRenderProps } = this.props;
+    fieldArrayRenderProps.push({ description: '', value: '' });
   }
 
-  public onRemove = (record: any) => {
+  public onRemove = (record: any, index: number) => {
     if (record && record.id) {
-      // this.setState(({ dataList }) => ({ dataList: dataList.filter(({ id }) => id !== record.id) }));
+      const { fieldArrayRenderProps } = this.props;
+      fieldArrayRenderProps.remove(index);
     }
   }
 
@@ -86,7 +88,7 @@ class ProposedProduct extends PureComponent<ProductProps, ProposedProductState> 
       <TableEntryContainer>
         <NewProposedProduct onAdd={this.onAdd} />
         <Table
-          rowKey={(rowKey) => rowKey.id ? rowKey.id.toString() : 'new'}
+          rowKey={(rowKey) => (rowKey.id ? rowKey.id.toString() : 'new')}
           className={`table-general ${this.tableName}-table`}
           columns={this.columns}
           dataSource={dataList}

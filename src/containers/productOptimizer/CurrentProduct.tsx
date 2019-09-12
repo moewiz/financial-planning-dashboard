@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import { Icon, Table, Popconfirm } from 'antd';
 import cn from 'classnames';
-import { get } from 'lodash';
+import { get, debounce } from 'lodash';
 
 import { HeaderTitleTable, TableEntryContainer, TextTitle } from '../../pages/client/styled';
-import { ProductProps } from '../../pages/client/productOptimizer/ProductOptimizer';
+import { ProductTable } from '../../pages/client/productOptimizer/ProductOptimizer';
 import { Projections } from '../../components/Icons';
 import { Product } from '../../components/ProductOptimizer/Drawer/DrawerProduct';
 import EditCell, { EditCellType } from '../../components/StrategyPage/Drawer/EditCell';
@@ -14,14 +14,28 @@ interface CurrentProductState {
 }
 
 const EditCellContainer = (props: any) => {
-  const { dataIndex, record, type, editable, onEdit } = props;
+  const { dataIndex, record, type, editable, onEdit, rowIndex } = props;
   const [value, setValue] = React.useState<any>(get(record, dataIndex));
-  const onChange: (value: any, name: string) => void = (val) => {
-    onEdit(val, name, record);
+  const debounceEdit = React.useCallback(
+    debounce((val, name) => {
+      onEdit(val, name, rowIndex);
+    }, 250),
+    [],
+  );
+  const onChange = (val: any, name: string) => {
+    debounceEdit(val, name);
     setValue(val);
   };
 
-  return <td>{editable ? <EditCell {...props} value={value} onChange={onChange} type={type} /> : props.children}</td>;
+  return (
+    <td>
+      {editable ? (
+        <EditCell {...props} name={dataIndex} value={value} onChange={onChange} type={type} />
+      ) : (
+        props.children
+      )}
+    </td>
+  );
 };
 
 const components = {
@@ -30,7 +44,7 @@ const components = {
   },
 };
 
-class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
+class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
   public state = {
     loading: false,
   };
@@ -59,7 +73,7 @@ class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
     {
       title: '',
       key: 'operation',
-      render: (text: any, record: any) => {
+      render: (text: any, record: any, index: number) => {
         const isDisable = !record || !record.id;
         return (
           <>
@@ -71,7 +85,7 @@ class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
             {isDisable ? (
               <Icon className={'remove disabled'} type="close-square" />
             ) : (
-              <Popconfirm title="Really delete?" onConfirm={() => this.onRemove(record)}>
+              <Popconfirm title="Really delete?" onConfirm={() => this.onRemove(record, index)}>
                 <Icon className="remove" type="close-square" />
               </Popconfirm>
             )}
@@ -84,7 +98,8 @@ class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
   private tableName = 'current-product';
 
   public handleAdd = () => {
-    // this.setState(({ dataList }) => ({ dataList: [...dataList, { description: '', value: '' }] }));
+    const { fieldArrayRenderProps } = this.props;
+    fieldArrayRenderProps.push({ description: '', value: '' });
   }
 
   public openDrawer = () => {
@@ -92,19 +107,18 @@ class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
     openDrawer();
   }
 
-  public onRemove = (record: any) => {
+  public onRemove = (record: any, index: number) => {
     if (record && record.id) {
-      // this.setState(({ dataList }) => ({ dataList: dataList.filter(({ id }) => id !== record.id) }));
+      const { fieldArrayRenderProps } = this.props;
+      fieldArrayRenderProps.remove(index);
     }
   }
 
-  public onEdit = (value: any, name: string, record: any) => {
-    if (record && record.id) {
-      return;
-    }
-
-    console.log('setFieldValue here');
-    console.log({ value, name, record });
+  public onEdit = (value: any, name: string, rowIndex: number) => {
+    const { fieldArrayRenderProps } = this.props;
+    const fieldName = `${fieldArrayRenderProps.name}[${rowIndex}].${name}`;
+    console.log('setFieldValue', { value, name, rowIndex });
+    fieldArrayRenderProps.form.setFieldValue(fieldName, value);
   }
 
   public getColumns = () => {
@@ -136,11 +150,10 @@ class CurrentProduct extends PureComponent<ProductProps, CurrentProductState> {
     return (
       <TableEntryContainer>
         <HeaderTitleTable>
-          <Icon type={'plus-square'} theme={'filled'} onClick={this.handleAdd} />
           <TextTitle small={true}>Current</TextTitle>
         </HeaderTitleTable>
         <Table
-          rowKey={(rowKey) => rowKey.id ? rowKey.id.toString() : 'new'}
+          rowKey={(rowKey) => (rowKey.id ? rowKey.id.toString() : 'new')}
           className={`table-general optimizer-table ${this.tableName}-table`}
           columns={this.getColumns()}
           dataSource={this.getDataList()}
