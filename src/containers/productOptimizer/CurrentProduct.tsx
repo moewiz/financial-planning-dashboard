@@ -1,7 +1,7 @@
 import React, { PureComponent, useState, useCallback, useEffect } from 'react';
 import { Icon, Table, Popconfirm } from 'antd';
 import cn from 'classnames';
-import { get, debounce, map } from 'lodash';
+import { get, debounce, map, filter } from 'lodash';
 import uuidv1 from 'uuid/v1';
 
 import { HeaderTitleTable, TableEntryContainer, TextTitle, TagStyled, TagList } from '../../pages/client/styled';
@@ -50,7 +50,14 @@ const EditCellContainer = (props: any) => {
       {showLinks && (
         <TagList>
           {map(get(record, 'links', []), (product) => (
-            <TagStyled key={product.id} closable={true} color="#e2e2e2">
+            <TagStyled
+              key={product.id}
+              closable={true}
+              color="#e2e2e2"
+              onClose={() =>
+                onEdit(filter(get(record, 'links', []), (link) => link.id !== product.id), 'links', rowIndex)
+              }
+            >
               {product.description}
             </TagStyled>
           ))}
