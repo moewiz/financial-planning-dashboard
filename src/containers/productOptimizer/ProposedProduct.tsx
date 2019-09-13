@@ -12,6 +12,49 @@ interface ProposedProductState {
   loading: boolean;
 }
 
+const currentProductsTree = [
+  {
+    description: 'Super',
+    children: [
+      {
+        description: 'Product A',
+        value: 10000,
+        id: 1,
+      },
+      {
+        description: 'Product B',
+        value: 10000,
+        id: 2,
+      },
+      {
+        description: 'Product C',
+        value: 10000,
+        id: 3,
+      },
+    ],
+  },
+  {
+    description: 'Test',
+    children: [
+      {
+        description: 'Product D',
+        value: 5000,
+        id: 4,
+      },
+      {
+        description: 'Product E',
+        value: 5000,
+        id: 5,
+      },
+      {
+        description: 'Product F',
+        value: 5000,
+        id: 6,
+      },
+    ],
+  },
+];
+
 class ProposedProduct extends PureComponent<ProductTable, ProposedProductState> {
   public state = {
     loading: false,
@@ -69,9 +112,21 @@ class ProposedProduct extends PureComponent<ProductTable, ProposedProductState> 
     openDrawer(record);
   }
 
-  public onAdd = (product: any) => {
-    const { fieldArrayRenderProps } = this.props;
-    fieldArrayRenderProps.push({ description: '', value: '' });
+  public onAdd = (productIds: number[]) => {
+    if (productIds && productIds.length > 0) {
+      let products: any[] = [];
+      currentProductsTree.map((parent) => {
+        if (parent.children && parent.children.length > 0) {
+          products = [...products, ...parent.children.filter((product) => productIds.includes(product.id))];
+        }
+      });
+      const { fieldArrayRenderProps, dataList } = this.props;
+      let lastIndex = dataList.length - 1;
+      products.map((product) => {
+        fieldArrayRenderProps.insert(lastIndex, product);
+        lastIndex += 1;
+      });
+    }
   }
 
   public onRemove = (record: any, index: number) => {
@@ -86,7 +141,7 @@ class ProposedProduct extends PureComponent<ProductTable, ProposedProductState> 
 
     return (
       <TableEntryContainer>
-        <NewProposedProduct onAdd={this.onAdd} />
+        <NewProposedProduct onAdd={this.onAdd} data={currentProductsTree} />
         <Table
           rowKey={(rowKey) => (rowKey.id ? rowKey.id.toString() : 'new')}
           className={`table-general ${this.tableName}-table`}

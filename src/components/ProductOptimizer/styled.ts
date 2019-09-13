@@ -14,7 +14,7 @@ export const NewProposedProductStyled = styled.div`
 export const ProposePopup = styled.div`
   position: absolute;
   background: #fff;
-  padding: 0px 8px;
+  padding: 8px 8px 0px 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   z-index: 2;
 `;

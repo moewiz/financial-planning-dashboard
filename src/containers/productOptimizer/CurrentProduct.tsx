@@ -123,10 +123,13 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
 
     const record = dataList[rowIndex];
     const remainingFieldName = name === 'description' ? 'value' : 'description';
-    if (record && value && record[remainingFieldName]) {
+    if (record && !record.id && value && record[remainingFieldName]) {
       const id = uuidv1();
       fieldArrayRenderProps.form.setFieldValue(`${rowName}.id`, id);
-      this.handleAdd();
+      // simulate call API to create a new product
+      setTimeout(() => {
+        this.handleAdd();
+      }, 1000);
     }
   }
 

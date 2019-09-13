@@ -1,36 +1,12 @@
 import React, { PureComponent } from 'react';
 import { Icon, TreeSelect } from 'antd';
 
-import { NewProposedProductStyled, ProposeItem, ProposePopup } from './styled';
+import { NewProposedProductStyled, ProposePopup } from './styled';
 import { HeaderTitleTable, TextTitle } from '../../pages/client/styled';
 
-const treeData = [
-  {
-    title: 'Super',
-    value: '0-1',
-    key: '0-1',
-    children: [
-      {
-        title: 'Product A',
-        value: 'Product A',
-        key: '0-1-0',
-      },
-      {
-        title: 'Product B',
-        value: 'Product B',
-        key: '0-1-1',
-      },
-      {
-        title: 'Product C',
-        value: 'Product C',
-        key: '0-1-2',
-      },
-    ],
-  },
-];
-
 interface NewProposedProductProps {
-  onAdd: (data?: any) => void;
+  data: CurrentDataTree[];
+  onAdd: (productIds: number[]) => void;
 }
 
 interface NewProposedProductState {
@@ -38,9 +14,33 @@ interface NewProposedProductState {
   open: boolean;
 }
 
+interface CurrentDataTree {
+  description: string;
+  id?: number;
+  children?: CurrentDataTree[];
+}
+
+const mapDataToTreeData = (arrayData: CurrentDataTree[], baseIndex: number = 0): any =>
+  arrayData.map((data: CurrentDataTree, index: number) => {
+    if (data.children && data.children.length > 0) {
+      return {
+        key: `${index}`,
+        value: `parent-${index}`,
+        title: data.description,
+        children: mapDataToTreeData(data.children, index),
+      };
+    }
+
+    return {
+      key: `${baseIndex}-${index}`,
+      value: data.id,
+      title: data.description,
+    };
+  });
+
 class NewProposedProduct extends PureComponent<NewProposedProductProps, NewProposedProductState> {
   public state = {
-    value: undefined,
+    value: [],
     open: false,
   };
   public preventNextClose = true;
@@ -49,6 +49,16 @@ class NewProposedProduct extends PureComponent<NewProposedProductProps, NewPropo
   // the popover should close
   public componentDidMount() {
     document.addEventListener('click', this.closePopover);
+  }
+
+  public componentDidUpdate(
+    prevProps: Readonly<NewProposedProductProps>,
+    prevState: Readonly<NewProposedProductState>,
+    snapshot?: any,
+  ): void {
+    if (prevState.open !== this.state.open && !this.state.open) {
+      this.addProducts();
+    }
   }
 
   public componentWillUnmount() {
@@ -63,11 +73,16 @@ class NewProposedProduct extends PureComponent<NewProposedProductProps, NewPropo
     if (!this.preventNextClose && this.state.open) {
       this.setState({
         open: false,
-        value: undefined,
       });
     }
 
     this.preventNextClose = false;
+  }
+
+  public addProducts = () => {
+    const { onAdd } = this.props;
+    onAdd(this.state.value);
+    this.setState({ value: undefined });
   }
 
   public openPopover = () => {
@@ -80,20 +95,14 @@ class NewProposedProduct extends PureComponent<NewProposedProductProps, NewPropo
   }
 
   public onChange = (value: any) => {
-    console.log('onChange ', value);
     this.setState({ value });
   }
 
-  public addNew = (e: React.SyntheticEvent) => {
-    const { onAdd } = this.props;
-
-    onAdd();
-    this.closePopover();
-  }
+  public getTreeData = () => mapDataToTreeData(this.props.data);
 
   public render() {
     const tProps = {
-      treeData,
+      treeData: this.getTreeData(),
       value: this.state.value,
       onChange: this.onChange,
       treeCheckable: true,
@@ -104,6 +113,7 @@ class NewProposedProduct extends PureComponent<NewProposedProductProps, NewPropo
         width: 300,
       },
       open: true,
+      treeNodeFilterProp: 'title',
     };
 
     return (
@@ -114,8 +124,6 @@ class NewProposedProduct extends PureComponent<NewProposedProductProps, NewPropo
         </HeaderTitleTable>
         {this.state.open && (
           <ProposePopup onClick={this.onPopoverClick}>
-            <ProposeItem onClick={this.addNew}>Add new propose product</ProposeItem>
-            <ProposeItem>Copy from current</ProposeItem>
             <TreeSelect {...tProps} dropdownClassName="new-proposed-product" />
           </ProposePopup>
         )}
