@@ -7,6 +7,9 @@ import { Projections } from '../../components/Icons';
 import NewProposedProduct from '../../components/ProductOptimizer/NewProposedProduct';
 import { ProductTable } from '../../pages/client/productOptimizer/ProductOptimizer';
 import { Product } from '../../components/ProductOptimizer/Drawer/DrawerProduct';
+import { components } from './CurrentProduct';
+import uuidv1 from 'uuid/v1';
+import { EditCellType } from '../../components/StrategyPage/Drawer/EditCell';
 
 interface ProposedProductState {
   loading: boolean;
@@ -70,15 +73,22 @@ class ProposedProduct extends PureComponent<ProductTable, ProposedProductState> 
     {
       title: 'Product',
       dataIndex: 'description',
-      type: 'text',
+      options: {
+        placeholder: 'Enter Description',
+      },
+      type: EditCellType.text,
       key: '0',
       editable: true,
     },
     {
       title: 'Value',
       dataIndex: 'value',
-      type: 'number',
+      options: {
+        placeholder: 'Enter Value',
+      },
+      type: EditCellType.number,
       key: '1',
+      editable: true,
     },
     {
       title: '',
@@ -136,6 +146,47 @@ class ProposedProduct extends PureComponent<ProductTable, ProposedProductState> 
     }
   }
 
+  public handleAdd: (row?: Product) => void = (row = { description: '', value: '' }) => {
+    const { fieldArrayRenderProps } = this.props;
+    fieldArrayRenderProps.push(row);
+  }
+
+  public onEdit = (value: any, name: string, rowIndex: number) => {
+    const { fieldArrayRenderProps, dataList } = this.props;
+    const rowName = `${fieldArrayRenderProps.name}[${rowIndex}]`;
+    const fieldName = `${rowName}.${name}`;
+    fieldArrayRenderProps.form.setFieldValue(fieldName, value);
+
+    const record = dataList[rowIndex];
+    const remainingFieldName = name === 'description' ? 'value' : 'description';
+    if (record && !record.id && value && record[remainingFieldName]) {
+      const id = uuidv1();
+      fieldArrayRenderProps.form.setFieldValue(`${rowName}.id`, id);
+      setTimeout(() => {
+        this.handleAdd();
+      }, 10);
+    }
+  }
+
+  public getColumns = () => {
+    return this.columns.map((col) => {
+      if (col.editable) {
+        return {
+          ...col,
+          onCell: (record: any, rowIndex: number) => ({
+            ...col,
+            record,
+            rowIndex,
+            type: col.type || 'text',
+            onEdit: this.onEdit,
+          }),
+        };
+      }
+
+      return col;
+    });
+  }
+
   public render() {
     const { dataList } = this.props;
 
@@ -144,10 +195,11 @@ class ProposedProduct extends PureComponent<ProductTable, ProposedProductState> 
         <NewProposedProduct onAdd={this.onAdd} data={currentProductsTree} />
         <Table
           rowKey={(rowKey) => (rowKey.id ? rowKey.id.toString() : 'new')}
-          className={`table-general ${this.tableName}-table`}
-          columns={this.columns}
+          className={`table-general optimizer-table ${this.tableName}-table`}
+          columns={this.getColumns()}
           dataSource={dataList}
           pagination={false}
+          components={components}
         />
       </TableEntryContainer>
     );

@@ -1,4 +1,4 @@
-import React, { Component, useState, useCallback, useEffect } from 'react';
+import React, { PureComponent, useState, useCallback, useEffect } from 'react';
 import { Icon, Table, Popconfirm } from 'antd';
 import cn from 'classnames';
 import { get, debounce } from 'lodash';
@@ -42,13 +42,13 @@ const EditCellContainer = (props: any) => {
   );
 };
 
-const components = {
+export const components = {
   body: {
     cell: EditCellContainer,
   },
 };
 
-class CurrentProduct extends Component<ProductTable, CurrentProductState> {
+class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
   public state = {
     loading: false,
   };
