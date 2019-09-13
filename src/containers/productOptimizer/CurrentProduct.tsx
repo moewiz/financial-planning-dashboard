@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, useState, useCallback, useEffect } from 'react';
 import { Icon, Table, Popconfirm } from 'antd';
 import cn from 'classnames';
 import { get, debounce } from 'lodash';
@@ -16,8 +16,12 @@ interface CurrentProductState {
 
 const EditCellContainer = (props: any) => {
   const { dataIndex, record, type, editable, onEdit, rowIndex } = props;
-  const [value, setValue] = React.useState<any>(get(record, dataIndex));
-  const debounceEdit = React.useCallback(
+  const [value, setValue] = useState<any>(get(record, dataIndex));
+  useEffect(() => {
+    console.log('value', get(record, dataIndex));
+    setValue(get(record, dataIndex));
+  }, [get(record, dataIndex)]);
+  const debounceEdit = useCallback(
     debounce((val, name) => {
       onEdit(val, name, rowIndex);
     }, 250),
@@ -126,10 +130,9 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
     if (record && !record.id && value && record[remainingFieldName]) {
       const id = uuidv1();
       fieldArrayRenderProps.form.setFieldValue(`${rowName}.id`, id);
-      // simulate call API to create a new product
       setTimeout(() => {
         this.handleAdd();
-      }, 1000);
+      }, 10);
     }
   }
 
