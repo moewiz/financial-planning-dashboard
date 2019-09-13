@@ -1,4 +1,4 @@
-import React, { PureComponent, useState, useCallback, useEffect } from 'react';
+import React, { Component, useState, useCallback, useEffect } from 'react';
 import { Icon, Table, Popconfirm } from 'antd';
 import cn from 'classnames';
 import { get, debounce } from 'lodash';
@@ -18,18 +18,17 @@ const EditCellContainer = (props: any) => {
   const { dataIndex, record, type, editable, onEdit, rowIndex } = props;
   const [value, setValue] = useState<any>(get(record, dataIndex));
   useEffect(() => {
-    console.log('value', get(record, dataIndex));
     setValue(get(record, dataIndex));
   }, [get(record, dataIndex)]);
   const debounceEdit = useCallback(
-    debounce((val, name) => {
-      onEdit(val, name, rowIndex);
+    debounce((val, name, index) => {
+      onEdit(val, name, index);
     }, 250),
     [],
   );
   const onChange = (val: any, name: string) => {
-    debounceEdit(val, name);
     setValue(val);
+    debounceEdit(val, name, rowIndex);
   };
 
   return (
@@ -49,7 +48,7 @@ const components = {
   },
 };
 
-class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
+class CurrentProduct extends Component<ProductTable, CurrentProductState> {
   public state = {
     loading: false,
   };
