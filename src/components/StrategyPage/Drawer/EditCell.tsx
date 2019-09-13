@@ -7,6 +7,7 @@ import { EntryPickerTable } from '../../../common/EntryPicker/styled';
 import { ddFreeTextOptions } from '../../../enums/strategySentences';
 import { DDFreeText, DrawerTableRows, QuotationMark } from './styled';
 import NewInputNumber from './NewInputNumber';
+import LinkCurrentProduct from './LinkCurrentProduct';
 
 const { MonthPicker } = DatePicker;
 const { Option } = Select;
@@ -33,6 +34,7 @@ export enum EditCellType {
   select,
   dropdownFreeText,
   textarea,
+  linkCurrentProduct,
 }
 
 class EditCell extends Component<EditCellProps> {
@@ -224,6 +226,10 @@ class EditCell extends Component<EditCellProps> {
     return <TextArea value={value} placeholder={placeholder} onChange={this.onChangeTextArea} autosize {...options} />;
   }
 
+  public renderLinkCurrentProduct = () => {
+    return <LinkCurrentProduct {...this.props} />;
+  }
+
   public render() {
     const { type } = this.props;
     let input = this.renderInputText();
@@ -246,6 +252,9 @@ class EditCell extends Component<EditCellProps> {
         break;
       case EditCellType.textarea:
         input = this.renderInputTextArea();
+        break;
+      case EditCellType.linkCurrentProduct:
+        input = this.renderLinkCurrentProduct();
         break;
       default:
         break;

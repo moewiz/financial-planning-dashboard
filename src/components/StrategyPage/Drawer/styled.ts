@@ -430,3 +430,9 @@ export const QuotationMark = styled.span<{ hideQuotationMark?: boolean }>`
       `}
   }
 `;
+
+export const LinkCurrentProductWrapper = styled.div`
+  .ant-select {
+    margin-left: 0px;
+  }
+`;

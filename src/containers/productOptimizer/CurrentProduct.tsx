@@ -1,21 +1,22 @@
 import React, { PureComponent, useState, useCallback, useEffect } from 'react';
 import { Icon, Table, Popconfirm } from 'antd';
 import cn from 'classnames';
-import { get, debounce } from 'lodash';
+import { get, debounce, map } from 'lodash';
 import uuidv1 from 'uuid/v1';
 
-import { HeaderTitleTable, TableEntryContainer, TextTitle } from '../../pages/client/styled';
+import { HeaderTitleTable, TableEntryContainer, TextTitle, TagStyled, TagList } from '../../pages/client/styled';
 import { ProductTable } from '../../pages/client/productOptimizer/ProductOptimizer';
 import { Projections } from '../../components/Icons';
 import { Product } from '../../components/ProductOptimizer/Drawer/DrawerProduct';
 import EditCell, { EditCellType } from '../../components/StrategyPage/Drawer/EditCell';
+import LinkCurrentProduct from '../../components/StrategyPage/Drawer/LinkCurrentProduct';
 
 interface CurrentProductState {
   loading: boolean;
 }
 
 const EditCellContainer = (props: any) => {
-  const { dataIndex, record, type, editable, onEdit, rowIndex } = props;
+  const { dataIndex, record, type, editable, onEdit, rowIndex, showLinks } = props;
   const [value, setValue] = useState<any>(get(record, dataIndex));
   useEffect(() => {
     setValue(get(record, dataIndex));
@@ -31,12 +32,29 @@ const EditCellContainer = (props: any) => {
     debounceEdit(val, name, rowIndex);
   };
 
+  if (editable && type === EditCellType.linkCurrentProduct) {
+    return (
+      <td>
+        {record && record.id && <LinkCurrentProduct {...props} name={dataIndex} value={value} onChange={onChange} />}
+      </td>
+    );
+  }
+
   return (
     <td>
       {editable ? (
         <EditCell {...props} name={dataIndex} value={value} onChange={onChange} type={type} />
       ) : (
         props.children
+      )}
+      {showLinks && (
+        <TagList>
+          {map(get(record, 'links', []), (product) => (
+            <TagStyled key={product.id} closable={true} color="#e2e2e2">
+              {product.description}
+            </TagStyled>
+          ))}
+        </TagList>
       )}
     </td>
   );

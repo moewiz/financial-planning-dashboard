@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Icon, Popconfirm, Table } from 'antd';
 import cn from 'classnames';
+import uuidv1 from 'uuid/v1';
 
 import { TableEntryContainer } from '../../pages/client/styled';
 import { Projections } from '../../components/Icons';
@@ -8,7 +9,6 @@ import NewProposedProduct from '../../components/ProductOptimizer/NewProposedPro
 import { ProductTable } from '../../pages/client/productOptimizer/ProductOptimizer';
 import { Product } from '../../components/ProductOptimizer/Drawer/DrawerProduct';
 import { components } from './CurrentProduct';
-import uuidv1 from 'uuid/v1';
 import { EditCellType } from '../../components/StrategyPage/Drawer/EditCell';
 
 interface ProposedProductState {
@@ -22,17 +22,17 @@ const currentProductsTree = [
       {
         description: 'Product A',
         value: 10000,
-        id: 1,
+        id: 100,
       },
       {
         description: 'Product B',
         value: 10000,
-        id: 2,
+        id: 101,
       },
       {
         description: 'Product C',
         value: 10000,
-        id: 3,
+        id: 1003,
       },
     ],
   },
@@ -42,17 +42,17 @@ const currentProductsTree = [
       {
         description: 'Product D',
         value: 5000,
-        id: 4,
+        id: 1004,
       },
       {
         description: 'Product E',
         value: 5000,
-        id: 5,
+        id: 1005,
       },
       {
         description: 'Product F',
         value: 5000,
-        id: 6,
+        id: 1006,
       },
     ],
   },
@@ -62,12 +62,18 @@ class ProposedProduct extends PureComponent<ProductTable, ProposedProductState> 
   public state = {
     loading: false,
   };
-  public columns = [
+
+  private columns = [
     {
       title: '',
-      key: 'link',
+      key: 'links',
       className: 'text-align-center',
-      render: (text: any, record: any) => <Icon type="link" style={{ transform: 'rotate(45deg)' }} />,
+      dataIndex: 'links',
+      editable: true,
+      type: EditCellType.linkCurrentProduct,
+      options: {
+        data: currentProductsTree,
+      },
       width: 30,
     },
     {
@@ -79,6 +85,7 @@ class ProposedProduct extends PureComponent<ProductTable, ProposedProductState> 
       type: EditCellType.text,
       key: '0',
       editable: true,
+      showLinks: true,
     },
     {
       title: 'Value',
@@ -187,12 +194,17 @@ class ProposedProduct extends PureComponent<ProductTable, ProposedProductState> 
     });
   }
 
+  public getCurrentProducts = () => {
+    // TODO: Ensure that data ignores the selected products
+    return currentProductsTree;
+  }
+
   public render() {
     const { dataList } = this.props;
 
     return (
       <TableEntryContainer>
-        <NewProposedProduct onAdd={this.onAdd} data={currentProductsTree} />
+        <NewProposedProduct onAdd={this.onAdd} data={this.getCurrentProducts()} />
         <Table
           rowKey={(rowKey) => (rowKey.id ? rowKey.id.toString() : 'new')}
           className={`table-general optimizer-table ${this.tableName}-table`}

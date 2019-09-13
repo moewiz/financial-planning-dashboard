@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Tag } from 'antd';
 
 interface HeaderTitleTableProps {
   small?: boolean;
@@ -84,16 +85,22 @@ export const TableEntryContainer = styled.section.attrs({
   }
   .optimizer-table {
     .ant-table-thead > tr > th {
-      text-align: center;
+      text-align: left;
     }
     .ant-table-tbody .ant-table-row .strategy-item {
       width: 100%;
+      input {
+        padding: 4px 11px;
+      }
 
       .edit-cell {
         width: 100%;
         font-weight: normal;
+        text-align: left;
+        margin-left: -11px;
         .ant-input-number-input {
           font-weight: normal;
+          text-align: left;
         }
       }
     }
@@ -156,6 +163,7 @@ export const TableEntryContainer = styled.section.attrs({
   }
   .ant-table-tbody > tr > td{
     padding: 10px 5px;
+    vertical-align: baseline;
   }
   .ant-table-thead > tr > th{
     background-color: #eaedef;
@@ -348,6 +356,22 @@ export const InnerTableContainer = styled.section`
       width: 20px;
       &.operation {
       }
+    }
+  }
+`;
+
+export const TagList = styled.div``;
+
+export const TagStyled = styled(Tag)`
+  &.ant-tag {
+    font-size: 10px;
+    color: #112054;
+    margin-top: 3px;
+    .anticon-close {
+      font-size: 10px !important;
+      background-color: #112054;
+      border-radius: 50%;
+      padding: 2px;
     }
   }
 `;

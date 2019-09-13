@@ -1,44 +1,17 @@
 import React, { PureComponent } from 'react';
 import { Icon, TreeSelect } from 'antd';
 
-import { NewProposedProductStyled, ProposePopupWrapper } from './styled';
-import { HeaderTitleTable, TextTitle } from '../../pages/client/styled';
+import { EditCellProps } from './EditCell';
+import { mapDataToTreeData } from '../../ProductOptimizer/NewProposedProduct';
+import { ProposePopupWrapper } from '../../ProductOptimizer/styled';
+import { LinkCurrentProductWrapper } from './styled';
 
-interface NewProposedProductProps {
-  data: CurrentDataTree[];
-  onAdd: (productIds: number[]) => void;
-}
-
-interface NewProposedProductState {
+interface LinkCurrentProductStates {
   value: any;
   open: boolean;
 }
 
-interface CurrentDataTree {
-  description: string;
-  id?: number;
-  children?: CurrentDataTree[];
-}
-
-export const mapDataToTreeData = (arrayData: CurrentDataTree[], baseIndex: number = 0): any =>
-  arrayData.map((data: CurrentDataTree, index: number) => {
-    if (data.children && data.children.length > 0) {
-      return {
-        key: `${index}`,
-        value: `parent-${index}`,
-        title: data.description,
-        children: mapDataToTreeData(data.children, index),
-      };
-    }
-
-    return {
-      key: `${baseIndex}-${index}`,
-      value: data.id,
-      title: data.description,
-    };
-  });
-
-class NewProposedProduct extends PureComponent<NewProposedProductProps, NewProposedProductState> {
+class LinkCurrentProduct extends PureComponent<EditCellProps, LinkCurrentProductStates> {
   public state = {
     value: [],
     open: false,
@@ -52,8 +25,8 @@ class NewProposedProduct extends PureComponent<NewProposedProductProps, NewPropo
   }
 
   public componentDidUpdate(
-    prevProps: Readonly<NewProposedProductProps>,
-    prevState: Readonly<NewProposedProductState>,
+    prevProps: Readonly<EditCellProps>,
+    prevState: Readonly<LinkCurrentProductStates>,
     snapshot?: any,
   ): void {
     if (prevState.open !== this.state.open && !this.state.open) {
@@ -80,9 +53,19 @@ class NewProposedProduct extends PureComponent<NewProposedProductProps, NewPropo
   }
 
   public addProducts = () => {
-    const { onAdd } = this.props;
-    onAdd(this.state.value);
-    this.setState({ value: undefined });
+    const { onChange, name, options } = this.props;
+    let products: any[] = [];
+    options.data.map((parent: { children?: Array<{ id: number }> }) => {
+      if (parent.children && parent.children.length > 0) {
+        products = [
+          ...products,
+          // @ts-ignore
+          ...parent.children.filter((product: any) => this.state.value.includes(product.id)),
+        ];
+      }
+    });
+    onChange(products, name);
+    this.setState({ value: [] });
   }
 
   public openPopover = () => {
@@ -98,7 +81,7 @@ class NewProposedProduct extends PureComponent<NewProposedProductProps, NewPropo
     this.setState({ value });
   }
 
-  public getTreeData = () => mapDataToTreeData(this.props.data);
+  public getTreeData = () => mapDataToTreeData(this.props.options.data);
 
   public render() {
     const tProps = {
@@ -117,19 +100,16 @@ class NewProposedProduct extends PureComponent<NewProposedProductProps, NewPropo
     };
 
     return (
-      <NewProposedProductStyled>
-        <HeaderTitleTable>
-          <Icon type={'plus-square'} theme={'filled'} onClick={this.openPopover} />
-          <TextTitle small={true}>Proposed</TextTitle>
-        </HeaderTitleTable>
+      <LinkCurrentProductWrapper>
+        <Icon type="link" style={{ transform: 'rotate(45deg)' }} onClick={this.openPopover} />
         {this.state.open && (
           <ProposePopupWrapper onClick={this.onPopoverClick}>
             <TreeSelect {...tProps} dropdownClassName="new-proposed-product" />
           </ProposePopupWrapper>
         )}
-      </NewProposedProductStyled>
+      </LinkCurrentProductWrapper>
     );
   }
 }
 
-export default NewProposedProduct;
+export default LinkCurrentProduct;
