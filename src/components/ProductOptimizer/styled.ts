@@ -9,12 +9,37 @@ export const NewProposedProductStyled = styled.div`
     // border-color: #d9d9d9;
     // box-shadow: none;
   }
+  .ant-select {
+    margin-left: 0px;
+    .ant-select{
+      &-selection{
+        &__choice{
+          font-size: 10px;
+          color: #112054;
+          margin-top: 3px;
+          background-color: rgb(226, 226, 226);
+          border: 1px solid transparent;
+          border-radius: 4px;
+          &__remove{
+            .anticon-close{
+              font-size: 10px !important;
+              background-color: #112054;
+              border-radius: 50%;
+              padding: 2px;
+              color: #fff;
+            }
+          }
+        }
+        &__rendered{
+        }
+      }
+    }
+  }
 `;
 
 export const ProposePopupWrapper = styled.div`
   position: absolute;
   background: #fff;
-  // padding: 8px 8px 0px 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   z-index: 2;
 `;
@@ -37,6 +62,16 @@ export const FundTabContent = styled.div`
 export const FundBlock = styled.div`
   flex: 0 0 340px;
   margin: 0 8px;
+  transition: opacity ease 400ms;
+  &.all-proposed{
+    opacity: 1;
+  }
+  &.proposed-active{
+    opacity: 1;
+  }
+  &.proposed-inavtive{
+    opacity: .5;
+  }
 `;
 
 export const HorizontalScrollable = styled.div`

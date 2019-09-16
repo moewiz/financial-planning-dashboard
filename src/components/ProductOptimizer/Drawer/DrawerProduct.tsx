@@ -30,6 +30,7 @@ const data = [
 ];
 
 class DrawerProduct extends PureComponent<DrawerProductProps> {
+  public state = { hovering: -1 };
   public columns = [
     {
       title: 'Fund Name',
@@ -60,20 +61,48 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
 
     return this.renderNewDrawer();
   }
-
+  public mouseOver = (id?: number) => {
+   this.setState({
+    hovering: id,
+   });
+  }
+  public mouseOut = (id?: number) => {
+    this.setState({
+      hovering: -1,
+    });
+  }
   public renderFundTab = () => {
     const { product } = this.props;
+    const { hovering } = this.state;
+    const haveHover = hovering !== -1;
+    const getClasses = (id?: number) => {
+      const classname = 'all-proposed';
+      if (haveHover) {
+        return hovering === id ? 'proposed-active' : 'proposed-inavtive';
+      } else {
+        return classname;
+      }
+    };
 
     return (
       <>
         <FundTabContent>
-          <FundBlock>
+          <FundBlock
+             className={getClasses(-2)}
+             onMouseOver={() => { this.mouseOver(-2); }}
+             onMouseOut={() => { this.mouseOut(-2); }}
+          >
             <CustomSearch placeholder="Search Product" />
             <CustomSearch placeholder="Search Proposed Fund" />
           </FundBlock>
           <HorizontalScrollable>
             {map(product.links, (linkedProduct: Product) => (
-              <FundBlock key={linkedProduct.id}>
+              <FundBlock
+                className={getClasses(linkedProduct.id)}
+                key={linkedProduct.id}
+                onMouseOver={() => { this.mouseOver(linkedProduct.id); }}
+                onMouseOut={() => { this.mouseOut(linkedProduct.id); }}
+              >
                 <CustomSearch placeholder="Search Product" />
                 <CustomSearch placeholder="Search Proposed Fund" />
               </FundBlock>
