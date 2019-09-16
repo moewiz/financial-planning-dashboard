@@ -80,4 +80,5 @@ export const HorizontalScrollable = styled.div`
   flex-direction: row;
   display: flex;
   overflow: overlay;
+  padding-bottom: 20px;
 `;
