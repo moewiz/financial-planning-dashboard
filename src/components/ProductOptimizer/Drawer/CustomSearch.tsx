@@ -132,6 +132,11 @@ const findOptionObj = (data: OptionData[], value: number) =>
       return !!(i && i.id);
     });
 
+// TODO: implement Filter Search result by option ids
+const filterOption = () => {
+  console.log('TODO: implement Filter Search result by option ids');
+};
+
 class CustomSearch extends PureComponent<Prop> {
   public renderResults = () => {
     const { type } = this.props;

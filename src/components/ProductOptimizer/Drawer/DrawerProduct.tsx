@@ -195,7 +195,7 @@ class DrawerProduct extends PureComponent<DrawerProductProps, DrawerProductState
                 <FundTable
                   columns={this.columns}
                   data={data}
-                  product={values}
+                  values={values}
                   setFieldValue={formikProps.setFieldValue}
                 />
 

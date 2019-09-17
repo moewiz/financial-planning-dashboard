@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table } from 'antd';
+import { get } from 'lodash';
 
 import { TableEntryContainer } from '../../../pages/client/styled';
 import { ActionDrawerGeneral } from '../../StrategyPage/Drawer/styled';
@@ -10,7 +11,7 @@ interface FundTableProps {
   columns: any[];
   data: object[];
   setFieldValue: (field: string, value: any) => void;
-  product?: Product;
+  values?: Product;
 }
 
 const total = {
@@ -20,18 +21,19 @@ const total = {
 };
 
 const FundTable = (props: FundTableProps) => {
-  const { columns, data, product, setFieldValue } = props;
+  const { columns, data, values, setFieldValue } = props;
   const onSelectProduct = (option: Option) => {
     if (option) {
       setFieldValue('details.product', option);
     }
   };
   const onSelectFund = (option: Option) => {
+    const funds = get(values, 'details.funds', []);
     if (option) {
-      setFieldValue('', option);
+      setFieldValue('details.funds', [option, ...funds]);
     }
   };
-  const detailProduct = product && product.details && product.details.product;
+  const detailProduct = values && values.details && values.details.product;
 
   return (
     <>
