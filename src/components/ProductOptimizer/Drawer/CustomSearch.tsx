@@ -15,132 +15,128 @@ interface Prop {
   selectedOption?: Option;
 }
 
-interface State {
-  keyword?: string;
+interface OptionData {
+  id?: number;
+  name: string;
+  code?: string;
+  children?: OptionData[];
 }
 
-class CustomSearch extends PureComponent<Prop, State> {
-  constructor(props: Prop) {
-    super(props);
+const dummyProductForSearching: OptionData[] = [
+  {
+    name: 'Recent',
+    children: [
+      {
+        id: 1,
+        name: 'BlackRock Global Income',
+        code: 'AMP1995AU',
+      },
+      {
+        id: 2,
+        name: 'Product X',
+        code: 'AMP1707AU',
+      },
+    ],
+  },
+  {
+    name: 'Popular',
+    children: [
+      {
+        id: 3,
+        name: 'AMP Australian Share Index',
+        code: 'AMP1995AU',
+      },
+      {
+        id: 4,
+        name: 'Perpetual Industrial Share',
+        code: 'AMP0057AU',
+      },
+      {
+        id: 5,
+        name: 'Plato Australian Shares Income',
+        code: 'AMP0767AU',
+      },
+    ],
+  },
+  {
+    name: 'Model Portfolios',
+    children: [
+      {
+        id: 6,
+        name: 'Model Portpolio 1 (Growth)',
+      },
+      {
+        id: 7,
+        name: 'Model Portpolio 2 (Defensive)',
+      },
+      {
+        id: 8,
+        name: 'Model Portpolio 3 (Moderate)',
+      },
+      {
+        id: 9,
+        name: 'Model Portpolio 4 (Defensive)',
+      },
+      {
+        id: 10,
+        name: 'Model Portpolio 5 (Growth)',
+      },
+    ],
+  },
+];
 
-    this.state = {
-      keyword: undefined,
-    };
-  }
+const dummyFundForSearching: OptionData[] = [
+  {
+    name: 'Search Result',
+    children: [
+      { id: 1, name: 'Fund DE' },
+      { id: 2, name: 'Fund DF' },
+      { id: 3, name: 'Fund DG' },
+      { id: 4, name: 'Fund DH' },
+      { id: 5, name: 'Fund DI' },
+    ],
+  },
+];
 
-  public onChange = (keyword: string) => {
-    this.setState({ keyword });
-  }
-
-  public renderResults = () => {
-    const { type } = this.props;
-
-    if (type === 'fund') {
+const renderOptions = (data: OptionData[]) =>
+  data &&
+  data.map((opt: OptionData) => {
+    if (opt.children && opt.children.length > 0) {
       return (
-        <OptGroup label="Search result">
-          <Select.Option value={JSON.stringify({ id: 1, name: 'Fund DE' })} title="Fund DE">
-            Fund DE
-          </Select.Option>
-          <Select.Option value={JSON.stringify({ id: 2, name: 'Fund DF' })} title="Fund DF">
-            Fund DF
-          </Select.Option>
-          <Select.Option value={JSON.stringify({ id: 3, name: 'Fund DG' })} title="Fund DG">
-            Fund DG
-          </Select.Option>
-          <Select.Option value={JSON.stringify({ id: 4, name: 'Fund DH' })} title="Fund DH">
-            Fund DH
-          </Select.Option>
-          <Select.Option value={JSON.stringify({ id: 5, name: 'Fund DI' })} title="Fund DI">
-            Fund DI
-          </Select.Option>
+        <OptGroup label={opt.name} key={opt.name}>
+          {renderOptions(opt.children)}
         </OptGroup>
       );
     }
 
-    return [
-      <OptGroup label="Recent">
-        <Select.Option
-          value={JSON.stringify({ id: 1, name: 'BlackRock Global Income' })}
-          title="BlackRock Global Income (AMP1995AU)"
-        >
-          <span className="text">BlackRock Global Income</span>
-          <span className="code">AMP1995AU</span>
-        </Select.Option>
-        <Select.Option value={JSON.stringify({ id: 2, name: 'Product X' })} title="Product X (AMP1707AU)">
-          <span className="text">Product X</span>
-          <span className="code">AMP1707AU</span>
-        </Select.Option>
-      </OptGroup>,
-      <OptGroup label="Popular">
-        <Select.Option
-          value={JSON.stringify({ id: 3, name: 'AMP Australian Share Index' })}
-          title="AMP Australian Share Index (AMP1995AU)"
-        >
-          <span className="text">AMP Australian Share Index</span>
-          <span className="code">AMP1995AU</span>
-        </Select.Option>
-        <Select.Option
-          value={JSON.stringify({ id: 4, name: 'Perpetual Industrial Share' })}
-          title="Perpetual Industrial Share (AMP0057AU)"
-        >
-          <span className="text">Perpetual Industrial Share</span>
-          <span className="code">AMP0057AU</span>
-        </Select.Option>
-        <Select.Option
-          value={JSON.stringify({ id: 5, name: 'Plato Australian Shares Income' })}
-          title="Plato Australian Shares Income (AMP0767AU)"
-        >
-          <span className="text">Plato Australian Shares Income</span>
-          <span className="code">AMP0767AU</span>
-        </Select.Option>
-      </OptGroup>,
-      <OptGroup label="Model Portfolios">
-        <Select.Option
-          value={JSON.stringify({ id: 6, name: 'Model Portpolio 1 (Growth)' })}
-          title="Model Portpolio 1 (Growth)"
-        >
-          Model Portpolio 1 (Growth)
-        </Select.Option>
-        <Select.Option
-          value={JSON.stringify({ id: 7, name: 'Model Portpolio 2 (Defensive)' })}
-          title="Model Portpolio 2 (Defensive)"
-        >
-          Model Portpolio 2 (Defensive)
-        </Select.Option>
-        <Select.Option
-          value={JSON.stringify({ id: 8, name: 'Model Portpolio 2 (Moderate)' })}
-          title="Model Portpolio 3 (Moderate)"
-        >
-          Model Portpolio 3 (Moderate)
-        </Select.Option>
-        <Select.Option
-          value={JSON.stringify({ id: 9, name: 'Model Portpolio 2 (Defensive)' })}
-          title="Model Portpolio 4 (Defensive)"
-        >
-          Model Portpolio 4 (Defensive)
-        </Select.Option>
-        <Select.Option
-          value={JSON.stringify({ id: 10, name: 'Model Portpolio 2 (Growth)' })}
-          title="Model Portpolio 5 (Growth)"
-        >
-          Model Portpolio 5 (Growth)
-        </Select.Option>
-      </OptGroup>,
-    ];
+    return (
+      <Select.Option key={opt.id} value={opt.id} title={`${opt.name} ${opt.code || ''}`}>
+        <span className="text">{opt.name}</span>
+        <span className="code">{opt.code}</span>
+      </Select.Option>
+    );
+  });
+
+class CustomSearch extends PureComponent<Prop> {
+  public renderResults = () => {
+    const { type } = this.props;
+
+    if (type === 'fund') {
+      return renderOptions(dummyFundForSearching);
+    }
+
+    return renderOptions(dummyProductForSearching);
   }
 
   public render() {
     const { placeholder, onSelect, selectedOption } = this.props;
-    const { keyword } = this.state;
 
     return (
       <TopSearch border>
         <Icon type="search" />
         <Select
           showSearch
-          value={keyword}
-          defaultValue={JSON.stringify(selectedOption)}
-          onChange={this.onChange}
+          defaultValue={selectedOption && selectedOption.id}
           onSelect={onSelect}
           placeholder={placeholder}
           className="custom-select"
