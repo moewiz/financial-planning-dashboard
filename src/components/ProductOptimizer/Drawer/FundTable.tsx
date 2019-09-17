@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Table } from 'antd';
 import { get } from 'lodash';
 
@@ -9,31 +9,39 @@ import { Option, Product } from './DrawerProduct';
 
 interface FundTableProps {
   columns: any[];
-  data: object[];
   setFieldValue: (field: string, value: any) => void;
   values?: Product;
 }
 
-const total = {
-  name: 'Total',
-  value: '10,000',
-  percentage: '100%',
-};
-
 const FundTable = (props: FundTableProps) => {
-  const { columns, data, values, setFieldValue } = props;
+  const { columns, values, setFieldValue } = props;
+  const funds = get(values, 'details.funds', []);
+  const [tableData, setTableData] = useState<Option[]>([]);
   const onSelectProduct = (option: Option) => {
     if (option) {
       setFieldValue('details.product', option);
     }
   };
   const onSelectFund = (option: Option) => {
-    const funds = get(values, 'details.funds', []);
     if (option) {
       setFieldValue('details.funds', [option, ...funds]);
     }
   };
   const detailProduct = values && values.details && values.details.product;
+  const calculateDataList = useCallback((dataList: Option[]) => {
+    const sum = dataList.reduce((acc, data) => (acc += data.value ? data.value : 0), 0);
+    const fundsWithPercentage = dataList.map((data: Option) => {
+      if (data && data.value) {
+        return { ...data, percentage: ((data.value / sum) * 100).toFixed() };
+      }
+      return data;
+    });
+    fundsWithPercentage.push({ name: 'Total', value: sum, percentage: 100 });
+    setTableData(fundsWithPercentage);
+  }, []);
+  useEffect(() => {
+    calculateDataList(funds);
+  }, [get(values, 'details.funds')]);
 
   return (
     <>
@@ -45,7 +53,7 @@ const FundTable = (props: FundTableProps) => {
         <Table
           className="table-general drawer-fund-table"
           columns={columns}
-          dataSource={[...data, total]}
+          dataSource={tableData}
           pagination={false}
         />
       </TableEntryContainer>

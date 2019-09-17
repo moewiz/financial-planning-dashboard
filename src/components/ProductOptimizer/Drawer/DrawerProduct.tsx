@@ -10,9 +10,10 @@ import { DrawerProductWrapper, FundBlock, FundTabContent, HorizontalScrollable }
 import CustomSearch from './CustomSearch';
 
 export interface Option {
-  id: number;
+  id?: number;
   name: string;
   code?: string;
+  value?: number;
 }
 
 export interface Product {
@@ -190,14 +191,9 @@ class DrawerProduct extends PureComponent<DrawerProductProps, DrawerProductState
           return (
             <Form>
               <DrawerProductWrapper>
-                <DrawerTitle>{(details && details.product.name) || 'My Product'}</DrawerTitle>
+                <DrawerTitle>{get(details, 'product.name', 'My Product')}</DrawerTitle>
 
-                <FundTable
-                  columns={this.columns}
-                  data={data}
-                  values={values}
-                  setFieldValue={formikProps.setFieldValue}
-                />
+                <FundTable columns={this.columns} values={values} setFieldValue={formikProps.setFieldValue} />
 
                 <ActionDrawerGeneral visible>
                   <Button htmlType={'submit'} type={'primary'}>

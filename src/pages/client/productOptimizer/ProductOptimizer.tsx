@@ -42,6 +42,7 @@ const client = {
           {
             id: 1,
             name: 'Fund DE',
+            value: 10000,
           },
         ],
       },

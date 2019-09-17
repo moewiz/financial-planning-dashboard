@@ -16,10 +16,7 @@ interface Prop {
   selectedOption?: Option;
 }
 
-interface OptionData {
-  id?: number;
-  name: string;
-  code?: string;
+interface OptionData extends Option {
   children?: OptionData[];
 }
 
@@ -90,11 +87,11 @@ const dummyFundForSearching: OptionData[] = [
   {
     name: 'Search Result',
     children: [
-      { id: 1, name: 'Fund DE' },
-      { id: 2, name: 'Fund DF' },
-      { id: 3, name: 'Fund DG' },
-      { id: 4, name: 'Fund DH' },
-      { id: 5, name: 'Fund DI' },
+      { id: 1, name: 'Fund DE', value: 10000 },
+      { id: 2, name: 'Fund DF', value: 5000 },
+      { id: 3, name: 'Fund DG', value: 15000 },
+      { id: 4, name: 'Fund DH', value: 20000 },
+      { id: 5, name: 'Fund DI', value: 25000 },
     ],
   },
 ];
