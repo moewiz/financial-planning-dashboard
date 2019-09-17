@@ -109,7 +109,7 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
             <Icon
               className={cn('projection', { disabled: isDisable })}
               component={Projections}
-              onClick={() => !isDisable && this.openDrawer()}
+              onClick={() => !isDisable && this.openDrawer(record)}
             />
             {isDisable ? (
               <Icon className={'remove disabled'} type="close-square" />
@@ -131,9 +131,9 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
     fieldArrayRenderProps.push(row);
   }
 
-  public openDrawer = () => {
+  public openDrawer = (record: any) => {
     const { openDrawer } = this.props;
-    openDrawer();
+    openDrawer(record);
   }
 
   public onRemove = (record: any, index: number) => {

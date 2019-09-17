@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
-import { map } from 'lodash';
+import { Formik, FormikProps } from 'formik';
+import { map, get } from 'lodash';
 import { Button, Drawer, Tabs } from 'antd';
 const { TabPane } = Tabs;
 
@@ -33,7 +34,6 @@ interface DrawerProductProps {
 
 interface DrawerProductStates {
   hovering?: number;
-  title: string;
 }
 
 const data = [
@@ -45,7 +45,7 @@ const data = [
 ];
 
 class DrawerProduct extends PureComponent<DrawerProductProps, DrawerProductStates> {
-  public state = { hovering: -1, title: '' };
+  public state = { hovering: -1};
   public columns = [
     {
       title: 'Fund Name',
@@ -68,34 +68,13 @@ class DrawerProduct extends PureComponent<DrawerProductProps, DrawerProductState
     },
   ];
 
-  public componentDidUpdate(
-    prevProps: Readonly<DrawerProductProps>,
-    prevState: Readonly<DrawerProductStates>,
-    snapshot?: any,
-  ): void {
-    const { isOpen } = this.props;
-
-    if (isOpen !== prevProps.isOpen && isOpen) {
-      this.setTitle();
-    }
-  }
-
-  public setTitle = () => {
-    const { product } = this.props;
-    if (product && product.details && product.details.product.name) {
-      this.setState({ title: product.details.product.name });
-    } else {
-      this.setState({ title: '' });
-    }
-  }
-
   public renderDrawer = () => {
     const { product } = this.props;
     if (product && product.links && product.links.length > 0) {
-      return this.renderLinkedDrawer();
+      return this.renderLinkedProducts();
     }
 
-    return this.renderNewDrawer();
+    return this.renderSingleProduct();
   }
 
   public mouseOver = (id?: number) => {
@@ -108,13 +87,6 @@ class DrawerProduct extends PureComponent<DrawerProductProps, DrawerProductState
     this.setState({
       hovering: -1,
     });
-  }
-
-  public onSelectProduct = (value: any) => {
-    const option: Option = JSON.parse(value);
-    if (option && option.name) {
-      this.setState({ title: option.name });
-    }
   }
 
   public renderFundTab = () => {
@@ -177,8 +149,7 @@ class DrawerProduct extends PureComponent<DrawerProductProps, DrawerProductState
     );
   }
 
-  // tslint:disable-next-line:no-empty
-  public renderLinkedDrawer = () => {
+  public renderLinkedProducts = () => {
     return (
       <DrawerProductWrapper>
         <DrawerTitle>Title</DrawerTitle>
@@ -199,26 +170,39 @@ class DrawerProduct extends PureComponent<DrawerProductProps, DrawerProductState
     );
   }
 
-  public renderNewDrawer = () => {
-    const { title } = this.state;
+  public renderSingleProduct = () => {
+    const { product } = this.props;
 
-    return (
-      <DrawerProductWrapper>
-        <DrawerTitle>{title || 'My Product'}</DrawerTitle>
-        <ActionDrawerGeneral drawer>
-          <CustomSearch placeholder="Add Product" onSelect={this.onSelectProduct} />
-          <CustomSearch placeholder="Search Fund" type="fund" />
-        </ActionDrawerGeneral>
+    return product ? (
+      <Formik
+        onSubmit={(values: Product, actions) => {
+          console.log('submitted', values);
+          setTimeout(() => {
+            actions.setSubmitting(false);
+            console.log('close drawer');
+          }, 500);
+        }}
+        initialValues={product}
+        render={(formikProps: FormikProps<Product>) => {
+          const { values } = formikProps;
+          const { details } = values;
 
-        <FundTable columns={this.columns} data={data} />
+          return (
+            <DrawerProductWrapper>
+              <DrawerTitle>{(details && details.product.name) || 'My Product'}</DrawerTitle>
 
-        <ActionDrawerGeneral visible>
-          <Button htmlType={'submit'} type={'primary'}>
-            <span>Save</span>
-          </Button>
-        </ActionDrawerGeneral>
-      </DrawerProductWrapper>
-    );
+              <FundTable columns={this.columns} data={data} product={values} />
+
+              <ActionDrawerGeneral visible>
+                <Button htmlType={'submit'} type={'primary'}>
+                  <span>Save</span>
+                </Button>
+              </ActionDrawerGeneral>
+            </DrawerProductWrapper>
+          );
+        }}
+      />
+    ) : null;
   }
 
   public render() {

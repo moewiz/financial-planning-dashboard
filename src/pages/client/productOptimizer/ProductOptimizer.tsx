@@ -24,7 +24,7 @@ interface ProductOptimizerProps {
 
 interface ProductOptimizerStates {
   isOpen: boolean;
-  product?: any;
+  product?: Product;
 }
 
 const client = {
@@ -33,6 +33,18 @@ const client = {
       id: 1,
       description: 'Product A',
       value: 10000,
+      details: {
+        product: {
+          id: 2,
+          name: 'Product X',
+        },
+        funds: [
+          {
+            id: 1,
+            name: 'Fund DE',
+          },
+        ],
+      },
     },
     {
       id: 2,
@@ -125,7 +137,7 @@ class ProductOptimizer extends React.PureComponent<ProductOptimizerProps, Produc
 
   public setDrawerVisible = (isOpen: boolean) => this.setState({ isOpen });
 
-  public setProduct = (product?: any) => this.setState({ product });
+  public setProduct = (product?: Product) => this.setState({ product });
 
   public openDrawer = (record?: any) => {
     this.setDrawerVisible(true);
@@ -138,7 +150,6 @@ class ProductOptimizer extends React.PureComponent<ProductOptimizerProps, Produc
 
   public resetForm = (formikProps: FormikProps<ProductOptimizerPage>) => () => {
     formikProps.resetForm();
-    // this.forceUpdate();
   }
 
   public render() {
