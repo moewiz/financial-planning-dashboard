@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Formik, FormikProps } from 'formik';
+import { Form, Formik, FormikProps } from 'formik';
 import { map, get } from 'lodash';
 import { Button, Drawer, Tabs } from 'antd';
 const { TabPane } = Tabs;
@@ -45,7 +45,7 @@ const data = [
 ];
 
 class DrawerProduct extends PureComponent<DrawerProductProps, DrawerProductStates> {
-  public state = { hovering: -1};
+  public state = { hovering: -1 };
   public columns = [
     {
       title: 'Fund Name',
@@ -188,17 +188,24 @@ class DrawerProduct extends PureComponent<DrawerProductProps, DrawerProductState
           const { details } = values;
 
           return (
-            <DrawerProductWrapper>
-              <DrawerTitle>{(details && details.product.name) || 'My Product'}</DrawerTitle>
+            <Form>
+              <DrawerProductWrapper>
+                <DrawerTitle>{(details && details.product.name) || 'My Product'}</DrawerTitle>
 
-              <FundTable columns={this.columns} data={data} product={values} />
+                <FundTable
+                  columns={this.columns}
+                  data={data}
+                  product={values}
+                  setFieldValue={formikProps.setFieldValue}
+                />
 
-              <ActionDrawerGeneral visible>
-                <Button htmlType={'submit'} type={'primary'}>
-                  <span>Save</span>
-                </Button>
-              </ActionDrawerGeneral>
-            </DrawerProductWrapper>
+                <ActionDrawerGeneral visible>
+                  <Button htmlType={'submit'} type={'primary'}>
+                    <span>Save</span>
+                  </Button>
+                </ActionDrawerGeneral>
+              </DrawerProductWrapper>
+            </Form>
           );
         }}
       />

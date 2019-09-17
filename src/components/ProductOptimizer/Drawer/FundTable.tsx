@@ -9,27 +9,26 @@ import { Option, Product } from './DrawerProduct';
 interface FundTableProps {
   columns: any[];
   data: object[];
+  setFieldValue: (field: string, value: any) => void;
   product?: Product;
 }
 
-const FundTable = ({ columns, data, product }: FundTableProps) => {
-  const total = {
-    name: 'Total',
-    value: '10,000',
-    percentage: '100%',
-  };
-  const onSelectProduct = (productStringObj: string) => {
-    const option: Option = JSON.parse(productStringObj);
-    if (option && option.name) {
-      // this.setState({ title: option.name });
-      console.log('select product', option);
+const total = {
+  name: 'Total',
+  value: '10,000',
+  percentage: '100%',
+};
+
+const FundTable = (props: FundTableProps) => {
+  const { columns, data, product, setFieldValue } = props;
+  const onSelectProduct = (option: Option) => {
+    if (option) {
+      setFieldValue('details.product', option);
     }
   };
-  const onSelectFund = (fundStringObj: string) => {
-    const option: Option = JSON.parse(fundStringObj);
-    if (option && option.name) {
-      // this.setState({ title: option.name });
-      console.log('select fund', option);
+  const onSelectFund = (option: Option) => {
+    if (option) {
+      setFieldValue('', option);
     }
   };
   const detailProduct = product && product.details && product.details.product;

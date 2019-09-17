@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { isFunction } from 'lodash';
 import { Select, Icon } from 'antd';
 const { OptGroup } = Select;
 
@@ -11,7 +12,7 @@ export type CustomSearchType = 'product' | 'fund';
 interface Prop {
   placeholder: string;
   type?: CustomSearchType;
-  onSelect?: (value: any, option: any) => void;
+  onSelect?: (value: Option) => void;
   selectedOption?: Option;
 }
 
@@ -117,6 +118,20 @@ const renderOptions = (data: OptionData[]) =>
     );
   });
 
+const findOptionObj = (data: OptionData[], value: number) =>
+  data
+    .map((opt: OptionData) => {
+      if (opt.children && opt.children.length > 0) {
+        return opt.children.find((i: OptionData) => i.id === value);
+      }
+      if (opt.id === value) {
+        return opt;
+      }
+    })
+    .filter((i: OptionData | undefined) => {
+      return !!(i && i.id);
+    });
+
 class CustomSearch extends PureComponent<Prop> {
   public renderResults = () => {
     const { type } = this.props;
@@ -128,8 +143,20 @@ class CustomSearch extends PureComponent<Prop> {
     return renderOptions(dummyProductForSearching);
   }
 
+  public onSelect = (value: number) => {
+    const { onSelect, type } = this.props;
+    if (isFunction(onSelect)) {
+      const dictionary = type === 'fund' ? dummyFundForSearching : dummyProductForSearching;
+
+      const options = findOptionObj(dictionary, value);
+      if (options && options.length > 0) {
+        onSelect(options[0]);
+      }
+    }
+  }
+
   public render() {
-    const { placeholder, onSelect, selectedOption } = this.props;
+    const { placeholder, selectedOption } = this.props;
 
     return (
       <TopSearch border>
@@ -137,7 +164,7 @@ class CustomSearch extends PureComponent<Prop> {
         <Select
           showSearch
           defaultValue={selectedOption && selectedOption.id}
-          onSelect={onSelect}
+          onSelect={this.onSelect}
           placeholder={placeholder}
           className="custom-select"
           showArrow={false}
