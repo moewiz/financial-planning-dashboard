@@ -11,20 +11,23 @@ interface FundTableProps {
   columns: any[];
   setFieldValue: (field: string, value: any) => void;
   values?: Product;
+  parentField?: string;
 }
 
 const FundTable = (props: FundTableProps) => {
-  const { columns, values, setFieldValue } = props;
+  const { columns, values, setFieldValue, parentField } = props;
   const funds = get(values, 'details.funds', []);
   const [tableData, setTableData] = useState<Option[]>([]);
   const onSelectProduct = (option: Option) => {
     if (option) {
-      setFieldValue('details.product', option);
+      const field = (parentField ? parentField + '.' : '') + 'details.product';
+      setFieldValue(field, option);
     }
   };
   const onSelectFund = (option: Option) => {
     if (option) {
-      setFieldValue('details.funds', [option, ...funds]);
+      const field = (parentField ? parentField + '.' : '') + 'details.funds';
+      setFieldValue(field, [option, ...funds]);
     }
   };
   const detailProduct = values && values.details && values.details.product;

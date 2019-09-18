@@ -7,7 +7,6 @@ const { TabPane } = Tabs;
 import { DrawerTitle, ActionDrawerGeneral, DrawerSubContent } from '../../StrategyPage/Drawer/styled';
 import FundTable from './FundTable';
 import { DrawerProductWrapper, FundBlock, FundTabContent, HorizontalScrollable } from '../styled';
-import CustomSearch from './CustomSearch';
 
 export interface Option {
   id?: number;
@@ -102,58 +101,82 @@ class DrawerProduct extends PureComponent<DrawerProductProps, DrawerProductState
         return classname;
       }
     };
+    if (!product) {
+      return null;
+    }
 
     return (
-      <>
-        <FundTabContent>
-          <FundBlock
-            className={getClasses(-2)}
-            onMouseOver={() => {
-              this.mouseOver(-2);
-            }}
-            onMouseOut={() => {
-              this.mouseOut(-2);
-            }}
-          >
-            <CustomSearch placeholder="Add Product" />
-            <CustomSearch placeholder="Search Proposed Fund" type="fund" />
-          </FundBlock>
-          <HorizontalScrollable>
-            {product &&
-              map(product.links, (linkedProduct: Product) => (
+      <Formik
+        onSubmit={(values: Product, actions) => {
+          console.log('submitted', values);
+          setTimeout(() => {
+            actions.setSubmitting(false);
+            console.log('close drawer');
+          }, 500);
+        }}
+        initialValues={product}
+        render={(formikProps: FormikProps<Product>) => {
+          const { values } = formikProps;
+
+          return (
+            <Form>
+              <FundTabContent>
                 <FundBlock
-                  className={getClasses(linkedProduct.id)}
-                  key={linkedProduct.id}
+                  className={getClasses(-2)}
                   onMouseOver={() => {
-                    this.mouseOver(linkedProduct.id);
+                    this.mouseOver(-2);
                   }}
                   onMouseOut={() => {
-                    this.mouseOut(linkedProduct.id);
+                    this.mouseOut(-2);
                   }}
                 >
-                  <CustomSearch placeholder="Add Product" />
-                  <CustomSearch placeholder="Search Proposed Fund" />
+                  <FundTable columns={this.columns} values={values} setFieldValue={formikProps.setFieldValue} />
                 </FundBlock>
-              ))}
-          </HorizontalScrollable>
-        </FundTabContent>
+                <HorizontalScrollable>
+                  {values &&
+                    map(values.links, (linkedProduct: Product, index: number) => (
+                      <FundBlock
+                        className={getClasses(linkedProduct.id)}
+                        key={linkedProduct.id}
+                        onMouseOver={() => {
+                          this.mouseOver(linkedProduct.id);
+                        }}
+                        onMouseOut={() => {
+                          this.mouseOut(linkedProduct.id);
+                        }}
+                      >
+                        <FundTable
+                          columns={this.columns}
+                          values={linkedProduct}
+                          setFieldValue={formikProps.setFieldValue}
+                          parentField={`links.${index}`}
+                        />
+                      </FundBlock>
+                    ))}
+                </HorizontalScrollable>
+              </FundTabContent>
 
-        <ActionDrawerGeneral visible>
-          <Button htmlType={'button'} type={'default'}>
-            <span>Add comparison product</span>
-          </Button>
-          <Button htmlType={'submit'} type={'primary'}>
-            <span>Save</span>
-          </Button>
-        </ActionDrawerGeneral>
-      </>
+              <ActionDrawerGeneral visible>
+                <Button htmlType={'button'} type={'default'}>
+                  <span>Add comparison product</span>
+                </Button>
+                <Button htmlType={'submit'} type={'primary'} disabled={formikProps.isSubmitting || !formikProps.dirty}>
+                  <span>Save</span>
+                </Button>
+              </ActionDrawerGeneral>
+            </Form>
+          );
+        }}
+      />
     );
   }
 
   public renderLinkedProducts = () => {
+    const { product } = this.props;
+
     return (
       <DrawerProductWrapper>
-        <DrawerTitle>Title</DrawerTitle>
+        <DrawerTitle>{get(product, 'description', 'Title')}</DrawerTitle>
         <DrawerSubContent>
           Detail text goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
           incididunt ut labore et dolore magna aliqua.
