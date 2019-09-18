@@ -196,7 +196,11 @@ class DrawerProduct extends PureComponent<DrawerProductProps, DrawerProductState
                 <FundTable columns={this.columns} values={values} setFieldValue={formikProps.setFieldValue} />
 
                 <ActionDrawerGeneral visible>
-                  <Button htmlType={'submit'} type={'primary'}>
+                  <Button
+                    htmlType={'submit'}
+                    type={'primary'}
+                    disabled={formikProps.isSubmitting || !formikProps.dirty}
+                  >
                     <span>Save</span>
                   </Button>
                 </ActionDrawerGeneral>
