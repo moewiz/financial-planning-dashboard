@@ -67,6 +67,104 @@ const client = {
     },
     {
       id: 5,
+      description: 'New proposed 2',
+      value: '10,000',
+      details: {
+        product: {
+          id: 101,
+          name: 'Product X',
+          value: 100,
+        },
+        funds: [
+          {
+            id: 101,
+            name: 'Sunsuper Balanced',
+            value: 10000,
+          },
+          {
+            id: 102,
+            name: 'Sunsuper Conservative',
+            value: 10000,
+          },
+          {
+            id: 103,
+            name: 'Sunsuper Conservative',
+            value: 10000,
+          },
+        ],
+      },
+    },
+    {
+      id: 6,
+      description: 'Proposed 1',
+      value: '10,000',
+      details: {
+        product: {
+          id: 101,
+          name: 'Product X',
+          value: 100,
+        },
+        funds: [
+          {
+            id: 101,
+            name: 'Sunsuper Balanced',
+            value: 10000,
+          },
+          {
+            id: 102,
+            name: 'Sunsuper Conservative',
+            value: 10000,
+          },
+          {
+            id: 103,
+            name: 'Sunsuper Conservative',
+            value: 10000,
+          },
+        ],
+      },
+      links: [
+        {
+          id: 1,
+          description: 'Product A',
+          value: '10,000',
+          details: {
+            product: {
+              id: 101,
+              name: 'Product H',
+              value: 100,
+            },
+            funds: [
+              {
+                id: 123,
+                name: 'Fund DE',
+                value: 10000,
+              },
+            ],
+          },
+        },
+        {
+          id: 2,
+          description: 'Product B',
+          value: '10,000',
+          details: {
+            product: {
+              id: 101,
+              name: 'Product I',
+              value: 100,
+            },
+            funds: [
+              {
+                id: 123,
+                name: 'Fund DF',
+                value: 10000,
+              },
+            ],
+          },
+        },
+      ],
+    },
+    {
+      id: 7,
       description: 'Proposed 2',
       value: '10,000',
       links: [
@@ -74,6 +172,20 @@ const client = {
           id: 1,
           description: 'Product A',
           value: '10,000',
+          details: {
+            product: {
+              id: 101,
+              name: 'Product H',
+              value: 100,
+            },
+            funds: [
+              {
+                id: 123,
+                name: 'Fund DE',
+                value: 10000,
+              },
+            ],
+          },
         },
       ],
     },
