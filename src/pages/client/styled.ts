@@ -70,6 +70,22 @@ export const TableEntryContainer = styled.section.attrs({
         }
       }
     }
+    &.linked-product {
+      .ant-table-thead{
+        tr{
+          th:first-child{
+            padding-left: 18px;
+          }
+        }
+      }
+      .ant-table-tbody{
+        tr{
+          td:first-child{
+            padding-left: 6px;
+          }
+        }
+      }
+    }
   }
   .proposed-product-table{
     .ant-table-thead{

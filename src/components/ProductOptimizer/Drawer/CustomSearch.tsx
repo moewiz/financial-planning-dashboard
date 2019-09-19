@@ -115,7 +115,7 @@ const renderOptions = (data: OptionData[]) =>
     );
   });
 
-const findOptionObj = (data: OptionData[], value: number) =>
+const findOptionObj = (data: OptionData[], value: number | string) =>
   data
     .map((opt: OptionData) => {
       if (opt.children && opt.children.length > 0) {
@@ -145,7 +145,7 @@ class CustomSearch extends PureComponent<Prop> {
     return renderOptions(dummyProductForSearching);
   }
 
-  public onSelect = (value: number) => {
+  public onSelect = (value: number | string) => {
     const { onSelect, type } = this.props;
     if (isFunction(onSelect)) {
       const dictionary = type === 'fund' ? dummyFundForSearching : dummyProductForSearching;
@@ -165,7 +165,7 @@ class CustomSearch extends PureComponent<Prop> {
         <Icon type="search" />
         <Select
           showSearch
-          defaultValue={selectedOption && selectedOption.id}
+          defaultValue={selectedOption && selectedOption.name}
           onSelect={this.onSelect}
           placeholder={placeholder}
           className="custom-select"

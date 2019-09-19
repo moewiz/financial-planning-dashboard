@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react';
 import { Form, Formik, FormikProps } from 'formik';
-import { map, get } from 'lodash';
+import { get } from 'lodash';
 import { Button, Drawer, Tabs } from 'antd';
 const { TabPane } = Tabs;
 
 import { DrawerTitle, ActionDrawerGeneral, DrawerSubContent } from '../../StrategyPage/Drawer/styled';
+import { DrawerProductWrapper } from '../styled';
 import FundTable from './FundTable';
-import { DrawerProductWrapper, FundBlock, FundTabContent, HorizontalScrollable } from '../styled';
+import FundTab from './FundTab';
 
 export interface Option {
   id?: number;
@@ -32,20 +33,27 @@ interface DrawerProductProps {
   product?: Product;
 }
 
-interface DrawerProductStates {
-  hovering?: number;
-}
-
-const data = [
-  {
-    name: 'Fund DF',
-    value: '10,000',
-    percentage: '100%',
+const alternativeProduct: Product = {
+  id: 99,
+  description: 'RoP - alternative',
+  value: 100,
+  details: {
+    product: {
+      id: 100,
+      name: 'Product G',
+      value: 100,
+    },
+    funds: [
+      {
+        id: 100,
+        name: 'Sunsuper Balanced',
+        value: 10000,
+      },
+    ],
   },
-];
+};
 
-class DrawerProduct extends PureComponent<DrawerProductProps, DrawerProductStates> {
-  public state = { hovering: -1 };
+class DrawerProduct extends PureComponent<DrawerProductProps> {
   public columns = [
     {
       title: 'Fund Name',
@@ -77,33 +85,13 @@ class DrawerProduct extends PureComponent<DrawerProductProps, DrawerProductState
     return this.renderSingleProduct();
   }
 
-  public mouseOver = (id?: number) => {
-    this.setState({
-      hovering: id,
-    });
-  }
-
-  public mouseOut = (id?: number) => {
-    this.setState({
-      hovering: -1,
-    });
-  }
-
   public renderFundTab = () => {
     const { product } = this.props;
-    const { hovering } = this.state;
-    const haveHover = hovering !== -1;
-    const getClasses = (id?: number) => {
-      const classname = 'all-proposed';
-      if (haveHover) {
-        return hovering === id ? 'proposed-active' : 'proposed-inavtive';
-      } else {
-        return classname;
-      }
-    };
     if (!product) {
       return null;
     }
+    product.links =
+      product.links && product.links.length === 1 ? [...product.links, alternativeProduct] : product.links;
 
     return (
       <Formik
@@ -120,50 +108,12 @@ class DrawerProduct extends PureComponent<DrawerProductProps, DrawerProductState
 
           return (
             <Form>
-              <FundTabContent>
-                <FundBlock
-                  className={getClasses(-2)}
-                  onMouseOver={() => {
-                    this.mouseOver(-2);
-                  }}
-                  onMouseOut={() => {
-                    this.mouseOut(-2);
-                  }}
-                >
-                  <FundTable columns={this.columns} values={values} setFieldValue={formikProps.setFieldValue} />
-                </FundBlock>
-                <HorizontalScrollable>
-                  {values &&
-                    map(values.links, (linkedProduct: Product, index: number) => (
-                      <FundBlock
-                        className={getClasses(linkedProduct.id)}
-                        key={linkedProduct.id}
-                        onMouseOver={() => {
-                          this.mouseOver(linkedProduct.id);
-                        }}
-                        onMouseOut={() => {
-                          this.mouseOut(linkedProduct.id);
-                        }}
-                      >
-                        <FundTable
-                          columns={this.columns}
-                          values={linkedProduct}
-                          setFieldValue={formikProps.setFieldValue}
-                          parentField={`links.${index}`}
-                        />
-                      </FundBlock>
-                    ))}
-                </HorizontalScrollable>
-              </FundTabContent>
-
-              <ActionDrawerGeneral visible>
-                <Button htmlType={'button'} type={'default'}>
-                  <span>Add comparison product</span>
-                </Button>
-                <Button htmlType={'submit'} type={'primary'} disabled={formikProps.isSubmitting || !formikProps.dirty}>
-                  <span>Save</span>
-                </Button>
-              </ActionDrawerGeneral>
+              <FundTab
+                product={values}
+                setFieldValue={formikProps.setFieldValue}
+                isSubmitting={formikProps.isSubmitting}
+                dirty={formikProps.dirty}
+              />
             </Form>
           );
         }}

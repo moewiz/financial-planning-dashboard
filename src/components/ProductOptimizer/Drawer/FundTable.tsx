@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Table } from 'antd';
+import { Icon, Popconfirm, Table } from 'antd';
 import { get } from 'lodash';
+import cn from 'classnames';
+import { FieldArray, FieldArrayRenderProps } from 'formik';
 
 import { TableEntryContainer } from '../../../pages/client/styled';
 import { ActionDrawerGeneral } from '../../StrategyPage/Drawer/styled';
@@ -12,10 +14,11 @@ interface FundTableProps {
   setFieldValue: (field: string, value: any) => void;
   values?: Product;
   parentField?: string;
+  linkedProduct?: boolean;
 }
 
 const FundTable = (props: FundTableProps) => {
-  const { columns, values, setFieldValue, parentField } = props;
+  const { columns, values, setFieldValue, parentField, linkedProduct } = props;
   const funds = get(values, 'details.funds', []);
   const [tableData, setTableData] = useState<Option[]>([]);
   const onSelectProduct = (option: Option) => {
@@ -39,7 +42,7 @@ const FundTable = (props: FundTableProps) => {
       }
       return data;
     });
-    fundsWithPercentage.push({ name: 'Total', value: sum, percentage: 100 });
+    fundsWithPercentage.push({ id: -1, name: 'Total', value: sum, percentage: 100 });
     setTableData(fundsWithPercentage);
   }, []);
   useEffect(() => {
@@ -53,11 +56,44 @@ const FundTable = (props: FundTableProps) => {
         <CustomSearch placeholder="Search Fund" type="fund" onSelect={onSelectFund} />
       </ActionDrawerGeneral>
       <TableEntryContainer drawer>
-        <Table
-          className="table-general drawer-fund-table"
-          columns={columns}
-          dataSource={tableData}
-          pagination={false}
+        <FieldArray
+          name={(parentField ? parentField + '.' : '') + 'details.funds'}
+          validateOnChange={false}
+          render={(fieldArrayRenderProps: FieldArrayRenderProps) => {
+            const getColumns = () => {
+              return columns.map((col) => {
+                if (col.dataIndex === 'remove') {
+                  return {
+                    ...col,
+                    render: (text: any, record: any, index: number) => {
+                      if (record && record.id !== -1) {
+                        return (
+                          <Popconfirm
+                            title="Really delete?"
+                            onConfirm={() => {
+                              fieldArrayRenderProps.remove(index);
+                            }}
+                          >
+                            <Icon type="close-square" theme="twoTone" style={{ fontSize: '16px' }} />
+                          </Popconfirm>
+                        );
+                      }
+                      return null;
+                    },
+                  };
+                }
+                return col;
+              });
+            };
+            return (
+              <Table
+                className={cn('table-general drawer-fund-table', { 'linked-product': linkedProduct })}
+                columns={getColumns()}
+                dataSource={tableData}
+                pagination={false}
+              />
+            );
+          }}
         />
       </TableEntryContainer>
     </>
