@@ -35,14 +35,16 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
       dataIndex: 'value',
       type: 'number',
       key: '1',
-      width: 100,
+      width: 80,
+      className: 'text-align-center',
     },
     {
       title: '%',
       dataIndex: 'percentage',
+      className: 'text-align-center',
       type: 'number',
       key: '2',
-      width: 60,
+      width: 50,
     },
     {
       title: '',

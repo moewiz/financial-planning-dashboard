@@ -433,34 +433,44 @@ export const QuotationMark = styled.span<{ hideQuotationMark?: boolean }>`
 
 export const LinkCurrentProductWrapper = styled.div`
   .ant-select {
-      margin-left: 0px;
-      .ant-select{
-        &-selection{
-          &__choice{
-            font-size: 10px;
-            color: #112054;
-            margin-top: 3px;
-            background-color: rgb(226, 226, 226);
-            border: 1px solid transparent;
-            border-radius: 4px;
-            &__remove{
-              .anticon-close{
-                font-size: 10px !important;
-                background-color: #112054;
-                border-radius: 50%;
-                padding: 2px;
-                color: #fff;
-              }
+    margin-left: 0px;
+    .ant-select {
+      &-selection {
+        &__choice {
+          font-size: 10px;
+          color: #112054;
+          margin-top: 3px;
+          background-color: rgb(226, 226, 226);
+          border: 1px solid transparent;
+          border-radius: 4px;
+          &__remove {
+            .anticon-close {
+              font-size: 10px !important;
+              background-color: #112054;
+              border-radius: 50%;
+              padding: 2px;
+              color: #fff;
             }
           }
-          &__rendered{
-          }
+        }
+        &__rendered {
         }
       }
     }
+  }
 `;
 
 export const ProposedBlock = styled.div`
-  display: flex;
-  margin-top: 20px
+  margin-top: 20px;
+  height: 41px;
+  .proposed-title {
+    display: flex;
+    justify-content: space-between;
+    &--text {
+      font-size: 13px;
+    }
+  }
+  .ant-checkbox-wrapper {
+    font-size: 13px;
+  }
 `;

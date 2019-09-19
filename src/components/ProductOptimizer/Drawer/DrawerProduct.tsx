@@ -67,12 +67,14 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
       title: 'Value',
       dataIndex: 'value',
       type: 'number',
+      className: 'text-align-center',
       key: '1',
     },
     {
       title: 'Percentage',
       dataIndex: 'percentage',
       type: 'number',
+      className: 'text-align-center',
       key: '2',
     },
   ];

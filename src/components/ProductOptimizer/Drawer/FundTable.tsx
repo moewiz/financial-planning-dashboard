@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Icon, Popconfirm, Table } from 'antd';
-import { get } from 'lodash';
+import { Checkbox, Icon, Popconfirm, Table } from 'antd';
+import { get, isFunction } from 'lodash';
 import cn from 'classnames';
 import { FieldArray, FieldArrayRenderProps } from 'formik';
 
@@ -15,10 +15,11 @@ interface FundTableProps {
   values?: Product;
   parentField?: string;
   linkedProduct?: boolean;
+  fieldArrayLinks?: FieldArrayRenderProps;
 }
 
 const FundTable = (props: FundTableProps) => {
-  const { columns, values, setFieldValue, parentField, linkedProduct } = props;
+  const { columns, values, setFieldValue, parentField, linkedProduct, fieldArrayLinks } = props;
   const funds = get(values, 'details.funds', []);
   const [tableData, setTableData] = useState<Option[]>([]);
   const onSelectProduct = (option: Option) => {
@@ -55,25 +56,37 @@ const FundTable = (props: FundTableProps) => {
         <CustomSearch placeholder="Add Product" onSelect={onSelectProduct} selectedOption={detailProduct} />
         <CustomSearch placeholder="Search Fund" type="fund" onSelect={onSelectFund} />
       </ActionDrawerGeneral>
-      {
-        linkedProduct && (
-          <>
-            { parentField ?
-              <ProposedBlock>
-                <small>{detailProduct && detailProduct.name}</small>
-              </ProposedBlock> :
-              <ProposedBlock>
-                <small>Proposed</small>
-              </ProposedBlock>
-            }
-          </>
-        )
-      }
+      {linkedProduct && (
+        <ProposedBlock>
+          {parentField ? (
+            <>
+              <div className="proposed-title">
+                <span className="proposed-title--text">{detailProduct && detailProduct.name}</span>
+                <Popconfirm
+                  title="Really delete?"
+                  onConfirm={() => {
+                    if (fieldArrayLinks && isFunction(fieldArrayLinks.remove)) {
+                      // fieldArrayLinks.remove(index);
+                    }
+                  }}
+                >
+                  <Icon type="close-square" theme="twoTone" style={{ fontSize: '22px' }} />
+                </Popconfirm>
+              </div>
+              <Checkbox onChange={() => {}}>RoP Alternative</Checkbox>
+            </>
+          ) : (
+            <div className="proposed-title">
+              <span className="proposed-title--text">Proposed</span>
+            </div>
+          )}
+        </ProposedBlock>
+      )}
       <TableEntryContainer drawer linkedProduct={linkedProduct}>
         <FieldArray
           name={(parentField ? parentField + '.' : '') + 'details.funds'}
           validateOnChange={false}
-          render={(fieldArrayRenderProps: FieldArrayRenderProps) => {
+          render={(fieldArrayFunds: FieldArrayRenderProps) => {
             const getColumns = () => {
               return columns.map((col) => {
                 if (col.dataIndex === 'remove') {
@@ -85,7 +98,7 @@ const FundTable = (props: FundTableProps) => {
                           <Popconfirm
                             title="Really delete?"
                             onConfirm={() => {
-                              fieldArrayRenderProps.remove(index);
+                              fieldArrayFunds.remove(index);
                             }}
                           >
                             <Icon type="close-square" theme="twoTone" style={{ fontSize: '16px' }} />
