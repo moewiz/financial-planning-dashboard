@@ -90,8 +90,6 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
     if (!product) {
       return null;
     }
-    product.links =
-      product.links && product.links.length === 1 ? [...product.links, alternativeProduct] : product.links;
 
     return (
       <Formik
@@ -102,7 +100,10 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
             console.log('close drawer');
           }, 500);
         }}
-        initialValues={product}
+        initialValues={{
+          ...product,
+          links: product.links && product.links.length === 1 ? [...product.links, alternativeProduct] : product.links,
+        }}
         render={(formikProps: FormikProps<Product>) => {
           const { values } = formikProps;
 

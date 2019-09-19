@@ -85,6 +85,7 @@ const FundTable = (props: FundTableProps) => {
                 return col;
               });
             };
+
             return (
               <Table
                 className={cn('table-general drawer-fund-table', { 'linked-product': linkedProduct })}
