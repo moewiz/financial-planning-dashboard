@@ -473,4 +473,17 @@ export const ProposedBlock = styled.div`
   .ant-checkbox-wrapper {
     font-size: 13px;
   }
+  .ant-checkbox-wrapper:hover .ant-checkbox-inner, .ant-checkbox:hover
+  .ant-checkbox-inner, .ant-checkbox-input:focus + .ant-checkbox-inner {
+    border-color: #000;
+  }
+  .ant-checkbox-checked {
+    &::after {
+      border: 1px solid #000;
+    }
+    .ant-checkbox-inner {
+      background-color: #000;
+      border-color: #000;
+    }
+  }
 `;
