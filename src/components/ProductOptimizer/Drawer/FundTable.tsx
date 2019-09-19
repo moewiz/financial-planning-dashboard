@@ -5,7 +5,7 @@ import cn from 'classnames';
 import { FieldArray, FieldArrayRenderProps } from 'formik';
 
 import { TableEntryContainer } from '../../../pages/client/styled';
-import { ActionDrawerGeneral } from '../../StrategyPage/Drawer/styled';
+import { ActionDrawerGeneral, ProposedBlock } from '../../StrategyPage/Drawer/styled';
 import CustomSearch from './CustomSearch';
 import { Option, Product } from './DrawerProduct';
 
@@ -55,7 +55,21 @@ const FundTable = (props: FundTableProps) => {
         <CustomSearch placeholder="Add Product" onSelect={onSelectProduct} selectedOption={detailProduct} />
         <CustomSearch placeholder="Search Fund" type="fund" onSelect={onSelectFund} />
       </ActionDrawerGeneral>
-      <TableEntryContainer drawer>
+      {
+        linkedProduct && (
+          <>
+            { parentField ?
+              <ProposedBlock>
+                <small>{detailProduct && detailProduct.name}</small>
+              </ProposedBlock> :
+              <ProposedBlock>
+                <small>Proposed</small>
+              </ProposedBlock>
+            }
+          </>
+        )
+      }
+      <TableEntryContainer drawer linkedProduct={linkedProduct}>
         <FieldArray
           name={(parentField ? parentField + '.' : '') + 'details.funds'}
           validateOnChange={false}

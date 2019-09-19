@@ -6,9 +6,9 @@ import { get } from 'lodash';
 import { ProductOptimizerPage } from '../../../reducers/client';
 import { StrategyPageWrapper } from '../../../components/StrategyPage/styled';
 import { CurrentProduct, ProposedProduct } from '../../../containers/productOptimizer';
-import { TabPanStyled } from './styled';
 import DrawerProduct, { Product } from '../../../components/ProductOptimizer/Drawer/DrawerProduct';
 import { ActionDrawerGeneral } from '../../../components/StrategyPage/Drawer/styled';
+import { TabPanStyled } from './styled';
 
 export interface ProductTable {
   dataList: Product[];
@@ -126,7 +126,7 @@ const client = {
         {
           id: 1,
           description: 'Product A',
-          value: '10,000',
+          value: 10000,
           details: {
             product: {
               id: 101,
@@ -145,7 +145,8 @@ const client = {
         {
           id: 2,
           description: 'Product B',
-          value: '10,000',
+          value: 1000,
+          alternative: true,
           details: {
             product: {
               id: 101,

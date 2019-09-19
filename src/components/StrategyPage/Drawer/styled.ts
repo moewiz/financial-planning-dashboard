@@ -458,6 +458,9 @@ export const LinkCurrentProductWrapper = styled.div`
         }
       }
     }
+`;
 
-
+export const ProposedBlock = styled.div`
+  display: flex;
+  margin-top: 20px
 `;

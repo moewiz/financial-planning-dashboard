@@ -11,12 +11,12 @@ interface TextTitleProps {
 
 export const TableEntryContainer = styled.section.attrs({
   className: 'table-entry-container',
-})<{ drawer?: boolean }>`
+})<{ drawer?: boolean; linkedProduct?: boolean }>`
   padding: 20px;
   ${(props) =>
     props.drawer &&
     css`
-      margin-top: 40px;
+      margin-top: ${props.linkedProduct ? '0px' : '40px'};
       padding: 20px 0;
     `}
   .expenditure-table,

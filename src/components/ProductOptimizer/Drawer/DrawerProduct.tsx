@@ -21,6 +21,7 @@ export interface Product {
   description: string;
   value: number | string;
   links?: Product[];
+  alternative?: boolean;
   details?: {
     product: Option;
     funds: Option[];
