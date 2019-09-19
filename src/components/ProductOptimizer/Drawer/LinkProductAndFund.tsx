@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Checkbox, Icon, Popconfirm, Table } from 'antd';
+import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { get, isFunction, isNumber } from 'lodash';
 import cn from 'classnames';
 import { FieldArray, FieldArrayRenderProps } from 'formik';
@@ -47,6 +48,12 @@ const LinkProductAndFund = (props: FundTableProps) => {
     fundsWithPercentage.push({ id: -1, name: 'Total', value: sum, percentage: 100 });
     setTableData(fundsWithPercentage);
   }, []);
+  const toggleRoPAlternative = useCallback((e: CheckboxChangeEvent) => {
+    const checked = e.target.checked;
+    const field = (parentField ? parentField + '.' : '') + 'alternative';
+    setFieldValue(field, checked);
+  }, [linkIndex]);
+
   useEffect(() => {
     calculateDataList(funds);
   }, [get(values, 'details.funds')]);
@@ -79,7 +86,12 @@ const LinkProductAndFund = (props: FundTableProps) => {
                   <Icon type="close-square" theme="twoTone" style={{ fontSize: '22px' }} />
                 </Popconfirm>
               </div>
-              <Checkbox onChange={() => {}}>RoP Alternative</Checkbox>
+              <Checkbox
+                onChange={toggleRoPAlternative}
+                checked={values && values.alternative}
+              >
+                RoP Alternative
+              </Checkbox>
             </>
           ) : (
             <div className="proposed-title">

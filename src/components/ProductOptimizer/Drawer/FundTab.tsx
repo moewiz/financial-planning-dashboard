@@ -1,12 +1,12 @@
 import React from 'react';
 import { map } from 'lodash';
 import { Button } from 'antd';
+import { FieldArray, FieldArrayRenderProps } from 'formik';
 
+import { ActionDrawerGeneral } from '../../StrategyPage/Drawer/styled';
 import { Product } from './DrawerProduct';
 import { FundBlock, FundTabContent, HorizontalScrollable } from '../styled';
 import LinkProductAndFund from './LinkProductAndFund';
-import { ActionDrawerGeneral } from '../../StrategyPage/Drawer/styled';
-import { FieldArray, FieldArrayRenderProps } from 'formik';
 
 interface FundTabProps {
   product: Product;

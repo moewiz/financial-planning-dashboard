@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Checkbox } from 'antd';
+import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { CheckboxCustomize, CheckboxCustomizeX } from '../StrategyTable/styled';
-import { CheckboxChangeEvent } from 'antd/es/checkbox';
 
 interface CheckboxInputProps {
   value: boolean;
