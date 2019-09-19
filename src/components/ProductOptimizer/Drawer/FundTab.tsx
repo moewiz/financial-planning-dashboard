@@ -4,8 +4,9 @@ import { Button } from 'antd';
 
 import { Product } from './DrawerProduct';
 import { FundBlock, FundTabContent, HorizontalScrollable } from '../styled';
-import FundTable from './FundTable';
+import LinkProductAndFund from './LinkProductAndFund';
 import { ActionDrawerGeneral } from '../../StrategyPage/Drawer/styled';
+import { FieldArray, FieldArrayRenderProps } from 'formik';
 
 interface FundTabProps {
   product: Product;
@@ -95,28 +96,41 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
             onMouseOver={this.handleMouseOver(-2)}
             onMouseOut={this.handleMouseOut(-2)}
           >
-            <FundTable columns={this.columns} values={product} setFieldValue={setFieldValue} linkedProduct={true} />
+            <LinkProductAndFund
+              columns={this.columns}
+              values={product}
+              setFieldValue={setFieldValue}
+              linkedProduct={true}
+            />
           </FundBlock>
           <HorizontalScrollable>
-            {product &&
-              map(product.links, (linkedProduct: Product, index: number) => {
-                return (
-                  <FundBlock
-                    className={this.getClasses(linkedProduct.id)}
-                    key={linkedProduct.id}
-                    // onMouseOver={this.handleMouseOver(linkedProduct.id)}
-                    // onMouseOut={this.handleMouseOut(linkedProduct.id)}
-                  >
-                    <FundTable
-                      columns={this.columns}
-                      values={linkedProduct}
-                      setFieldValue={setFieldValue}
-                      parentField={`links.${index}`}
-                      linkedProduct={true}
-                    />
-                  </FundBlock>
-                );
-              })}
+            {product && (
+              <FieldArray
+                name={'links'}
+                render={(fieldArrayRenderProps: FieldArrayRenderProps) => {
+                  return map(product.links, (linkedProduct: Product, index: number) => {
+                    return (
+                      <FundBlock
+                        className={this.getClasses(linkedProduct.id)}
+                        key={linkedProduct.id}
+                        // onMouseOver={this.handleMouseOver(linkedProduct.id)}
+                        // onMouseOut={this.handleMouseOut(linkedProduct.id)}
+                      >
+                        <LinkProductAndFund
+                          columns={this.columns}
+                          values={linkedProduct}
+                          setFieldValue={setFieldValue}
+                          parentField={`links.${index}`}
+                          linkedProduct={true}
+                          fieldArrayLinks={fieldArrayRenderProps}
+                          linkIndex={index}
+                        />
+                      </FundBlock>
+                    );
+                  });
+                }}
+              />
+            )}
           </HorizontalScrollable>
         </FundTabContent>
 

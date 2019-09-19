@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Checkbox, Icon, Popconfirm, Table } from 'antd';
-import { get, isFunction } from 'lodash';
+import { get, isFunction, isNumber } from 'lodash';
 import cn from 'classnames';
 import { FieldArray, FieldArrayRenderProps } from 'formik';
 
@@ -16,10 +16,11 @@ interface FundTableProps {
   parentField?: string;
   linkedProduct?: boolean;
   fieldArrayLinks?: FieldArrayRenderProps;
+  linkIndex?: number;
 }
 
-const FundTable = (props: FundTableProps) => {
-  const { columns, values, setFieldValue, parentField, linkedProduct, fieldArrayLinks } = props;
+const LinkProductAndFund = (props: FundTableProps) => {
+  const { columns, values, setFieldValue, parentField, linkedProduct, fieldArrayLinks, linkIndex } = props;
   const funds = get(values, 'details.funds', []);
   const [tableData, setTableData] = useState<Option[]>([]);
   const onSelectProduct = (option: Option) => {
@@ -65,8 +66,13 @@ const FundTable = (props: FundTableProps) => {
                 <Popconfirm
                   title="Really delete?"
                   onConfirm={() => {
-                    if (fieldArrayLinks && isFunction(fieldArrayLinks.remove)) {
-                      // fieldArrayLinks.remove(index);
+                    if (
+                      fieldArrayLinks &&
+                      isFunction(fieldArrayLinks.remove) &&
+                      isNumber(linkIndex) &&
+                      linkIndex > -1
+                    ) {
+                      fieldArrayLinks.remove(linkIndex);
                     }
                   }}
                 >
@@ -92,13 +98,13 @@ const FundTable = (props: FundTableProps) => {
                 if (col.dataIndex === 'remove') {
                   return {
                     ...col,
-                    render: (text: any, record: any, index: number) => {
+                    render: (text: any, record: any, fundIndex: number) => {
                       if (record && record.id !== -1) {
                         return (
                           <Popconfirm
                             title="Really delete?"
                             onConfirm={() => {
-                              fieldArrayFunds.remove(index);
+                              fieldArrayFunds.remove(fundIndex);
                             }}
                           >
                             <Icon type="close-square" theme="twoTone" style={{ fontSize: '16px' }} />
@@ -128,4 +134,4 @@ const FundTable = (props: FundTableProps) => {
   );
 };
 
-export default FundTable;
+export default LinkProductAndFund;

@@ -6,7 +6,7 @@ const { TabPane } = Tabs;
 
 import { DrawerTitle, ActionDrawerGeneral, DrawerSubContent } from '../../StrategyPage/Drawer/styled';
 import { DrawerProductWrapper } from '../styled';
-import FundTable from './FundTable';
+import LinkProductAndFund from './LinkProductAndFund';
 import FundTab from './FundTab';
 
 export interface Option {
@@ -170,7 +170,7 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
               <DrawerProductWrapper>
                 <DrawerTitle>{get(details, 'product.name', 'My Product')}</DrawerTitle>
 
-                <FundTable columns={this.columns} values={values} setFieldValue={formikProps.setFieldValue} />
+                <LinkProductAndFund columns={this.columns} values={values} setFieldValue={formikProps.setFieldValue} />
 
                 <ActionDrawerGeneral visible>
                   <Button
