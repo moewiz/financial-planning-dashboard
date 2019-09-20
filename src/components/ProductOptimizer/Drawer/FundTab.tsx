@@ -7,6 +7,7 @@ import { ActionDrawerGeneral } from '../../StrategyPage/Drawer/styled';
 import { Product } from './DrawerProduct';
 import { FundBlock, FundTabContent, HorizontalScrollable } from '../styled';
 import LinkProductAndFund from './LinkProductAndFund';
+import { EditCellType } from '../../StrategyPage/Drawer/EditCell';
 
 interface FundTabProps {
   product: Product;
@@ -27,30 +28,37 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
     {
       title: 'Fund Name',
       dataIndex: 'name',
-      type: 'text',
       key: '0',
-      editable: true,
     },
     {
       title: 'Value',
       dataIndex: 'value',
-      type: 'number',
       key: '1',
-      width: 80,
+      width: 100,
       className: 'text-align-center',
+      editable: true,
+      type: EditCellType.number,
     },
     {
       title: '%',
       dataIndex: 'percentage',
       className: 'text-align-center',
-      type: 'number',
+      type: EditCellType.number,
+      editable: true,
+      options: {
+        min: 0,
+        max: 100,
+        formatter: (value: any) => `${value}%`,
+        parser: (value: any) => value.replace('%', ''),
+      },
       key: '2',
-      width: 50,
+      width: 60,
     },
     {
       title: '',
       dataIndex: 'remove',
       width: 30,
+      key: '3',
     },
   ];
 
@@ -85,6 +93,44 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
     }
   }
 
+  public onEdit = (value: any, name: string, rowIndex: number) => {
+    console.log({ value, name, rowIndex });
+    // const { fieldArrayRenderProps, dataList } = this.props;
+    // const rowName = `${fieldArrayRenderProps.name}[${rowIndex}]`;
+    // const fieldName = `${rowName}.${name}`;
+    // fieldArrayRenderProps.form.setFieldValue(fieldName, value);
+    //
+    // const record = dataList[rowIndex];
+    // const remainingFieldName = name === 'description' ? 'value' : 'description';
+    // if (record && !record.id && value && record[remainingFieldName]) {
+    //   const id = uuidv1();
+    //   fieldArrayRenderProps.form.setFieldValue(`${rowName}.id`, id);
+    //   setTimeout(() => {
+    //     this.handleAdd();
+    //   }, 10);
+    // }
+  }
+
+  public getColumns = () => {
+    return this.columns.map((col) => {
+      if (col.editable) {
+        return {
+          ...col,
+          onCell: (record: any, rowIndex: number) => ({
+            ...col,
+            record,
+            rowIndex,
+            // dataIndex: 'test-' + rowIndex + col.dataIndex,
+            type: col.type || 'text',
+            onEdit: this.onEdit,
+          }),
+        };
+      }
+
+      return col;
+    });
+  }
+
   public render() {
     const { product, setFieldValue, isSubmitting, dirty } = this.props;
 
@@ -97,7 +143,7 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
             onMouseOut={this.handleMouseOut(-2)}
           >
             <LinkProductAndFund
-              columns={this.columns}
+              columns={this.getColumns()}
               values={product}
               setFieldValue={setFieldValue}
               linkedProduct={true}
@@ -117,10 +163,10 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
                         // onMouseOut={this.handleMouseOut(linkedProduct.id)}
                       >
                         <LinkProductAndFund
-                          columns={this.columns}
+                          columns={this.getColumns()}
                           values={linkedProduct}
                           setFieldValue={setFieldValue}
-                          parentField={`links.${index}`}
+                          prefixField={`links.${index}`}
                           linkedProduct={true}
                           fieldArrayLinks={fieldArrayRenderProps}
                           linkIndex={index}

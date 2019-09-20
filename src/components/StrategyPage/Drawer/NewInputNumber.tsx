@@ -45,7 +45,6 @@ class NewInputNumber extends PureComponent<NewInputNumberProps, NewInputNumberSt
     if (dollar) {
       optionalProps.formatter = (valueNumber: number) => `$${valueNumber}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
       optionalProps.parser = (displayValue: string) => displayValue.replace(/\$\s?|(,*)/g, '');
-      // optionalProps.precision = 2;
     } else {
       optionalProps.formatter = (valueNumber: number) => `${valueNumber}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
       optionalProps.parser = (displayValue: string) => displayValue.replace(/\$\s?|(,*)/g, '');

@@ -8,6 +8,8 @@ import { DrawerTitle, ActionDrawerGeneral, DrawerSubContent } from '../../Strate
 import { DrawerProductWrapper } from '../styled';
 import LinkProductAndFund from './LinkProductAndFund';
 import FundTab from './FundTab';
+import { EditCellType } from '../../StrategyPage/Drawer/EditCell';
+import uuidv1 from 'uuid/v1';
 
 export interface Option {
   id?: number;
@@ -59,22 +61,28 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
     {
       title: 'Fund Name',
       dataIndex: 'name',
-      type: 'text',
       key: '0',
-      editable: true,
     },
     {
       title: 'Value',
       dataIndex: 'value',
-      type: 'number',
-      className: 'text-align-center',
       key: '1',
+      className: 'text-align-center',
+      editable: true,
+      type: EditCellType.number,
     },
     {
       title: 'Percentage',
       dataIndex: 'percentage',
-      type: 'number',
       className: 'text-align-center',
+      editable: true,
+      type: EditCellType.number,
+      options: {
+        min: 0,
+        max: 100,
+        formatter: (value: any) => `${value}%`,
+        parser: (value: any) => value.replace('%', ''),
+      },
       key: '2',
     },
   ];
@@ -148,6 +156,44 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
     );
   }
 
+  public onEdit = (value: any, name: string, rowIndex: number) => {
+    console.log({ value, name, rowIndex });
+    // const { fieldArrayRenderProps, dataList } = this.props;
+    // const rowName = `${fieldArrayRenderProps.name}[${rowIndex}]`;
+    // const fieldName = `${rowName}.${name}`;
+    // fieldArrayRenderProps.form.setFieldValue(fieldName, value);
+    //
+    // const record = dataList[rowIndex];
+    // const remainingFieldName = name === 'description' ? 'value' : 'description';
+    // if (record && !record.id && value && record[remainingFieldName]) {
+    //   const id = uuidv1();
+    //   fieldArrayRenderProps.form.setFieldValue(`${rowName}.id`, id);
+    //   setTimeout(() => {
+    //     this.handleAdd();
+    //   }, 10);
+    // }
+  }
+
+  public getColumns = () => {
+    return this.columns.map((col) => {
+      if (col.editable) {
+        return {
+          ...col,
+          onCell: (record: any, rowIndex: number) => ({
+            ...col,
+            record,
+            rowIndex,
+            // dataIndex: 'test-' + rowIndex + col.dataIndex,
+            type: col.type || 'text',
+            onEdit: this.onEdit,
+          }),
+        };
+      }
+
+      return col;
+    });
+  }
+
   public renderSingleProduct = () => {
     const { product } = this.props;
 
@@ -170,7 +216,11 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
               <DrawerProductWrapper>
                 <DrawerTitle>{get(details, 'product.name', 'My Product')}</DrawerTitle>
 
-                <LinkProductAndFund columns={this.columns} values={values} setFieldValue={formikProps.setFieldValue} />
+                <LinkProductAndFund
+                  columns={this.getColumns()}
+                  values={values}
+                  setFieldValue={formikProps.setFieldValue}
+                />
 
                 <ActionDrawerGeneral visible>
                   <Button

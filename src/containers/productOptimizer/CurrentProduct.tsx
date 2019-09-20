@@ -24,7 +24,7 @@ const EditCellContainer = (props: any) => {
   const debounceEdit = useCallback(
     debounce((val, name, index) => {
       onEdit(val, name, index);
-    }, 250),
+    }, 500),
     [],
   );
   const onChange = (val: any, name: string) => {

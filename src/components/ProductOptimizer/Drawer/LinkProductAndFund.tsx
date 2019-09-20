@@ -7,6 +7,7 @@ import { FieldArray, FieldArrayRenderProps } from 'formik';
 
 import { TableEntryContainer } from '../../../pages/client/styled';
 import { ActionDrawerGeneral, ProposedBlock } from '../../StrategyPage/Drawer/styled';
+import { components } from '../../../containers/productOptimizer/CurrentProduct';
 import CustomSearch from './CustomSearch';
 import { Option, Product } from './DrawerProduct';
 
@@ -14,25 +15,25 @@ interface FundTableProps {
   columns: any[];
   setFieldValue: (field: string, value: any) => void;
   values?: Product;
-  parentField?: string;
+  prefixField?: string;
   linkedProduct?: boolean;
   fieldArrayLinks?: FieldArrayRenderProps;
   linkIndex?: number;
 }
 
 const LinkProductAndFund = (props: FundTableProps) => {
-  const { columns, values, setFieldValue, parentField, linkedProduct, fieldArrayLinks, linkIndex } = props;
+  const { columns, values, setFieldValue, prefixField, linkedProduct, fieldArrayLinks, linkIndex } = props;
   const funds = get(values, 'details.funds', []);
   const [tableData, setTableData] = useState<Option[]>([]);
   const onSelectProduct = (option: Option) => {
     if (option) {
-      const field = (parentField ? parentField + '.' : '') + 'details.product';
+      const field = (prefixField ? prefixField + '.' : '') + 'details.product';
       setFieldValue(field, option);
     }
   };
   const onSelectFund = (option: Option) => {
     if (option) {
-      const field = (parentField ? parentField + '.' : '') + 'details.funds';
+      const field = (prefixField ? prefixField + '.' : '') + 'details.funds';
       setFieldValue(field, [option, ...funds]);
     }
   };
@@ -48,11 +49,14 @@ const LinkProductAndFund = (props: FundTableProps) => {
     fundsWithPercentage.push({ id: -1, name: 'Total', value: sum, percentage: 100 });
     setTableData(fundsWithPercentage);
   }, []);
-  const toggleRoPAlternative = useCallback((e: CheckboxChangeEvent) => {
-    const checked = e.target.checked;
-    const field = (parentField ? parentField + '.' : '') + 'alternative';
-    setFieldValue(field, checked);
-  }, [linkIndex]);
+  const toggleRoPAlternative = useCallback(
+    (e: CheckboxChangeEvent) => {
+      const checked = e.target.checked;
+      const field = (prefixField ? prefixField + '.' : '') + 'alternative';
+      setFieldValue(field, checked);
+    },
+    [linkIndex],
+  );
 
   useEffect(() => {
     calculateDataList(funds);
@@ -66,7 +70,7 @@ const LinkProductAndFund = (props: FundTableProps) => {
       </ActionDrawerGeneral>
       {linkedProduct && (
         <ProposedBlock>
-          {parentField ? (
+          {prefixField ? (
             <>
               <div className="proposed-title">
                 <span className="proposed-title--text">{detailProduct && detailProduct.name}</span>
@@ -86,10 +90,7 @@ const LinkProductAndFund = (props: FundTableProps) => {
                   <Icon type="close-square" theme="twoTone" style={{ fontSize: '22px' }} />
                 </Popconfirm>
               </div>
-              <Checkbox
-                onChange={toggleRoPAlternative}
-                checked={values && values.alternative}
-              >
+              <Checkbox onChange={toggleRoPAlternative} checked={values && values.alternative}>
                 RoP Alternative
               </Checkbox>
             </>
@@ -102,7 +103,7 @@ const LinkProductAndFund = (props: FundTableProps) => {
       )}
       <TableEntryContainer drawer linkedProduct={linkedProduct}>
         <FieldArray
-          name={(parentField ? parentField + '.' : '') + 'details.funds'}
+          name={(prefixField ? prefixField + '.' : '') + 'details.funds'}
           validateOnChange={false}
           render={(fieldArrayFunds: FieldArrayRenderProps) => {
             const getColumns = () => {
@@ -137,6 +138,7 @@ const LinkProductAndFund = (props: FundTableProps) => {
                 columns={getColumns()}
                 dataSource={tableData}
                 pagination={false}
+                components={components}
               />
             );
           }}

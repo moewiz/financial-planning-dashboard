@@ -63,12 +63,12 @@ const client = {
     {
       id: 4,
       description: 'New proposed 1',
-      value: '10,000',
+      value: 10000,
     },
     {
       id: 5,
       description: 'New proposed 2',
-      value: '10,000',
+      value: 10000,
       details: {
         product: {
           id: 101,
@@ -97,7 +97,7 @@ const client = {
     {
       id: 6,
       description: 'Proposed 1',
-      value: '10,000',
+      value: 10000,
       details: {
         product: {
           id: 101,
@@ -167,12 +167,12 @@ const client = {
     {
       id: 7,
       description: 'Proposed 2',
-      value: '10,000',
+      value: 10000,
       links: [
         {
           id: 1,
           description: 'Product A',
-          value: '10,000',
+          value: 10000,
           details: {
             product: {
               id: 101,
@@ -217,17 +217,17 @@ const partner = {
     {
       id: 9,
       description: 'New proposed 1',
-      value: '10,000',
+      value: 10000,
     },
     {
       id: 10,
       description: 'Proposed 2',
-      value: '10,000',
+      value: 10000,
       links: [
         {
           id: 8,
           description: 'Product C',
-          value: '10,000',
+          value: 10000,
         },
       ],
     },

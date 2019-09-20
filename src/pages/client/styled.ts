@@ -67,6 +67,12 @@ export const TableEntryContainer = styled.section.attrs({
         }
         &:last-child {
           font-weight: 600;
+          .edit-cell {
+            font-weight: 600 !important;
+            .ant-input-number-input {
+              font-weight: 600 !important;
+            }
+          }
         }
       }
     }
@@ -83,6 +89,23 @@ export const TableEntryContainer = styled.section.attrs({
           td:first-child{
             padding-left: 6px;
           }
+        }
+      }
+    }
+    .ant-table-tbody .ant-table-row .strategy-item {
+      width: 100%;
+      input {
+        padding: 4px 11px;
+      }
+
+      .edit-cell {
+        width: 100%;
+        font-weight: normal;
+        text-align: center;
+        .ant-input-number-input {
+          font-weight: normal;
+          text-align: center;
+          padding: 4px;
         }
       }
     }
