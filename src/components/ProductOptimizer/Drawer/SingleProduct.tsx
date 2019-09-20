@@ -49,7 +49,6 @@ class SingleProduct extends PureComponent<SingleProductProps> {
     const { setFieldValue } = this.props;
     const fieldName = `details.funds.${rowIndex}.${name}`;
     setFieldValue(fieldName, value);
-    console.log({ fieldName, value });
   }
   public getColumns = () => {
     return this.columns.map((col) => {

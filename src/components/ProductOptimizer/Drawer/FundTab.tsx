@@ -93,25 +93,14 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
     }
   }
 
-  public onEdit = (value: any, name: string, rowIndex: number) => {
-    console.log({ value, name, rowIndex });
-    // const { fieldArrayRenderProps, dataList } = this.props;
-    // const rowName = `${fieldArrayRenderProps.name}[${rowIndex}]`;
-    // const fieldName = `${rowName}.${name}`;
-    // fieldArrayRenderProps.form.setFieldValue(fieldName, value);
-    //
-    // const record = dataList[rowIndex];
-    // const remainingFieldName = name === 'description' ? 'value' : 'description';
-    // if (record && !record.id && value && record[remainingFieldName]) {
-    //   const id = uuidv1();
-    //   fieldArrayRenderProps.form.setFieldValue(`${rowName}.id`, id);
-    //   setTimeout(() => {
-    //     this.handleAdd();
-    //   }, 10);
-    // }
+  public onEdit = (prefixField?: string) => (value: any, name: string, rowIndex: number) => {
+    const { setFieldValue } = this.props;
+    const inputName = `details.funds.${rowIndex}.${name}`;
+    const fieldName = prefixField ? `${prefixField}.${inputName}` : inputName;
+    setFieldValue(fieldName, value);
   }
 
-  public getColumns = () => {
+  public getColumns = (prefixField?: string) => {
     return this.columns.map((col) => {
       if (col.editable) {
         return {
@@ -120,9 +109,8 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
             ...col,
             record,
             rowIndex,
-            // dataIndex: 'test-' + rowIndex + col.dataIndex,
             type: col.type || 'text',
-            onEdit: this.onEdit,
+            onEdit: this.onEdit(prefixField),
           }),
         };
       }
@@ -155,6 +143,8 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
                 name={'links'}
                 render={(fieldArrayRenderProps: FieldArrayRenderProps) => {
                   return map(product.links, (linkedProduct: Product, index: number) => {
+                    const prefixField = `links.${index}`;
+
                     return (
                       <FundBlock
                         className={this.getClasses(linkedProduct.id)}
@@ -163,10 +153,10 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
                         // onMouseOut={this.handleMouseOut(linkedProduct.id)}
                       >
                         <LinkProductAndFund
-                          columns={this.getColumns()}
+                          columns={this.getColumns(prefixField)}
                           values={linkedProduct}
                           setFieldValue={setFieldValue}
-                          prefixField={`links.${index}`}
+                          prefixField={prefixField}
                           linkedProduct={true}
                           fieldArrayLinks={fieldArrayRenderProps}
                           linkIndex={index}
