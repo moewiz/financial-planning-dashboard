@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Checkbox, Icon, Popconfirm, Table } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { get, isFunction, isNumber } from 'lodash';
@@ -23,17 +23,20 @@ interface FundTableProps {
 
 const LinkProductAndFund = (props: FundTableProps) => {
   const { columns, values, setFieldValue, prefixField, linkedProduct, fieldArrayLinks, linkIndex } = props;
-  const funds = get(values, 'details.funds', []);
+  const funds: Option[] = get(values, 'details.funds', []);
   const onSelectProduct = (option: Option) => {
     if (option) {
       const field = (prefixField ? prefixField + '.' : '') + 'details.product';
       setFieldValue(field, option);
     }
   };
-  const onSelectFund = (option: Option) => {
+  const onSelectFund = (fieldArrayFunds: FieldArrayRenderProps) => (option: Option) => {
     if (option) {
-      const field = (prefixField ? prefixField + '.' : '') + 'details.funds';
-      setFieldValue(field, [option, ...funds]);
+      const shouldAddTotalRow = funds.length === 0;
+      fieldArrayFunds.unshift(option);
+      if (shouldAddTotalRow) {
+        fieldArrayFunds.push({ id: -1, name: 'Total', value: option.value, percentage: 100 });
+      }
     }
   };
   const detailProduct = values && values.details && values.details.product;
@@ -46,88 +49,95 @@ const LinkProductAndFund = (props: FundTableProps) => {
     [linkIndex],
   );
 
+  useEffect(() => {
+    console.log('should update', funds);
+  }, [get(values, 'details.funds.length')]);
+
   return (
     <>
-      <ActionDrawerGeneral drawer>
-        <CustomSearch placeholder="Add Product" onSelect={onSelectProduct} selectedOption={detailProduct} />
-        <CustomSearch placeholder="Search Fund" type="fund" onSelect={onSelectFund} />
-      </ActionDrawerGeneral>
-      {linkedProduct && (
-        <ProposedBlock>
-          {prefixField ? (
-            <>
-              <div className="proposed-title">
-                <span className="proposed-title--text">{detailProduct && detailProduct.name}</span>
-                <Popconfirm
-                  title="Really delete?"
-                  onConfirm={() => {
-                    if (
-                      fieldArrayLinks &&
-                      isFunction(fieldArrayLinks.remove) &&
-                      isNumber(linkIndex) &&
-                      linkIndex > -1
-                    ) {
-                      fieldArrayLinks.remove(linkIndex);
+      <FieldArray
+        name={(prefixField ? prefixField + '.' : '') + 'details.funds'}
+        validateOnChange={false}
+        render={(fieldArrayFunds: FieldArrayRenderProps) => {
+          const getColumns = () => {
+            return columns.map((col) => {
+              if (col.dataIndex === 'remove') {
+                return {
+                  ...col,
+                  render: (text: any, record: any, fundIndex: number) => {
+                    if (record && record.id !== -1) {
+                      return (
+                        <Popconfirm
+                          title="Really delete?"
+                          onConfirm={() => {
+                            // TODO should remove total row if there's no rows
+                            fieldArrayFunds.remove(fundIndex);
+                          }}
+                        >
+                          <Icon type="close-square" theme="twoTone" style={{ fontSize: '16px' }} />
+                        </Popconfirm>
+                      );
                     }
-                  }}
-                >
-                  <Icon type="close-square" theme="twoTone" style={{ fontSize: '22px' }} />
-                </Popconfirm>
-              </div>
-              <Checkbox onChange={toggleRoPAlternative} checked={values && values.alternative}>
-                RoP Alternative
-              </Checkbox>
-            </>
-          ) : (
-            <div className="proposed-title">
-              <span className="proposed-title--text">Proposed</span>
-            </div>
-          )}
-        </ProposedBlock>
-      )}
-      <TableEntryContainer drawer linkedProduct={linkedProduct}>
-        <FieldArray
-          name={(prefixField ? prefixField + '.' : '') + 'details.funds'}
-          validateOnChange={false}
-          render={(fieldArrayFunds: FieldArrayRenderProps) => {
-            const getColumns = () => {
-              return columns.map((col) => {
-                if (col.dataIndex === 'remove') {
-                  return {
-                    ...col,
-                    render: (text: any, record: any, fundIndex: number) => {
-                      if (record && record.id !== -1) {
-                        return (
-                          <Popconfirm
-                            title="Really delete?"
-                            onConfirm={() => {
-                              fieldArrayFunds.remove(fundIndex);
-                            }}
-                          >
-                            <Icon type="close-square" theme="twoTone" style={{ fontSize: '16px' }} />
-                          </Popconfirm>
-                        );
-                      }
-                      return null;
-                    },
-                  };
-                }
-                return col;
-              });
-            };
+                    return null;
+                  },
+                };
+              }
+              return col;
+            });
+          };
 
-            return (
-              <Table
-                className={cn('table-general drawer-fund-table', { 'linked-product': linkedProduct })}
-                columns={getColumns()}
-                dataSource={funds}
-                pagination={false}
-                components={components}
-              />
-            );
-          }}
-        />
-      </TableEntryContainer>
+          return (
+            <>
+              <ActionDrawerGeneral drawer>
+                <CustomSearch placeholder="Add Product" onSelect={onSelectProduct} selectedOption={detailProduct} />
+                <CustomSearch placeholder="Search Fund" type="fund" onSelect={onSelectFund(fieldArrayFunds)} />
+              </ActionDrawerGeneral>
+              {linkedProduct && (
+                <ProposedBlock>
+                  {prefixField ? (
+                    <>
+                      <div className="proposed-title">
+                        <span className="proposed-title--text">{detailProduct && detailProduct.name}</span>
+                        <Popconfirm
+                          title="Really delete?"
+                          onConfirm={() => {
+                            if (
+                              fieldArrayLinks &&
+                              isFunction(fieldArrayLinks.remove) &&
+                              isNumber(linkIndex) &&
+                              linkIndex > -1
+                            ) {
+                              fieldArrayLinks.remove(linkIndex);
+                            }
+                          }}
+                        >
+                          <Icon type="close-square" theme="twoTone" style={{ fontSize: '22px' }} />
+                        </Popconfirm>
+                      </div>
+                      <Checkbox onChange={toggleRoPAlternative} checked={values && values.alternative}>
+                        RoP Alternative
+                      </Checkbox>
+                    </>
+                  ) : (
+                    <div className="proposed-title">
+                      <span className="proposed-title--text">Proposed</span>
+                    </div>
+                  )}
+                </ProposedBlock>
+              )}
+              <TableEntryContainer drawer linkedProduct={linkedProduct}>
+                <Table
+                  className={cn('table-general drawer-fund-table', { 'linked-product': linkedProduct })}
+                  columns={getColumns()}
+                  dataSource={funds}
+                  pagination={false}
+                  components={components}
+                />
+              </TableEntryContainer>
+            </>
+          );
+        }}
+      />
     </>
   );
 };
