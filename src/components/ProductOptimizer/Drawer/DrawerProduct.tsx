@@ -54,6 +54,38 @@ const alternativeProduct: Product = {
   },
 };
 
+const getSumFunds = (funds: Option[]) =>
+  funds.reduce((acc: number, data: Option) => (acc += data.value ? data.value : 0), 0);
+
+const addPercentage = (funds: Option[]) => {
+  const sum = getSumFunds(funds);
+
+  return funds.map((data: Option) => {
+    if (data && data.value) {
+      return { ...data, percentage: ((data.value / sum) * 100).toFixed() };
+    }
+    return data;
+  });
+};
+
+const initFormValues = (product: Product) => {
+  if (product.details && product.details.funds) {
+    const funds = addPercentage(product.details.funds);
+    const sum = getSumFunds(funds);
+    funds.push({ id: -1, name: 'Total', value: sum, percentage: 100 });
+
+    return {
+      ...product,
+      details: {
+        product: product.details.product,
+        funds,
+      },
+    };
+  }
+
+  return product;
+};
+
 class DrawerProduct extends PureComponent<DrawerProductProps> {
   public renderDrawer = () => {
     const { product } = this.props;
@@ -128,6 +160,7 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
     const { product } = this.props;
 
     if (product) {
+      const initialValues = initFormValues(product)
       return (
         <Formik
           onSubmit={(values: Product, actions) => {
@@ -137,7 +170,7 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
               console.log('close drawer');
             }, 500);
           }}
-          initialValues={product}
+          initialValues={initialValues}
           render={(formikProps: FormikProps<Product>) => (
             <Form>
               <SingleProduct

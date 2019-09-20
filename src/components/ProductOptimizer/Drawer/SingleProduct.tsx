@@ -46,9 +46,13 @@ class SingleProduct extends PureComponent<SingleProductProps> {
     },
   ];
   public onEdit = (value: any, name: string, rowIndex: number) => {
-    const { setFieldValue } = this.props;
+    const { setFieldValue, values } = this.props;
     const fieldName = `details.funds.${rowIndex}.${name}`;
     setFieldValue(fieldName, value);
+    // const record = get(values, `details.funds[${rowIndex}]`);
+    // if (record && record.id === -1) {
+    //
+    // }
   }
   public getColumns = () => {
     return this.columns.map((col) => {

@@ -39,15 +39,7 @@ const LinkProductAndFund = (props: FundTableProps) => {
   };
   const detailProduct = values && values.details && values.details.product;
   const calculateDataList = useCallback((dataList: Option[]) => {
-    const sum = dataList.reduce((acc, data) => (acc += data.value ? data.value : 0), 0);
-    const fundsWithPercentage = dataList.map((data: Option) => {
-      if (data && data.value) {
-        return { ...data, percentage: ((data.value / sum) * 100).toFixed() };
-      }
-      return data;
-    });
-    fundsWithPercentage.push({ id: -1, name: 'Total', value: sum, percentage: 100 });
-    setTableData(fundsWithPercentage);
+    setTableData(dataList);
   }, []);
   const toggleRoPAlternative = useCallback(
     (e: CheckboxChangeEvent) => {
@@ -136,7 +128,7 @@ const LinkProductAndFund = (props: FundTableProps) => {
               <Table
                 className={cn('table-general drawer-fund-table', { 'linked-product': linkedProduct })}
                 columns={getColumns()}
-                dataSource={tableData}
+                dataSource={funds}
                 pagination={false}
                 components={components}
               />
