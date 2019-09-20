@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 import { Checkbox, Icon, Popconfirm, Table } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { get, isFunction, isNumber } from 'lodash';
@@ -24,7 +24,6 @@ interface FundTableProps {
 const LinkProductAndFund = (props: FundTableProps) => {
   const { columns, values, setFieldValue, prefixField, linkedProduct, fieldArrayLinks, linkIndex } = props;
   const funds = get(values, 'details.funds', []);
-  const [tableData, setTableData] = useState<Option[]>([]);
   const onSelectProduct = (option: Option) => {
     if (option) {
       const field = (prefixField ? prefixField + '.' : '') + 'details.product';
@@ -38,9 +37,6 @@ const LinkProductAndFund = (props: FundTableProps) => {
     }
   };
   const detailProduct = values && values.details && values.details.product;
-  const calculateDataList = useCallback((dataList: Option[]) => {
-    setTableData(dataList);
-  }, []);
   const toggleRoPAlternative = useCallback(
     (e: CheckboxChangeEvent) => {
       const checked = e.target.checked;
@@ -49,10 +45,6 @@ const LinkProductAndFund = (props: FundTableProps) => {
     },
     [linkIndex],
   );
-
-  useEffect(() => {
-    calculateDataList(funds);
-  }, [get(values, 'details.funds')]);
 
   return (
     <>

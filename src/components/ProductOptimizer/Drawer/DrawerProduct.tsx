@@ -160,7 +160,6 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
     const { product } = this.props;
 
     if (product) {
-      const initialValues = initFormValues(product)
       return (
         <Formik
           onSubmit={(values: Product, actions) => {
@@ -170,7 +169,7 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
               console.log('close drawer');
             }, 500);
           }}
-          initialValues={initialValues}
+          initialValues={initFormValues(product)}
           render={(formikProps: FormikProps<Product>) => (
             <Form>
               <SingleProduct
