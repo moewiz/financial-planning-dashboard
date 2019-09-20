@@ -1,15 +1,13 @@
 import React, { PureComponent } from 'react';
 import { Form, Formik, FormikProps } from 'formik';
 import { get } from 'lodash';
-import { Button, Drawer, Tabs } from 'antd';
+import { Drawer, Tabs } from 'antd';
 const { TabPane } = Tabs;
 
-import { DrawerTitle, ActionDrawerGeneral, DrawerSubContent } from '../../StrategyPage/Drawer/styled';
+import { DrawerTitle, DrawerSubContent } from '../../StrategyPage/Drawer/styled';
 import { DrawerProductWrapper } from '../styled';
-import LinkProductAndFund from './LinkProductAndFund';
 import FundTab from './FundTab';
-import { EditCellType } from '../../StrategyPage/Drawer/EditCell';
-import uuidv1 from 'uuid/v1';
+import SingleProduct from './SingleProduct';
 
 export interface Option {
   id?: number;
@@ -57,36 +55,6 @@ const alternativeProduct: Product = {
 };
 
 class DrawerProduct extends PureComponent<DrawerProductProps> {
-  public columns = [
-    {
-      title: 'Fund Name',
-      dataIndex: 'name',
-      key: '0',
-    },
-    {
-      title: 'Value',
-      dataIndex: 'value',
-      key: '1',
-      className: 'text-align-center',
-      editable: true,
-      type: EditCellType.number,
-    },
-    {
-      title: 'Percentage',
-      dataIndex: 'percentage',
-      className: 'text-align-center',
-      editable: true,
-      type: EditCellType.number,
-      options: {
-        min: 0,
-        max: 100,
-        formatter: (value: any) => `${value}%`,
-        parser: (value: any) => value.replace('%', ''),
-      },
-      key: '2',
-    },
-  ];
-
   public renderDrawer = () => {
     const { product } = this.props;
     if (product && product.links && product.links.length > 0) {
@@ -156,87 +124,35 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
     );
   }
 
-  public onEdit = (value: any, name: string, rowIndex: number) => {
-    console.log({ value, name, rowIndex });
-    // const { fieldArrayRenderProps, dataList } = this.props;
-    // const rowName = `${fieldArrayRenderProps.name}[${rowIndex}]`;
-    // const fieldName = `${rowName}.${name}`;
-    // fieldArrayRenderProps.form.setFieldValue(fieldName, value);
-    //
-    // const record = dataList[rowIndex];
-    // const remainingFieldName = name === 'description' ? 'value' : 'description';
-    // if (record && !record.id && value && record[remainingFieldName]) {
-    //   const id = uuidv1();
-    //   fieldArrayRenderProps.form.setFieldValue(`${rowName}.id`, id);
-    //   setTimeout(() => {
-    //     this.handleAdd();
-    //   }, 10);
-    // }
-  }
-
-  public getColumns = () => {
-    return this.columns.map((col) => {
-      if (col.editable) {
-        return {
-          ...col,
-          onCell: (record: any, rowIndex: number) => ({
-            ...col,
-            record,
-            rowIndex,
-            // dataIndex: 'test-' + rowIndex + col.dataIndex,
-            type: col.type || 'text',
-            onEdit: this.onEdit,
-          }),
-        };
-      }
-
-      return col;
-    });
-  }
-
   public renderSingleProduct = () => {
     const { product } = this.props;
 
-    return product ? (
-      <Formik
-        onSubmit={(values: Product, actions) => {
-          console.log('submitted', values);
-          setTimeout(() => {
-            actions.setSubmitting(false);
-            console.log('close drawer');
-          }, 500);
-        }}
-        initialValues={product}
-        render={(formikProps: FormikProps<Product>) => {
-          const { values } = formikProps;
-          const { details } = values;
-
-          return (
+    if (product) {
+      return (
+        <Formik
+          onSubmit={(values: Product, actions) => {
+            console.log('submitted', values);
+            setTimeout(() => {
+              actions.setSubmitting(false);
+              console.log('close drawer');
+            }, 500);
+          }}
+          initialValues={product}
+          render={(formikProps: FormikProps<Product>) => (
             <Form>
-              <DrawerProductWrapper>
-                <DrawerTitle>{get(details, 'product.name', 'My Product')}</DrawerTitle>
-
-                <LinkProductAndFund
-                  columns={this.getColumns()}
-                  values={values}
-                  setFieldValue={formikProps.setFieldValue}
-                />
-
-                <ActionDrawerGeneral visible>
-                  <Button
-                    htmlType={'submit'}
-                    type={'primary'}
-                    disabled={formikProps.isSubmitting || !formikProps.dirty}
-                  >
-                    <span>Save</span>
-                  </Button>
-                </ActionDrawerGeneral>
-              </DrawerProductWrapper>
+              <SingleProduct
+                values={formikProps.values}
+                setFieldValue={formikProps.setFieldValue}
+                dirty={formikProps.dirty}
+                isSubmitting={formikProps.isSubmitting}
+              />
             </Form>
-          );
-        }}
-      />
-    ) : null;
+          )}
+        />
+      );
+    }
+
+    return null;
   }
 
   public render() {
