@@ -70,7 +70,9 @@ const LinkProductAndFund = (props: FundTableProps) => {
                         <Popconfirm
                           title="Really delete?"
                           onConfirm={() => {
-                            // TODO should remove total row if there's no rows
+                            if (funds.length === 2 && funds[1].id === -1) {
+                              fieldArrayFunds.remove(1);
+                            }
                             fieldArrayFunds.remove(fundIndex);
                           }}
                         >
