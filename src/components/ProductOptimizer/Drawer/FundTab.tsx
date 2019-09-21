@@ -180,8 +180,8 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
                       <FundBlock
                         className={this.getClasses(linkedProduct.id)}
                         key={linkedProduct.id}
-                        // onMouseOver={this.handleMouseOver(linkedProduct.id)}
-                        // onMouseOut={this.handleMouseOut(linkedProduct.id)}
+                        onMouseOver={this.handleMouseOver(linkedProduct.id)}
+                        onMouseOut={this.handleMouseOut(linkedProduct.id)}
                       >
                         <LinkProductAndFund
                           columns={this.getColumns(prefixField)}
