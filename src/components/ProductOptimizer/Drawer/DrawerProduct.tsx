@@ -61,10 +61,11 @@ export const addPercentage = (funds: Option[]) => {
   const sum = getSumFunds(funds);
 
   return funds.map((data: Option) => {
+    let value = 0;
     if (data && data.value) {
-      return { ...data, percentage: ((data.value / sum) * 100).toFixed() };
+      value = data.value;
     }
-    return data;
+    return { ...data, percentage: ((value / sum) * 100).toFixed() };
   });
 };
 
@@ -77,7 +78,7 @@ const initFormValues = (product: Product) => {
   if (product.details && product.details.funds) {
     const funds = addPercentage(product.details.funds);
     const sum = getSumFunds(funds);
-    funds.push({ id: -1, name: 'Total', value: sum, percentage: 100 });
+    funds.push({ id: -1, name: 'Total', value: sum, percentage: '100' });
 
     product.details = {
       product: product.details.product,

@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
-import { get, isString, last } from 'lodash';
+import { get, isString, last, dropRight } from 'lodash';
 import { Button } from 'antd';
 
-import { Product } from './DrawerProduct';
+import {addPercentage, getSumFunds, Product} from './DrawerProduct';
 import LinkProductAndFund from './LinkProductAndFund';
 import { DrawerProductWrapper } from '../styled';
 import { ActionDrawerGeneral, DrawerTitle } from '../../StrategyPage/Drawer/styled';
@@ -47,11 +47,13 @@ class SingleProduct extends PureComponent<SingleProductProps> {
   ];
   public onEdit = (value: any, name: string, rowIndex: number) => {
     const { setFieldValue, values } = this.props;
-    const fieldName = `details.funds.${rowIndex}.${name}`;
+    const tableName = 'details.funds';
+    const fieldName = `${tableName}.${rowIndex}.${name}`;
+    value = value > 0 ? value : 0;
     setFieldValue(fieldName, value);
 
     // Side-effects
-    const record = get(values, `details.funds[${rowIndex}]`);
+    const record = get(values, `${tableName}[${rowIndex}]`);
     if (record && record.id === -1) {
       return;
     }
@@ -61,13 +63,23 @@ class SingleProduct extends PureComponent<SingleProductProps> {
     }
 
     if (values.details && values.details.funds.length > 0) {
-      value = value > 0 ? value : 0;
+      const funds = values.details.funds;
+
       if (name === 'percentage') {
-        const totalRow = last(values.details.funds);
+        const totalRow = last(funds);
         if (totalRow && totalRow.value) {
           const newValue = (value * totalRow.value) / 100;
-          setFieldValue(`details.funds.${rowIndex}.value`, newValue);
+          setFieldValue(`${tableName}.${rowIndex}.value`, newValue);
         }
+      } else {
+        funds[rowIndex].value = value;
+        const fundsWithoutTotal = dropRight(funds);
+        const updatedFunds = addPercentage(fundsWithoutTotal);
+        const total = funds[funds.length - 1];
+        const sum = getSumFunds(fundsWithoutTotal);
+        total.value = sum;
+
+        setFieldValue(tableName, [...updatedFunds, total]);
       }
     }
   }
