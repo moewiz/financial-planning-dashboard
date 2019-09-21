@@ -1,10 +1,10 @@
 import React from 'react';
-import { map, get, last, isString } from 'lodash';
+import { map, get, last, isString, dropRight } from 'lodash';
 import { Button } from 'antd';
 import { FieldArray, FieldArrayRenderProps } from 'formik';
 
 import { ActionDrawerGeneral } from '../../StrategyPage/Drawer/styled';
-import {Option, Product} from './DrawerProduct';
+import {addPercentage, getSumFunds, Option, Product} from './DrawerProduct';
 import { FundBlock, FundTabContent, HorizontalScrollable } from '../styled';
 import LinkProductAndFund from './LinkProductAndFund';
 import { EditCellType } from '../../StrategyPage/Drawer/EditCell';
@@ -118,6 +118,15 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
           const newValue = (value * totalRow.value) / 100;
           setFieldValue(`${tableName}.${rowIndex}.value`, newValue);
         }
+      } else {
+        funds[rowIndex].value = value;
+        const fundsWithoutTotal = dropRight(funds);
+        const updatedFunds = addPercentage(fundsWithoutTotal);
+        const total = funds[funds.length - 1];
+        const sum = getSumFunds(fundsWithoutTotal);
+        total.value = sum;
+
+        setFieldValue(tableName, [...updatedFunds, total]);
       }
     }
   }
