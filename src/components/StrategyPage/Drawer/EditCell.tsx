@@ -177,8 +177,11 @@ class EditCell extends Component<EditCellProps> {
   }
 
   public renderInputNumber = () => {
-    const { value: propValue } = this.props;
-    const value = propValue ? propValue : 0;
+    const { value: propValue, options } = this.props;
+    let value = propValue ? propValue : 0;
+    if (options && options.allowEmpty) {
+      value = propValue;
+    }
     return <NewInputNumber {...this.props} value={value} onChange={this.onChange} />;
   }
 

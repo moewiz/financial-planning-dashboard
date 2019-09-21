@@ -101,6 +101,7 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
       dataIndex: 'value',
       options: {
         placeholder: 'Enter Value',
+        allowEmpty: true,
       },
       type: EditCellType.number,
       key: '1',

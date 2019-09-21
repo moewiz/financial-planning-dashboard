@@ -92,6 +92,7 @@ class ProposedProduct extends PureComponent<ProductTable, ProposedProductState> 
       dataIndex: 'value',
       options: {
         placeholder: 'Enter Value',
+        allowEmpty: true,
       },
       type: EditCellType.number,
       key: '1',

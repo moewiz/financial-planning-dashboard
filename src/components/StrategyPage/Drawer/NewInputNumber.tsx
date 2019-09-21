@@ -9,6 +9,7 @@ interface NewInputNumberProps {
   dollar?: boolean;
   calculateWidth?: boolean;
   disabled?: boolean;
+  allowEmpty?: boolean;
 }
 
 interface NewInputNumberState {
@@ -39,7 +40,10 @@ class NewInputNumber extends PureComponent<NewInputNumberProps, NewInputNumberSt
   public render() {
     const { options, dollar, calculateWidth, disabled } = this.props;
     const { value: stateValue } = this.state;
-    const value = stateValue ? stateValue : 0;
+    let value = stateValue ? stateValue : 0;
+    if (options && options.allowEmpty) {
+      value = stateValue;
+    }
     const optionalProps: { [key: string]: any } = {};
 
     optionalProps.precision = 0;
