@@ -60,7 +60,7 @@ export const getSumFunds = (funds: Option[]) =>
 export const addPercentage = (funds: Option[]) => {
   const sum = getSumFunds(funds);
 
-  return funds.map((data: Option) => {
+  return map(funds, (data: Option) => {
     let value = 0;
     if (data && data.value) {
       value = data.value;
@@ -69,7 +69,8 @@ export const addPercentage = (funds: Option[]) => {
   });
 };
 
-const initFormValues = (product: Product) => {
+const initFormValues = (value: Product) => {
+  const product = { ...value };
   if (product.links && product.links.length > 0) {
     const links = product.links.length === 1 ? [...product.links, alternativeProduct] : product.links;
     product.links = map(links, (link: Product) => initFormValues(link));
