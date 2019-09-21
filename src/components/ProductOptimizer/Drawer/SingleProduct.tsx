@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { get } from 'lodash';
+import { get, isString, last } from 'lodash';
 import { Button } from 'antd';
 
 import { Product } from './DrawerProduct';
@@ -50,12 +50,26 @@ class SingleProduct extends PureComponent<SingleProductProps> {
     const fieldName = `details.funds.${rowIndex}.${name}`;
     setFieldValue(fieldName, value);
 
-    // Effects
+    // Side-effects
     const record = get(values, `details.funds[${rowIndex}]`);
     if (record && record.id === -1) {
       return;
     }
-    console.log('editing total row', { props: this.props, fieldName, record, value, name, rowIndex });
+
+    if (isString(value)) {
+      return;
+    }
+
+    if (values.details && values.details.funds.length > 0) {
+      value = value > 0 ? value : 0;
+      if (name === 'percentage') {
+        const totalRow = last(values.details.funds);
+        if (totalRow && totalRow.value) {
+          const newValue = (value * totalRow.value) / 100;
+          setFieldValue(`details.funds.${rowIndex}.value`, newValue);
+        }
+      }
+    }
   }
   public getColumns = () => {
     return this.columns.map((col) => {

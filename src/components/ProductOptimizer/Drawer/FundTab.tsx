@@ -1,10 +1,10 @@
 import React from 'react';
-import { map } from 'lodash';
+import { map, get, last, isString } from 'lodash';
 import { Button } from 'antd';
 import { FieldArray, FieldArrayRenderProps } from 'formik';
 
 import { ActionDrawerGeneral } from '../../StrategyPage/Drawer/styled';
-import { Product } from './DrawerProduct';
+import {Option, Product} from './DrawerProduct';
 import { FundBlock, FundTabContent, HorizontalScrollable } from '../styled';
 import LinkProductAndFund from './LinkProductAndFund';
 import { EditCellType } from '../../StrategyPage/Drawer/EditCell';
@@ -94,10 +94,32 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
   }
 
   public onEdit = (prefixField?: string) => (value: any, name: string, rowIndex: number) => {
-    const { setFieldValue } = this.props;
-    const inputName = `details.funds.${rowIndex}.${name}`;
-    const fieldName = prefixField ? `${prefixField}.${inputName}` : inputName;
+    const { setFieldValue, product } = this.props;
+    const tableName = prefixField ? `${prefixField}.details.funds` : `details.funds`;
+    const fieldName = `${tableName}.${rowIndex}.${name}`;
     setFieldValue(fieldName, value);
+
+    // Side-effects
+    const record = get(product, `${tableName}[${rowIndex}]`);
+    if (record && record.id === -1) {
+      return;
+    }
+
+    if (isString(value)) {
+      return;
+    }
+
+    const funds: Option[] = get(product, tableName, []);
+    if (funds && funds.length > 0) {
+      value = value > 0 ? value : 0;
+      if (name === 'percentage') {
+        const totalRow = last(funds);
+        if (totalRow && totalRow.value) {
+          const newValue = (value * totalRow.value) / 100;
+          setFieldValue(`${tableName}.${rowIndex}.value`, newValue);
+        }
+      }
+    }
   }
 
   public getColumns = (prefixField?: string) => {

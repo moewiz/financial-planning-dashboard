@@ -41,8 +41,18 @@ const client = {
         funds: [
           {
             id: 1,
-            name: 'Fund DE',
-            value: 10000,
+            name: 'Fund A',
+            value: 20000,
+          },
+          {
+            id: 2,
+            name: 'Fund B',
+            value: 50000,
+          },
+          {
+            id: 3,
+            name: 'Fund C',
+            value: 30000,
           },
         ],
       },
