@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Form, Formik, FormikProps } from 'formik';
-import { get } from 'lodash';
+import { get, map } from 'lodash';
 import { Drawer, Tabs } from 'antd';
 const { TabPane } = Tabs;
 
@@ -69,17 +69,19 @@ export const addPercentage = (funds: Option[]) => {
 };
 
 const initFormValues = (product: Product) => {
+  if (product.links && product.links.length > 0) {
+    const links = product.links.length === 1 ? [...product.links, alternativeProduct] : product.links;
+    product.links = map(links, (link: Product) => initFormValues(link));
+  }
+
   if (product.details && product.details.funds) {
     const funds = addPercentage(product.details.funds);
     const sum = getSumFunds(funds);
     funds.push({ id: -1, name: 'Total', value: sum, percentage: 100 });
 
-    return {
-      ...product,
-      details: {
-        product: product.details.product,
-        funds,
-      },
+    product.details = {
+      product: product.details.product,
+      funds,
     };
   }
 
@@ -111,10 +113,7 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
             console.log('close drawer');
           }, 500);
         }}
-        initialValues={{
-          ...product,
-          links: product.links && product.links.length === 1 ? [...product.links, alternativeProduct] : product.links,
-        }}
+        initialValues={initFormValues(product)}
         render={(formikProps: FormikProps<Product>) => {
           const { values } = formikProps;
 
