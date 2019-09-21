@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { Checkbox, Icon, Popconfirm, Table } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
-import { get, isFunction, isNumber } from 'lodash';
+import { get, isFunction, isNumber, dropRight, last } from 'lodash';
 import cn from 'classnames';
 import { FieldArray, FieldArrayRenderProps } from 'formik';
 
@@ -9,7 +9,7 @@ import { TableEntryContainer } from '../../../pages/client/styled';
 import { ActionDrawerGeneral, ProposedBlock } from '../../StrategyPage/Drawer/styled';
 import { components } from '../../../containers/productOptimizer/CurrentProduct';
 import CustomSearch from './CustomSearch';
-import { Option, Product } from './DrawerProduct';
+import { addPercentage, getSumFunds, Option, Product } from './DrawerProduct';
 
 interface FundTableProps {
   columns: any[];
@@ -50,7 +50,16 @@ const LinkProductAndFund = (props: FundTableProps) => {
   );
 
   useEffect(() => {
-    console.log('should update', funds);
+    if (funds.length > 0) {
+      const fieldName = (prefixField ? prefixField + '.' : '') + 'details.funds';
+      const fundsWithoutTotal = dropRight(funds);
+      const updatedFunds = addPercentage(fundsWithoutTotal);
+      const sum = getSumFunds(fundsWithoutTotal);
+      const total = funds[funds.length - 1];
+      total.value = sum;
+
+      setFieldValue(fieldName, [...updatedFunds, total]);
+    }
   }, [get(values, 'details.funds.length')]);
 
   return (

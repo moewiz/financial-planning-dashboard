@@ -54,10 +54,10 @@ const alternativeProduct: Product = {
   },
 };
 
-const getSumFunds = (funds: Option[]) =>
+export const getSumFunds = (funds: Option[]) =>
   funds.reduce((acc: number, data: Option) => (acc += data.value ? data.value : 0), 0);
 
-const addPercentage = (funds: Option[]) => {
+export const addPercentage = (funds: Option[]) => {
   const sum = getSumFunds(funds);
 
   return funds.map((data: Option) => {
