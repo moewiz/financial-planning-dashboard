@@ -49,10 +49,13 @@ class SingleProduct extends PureComponent<SingleProductProps> {
     const { setFieldValue, values } = this.props;
     const fieldName = `details.funds.${rowIndex}.${name}`;
     setFieldValue(fieldName, value);
-    // const record = get(values, `details.funds[${rowIndex}]`);
-    // if (record && record.id === -1) {
-    //
-    // }
+
+    // Effects
+    const record = get(values, `details.funds[${rowIndex}]`);
+    if (record && record.id === -1) {
+      return;
+    }
+    console.log('editing total row', { props: this.props, fieldName, record, value, name, rowIndex });
   }
   public getColumns = () => {
     return this.columns.map((col) => {
