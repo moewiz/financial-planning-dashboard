@@ -8,6 +8,7 @@ interface NewInputNumberProps {
   options?: any;
   dollar?: boolean;
   calculateWidth?: boolean;
+  disabled?: boolean;
 }
 
 interface NewInputNumberState {
@@ -36,7 +37,7 @@ class NewInputNumber extends PureComponent<NewInputNumberProps, NewInputNumberSt
   }
 
   public render() {
-    const { options, dollar, calculateWidth } = this.props;
+    const { options, dollar, calculateWidth, disabled } = this.props;
     const { value: stateValue } = this.state;
     const value = stateValue ? stateValue : 0;
     const optionalProps: { [key: string]: any } = {};
@@ -85,7 +86,14 @@ class NewInputNumber extends PureComponent<NewInputNumberProps, NewInputNumberSt
     }
 
     return (
-      <InputNumber onChange={this.onChange} value={value} className={'edit-cell'} {...optionalProps} {...options} />
+      <InputNumber
+        onChange={this.onChange}
+        value={value}
+        className={'edit-cell'}
+        disabled={disabled}
+        {...optionalProps}
+        {...options}
+      />
     );
   }
 }

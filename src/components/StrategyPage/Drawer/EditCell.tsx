@@ -25,6 +25,7 @@ export interface EditCellProps {
   dollar?: boolean;
   yearFi?: boolean;
   calculateWidth?: boolean;
+  disabled?: boolean;
 }
 
 export enum EditCellType {

@@ -72,6 +72,10 @@ export const TableEntryContainer = styled.section.attrs({
             .ant-input-number-input {
               font-weight: 600 !important;
             }
+            &.ant-input-number-disabled {
+              background-color: #fff;
+              color: rgba(0, 0, 0, 0.65);
+            }
           }
         }
       }

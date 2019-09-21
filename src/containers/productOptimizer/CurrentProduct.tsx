@@ -43,7 +43,14 @@ const EditCellContainer = (props: any) => {
   return (
     <td>
       {editable ? (
-        <EditCell {...props} name={dataIndex} value={value} onChange={onChange} type={type} />
+        <EditCell
+          {...props}
+          name={dataIndex}
+          value={value}
+          onChange={onChange}
+          type={type}
+          disabled={record.id === -1 && dataIndex === 'percentage'}
+        />
       ) : (
         props.children
       )}
