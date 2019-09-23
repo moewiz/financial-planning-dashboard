@@ -130,6 +130,9 @@ export const TableEntryContainer = styled.section.attrs({
     .ant-table-thead > tr > th {
       text-align: left;
     }
+    .ant-table-tbody > tr > td{
+      vertical-align: baseline;
+    }
     .ant-table-tbody .ant-table-row .strategy-item {
       width: 100%;
       input {
@@ -206,7 +209,6 @@ export const TableEntryContainer = styled.section.attrs({
   }
   .ant-table-tbody > tr > td{
     padding: 10px 5px;
-    vertical-align: baseline;
   }
   .ant-table-thead > tr > th{
     background-color: #eaedef;
