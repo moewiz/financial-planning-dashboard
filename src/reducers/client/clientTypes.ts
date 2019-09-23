@@ -36,6 +36,11 @@ export interface DynamicData {
     label: string;
   };
 }
+export interface GraphData {
+  xAxis: string[];
+  current: number[];
+  proposed: number[];
+}
 export interface StrategyEntry {
   superannuation?: Strategy;
   pension?: Strategy;
@@ -48,6 +53,10 @@ export interface StrategyEntry {
   partner?: DynamicData;
   joint?: DynamicData;
   defaultFullValue?: any;
+  netAssets: GraphData;
+  cashflowComparisons: GraphData;
+  tax: GraphData;
+  retirementFunding: GraphData;
 }
 
 export interface ProductOptimizerPage {

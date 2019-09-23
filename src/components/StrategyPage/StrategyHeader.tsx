@@ -1,153 +1,150 @@
 import React from 'react';
 import { Col, Row } from 'antd';
-import GraphContainer, { GraphType } from './Graph/GraphContainer';
+import { get } from 'lodash';
 
-const data1 = {
-  labels: ['19', '20', '21', '22', '23', '24', '25'],
+import GraphContainer, { GraphType } from './Graph/GraphContainer';
+import { GraphData } from '../../reducers/client';
+
+const configNetAssets = {
   datasets: [
     {
-      label: 'a',
+      dataIndex: 'current',
+      label: 'Current',
       fill: false,
-      lineTension: 0.6,
-      // backgroundColor: '#fff',
+      lineTension: 0.2,
       borderColor: '#FF5722',
-      // borderCapStyle: 'butt',
-      // borderDash: [],
-      // borderDashOffset: 0.0,
-      // borderJoinStyle: 'miter',
-      // pointBorderColor: 'rgba(75,192,192,1)',
-      // pointBackgroundColor: '#fff',
-      // pointBorderWidth: 1,
-      // pointHoverRadius: 5,
-      // pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-      // pointHoverBorderColor: 'rgba(220,220,220,1)',
-      // pointHoverBorderWidth: 2,
-      // pointRadius: 1,
-      // pointHitRadius: 10,
-      data: [30000, 200000, 80000, 155000, 166000, 220000, 380000],
     },
     {
-      label: 'b',
+      dataIndex: 'proposed',
+      label: 'Proposed',
       fill: false,
-      lineTension: 0.6,
-      // backgroundColor: '#fff',
+      lineTension: 0.2,
       borderColor: '#00BCD4',
-      // borderCapStyle: 'butt',
-      // borderDash: [],
-      // borderDashOffset: 0.0,
-      // borderJoinStyle: 'miter',
-      // pointBorderColor: 'rgba(75,192,192,1)',
-      // pointBackgroundColor: '#fff',
-      // pointBorderWidth: 1,
-      // pointHoverRadius: 5,
-      // pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-      // pointHoverBorderColor: 'rgba(220,220,220,1)',
-      // pointHoverBorderWidth: 2,
-      // pointRadius: 1,
-      // pointHitRadius: 10,
-      data: [30000, 140000, 120000, 166000, 180000, 191000, 256000],
-    },
-    {
-      label: 'c',
-      fill: false,
-      lineTension: 0.6,
-      // backgroundColor: '#fff',
-      borderColor: '#FFC107',
-      // borderCapStyle: 'butt',
-      // borderDash: [],
-      // borderDashOffset: 0.0,
-      // borderJoinStyle: 'miter',
-      // pointBorderColor: 'rgba(75,192,192,1)',
-      // pointBackgroundColor: '#fff',
-      // pointBorderWidth: 1,
-      // pointHoverRadius: 5,
-      // pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-      // pointHoverBorderColor: 'rgba(220,220,220,1)',
-      // pointHoverBorderWidth: 2,
-      // pointRadius: 1,
-      // pointHitRadius: 10,
-      data: [30000, 80000, 50000, 70000, 60000, 90000, 100000],
     },
   ],
 };
-const data2 = {
-  labels: ['19', '20', '21', '22', '23', '24', '25'],
+const cashflowConfig = {
   datasets: [
     {
-      label: 'a',
-      fill: false,
+      dataIndex: 'current',
+      label: 'Current',
+      fill: true,
       borderColor: '#FF5722',
-      steppedLine: true,
-      data: [165000, 159000, 120000, 165000, 235000, 120000, 140000],
+      backgroundColor: '#FF5722',
     },
     {
-      label: 'b',
-      fill: false,
+      dataIndex: 'proposed',
+      label: 'Proposed',
+      fill: true,
       borderColor: '#00BCD4',
-      steppedLine: true,
-      data: [85000, 45000, 70000, 65000, 100000, 150000, 135000],
+      backgroundColor: '#00BCD4',
     },
   ],
 };
-const data3 = {
-  labels: ['19', '20', '21', '22', '23', '24', '25'],
+const taxConfig = {
   datasets: [
     {
-      label: 'a',
+      dataIndex: 'current',
+      label: 'Current',
       fill: false,
       lineTension: 0,
       borderColor: '#FF5722',
-      data: [65000, 59000, 80000, 91000, 135000, 120000, 140000],
+    },
+    {
+      dataIndex: 'proposed',
+      label: 'Proposed',
+      fill: false,
+      lineTension: 0,
+      borderColor: '#00BCD4',
     },
   ],
 };
 
-const data4 = {
-  labels: ['19', '20', '21', '22', '23', '24', '25'],
+const retirementFundingConfig = {
   datasets: [
     {
-      label: 'a',
-      type: 'bubble',
+      dataIndex: 'current',
+      label: 'Current',
       fill: false,
-      lineTension: 0.1,
-      backgroundColor: 'rgba(103, 58, 183, 0.8)',
-      pointBorderColor: 'rgba(103, 58, 183, 1)',
-      pointBackgroundColor: '#fff',
-      pointBorderWidth: 1,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: 'rgba(103, 58, 183, 1)',
-      pointHoverBorderColor: 'rgba(220,220,220,1)',
-      pointHoverBorderWidth: 2,
-      pointRadius: 1,
-      pointHitRadius: 10,
-      data: [65000, 59000, 80000, 91000, 135000, 120000, 140000],
+      lineTension: 0,
+      borderColor: '#FF5722',
     },
     {
-      label: 'b',
-      type: 'line',
+      dataIndex: 'proposed',
+      label: 'Proposed',
       fill: false,
-      borderColor: '#FF5722',
-      backgroundColor: 'rgba(218,83,79, .7)',
-      pointRadius: 0,
-      data: [65000, 59000, 80000, 91000, 135000, 120000, 140000],
+      lineTension: 0,
+      borderColor: '#00BCD4',
     },
   ],
 };
 
-const StrategyHeader = () => {
+interface StrategyHeaderProps {
+  netAssets: GraphData;
+  cashflowComparisons: GraphData;
+  tax: GraphData;
+  retirementFunding: GraphData;
+}
+
+interface DataSet {
+  label: string;
+  dataIndex: string;
+
+  [key: string]: any;
+}
+
+interface GraphConfig {
+  datasets: DataSet[];
+}
+
+const loadGraphData = (config: GraphConfig) => (
+  data: GraphData,
+): {
+  labels?: any[];
+  datasets: object[];
+} => {
+  return {
+    labels: get(data, 'xAxis', []),
+    datasets: config.datasets.map((dataset) => {
+      return {
+        ...dataset,
+        data: get(data, dataset.dataIndex, []),
+      };
+    }),
+  };
+};
+
+const StrategyHeader = (props: StrategyHeaderProps) => {
+  const { netAssets, cashflowComparisons, tax, retirementFunding } = props;
+
   return (
     <Row gutter={32}>
       <Col span={6}>
-        <GraphContainer type={GraphType.Line} name="Net assets" data={data1} flipping={false} />
+        <GraphContainer
+          type={GraphType.Line}
+          name="Net assets"
+          data={loadGraphData(configNetAssets)(netAssets)}
+          flipping={false}
+        />
       </Col>
       <Col span={6}>
-        <GraphContainer type={GraphType.Line} name="Cashflow comparisons" data={data2} flipping={false} />
+        <GraphContainer
+          type={GraphType.Bar}
+          name="Cashflow comparisons"
+          data={loadGraphData(cashflowConfig)(cashflowComparisons)}
+          flipping={false}
+        />
       </Col>
       <Col span={6}>
-        <GraphContainer type={GraphType.Line} name="Tax" data={data3} flipping={false} />
+        <GraphContainer type={GraphType.Line} name="Tax" data={loadGraphData(taxConfig)(tax)} flipping={false} />
       </Col>
       <Col span={6}>
-        <GraphContainer type={GraphType.Line} name="Retirement Funding" data={data4} flipping={false} />
+        <GraphContainer
+          type={GraphType.Line}
+          name="Retirement Funding"
+          data={loadGraphData(retirementFundingConfig)(retirementFunding)}
+          flipping={false}
+        />
       </Col>
     </Row>
   );

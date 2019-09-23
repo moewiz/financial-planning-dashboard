@@ -18,6 +18,10 @@ interface StrategyPageProps {
 
 const StrategyPage = (props: StrategyPageProps) => {
   const { pageData } = props;
+  const netAssets = get(pageData, 'netAssets');
+  const cashflowComparisons = get(pageData, 'cashflowComparisons');
+  const tax = get(pageData, 'tax');
+  const retirementFunding = get(pageData, 'retirementFunding');
   const superannuation = get(pageData, 'superannuation');
   const pension = get(pageData, 'pension');
   const investments = get(pageData, 'investments');
@@ -48,11 +52,20 @@ const StrategyPage = (props: StrategyPageProps) => {
           client,
           partner,
           joint,
+          netAssets,
+          cashflowComparisons,
+          tax,
+          retirementFunding,
         }}
         enableReinitialize={true}
         render={(formikProps: FormikProps<StrategyEntry>) => (
           <Form>
-            <StrategyHeader />
+            <StrategyHeader
+              netAssets={formikProps.values.netAssets}
+              cashflowComparisons={formikProps.values.cashflowComparisons}
+              tax={formikProps.values.tax}
+              retirementFunding={formikProps.values.retirementFunding}
+            />
             {formikProps.values.superannuation && defaultFullValue && (
               <StrategyContainer type={StrategyTypes.Superannuation} defaultFullValue={defaultFullValue} />
             )}
