@@ -39,7 +39,7 @@ const ExpandedBasicInformationRow = (
 
   if (description && expandable) {
     const dob = moment(record.dob);
-    // Note: Always use Jul 1st as the month and day in the calculation for the formula retirement age
+    // Note: Always use Jul 1st as the month and day in the calculation for the retirement year
     const retirementYear = expandable.retirementYear ? moment([expandable.retirementYear, 6, 1]) : moment();
     const retirementAge = retirementYear.diff(dob, 'years');
     if (description === 'Client') {
@@ -106,7 +106,7 @@ const ExpandedBasicInformationRow = (
                 disabledYear={true}
               />
             </ExpandedSelectGroup>
-            <span>({retirementAge})</span>
+            <ExpandedAssetsText>({retirementAge})</ExpandedAssetsText>
           </ExpandedAssetsInlineGroups>
 
           <ExpandedAssetsInlineGroups>
@@ -192,7 +192,7 @@ const ExpandedBasicInformationRow = (
               disabledYear={true}
             />
           </ExpandedSelectGroup>
-          <span>({retirementAge})</span>
+          <ExpandedAssetsText>({retirementAge})</ExpandedAssetsText>
         </ExpandedAssetsInlineGroups>
 
         <ExpandedAssetsInlineGroups>

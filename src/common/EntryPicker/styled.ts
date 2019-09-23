@@ -5,7 +5,10 @@ export const EntryPickerTable = styled.section`
   align-items: center;
   display: flex;
   &.picker-year{
-    width: 60px;
+    width: 42px;
+    &:hover {
+      width: 60px;
+    }
     input{
       font-weight: 700;
       padding: 0px;
@@ -26,6 +29,10 @@ export const EntryPickerTable = styled.section`
         border: 1px solid rebeccapurple;
       }
     }
+  }
+  &.showAge {
+    width: calc(100% - 22px) !important;
+    color: #5f698d;
   }
   &.text-small{
     .ant-input{

@@ -30,6 +30,7 @@ interface EntryPickerProps {
   defaultOpen?: boolean;
   allowClear?: boolean;
   disabledYear?: boolean;
+  showAge?: boolean;
 }
 
 export declare type PickerType = 'month' | 'week' | 'year' | 'date' | 'custom';
@@ -131,10 +132,10 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
 
   public render(): React.ReactNode {
     const { open } = this.state;
-    const { pickerType, border, value, defaultOpen, format, options, disabledYear, ...props } = this.props;
-    const className = classNames('picker-' + pickerType + ' has-' + border);
-
+    const { pickerType, border, value, defaultOpen, format, options, disabledYear, showAge, ...props } = this.props;
+    const className = classNames('picker-' + pickerType + ' has-' + border, { showAge });
     const momentValue = moment(value);
+    const age = showAge ? moment().diff(momentValue, 'years') : 0;
 
     switch (pickerType) {
       case 'month': {
@@ -179,6 +180,7 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
               open={open}
               format={format}
             />
+            { showAge && <span>({age})</span> }
           </EntryPickerTable>
         );
       }
