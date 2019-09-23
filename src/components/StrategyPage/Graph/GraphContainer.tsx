@@ -106,6 +106,10 @@ const GraphContainer = (props: GraphProps) => {
     const id = setInterval(updateActiveIndex, 6000);
     return () => clearInterval(id);
   }, [activeIndex]);
+  const [redraw, setRedraw] = useState<boolean>(false);
+  useEffect(() => {
+    setRedraw(true);
+  }, [data]);
 
   const renderGraph = (graphData: any, index: number) => {
     switch (type) {
@@ -115,6 +119,7 @@ const GraphContainer = (props: GraphProps) => {
             <Line
               height={190}
               data={graphData}
+              redraw={redraw}
               options={{
                 maintainAspectRatio: false,
                 legend: {
@@ -137,6 +142,7 @@ const GraphContainer = (props: GraphProps) => {
             <Line
               height={190}
               data={graphData}
+              redraw={redraw}
               options={{
                 maintainAspectRatio: false,
                 legend: {
@@ -152,6 +158,7 @@ const GraphContainer = (props: GraphProps) => {
             <Bar
               height={190}
               data={graphData}
+              redraw={redraw}
               options={{
                 maintainAspectRatio: false,
                 legend: {
@@ -167,6 +174,7 @@ const GraphContainer = (props: GraphProps) => {
             <HorizontalBar
               height={190}
               data={graphData}
+              redraw={redraw}
               options={{
                 maintainAspectRatio: false,
                 legend: {
