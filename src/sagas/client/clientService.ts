@@ -1,6 +1,5 @@
 import ApiUtils from '../../utils/apiUtils';
 import data from './strategy.json';
-import current from './data.json';
 import { PositionValue } from '../../enums/client';
 
 export default class ClientService {
@@ -14,13 +13,13 @@ export default class ClientService {
     const params = [clientId, tabNameValue].join('/');
     const url: string = `/currentPosition/${params}`;
 
-    if (tabNameValue === PositionValue.Strategy || tabNameValue === PositionValue.Current) {
+    if (tabNameValue === PositionValue.Strategy) {
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve({
             status: 200,
             data: {
-              data: tabNameValue === PositionValue.Current ? current : data,
+              data,
               error: null,
               message: null,
               success: true,
