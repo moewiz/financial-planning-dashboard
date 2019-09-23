@@ -59,7 +59,7 @@ code {
   position: relative;
 }
 
-body .custom-menu-width.ant-select-dropdown.ant-select-dropdown--single.ant-select-dropdown-placement-bottomLeft {
+body .select-inline.ant-select-dropdown.ant-select-dropdown--single.ant-select-dropdown-placement-bottomLeft {
   min-width: 145px;
   width: auto !important;
 }

@@ -92,7 +92,13 @@ class CustomSelect extends React.PureComponent<InputProps> {
 
     return (
       <InputWrapper>
-        <Select {...props} onSelect={this.handleSelect} onBlur={this.handleBlur} ref={this.myRef}>
+        <Select
+          {...props}
+          onSelect={this.handleSelect}
+          onBlur={this.handleBlur}
+          ref={this.myRef}
+          dropdownClassName="select-inline"
+        >
           {options &&
             options.length > 0 &&
             options.map((option) => (
