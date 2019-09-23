@@ -1,5 +1,6 @@
 import ApiUtils from '../../utils/apiUtils';
 import data from './strategy.json';
+import current from './data.json';
 import { PositionValue } from '../../enums/client';
 
 export default class ClientService {

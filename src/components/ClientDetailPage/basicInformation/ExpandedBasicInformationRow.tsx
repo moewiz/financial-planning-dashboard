@@ -1,4 +1,6 @@
 import React from 'react';
+import moment from 'moment';
+
 import EditableCell from '../assets/EditableCell';
 import {
   ExpandedAssetsGroups,
@@ -15,11 +17,13 @@ import {
 
 export interface BasicInformation {
   description: string;
+  dob: string;
   expandable: {
     riskProfile: string;
     hasPrivateHealthInsurance: boolean;
     lookingForCoupleAdvice?: boolean;
     jointRiskProfile?: string;
+    retirementYear?: number;
   };
 }
 
@@ -34,6 +38,10 @@ const ExpandedBasicInformationRow = (
   const { expandable, description } = record;
 
   if (description && expandable) {
+    const dob = moment(record.dob);
+    // Note: Always use Jul 1st as the month and day in the calculation for the retirement year
+    const retirementYear = expandable.retirementYear ? moment([expandable.retirementYear, 6, 1]) : moment();
+    const retirementAge = retirementYear.diff(dob, 'years');
     if (description === 'Client') {
       return (
         <ExpandedAssetsGroups>
@@ -98,6 +106,7 @@ const ExpandedBasicInformationRow = (
                 disabledYear={true}
               />
             </ExpandedSelectGroup>
+            <ExpandedAssetsText>({retirementAge})</ExpandedAssetsText>
           </ExpandedAssetsInlineGroups>
 
           <ExpandedAssetsInlineGroups>
@@ -119,6 +128,7 @@ const ExpandedBasicInformationRow = (
         </ExpandedAssetsGroups>
       );
     }
+
     return (
       <ExpandedAssetsGroups>
         <ExpandedAssetsInlineGroups>
@@ -182,6 +192,7 @@ const ExpandedBasicInformationRow = (
               disabledYear={true}
             />
           </ExpandedSelectGroup>
+          <ExpandedAssetsText>({retirementAge})</ExpandedAssetsText>
         </ExpandedAssetsInlineGroups>
 
         <ExpandedAssetsInlineGroups>

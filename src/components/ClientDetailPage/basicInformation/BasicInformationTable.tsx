@@ -53,6 +53,7 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
       dataIndex: 'dob',
       type: 'date',
       width: '14%',
+      showAge: true,
     },
     {
       title: 'Emp Status',

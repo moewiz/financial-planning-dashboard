@@ -21,6 +21,7 @@ interface EditableProps {
   pickerType?: PickerType;
   sign?: string;
   expandedField?: boolean;
+  showAge?: boolean;
   options?: Array<{ value: any; label: any }>;
   confirmTitle?: { title: string; fieldValue: any };
   render?: () => void;
@@ -91,6 +92,7 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
       min,
       customMin,
       sign,
+      showAge,
     } = props;
     const appendProps = [];
 
@@ -100,7 +102,7 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
         break;
       }
       case 'date': {
-        appendProps.push({ defaultOpen: editing, pickerType, options, disabledYear });
+        appendProps.push({ defaultOpen: editing, pickerType, options, disabledYear, showAge });
         break;
       }
       case 'number': {
