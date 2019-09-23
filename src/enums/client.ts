@@ -5,6 +5,7 @@ export enum Tab {
   Documents = 'documents',
   Presentation = 'presentation',
 }
+
 export interface Position {
   value: number;
   icon: string;
@@ -12,10 +13,18 @@ export interface Position {
   label: string;
 }
 
+export enum PositionValue {
+  Current = 1,
+  Strategy = 2,
+  ProductOptimizer = 3,
+  Documents = 4,
+  Presentation = 5,
+}
+
 export const POSITIONS: Position[] = [
-  { value: 1, icon: 'icon-current', slug: Tab.Current, label: 'Current' },
-  { value: 2, icon: 'icon-strategy', slug: Tab.Strategy, label: 'Strategy' },
-  { value: 3, icon: 'icon-projections', slug: Tab.Switching, label: 'Switching' },
-  { value: 4, icon: 'icon-documents', slug: Tab.Documents, label: 'Documents' },
-  { value: 5, icon: 'icon-presentation', slug: Tab.Presentation, label: 'Presentation' },
+  { value: PositionValue.Current, icon: 'icon-current', slug: Tab.Current, label: 'Current' },
+  { value: PositionValue.Strategy, icon: 'icon-strategy', slug: Tab.Strategy, label: 'Strategy' },
+  { value: PositionValue.ProductOptimizer, icon: 'icon-projections', slug: Tab.Switching, label: 'Switching' },
+  { value: PositionValue.Documents, icon: 'icon-documents', slug: Tab.Documents, label: 'Documents' },
+  { value: PositionValue.Presentation, icon: 'icon-presentation', slug: Tab.Presentation, label: 'Presentation' },
 ];
