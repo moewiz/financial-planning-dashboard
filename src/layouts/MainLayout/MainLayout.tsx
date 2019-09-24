@@ -19,11 +19,33 @@ interface MainLayoutProp {
   children: React.ReactNode;
 }
 
+declare global {
+  interface Window {
+    $crisp: any[];
+    CRISP_WEBSITE_ID: string;
+  }
+}
+
+window.$crisp = window.$crisp || {};
+
 class MainLayout extends React.PureComponent<MainLayoutProp> {
   public componentDidMount() {
     const { userId } = this.props;
 
     initializeGA(userId);
+    // Include the Crisp code here, without the <script></script> tags
+    window.$crisp = [];
+    window.CRISP_WEBSITE_ID = '6cd2832d-41b0-40da-af26-d8de89c2378b';
+
+    // tslint:disable-next-line:only-arrow-functions
+    (function() {
+      const d = document;
+      const s = d.createElement('script');
+
+      s.src = 'https://client.crisp.chat/l.js';
+      s.async = Boolean(1);
+      d.getElementsByTagName('head')[0].appendChild(s);
+    })();
   }
 
   public render(): React.ReactNode {
