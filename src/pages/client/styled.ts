@@ -209,6 +209,7 @@ export const TableEntryContainer = styled.section.attrs({
   }
   .ant-table-tbody > tr > td{
     padding: 10px 5px;
+    color: #4e5d86;
   }
   .ant-table-thead > tr > th{
     background-color: #eaedef;

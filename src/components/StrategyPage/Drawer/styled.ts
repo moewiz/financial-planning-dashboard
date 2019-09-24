@@ -185,7 +185,7 @@ export const DrawerTableRows = styled.div<{ noBorder?: boolean; maximumWidth?: b
       text-align: center;
       font-weight: 600;
       padding: 0 5px;
-      // color: #4e5d86;
+      color: #4e5d86;
     }
   }
   .ant-collapse {
@@ -213,7 +213,7 @@ export const DrawerTableRows = styled.div<{ noBorder?: boolean; maximumWidth?: b
     display: inline-block;
     input {
       font-weight: 600;
-      // color: #4e5d86;
+      color: #4e5d86;
       padding: 0px;
     }
     .ant-calendar-picker {
