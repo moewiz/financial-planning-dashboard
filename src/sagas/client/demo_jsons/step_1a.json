@@ -1,0 +1,284 @@
+{
+  "clientId": 3,
+  "inflationCPI": 2.3,
+  "salaryInflation": 3.5,
+  "sgcRate": 4.7,
+  "benefitDefaultAge": 65,
+
+  "basicInformation": [
+    {
+      "description": "Client",
+      "firstName": "John",
+      "lastName": "Samual",
+      "dob": "1962-08-23T00:00:00",
+      "empStatus": "employed",
+      "maritalStatus": "single",
+      "gender": "male",
+      "expandable": {
+        "riskProfile": "balanced",
+        "hasPrivateHealthInsurance": true,
+        "lookingForCoupleAdvice": false,
+        "retirementYear": 2023,
+        "isSmoker": false
+      }
+    }
+  ],
+  "income": [
+    {
+      "id": 1,
+      "description": "Salary",
+      "type": "employment",
+      "owner": "client",
+      "value": 120000,
+      "indexation": "salaryInflation",
+      "from": {
+        "type": "start",
+        "yearValue": null
+      },
+      "to": {
+        "type": "clientRetirement",
+        "yearValue": null
+      }
+    }
+  ],
+  "expenditure": [],
+  "assets": [
+    {
+      "refId": 0,
+      "description": "Primary Residense",
+      "type": "lifestyle",
+      "owner": "client",
+      "value": 750000,
+      "investment": "primaryResidence",
+      "from": {
+        "type": "existing",
+        "yearValue": null
+      },
+      "to": {
+        "type": "retain",
+        "yearValue": null
+      },
+      "expandable": {
+        "growthRate": 3.2,
+        "costBase": 500000,
+        "isCGTAssessable": true
+      }
+    },
+    {
+      "refId": 1,
+      "description": "CFS FirstChoice Wholesale Investments",
+      "type": "directInvestment",
+      "owner": "client",
+      "value": 50000,
+      "investment": "moderateProfile",
+      "from": {
+        "type": "existing",
+        "yearValue": null
+      },
+      "to": {
+        "type": "retain",
+        "yearValue": null
+      },
+      "expandable": {
+        "growthRate": 2.63,
+        "incomeGenerated": 3.77,
+        "frankedRate": 13.2,
+        "costBase": 48000,
+        "isCGTAssessable": true,
+        "isCentrelinkAssessable": true,
+        "productFees": 0,
+        "adviserFeeValue": 0,
+        "adviserFeeType": "percent",
+        "reinvest": true
+      },
+      "contributionWithdrawals": []
+    },
+    {
+      "refId": 2,
+      "description": "Cash",
+      "type": "directInvestment",
+      "owner": "client",
+      "value": 150000.0,
+      "investment": "cash",
+      "from": {
+        "type": "existing",
+        "yearValue": null
+      },
+      "to": {
+        "type": "retain",
+        "yearValue": null
+      },
+      "expandable": {
+        "growthRate": 0,
+        "incomeGenerated": 1.5,
+        "frankedRate": 0,
+        "costBase": 150000,
+        "isCGTAssessable": true,
+        "isCentrelinkAssessable": true,
+        "productFees": 0,
+        "adviserFeeValue": 0,
+        "adviserFeeType": "percent",
+        "reinvest": true
+      },
+      "contributionWithdrawals": []
+    },
+    {
+      "refId": 3,
+      "description": "Home Content",
+      "type": "lifestyle",
+      "owner": "client",
+      "value": 10000,
+      "investment": "homeContents",
+      "from": {
+        "type": "existing",
+        "yearValue": null
+      },
+      "to": {
+        "type": "retain",
+        "yearValue": null
+      }
+    },
+    {
+      "refId": 4,
+      "description": "Motor Vehicle",
+      "type": "lifestyle",
+      "owner": "client",
+      "value": 30000,
+      "investment": "motorVehicles",
+      "from": {
+        "type": "existing",
+        "yearValue": null
+      },
+      "to": {
+        "type": "retain",
+        "yearValue": null
+      }
+    },
+    {
+      "refId": 5,
+      "description": "Hesta Personal Super",
+      "type": "super",
+      "owner": "client",
+      "value": 400000,
+      "investment": "balanced",
+      "from": {
+        "type": "existing",
+        "yearValue": null
+      },
+      "to": {
+        "type": "retain",
+        "yearValue": null
+      },
+      "expandable": {
+        "growthRate": 2.63,
+        "incomeGenerated": 3.77,
+        "frankedRate": 18.17,
+        "taxableComponent": 400000,
+        "taxFreeComponent": 0,
+        "isCentrelinkAssessable": true,
+        "productFees": 1,
+        "adviserFeeValue": 0,
+        "adviserFeeType": "percent",
+        "insuranceCost": 0
+      }
+    }
+  ],
+  "liabilities": [
+    {
+      "id": 1,
+      "description": "Primary Residense mortgage",
+      "type": "nonDeductible",
+      "owner": "client",
+      "value": 300000,
+      "interest": 5,
+      "from": {
+        "type": "existing",
+        "yearValue": null
+      },
+      "to": {
+        "type": "retain",
+        "yearValue": null
+      },
+      "expandable": {
+        "deductibility": 0,
+        "repaymentAmount": 19043,
+        "repaymentType": "principalInterest",
+        "durationLength": 360,
+        "durationType": "months",
+        "creditLimit": 300000,
+        "associatedAssetRefId": 1
+      },
+      "drawdowns": []
+    }
+  ],
+  "insurance": [
+    {
+      "provider": "OnePath OneCare",
+      "owner": "client",
+      "premiumFeeDetails": [],
+      "coverDetails": [
+        {
+          "refId": 0,
+          "coverType": "life",
+          "policyOwner": "client",
+          "benefitAmount": 500000,
+          "premiumType": "stepped",
+          "notes": "",
+          "expandable": {
+            "isLinked": false,
+            "linkedProduct": null
+          }
+        },
+        {
+          "refId": 1,
+          "coverType": "tpd",
+          "policyOwner": "client",
+          "benefitAmount": 500000,
+          "premiumType": "stepped",
+          "notes": "",
+          "expandable": {
+            "isLinked": false,
+            "linkedProduct": null
+          }
+        },
+        {
+          "refId": 2,
+          "coverType": "trauma",
+          "policyOwner": "client",
+          "benefitAmount": 150000.0,
+          "premiumType": "stepped",
+          "notes": "",
+          "expandable": {
+            "isLinked": false,
+            "linkedProduct": null
+          }
+        }
+      ]
+    },
+    {
+      "provider": "OnePath OneCare",
+      "owner": "client",
+      "premiumFeeDetails": [],
+      "coverDetails": [
+        {
+          "refId": 0,
+          "coverType": "incomeProtection",
+          "policyOwner": "client",
+          "benefitAmount": 7000,
+          "premiumType": "stepped",
+          "notes": "",
+          "expandable": {
+            "incomeProtectionType": "indemnity",
+            "superlinked": true,
+            "isLinked": false,
+            "linkedProduct": null,
+            "waitingPeriodLength": 3,
+            "waitingPeriodType": "months",
+            "benefitCustomAge": "62",
+            "benefitAtDefaultAge": true
+          }
+        }
+      ]
+    }
+  ]
+}
