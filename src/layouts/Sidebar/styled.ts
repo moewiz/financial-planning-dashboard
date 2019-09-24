@@ -54,7 +54,7 @@ export const FullName = styled.span.attrs({
   font-size: 18px;
   font-weight: 500;
   color: #515C83;
-  margin-left: 15px;
+  // margin-left: 15px;
 `;
 export const ClientSide = styled(Menu).attrs({
     className: 'client-side-modify',
