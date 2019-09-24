@@ -238,7 +238,9 @@
           "notes": "",
           "expandable": {
             "isLinked": false,
-            "linkedProduct": null
+            "linkedProduct": null,
+            "superlinked": true,
+            "tpdType": "any"
           }
         },
         {
