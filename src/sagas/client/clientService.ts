@@ -1,6 +1,7 @@
 import ApiUtils from '../../utils/apiUtils';
-import data from './strategy.json';
-import current from './data.json';
+// import data from './strategy.json';
+// import current from './data.json';
+import strategy from './demo_jsons/step_2a.json';
 import { PositionValue } from '../../enums/client';
 
 export default class ClientService {
@@ -20,7 +21,7 @@ export default class ClientService {
           resolve({
             status: 200,
             data: {
-              data,
+              data: strategy,
               error: null,
               message: null,
               success: true,
