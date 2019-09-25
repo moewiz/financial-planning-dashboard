@@ -8,6 +8,8 @@ import { DrawerTitle, DrawerSubContent } from '../../StrategyPage/Drawer/styled'
 import { DrawerProductWrapper } from '../styled';
 import FundTab from './FundTab';
 import SingleProduct from './SingleProduct';
+import AssetsAllocation from './AssetsAllocation';
+import Fees from './Fees';
 
 export interface Option {
   id?: number;
@@ -157,7 +159,10 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
             {this.renderFundTab()}
           </TabPane>
           <TabPane tab="Assets Allocation" key="2">
-            Coming soon
+            <AssetsAllocation />
+          </TabPane>
+          <TabPane tab="Fees" key="3">
+            <Fees />
           </TabPane>
         </Tabs>
       </DrawerProductWrapper>

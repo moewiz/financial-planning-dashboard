@@ -85,23 +85,29 @@ export const TabsPaneCustomized = styled(TabPane).attrs({
   className: 'tabs-pane-customized',
 })``;
 
-export const DrawerTableHeader = styled.div`
+export const DrawerTableHeader = styled.div<{ productOptimizer?: boolean }>`
   padding: 10px 5px;
   background: #ebeef1;
   text-align: right;
-  .cell {
-    font-weight: 600;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-weight: 600;
+  ${(props) =>
+    props.productOptimizer &&
+    css`
+      height: 42px;
+    `}
 `;
-export const DrawerTableContent = styled.section`
+export const DrawerTableContent = styled.section<{ productOptimizer?: boolean }>`
   color: #4e5d86;
-  height: calc(100vh - 350px);
+  height: ${(props) => (props.productOptimizer ? 'auto' : 'calc(100vh - 350px)')};
   overflow: overlay;
   @media (max-height: 450px) {
     height: auto;
   }
 `;
-export const DrawerTableWrapper = styled.div`
+export const DrawerTableWrapper = styled.div<{ productOptimizer?: boolean }>`
   .parent {
     .title {
       font-weight: 600;
@@ -122,7 +128,7 @@ export const DrawerTableWrapper = styled.div`
   }
   .cell {
     display: inline-block;
-    width: 60px;
+    width: ${(props) => (props.productOptimizer ? '80px' : '60px')};
     margin: 0 5px;
     text-align: center;
     color: #4e5d86;
@@ -291,7 +297,7 @@ export const DDFreeText = styled.div`
   display: flex;
 `;
 
-export const DrawerTableParent = styled.div`
+export const DrawerTableParent = styled.div<{ customBorder?: boolean }>`
   display: flex;
   align-items: center;
   min-height: 50px;
@@ -301,6 +307,12 @@ export const DrawerTableParent = styled.div`
     float: left;
     margin-right: 10px;
   }
+  ${(props) =>
+    props.customBorder &&
+    css`
+      border-color: #8e8e8e;
+      border-top: 1px solid #8e8e8e;
+    `}
 `;
 
 export const DrawerRowTitle = styled.span.attrs({
@@ -311,11 +323,19 @@ export const DrawerRowTitle = styled.span.attrs({
   padding-left: 20px;
 `;
 
+type TitleSize = 'medium' | 'small' | 'large';
+
 export const DrawerRowSubTitle = styled.span.attrs({
   className: 'drawer-title-sub-row',
-})`
+})<{ size?: TitleSize }>`
   flex: 1;
   color: #4e5d86;
+  text-align: left;
+  font-size: ${(props) =>
+    (props.size === 'large' && '14px') ||
+    (props.size === 'medium' && '13px') ||
+    (props.size === 'small' && '12px') ||
+    '13px'};
 `;
 
 export const DrawerTableList = styled.div.attrs({
@@ -473,8 +493,9 @@ export const ProposedBlock = styled.div`
   .ant-checkbox-wrapper {
     font-size: 13px;
   }
-  .ant-checkbox-wrapper:hover .ant-checkbox-inner, .ant-checkbox:hover
-  .ant-checkbox-inner, .ant-checkbox-input:focus + .ant-checkbox-inner {
+  .ant-checkbox-wrapper:hover .ant-checkbox-inner,
+  .ant-checkbox:hover .ant-checkbox-inner,
+  .ant-checkbox-input:focus + .ant-checkbox-inner {
     border-color: #000;
   }
   .ant-checkbox-checked {
