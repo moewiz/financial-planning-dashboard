@@ -12,19 +12,30 @@ export const FeesWrapper = styled(AssetsAllocationWrapper)`
   }
   .table-entry-container {
     margin-top: 0;
+    margin-bottom: 20px;
     padding-top: 0;
   }
   .drawer-fund-table .ant-table-tbody {
     tr {
       &:last-child {
         .edit-cell {
-          font-weight: normal;
+          // font-weight: normal;
         }
       }
     }
     .strategy-item .edit-cell {
       &.text {
         text-align: left;
+      }
+    }
+  }
+  .drawer-fund-table.no-bold .ant-table-tbody {
+    tr {
+      &:last-child {
+        font-weight: normal;
+        .edit-cell {
+          font-weight: normal;
+        }
       }
     }
   }
@@ -41,6 +52,7 @@ export const AssetTitleBlock = styled.div<{ marginLeft?: boolean }>`
 export const AssetTitle = styled.div`
   font-size: 18px;
   font-weight: 600;
+  margin-bottom: 8px;
 `;
 
 export const AssetSubTitle = styled.div``;

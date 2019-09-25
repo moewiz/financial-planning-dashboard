@@ -27,6 +27,36 @@ const onGoingFee = [
     percentage: '0.00',
   },
   { name: '', value: '', percentage: '' },
+  {
+    id: 4,
+    name: 'Gross On-going Costs',
+    value: '657.98',
+    percentage: '0.98',
+  },
+];
+
+const transactionFee = [
+  {
+    id: 1,
+    name: 'Buy/Sell Spread',
+    value: '130.30',
+    percentage: '0.26',
+  },
+  { name: '', value: '', percentage: '' },
+];
+
+const otherBalances = [
+  {
+    id: 1,
+    name: 'Total balance held by client',
+    value: '500,000',
+  },
+  {
+    id: 2,
+    name: 'Total balance held by family group me...',
+    value: '500,000',
+  },
+  { name: '', value: '' },
 ];
 
 class Fees extends PureComponent {
@@ -71,8 +101,13 @@ class Fees extends PureComponent {
   public onEdit = (value: any, name: string, rowIndex: number) => {
     console.log({ value, name, rowIndex });
   }
-  public getColumns = () => {
-    return this.columns.map((col) => {
+  public getColumns = (title: string) => () => {
+    let columns = [...this.columns];
+    if (title === 'Other Balances') {
+      columns = columns.filter((col) => col.dataIndex !== 'percentage');
+    }
+    return columns.map((col) => {
+      col.title = col.dataIndex === 'name' ? title : col.title;
       if (col.editable) {
         return {
           ...col,
@@ -121,8 +156,28 @@ class Fees extends PureComponent {
             <Table
               rowKey={(rowKey) => (rowKey.id ? rowKey.id.toString() : 'new')}
               className={cn('table-general drawer-fund-table linked-product')}
-              columns={this.getColumns()}
+              columns={this.getColumns('Ongoing Fee')()}
               dataSource={onGoingFee}
+              pagination={false}
+              components={components}
+            />
+          </TableEntryContainer>
+          <TableEntryContainer drawer>
+            <Table
+              rowKey={(rowKey) => (rowKey.id ? rowKey.id.toString() : 'new')}
+              className={cn('table-general drawer-fund-table linked-product no-bold')}
+              columns={this.getColumns('Transaction Fee')()}
+              dataSource={transactionFee}
+              pagination={false}
+              components={components}
+            />
+          </TableEntryContainer>
+          <TableEntryContainer drawer>
+            <Table
+              rowKey={(rowKey) => (rowKey.id ? rowKey.id.toString() : 'new')}
+              className={cn('table-general drawer-fund-table linked-product no-bold')}
+              columns={this.getColumns('Other Balances')()}
+              dataSource={otherBalances}
               pagination={false}
               components={components}
             />
