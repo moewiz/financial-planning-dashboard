@@ -191,6 +191,7 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
                           linkedProduct={true}
                           fieldArrayLinks={fieldArrayRenderProps}
                           linkIndex={index}
+                          hasCurrent={product.hasCurrent}
                         />
                       </FundBlock>
                     );

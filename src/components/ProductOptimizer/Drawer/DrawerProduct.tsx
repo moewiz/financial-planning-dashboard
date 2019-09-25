@@ -26,6 +26,7 @@ export interface Product {
     product: Option;
     funds: Option[];
   };
+  hasCurrent?: boolean;
   isCurrent?: boolean;
 }
 
@@ -75,6 +76,7 @@ const initFormValues = (value: Product) => {
   if (product.links && product.links.length > 0) {
     let links = product.links;
     if (links.length === 1) {
+      product.hasCurrent = true;
       links[0].isCurrent = true;
       links = [...links, alternativeProduct];
     }

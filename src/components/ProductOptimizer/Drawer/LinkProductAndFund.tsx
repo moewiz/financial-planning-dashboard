@@ -17,12 +17,13 @@ interface FundTableProps {
   values?: Product;
   prefixField?: string;
   linkedProduct?: boolean;
+  hasCurrent?: boolean;
   fieldArrayLinks?: FieldArrayRenderProps;
   linkIndex?: number;
 }
 
 const LinkProductAndFund = (props: FundTableProps) => {
-  const { columns, values, setFieldValue, prefixField, linkedProduct, fieldArrayLinks, linkIndex } = props;
+  const { columns, values, setFieldValue, prefixField, linkedProduct, fieldArrayLinks, linkIndex, hasCurrent } = props;
   const funds: Option[] = get(values, 'details.funds', []);
   const onSelectProduct = (option: Option) => {
     if (option) {
@@ -125,9 +126,13 @@ const LinkProductAndFund = (props: FundTableProps) => {
                           <Icon type="close-square" theme="twoTone" style={{ fontSize: '22px' }} />
                         </Popconfirm>
                       </div>
-                      <Checkbox onChange={toggleRoPAlternative} checked={values && values.alternative}>
-                        {values && values.isCurrent ? 'RoP Current' : 'RoP Alternative'}
-                      </Checkbox>
+                      {hasCurrent ? (
+                        <span>{values && values.isCurrent ? 'RoP Current' : 'RoP Alternative'}</span>
+                      ) : (
+                        <Checkbox onChange={toggleRoPAlternative} checked={values && values.alternative}>
+                          {values && values.isCurrent ? 'RoP Current' : 'RoP Alternative'}
+                        </Checkbox>
+                      )}
                     </>
                   ) : (
                     <div className="proposed-title">
