@@ -157,8 +157,8 @@ class AssetsAllocation extends PureComponent {
           <AssetBlock>
             <DrawerTableWrapper productOptimizer>
               <AssetTitleBlock>
-                <AssetTitle>Product X</AssetTitle>
-                <AssetSubTitle>Proposed</AssetSubTitle>
+                <AssetTitle>Product A</AssetTitle>
+                <AssetSubTitle>RoP - alternative</AssetSubTitle>
               </AssetTitleBlock>
               <TableHeader />
               <TableContent />
@@ -167,8 +167,8 @@ class AssetsAllocation extends PureComponent {
           <AssetBlock>
             <DrawerTableWrapper productOptimizer>
               <AssetTitleBlock>
-                <AssetTitle>Product X</AssetTitle>
-                <AssetSubTitle>Proposed</AssetSubTitle>
+                <AssetTitle>Product B</AssetTitle>
+                <AssetSubTitle>RoP - alternative</AssetSubTitle>
               </AssetTitleBlock>
               <TableHeader />
               <TableContent />
