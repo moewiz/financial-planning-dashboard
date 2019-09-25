@@ -41,7 +41,7 @@ const EditCellContainer = (props: any) => {
   }
 
   return (
-    <td>
+    <td className={props.className}>
       {editable ? (
         <EditCell
           {...props}

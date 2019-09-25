@@ -68,9 +68,9 @@ export const TableEntryContainer = styled.section.attrs({
         &:last-child {
           font-weight: 600;
           .edit-cell {
-            font-weight: 600 !important;
+            font-weight: 600;
             .ant-input-number-input {
-              font-weight: 600 !important;
+              font-weight: 600;
             }
             &.ant-input-number-disabled {
               background-color: #fff;
@@ -96,7 +96,7 @@ export const TableEntryContainer = styled.section.attrs({
         }
       }
     }
-    .ant-table-tbody .ant-table-row .strategy-item {
+    .ant-table-tbody .strategy-item {
       width: 100%;
       input {
         padding: 4px 11px;
