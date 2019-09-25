@@ -126,7 +126,7 @@ const LinkProductAndFund = (props: FundTableProps) => {
                         </Popconfirm>
                       </div>
                       <Checkbox onChange={toggleRoPAlternative} checked={values && values.alternative}>
-                        RoP Alternative
+                        {values && values.isCurrent ? 'RoP Current' : 'RoP Alternative'}
                       </Checkbox>
                     </>
                   ) : (

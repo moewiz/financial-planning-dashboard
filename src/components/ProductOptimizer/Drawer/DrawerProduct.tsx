@@ -26,6 +26,7 @@ export interface Product {
     product: Option;
     funds: Option[];
   };
+  isCurrent?: boolean;
 }
 
 interface DrawerProductProps {
@@ -35,7 +36,7 @@ interface DrawerProductProps {
 }
 
 const alternativeProduct: Product = {
-  id: 99,
+  id: -1,
   description: 'RoP - alternative',
   value: 100,
   details: {
@@ -72,7 +73,11 @@ export const addPercentage = (funds: Option[]) => {
 const initFormValues = (value: Product) => {
   const product = { ...value };
   if (product.links && product.links.length > 0) {
-    const links = product.links.length === 1 ? [...product.links, alternativeProduct] : product.links;
+    let links = product.links;
+    if (links.length === 1) {
+      links[0].isCurrent = true;
+      links = [...links, alternativeProduct];
+    }
     product.links = map(links, (link: Product) => initFormValues(link));
   }
 
