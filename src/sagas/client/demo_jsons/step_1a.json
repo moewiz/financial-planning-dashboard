@@ -136,6 +136,11 @@
       "to": {
         "type": "retain",
         "yearValue": null
+      },
+      "expandable": {
+        "growthRate": 3.2,
+        "costBase": 0,
+        "isCGTAssessable": true
       }
     },
     {

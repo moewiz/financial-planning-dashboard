@@ -1,4 +1,6 @@
 import React from 'react';
+import { get } from 'lodash';
+
 import ContributionWithdrawalsTable from './ContributionWithdrawalsTable';
 import SGContributionTable from './SGContributionTable';
 import EditableCell from '../assets/EditableCell';
@@ -296,7 +298,7 @@ const ExpandedAssetsRow = (props: {
               <TypePercentPrefix>%</TypePercentPrefix>
             </PrefixSingleGroup>
             <ExpandedAssetsText> and adviser fees of</ExpandedAssetsText>
-            <PrefixGroup dollar={expandable.adviserFeeType === 'dollar'}>
+            <PrefixGroup dollar={get(expandable, 'adviserFeeType') === 'dollar'}>
               <PrefixChooseGroup>
                 <EditableCell
                   record={record}
@@ -310,8 +312,8 @@ const ExpandedAssetsRow = (props: {
                 />
               </PrefixChooseGroup>
               <PrefixSingleGroup
-                percent={expandable.adviserFeeType !== 'dollar'}
-                dollar={expandable.adviserFeeType === 'dollar'}
+                percent={get(expandable, 'adviserFeeType') !== 'dollar'}
+                dollar={get(expandable, 'adviserFeeType') === 'dollar'}
               >
                 <TypeDollarPrefix>$</TypeDollarPrefix>
                 <EditableCell
@@ -322,7 +324,7 @@ const ExpandedAssetsRow = (props: {
                   rowIndex={index}
                   editable={true}
                   expandedField={true}
-                  precision={expandable.adviserFeeType === 'dollar' ? 0 : 1}
+                  precision={get(expandable, 'adviserFeeType') === 'dollar' ? 0 : 1}
                 />
                 <TypePercentPrefix>%</TypePercentPrefix>
               </PrefixSingleGroup>
@@ -491,7 +493,7 @@ const ExpandedAssetsRow = (props: {
             <ExpandedAssetsText> and adviser fees of</ExpandedAssetsText>
 
             {/* TODO: Prefix OR suffix and Free Text component */}
-            <PrefixGroup dollar={expandable.adviserFeeType === 'dollar'}>
+            <PrefixGroup dollar={get(expandable, 'adviserFeeType') === 'dollar'}>
               <PrefixChooseGroup>
                 <EditableCell
                   record={record}
@@ -514,7 +516,7 @@ const ExpandedAssetsRow = (props: {
                   rowIndex={index}
                   editable={true}
                   expandedField={true}
-                  precision={expandable.adviserFeeType === 'dollar' ? 0 : 1}
+                  precision={get(expandable, 'adviserFeeType') === 'dollar' ? 0 : 1}
                 />
                 <TypePercentPrefix>%</TypePercentPrefix>
               </PrefixViewGroup>
@@ -663,7 +665,7 @@ const ExpandedAssetsRow = (props: {
                 expandedField={true}
               />
             </ExpandedSelectGroup>
-            {expandable.isDeemed === false && (
+            {get(expandable, 'isDeemed') === false && (
               <>
                 <ExpandedAssetsText>amount of</ExpandedAssetsText>
                 <PrefixSingleGroup dollar>
@@ -700,7 +702,7 @@ const ExpandedAssetsRow = (props: {
             <ExpandedAssetsText>and adviser fees of</ExpandedAssetsText>
 
             {/* TODO: Prefix OR suffix and Free Text component */}
-            <PrefixGroup dollar={expandable.adviserFeeType === 'dollar'}>
+            <PrefixGroup dollar={get(expandable, 'adviserFeeType') === 'dollar'}>
               <PrefixChooseGroup>
                 <EditableCell
                   record={record}
@@ -723,7 +725,7 @@ const ExpandedAssetsRow = (props: {
                   rowIndex={index}
                   editable={true}
                   expandedField={true}
-                  precision={expandable.adviserFeeType === 'dollar' ? 0 : 1}
+                  precision={get(expandable, 'adviserFeeType') === 'dollar' ? 0 : 1}
                 />
                 <TypePercentPrefix>%</TypePercentPrefix>
               </PrefixViewGroup>

@@ -84,10 +84,11 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
       options: to2Options,
     },
     {
-      title: 'Action',
+      title: 'Delete',
       key: 'operation',
       editable: false,
-      width: '7%',
+      className: 'text-align-center',
+      width: 60,
     },
   ];
 
@@ -195,12 +196,10 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
       if (col.key === 'operation') {
         return {
           ...col,
-          title: 'Action',
           key: 'operation',
-          width: '7%',
           render: (text: any, record: any) => (
             <Popconfirm title="Really delete?" onConfirm={() => this.handleDelete(record.key)}>
-              <a href="javascript:">Delete</a>
+              <Icon type="close-square" theme="twoTone" style={{ fontSize: '16px' }} />
             </Popconfirm>
           ),
         };

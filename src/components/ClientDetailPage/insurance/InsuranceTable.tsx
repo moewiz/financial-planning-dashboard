@@ -40,9 +40,10 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
       options: ownerWithJointOptions,
     },
     {
-      title: 'Action',
+      title: 'Delete',
       key: 'operation',
-      width: '7%',
+      width: 60,
+      className: 'text-align-center',
       editable: false,
     },
   ];
@@ -154,12 +155,10 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
       if (col.key === 'operation') {
         return {
           ...col,
-          title: 'Action',
           key: 'operation',
-          width: '7%',
           render: (text: any, record: any) => (
             <Popconfirm title="Really delete?" onConfirm={() => this.handleDelete(record.key)}>
-              <a href="javascript:">Delete</a>
+              <Icon type="close-square" theme="twoTone" style={{ fontSize: '16px' }} />
             </Popconfirm>
           ),
         };

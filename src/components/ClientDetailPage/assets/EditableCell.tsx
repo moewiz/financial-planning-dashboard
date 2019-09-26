@@ -147,6 +147,7 @@ export default class EditableCell extends React.PureComponent<EditableProps> {
       emptyIcon,
       min,
       customMin,
+      showAge,
       ...restProps
     } = this.props;
     const appendedProps = this.getAppendedProps(this.props, editing);
