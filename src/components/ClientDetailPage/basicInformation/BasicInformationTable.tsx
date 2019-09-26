@@ -115,7 +115,7 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
         description: 'Partner',
         firstName: 'Susane',
         lastName: 'Diaz',
-        dob: '27/05/1978',
+        dob: '1978-05-27T00:00:00',
         empStatus: 'unemployed',
         gender: 'female',
         maritalStatus: 'married',

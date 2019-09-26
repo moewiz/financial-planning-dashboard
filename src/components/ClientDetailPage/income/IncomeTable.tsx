@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react';
 import { Button, Icon, Popconfirm } from 'antd';
-import { ActionTableGeneral, HeaderTitleTable, TableEntryContainer, TextTitle } from '../../../pages/client/styled';
 import { isFunction } from 'lodash';
-import GeneralTable from '../GeneralTable';
 import { FormikProps } from 'formik';
+
+import GeneralTable from '../GeneralTable';
+import { ActionTableGeneral, HeaderTitleTable, TableEntryContainer, TextTitle } from '../../../pages/client/styled';
 import {
   maritalStatusOptions,
   ownerOptions,
@@ -13,6 +14,8 @@ import {
   indexationOptions,
 } from '../../../enums/options';
 import { loadOptionsBaseOnCol } from '../../../utils/columnUtils';
+import { CurrentTypes } from '../../../enums/currents';
+import AddMenu from '../AddMenu';
 
 interface IncomeTableProps {
   data: object[];
@@ -125,13 +128,14 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
     }
   }
 
-  public handleAdd = () => {
+  public handleAdd = (value: string[]) => {
     const { addRow } = this.props;
+    const [owner, type] = value;
     const newData = {
       key: Date.now(),
       description: 'Salary',
-      type: 'employment',
-      owner: 'client',
+      type,
+      owner,
       value: 1000,
       indexation: 'salaryInflation',
       from: {
@@ -201,7 +205,7 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
     return (
       <TableEntryContainer>
         <HeaderTitleTable>
-          <Icon type={'plus-square'} theme={'filled'} onClick={this.handleAdd} />
+          <AddMenu onClick={this.handleAdd} type={CurrentTypes.Income} maritalStatus={maritalStatus} />
           <TextTitle>{'Income'}</TextTitle>
         </HeaderTitleTable>
         <GeneralTable

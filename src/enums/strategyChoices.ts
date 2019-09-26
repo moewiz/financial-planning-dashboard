@@ -6,7 +6,7 @@ export interface Choice {
   children?: Choice[];
 }
 
-interface StrategyChoice {
+export interface StrategyChoice {
   [key: string]: Choice[];
 }
 
