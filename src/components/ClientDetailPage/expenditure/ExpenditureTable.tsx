@@ -12,6 +12,8 @@ import {
   ownerWithJointOptions,
 } from '../../../enums/options';
 import { loadOptionsBaseOnCol } from '../../../utils/columnUtils';
+import { CurrentTypes } from '../../../enums/currents';
+import AddMenu from '../AddMenu';
 
 interface ExpenditureTableProps {
   data: object[];
@@ -122,13 +124,14 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps> {
     }
   }
 
-  public handleAdd = () => {
+  public handleAdd = (value: string[]) => {
     const { addRow } = this.props;
+    const [owner, type] = value;
     const newData = {
       key: Date.now(),
       description: 'Living Expenses',
-      type: 'postTax',
-      owner: 'client',
+      type,
+      owner,
       value: 25000.0,
       indexation: 'inflationCPI',
       from: {
@@ -197,7 +200,7 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps> {
     return (
       <TableEntryContainer>
         <HeaderTitleTable>
-          <Icon type={'plus-square'} theme={'filled'} onClick={this.handleAdd} />
+          <AddMenu onClick={this.handleAdd} type={CurrentTypes.Expenditure} maritalStatus={maritalStatus} />
           <TextTitle>{'Expenditure'}</TextTitle>
         </HeaderTitleTable>
         <GeneralTable

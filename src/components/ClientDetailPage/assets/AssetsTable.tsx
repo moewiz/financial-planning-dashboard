@@ -7,6 +7,8 @@ import { FormikProps } from 'formik';
 import { isFunction, get } from 'lodash';
 import { from2Options, ownerOptions, to2Options, assetTypes, investmentTypeOptions } from '../../../enums/options';
 import { loadOptionsBaseOnCol } from '../../../utils/columnUtils';
+import { CurrentTypes } from '../../../enums/currents';
+import AddMenu from '../AddMenu';
 
 interface AssetsTableProps {
   data: object[];
@@ -119,14 +121,15 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
     }
   }
 
-  public handleAdd = () => {
+  public handleAdd = (value: string[]) => {
     const { addRow } = this.props;
+    const [owner, type] = value;
     const newData = {
       key: Date.now(),
       refId: Date.now(),
       description: 'Home',
-      type: 'lifestyle',
-      owner: 'client',
+      type,
+      owner,
       value: 25000,
       investment: 'primaryResidence',
       from: {
@@ -226,7 +229,7 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
     return (
       <TableEntryContainer>
         <HeaderTitleTable>
-          <Icon type={'plus-square'} theme={'filled'} onClick={this.handleAdd} />
+          <AddMenu onClick={this.handleAdd} type={CurrentTypes.Assets} maritalStatus={maritalStatus} />
           <TextTitle>{'Assets'}</TextTitle>
         </HeaderTitleTable>
         <GeneralTable
