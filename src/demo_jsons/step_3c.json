@@ -1,0 +1,59 @@
+{
+  "proposed": [
+    {
+      "title": "Domestic Equity",
+      "values": [0, 0, 0]
+    },
+    {
+      "title": "International Equity",
+      "values": [0, 0, 0]
+    },
+    {
+      "title": "Domestic Property",
+      "values": [0, 0, 0]
+    },
+    {
+      "title": "International Property",
+      "values": [0, 0, 0]
+    },
+    {
+      "title": "Growth Alternatives",
+      "values": [0, 0, 0]
+    },
+    {
+      "title": "Other Growth",
+      "values": [0, 0, 0]
+    },
+    {
+      "title": "Total Growth",
+      "values": [0, 0, 0],
+      "size": "large"
+    },
+    {
+      "title": "Domestic Fixed Interest",
+      "values": [0, 0, 0]
+    },
+    {
+      "title": "International Fixed Interest",
+      "values": [0, 0, 0]
+    },
+    {
+      "title": "Domestic Cash",
+      "values": [0, 0, 0]
+    },
+    {
+      "title": "International Cash",
+      "values": [0, 0, 0]
+    },
+    {
+      "title": "Defensive Alternatives",
+      "values": [0, 0, 0]
+    },
+    {
+      "title": "Total Defensive",
+      "values": [0, 0, 0],
+      "size": "large"
+    }
+  ],
+  "links": []
+}
