@@ -30,14 +30,11 @@ const GraphContainer = (props: GraphProps) => {
   const { type, name, data, className, flipping = true, onGraphClick } = props;
   const [activeIndex, setActiveIndex] = useState(0);
   const listOfData = flipping ? [data, data] : [data];
-  const updateActiveIndex = useCallback(() => {
-    setActiveIndex((index) => (index + 1 >= listOfData.length ? 0 : index + 1));
-  }, []);
   useEffect(() => {
-    const id = setInterval(updateActiveIndex, 6000);
-    return () => {
-      clearInterval(id);
-    };
+    const id = setInterval(() => {
+      setActiveIndex((index) => (index + 1 >= listOfData.length ? 0 : index + 1));
+    }, 6000);
+    return () => clearInterval(id);
   }, []);
   const [redraw, setRedraw] = useState<boolean>(false);
   useEffect(() => {
