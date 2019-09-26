@@ -1,18 +1,21 @@
 import React, { PureComponent } from 'react';
+import { map } from 'lodash';
 
 import { FeesWrapper } from './styled';
 import { HorizontalScrollable } from '../styled';
 import Fee from './Fee';
+import feesData from '../../../demo_jsons/step_3d.json';
 
 class Fees extends PureComponent {
   public render() {
     return (
       <FeesWrapper>
-        <Fee title="Product X" subTitle="Proposed" />
+        <Fee product={feesData.proposed} />
 
         <HorizontalScrollable>
-          <Fee title="Product A" subTitle="RoP - alternative"/>
-          <Fee title="Product B" subTitle="RoP - alternative"/>
+          {map(feesData.links, (product, index: number) => (
+            <Fee product={product} key={index} />
+          ))}
         </HorizontalScrollable>
       </FeesWrapper>
     );

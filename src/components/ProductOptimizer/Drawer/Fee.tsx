@@ -7,60 +7,22 @@ import { TableEntryContainer } from '../../../pages/client/styled';
 import { components } from '../../../containers/productOptimizer/CurrentProduct';
 import { EditCellType } from '../../StrategyPage/Drawer/EditCell';
 
-const onGoingFee = [
-  {
-    id: 1,
-    name: 'Administration Fees',
-    value: '248.33',
-    percentage: '0.50',
-  },
-  {
-    id: 2,
-    name: 'Investment Fees and Costs',
-    value: '489.45',
-    percentage: '0.98',
-  },
-  {
-    id: 3,
-    name: 'Expense Recovery Fees',
-    value: '0.00',
-    percentage: '0.00',
-  },
-  { id: -1, name: '', value: '', percentage: '' },
-  {
-    name: 'Gross On-going Costs',
-    value: '657.98',
-    percentage: '0.98',
-  },
-];
-
-const transactionFee = [
-  {
-    id: 1,
-    name: 'Buy/Sell Spread',
-    value: '130.30',
-    percentage: '0.26',
-  },
-  { id: -1, name: '', value: '', percentage: '' },
-];
-
-const otherBalances = [
-  {
-    id: 1,
-    name: 'Total balance held by client',
-    value: '500,000',
-  },
-  {
-    id: 2,
-    name: 'Total balance held by family group me...',
-    value: '500,000',
-  },
-  { id: -1, name: '', value: '' },
-];
+interface Row {
+  id?: number;
+  name: string;
+  value: string | number;
+  percentage?: string | number;
+  [key: string]: any;
+}
 
 interface FeeProps {
-  title: string;
-  subTitle: string;
+  product: {
+    title: string;
+    subTitle: string;
+    ongoingFee: Row[];
+    transactionFee: Row[];
+    otherBalances: Row[];
+  };
 }
 
 class Fee extends PureComponent<FeeProps> {
@@ -149,7 +111,13 @@ class Fee extends PureComponent<FeeProps> {
     });
   }
   public render() {
-    const { title, subTitle } = this.props;
+    const { product } = this.props;
+
+    if (!product) {
+      return null;
+    }
+
+    const { title, subTitle, ongoingFee, transactionFee, otherBalances } = product;
 
     return (
       <AssetBlock>
@@ -162,7 +130,7 @@ class Fee extends PureComponent<FeeProps> {
             rowKey={(rowKey) => (rowKey.id ? rowKey.id.toString() : 'new')}
             className={cn('table-general drawer-fund-table linked-product')}
             columns={this.getColumns('Ongoing Fee')()}
-            dataSource={onGoingFee}
+            dataSource={ongoingFee}
             pagination={false}
             components={components}
           />
