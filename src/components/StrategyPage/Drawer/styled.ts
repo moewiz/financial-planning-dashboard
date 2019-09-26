@@ -323,7 +323,7 @@ export const DrawerRowTitle = styled.span.attrs({
   padding-left: 20px;
 `;
 
-type TitleSize = 'medium' | 'small' | 'large';
+export type TitleSize = 'medium' | 'small' | 'large';
 
 export const DrawerRowSubTitle = styled.span.attrs({
   className: 'drawer-title-sub-row',

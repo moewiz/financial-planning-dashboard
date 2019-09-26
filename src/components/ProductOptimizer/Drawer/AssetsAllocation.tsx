@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { map } from 'lodash';
 
 import {
   DrawerTableContent,
@@ -11,12 +12,24 @@ import {
 } from '../../StrategyPage/Drawer/styled';
 import { AssetsAllocationWrapper, AssetSubTitle, AssetTitle, AssetTitleBlock, AssetBlock } from './styled';
 import { HorizontalScrollable } from '../styled';
+import assetsAllocationData from '../../../demo_jsons/step_3c.json';
 
-interface TableProps {
+interface Row {
+  title: string;
+  values: number[];
+  total?: boolean;
+}
+
+interface TableContentProps {
+  values: Row[];
   showTitle?: boolean;
 }
 
-const TableHeader = ({ showTitle }: TableProps) => (
+interface TableHeaderProps {
+  showTitle?: boolean;
+}
+
+const TableHeader = ({ showTitle }: TableHeaderProps) => (
   <DrawerTableHeader productOptimizer>
     {showTitle && <DrawerRowSubTitle size={'large'}>Assets Allocation</DrawerRowSubTitle>}
     <span className={'cell'}>Proposed %</span>
@@ -25,155 +38,68 @@ const TableHeader = ({ showTitle }: TableProps) => (
   </DrawerTableHeader>
 );
 
-const TableContent = ({ showTitle }: TableProps) => (
+const TableContent = ({ showTitle, values }: TableContentProps) => (
   <DrawerTableContent productOptimizer>
     <DrawerTableRows>
-      <DrawerTableListItems>
-        {showTitle && <DrawerRowSubTitle>Domestic Equity</DrawerRowSubTitle>}
-        <div className="values">
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-        </div>
-      </DrawerTableListItems>
-      <DrawerTableListItems>
-        {showTitle && <DrawerRowSubTitle>International Equity</DrawerRowSubTitle>}
-        <div className="values">
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-        </div>
-      </DrawerTableListItems>
-      <DrawerTableListItems>
-        {showTitle && <DrawerRowSubTitle>Domestic Property</DrawerRowSubTitle>}
-        <div className="values">
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-        </div>
-      </DrawerTableListItems>
-      <DrawerTableListItems>
-        {showTitle && <DrawerRowSubTitle>International Property</DrawerRowSubTitle>}
-        <div className="values">
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-        </div>
-      </DrawerTableListItems>
-      <DrawerTableListItems>
-        {showTitle && <DrawerRowSubTitle>Growth Alternatives</DrawerRowSubTitle>}
-        <div className="values">
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-        </div>
-      </DrawerTableListItems>
-      <DrawerTableListItems>
-        {showTitle && <DrawerRowSubTitle>Other Growth</DrawerRowSubTitle>}
-        <div className="values">
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-        </div>
-      </DrawerTableListItems>
-      <DrawerTableParent customBorder>
-        {showTitle && <DrawerRowSubTitle size="large">Total Growth</DrawerRowSubTitle>}
-        <div className="values">
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-        </div>
-      </DrawerTableParent>
-    </DrawerTableRows>
-
-    <DrawerTableRows>
-      <DrawerTableListItems>
-        {showTitle && <DrawerRowSubTitle>Domestic Fixed Interest</DrawerRowSubTitle>}
-        <div className="values">
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-        </div>
-      </DrawerTableListItems>
-      <DrawerTableListItems>
-        {showTitle && <DrawerRowSubTitle>International Fixed Interest</DrawerRowSubTitle>}
-        <div className="values">
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-        </div>
-      </DrawerTableListItems>
-      <DrawerTableListItems>
-        {showTitle && <DrawerRowSubTitle>Domestic Cash</DrawerRowSubTitle>}
-        <div className="values">
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-        </div>
-      </DrawerTableListItems>
-      <DrawerTableListItems>
-        {showTitle && <DrawerRowSubTitle>International Cash</DrawerRowSubTitle>}
-        <div className="values">
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-        </div>
-      </DrawerTableListItems>
-      <DrawerTableListItems>
-        {showTitle && <DrawerRowSubTitle>Defensive Alternatives</DrawerRowSubTitle>}
-        <div className="values">
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-        </div>
-      </DrawerTableListItems>
-      <DrawerTableParent customBorder>
-        {showTitle && <DrawerRowSubTitle size="large">Total Defensive</DrawerRowSubTitle>}
-        <div className="values">
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-          <span className={'cell'}>0</span>
-        </div>
-      </DrawerTableParent>
+      {map(values, (data: Row, index: number) => (
+        data.total ?
+        <DrawerTableParent customBorder key={index}>
+          {showTitle && <DrawerRowSubTitle size="large">{data.title}</DrawerRowSubTitle>}
+          <div className="values">
+            {map(data.values, (value: number, idx: number) => (
+              <span className={'cell'} key={idx}>
+                {value}
+              </span>
+            ))}
+          </div>
+        </DrawerTableParent> :
+        <DrawerTableListItems key={index}>
+          {showTitle && <DrawerRowSubTitle>{data.title}</DrawerRowSubTitle>}
+          <div className="values">
+            {map(data.values, (value: number, idx: number) => (
+              <span className={'cell'} key={idx}>
+                {value}
+              </span>
+            ))}
+          </div>
+        </DrawerTableListItems>
+      ))}
     </DrawerTableRows>
   </DrawerTableContent>
+);
+
+interface AssetColumnProps {
+  product: {
+    title: string;
+    subTitle: string;
+    values: Row[];
+  };
+  proposed?: boolean;
+}
+
+const AssetColumn = ({ product, proposed }: AssetColumnProps) => (
+  <AssetBlock proposed={proposed}>
+    <DrawerTableWrapper productOptimizer>
+      <AssetTitleBlock marginLeft={proposed}>
+        <AssetTitle>{product.title}</AssetTitle>
+        <AssetSubTitle>{product.subTitle}</AssetSubTitle>
+      </AssetTitleBlock>
+      <TableHeader showTitle={proposed} />
+      <TableContent showTitle={proposed} values={product.values} />
+    </DrawerTableWrapper>
+  </AssetBlock>
 );
 
 class AssetsAllocation extends PureComponent {
   public render() {
     return (
       <AssetsAllocationWrapper>
-        <AssetBlock proposed>
-          <DrawerTableWrapper productOptimizer>
-            <AssetTitleBlock marginLeft>
-              <AssetTitle>Product X</AssetTitle>
-              <AssetSubTitle>Proposed</AssetSubTitle>
-            </AssetTitleBlock>
-            <TableHeader showTitle />
-            <TableContent showTitle />
-          </DrawerTableWrapper>
-        </AssetBlock>
+        <AssetColumn product={assetsAllocationData.proposed} proposed={true} />
+
         <HorizontalScrollable>
-          <AssetBlock>
-            <DrawerTableWrapper productOptimizer>
-              <AssetTitleBlock>
-                <AssetTitle>Product A</AssetTitle>
-                <AssetSubTitle>RoP - alternative</AssetSubTitle>
-              </AssetTitleBlock>
-              <TableHeader />
-              <TableContent />
-            </DrawerTableWrapper>
-          </AssetBlock>
-          <AssetBlock>
-            <DrawerTableWrapper productOptimizer>
-              <AssetTitleBlock>
-                <AssetTitle>Product B</AssetTitle>
-                <AssetSubTitle>RoP - alternative</AssetSubTitle>
-              </AssetTitleBlock>
-              <TableHeader />
-              <TableContent />
-            </DrawerTableWrapper>
-          </AssetBlock>
+          {map(assetsAllocationData.links, (product, index: number) => (
+            <AssetColumn product={product} key={index} />
+          ))}
         </HorizontalScrollable>
       </AssetsAllocationWrapper>
     );
