@@ -89,7 +89,7 @@ export interface Client {
 
 export interface ClientState {
   clients: Client[];
-  processing: boolean;
+  processingDraw: boolean;
   tableProcessing: string | null;
   loading?: boolean;
   submitting?: boolean;
@@ -133,7 +133,7 @@ export const defaultClientState: ClientState = {
   empStatus: '',
   loading: false,
   submitting: false,
-  processing: false,
+  processingDraw: false,
   tableProcessing: null,
   error: '',
 };
@@ -192,4 +192,7 @@ export type UpdateAssetsAction = PayloadAction<
   ClientActionTypes.UPDATE_ASSETS,
   Array<{ description: string; type: string; refId: number }>
 >;
-export type RedrawGraphs = PayloadAction<ClientActionTypes.REDRAW_GRAPHS, string>;
+export type RedrawGraphs = PayloadAction<
+  ClientActionTypes.REDRAW_GRAPHS,
+  { type: string; shouldUpdateGraphs?: boolean }
+>;

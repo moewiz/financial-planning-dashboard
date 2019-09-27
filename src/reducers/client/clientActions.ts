@@ -9,7 +9,7 @@ import {
   UpdateEmpStatus,
   UpdateMaritalStatusAction,
 } from './clientTypes';
-import { createAction, createPayloadAction } from '../reducerHelpers';
+import { createPayloadAction } from '../reducerHelpers';
 
 export default class ClientActions {
   public static fetchDataEntry = (payload: FetchDataEntryPayload): FetchDataEntryAction =>
@@ -23,6 +23,6 @@ export default class ClientActions {
   public static updateAssets = (
     assets: Array<{ refId: number; description: string; type: string }>,
   ): UpdateAssetsAction => createPayloadAction(ClientActionTypes.UPDATE_ASSETS, assets)
-  public static redrawGraphs = (type: string): RedrawGraphs =>
-    createPayloadAction(ClientActionTypes.REDRAW_GRAPHS, type)
+  public static redrawGraphs = (type: string, shouldUpdateGraphs?: boolean): RedrawGraphs =>
+    createPayloadAction(ClientActionTypes.REDRAW_GRAPHS, { type, shouldUpdateGraphs })
 }

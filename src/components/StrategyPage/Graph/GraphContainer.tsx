@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { isFunction } from 'lodash';
+import { isFunction, isBoolean } from 'lodash';
 import { Icon } from 'antd';
 import { connect } from 'react-redux';
 import { Bar, HorizontalBar, Line } from 'react-chartjs-2';
@@ -16,21 +16,22 @@ export enum GraphType {
 }
 
 interface GraphProps {
-  processing: boolean;
   type: GraphType;
   name: string;
   data: {
     labels?: any[];
     datasets: object[];
   };
+  processingDraw: boolean;
   options?: object;
   className?: string;
   flipping?: boolean;
+  redraw?: boolean;
   onGraphClick?: (e: React.SyntheticEvent) => void;
 }
 
 const GraphContainer = (props: GraphProps) => {
-  const { type, name, data, className, flipping = true, onGraphClick, processing } = props;
+  const { type, name, data, className, flipping = true, onGraphClick, redraw: redrawProp } = props;
   const [activeIndex, setActiveIndex] = useState(0);
   const defaultListOfData = flipping ? [data, data] : [data];
   const [listOfData, setListOfData] = useState(defaultListOfData);
@@ -40,20 +41,10 @@ const GraphContainer = (props: GraphProps) => {
     }, 6000);
     return () => clearInterval(id);
   }, []);
-  const [redraw, setRedraw] = useState<boolean>(false);
+  const redraw = isBoolean(redrawProp) ? redrawProp : true;
 
   // redraw graph
   useEffect(() => {
-    if (!processing) {
-      console.log('clone default list of data and redraw the graph');
-      const clonedData = [...defaultListOfData];
-      console.log(clonedData === defaultListOfData);
-      // setListOfData([...defaultListOfData]);
-    }
-  }, [processing]);
-
-  useEffect(() => {
-    setRedraw(true);
     setListOfData([...defaultListOfData]);
   }, [data]);
 
@@ -150,15 +141,15 @@ const GraphContainer = (props: GraphProps) => {
 };
 
 const mapStateToProps = (state: RootState) => {
-  const processing = state.client.processing;
+  const processingDraw = state.client.processingDraw;
   return {
-    processing,
+    processingDraw,
   };
 };
 
 function areEqual(prevProps: GraphProps, nextProps: GraphProps) {
-  console.log({ prevProps, nextProps })
-  return false;
+  const shouldRender = !prevProps.processingDraw && !nextProps.processingDraw;
+  return !shouldRender;
 }
 
 export default connect(mapStateToProps)(React.memo(GraphContainer, areEqual));

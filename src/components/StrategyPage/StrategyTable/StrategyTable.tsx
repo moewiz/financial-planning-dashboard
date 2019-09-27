@@ -24,35 +24,28 @@ interface StrategyTableProps {
   defaultFullValue: any;
   tableProcessing: string | null;
 
-  redrawGraphs?: (type: string) => RedrawGraphs;
+  redrawGraphs?: (type: string, shouldUpdateGraphs?: boolean) => RedrawGraphs;
 }
 
-interface StrategyTableStates {
-  isProcessing: boolean;
-}
-
-class StrategyTable extends PureComponent<FormikPartProps & StrategyTableProps, StrategyTableStates> {
-  public state = {
-    isProcessing: false,
-  };
-
-  public redrawGraphs = () => {
+class StrategyTable extends PureComponent<FormikPartProps & StrategyTableProps> {
+  public redrawGraphs = (shouldUpdateGraphs: boolean = false) => {
     const { redrawGraphs, type } = this.props;
 
     if (isFunction(redrawGraphs)) {
-      redrawGraphs(type);
+      redrawGraphs(type, shouldUpdateGraphs);
     }
-    this.setState({ isProcessing: true });
-    setTimeout(() => {
-      this.setState({ isProcessing: false });
-    }, 3000);
   }
 
   public addItem = (value: string[]): void => {
     const { addItem } = this.props;
+    const [owner, type] = value;
+    let shouldUpdateGraphs = false;
 
+    if (type === 'commenceAccount') {
+      shouldUpdateGraphs = true;
+    }
     addItem({ id: uuidv1(), check: true, sentence: value.join('.') });
-    this.redrawGraphs();
+    this.redrawGraphs(shouldUpdateGraphs);
   }
 
   public getOptions = () => {

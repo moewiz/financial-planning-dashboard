@@ -9,6 +9,7 @@ export const HeaderTitleStrategy = styled.div.attrs({})<HeaderTitleStrategyProps
   align-items: center;
   border-bottom: 1px solid #e8e8e8;
   padding-bottom: 10px;
+  line-height: 25px;
   i.anticon {
     font-size: ${(props) => (props.small ? '16px' : '22px')};
     color: #072074;

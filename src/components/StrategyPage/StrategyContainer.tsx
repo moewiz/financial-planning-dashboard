@@ -17,7 +17,7 @@ interface StrategyContainerProps {
   defaultFullValue: any;
   tableProcessing: string | null;
 
-  redrawGraphs?: (type: string) => RedrawGraphs;
+  redrawGraphs?: (type: string, shouldUpdateGraphs?: boolean) => RedrawGraphs;
 }
 
 class StrategyContainer extends PureComponent<StrategyContainerProps> {

@@ -37,6 +37,12 @@ const StrategyPage = (props: StrategyPageProps) => {
 
   return (
     <StrategyPageWrapper>
+      <StrategyHeader
+        netAssets={netAssets}
+        cashflowComparisons={cashflowComparisons}
+        tax={tax}
+        retirementFunding={retirementFunding}
+      />
       <Formik
         onSubmit={(values: StrategyEntry, actions: FormikActions<StrategyEntry>) => {
           console.log('submitted', values);
@@ -61,12 +67,6 @@ const StrategyPage = (props: StrategyPageProps) => {
         enableReinitialize={true}
         render={(formikProps: FormikProps<StrategyEntry>) => (
           <Form>
-            <StrategyHeader
-              netAssets={formikProps.values.netAssets}
-              cashflowComparisons={formikProps.values.cashflowComparisons}
-              tax={formikProps.values.tax}
-              retirementFunding={formikProps.values.retirementFunding}
-            />
             {formikProps.values.superannuation && defaultFullValue && (
               <StrategyContainer type={StrategyTypes.Superannuation} defaultFullValue={defaultFullValue} />
             )}

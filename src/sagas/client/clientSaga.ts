@@ -62,12 +62,14 @@ export default class ClientSaga {
     }
   }
 
-  public static *redrawGraphs({ payload }: { payload: string }) {
+  public static *redrawGraphs({ payload }: { payload: { type: string; shouldUpdateGraphs?: boolean } }) {
+    const { type, shouldUpdateGraphs } = payload;
+
     yield put({
       type: ClientActionTypes.TOGGLE_PROCESSING,
       payload: {
-        processing: true,
-        tableProcessing: payload,
+        processingDraw: !!shouldUpdateGraphs,
+        tableProcessing: type,
       },
     });
 
@@ -76,7 +78,7 @@ export default class ClientSaga {
     yield put({
       type: ClientActionTypes.TOGGLE_PROCESSING,
       payload: {
-        processing: false,
+        processingDraw: false,
         tableProcessing: null,
       },
     });
