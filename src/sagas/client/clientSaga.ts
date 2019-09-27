@@ -1,8 +1,8 @@
-import { all, takeLatest, call, put } from 'redux-saga/effects';
+import { all, takeLatest, call, put, delay } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 import { get, find } from 'lodash';
 
-import { ClientActionTypes, FetchDataEntryPayload, UpdateDataEntryPayload } from '../../reducers/client/clientTypes';
+import { ClientActionTypes, FetchDataEntryPayload, UpdateDataEntryPayload } from '../../reducers/client';
 import ClientService from './clientService';
 import { APIResponse, getAPIErrorMessage } from '../../utils/apiUtils';
 import { POSITIONS } from '../../enums/client';
@@ -61,6 +61,21 @@ export default class ClientSaga {
       });
     }
   }
+
+  public static *redrawGraphs() {
+    yield put({
+      type: ClientActionTypes.TOGGLE_PROCESSING,
+      payload: true,
+    });
+
+    yield delay(3000);
+
+    yield put({
+      type: ClientActionTypes.TOGGLE_PROCESSING,
+      payload: false,
+    });
+  }
+
   public static *watchFetchDataEntry() {
     // @ts-ignore
     yield takeLatest(ClientActionTypes.FETCH_DATA_ENTRY_REQUEST, ClientSaga.fetchDataEntry);
@@ -71,7 +86,11 @@ export default class ClientSaga {
     yield takeLatest(ClientActionTypes.UPDATE_DATA_ENTRY_REQUEST, ClientSaga.updateDataEntry);
   }
 
+  public static *watchRedrawGraphs() {
+    yield takeLatest(ClientActionTypes.REDRAW_GRAPHS, ClientSaga.redrawGraphs);
+  }
+
   public static *clientFlow() {
-    yield all([ClientSaga.watchFetchDataEntry(), ClientSaga.watchUpdateDataEntry()]);
+    yield all([ClientSaga.watchFetchDataEntry(), ClientSaga.watchUpdateDataEntry(), ClientSaga.watchRedrawGraphs()]);
   }
 }

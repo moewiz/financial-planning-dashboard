@@ -38,7 +38,7 @@ const GraphContainer = (props: GraphProps) => {
   }, []);
   const [redraw, setRedraw] = useState<boolean>(false);
   useEffect(() => {
-    setRedraw(true);
+    // setRedraw(true);
   }, [data]);
 
   const renderGraph = (graphData: any, index: number) => {

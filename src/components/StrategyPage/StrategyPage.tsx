@@ -4,7 +4,7 @@ import StrategyHeader from './StrategyHeader';
 import StrategyContainer from './StrategyContainer';
 import { StrategyTypes } from '../../enums/strategies';
 import { StrategyPageWrapper } from './styled';
-import { StrategyEntry } from '../../reducers/client';
+import { RedrawGraphs, StrategyEntry } from '../../reducers/client';
 import DrawerContainer from './Drawer/DrawerContainer';
 import { Form, Formik, FormikActions, FormikProps } from 'formik';
 import { Button, Icon } from 'antd';
@@ -14,6 +14,7 @@ interface StrategyPageProps {
   clientId: number;
 
   pageData: StrategyEntry;
+  redrawGraphs?: () => RedrawGraphs;
 }
 
 const StrategyPage = (props: StrategyPageProps) => {
@@ -36,6 +37,7 @@ const StrategyPage = (props: StrategyPageProps) => {
 
   return (
     <StrategyPageWrapper>
+      <button onClick={() => props.redrawGraphs && props.redrawGraphs()}>Redraw</button>
       <Formik
         onSubmit={(values: StrategyEntry, actions: FormikActions<StrategyEntry>) => {
           console.log('submitted', values);

@@ -2,13 +2,14 @@ import {
   ClientActionTypes,
   FetchDataEntryAction,
   FetchDataEntryPayload,
+  RedrawGraphs,
   UpdateAssetsAction,
   UpdateDataEntryAction,
   UpdateDataEntryPayload,
   UpdateEmpStatus,
   UpdateMaritalStatusAction,
 } from './clientTypes';
-import { createPayloadAction } from '../reducerHelpers';
+import { createAction, createPayloadAction } from '../reducerHelpers';
 
 export default class ClientActions {
   public static fetchDataEntry = (payload: FetchDataEntryPayload): FetchDataEntryAction =>
@@ -22,4 +23,5 @@ export default class ClientActions {
   public static updateAssets = (
     assets: Array<{ refId: number; description: string; type: string }>,
   ): UpdateAssetsAction => createPayloadAction(ClientActionTypes.UPDATE_ASSETS, assets)
+  public static redrawGraphs = (): RedrawGraphs => createAction(ClientActionTypes.REDRAW_GRAPHS);
 }

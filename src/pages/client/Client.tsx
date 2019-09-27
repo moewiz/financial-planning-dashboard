@@ -13,6 +13,7 @@ import {
   DataEntry,
   FetchDataEntryAction,
   FetchDataEntryPayload,
+  RedrawGraphs,
   Tag,
 } from '../../reducers/client';
 import { Tab } from '../../enums/client';
@@ -38,6 +39,7 @@ interface ClientProps {
     clientName: string;
   };
   fetchDataEntry?: (payload: FetchDataEntryPayload) => FetchDataEntryAction;
+  redrawGraphs?: () => RedrawGraphs;
 }
 
 class Client extends React.PureComponent<RouteComponentProps & ClientProps> {
@@ -78,7 +80,7 @@ class Client extends React.PureComponent<RouteComponentProps & ClientProps> {
   }
 
   public render(): JSX.Element {
-    const { match, pageData, client } = this.props;
+    const { match, pageData, client, redrawGraphs } = this.props;
     const { clientId, tagName, tabName } = getParams(match.params);
 
     if (client && clientId && tagName && tabName) {
@@ -87,7 +89,7 @@ class Client extends React.PureComponent<RouteComponentProps & ClientProps> {
           return <DataEntryComponent clientId={clientId} tabName={tabName} tagName={tagName} empStatus={''} />;
         }
         case Tab.Strategy: {
-          return <StrategyPage clientId={clientId} pageData={pageData} />;
+          return <StrategyPage clientId={clientId} pageData={pageData} redrawGraphs={redrawGraphs} />;
         }
         case Tab.ProductOptimizer: {
           return <ProductOptimizer clientId={clientId} pageData={pageData} />;
@@ -149,6 +151,7 @@ const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>
   bindActionCreators(
     {
       fetchDataEntry: ClientActions.fetchDataEntry,
+      redrawGraphs: ClientActions.redrawGraphs,
     },
     dispatch,
   );
