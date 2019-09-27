@@ -1,14 +1,15 @@
 import React from 'react';
 import { get } from 'lodash';
-import StrategyHeader from './StrategyHeader';
-import StrategyContainer from './StrategyContainer';
-import { StrategyTypes } from '../../enums/strategies';
-import { StrategyPageWrapper } from './styled';
-import { RedrawGraphs, StrategyEntry } from '../../reducers/client';
-import DrawerContainer from './Drawer/DrawerContainer';
 import { Form, Formik, FormikActions, FormikProps } from 'formik';
 import { Button, Icon } from 'antd';
+
+import { RedrawGraphs, StrategyEntry } from '../../reducers/client';
+import { StrategyTypes } from '../../enums/strategies';
+import { StrategyPageWrapper } from './styled';
 import { ActionTableGeneral } from '../../pages/client/styled';
+import StrategyHeader from './StrategyHeader';
+import StrategyContainer from './StrategyContainer';
+import DrawerContainer from './Drawer/DrawerContainer';
 
 interface StrategyPageProps {
   clientId: number;

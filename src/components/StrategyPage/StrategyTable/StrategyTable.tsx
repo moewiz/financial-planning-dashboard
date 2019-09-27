@@ -1,14 +1,15 @@
 import React, { PureComponent } from 'react';
 import { get, map } from 'lodash';
 import { Dropdown, Empty, Icon, Menu } from 'antd';
-import { TextTitle } from '../../../pages/client/styled';
+import { connect, FormikContext } from 'formik';
+import uuidv1 from 'uuid/v1';
+
+import { StrategyEntry } from '../../../reducers/client';
 import { StrategyTypes } from '../../../enums/strategies';
+import { TextTitle } from '../../../pages/client/styled';
 import { HeaderTitleMargin, HeaderTitleMark, HeaderTitleStrategy, StrategyTableContent } from './styled';
 import StrategyItem, { StrategyItemI } from './StrategyItem';
 import { Choice, strategyChoices } from '../../../enums/strategyChoices';
-import { StrategyEntry } from '../../../reducers/client';
-import { connect, FormikContext } from 'formik';
-import uuidv1 from 'uuid/v1';
 
 const { SubMenu, Item } = Menu;
 
