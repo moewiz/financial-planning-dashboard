@@ -38,6 +38,7 @@ export interface StrategyItemProps {
   strategyType: string;
   strategy: StrategyItemI;
   removeItem: (index: number) => void;
+  redrawGraphs: () => void;
   client: DynamicData;
   partner: DynamicData;
   mark?: boolean;
@@ -101,7 +102,7 @@ const Projections = () => (
 
 class StrategyItem extends Component<StrategyItemProps> {
   public removeItem = () => {
-    const { strategy, strategyIndex, removeItem, setFieldValue } = this.props;
+    const { strategy, strategyIndex, removeItem, setFieldValue, redrawGraphs } = this.props;
     const strategySentenceKeys = strategy.sentence.split('.');
     const context = head(strategySentenceKeys);
     if (context && strategy.id) {
@@ -122,6 +123,7 @@ class StrategyItem extends Component<StrategyItemProps> {
       }
     }
     removeItem(strategyIndex);
+    redrawGraphs();
   }
 
   public handleMenuClick: (param: ClickParam) => void = (e) => {
@@ -310,9 +312,10 @@ class StrategyItem extends Component<StrategyItemProps> {
   }
 
   public onChangeCheck = (check: boolean) => {
-    const { setFieldValue, strategyType, strategyIndex } = this.props;
+    const { setFieldValue, strategyType, strategyIndex, redrawGraphs } = this.props;
     const fieldName = `${strategyType}.strategies[${strategyIndex}].check`;
 
+    redrawGraphs();
     setFieldValue(fieldName, check);
   }
 

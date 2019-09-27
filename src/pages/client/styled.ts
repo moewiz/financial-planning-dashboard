@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Tag } from 'antd';
+import { Spin, Tag } from 'antd';
 
 interface HeaderTitleTableProps {
   small?: boolean;
@@ -7,6 +7,7 @@ interface HeaderTitleTableProps {
 
 interface TextTitleProps {
   small?: boolean;
+  strategy?: boolean;
 }
 
 export const TableEntryContainer = styled.section.attrs({
@@ -241,7 +242,7 @@ export const HeaderTitleTable = styled.div.attrs({
   margin-bottom: 10px;
   display: flex;
   align-items: center;
-  i {
+  i.anticon {
     font-size: ${(props) => (props.small ? '16px' : '24px')};
     color: #072074;
     margin-right: 10px;
@@ -258,6 +259,15 @@ export const TextTitle = styled.span<TextTitleProps>`
   color: #4e5b86;
   font-size: ${(props) => (props.small ? '15px' : '21px')};
   font-weight: 600;
+  ${(props) =>
+    props.strategy &&
+    css`
+      flex: 1;
+    `}
+`;
+
+export const Spinner = styled(Spin)`
+  text-align: right;
 `;
 
 export const DivideLine = styled.span`

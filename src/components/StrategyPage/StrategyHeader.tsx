@@ -97,7 +97,7 @@ interface GraphConfig {
   datasets: DataSet[];
 }
 
-const loadGraphData = (config: GraphConfig) => (
+export const loadGraphData = (config: GraphConfig) => (
   data: GraphData,
 ): {
   labels?: any[];

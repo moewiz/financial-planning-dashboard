@@ -3,7 +3,7 @@ import { get } from 'lodash';
 import { Form, Formik, FormikActions, FormikProps } from 'formik';
 import { Button, Icon } from 'antd';
 
-import { RedrawGraphs, StrategyEntry } from '../../reducers/client';
+import { StrategyEntry } from '../../reducers/client';
 import { StrategyTypes } from '../../enums/strategies';
 import { StrategyPageWrapper } from './styled';
 import { ActionTableGeneral } from '../../pages/client/styled';
@@ -15,7 +15,6 @@ interface StrategyPageProps {
   clientId: number;
 
   pageData: StrategyEntry;
-  redrawGraphs?: () => RedrawGraphs;
 }
 
 const StrategyPage = (props: StrategyPageProps) => {
@@ -38,7 +37,6 @@ const StrategyPage = (props: StrategyPageProps) => {
 
   return (
     <StrategyPageWrapper>
-      <button onClick={() => props.redrawGraphs && props.redrawGraphs()}>Redraw</button>
       <Formik
         onSubmit={(values: StrategyEntry, actions: FormikActions<StrategyEntry>) => {
           console.log('submitted', values);

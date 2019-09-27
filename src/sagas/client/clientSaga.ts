@@ -62,17 +62,23 @@ export default class ClientSaga {
     }
   }
 
-  public static *redrawGraphs() {
+  public static *redrawGraphs({ payload }: { payload: string }) {
     yield put({
       type: ClientActionTypes.TOGGLE_PROCESSING,
-      payload: true,
+      payload: {
+        processing: true,
+        tableProcessing: payload,
+      },
     });
 
     yield delay(3000);
 
     yield put({
       type: ClientActionTypes.TOGGLE_PROCESSING,
-      payload: false,
+      payload: {
+        processing: false,
+        tableProcessing: null,
+      },
     });
   }
 
@@ -87,6 +93,7 @@ export default class ClientSaga {
   }
 
   public static *watchRedrawGraphs() {
+    // @ts-ignore
     yield takeLatest(ClientActionTypes.REDRAW_GRAPHS, ClientSaga.redrawGraphs);
   }
 

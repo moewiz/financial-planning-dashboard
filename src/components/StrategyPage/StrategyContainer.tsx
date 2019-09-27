@@ -1,15 +1,23 @@
 import React, { PureComponent } from 'react';
-import StrategyInformation from './StrategyInformation';
-import { StrategyTypes } from '../../enums/strategies';
-import StrategyTable from './StrategyTable/StrategyTable';
-import { StrategyWrapper } from './styled';
+import { connect } from 'react-redux';
 import { Col, Row } from 'antd';
-import { StrategyItemI } from './StrategyTable/StrategyItem';
 import { ArrayHelpers, FieldArray } from 'formik';
+import { bindActionCreators, Dispatch } from 'redux';
+
+import { RootState, StandardAction } from '../../reducers/reducerTypes';
+import { ClientActions, RedrawGraphs } from '../../reducers/client';
+import { StrategyTypes } from '../../enums/strategies';
+import { StrategyWrapper } from './styled';
+import StrategyInformation from './StrategyInformation';
+import StrategyTable from './StrategyTable/StrategyTable';
+import { StrategyItemI } from './StrategyTable/StrategyItem';
 
 interface StrategyContainerProps {
   type: StrategyTypes;
   defaultFullValue: any;
+  tableProcessing: string | null;
+
+  redrawGraphs?: (type: string) => RedrawGraphs;
 }
 
 class StrategyContainer extends PureComponent<StrategyContainerProps> {
@@ -22,7 +30,7 @@ class StrategyContainer extends PureComponent<StrategyContainerProps> {
   }
 
   public renderStrategyTable = (arrayHelpers: ArrayHelpers) => {
-    const { type, defaultFullValue } = this.props;
+    const { type, defaultFullValue, redrawGraphs, tableProcessing } = this.props;
 
     return (
       <StrategyTable
@@ -30,6 +38,8 @@ class StrategyContainer extends PureComponent<StrategyContainerProps> {
         addItem={this.addItem(arrayHelpers)}
         removeItem={this.removeItem(arrayHelpers)}
         defaultFullValue={defaultFullValue}
+        redrawGraphs={redrawGraphs}
+        tableProcessing={tableProcessing}
       />
     );
   }
@@ -52,4 +62,19 @@ class StrategyContainer extends PureComponent<StrategyContainerProps> {
   }
 }
 
-export default StrategyContainer;
+const mapStateToProps = (state: RootState) => ({
+  tableProcessing: state.client.tableProcessing,
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>
+  bindActionCreators(
+    {
+      redrawGraphs: ClientActions.redrawGraphs,
+    },
+    dispatch,
+  );
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(StrategyContainer);

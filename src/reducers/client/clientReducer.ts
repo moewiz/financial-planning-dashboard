@@ -34,7 +34,7 @@ export default class ClientReducer {
       case ClientActionTypes.UPDATE_ASSETS:
         return ClientReducer.updateAssets(state, action);
       case ClientActionTypes.TOGGLE_PROCESSING:
-        return state.set('processing', action.payload);
+        return state.set('processing', action.payload.processing).set('tableProcessing', action.payload.tableProcessing);
       default:
         return state;
     }

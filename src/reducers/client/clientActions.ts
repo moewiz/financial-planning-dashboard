@@ -23,5 +23,6 @@ export default class ClientActions {
   public static updateAssets = (
     assets: Array<{ refId: number; description: string; type: string }>,
   ): UpdateAssetsAction => createPayloadAction(ClientActionTypes.UPDATE_ASSETS, assets)
-  public static redrawGraphs = (): RedrawGraphs => createAction(ClientActionTypes.REDRAW_GRAPHS);
+  public static redrawGraphs = (type: string): RedrawGraphs =>
+    createPayloadAction(ClientActionTypes.REDRAW_GRAPHS, type)
 }
