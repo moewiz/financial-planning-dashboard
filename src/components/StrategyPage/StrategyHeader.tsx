@@ -130,7 +130,7 @@ const StrategyHeader = (props: StrategyHeaderProps) => {
       <Col span={6}>
         <GraphContainer
           type={GraphType.Bar}
-          name="Cashflow comparisons"
+          name="Net Income after tax"
           data={loadGraphData(cashflowConfig)(cashflowComparisons)}
           flipping={false}
         />
