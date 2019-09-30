@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import { map, get, isNumber } from 'lodash';
+import numeral from 'numeral';
 import { Collapse, Icon, Tooltip } from 'antd';
+
 import EditCell, { EditCellType } from './EditCell';
 import { DrawerTableRows, DrawerTableParent, DrawerTableList, DrawerTableListItems, DrawerRowSubTitle } from './styled';
 const { Panel } = Collapse;
@@ -54,7 +56,7 @@ class DrawerItem extends PureComponent<DrawerItemProps> {
         const value = get(values, [index], '');
         return (
           <span className={'cell'} key={index}>
-            {value}
+            {numeral(value).format('0,0.[00]')}
           </span>
         );
       });

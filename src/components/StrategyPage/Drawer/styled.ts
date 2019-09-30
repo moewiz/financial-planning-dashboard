@@ -219,6 +219,7 @@ export const DrawerTableRows = styled.div<{ noBorder?: boolean; maximumWidth?: b
     display: inline-block;
     input {
       font-weight: 600;
+      font-size: 13px;
       color: #4e5d86;
       padding: 0px;
     }
