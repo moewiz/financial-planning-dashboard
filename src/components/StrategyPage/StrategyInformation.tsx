@@ -131,14 +131,13 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
             backgroundColor: get(superannuationChartColors[index], 'fill'),
           })),
         };
-        const listOfKpi = map(kpi, (i: any) => ({ ...i, total: i.accumulationBalance, subValue: i.retirementYear }));
 
         return (
           <StrategyInfoWrapper>
             <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
-                <StatisticItem listOfKpi={listOfKpi} title={'Accumulation balance'} subTitle={'At retirement'} />
+                <StatisticItem listOfKpi={kpi} />
               </Col>
               <Col span={12}>
                 <GraphContainer
@@ -155,18 +154,12 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
         );
       }
       case StrategyTypes.Pensions: {
-        const listOfKpi = map(kpi, (i: any) => ({ ...i, total: i.averagePensionIncome, subValue: i.paidUntil }));
-
         return (
           <StrategyInfoWrapper>
             <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
-                <StatisticItem
-                  listOfKpi={listOfKpi}
-                  title={'Average pension income'}
-                  subTitle={'Per annum paid until'}
-                />
+                <StatisticItem listOfKpi={kpi} />
               </Col>
               <Col span={12}>
                 <GraphContainer
@@ -183,14 +176,12 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
         );
       }
       case StrategyTypes.Investments: {
-        const listOfKpi = map(kpi, (i: any) => ({ ...i, total: i.cashReserve, subValue: i.atAge }));
-
         return (
           <StrategyInfoWrapper>
             <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
-                <StatisticItem listOfKpi={listOfKpi} title={'Cash reserve'} subTitle={'At age'} />
+                <StatisticItem listOfKpi={kpi} />
               </Col>
               <Col span={12}>
                 <GraphContainer
@@ -207,18 +198,12 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
         );
       }
       case StrategyTypes.Debt: {
-        const listOfKpi = map(kpi, (i: any) => ({ ...i, total: i.interestCost, subValue: i.atAge }));
-
         return (
           <StrategyInfoWrapper>
             <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
-                <StatisticItem
-                  listOfKpi={listOfKpi}
-                  title={'Total interest cost'}
-                  subTitle={'non-deductible debt over loan period'}
-                />
+                <StatisticItem listOfKpi={kpi} />
               </Col>
               <Col span={12}>
                 <GraphContainer
@@ -235,14 +220,12 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
         );
       }
       case StrategyTypes.Centrelink: {
-        const listOfKpi = map(kpi, (i: any) => ({ ...i, total: i.interestCost }));
-
         return (
           <StrategyInfoWrapper>
             <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
-                <StatisticItem listOfKpi={listOfKpi} title={'Centrelink income'} />
+                <StatisticItem listOfKpi={kpi} />
               </Col>
               <Col span={12}>
                 <GraphContainer
@@ -259,14 +242,12 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
         );
       }
       case StrategyTypes.Insurance: {
-        const listOfKpi = map(kpi, (i: any) => ({ ...i, total: i.lifeInsurance }));
-
         return (
           <StrategyInfoWrapper>
             <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
-                <StatisticItem listOfKpi={listOfKpi} title={'Life insurance'} />
+                <StatisticItem listOfKpi={kpi} />
               </Col>
               <Col span={12}>
                 <GraphContainer
@@ -283,14 +264,12 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
         );
       }
       case StrategyTypes.EstatePlanning: {
-        const listOfKpi = map(kpi, (i: any) => ({ ...i, total: i.kpiName }));
-
         return (
           <StrategyInfoWrapper>
             <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
-                <StatisticItem listOfKpi={listOfKpi} title={'[KPI Name]'} />
+                <StatisticItem listOfKpi={kpi} />
               </Col>
               <Col span={12}>
                 <GraphContainer
