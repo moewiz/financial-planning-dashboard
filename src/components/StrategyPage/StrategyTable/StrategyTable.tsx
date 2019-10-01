@@ -4,7 +4,7 @@ import { Dropdown, Empty, Icon, Menu } from 'antd';
 import { connect, FormikContext } from 'formik';
 import uuidv1 from 'uuid/v1';
 
-import { RedrawGraphs, StrategyEntry } from '../../../reducers/client';
+import { StrategyEntry } from '../../../reducers/client';
 import { StrategyTypes } from '../../../enums/strategies';
 import { Choice, strategyChoices } from '../../../enums/strategyChoices';
 import { TextTitle, Spinner } from '../../../pages/client/styled';
@@ -24,7 +24,7 @@ interface StrategyTableProps {
   defaultFullValue: any;
   tableProcessing: string | null;
 
-  redrawGraphs?: (type: string, shouldUpdateGraphs?: boolean) => RedrawGraphs;
+  redrawGraphs?: (type: string, shouldUpdateGraphs?: boolean) => void;
 }
 
 class StrategyTable extends PureComponent<FormikPartProps & StrategyTableProps> {
@@ -43,8 +43,10 @@ class StrategyTable extends PureComponent<FormikPartProps & StrategyTableProps> 
 
     if (type === 'commenceAccount') {
       shouldUpdateGraphs = true;
+    } else {
+      addItem({ id: uuidv1(), check: true, sentence: value.join('.') });
     }
-    addItem({ id: uuidv1(), check: true, sentence: value.join('.') });
+
     this.redrawGraphs(shouldUpdateGraphs);
   }
 

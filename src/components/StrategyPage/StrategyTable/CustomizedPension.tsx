@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import numeral from 'numeral';
 import { FullyCustomized } from '../Drawer/styled';
 import EditCell, { EditCellType } from '../Drawer/EditCell';
@@ -25,6 +25,9 @@ const CustomizedPension = (
   const pensionIncomeOptions = map(getOptions(context, { client, partner }, 'pensionIncome'), (option) => ({
     ...option,
     label: option.income ? `${option.label} $(${numeral(option.income).format('0,0')})` : option.label,
+    renderedLabel: option.income
+      ? `${option.renderedLabel} $(${numeral(option.income).format('0,0')})`
+      : option.renderedLabel,
   }));
   const superannuationOptions = filter(
     map(getOptions(context, { client, partner }, 'superannuation')),
@@ -72,6 +75,9 @@ const CustomizedPension = (
     setFieldValue(fieldName, val);
     setFieldValue(`${context}.superannuation`, currentSuperannuation);
   };
+  useEffect(() => {
+    setPensionIncome(get(strategy, 'values[5][0]'));
+  }, [strategy]);
 
   return (
     <FullyCustomized>
@@ -147,25 +153,30 @@ const CustomizedPension = (
           type={EditCellType.select}
           options={pensionIncomeOptions}
           onChange={(val) => setPensionIncome(val)}
+          yearFi={true}
         />{' '}
-        {pensionIncome === 'specific' && (
-          <EditCell
-            name={`${strategyType}.strategies[${strategyIndex}].values[5][1]`}
-            value={get(strategy, 'values[5][1]')}
-            type={EditCellType.number}
-            onChange={(val, fieldName) => setFieldValue(fieldName, val)}
-            dollar={true}
-            calculateWidth={true}
-          />
-        )}
-        per
-        <EditCell
-          name={`${strategyType}.strategies[${strategyIndex}].values[6]`}
-          value={get(strategy, 'values[6]')}
-          onChange={(val, fieldName) => setFieldValue(fieldName, val)}
-          type={EditCellType.select}
-          options={periodTypes}
-        />
+        {pensionIncome !== 'meetExpenses' ? (
+          <>
+            {pensionIncome === 'specific' && (
+              <EditCell
+                name={`${strategyType}.strategies[${strategyIndex}].values[5][1]`}
+                value={get(strategy, 'values[5][1]')}
+                type={EditCellType.number}
+                onChange={(val, fieldName) => setFieldValue(fieldName, val)}
+                dollar={true}
+                calculateWidth={true}
+              />
+            )}
+            per
+            <EditCell
+              name={`${strategyType}.strategies[${strategyIndex}].values[6]`}
+              value={get(strategy, 'values[6]')}
+              onChange={(val, fieldName) => setFieldValue(fieldName, val)}
+              type={EditCellType.select}
+              options={periodTypes}
+            />
+          </>
+        ) : null}
       </span>
     </FullyCustomized>
   );

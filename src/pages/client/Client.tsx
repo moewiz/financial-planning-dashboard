@@ -13,7 +13,6 @@ import {
   DataEntry,
   FetchDataEntryAction,
   FetchDataEntryPayload,
-  RedrawGraphs,
   Tag,
 } from '../../reducers/client';
 import { Tab } from '../../enums/client';
@@ -24,7 +23,7 @@ import DataEntryComponent from '../../components/ClientDetailPage/DataEntry';
 import StrategyPage from '../../components/StrategyPage/StrategyPage';
 import ProductOptimizer from './productOptimizer';
 
-const getParams = (params: { clientId?: string; tagName?: string; tabName?: string }) => {
+export const getParams = (params: { clientId?: string; tagName?: string; tabName?: string }) => {
   return {
     clientId: Number.parseInt(get(params, 'clientId', ''), 10),
     tagName: get(params, 'tagName'),
@@ -76,7 +75,7 @@ class Client extends React.PureComponent<RouteComponentProps & ClientProps> {
     if (fetchDataEntry) {
       fetchDataEntry(params);
     }
-  }
+  };
 
   public render(): JSX.Element {
     const { match, pageData, client } = this.props;

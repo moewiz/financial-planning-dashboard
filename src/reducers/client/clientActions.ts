@@ -23,6 +23,7 @@ export default class ClientActions {
   public static updateAssets = (
     assets: Array<{ refId: number; description: string; type: string }>,
   ): UpdateAssetsAction => createPayloadAction(ClientActionTypes.UPDATE_ASSETS, assets)
-  public static redrawGraphs = (type: string, shouldUpdateGraphs?: boolean): RedrawGraphs =>
-    createPayloadAction(ClientActionTypes.REDRAW_GRAPHS, { type, shouldUpdateGraphs })
+  public static redrawGraphs = (
+    payload: FetchDataEntryPayload & { type: string; shouldUpdateGraphs?: boolean },
+  ): RedrawGraphs => createPayloadAction(ClientActionTypes.REDRAW_GRAPHS, payload)
 }

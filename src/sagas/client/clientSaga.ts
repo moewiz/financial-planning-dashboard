@@ -1,4 +1,4 @@
-import { all, takeLatest, call, put, delay } from 'redux-saga/effects';
+import { all, takeLatest, call, put, delay, select } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 import { get, find } from 'lodash';
 
@@ -6,6 +6,7 @@ import { ClientActionTypes, FetchDataEntryPayload, UpdateDataEntryPayload } from
 import ClientService from './clientService';
 import { APIResponse, getAPIErrorMessage } from '../../utils/apiUtils';
 import { POSITIONS } from '../../enums/client';
+import { RootState } from '../../reducers/reducerTypes';
 
 export default class ClientSaga {
   public static *fetchDataEntry({ payload }: { payload: FetchDataEntryPayload }) {
@@ -62,8 +63,12 @@ export default class ClientSaga {
     }
   }
 
-  public static *redrawGraphs({ payload }: { payload: { type: string; shouldUpdateGraphs?: boolean } }) {
-    const { type, shouldUpdateGraphs } = payload;
+  public static *redrawGraphs({
+    payload,
+  }: {
+    payload: FetchDataEntryPayload & { type: string; shouldUpdateGraphs?: boolean };
+  }) {
+    const { type, shouldUpdateGraphs, tagName, tabName, clientId } = payload;
 
     yield put({
       type: ClientActionTypes.TOGGLE_PROCESSING,
@@ -74,6 +79,19 @@ export default class ClientSaga {
     });
 
     yield delay(3000);
+
+    if (shouldUpdateGraphs) {
+      const response: AxiosResponse<APIResponse> = yield call(ClientService.demoUpdateStrategyPage);
+      yield put({
+        type: ClientActionTypes.UPDATE_DATA_ENTRY_SUCCESS,
+        payload: {
+          clientId,
+          tagName,
+          tabName,
+          pageData: response.data.data,
+        },
+      });
+    }
 
     yield put({
       type: ClientActionTypes.TOGGLE_PROCESSING,

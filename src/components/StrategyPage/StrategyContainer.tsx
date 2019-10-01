@@ -1,26 +1,29 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { RouteComponentProps, withRouter } from 'react-router';
 import { Col, Row } from 'antd';
 import { ArrayHelpers, FieldArray } from 'formik';
 import { bindActionCreators, Dispatch } from 'redux';
+import { isFunction } from 'lodash';
 
 import { RootState, StandardAction } from '../../reducers/reducerTypes';
-import { ClientActions, RedrawGraphs } from '../../reducers/client';
+import { ClientActions, FetchDataEntryPayload, RedrawGraphs } from '../../reducers/client';
 import { StrategyTypes } from '../../enums/strategies';
 import { StrategyWrapper } from './styled';
 import StrategyInformation from './StrategyInformation';
 import StrategyTable from './StrategyTable/StrategyTable';
 import { StrategyItemI } from './StrategyTable/StrategyItem';
+import { getParams } from '../../pages/client/Client';
 
 interface StrategyContainerProps {
   type: StrategyTypes;
   defaultFullValue: any;
   tableProcessing: string | null;
 
-  redrawGraphs?: (type: string, shouldUpdateGraphs?: boolean) => RedrawGraphs;
+  redrawGraphs?: (payload: FetchDataEntryPayload & { type: string; shouldUpdateGraphs?: boolean }) => RedrawGraphs;
 }
 
-class StrategyContainer extends PureComponent<StrategyContainerProps> {
+class StrategyContainer extends PureComponent<StrategyContainerProps & RouteComponentProps> {
   public addItem = (arrayHelpers: ArrayHelpers) => (data: StrategyItemI) => {
     arrayHelpers.unshift(data);
   }
@@ -29,8 +32,25 @@ class StrategyContainer extends PureComponent<StrategyContainerProps> {
     arrayHelpers.remove(index);
   }
 
+  public redrawGraphs = (type: string, shouldUpdateGraphs?: boolean) => {
+    const { redrawGraphs, match } = this.props;
+    const { clientId, tabName, tagName } = getParams(match.params);
+
+    if (isFunction(redrawGraphs) && clientId && tagName && tabName) {
+      const payload: FetchDataEntryPayload & { type: string; shouldUpdateGraphs?: boolean } = {
+        type,
+        shouldUpdateGraphs,
+        clientId,
+        tagName,
+        tabName,
+      };
+
+      redrawGraphs(payload);
+    }
+  }
+
   public renderStrategyTable = (arrayHelpers: ArrayHelpers) => {
-    const { type, defaultFullValue, redrawGraphs, tableProcessing } = this.props;
+    const { type, defaultFullValue, tableProcessing } = this.props;
 
     return (
       <StrategyTable
@@ -38,7 +58,7 @@ class StrategyContainer extends PureComponent<StrategyContainerProps> {
         addItem={this.addItem(arrayHelpers)}
         removeItem={this.removeItem(arrayHelpers)}
         defaultFullValue={defaultFullValue}
-        redrawGraphs={redrawGraphs}
+        redrawGraphs={this.redrawGraphs}
         tableProcessing={tableProcessing}
       />
     );
@@ -77,4 +97,4 @@ const mapDispatchToProps = (dispatch: Dispatch<StandardAction<any>>) =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(StrategyContainer);
+)(withRouter(StrategyContainer));

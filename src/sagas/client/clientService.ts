@@ -3,6 +3,7 @@ import ApiUtils from '../../utils/apiUtils';
 // import strategy from './strategy.json';
 import current from '../../demo_jsons/step_1a.json';
 import strategy from '../../demo_jsons/step_2a.json';
+import updatedStrategy from '../../demo_jsons/step_2f.json';
 import { PositionValue } from '../../enums/client';
 
 export default class ClientService {
@@ -50,5 +51,21 @@ export default class ClientService {
     const url: string = '/currentPosition/';
 
     return ApiUtils.HTTP.post(url, formData);
+  }
+
+  public static async demoUpdateStrategyPage(): Promise<any> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          status: 200,
+          data: {
+            data: updatedStrategy,
+            error: null,
+            message: null,
+            success: true,
+          },
+        });
+      }, 0);
+    });
   }
 }

@@ -180,16 +180,24 @@
       {
         "value": "minimum",
         "label": "Minimum Pension income",
+        "renderedLabel": "Minimum Pension income",
         "income": 1000
       },
       {
         "value": "specific",
-        "label": "Specific Pension income"
+        "label": "Specific Pension income",
+        "renderedLabel": "Specific Pension income"
       },
       {
         "value": "maximum",
         "label": "Maximum Pension income",
+        "renderedLabel": "Maximum Pension income",
         "income": 5000
+      },
+      {
+        "value": "meetExpenses",
+        "label": "Meet expenses",
+        "renderedLabel": "pension income to meet your expenses"
       }
     ],
     "funeralBond": []
@@ -225,16 +233,24 @@
       {
         "value": "minimum",
         "label": "Minimum Pension income",
+        "renderedLabel": "Minimum Pension income",
         "income": 1500
       },
       {
         "value": "specific",
-        "label": "Specific Pension income"
+        "label": "Specific Pension income",
+        "renderedLabel": "Specific Pension income"
       },
       {
         "value": "maximum",
         "label": "Maximum Pension income",
+        "renderedLabel": "Maximum Pension income",
         "income": 4000
+      },
+      {
+        "value": "meetExpenses",
+        "label": "Meet expenses",
+        "renderedLabel": "pension income to meet your expenses"
       }
     ],
     "funeralBond": [
@@ -1231,7 +1247,7 @@
       {
         "check": true,
         "sentence": "client.commenceAccount",
-        "values": ["CFS FirstChoice Wholesale Pension", "2019-07-09T12:00:00", 1, "full_value"]
+        "values": ["CFS FirstChoice Wholesale Pension", "2019-07-09T12:00:00", 1, "full_value", [], ["meetExpenses"]]
       }
     ],
     "drawer": {

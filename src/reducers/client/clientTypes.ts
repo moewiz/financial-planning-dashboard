@@ -194,5 +194,5 @@ export type UpdateAssetsAction = PayloadAction<
 >;
 export type RedrawGraphs = PayloadAction<
   ClientActionTypes.REDRAW_GRAPHS,
-  { type: string; shouldUpdateGraphs?: boolean }
+  FetchDataEntryPayload & { type: string; shouldUpdateGraphs?: boolean }
 >;
