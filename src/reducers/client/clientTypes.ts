@@ -40,6 +40,7 @@ export interface GraphData {
   xAxis: string[];
   current: number[];
   proposed: number[];
+  title?: string;
 }
 export interface StrategyEntry {
   superannuation?: Strategy;

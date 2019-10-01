@@ -9,7 +9,7 @@ import StandardText from './StandardText';
 import { StrategyInfoWrapper, TitleStrategyBlock } from './styled';
 import { Col, Row } from 'antd';
 import GraphContainer, { GraphType } from './Graph/GraphContainer';
-import { StrategyEntry } from '../../reducers/client';
+import { StrategyEntry, GraphData } from '../../reducers/client';
 import { StandardAction } from '../../reducers/reducerTypes';
 import {
   DrawerActions,
@@ -18,6 +18,7 @@ import {
   FetchDrawerDataSuccessAction,
   OpenDrawerAction,
 } from '../../reducers/drawer';
+import { loadGraphData } from './StrategyHeader';
 
 interface FormikPartProps {
   formik: FormikContext<StrategyEntry>;
@@ -51,46 +52,47 @@ const getTitle = (type: StrategyTypes) => {
   }
 };
 
-const data = {
-  labels: ['19', '20', '21', '22', '23', '24', '25'],
+const generalConfig = {
   datasets: [
     {
-      label: 'a',
+      dataIndex: 'current',
+      label: 'Current',
       fill: false,
       borderColor: '#FF5722',
-      data: [165000, 159000, 120000, 165000, 235000, 120000, 140000],
+      lineTension: 0,
     },
     {
-      label: 'b',
+      dataIndex: 'proposed',
+      label: 'Proposed',
       fill: false,
       borderColor: '#00BCD4',
-      data: [85000, 45000, 70000, 65000, 100000, 150000, 135000],
+      lineTension: 0,
     },
   ],
 };
+
 const colors = {
   grey: {
-    fill: '#f1f1f1',
+    backgroundColor: '#f1f1f1',
     stoke: '#d0d0d0',
   },
   green: {
-    fill: '#e0eadf',
+    backgroundColor: '#e0eadf',
     stroke: '#5eb84d',
   },
   lightBlue: {
-    fill: '#6fccdd',
+    backgroundColor: '#6fccdd',
     stroke: '#6fccdd',
   },
   darkBlue: {
-    fill: '#3282bf',
+    backgroundColor: '#3282bf',
     stroke: '#3282bf',
   },
   purple: {
-    fill: '#8fa8c8',
+    backgroundColor: '#8fa8c8',
     stroke: '#75539e',
   },
 };
-const superannuationChartColors = [colors.lightBlue, colors.darkBlue, colors.grey];
 
 class StrategyInformation extends PureComponent<FormikPartProps & StrategyInformationProps> {
   public onGraphClick = (e: React.SyntheticEvent) => {
@@ -109,28 +111,35 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
     const kpi = get(this.props, ['formik', 'values', type, 'kpi'], []);
     const graph = get(this.props, ['formik', 'values', type, 'graph'], []);
     const standardText = get(this.props, ['formik', 'values', type, 'standardText'], []);
+    const basicGraphData = map(graph, (graphData: GraphData) => ({
+      ...loadGraphData(generalConfig)(graphData),
+      title: graphData.title,
+    }));
 
     switch (type) {
       case StrategyTypes.Superannuation: {
-        const datasets = [
-          ...data.datasets,
-          {
-            label: 'c',
-            fill: true,
-            borderColor: '#00BCD4',
-            data: [70000, 45000, 45000, 150000, 100000, 35000, 65000],
-          },
-        ];
-        const areaData = {
-          ...data,
-          datasets: datasets.map((dataset, index) => ({
-            ...dataset,
-            fill: true,
-            borderColor: '',
-            pointRadius: 0,
-            backgroundColor: get(superannuationChartColors[index], 'fill'),
-          })),
+        const config = {
+          datasets: [
+            {
+              dataIndex: 'current',
+              label: 'Current',
+              fill: true,
+              pointRadius: 0,
+              ...colors.lightBlue,
+            },
+            {
+              dataIndex: 'proposed',
+              label: 'Proposed',
+              fill: true,
+              pointRadius: 0,
+              ...colors.darkBlue,
+            },
+          ],
         };
+        const graphList = map(graph, (graphData: GraphData) => ({
+          ...loadGraphData(config)(graphData),
+          title: graphData.title,
+        }));
 
         return (
           <StrategyInfoWrapper>
@@ -142,8 +151,7 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
               <Col span={12}>
                 <GraphContainer
                   type={GraphType.Area}
-                  name="Superannuation balance"
-                  data={areaData}
+                  dataList={graphList}
                   className={'marginTop'}
                   onGraphClick={this.onGraphClick}
                 />
@@ -164,8 +172,7 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
               <Col span={12}>
                 <GraphContainer
                   type={GraphType.Line}
-                  name="Pension balance"
-                  data={data}
+                  dataList={basicGraphData}
                   className={'marginTop'}
                   onGraphClick={this.onGraphClick}
                 />
@@ -186,8 +193,7 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
               <Col span={12}>
                 <GraphContainer
                   type={GraphType.Line}
-                  name="Investment (non-super) balance"
-                  data={data}
+                  dataList={basicGraphData}
                   className={'marginTop'}
                   onGraphClick={this.onGraphClick}
                 />
@@ -208,8 +214,7 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
               <Col span={12}>
                 <GraphContainer
                   type={GraphType.Line}
-                  name="Debt Value"
-                  data={data}
+                  dataList={basicGraphData}
                   className={'marginTop'}
                   onGraphClick={this.onGraphClick}
                 />
@@ -230,8 +235,7 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
               <Col span={12}>
                 <GraphContainer
                   type={GraphType.Line}
-                  name="Centrelink income"
-                  data={data}
+                  dataList={basicGraphData}
                   className={'marginTop'}
                   onGraphClick={this.onGraphClick}
                 />
@@ -252,8 +256,7 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
               <Col span={12}>
                 <GraphContainer
                   type={GraphType.HorizontalBar}
-                  name="[Graph Name]"
-                  data={data}
+                  dataList={basicGraphData}
                   className={'marginTop'}
                   onGraphClick={this.onGraphClick}
                 />
@@ -274,8 +277,7 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
               <Col span={12}>
                 <GraphContainer
                   type={GraphType.Bar}
-                  name="[Graph Name]"
-                  data={data}
+                  dataList={basicGraphData}
                   className={'marginTop'}
                   onGraphClick={this.onGraphClick}
                 />

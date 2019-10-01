@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { isFunction, isBoolean } from 'lodash';
+import { isFunction, isBoolean, get } from 'lodash';
 import { Icon } from 'antd';
 import { connect } from 'react-redux';
 import { Bar, HorizontalBar, Line } from 'react-chartjs-2';
@@ -17,23 +17,27 @@ export enum GraphType {
 
 interface GraphProps {
   type: GraphType;
-  name: string;
-  data: {
+  name?: string;
+  data?: {
     labels?: any[];
     datasets: object[];
   };
+  dataList?: Array<{
+    labels?: any[];
+    datasets: object[];
+  }>;
   processingDraw: boolean;
   options?: object;
   className?: string;
-  flipping?: boolean;
   redraw?: boolean;
   onGraphClick?: (e: React.SyntheticEvent) => void;
 }
 
 const GraphContainer = (props: GraphProps) => {
-  const { type, name, data, className, flipping = true, onGraphClick, redraw: redrawProp } = props;
+  const { type, name, data, className, onGraphClick, redraw: redrawProp, dataList } = props;
+  const flipping = dataList && dataList.length > 0;
   const [activeIndex, setActiveIndex] = useState(0);
-  const defaultListOfData = flipping ? [data, data] : [data];
+  const defaultListOfData = dataList && dataList.length > 0 ? dataList : [data];
   const [listOfData, setListOfData] = useState(defaultListOfData);
   useEffect(() => {
     const id = setInterval(() => {
@@ -131,7 +135,7 @@ const GraphContainer = (props: GraphProps) => {
     <GraphWrapper className={className}>
       <GraphTitle>
         <Icon type="info-circle" theme="filled" />
-        {name}
+        {flipping ? get(listOfData[activeIndex], 'title') : name}
       </GraphTitle>
       <GraphGroup onClick={onGraphClick} className={classNames({ hasOnClick })}>
         {listOfData.map(renderGraph)}

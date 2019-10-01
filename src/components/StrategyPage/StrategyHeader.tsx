@@ -120,30 +120,23 @@ const StrategyHeader = (props: StrategyHeaderProps) => {
   return (
     <Row gutter={32}>
       <Col span={6}>
-        <GraphContainer
-          type={GraphType.Line}
-          name="Net assets"
-          data={loadGraphData(configNetAssets)(netAssets)}
-          flipping={false}
-        />
+        <GraphContainer type={GraphType.Line} name="Net assets" data={loadGraphData(configNetAssets)(netAssets)} />
       </Col>
       <Col span={6}>
         <GraphContainer
           type={GraphType.Bar}
           name="Net Income after tax"
           data={loadGraphData(cashflowConfig)(cashflowComparisons)}
-          flipping={false}
         />
       </Col>
       <Col span={6}>
-        <GraphContainer type={GraphType.Line} name="Tax" data={loadGraphData(taxConfig)(tax)} flipping={false} />
+        <GraphContainer type={GraphType.Line} name="Tax" data={loadGraphData(taxConfig)(tax)} />
       </Col>
       <Col span={6}>
         <GraphContainer
           type={GraphType.Line}
           name="Retirement Funding"
           data={loadGraphData(retirementFundingConfig)(retirementFunding)}
-          flipping={false}
         />
       </Col>
     </Row>
