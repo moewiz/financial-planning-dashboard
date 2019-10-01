@@ -1,0 +1,214 @@
+{
+  "client": {
+    "current": [
+      {
+        "id": 1,
+        "description": "Product A",
+        "value": 10000,
+        "details": {
+          "product": {
+            "id": 2,
+            "name": "Product X"
+          },
+          "funds": [
+            {
+              "id": 1,
+              "name": "Fund A",
+              "value": 20000
+            },
+            {
+              "id": 2,
+              "name": "Fund B",
+              "value": 50000
+            },
+            {
+              "id": 3,
+              "name": "Fund C",
+              "value": 30000
+            }
+          ]
+        }
+      },
+      {
+        "id": 2,
+        "description": "Product B",
+        "value": 10000
+      },
+      {
+        "id": 3,
+        "description": "Product C",
+        "value": 10000
+      }
+    ],
+    "proposed": [
+      {
+        "id": 4,
+        "description": "New proposed 1",
+        "value": 10000
+      },
+      {
+        "id": 5,
+        "description": "New proposed 2",
+        "value": 10000,
+        "details": {
+          "product": {
+            "id": 101,
+            "name": "Product X",
+            "value": 100
+          },
+          "funds": [
+            {
+              "id": 101,
+              "name": "Sunsuper Balanced",
+              "value": 10000
+            },
+            {
+              "id": 102,
+              "name": "Sunsuper Conservative",
+              "value": 10000
+            },
+            {
+              "id": 103,
+              "name": "Sunsuper Conservative",
+              "value": 10000
+            }
+          ]
+        }
+      },
+      {
+        "id": 6,
+        "description": "Proposed 1",
+        "value": 10000,
+        "details": {
+          "product": {
+            "id": 101,
+            "name": "Product X",
+            "value": 100
+          },
+          "funds": [
+            {
+              "id": 101,
+              "name": "Sunsuper Balanced",
+              "value": 10000
+            },
+            {
+              "id": 102,
+              "name": "Sunsuper Conservative",
+              "value": 10000
+            },
+            {
+              "id": 103,
+              "name": "Sunsuper Conservative",
+              "value": 10000
+            }
+          ]
+        },
+        "links": [
+          {
+            "id": 1,
+            "description": "Product A",
+            "value": 10000,
+            "details": {
+              "product": {
+                "id": 101,
+                "name": "Product H",
+                "value": 100
+              },
+              "funds": [
+                {
+                  "id": 123,
+                  "name": "Fund DE",
+                  "value": 10000
+                }
+              ]
+            }
+          },
+          {
+            "id": 2,
+            "description": "Product B",
+            "value": 1000,
+            "alternative": true,
+            "details": {
+              "product": {
+                "id": 101,
+                "name": "Product I",
+                "value": 100
+              },
+              "funds": [
+                {
+                  "id": 123,
+                  "name": "Fund DF",
+                  "value": 10000
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "description": "Proposed 2",
+        "value": 10000,
+        "links": [
+          {
+            "id": 1,
+            "description": "Product A",
+            "value": 10000,
+            "details": {
+              "product": {
+                "id": 101,
+                "name": "Product H",
+                "value": 100
+              },
+              "funds": [
+                {
+                  "id": 123,
+                  "name": "Fund DE",
+                  "value": 10000
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "partner": {
+    "current": [
+      {
+        "id": 6,
+        "description": "Product A",
+        "value": 10000
+      },
+      {
+        "id": 7,
+        "description": "Product B",
+        "value": 10000
+      },
+      {
+        "id": 8,
+        "description": "Product C",
+        "value": 10000
+      }
+    ],
+    "proposed": [
+      {
+        "id": 9,
+        "description": "New proposed 1",
+        "value": 10000
+      },
+      {
+        "id": 10,
+        "description": "Proposed 2",
+        "value": 10000,
+        "links": [
+          {
+            "id": 8,
+            "description": "Product C",
+            "value": 10000
+          }
+        ]
+      }
+    ]
+  }
+}

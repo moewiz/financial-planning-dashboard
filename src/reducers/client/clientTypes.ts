@@ -1,7 +1,8 @@
 import { Record } from 'immutable';
-import { map } from 'lodash';
-import { PayloadAction, StandardAction } from '../reducerTypes';
+import { map, values } from 'lodash';
+import { PayloadAction } from '../reducerTypes';
 import { Product } from '../../components/ProductOptimizer/Drawer/DrawerProduct';
+import { Tab } from '../../enums/client';
 
 export interface Table {
   basicInformation?: object[];
@@ -104,7 +105,7 @@ export interface ClientState {
 
 export const getDefaultTagList = () => {
   const tagList = ['new', 'position', 'strategy', 'products', 'advice', 'done'];
-  const tabList = ['current', 'strategy', 'switching', 'documents', 'presentation'];
+  const tabList = values(Tab);
 
   return map(tagList, (tag) => ({
     name: tag,

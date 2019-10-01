@@ -32,6 +32,7 @@ export const getParams = (params: { clientId?: string; tagName?: string; tabName
 };
 
 interface ClientProps {
+  loading: boolean;
   pageData: any;
   client?: {
     clientId: number;
@@ -78,7 +79,7 @@ class Client extends React.PureComponent<RouteComponentProps & ClientProps> {
   };
 
   public render(): JSX.Element {
-    const { match, pageData, client } = this.props;
+    const { match, pageData, client, loading } = this.props;
     const { clientId, tagName, tabName } = getParams(match.params);
 
     if (client && clientId && tagName && tabName) {
@@ -90,7 +91,7 @@ class Client extends React.PureComponent<RouteComponentProps & ClientProps> {
           return <StrategyPage clientId={clientId} pageData={pageData} />;
         }
         case Tab.ProductOptimizer: {
-          return <ProductOptimizer clientId={clientId} pageData={pageData} />;
+          return <ProductOptimizer clientId={clientId} pageData={pageData} loading={loading} />;
         }
         default: {
           return (
