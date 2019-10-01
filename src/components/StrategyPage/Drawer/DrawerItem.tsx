@@ -93,22 +93,9 @@ class DrawerItem extends PureComponent<DrawerItemProps> {
   public render() {
     const { row } = this.props;
 
-    return (
-      <DrawerTableRows>
-        {row.values ? (
-          <DrawerTableParent>
-            {row.tooltip ? (
-              <DrawerRowSubTitle>
-                <Tooltip title={row.tooltip} placement="topLeft">
-                  {row.title}
-                </Tooltip>
-              </DrawerRowSubTitle>
-            ) : (
-              <DrawerRowSubTitle>{row.title}</DrawerRowSubTitle>
-            )}
-            <div className="values">{this.renderValues(row, row.key)}</div>
-          </DrawerTableParent>
-        ) : (
+    if (row.children) {
+      return (
+        <DrawerTableRows>
           <Collapse
             defaultActiveKey={['1']}
             bordered={false}
@@ -116,7 +103,23 @@ class DrawerItem extends PureComponent<DrawerItemProps> {
               panelProps.isActive ? <Icon type="minus-square" /> : <Icon type="plus-square" />
             }
           >
-            <Panel header={row.title} key="1">
+            <Panel
+              header={
+                <div className="drawer-parent">
+                  {row.tooltip ? (
+                    <DrawerRowSubTitle>
+                      <Tooltip title={row.tooltip} placement="topLeft">
+                        {row.title}
+                      </Tooltip>
+                    </DrawerRowSubTitle>
+                  ) : (
+                    <DrawerRowSubTitle>{row.title}</DrawerRowSubTitle>
+                  )}
+                  {row.values && <div className="values">{this.renderValues(row, row.key)}</div>}
+                </div>
+              }
+              key="1"
+            >
               {row.children && row.children.length > 0 && (
                 <DrawerTableList>
                   {map(row.children, (innerRow: RowData, index: number) => this.renderChild(innerRow, index, row.key))}
@@ -124,7 +127,24 @@ class DrawerItem extends PureComponent<DrawerItemProps> {
               )}
             </Panel>
           </Collapse>
-        )}
+        </DrawerTableRows>
+      );
+    }
+
+    return (
+      <DrawerTableRows>
+        <DrawerTableParent>
+          {row.tooltip ? (
+            <DrawerRowSubTitle>
+              <Tooltip title={row.tooltip} placement="topLeft">
+                {row.title}
+              </Tooltip>
+            </DrawerRowSubTitle>
+          ) : (
+            <DrawerRowSubTitle>{row.title}</DrawerRowSubTitle>
+          )}
+          <div className="values">{this.renderValues(row, row.key)}</div>
+        </DrawerTableParent>
       </DrawerTableRows>
     );
   }

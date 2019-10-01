@@ -168,6 +168,10 @@ export const DrawerTableRows = styled.div<{ noBorder?: boolean; maximumWidth?: b
       }
     }
   }
+  .drawer-parent {
+    flex: 1;
+    display: flex;
+  }
   .ant-input-number {
     &:focus {
       border: 1px solid #dcdcdc !important;
