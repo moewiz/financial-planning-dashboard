@@ -1,5 +1,5 @@
 import React from 'react';
-import { Skeleton, Icon, Avatar } from 'antd';
+import { Icon, Avatar } from 'antd';
 import { map } from 'lodash';
 
 import {
@@ -12,7 +12,6 @@ import {
   DateItem,
   StatusTags,
   ClientSide,
-  SkeletonClient,
   ClientRoot,
 } from './styled';
 import { default as ModalNameAndBirthDay } from '../../components/NameAndBirthDay/NameAndBirthDay';

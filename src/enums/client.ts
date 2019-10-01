@@ -4,6 +4,7 @@ export enum Tab {
   ProductOptimizer = 'product-optimizer',
   Documents = 'documents',
   Presentation = 'presentation',
+  Insurance = 'insurance',
 }
 
 export interface Position {
@@ -19,6 +20,7 @@ export enum PositionValue {
   ProductOptimizer = 3,
   Documents = 4,
   Presentation = 5,
+  Insurance = 6,
 }
 
 export const POSITIONS: Position[] = [
@@ -32,4 +34,5 @@ export const POSITIONS: Position[] = [
   },
   { value: PositionValue.Documents, icon: 'icon-documents', slug: Tab.Documents, label: 'Documents' },
   { value: PositionValue.Presentation, icon: 'icon-presentation', slug: Tab.Presentation, label: 'Presentation' },
+  { value: PositionValue.Insurance, icon: 'icon-documents', slug: Tab.Insurance, label: 'Insurance' },
 ];
