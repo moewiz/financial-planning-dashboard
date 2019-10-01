@@ -14,6 +14,7 @@ export interface RowData {
   values?: Array<string | number>;
   tooltip?: string;
   editable?: boolean;
+  percent?: boolean;
   children?: RowData[];
 
   [key: string]: any;
@@ -29,34 +30,62 @@ interface EditCellContainerProps {
   index: number;
   keyString?: string;
   type: EditCellType;
+  extraProps?: any;
 }
 
 const EditCellContainer = (props: EditCellContainerProps) => {
-  const { index, value: propValue, keyString: key, type } = props;
+  const { index, value: propValue, keyString: key, type, extraProps } = props;
   const [value, setValue] = React.useState<any>(propValue);
   const name = `${key}[${index}]`;
 
-  return <EditCell name={name} key={index} onChange={(val) => setValue(val)} value={value} type={type} />;
+  // tslint:disable-next-line:max-line-length
+  return <EditCell name={name} key={index} onChange={(val) => setValue(val)} value={value} type={type} {...extraProps} />;
 };
 
 class DrawerItem extends PureComponent<DrawerItemProps> {
   public renderValues = (row: RowData, key?: string) => {
-    const { values, editable } = row;
+    const { values, editable, percent } = row;
     const { columns } = this.props;
 
     if (editable) {
       return map(columns, (column: string, index: number) => {
         const value = get(values, [index], '');
         const type = isNumber(value) ? EditCellType.number : EditCellType.text;
+        let extraProps = {};
+        if (percent) {
+          extraProps = {
+            options: {
+              precision: 2,
+              min: 0,
+              max: 100,
+              formatter: (val: any) => `${val}%`,
+              parser: (val: any) => val.replace('%', ''),
+            },
+          };
+        }
 
-        return <EditCellContainer key={index} keyString={key} index={index} value={value} type={type} />;
+        return (
+          <EditCellContainer
+            key={index}
+            keyString={key}
+            index={index}
+            value={value}
+            type={type}
+            extraProps={extraProps}
+          />
+        );
       });
     } else {
       return map(columns, (column: string, index: number) => {
-        const value = get(values, [index], '');
+        let value = get(values, [index], 0);
+        let format = '0,0.[00]';
+        if (percent && isNumber(value)) {
+          value /= 100;
+          format = '0.00%';
+        }
         return (
           <span className={'cell'} key={index}>
-            {numeral(value).format('0,0.[00]')}
+            {numeral(value).format(format)}
           </span>
         );
       });
