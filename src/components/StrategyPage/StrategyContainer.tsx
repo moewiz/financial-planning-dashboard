@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router';
-import { Col, Row } from 'antd';
+import { Col, Collapse, Icon, Row } from 'antd';
 import { ArrayHelpers, FieldArray } from 'formik';
 import { bindActionCreators, Dispatch } from 'redux';
 import { isFunction } from 'lodash';
@@ -9,7 +9,7 @@ import { isFunction } from 'lodash';
 import { RootState, StandardAction } from '../../reducers/reducerTypes';
 import { ClientActions, FetchDataEntryPayload, RedrawGraphs } from '../../reducers/client';
 import { StrategyTypes } from '../../enums/strategies';
-import { StrategyWrapper } from './styled';
+import { StrategyWrapper, TitleStrategyBlock } from './styled';
 import StrategyInformation from './StrategyInformation';
 import StrategyTable from './StrategyTable/StrategyTable';
 import { StrategyItemI } from './StrategyTable/StrategyItem';

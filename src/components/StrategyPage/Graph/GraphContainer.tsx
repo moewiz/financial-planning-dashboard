@@ -133,10 +133,12 @@ const GraphContainer = (props: GraphProps) => {
 
   return (
     <GraphWrapper className={className}>
-      <GraphTitle>
-        <Icon type="info-circle" theme="filled" />
-        {flipping ? get(listOfData[activeIndex], 'title') : name}
-      </GraphTitle>
+      {name && (
+        <GraphTitle>
+          <Icon type="info-circle" theme="filled" />
+          {name}
+        </GraphTitle>
+      )}
       <GraphGroup onClick={onGraphClick} className={classNames({ hasOnClick })}>
         {listOfData.map(renderGraph)}
       </GraphGroup>

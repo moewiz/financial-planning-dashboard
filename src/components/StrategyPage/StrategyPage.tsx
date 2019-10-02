@@ -1,11 +1,11 @@
 import React from 'react';
-import { get } from 'lodash';
-import { Form, Formik, FormikActions, FormikProps } from 'formik';
-import { Button, Icon } from 'antd';
+import { get, values } from 'lodash';
+import { Formik, FormikActions, FormikProps } from 'formik';
+import { Button, Collapse, Icon } from 'antd';
 
 import { StrategyEntry } from '../../reducers/client';
 import { StrategyTypes } from '../../enums/strategies';
-import { StrategyPageWrapper } from './styled';
+import { StrategyPageWrapper, TitleStrategyBlock, FormWrapper, PanelWrapper } from './styled';
 import { ActionTableGeneral } from '../../pages/client/styled';
 import StrategyHeader from './StrategyHeader';
 import StrategyContainer from './StrategyContainer';
@@ -16,6 +16,27 @@ interface StrategyPageProps {
 
   pageData: StrategyEntry;
 }
+
+const getTitle = (type: StrategyTypes) => {
+  switch (type) {
+    case StrategyTypes.Superannuation:
+      return 'Superannuation';
+    case StrategyTypes.Pensions:
+      return 'Pensions';
+    case StrategyTypes.Investments:
+      return 'Investments (non-super)';
+    case StrategyTypes.Debt:
+      return 'Debt';
+    case StrategyTypes.Centrelink:
+      return 'Centrelink';
+    case StrategyTypes.Insurance:
+      return 'Insurance';
+    case StrategyTypes.EstatePlanning:
+      return 'Estate Planning';
+    default:
+      return '';
+  }
+};
 
 const StrategyPage = (props: StrategyPageProps) => {
   const { pageData } = props;
@@ -66,35 +87,72 @@ const StrategyPage = (props: StrategyPageProps) => {
         }}
         enableReinitialize={true}
         render={(formikProps: FormikProps<StrategyEntry>) => (
-          <Form>
-            {formikProps.values.superannuation && defaultFullValue && (
-              <StrategyContainer type={StrategyTypes.Superannuation} defaultFullValue={defaultFullValue} />
-            )}
-            {formikProps.values.pension && defaultFullValue && (
-              <StrategyContainer type={StrategyTypes.Pensions} defaultFullValue={defaultFullValue} />
-            )}
-            {formikProps.values.investments && defaultFullValue && (
-              <StrategyContainer type={StrategyTypes.Investments} defaultFullValue={defaultFullValue} />
-            )}
-            {formikProps.values.debt && defaultFullValue && (
-              <StrategyContainer type={StrategyTypes.Debt} defaultFullValue={defaultFullValue} />
-            )}
-            {formikProps.values.centrelink && defaultFullValue && (
-              <StrategyContainer type={StrategyTypes.Centrelink} defaultFullValue={defaultFullValue} />
-            )}
-            {formikProps.values.insurance && defaultFullValue && (
-              <StrategyContainer type={StrategyTypes.Insurance} defaultFullValue={defaultFullValue} />
-            )}
-            {formikProps.values.estatePlanning && defaultFullValue && (
-              <StrategyContainer type={StrategyTypes.EstatePlanning} defaultFullValue={defaultFullValue} />
-            )}
+          <FormWrapper>
+            <Collapse defaultActiveKey={values(StrategyTypes)} bordered={false}>
+              <PanelWrapper
+                key={StrategyTypes.Superannuation}
+                header={<TitleStrategyBlock>{getTitle(StrategyTypes.Superannuation)}</TitleStrategyBlock>}
+              >
+                {formikProps.values.superannuation && defaultFullValue && (
+                  <StrategyContainer type={StrategyTypes.Superannuation} defaultFullValue={defaultFullValue} />
+                )}
+              </PanelWrapper>
+              <PanelWrapper
+                key={StrategyTypes.Pensions}
+                header={<TitleStrategyBlock>{getTitle(StrategyTypes.Pensions)}</TitleStrategyBlock>}
+              >
+                {formikProps.values.pension && defaultFullValue && (
+                  <StrategyContainer type={StrategyTypes.Pensions} defaultFullValue={defaultFullValue} />
+                )}
+              </PanelWrapper>
+              <PanelWrapper
+                key={StrategyTypes.Investments}
+                header={<TitleStrategyBlock>{getTitle(StrategyTypes.Investments)}</TitleStrategyBlock>}
+              >
+                {formikProps.values.investments && defaultFullValue && (
+                  <StrategyContainer type={StrategyTypes.Investments} defaultFullValue={defaultFullValue} />
+                )}
+              </PanelWrapper>
+              <PanelWrapper
+                key={StrategyTypes.Debt}
+                header={<TitleStrategyBlock>{getTitle(StrategyTypes.Debt)}</TitleStrategyBlock>}
+              >
+                {formikProps.values.debt && defaultFullValue && (
+                  <StrategyContainer type={StrategyTypes.Debt} defaultFullValue={defaultFullValue} />
+                )}
+              </PanelWrapper>
+              <PanelWrapper
+                key={StrategyTypes.Centrelink}
+                header={<TitleStrategyBlock>{getTitle(StrategyTypes.Centrelink)}</TitleStrategyBlock>}
+              >
+                {formikProps.values.centrelink && defaultFullValue && (
+                  <StrategyContainer type={StrategyTypes.Centrelink} defaultFullValue={defaultFullValue} />
+                )}
+              </PanelWrapper>
+              <PanelWrapper
+                key={StrategyTypes.Insurance}
+                header={<TitleStrategyBlock>{getTitle(StrategyTypes.Insurance)}</TitleStrategyBlock>}
+              >
+                {formikProps.values.insurance && defaultFullValue && (
+                  <StrategyContainer type={StrategyTypes.Insurance} defaultFullValue={defaultFullValue} />
+                )}
+              </PanelWrapper>
+              <PanelWrapper
+                key={StrategyTypes.EstatePlanning}
+                header={<TitleStrategyBlock>{getTitle(StrategyTypes.EstatePlanning)}</TitleStrategyBlock>}
+              >
+                {formikProps.values.estatePlanning && defaultFullValue && (
+                  <StrategyContainer type={StrategyTypes.EstatePlanning} defaultFullValue={defaultFullValue} />
+                )}
+              </PanelWrapper>
+            </Collapse>
             <ActionTableGeneral visible>
               <Button htmlType={'submit'} type={'primary'} disabled={formikProps.isSubmitting || !formikProps.dirty}>
                 <Icon type="check" />
                 <span>Submit</span>
               </Button>
             </ActionTableGeneral>
-          </Form>
+          </FormWrapper>
         )}
       />
       <DrawerContainer />

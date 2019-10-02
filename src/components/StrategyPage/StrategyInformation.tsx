@@ -6,7 +6,7 @@ import { get, map } from 'lodash';
 import StatisticItem from './StatisticItem';
 import { StrategyTypes } from '../../enums/strategies';
 import StandardText from './StandardText';
-import { StrategyInfoWrapper, TitleStrategyBlock } from './styled';
+import { StrategyInfoWrapper } from './styled';
 import { Col, Row } from 'antd';
 import GraphContainer, { GraphType } from './Graph/GraphContainer';
 import { StrategyEntry, GraphData } from '../../reducers/client';
@@ -30,27 +30,6 @@ interface StrategyInformationProps {
   fetchDrawerData: (type: string) => FetchDrawerDataAction;
   fetchDrawerSuccess: (drawerData: DrawerPayload) => FetchDrawerDataSuccessAction;
 }
-
-const getTitle = (type: StrategyTypes) => {
-  switch (type) {
-    case StrategyTypes.Superannuation:
-      return 'Superannuation';
-    case StrategyTypes.Pensions:
-      return 'Pensions';
-    case StrategyTypes.Investments:
-      return 'Investments (non-super)';
-    case StrategyTypes.Debt:
-      return 'Debt';
-    case StrategyTypes.Centrelink:
-      return 'Centrelink';
-    case StrategyTypes.Insurance:
-      return 'Insurance';
-    case StrategyTypes.EstatePlanning:
-      return 'Estate Planning';
-    default:
-      return '';
-  }
-};
 
 const generalConfig = {
   datasets: [
@@ -143,7 +122,6 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
 
         return (
           <StrategyInfoWrapper>
-            <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
                 <StatisticItem listOfKpi={kpi} />
@@ -152,7 +130,6 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
                 <GraphContainer
                   type={GraphType.Area}
                   dataList={graphList}
-                  className={'marginTop'}
                   onGraphClick={this.onGraphClick}
                 />
               </Col>
@@ -164,7 +141,6 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
       case StrategyTypes.Pensions: {
         return (
           <StrategyInfoWrapper>
-            <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
                 <StatisticItem listOfKpi={kpi} />
@@ -173,7 +149,6 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
                 <GraphContainer
                   type={GraphType.Line}
                   dataList={basicGraphData}
-                  className={'marginTop'}
                   onGraphClick={this.onGraphClick}
                 />
               </Col>
@@ -185,7 +160,6 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
       case StrategyTypes.Investments: {
         return (
           <StrategyInfoWrapper>
-            <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
                 <StatisticItem listOfKpi={kpi} />
@@ -194,7 +168,6 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
                 <GraphContainer
                   type={GraphType.Line}
                   dataList={basicGraphData}
-                  className={'marginTop'}
                   onGraphClick={this.onGraphClick}
                 />
               </Col>
@@ -206,7 +179,6 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
       case StrategyTypes.Debt: {
         return (
           <StrategyInfoWrapper>
-            <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
                 <StatisticItem listOfKpi={kpi} />
@@ -215,7 +187,6 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
                 <GraphContainer
                   type={GraphType.Line}
                   dataList={basicGraphData}
-                  className={'marginTop'}
                   onGraphClick={this.onGraphClick}
                 />
               </Col>
@@ -227,7 +198,6 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
       case StrategyTypes.Centrelink: {
         return (
           <StrategyInfoWrapper>
-            <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
                 <StatisticItem listOfKpi={kpi} />
@@ -236,7 +206,6 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
                 <GraphContainer
                   type={GraphType.Line}
                   dataList={basicGraphData}
-                  className={'marginTop'}
                   onGraphClick={this.onGraphClick}
                 />
               </Col>
@@ -248,7 +217,6 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
       case StrategyTypes.Insurance: {
         return (
           <StrategyInfoWrapper>
-            <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
                 <StatisticItem listOfKpi={kpi} />
@@ -257,7 +225,6 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
                 <GraphContainer
                   type={GraphType.HorizontalBar}
                   dataList={basicGraphData}
-                  className={'marginTop'}
                   onGraphClick={this.onGraphClick}
                 />
               </Col>
@@ -269,7 +236,6 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
       case StrategyTypes.EstatePlanning: {
         return (
           <StrategyInfoWrapper>
-            <TitleStrategyBlock>{getTitle(type)}</TitleStrategyBlock>
             <Row type="flex" justify="space-between" gutter={32}>
               <Col span={12}>
                 <StatisticItem listOfKpi={kpi} />
@@ -278,7 +244,6 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
                 <GraphContainer
                   type={GraphType.Bar}
                   dataList={basicGraphData}
-                  className={'marginTop'}
                   onGraphClick={this.onGraphClick}
                 />
               </Col>

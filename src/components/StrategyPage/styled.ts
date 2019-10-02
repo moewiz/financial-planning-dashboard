@@ -1,5 +1,8 @@
 import styled, { keyframes } from 'styled-components';
+import { Form } from 'formik';
 import { Collapse } from 'antd';
+
+const { Panel } = Collapse;
 
 const slideOutUp = keyframes`
   from {
@@ -25,10 +28,17 @@ const slideInUp = keyframes`
 export const StrategyPageWrapper = styled.div`
   padding: 48px 24px;
 `;
-export const GraphWrapper = styled.div`
-  &.marginTop {
-    margin-top: -31px;
+export const FormWrapper = styled(Form)`
+  margin-top: 64px;
+  .ant-collapse {
+    > .ant-collapse-item {
+      border-bottom: none;
+    }
   }
+`;
+export const PanelWrapper = styled(Panel)`
+`;
+export const GraphWrapper = styled.div`
 `;
 export const GraphGroup = styled.section`
   overflow: hidden;
@@ -60,7 +70,7 @@ export const GraphCard = styled.div`
 export const GraphTitle = styled.div`
   display: inline-block;
   width: 100%;
-  font-size: 14px;
+  font-size: 20px;
   color: #4e5b86;
   margin-bottom: 10px;
   .anticon-info-circle {
@@ -69,14 +79,13 @@ export const GraphTitle = styled.div`
 `;
 
 export const StrategyWrapper = styled.div`
-  margin-top: 64px;
 `;
 
 export const TitleStrategyBlock = styled.h3`
   color: #4e5b86;
   font-size: 21px;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 0;
 `;
 // Style StrategyInfoWrapper
 export const StrategyInfoWrapper = styled.div`
