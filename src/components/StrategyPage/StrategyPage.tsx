@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { get, values } from 'lodash';
 import { Formik, FormikActions, FormikProps } from 'formik';
 import { Button, Collapse, Icon, Row } from 'antd';
@@ -10,6 +10,7 @@ import { ActionTableGeneral } from '../../pages/client/styled';
 import StrategyHeader from './StrategyHeader';
 import StrategyContainer from './StrategyContainer';
 import DrawerContainer from './Drawer/DrawerContainer';
+import { Lock } from '../Icons';
 
 interface StrategyPageProps {
   clientId: number;
@@ -87,8 +88,13 @@ const StrategyPage = (props: StrategyPageProps) => {
     };
   }, [graphs, pinned]);
 
+  const togglePinned = useCallback(() => {
+    setPinned((p) => !p);
+  }, []);
+
   return (
     <StrategyPageWrapper>
+      <Lock lock={pinned} onClick={togglePinned} />
       <div id="header-graphs">
         <StrategyHeader
           netAssets={netAssets}

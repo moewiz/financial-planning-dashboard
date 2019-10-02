@@ -1,5 +1,9 @@
 import React from 'react';
 
+export const Lock = ({ lock, onClick }: { lock?: boolean, onClick: () => void }) => (
+  <span className={lock ? 'lock' : 'lock unlocked'} onClick={onClick} />
+);
+
 export const Projections = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
