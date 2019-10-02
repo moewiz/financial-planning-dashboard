@@ -156,6 +156,7 @@ interface TableProps {
 const BasicTable = ({ title, dataList, columns, className }: TableProps) => (
   <TableEntryContainer smallPadding>
     <HeaderTitleTable>
+      { title === 'Proposed' && <Icon type={'plus-square'} theme={'filled'} />}
       <TextTitle small={true}>{title}</TextTitle>
     </HeaderTitleTable>
     <Table
