@@ -12,8 +12,8 @@ interface TextTitleProps {
 
 export const TableEntryContainer = styled.section.attrs({
   className: 'table-entry-container',
-})<{ drawer?: boolean; linkedProduct?: boolean }>`
-  padding: 20px;
+})<{ drawer?: boolean; linkedProduct?: boolean; smallPadding?: boolean; }>`
+  padding: ${(props) => props.smallPadding ? '10px' : '20px'};
   ${(props) =>
     props.drawer &&
     css`
@@ -133,6 +133,7 @@ export const TableEntryContainer = styled.section.attrs({
     }
     .ant-table-tbody > tr > td{
       vertical-align: baseline;
+      line-height: 33px;
     }
     .ant-table-tbody .ant-table-row .strategy-item {
       width: 100%;

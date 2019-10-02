@@ -204,7 +204,7 @@ class ProposedProduct extends PureComponent<ProductTable, ProposedProductState> 
     const { dataList } = this.props;
 
     return (
-      <TableEntryContainer>
+      <TableEntryContainer smallPadding>
         <NewProposedProduct onAdd={this.onAdd} data={this.getCurrentProducts()} />
         <Table
           rowKey={(rowKey) => (rowKey.id ? rowKey.id.toString() : 'new')}

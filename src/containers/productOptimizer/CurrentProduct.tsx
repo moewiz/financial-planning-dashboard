@@ -191,7 +191,7 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
     const { dataList } = this.props;
 
     return (
-      <TableEntryContainer>
+      <TableEntryContainer smallPadding>
         <HeaderTitleTable>
           <TextTitle small={true}>Current</TextTitle>
         </HeaderTitleTable>
