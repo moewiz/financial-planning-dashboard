@@ -29,6 +29,9 @@ export const StrategyPageWrapper = styled.div`
   padding: 48px 24px;
 `;
 export const FormWrapper = styled(Form)`
+  &.paddingTop {
+    margin-top: 328px;
+  }
   margin-top: 64px;
   .ant-collapse {
     > .ant-collapse-item {

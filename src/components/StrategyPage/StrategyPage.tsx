@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { get, values } from 'lodash';
 import { Formik, FormikActions, FormikProps } from 'formik';
-import { Button, Collapse, Icon } from 'antd';
+import { Button, Collapse, Icon, Row } from 'antd';
 
 import { StrategyEntry } from '../../reducers/client';
 import { StrategyTypes } from '../../enums/strategies';
@@ -39,6 +39,7 @@ const getTitle = (type: StrategyTypes) => {
 };
 
 const StrategyPage = (props: StrategyPageProps) => {
+  const [pinned, setPinned] = useState<boolean>(true);
   const { pageData } = props;
   const netAssets = get(pageData, 'netAssets');
   const cashflowComparisons = get(pageData, 'cashflowComparisons');
@@ -55,15 +56,47 @@ const StrategyPage = (props: StrategyPageProps) => {
   const partner = pageData.partner;
   const joint = pageData.joint;
   const defaultFullValue = pageData.defaultFullValue;
+  const graphs = document.getElementById('header-graphs');
+
+  useEffect(() => {
+    if (graphs) {
+      if (pinned) {
+        const sticky = graphs.offsetTop;
+        const strategyForm = document.getElementById('strategy-form');
+
+        window.onscroll = () => {
+          if (window.pageYOffset >= sticky) {
+            graphs.classList.add('sticky');
+            if (strategyForm) {
+              strategyForm.classList.add('paddingTop');
+            }
+          } else {
+            graphs.classList.remove('sticky');
+            if (strategyForm) {
+              strategyForm.classList.remove('paddingTop');
+            }
+          }
+        };
+      } else {
+        graphs.classList.remove('sticky');
+      }
+    }
+
+    return () => {
+      window.onscroll = null;
+    };
+  }, [graphs, pinned]);
 
   return (
     <StrategyPageWrapper>
-      <StrategyHeader
-        netAssets={netAssets}
-        cashflowComparisons={cashflowComparisons}
-        tax={tax}
-        retirementFunding={retirementFunding}
-      />
+      <div id="header-graphs">
+        <StrategyHeader
+          netAssets={netAssets}
+          cashflowComparisons={cashflowComparisons}
+          tax={tax}
+          retirementFunding={retirementFunding}
+        />
+      </div>
       <Formik
         onSubmit={(values: StrategyEntry, actions: FormikActions<StrategyEntry>) => {
           console.log('submitted', values);
@@ -87,7 +120,7 @@ const StrategyPage = (props: StrategyPageProps) => {
         }}
         enableReinitialize={true}
         render={(formikProps: FormikProps<StrategyEntry>) => (
-          <FormWrapper>
+          <FormWrapper id="strategy-form">
             <Collapse defaultActiveKey={values(StrategyTypes)} bordered={false}>
               <PanelWrapper
                 key={StrategyTypes.Superannuation}

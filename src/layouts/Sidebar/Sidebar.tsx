@@ -13,6 +13,7 @@ import {
   StatusTags,
   ClientSide,
   ClientRoot,
+  StickyStyle,
 } from './styled';
 import { default as ModalNameAndBirthDay } from '../../components/NameAndBirthDay/NameAndBirthDay';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
@@ -109,6 +110,7 @@ class Sidebar extends React.PureComponent<SidebarProps & RouteComponentProps> {
           ))}
         </ClientSide>
         <ModalNameAndBirthDay />
+        <StickyStyle collapsed={this.state.collapsed} />
       </SiderCollapsible>
     );
   }
