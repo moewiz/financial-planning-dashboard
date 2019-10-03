@@ -28,6 +28,9 @@ export default class ClientService {
       case PositionValue.ProductOptimizer:
         data = productOptimizer;
         break;
+      case PositionValue.Documents:
+        data = productOptimizer;
+        break;
 
       default:
         break;

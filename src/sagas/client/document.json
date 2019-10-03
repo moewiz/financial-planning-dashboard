@@ -1,0 +1,116 @@
+{
+  "step1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec sollicitudin molestie malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n\nMauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Nulla quis lorem ut libero malesuada feugiat. Proin eget tortor risus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.",
+  "step2": [
+    {
+      "type": "fixed",
+      "title": "Superannuation",
+      "subtitle": "Record the Superannuation-related scope of advice, as agreed between you and the client.",
+      "tables": {
+        "columns": ["Superannuation", "Advice Limitations"],
+        "data": [
+          {
+            "id": 1,
+            "value": "Contributions",
+            "description": "No Limitations"
+          },
+          {
+            "id": 2,
+            "value": "Platform Review",
+            "description": "No Limitations"
+          },
+          {
+            "id": 3,
+            "value": "Portfolio Review",
+            "description": "No Limitations"
+          },
+          {
+            "id": 4,
+            "value": "SMSF",
+            "description": "No Limitations"
+          }
+        ]
+      }
+    },
+    {
+      "type": "fixed",
+      "title": "Retirement Income",
+      "subtitle": "Record the Retirement Income scope of advice, as agreed between you and the client.",
+      "tables": {
+        "columns": ["Retirement Income", "Advice Limitations"],
+        "data": [
+          {
+            "id": 1,
+            "value": "Income streams",
+            "description": "No Limitations"
+          },
+          {
+            "id": 2,
+            "value": "Platform Review",
+            "description": "No Limitations"
+          },
+          {
+            "id": 3,
+            "value": "Portfolio Review",
+            "description": "No Limitations"
+          }
+        ]
+      }
+    },
+    {
+      "type": "fixed",
+      "title": "Investment",
+      "subtitle": "Record the Investment scope of advice, as agreed between you and the client.",
+      "tables": {
+        "columns": ["Investment", "Advice Limitations"],
+        "data": [
+          {
+            "id": 1,
+            "value": "Direct shares",
+            "description": "No Limitations"
+          },
+          {
+            "id": 2,
+            "value": "Portfolio Review",
+            "description": "No Limitations"
+          }
+        ]
+      }
+    },
+    {
+      "type": "fixed",
+      "title": "Estate Planning",
+      "subtitle": "Record the Estate Planning scope of advice, as agreed between you and the client.",
+      "tables": {
+        "columns": ["Estate Planning", "Advice Limitations"],
+        "data": [
+          {
+            "id": 1,
+            "value": "Super death benefit nomination",
+            "description": "No Limitations"
+          }
+        ]
+      }
+    },
+    {
+      "type": "fixed",
+      "title": "Aged Care",
+      "subtitle": "Record the Aged Care scope of advice, as agreed between you and the client.",
+      "tables": {
+        "columns": ["Aged Care", "Advice Limitations"],
+        "data": [
+          {
+            "id": 1,
+            "value": "Home care",
+            "description": "No Limitations"
+          }
+        ]
+      }
+    }
+  ],
+  "step3": [],
+  "step4": [],
+  "step5": [],
+  "step6": [],
+  "step7": [],
+  "step8": []
+}
