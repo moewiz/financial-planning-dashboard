@@ -460,5 +460,146 @@
       ]
     }
   },
-  "step8": []
+  "step8": {
+    "title": "Regulatory Compliance",
+    "subtitle": "The following issues were flagged",
+    "records": [
+      {
+        "header": "Current Position",
+        "title": "Regulatory Compliance (Current Position)",
+        "subtitle": "Supporting text goes here",
+        "tables": {
+          "columns": [
+            {
+              "title": "Subsection",
+              "dataIndex": "subsection"
+            },
+            {
+              "title": "Issue",
+              "dataIndex": "issue"
+            }
+          ],
+          "data": [
+            {
+              "id": 1,
+              "subsection": "Assets",
+              "issue": "Client has 2 primary residences",
+              "isOverwrite": false,
+              "justification": null
+            },
+            {
+              "id": 2,
+              "subsection": "Liabilities",
+              "issue": "Liabilities don't add up",
+              "isOverwrite": false,
+              "justification": null
+            }
+          ]
+        }
+      },
+      {
+        "header": "Strategy",
+        "title": "Regulatory Compliance (Strategy)",
+        "subtitle": "Supporting text goes here",
+        "tables": {
+          "columns": [
+            {
+              "title": "Subsection",
+              "dataIndex": "subsection"
+            },
+            {
+              "title": "Issue",
+              "dataIndex": "issue"
+            }
+          ],
+          "data": [
+            {
+              "id": 1,
+              "subsection": "Assets",
+              "issue": "Lorem ipsum dolor sit amet",
+              "isOverwrite": false,
+              "justification": null
+            }
+          ]
+        }
+      },
+      {
+        "header": "Product Optimizer",
+        "title": "Regulatory Compliance (Product Optimizer)",
+        "subtitle": "Supporting text goes here",
+        "tables": {
+          "columns": [
+            {
+              "title": "Subsection",
+              "dataIndex": "subsection"
+            },
+            {
+              "title": "Issue",
+              "dataIndex": "issue"
+            }
+          ],
+          "data": [
+            {
+              "id": 1,
+              "subsection": "Assets",
+              "issue": "Lorem ipsum dolor sit amet",
+              "isOverwrite": false,
+              "justification": null
+            },
+            {
+              "id": 2,
+              "subsection": "Assets",
+              "issue": "Lorem ipsum dolor sit amet",
+              "isOverwrite": false,
+              "justification": null
+            }
+          ]
+        }
+      },
+      {
+        "header": "Insurance Optimizer",
+        "title": "Regulatory Compliance (Insurance Optimizer)",
+        "subtitle": "Supporting text goes here",
+        "tables": {
+          "columns": [
+            {
+              "title": "Subsection",
+              "dataIndex": "subsection"
+            },
+            {
+              "title": "Issue",
+              "dataIndex": "issue"
+            }
+          ],
+          "data": [
+            {
+              "id": 1,
+              "subsection": "Assets",
+              "issue": "Lorem ipsum dolor sit amet",
+              "isOverwrite": true,
+              "justification": null
+            }
+          ]
+        }
+      },
+      {
+        "header": "Document Builder",
+        "title": "Regulatory Compliance (Document Builder)",
+        "subtitle": "Supporting text goes here",
+        "tables": {
+          "columns": [
+            {
+              "title": "Subsection",
+              "dataIndex": "subsection"
+            },
+            {
+              "title": "Issue",
+              "dataIndex": "issue"
+            }
+          ],
+          "data": []
+        }
+      }
+    ]
+  }
 }
