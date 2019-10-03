@@ -294,7 +294,20 @@
       }
     ]
   },
-  "step5": [],
+  "step5": {
+    "title": "Were there any limitations to the advice provided?",
+    "subtitle": "Clearly record the reason for any limitations to your advice",
+    "tables": {
+      "columns": ["Missing Information", "Reason for limitation"],
+      "data": [
+        {
+          "id": 1,
+          "value": "Expenses",
+          "description": "You were unable to provide us with this information. Therefore, the supporting calculation provided in this Statement of Advice is based on the assumption that all personal cash flow is spent"
+        }
+      ]
+    }
+  },
   "step6": [],
   "step7": [],
   "step8": []
