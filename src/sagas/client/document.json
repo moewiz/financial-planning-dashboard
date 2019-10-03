@@ -6,7 +6,8 @@
     "records": [
       {
         "type": "fixed",
-        "title": "Superannuation",
+        "header": "Super",
+        "title": "What the advice cover (Superannuation)",
         "subtitle": "Record the Superannuation-related scope of advice, as agreed between you and the client.",
         "tables": {
           "columns": ["Superannuation", "Advice Limitations"],
@@ -36,7 +37,8 @@
       },
       {
         "type": "fixed",
-        "title": "Retirement Income",
+        "header": "Retirement Income",
+        "title": "What the advice cover (Retirement Income)",
         "subtitle": "Record the Retirement Income scope of advice, as agreed between you and the client.",
         "tables": {
           "columns": ["Retirement Income", "Advice Limitations"],
@@ -61,7 +63,8 @@
       },
       {
         "type": "fixed",
-        "title": "Investment",
+        "header": "Investment",
+        "title": "What the advice cover (Investment)",
         "subtitle": "Record the Investment scope of advice, as agreed between you and the client.",
         "tables": {
           "columns": ["Investment", "Advice Limitations"],
@@ -81,7 +84,8 @@
       },
       {
         "type": "fixed",
-        "title": "Estate Planning",
+        "header": "Estate Planning",
+        "title": "What the advice cover (Estate Planning)",
         "subtitle": "Record the Estate Planning scope of advice, as agreed between you and the client.",
         "tables": {
           "columns": ["Estate Planning", "Advice Limitations"],
@@ -117,7 +121,8 @@
     "records": [
       {
         "type": "fixed",
-        "title": "Insurance",
+        "header": "Insurance",
+        "title": "What the advice cover doesn't cover (Insurance)",
         "subtitle": "Supporting text goes here",
         "tables": {
           "columns": ["Insurance", "Reason for being scoped out"],
@@ -132,7 +137,8 @@
       },
       {
         "type": "fixed",
-        "title": "Estate Planning",
+        "header": "Estate Planning",
+        "title": "What the advice cover doesn't cover (Estate Planning)",
         "subtitle": "Record the Estate planning-related items, that did not fall within the scope of advice.",
         "tables": {
           "columns": ["Estate Planning", "Reason for being scoped out"],
@@ -162,7 +168,8 @@
       },
       {
         "type": "fixed",
-        "title": "Investment",
+        "header": "Investment",
+        "title": "What the advice cover doesn't cover (Investment)",
         "subtitle": "Record the Investment-related items, that did not fall within the scope of advice.",
         "tables": {
           "columns": ["Investment", "Reason for being scoped out"],
@@ -177,7 +184,116 @@
       }
     ]
   },
-  "step4": [],
+  "step4": {
+    "title": "What are the client's goals, needs and objectives?",
+    "subtitle": "Record any other goals, needs and objectives that emerged as a result of your discussions with the client",
+    "records": [
+      {
+        "type": "fixed",
+        "header": "Super",
+        "title": "What are the client's goals, needs and objectives addressed by your super advice?",
+        "subtitle": "Enter Superannuation-related goals, needs and objectives",
+        "tables": {
+          "columns": ["Superannuation", "Goals, needs and objectives"],
+          "data": [
+            {
+              "id": 1,
+              "value": "",
+              "description": "You would like to maximize your superannuation, to meet your retirement needs"
+            }
+          ]
+        }
+      },
+      {
+        "type": "fixed",
+        "header": "Retirement Income",
+        "title": "What are the client's goals, needs and objectives addressed by your super advice?",
+        "subtitle": "Record the Retirement Income-related items, that did not fall within the scope of advice.",
+        "tables": {
+          "columns": ["Retirement Income", "Goals, needs and objectives"],
+          "data": [
+            {
+              "id": 1,
+              "value": "Insurance nominations",
+              "description": "Unspecified"
+            },
+            {
+              "id": 2,
+              "value": "Sample text",
+              "description": "Unspecified"
+            },
+            {
+              "id": 3,
+              "value": "POA/EPOA",
+              "description": "Unspecified"
+            },
+            {
+              "id": 3,
+              "value": "Guardianship",
+              "description": "Unspecified"
+            }
+          ]
+        }
+      },
+      {
+        "type": "fixed",
+        "header": "Investment",
+        "title": "What are the client's goals, needs and objectives addressed by your super advice?",
+        "subtitle": "Record the Investment-related items, that did not fall within the scope of advice.",
+        "tables": {
+          "columns": ["Investment", "Goals, needs and objectives"],
+          "data": [
+            {
+              "id": 1,
+              "value": "Platform review",
+              "description": "Unspecified"
+            }
+          ]
+        }
+      },
+      {
+        "type": "fixed",
+        "header": "Estate Planning",
+        "title": "What are the client's goals, needs and objectives addressed by your super advice?",
+        "subtitle": "Record the Estate Planning-related items, that did not fall within the scope of advice.",
+        "tables": {
+          "columns": ["Estate Planning", "Goals, needs and objectives"],
+          "data": []
+        }
+      },
+      {
+        "type": "fixed",
+        "header": "Aged Care",
+        "title": "What are the client's goals, needs and objectives addressed by your super advice?",
+        "subtitle": "Record the Aged Care-related items, that did not fall within the scope of advice.",
+        "tables": {
+          "columns": ["Aged Care", "Goals, needs and objectives"],
+          "data": [
+            {
+              "id": 1,
+              "value": "Insurance nominations",
+              "description": "Unspecified"
+            },
+            {
+              "id": 2,
+              "value": "Sample text",
+              "description": "Unspecified"
+            },
+            {
+              "id": 3,
+              "value": "POA/EPOA",
+              "description": "Unspecified"
+            },
+            {
+              "id": 3,
+              "value": "Guardianship",
+              "description": "Unspecified"
+            }
+          ]
+        }
+      }
+    ]
+  },
   "step5": [],
   "step6": [],
   "step7": [],
