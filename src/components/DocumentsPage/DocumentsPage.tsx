@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Steps, message } from 'antd';
 
 import DocumentsStep1 from './DocumentsStep1/DocumentsStep1';
@@ -61,7 +61,7 @@ export interface FormikPartProps {
   formik: FormikContext<DocumentData>;
 }
 
-interface Row {
+export interface Row {
   id: number;
   [key: string]: any;
 }
@@ -71,7 +71,7 @@ interface Table {
   data: Row[];
 }
 
-interface Record {
+export interface Record {
   type?: string;
   header: string;
   title: string;
@@ -130,14 +130,14 @@ class DocumentsPage extends React.PureComponent<DocumentsPageProps, DocumentsPag
   public renderForm = (formikProps: FormikProps<DocumentData>) => {
     const { currentStep } = this.state;
     return (
-      <Form>
+      <>
         <Steps size="small" current={currentStep} className="header-step-document">
           {steps.map((item) => (
             <Step key={item.title} description={item.description} title={item.title} />
           ))}
         </Steps>
         <div className="steps-content">{steps[currentStep].content}</div>
-      </Form>
+      </>
     );
   }
 

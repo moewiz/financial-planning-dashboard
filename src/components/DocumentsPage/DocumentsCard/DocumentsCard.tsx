@@ -2,11 +2,84 @@ import React from 'react';
 import { isFunction } from 'lodash';
 
 import { DocumentsCardWrapper, CardBlock, CardBlockText } from './styled';
-export interface DocumentsCardProps {
+import CardThumbnail from './CardThumbnail';
+
+interface DocumentsCardProps {
   setSlideNumber?: (slideNumber: number) => void;
   title?: string;
   extra?: string;
 }
+
+const fixedCard1 = {
+  type: 'fixed',
+  header: 'Super',
+  title: 'What the advice cover (Superannuation)',
+  subtitle: 'Record the Superannuation-related scope of advice, as agreed between you and the client.',
+  table: {
+    columns: ['Superannuation', 'Advice Limitations'],
+    data: [
+      {
+        id: 1,
+        value: 'Contributions',
+        description: 'No Limitations',
+      },
+      {
+        id: 2,
+        value: 'Platform Review',
+        description: 'No Limitations',
+      },
+      {
+        id: 3,
+        value: 'Portfolio Review',
+        description: 'No Limitations',
+      },
+      {
+        id: 4,
+        value: 'SMSF',
+        description: 'No Limitations',
+      },
+    ],
+  },
+};
+
+const fixedCard2 = {
+  type: 'fixed',
+  header: 'Retirement Income',
+  title: 'What the advice cover (Retirement Income)',
+  subtitle: 'Record the Retirement Income-related scope of advice, as agreed between you and the client.',
+  table: {
+    columns: ['Retirement Income', 'Advice Limitations'],
+    data: [
+      {
+        id: 1,
+        value: '',
+        description: 'No Limitations',
+      },
+    ],
+  },
+};
+
+const userCard = {
+  type: 'user',
+  header: 'Test',
+  title: 'What the advice cover (Test)',
+  subtitle: 'Record the Test-related scope of advice, as agreed between you and the client.',
+  table: {
+    columns: ['Test', 'Advice Limitations'],
+    data: [
+      {
+        id: 1,
+        value: 'Lorem',
+        description: 'Lorem ipsum dolor sit amet',
+      },
+      {
+        id: 2,
+        value: 'Some text',
+        description: 'Some description',
+      },
+    ],
+  },
+};
 
 class DocumentsCard extends React.PureComponent<DocumentsCardProps> {
   public goToSlide = (slide: number) => () => {
@@ -15,35 +88,14 @@ class DocumentsCard extends React.PureComponent<DocumentsCardProps> {
       setSlideNumber(slide);
     }
   }
+
   public render(): JSX.Element {
     return (
       <DocumentsCardWrapper>
-        <CardBlock title="Super" onClick={this.goToSlide(1)}>
-          <CardBlockText>Contributions</CardBlockText>
-          <CardBlockText>Platform review </CardBlockText>
-          <CardBlockText>Portfolio review </CardBlockText>
-          <CardBlockText>SMSF </CardBlockText>
-        </CardBlock>
-        <CardBlock title="Retirement Income" onClick={this.goToSlide(2)}>
-          <CardBlockText>Income streams </CardBlockText>
-          <CardBlockText>Platform review </CardBlockText>
-          <CardBlockText>Portfolio review </CardBlockText>
-        </CardBlock>
-        <CardBlock title="Investment" onClick={this.goToSlide(3)}>
-          <CardBlockText>Direct shares </CardBlockText>
-          <CardBlockText>Portfolio review </CardBlockText>
-        </CardBlock>
-        <CardBlock title="Estate Planning" onClick={this.goToSlide(4)}>
-          <CardBlockText>Super death benefit nomination </CardBlockText>
-        </CardBlock>
-        <CardBlock title="Aged Care" onClick={this.goToSlide(5)}>
-          <CardBlockText>Home Care </CardBlockText>
-        </CardBlock>
-        <CardBlock title="New Title">
-          <CardBlockText>Card content </CardBlockText>
-          <CardBlockText>Card content </CardBlockText>
-          <CardBlockText>Card content </CardBlockText>
-        </CardBlock>
+        <CardThumbnail record={fixedCard1} />
+        <CardThumbnail record={fixedCard2} />
+        <CardThumbnail record={userCard} />
+        <CardThumbnail />
       </DocumentsCardWrapper>
     );
   }
