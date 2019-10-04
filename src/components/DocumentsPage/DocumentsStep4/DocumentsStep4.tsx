@@ -15,8 +15,6 @@ class DocumentsStep1 extends React.PureComponent<FormikPartProps> {
   public render(): JSX.Element {
     return (
       <StepWrapper>
-        <TitleStep>What are the client's goals, needs and objectives addressed by your super advice?</TitleStep>
-        <TitleStepSmall>Enter Superannuation-related goals, need and objectives</TitleStepSmall>
         <DocumentsStep4Form>
           <textarea
             placeholder="You would like to maximize your superannation, to meet your retirement needs" />

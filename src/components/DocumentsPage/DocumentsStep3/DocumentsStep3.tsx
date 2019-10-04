@@ -3,7 +3,7 @@ import { connect } from 'formik';
 
 import DocumentsCard from '../DocumentsCard/DocumentsCard';
 import DocumentsCarousel from '../DocumentsCarousel/DocumentsCarousel';
-import { TitleStep, TitleStepSmall, StepWrapper } from '../styled';
+import { StepWrapper } from '../styled';
 import { DocumentsStep3WP } from './styled';
 import { DocumentData, FormikPartProps } from '../DocumentsPage';
 
@@ -18,8 +18,6 @@ class DocumentsStep3 extends React.PureComponent<FormikPartProps> {
     const { slideNumber } = this.state;
     return (
       <StepWrapper>
-        <TitleStep>What the advice don't covers</TitleStep>
-        <TitleStepSmall>Record the items that dit fail within the scope of advice.</TitleStepSmall>
         <DocumentsStep3WP>
           {slideNumber > 0 ? (
             <DocumentsCarousel slideNumber={slideNumber} />

@@ -1,6 +1,5 @@
 import React from 'react';
-import { Carousel, Table } from 'antd';
-import cn from 'classnames';
+import { Carousel } from 'antd';
 
 export interface DocumentsCarouselProps {
   slideNumber?: number;
@@ -8,125 +7,98 @@ export interface DocumentsCarouselProps {
   dotPosition?: string;
 }
 import { CarouselItem, CarouselWrapper } from './styled';
+import CardDetails from './CardDetails';
+
+const fixedCard1 = {
+  type: 'fixed',
+  header: 'Super',
+  title: 'What the advice cover (Superannuation)',
+  subtitle: 'Record the Superannuation-related scope of advice, as agreed between you and the client.',
+  table: {
+    columns: ['Superannuation', 'Advice Limitations'],
+    data: [
+      {
+        id: 1,
+        value: 'Contributions',
+        description: 'No Limitations',
+      },
+      {
+        id: 2,
+        value: 'Platform Review',
+        description: 'No Limitations',
+      },
+      {
+        id: 3,
+        value: 'Portfolio Review',
+        description: 'No Limitations',
+      },
+      {
+        id: 4,
+        value: 'SMSF',
+        description: 'No Limitations',
+      },
+    ],
+  },
+};
+
+const fixedCard2 = {
+  type: 'fixed',
+  header: 'Retirement Income',
+  title: 'What the advice cover (Retirement Income)',
+  subtitle: 'Record the Retirement Income-related scope of advice, as agreed between you and the client.',
+  table: {
+    columns: ['Retirement Income', 'Advice Limitations'],
+    data: [
+      {
+        id: 1,
+        value: '',
+        description: 'No Limitations',
+      },
+    ],
+  },
+};
+
+const userCard = {
+  type: 'user',
+  header: 'Test',
+  title: 'What the advice cover (Test)',
+  subtitle: 'Record the Test-related scope of advice, as agreed between you and the client.',
+  table: {
+    columns: ['Test', 'Advice Limitations'],
+    data: [
+      {
+        id: 1,
+        value: 'Lorem',
+        description: 'Lorem ipsum dolor sit amet',
+      },
+      {
+        id: 2,
+        value: 'Some text',
+        description: 'Some description',
+      },
+    ],
+  },
+};
+
 class DocumentsCarousel extends React.PureComponent<DocumentsCarouselProps> {
-  public dataSource = [
-    {
-      key: '1',
-      insurance: 'Insurance Nominations',
-      reason:
-        'You have informed us that your estate planning arrangements are in place and you do not require it to be re-addressed',
-    },
-    {
-      key: '2',
-      insurance: 'Sample text',
-      reason: 'Unspecified',
-    },
-    {
-      key: '3',
-      insurance: 'POA / EPOA',
-      reason: 'Unspecified',
-    },
-    {
-      key: '4',
-      insurance: 'Guardianship',
-      reason: 'Unspecified',
-    },
-    {
-      key: '5',
-      insurance: 'Enter Description',
-      reason: '-',
-    },
-  ];
-  public columns = [
-    {
-      title: 'Insurance',
-      dataIndex: 'insurance',
-      key: 'insurance',
-    },
-    {
-      title: 'Reason for being scoped out',
-      dataIndex: 'reason',
-      key: 'reason',
-    },
-  ];
-  public dataSource2 = [
-    {
-      key: '1',
-      insurance: 'Insurance Nominations 2 ',
-      reason:
-        'You have informed us that your estate planning arrangements are in place and you do not require it to be re-addressed',
-    },
-    {
-      key: '2',
-      insurance: 'Sample text 2',
-      reason: 'Unspecified',
-    },
-    {
-      key: '3',
-      insurance: 'POA / EPOA 2',
-      reason: 'Unspecified',
-    },
-    {
-      key: '4',
-      insurance: 'Guardianship 2',
-      reason: 'Unspecified',
-    },
-    {
-      key: '5',
-      insurance: 'Enter Description',
-      reason: '-',
-    },
-  ];
-  public columns2 = [
-    {
-      title: 'Insurance',
-      dataIndex: 'insurance',
-      key: 'insurance',
-    },
-    {
-      title: 'Reason for being scoped out',
-      dataIndex: 'reason',
-      key: 'reason',
-    },
-  ];
   public render(): JSX.Element {
+    const { slideNumber } = this.props;
+
     return (
-      <CarouselWrapper>
-        <Carousel effect="fade" dotPosition={'left'}>
-          <CarouselItem>
-            <Table
-              className={cn('table-general documents-table')}
-              columns={this.columns}
-              dataSource={this.dataSource}
-              pagination={false}
-            />
-          </CarouselItem>
-          <CarouselItem>
-            <Table
-              className={`table-general documents-table`}
-              columns={this.columns2}
-              dataSource={this.dataSource2}
-              pagination={false}
-            />
-          </CarouselItem>
-          <CarouselItem>
-            <Table
-              className={`table-general documents-table`}
-              columns={this.columns}
-              dataSource={this.dataSource}
-              pagination={false}
-            />
-          </CarouselItem>
-          <CarouselItem>
-            <Table
-              className={`table-general documents-table`}
-              columns={this.columns2}
-              dataSource={this.dataSource2}
-              pagination={false}
-            />
-          </CarouselItem>
-        </Carousel>
-      </CarouselWrapper>
+      <>
+        <CarouselWrapper>
+          <Carousel effect="fade" dotPosition={'left'} initialSlide={slideNumber} adaptiveHeight={true}>
+            {/* Loop records */}
+            <CardDetails record={fixedCard1} />
+            <CardDetails record={fixedCard2} />
+            <CardDetails record={fixedCard1} />
+            <CardDetails record={fixedCard2} />
+
+            {/* Step 5 & Step 7  */}
+            {/* There's no slider */}
+          </Carousel>
+        </CarouselWrapper>
+      </>
     );
   }
 }

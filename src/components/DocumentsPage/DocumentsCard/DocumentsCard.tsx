@@ -3,6 +3,7 @@ import { isFunction } from 'lodash';
 
 import { DocumentsCardWrapper, CardBlock, CardBlockText } from './styled';
 import CardThumbnail from './CardThumbnail';
+import { StepWrapper, TitleStep, TitleStepSmall } from '../styled';
 
 interface DocumentsCardProps {
   setSlideNumber?: (slideNumber: number) => void;
@@ -91,12 +92,16 @@ class DocumentsCard extends React.PureComponent<DocumentsCardProps> {
 
   public render(): JSX.Element {
     return (
-      <DocumentsCardWrapper>
-        <CardThumbnail record={fixedCard1} />
-        <CardThumbnail record={fixedCard2} />
-        <CardThumbnail record={userCard} />
-        <CardThumbnail />
-      </DocumentsCardWrapper>
+      <>
+        <TitleStep>What the advice covers</TitleStep>
+        <TitleStepSmall>Record the scope of advice, as agreed between you and the client.</TitleStepSmall>
+        <DocumentsCardWrapper>
+          <CardThumbnail record={fixedCard1} />
+          <CardThumbnail record={fixedCard2} />
+          <CardThumbnail record={userCard} />
+          <CardThumbnail />
+        </DocumentsCardWrapper>
+      </>
     );
   }
 }

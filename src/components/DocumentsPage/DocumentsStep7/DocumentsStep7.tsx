@@ -2,11 +2,7 @@ import React from 'react';
 import { Table } from 'antd';
 import { connect } from 'formik';
 
-import {
-  TitleStep,
-  TitleStepSmall,
-  StepWrapper,
-} from '../styled';
+import { StepWrapper } from '../styled';
 import {
   DocumentsStep7WP,
 } from './styled';
@@ -69,8 +65,6 @@ class DocumentsStep7 extends React.PureComponent<FormikPartProps> {
   public render(): JSX.Element {
     return (
       <StepWrapper>
-        <TitleStep>Cost of advice</TitleStep>
-        <TitleStepSmall>List the costs to the client associated with preparing this advice</TitleStepSmall>
         <DocumentsStep7WP>
           <Table
             className={`table-general documents-table`}

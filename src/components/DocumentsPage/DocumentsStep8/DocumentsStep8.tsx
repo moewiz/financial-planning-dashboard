@@ -2,11 +2,7 @@ import React from 'react';
 import { Icon } from 'antd';
 import { connect } from 'formik';
 
-import {
-  TitleStep,
-  TitleStepSmall,
-  StepWrapper,
-} from '../styled';
+import { StepWrapper } from '../styled';
 import {
   DocumentsStep8WP,
   CardThumbnailCompleted,
@@ -23,8 +19,6 @@ class DocumentsStep8 extends React.PureComponent<FormikPartProps> {
   public render(): JSX.Element {
     return (
       <StepWrapper>
-        <TitleStep>Regulatory compliance</TitleStep>
-        <TitleStepSmall>The following issues were flagged</TitleStepSmall>
         <DocumentsStep8WP>
           <CardThumbnailCompleted>
             <CardThumbnailItem>
