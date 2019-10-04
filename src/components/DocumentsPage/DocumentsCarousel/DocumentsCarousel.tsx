@@ -87,7 +87,7 @@ class DocumentsCarousel extends React.PureComponent<DocumentsCarouselProps> {
     return (
       <>
         <CarouselWrapper>
-          <Carousel effect="fade" dotPosition={'left'} initialSlide={slideNumber} adaptiveHeight={true}>
+          <Carousel effect="fade" dotPosition={'left'} initialSlide={slideNumber}>
             {/* Loop records */}
             <CardDetails record={fixedCard1} />
             <CardDetails record={fixedCard2} />
