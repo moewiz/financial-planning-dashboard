@@ -1,10 +1,13 @@
 import React from 'react';
+import { connect } from 'formik';
+
 import DocumentsCard from '../DocumentsCard/DocumentsCard';
 import DocumentsCarousel from '../DocumentsCarousel/DocumentsCarousel';
 import { TitleStep, TitleStepSmall, StepWrapper } from '../styled';
 import { DocumentsStep6WP } from './styled';
+import { DocumentData, FormikPartProps } from '../DocumentsPage';
 
-class DocumentsStep6 extends React.PureComponent {
+class DocumentsStep6 extends React.PureComponent<FormikPartProps> {
   public state = {
     slideNumber: 0,
   };
@@ -29,4 +32,4 @@ class DocumentsStep6 extends React.PureComponent {
   }
 }
 
-export default DocumentsStep6;
+export default connect<{}, DocumentData>(DocumentsStep6);

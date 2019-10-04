@@ -127,7 +127,7 @@ class DocumentsPage extends React.PureComponent<DocumentsPageProps, DocumentsPag
     this.setState({ currentStep });
   }
 
-  public renderForm = (formikPRops: FormikProps<DocumentData>) => {
+  public renderForm = (formikProps: FormikProps<DocumentData>) => {
     const { currentStep } = this.state;
     return (
       <Form>

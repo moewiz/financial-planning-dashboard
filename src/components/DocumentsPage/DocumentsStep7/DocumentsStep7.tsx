@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table } from 'antd';
-import cn from 'classnames';
+import { connect } from 'formik';
+
 import {
   TitleStep,
   TitleStepSmall,
@@ -9,8 +10,9 @@ import {
 import {
   DocumentsStep7WP,
 } from './styled';
+import { DocumentData, FormikPartProps } from '../DocumentsPage';
 
-class DocumentsStep7 extends React.PureComponent {
+class DocumentsStep7 extends React.PureComponent<FormikPartProps> {
   public dataSource = [
     {
       key: '1',
@@ -82,4 +84,4 @@ class DocumentsStep7 extends React.PureComponent {
   }
 }
 
-export default DocumentsStep7;
+export default connect<{}, DocumentData>(DocumentsStep7);

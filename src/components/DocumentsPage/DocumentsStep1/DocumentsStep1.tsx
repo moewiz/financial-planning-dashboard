@@ -11,12 +11,7 @@ import {
 } from './styled';
 import { DocumentData, FormikPartProps } from '../DocumentsPage';
 
-export interface DocumentsStep1Props {
-  title?: string;
-  extra?: string;
-}
-
-class DocumentsStep1 extends React.PureComponent<DocumentsStep1Props & FormikPartProps> {
+class DocumentsStep1 extends React.PureComponent<FormikPartProps> {
   public render(): JSX.Element {
     const { formik } = this.props;
     return (
@@ -39,4 +34,4 @@ class DocumentsStep1 extends React.PureComponent<DocumentsStep1Props & FormikPar
   }
 }
 
-export default connect<DocumentsStep1Props, DocumentData>(DocumentsStep1);
+export default connect<{}, DocumentData>(DocumentsStep1);

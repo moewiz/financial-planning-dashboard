@@ -1,5 +1,6 @@
 import React from 'react';
-import { FormInput } from '../../Elements';
+import { connect } from 'formik';
+
 import {
   TitleStep,
   TitleStepSmall,
@@ -8,13 +9,9 @@ import {
 import {
   DocumentsStep4Form,
 } from './styled';
+import { DocumentData, FormikPartProps } from '../DocumentsPage';
 
-export interface DocumentsStep1Props {
-  title?: string;
-  extra?: string;
-}
-
-class DocumentsStep1 extends React.PureComponent<DocumentsStep1Props> {
+class DocumentsStep1 extends React.PureComponent<FormikPartProps> {
   public render(): JSX.Element {
     return (
       <StepWrapper>
@@ -29,4 +26,4 @@ class DocumentsStep1 extends React.PureComponent<DocumentsStep1Props> {
   }
 }
 
-export default DocumentsStep1;
+export default connect<{}, DocumentData>(DocumentsStep1);

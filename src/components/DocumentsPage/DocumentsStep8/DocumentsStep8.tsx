@@ -1,5 +1,7 @@
 import React from 'react';
 import { Icon } from 'antd';
+import { connect } from 'formik';
+
 import {
   TitleStep,
   TitleStepSmall,
@@ -15,8 +17,9 @@ import {
   StatusCard,
   DoneCard,
 } from './styled';
+import { DocumentData, FormikPartProps } from '../DocumentsPage';
 
-class DocumentsStep8 extends React.PureComponent {
+class DocumentsStep8 extends React.PureComponent<FormikPartProps> {
   public render(): JSX.Element {
     return (
       <StepWrapper>
@@ -54,4 +57,4 @@ class DocumentsStep8 extends React.PureComponent {
   }
 }
 
-export default DocumentsStep8;
+export default connect<{}, DocumentData>(DocumentsStep8);
