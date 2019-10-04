@@ -66,8 +66,14 @@ export interface Row {
   [key: string]: any;
 }
 
+interface Column {
+  dataIndex: string;
+  title: string;
+  type?: number;
+}
+
 interface Table {
-  columns: Array<string | { dataIndex: string; title: string }>;
+  columns: Array<string | Column>;
   data: Row[];
 }
 
