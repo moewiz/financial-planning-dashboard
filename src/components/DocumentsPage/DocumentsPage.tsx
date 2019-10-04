@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Steps, message } from 'antd';
 
 import DocumentsStep1 from './DocumentsStep1/DocumentsStep1';
