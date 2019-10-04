@@ -9,7 +9,7 @@
         "header": "Super",
         "title": "What the advice cover (Superannuation)",
         "subtitle": "Record the Superannuation-related scope of advice, as agreed between you and the client.",
-        "tables": {
+        "table": {
           "columns": ["Superannuation", "Advice Limitations"],
           "data": [
             {
@@ -40,7 +40,7 @@
         "header": "Retirement Income",
         "title": "What the advice cover (Retirement Income)",
         "subtitle": "Record the Retirement Income scope of advice, as agreed between you and the client.",
-        "tables": {
+        "table": {
           "columns": ["Retirement Income", "Advice Limitations"],
           "data": [
             {
@@ -66,7 +66,7 @@
         "header": "Investment",
         "title": "What the advice cover (Investment)",
         "subtitle": "Record the Investment scope of advice, as agreed between you and the client.",
-        "tables": {
+        "table": {
           "columns": ["Investment", "Advice Limitations"],
           "data": [
             {
@@ -87,7 +87,7 @@
         "header": "Estate Planning",
         "title": "What the advice cover (Estate Planning)",
         "subtitle": "Record the Estate Planning scope of advice, as agreed between you and the client.",
-        "tables": {
+        "table": {
           "columns": ["Estate Planning", "Advice Limitations"],
           "data": [
             {
@@ -102,7 +102,7 @@
         "type": "fixed",
         "title": "Aged Care",
         "subtitle": "Record the Aged Care scope of advice, as agreed between you and the client.",
-        "tables": {
+        "table": {
           "columns": ["Aged Care", "Advice Limitations"],
           "data": [
             {
@@ -124,7 +124,7 @@
         "header": "Insurance",
         "title": "What the advice cover doesn't cover (Insurance)",
         "subtitle": "Supporting text goes here",
-        "tables": {
+        "table": {
           "columns": ["Insurance", "Reason for being scoped out"],
           "data": [
             {
@@ -140,7 +140,7 @@
         "header": "Estate Planning",
         "title": "What the advice cover doesn't cover (Estate Planning)",
         "subtitle": "Record the Estate planning-related items, that did not fall within the scope of advice.",
-        "tables": {
+        "table": {
           "columns": ["Estate Planning", "Reason for being scoped out"],
           "data": [
             {
@@ -171,7 +171,7 @@
         "header": "Investment",
         "title": "What the advice cover doesn't cover (Investment)",
         "subtitle": "Record the Investment-related items, that did not fall within the scope of advice.",
-        "tables": {
+        "table": {
           "columns": ["Investment", "Reason for being scoped out"],
           "data": [
             {
@@ -193,7 +193,7 @@
         "header": "Super",
         "title": "What are the client's goals, needs and objectives addressed by your super advice?",
         "subtitle": "Enter Superannuation-related goals, needs and objectives",
-        "tables": {
+        "table": {
           "columns": ["Superannuation", "Goals, needs and objectives"],
           "data": [
             {
@@ -209,7 +209,7 @@
         "header": "Retirement Income",
         "title": "What are the client's goals, needs and objectives addressed by your super advice?",
         "subtitle": "Record the Retirement Income-related items, that did not fall within the scope of advice.",
-        "tables": {
+        "table": {
           "columns": ["Retirement Income", "Goals, needs and objectives"],
           "data": [
             {
@@ -240,7 +240,7 @@
         "header": "Investment",
         "title": "What are the client's goals, needs and objectives addressed by your super advice?",
         "subtitle": "Record the Investment-related items, that did not fall within the scope of advice.",
-        "tables": {
+        "table": {
           "columns": ["Investment", "Goals, needs and objectives"],
           "data": [
             {
@@ -256,7 +256,7 @@
         "header": "Estate Planning",
         "title": "What are the client's goals, needs and objectives addressed by your super advice?",
         "subtitle": "Record the Estate Planning-related items, that did not fall within the scope of advice.",
-        "tables": {
+        "table": {
           "columns": ["Estate Planning", "Goals, needs and objectives"],
           "data": []
         }
@@ -266,7 +266,7 @@
         "header": "Aged Care",
         "title": "What are the client's goals, needs and objectives addressed by your super advice?",
         "subtitle": "Record the Aged Care-related items, that did not fall within the scope of advice.",
-        "tables": {
+        "table": {
           "columns": ["Aged Care", "Goals, needs and objectives"],
           "data": [
             {
@@ -297,7 +297,7 @@
   "step5": {
     "title": "Were there any limitations to the advice provided?",
     "subtitle": "Clearly record the reason for any limitations to your advice",
-    "tables": {
+    "table": {
       "columns": ["Missing Information", "Reason for limitation"],
       "data": [
         {
@@ -317,7 +317,7 @@
         "header": "Super",
         "title": "Summary of Recommendations (Superannuation)",
         "subtitle": "Supporting text goes here",
-        "tables": {
+        "table": {
           "columns": ["Advice", "Description"],
           "data": [
             {
@@ -333,7 +333,7 @@
         "header": "Retirement Income",
         "title": "Summary of Recommendations (Retirement Income)",
         "subtitle": "Supporting text goes here",
-        "tables": {
+        "table": {
           "columns": ["Advice", "Description"],
           "data": [
             {
@@ -349,7 +349,7 @@
         "header": "Investment",
         "title": "Summary of Recommendations (Investment)",
         "subtitle": "Supporting text goes here",
-        "tables": {
+        "table": {
           "columns": ["Advice", "Description"],
           "data": [
             {
@@ -370,7 +370,7 @@
         "header": "Estate Planning",
         "title": "Summary of Recommendations (Estate Planning)",
         "subtitle": "Supporting text goes here",
-        "tables": {
+        "table": {
           "columns": ["Advice", "Description"],
           "data": [
             {
@@ -386,7 +386,7 @@
         "header": "Insurance",
         "title": "Summary of Recommendations (Insurance)",
         "subtitle": "Supporting text goes here",
-        "tables": {
+        "table": {
           "columns": ["Advice", "Description"],
           "data": [
             {
@@ -417,7 +417,7 @@
   "step7": {
     "title": "Cost of advice",
     "subtitle": "List the costs to the client associated with preparing this advice",
-    "tables": {
+    "table": {
       "columns": [
         {
           "title": "Description",
@@ -468,7 +468,7 @@
         "header": "Current Position",
         "title": "Regulatory Compliance (Current Position)",
         "subtitle": "Supporting text goes here",
-        "tables": {
+        "table": {
           "columns": [
             {
               "title": "Subsection",
@@ -501,7 +501,7 @@
         "header": "Strategy",
         "title": "Regulatory Compliance (Strategy)",
         "subtitle": "Supporting text goes here",
-        "tables": {
+        "table": {
           "columns": [
             {
               "title": "Subsection",
@@ -527,7 +527,7 @@
         "header": "Product Optimizer",
         "title": "Regulatory Compliance (Product Optimizer)",
         "subtitle": "Supporting text goes here",
-        "tables": {
+        "table": {
           "columns": [
             {
               "title": "Subsection",
@@ -560,7 +560,7 @@
         "header": "Insurance Optimizer",
         "title": "Regulatory Compliance (Insurance Optimizer)",
         "subtitle": "Supporting text goes here",
-        "tables": {
+        "table": {
           "columns": [
             {
               "title": "Subsection",
@@ -586,7 +586,7 @@
         "header": "Document Builder",
         "title": "Regulatory Compliance (Document Builder)",
         "subtitle": "Supporting text goes here",
-        "tables": {
+        "table": {
           "columns": [
             {
               "title": "Subsection",

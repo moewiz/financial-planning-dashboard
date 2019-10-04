@@ -1,6 +1,6 @@
-import React from 'react';
-import { Steps, Button, message } from 'antd';
-import DocumentsCard from './DocumentsCard/DocumentsCard';
+import React, { useState } from 'react';
+import { Steps, message } from 'antd';
+
 import DocumentsStep1 from './DocumentsStep1/DocumentsStep1';
 import DocumentsStep2 from './DocumentsStep2/DocumentsStep2';
 import DocumentsStep3 from './DocumentsStep3/DocumentsStep3';
@@ -9,11 +9,10 @@ import DocumentsStep5 from './DocumentsStep5/DocumentsStep5';
 import DocumentsStep6 from './DocumentsStep6/DocumentsStep6';
 import DocumentsStep7 from './DocumentsStep7/DocumentsStep7';
 import DocumentsStep8 from './DocumentsStep8/DocumentsStep8';
-import DocumentsCarousel from './DocumentsCarousel/DocumentsCarousel';
-import { DocumentsWrapper,
-  StepActionDocument,
-  BtnStepDocument,
- } from './styled';
+
+import { DocumentsWrapper, StepActionDocument, BtnStepDocument } from './styled';
+import { Form, Formik, FormikActions, FormikContext, FormikProps } from 'formik';
+
 const { Step } = Steps;
 const steps = [
   {
@@ -58,7 +57,50 @@ const steps = [
   },
 ];
 
+export interface FormikPartProps {
+  formik: FormikContext<DocumentData>;
+}
+
+interface Row {
+  id: number;
+  [key: string]: any;
+}
+
+interface Table {
+  columns: Array<string | { dataIndex: string; title: string }>;
+  data: Row[];
+}
+
+interface Record {
+  type?: string;
+  header: string;
+  title: string;
+  subtitle?: string;
+  table: Table;
+}
+
+interface StepProps {
+  title: string;
+  subtitle?: string;
+  record?: Record[];
+  table?: Table;
+}
+
+export interface DocumentData {
+  step1: string;
+  step2: StepProps;
+  step3: StepProps;
+  step4: StepProps;
+  step5: StepProps;
+  step6: StepProps;
+  step7: StepProps;
+  step8: StepProps;
+}
+
 export interface DocumentsPageProps {
+  clientId: number;
+  pageData: DocumentData;
+
   current?: string;
   className?: string;
 }
@@ -85,23 +127,38 @@ class DocumentsPage extends React.PureComponent<DocumentsPageProps, DocumentsPag
     this.setState({ currentStep });
   }
 
-  public render(): JSX.Element {
+  public renderForm = (formikPRops: FormikProps<DocumentData>) => {
     const { currentStep } = this.state;
     return (
-      <DocumentsWrapper>
+      <Form>
         <Steps size="small" current={currentStep} className="header-step-document">
-          {steps.map(item => (
+          {steps.map((item) => (
             <Step key={item.title} description={item.description} title={item.title} />
           ))}
         </Steps>
         <div className="steps-content">{steps[currentStep].content}</div>
+      </Form>
+    );
+  }
+
+  public render(): JSX.Element {
+    const { currentStep } = this.state;
+    const { pageData } = this.props;
+
+    return (
+      <DocumentsWrapper>
+        <Formik
+          onSubmit={(values: DocumentData, actions: FormikActions<DocumentData>) => {
+            console.log('submitted', values);
+            actions.setSubmitting(false);
+          }}
+          initialValues={pageData}
+          enableReinitialize={true}
+          render={this.renderForm}
+        />
 
         <StepActionDocument>
-          {currentStep > 0 && (
-            <BtnStepDocument onClick={() => this.prev()}>
-              Back
-            </BtnStepDocument>
-          )}
+          {currentStep > 0 && <BtnStepDocument onClick={() => this.prev()}>Back</BtnStepDocument>}
           {currentStep < steps.length - 1 && (
             <BtnStepDocument type="primary" onClick={() => this.next()}>
               Next
@@ -113,7 +170,7 @@ class DocumentsPage extends React.PureComponent<DocumentsPageProps, DocumentsPag
             </BtnStepDocument>
           )}
         </StepActionDocument>
-    </DocumentsWrapper>
+      </DocumentsWrapper>
     );
   }
 }

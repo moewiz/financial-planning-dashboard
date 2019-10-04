@@ -3,6 +3,7 @@ import current from '../../demo_jsons/step_1a.json';
 import strategy from '../../demo_jsons/step_2a.json';
 import updatedStrategy from '../../demo_jsons/step_2f.json';
 import productOptimizer from '../../demo_jsons/step_3a.json';
+import document from './document.json';
 import { PositionValue } from '../../enums/client';
 
 export default class ClientService {
@@ -29,7 +30,7 @@ export default class ClientService {
         data = productOptimizer;
         break;
       case PositionValue.Documents:
-        data = productOptimizer;
+        data = document;
         break;
 
       default:

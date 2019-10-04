@@ -79,9 +79,9 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
       e.preventDefault();
     }
 
-    const { openDrawer, type, fetchDrawerSuccess } = this.props;
+    const { openDrawer, type, fetchDrawerSuccess, formik } = this.props;
     openDrawer('client');
-    const drawerData = get(this.props, ['formik', 'values', type, 'drawer'], {});
+    const drawerData = get(formik, ['values', type, 'drawer'], {});
     fetchDrawerSuccess(drawerData);
   }
 
@@ -127,11 +127,7 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
                 <StatisticItem listOfKpi={kpi} />
               </Col>
               <Col span={12}>
-                <GraphContainer
-                  type={GraphType.Area}
-                  dataList={graphList}
-                  onGraphClick={this.onGraphClick}
-                />
+                <GraphContainer type={GraphType.Area} dataList={graphList} onGraphClick={this.onGraphClick} />
               </Col>
             </Row>
             <StandardText data={standardText} />
@@ -146,11 +142,7 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
                 <StatisticItem listOfKpi={kpi} />
               </Col>
               <Col span={12}>
-                <GraphContainer
-                  type={GraphType.Line}
-                  dataList={basicGraphData}
-                  onGraphClick={this.onGraphClick}
-                />
+                <GraphContainer type={GraphType.Line} dataList={basicGraphData} onGraphClick={this.onGraphClick} />
               </Col>
             </Row>
             <StandardText data={standardText} />
@@ -165,11 +157,7 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
                 <StatisticItem listOfKpi={kpi} />
               </Col>
               <Col span={12}>
-                <GraphContainer
-                  type={GraphType.Line}
-                  dataList={basicGraphData}
-                  onGraphClick={this.onGraphClick}
-                />
+                <GraphContainer type={GraphType.Line} dataList={basicGraphData} onGraphClick={this.onGraphClick} />
               </Col>
             </Row>
             <StandardText data={standardText} />
@@ -184,11 +172,7 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
                 <StatisticItem listOfKpi={kpi} />
               </Col>
               <Col span={12}>
-                <GraphContainer
-                  type={GraphType.Line}
-                  dataList={basicGraphData}
-                  onGraphClick={this.onGraphClick}
-                />
+                <GraphContainer type={GraphType.Line} dataList={basicGraphData} onGraphClick={this.onGraphClick} />
               </Col>
             </Row>
             <StandardText data={standardText} />
@@ -203,11 +187,7 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
                 <StatisticItem listOfKpi={kpi} />
               </Col>
               <Col span={12}>
-                <GraphContainer
-                  type={GraphType.Line}
-                  dataList={basicGraphData}
-                  onGraphClick={this.onGraphClick}
-                />
+                <GraphContainer type={GraphType.Line} dataList={basicGraphData} onGraphClick={this.onGraphClick} />
               </Col>
             </Row>
             <StandardText data={standardText} />
@@ -241,11 +221,7 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
                 <StatisticItem listOfKpi={kpi} />
               </Col>
               <Col span={12}>
-                <GraphContainer
-                  type={GraphType.Bar}
-                  dataList={basicGraphData}
-                  onGraphClick={this.onGraphClick}
-                />
+                <GraphContainer type={GraphType.Bar} dataList={basicGraphData} onGraphClick={this.onGraphClick} />
               </Col>
             </Row>
             <StandardText data={standardText} />

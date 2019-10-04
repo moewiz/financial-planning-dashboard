@@ -1,5 +1,6 @@
 import React from 'react';
-import { FormInput } from '../../Elements';
+import { connect } from 'formik';
+
 import {
   TitleStep,
   TitleStepSmall,
@@ -8,21 +9,23 @@ import {
 import {
   DocumentsStep1Form,
 } from './styled';
+import { DocumentData, FormikPartProps } from '../DocumentsPage';
 
 export interface DocumentsStep1Props {
   title?: string;
   extra?: string;
 }
 
-class DocumentsStep1 extends React.PureComponent<DocumentsStep1Props> {
+class DocumentsStep1 extends React.PureComponent<DocumentsStep1Props & FormikPartProps> {
   public render(): JSX.Element {
+    const { formik } = this.props;
     return (
       <StepWrapper>
         <TitleStep>why did lan & Deborah seek advice?</TitleStep>
         <TitleStepSmall>Your purpose for seeking advice</TitleStepSmall>
         <DocumentsStep1Form>
           <textarea
-            placeholder="What are your reasons for seeking financial advice? For example, 
+            placeholder="What are your reasons for seeking financial advice? For example,
             are you going through a life event,
             such as starting a family or retrenchment, or are you planning for a future event such  as retirement?
             You may wish to include any personal goals
@@ -36,4 +39,4 @@ class DocumentsStep1 extends React.PureComponent<DocumentsStep1Props> {
   }
 }
 
-export default DocumentsStep1;
+export default connect<DocumentsStep1Props, DocumentData>(DocumentsStep1);

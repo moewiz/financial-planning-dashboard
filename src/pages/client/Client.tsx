@@ -99,7 +99,7 @@ class Client extends React.PureComponent<RouteComponentProps & ClientProps> {
           return <Insurance clientId={clientId} pageData={pageData} />;
         }
         case Tab.Documents: {
-          return <DocumentsPage />;
+          return <DocumentsPage clientId={clientId} pageData={pageData} />;
         }
         default: {
           return (
