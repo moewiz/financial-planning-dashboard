@@ -123,23 +123,38 @@ class DocumentsPage extends React.PureComponent<DocumentsPageProps, DocumentsPag
     };
   }
 
-  public next() {
+  public next = () => {
     const currentStep = this.state.currentStep + 1;
     this.setState({ currentStep });
   }
 
-  public prev() {
+  public prev = () => {
     const currentStep = this.state.currentStep - 1;
     this.setState({ currentStep });
+  }
+
+  public onChangeStep = (step: number) => {
+    this.setState({ currentStep: step });
+  }
+
+  public onClickStep: React.MouseEventHandler<HTMLElement> = (e) => {
+    console.log('onClick step', e);
+    debugger;
   }
 
   public renderForm = (formikProps: FormikProps<DocumentData>) => {
     const { currentStep } = this.state;
     return (
       <>
-        <Steps size="small" current={currentStep} className="header-step-document">
-          {steps.map((item) => (
-            <Step key={item.title} description={item.description} title={item.title} />
+        <Steps size="small" current={currentStep} className="header-step-document" onChange={this.onChangeStep}>
+          {steps.map((item, stepNumber: number) => (
+            <Step
+              key={item.title}
+              description={item.description}
+              title={item.title}
+              onClick={this.onClickStep}
+              data-stepNumber={stepNumber}
+            />
           ))}
         </Steps>
         <div className="steps-content">{steps[currentStep].content}</div>
@@ -164,9 +179,9 @@ class DocumentsPage extends React.PureComponent<DocumentsPageProps, DocumentsPag
         />
 
         <StepActionDocument>
-          {currentStep > 0 && <BtnStepDocument onClick={() => this.prev()}>Back</BtnStepDocument>}
+          {currentStep > 0 && <BtnStepDocument onClick={this.prev}>Back</BtnStepDocument>}
           {currentStep < steps.length - 1 && (
-            <BtnStepDocument type="primary" onClick={() => this.next()}>
+            <BtnStepDocument type="primary" onClick={this.next}>
               Next
             </BtnStepDocument>
           )}
