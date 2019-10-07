@@ -23,7 +23,7 @@ const CardDetails = (props: { record: Record }) => {
     }
 
     return column;
-  }).map((col) => ({
+  }).map((col, index: number) => ({
     ...col,
     onCell: (row: any, rowIndex: number) => ({
       ...col,
@@ -32,11 +32,13 @@ const CardDetails = (props: { record: Record }) => {
       rowIndex,
       type: col.type || EditCellType.text,
       onEdit,
+      options: {
+        placeholder: index === 0 ? 'Enter description' : '',
+      },
     }),
   }));
   const dataSource = record.table.data;
   const placeholderRow = { value: '', description: '' };
-  console.log(columns)
 
   return (
     <CarouselItem>
@@ -48,7 +50,7 @@ const CardDetails = (props: { record: Record }) => {
         columns={columns}
         dataSource={[...dataSource, placeholderRow]}
         pagination={false}
-        scroll={{ y: 260 }}
+        scroll={{ y: 325 }}
         components={components}
       />
     </CarouselItem>

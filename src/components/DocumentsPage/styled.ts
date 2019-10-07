@@ -110,6 +110,16 @@ export const StepWrapper = styled.section`
           color: #586388;
         }
       }
+      .strategy-item {
+        width: 100%;
+        .edit-cell {
+          width: 100%;
+          text-align: left;
+          font-weight: normal;
+          padding: 0 10px;
+          margin-left: -10px;
+        }
+      }
     }
   }
 `;
