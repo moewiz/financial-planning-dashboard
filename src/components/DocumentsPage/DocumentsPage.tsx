@@ -12,7 +12,7 @@ import DocumentsStep7 from './DocumentsStep7/DocumentsStep7';
 import DocumentsStep8 from './DocumentsStep8/DocumentsStep8';
 
 import { DocumentsWrapper, StepActionDocument, BtnStepDocument } from './styled';
-import { Formik, FormikActions, FormikContext, FormikProps } from 'formik';
+import { Formik, FormikActions, FormikContext } from 'formik';
 
 const { Step } = Steps;
 const steps = [

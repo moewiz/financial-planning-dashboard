@@ -1,9 +1,9 @@
 import React from 'react';
 import { isFunction } from 'lodash';
 
-import { DocumentsCardWrapper, CardBlock, CardBlockText } from './styled';
+import { DocumentsCardWrapper } from './styled';
 import CardThumbnail from './CardThumbnail';
-import { StepWrapper, TitleStep, TitleStepSmall } from '../styled';
+import { TitleStep, TitleStepSmall } from '../styled';
 
 interface DocumentsCardProps {
   setSlideNumber?: (slideNumber: number) => void;
