@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
+import { get } from 'lodash';
 import { Steps, message } from 'antd';
 
 import DocumentsStep1 from './DocumentsStep1/DocumentsStep1';
@@ -11,48 +12,48 @@ import DocumentsStep7 from './DocumentsStep7/DocumentsStep7';
 import DocumentsStep8 from './DocumentsStep8/DocumentsStep8';
 
 import { DocumentsWrapper, StepActionDocument, BtnStepDocument } from './styled';
-import { Form, Formik, FormikActions, FormikContext, FormikProps } from 'formik';
+import { Formik, FormikActions, FormikContext, FormikProps } from 'formik';
 
 const { Step } = Steps;
 const steps = [
   {
     title: 'Step 1',
-    content: <DocumentsStep1 />,
+    content: DocumentsStep1,
     description: 'Reason for seeking advice',
   },
   {
     title: 'Step 2',
-    content: <DocumentsStep2 />,
+    content: DocumentsStep2,
     description: 'What the advice cover',
   },
   {
     title: 'Step 3',
-    content: <DocumentsStep3 />,
+    content: DocumentsStep3,
     description: 'What the advice does not cover',
   },
   {
     title: 'Step 4',
-    content: <DocumentsStep4 />,
+    content: DocumentsStep4,
     description: 'Client is goals',
   },
   {
     title: 'Step 5',
-    content: <DocumentsStep5 />,
+    content: DocumentsStep5,
     description: 'Limitations of client is information',
   },
   {
     title: 'Step 6',
-    content: <DocumentsStep6 />,
+    content: DocumentsStep6,
     description: 'Summary of recommendation',
   },
   {
     title: 'Step 7',
-    content: <DocumentsStep7 />,
+    content: DocumentsStep7,
     description: 'Cost of advice',
   },
   {
     title: 'Step 8',
-    content: <DocumentsStep8 />,
+    content: DocumentsStep8,
     description: 'Cost of advice',
   },
 ];
@@ -110,90 +111,78 @@ export interface DocumentsPageProps {
   current?: string;
   className?: string;
 }
-export interface DocumentsPageState {
-  currentStep: number;
-}
 
-class DocumentsPage extends React.PureComponent<DocumentsPageProps, DocumentsPageState> {
-  constructor(props: DocumentsPageProps) {
-    super(props);
+export const SwitcherContext = React.createContext<{
+  switcherContext: boolean;
+  setSwitcherContext: React.Dispatch<React.SetStateAction<boolean>>;
+} | null>(null);
 
-    this.state = {
-      currentStep: 0,
-    };
-  }
+const DocumentsPage = (props: DocumentsPageProps) => {
+  const { pageData } = props;
+  const [currentStep, updateStep] = useState<number>(0);
+  const [switcherContext, setSwitcherContext] = useState(false);
+  const value = useMemo(() => ({ switcherContext, setSwitcherContext }), [switcherContext, setSwitcherContext]);
+  const onClickStep: React.MouseEventHandler<HTMLElement> = (e) => {
+    const stepNumber = parseInt(get(e, 'currentTarget.dataset.stepNumber'), 10);
 
-  public next = () => {
-    const currentStep = this.state.currentStep + 1;
-    this.setState({ currentStep });
-  }
-
-  public prev = () => {
-    const currentStep = this.state.currentStep - 1;
-    this.setState({ currentStep });
-  }
-
-  public onChangeStep = (step: number) => {
-    this.setState({ currentStep: step });
-  }
-
-  public onClickStep: React.MouseEventHandler<HTMLElement> = (e) => {
-    console.log('onClick step', e);
-    debugger;
-  }
-
-  public renderForm = (formikProps: FormikProps<DocumentData>) => {
-    const { currentStep } = this.state;
+    if (stepNumber === currentStep && !switcherContext) {
+      setSwitcherContext(true);
+    }
+  };
+  const renderForm = () => {
+    const StepComponent = steps[currentStep].content;
     return (
-      <>
-        <Steps size="small" current={currentStep} className="header-step-document" onChange={this.onChangeStep}>
+      <SwitcherContext.Provider value={value}>
+        <Steps
+          size="small"
+          current={currentStep}
+          className="header-step-document"
+          onChange={(step: number) => updateStep(step)}
+        >
           {steps.map((item, stepNumber: number) => (
             <Step
               key={item.title}
               description={item.description}
               title={item.title}
-              onClick={this.onClickStep}
-              data-stepNumber={stepNumber}
+              onClick={onClickStep}
+              data-step-number={stepNumber}
             />
           ))}
         </Steps>
-        <div className="steps-content">{steps[currentStep].content}</div>
-      </>
+        <div className="steps-content">
+          <StepComponent />
+        </div>
+      </SwitcherContext.Provider>
     );
-  }
+  };
 
-  public render(): JSX.Element {
-    const { currentStep } = this.state;
-    const { pageData } = this.props;
+  return (
+    <DocumentsWrapper>
+      <Formik
+        onSubmit={(values: DocumentData, actions: FormikActions<DocumentData>) => {
+          console.log('submitted', values);
+          actions.setSubmitting(false);
+        }}
+        initialValues={pageData}
+        enableReinitialize={true}
+        render={renderForm}
+      />
 
-    return (
-      <DocumentsWrapper>
-        <Formik
-          onSubmit={(values: DocumentData, actions: FormikActions<DocumentData>) => {
-            console.log('submitted', values);
-            actions.setSubmitting(false);
-          }}
-          initialValues={pageData}
-          enableReinitialize={true}
-          render={this.renderForm}
-        />
-
-        <StepActionDocument>
-          {currentStep > 0 && <BtnStepDocument onClick={this.prev}>Back</BtnStepDocument>}
-          {currentStep < steps.length - 1 && (
-            <BtnStepDocument type="primary" onClick={this.next}>
-              Next
-            </BtnStepDocument>
-          )}
-          {currentStep === steps.length - 1 && (
-            <BtnStepDocument type="primary" onClick={() => message.success('Processing complete!')}>
-              Submit
-            </BtnStepDocument>
-          )}
-        </StepActionDocument>
-      </DocumentsWrapper>
-    );
-  }
-}
+      <StepActionDocument>
+        {/*{currentStep > 0 && <BtnStepDocument onClick={this.prev}>Back</BtnStepDocument>}*/}
+        {/*{currentStep < steps.length - 1 && (*/}
+        {/*  <BtnStepDocument type="primary" onClick={this.next}>*/}
+        {/*    Next*/}
+        {/*  </BtnStepDocument>*/}
+        {/*)}*/}
+        {currentStep === steps.length - 1 && (
+          <BtnStepDocument type="primary" onClick={() => message.success('Processing complete!')}>
+            Submit
+          </BtnStepDocument>
+        )}
+      </StepActionDocument>
+    </DocumentsWrapper>
+  );
+};
 
 export default DocumentsPage;
