@@ -3,11 +3,10 @@ import { Table } from 'antd';
 import { map, isString } from 'lodash';
 import cn from 'classnames';
 
-import { TitleStep, TitleStepSmall } from '../styled';
 import { CarouselItem } from './styled';
 import { Record } from '../DocumentsPage';
 import { components } from '../../../containers/productOptimizer/CurrentProduct';
-import EditCell, { EditCellType } from '../../StrategyPage/Drawer/EditCell';
+import { EditCellType } from '../../StrategyPage/Drawer/EditCell';
 import TitleEditable from './TitleEditable';
 
 const CardDetails = (props: { record: Record }) => {
@@ -25,6 +24,8 @@ const CardDetails = (props: { record: Record }) => {
 
     return column;
   }).map((col, index: number) => ({
+    key: index.toString(),
+    width: 160,
     ...col,
     onCell: (row: any, rowIndex: number) => ({
       ...col,

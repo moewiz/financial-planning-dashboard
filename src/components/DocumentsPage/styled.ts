@@ -92,11 +92,9 @@ export const StepWrapper = styled.section`
     .ant-table-thead {
       background-color: #eceef1;
       & > tr {
-        display: flex;
         & > th {
           background-color: #ebeef1;
           color: #515c83;
-          flex: 1;
           font-weight: 600;
         }
       }
@@ -104,9 +102,7 @@ export const StepWrapper = styled.section`
     .ant-table-tbody {
       font-size: 13px;
       & > tr {
-        display: flex;
         & > td {
-          flex: 1;
           color: #586388;
         }
       }

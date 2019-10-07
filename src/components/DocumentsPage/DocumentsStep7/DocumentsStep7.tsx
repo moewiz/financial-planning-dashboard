@@ -13,6 +13,7 @@ const step7 = {
       {
         title: 'Description',
         dataIndex: 'description',
+        width: 200,
       },
       {
         title: 'Cost to you',
@@ -21,6 +22,7 @@ const step7 = {
       {
         title: 'Calculation of amount reviewed by us',
         dataIndex: 'amount',
+        width: 300,
       },
       {
         title: 'Practice retainer',
