@@ -79,7 +79,7 @@ interface Table {
 
 export interface Record {
   type?: string;
-  header: string;
+  header?: string;
   title: string;
   subtitle?: string;
   table: Table;

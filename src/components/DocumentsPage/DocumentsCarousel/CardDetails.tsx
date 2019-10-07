@@ -7,11 +7,12 @@ import { TitleStep, TitleStepSmall } from '../styled';
 import { CarouselItem } from './styled';
 import { Record } from '../DocumentsPage';
 import { components } from '../../../containers/productOptimizer/CurrentProduct';
-import { EditCellType } from '../../StrategyPage/Drawer/EditCell';
+import EditCell, { EditCellType } from '../../StrategyPage/Drawer/EditCell';
+import TitleEditable from './TitleEditable';
 
 const CardDetails = (props: { record: Record }) => {
   const { record } = props;
-  const onEdit = (value: any, name: string, rowIndex: number) => {
+  const onEdit = (value: any, name: string, rowIndex?: number) => {
     console.log({ value, name, rowIndex });
   };
   const columns = map(record.table.columns, (column, index: number) => {
@@ -42,8 +43,14 @@ const CardDetails = (props: { record: Record }) => {
 
   return (
     <CarouselItem>
-      <TitleStep>What the advice covers</TitleStep>
-      <TitleStepSmall>Record the scope of advice, as agreed between you and the client.</TitleStepSmall>
+      <TitleEditable value="What the advice covers" name="title" onChange={onEdit} editable={record.type === 'user'} />
+      <TitleEditable
+        value="Record the scope of advice, as agreed between you and the client."
+        name="subtitle"
+        onChange={onEdit}
+        editable={record.type === 'user'}
+        subTitle={true}
+      />
 
       <Table
         className={cn('table-general documents-table')}

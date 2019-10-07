@@ -16,7 +16,7 @@ class DocumentsStep1 extends React.PureComponent<FormikPartProps> {
     const { formik } = this.props;
     return (
       <StepWrapper>
-        <TitleStep>why did lan & Deborah seek advice?</TitleStep>
+        <TitleStep>Why did Ian & Deborah seek advice?</TitleStep>
         <TitleStepSmall>Your purpose for seeking advice</TitleStepSmall>
         <DocumentsStep1Form>
           <textarea

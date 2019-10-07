@@ -1,13 +1,14 @@
 import React from 'react';
 import { Carousel } from 'antd';
 
+import { CarouselWrapper } from './styled';
+import CardDetails from './CardDetails';
+
 export interface DocumentsCarouselProps {
   slideNumber?: number;
   effect?: string;
   dotPosition?: string;
 }
-import { CarouselItem, CarouselWrapper } from './styled';
-import CardDetails from './CardDetails';
 
 const fixedCard1 = {
   type: 'fixed',
@@ -91,8 +92,7 @@ class DocumentsCarousel extends React.PureComponent<DocumentsCarouselProps> {
             {/* Loop records */}
             <CardDetails record={fixedCard1} />
             <CardDetails record={fixedCard2} />
-            <CardDetails record={fixedCard1} />
-            <CardDetails record={fixedCard2} />
+            <CardDetails record={userCard} />
 
             {/* Step 5 & Step 7  */}
             {/* There's no slider */}
