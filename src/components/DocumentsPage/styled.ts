@@ -1,6 +1,6 @@
-
 import styled, { css } from 'styled-components';
 import { Button } from 'antd';
+
 export const DocumentsWrapper = styled.section`
   padding: 20px;
   .header-step-document{
@@ -144,4 +144,8 @@ export const TitleStepSmall = styled.div.attrs({
   margin-bottom: 20px;
   width: 100%;
   display: inline-block;
+`;
+
+export const DocumentSwitcherWrapper = styled.div`
+  margin-bottom: 50px;
 `;

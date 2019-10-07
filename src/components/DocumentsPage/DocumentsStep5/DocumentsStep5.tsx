@@ -1,53 +1,16 @@
 import React from 'react';
-import { Table } from 'antd';
 import { connect } from 'formik';
 
 import { StepWrapper } from '../styled';
-import {
-  DocumentsStep5WP,
-} from './styled';
 import { DocumentData, FormikPartProps } from '../DocumentsPage';
+import DocumentSwitcher from '../DocumentSwitcher';
 
-class DocumentsStep5 extends React.PureComponent<FormikPartProps> {
-  public dataSource = [
-    {
-      key: '1',
-      insurance: 'Expenses',
-      reason: 'You were unable to provide us with this information. Therefore, the supporting calculation provided in this Satement of Advice is based on the assumption that all personal cash flow is spent ',
-    },
-    {
-      key: '2',
-      insurance: 'Enter Description',
-      reason: '-',
-    },
-  ];
-  public columns = [
-    {
-      title: 'Missing Information',
-      dataIndex: 'insurance',
-      key: 'insurance',
-    },
-    {
-      title: 'Reason for limitation',
-      dataIndex: 'reason',
-      key: 'reason',
-    },
-  ];
-
-  public render(): JSX.Element {
-    return (
-      <StepWrapper>
-        <DocumentsStep5WP>
-          <Table
-            className={`table-general documents-table`}
-            columns={this.columns}
-            dataSource={this.dataSource}
-            pagination={false}
-          />
-        </DocumentsStep5WP>
+const DocumentsStep5 = (props: FormikPartProps) => {
+  return (
+    <StepWrapper>
+      <DocumentSwitcher />
     </StepWrapper>
-    );
-  }
-}
+  );
+};
 
 export default connect<{}, DocumentData>(DocumentsStep5);

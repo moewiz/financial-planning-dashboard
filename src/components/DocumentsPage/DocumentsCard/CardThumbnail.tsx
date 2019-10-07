@@ -5,14 +5,14 @@ import { Record, Row } from '../DocumentsPage';
 import { CardBlock, CardBlockText } from './styled';
 import EditCell from '../../StrategyPage/Drawer/EditCell';
 
-const CardThumbnail = (props: { record?: Record }) => {
-  const { record } = props;
+const CardThumbnail = (props: { record?: Record; onClick?: () => void; }) => {
+  const { record, onClick } = props;
 
   if (record) {
     const { header, table } = record;
 
     return (
-      <CardBlock title={header}>
+      <CardBlock title={header} onClick={onClick}>
         {map(
           table.data,
           (row: Row, index: number) => row && row.value && <CardBlockText key={index}>{row.value}</CardBlockText>,

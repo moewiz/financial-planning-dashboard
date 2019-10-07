@@ -96,9 +96,9 @@ class DocumentsCard extends React.PureComponent<DocumentsCardProps> {
         <TitleStep>What the advice covers</TitleStep>
         <TitleStepSmall>Record the scope of advice, as agreed between you and the client.</TitleStepSmall>
         <DocumentsCardWrapper>
-          <CardThumbnail record={fixedCard1} />
-          <CardThumbnail record={fixedCard2} />
-          <CardThumbnail record={userCard} />
+          <CardThumbnail record={fixedCard1} onClick={this.goToSlide(0)} />
+          <CardThumbnail record={fixedCard2} onClick={this.goToSlide(0)} />
+          <CardThumbnail record={userCard} onClick={this.goToSlide(0)} />
           <CardThumbnail />
         </DocumentsCardWrapper>
       </>
