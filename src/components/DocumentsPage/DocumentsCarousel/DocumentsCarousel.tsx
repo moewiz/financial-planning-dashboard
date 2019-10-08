@@ -11,6 +11,8 @@ export interface DocumentsCarouselProps {
   cards: Record[];
   stepName: string;
   setFieldValue: (field: string, value: any) => void;
+
+  overwrite?: boolean;
 }
 
 const DocumentsCarousel = (props: DocumentsCarouselProps) => {

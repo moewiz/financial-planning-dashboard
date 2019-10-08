@@ -13,6 +13,7 @@ export const ListCardThumbnails = styled.div`
 `;
 
 export const CardThumbnailItem = styled.div`
+  cursor: pointer;
   flex: 0 0 27%;
   margin: 15px 10px;
   flex-direction: column;
