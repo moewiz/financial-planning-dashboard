@@ -57,7 +57,7 @@ const step7 = {
 const DocumentsStep7 = (props: FormikPartProps) => {
   return (
     <StepWrapper>
-      <CardDetails record={step7} name="step7" />
+      <CardDetails record={step7} name="step7" setFieldValue={props.formik.setFieldValue} />
     </StepWrapper>
   );
 };

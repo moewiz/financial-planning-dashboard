@@ -14,7 +14,7 @@ export interface DocumentsCarouselProps {
 }
 
 const DocumentsCarousel = (props: DocumentsCarouselProps) => {
-  const { slideNumber, cards, stepName } = props;
+  const { slideNumber, cards, stepName, setFieldValue } = props;
   const carouselInstance = React.createRef<Carousel>();
   const onPrev = () => {
     if (carouselInstance.current) {
@@ -31,7 +31,7 @@ const DocumentsCarousel = (props: DocumentsCarouselProps) => {
     <CarouselWrapper>
       <Carousel effect="fade" dotPosition={'left'} initialSlide={slideNumber} ref={carouselInstance}>
         {cards.map((card: Record, index: number) => (
-          <CardDetails record={card} key={index} name={`${stepName}.records.${index}`} />
+          <CardDetails record={card} key={index} name={`${stepName}.records.${index}`} setFieldValue={setFieldValue} />
         ))}
       </Carousel>
 

@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
-import { get } from 'lodash';
-import { Steps, message } from 'antd';
+import { get, isEmpty } from 'lodash';
+import { Steps, message, Spin } from 'antd';
 
 import DocumentsStep1 from './DocumentsStep1/DocumentsStep1';
 import DocumentsStep2 from './DocumentsStep2/DocumentsStep2';
@@ -12,7 +12,7 @@ import DocumentsStep7 from './DocumentsStep7/DocumentsStep7';
 import DocumentsStep8 from './DocumentsStep8/DocumentsStep8';
 
 import { DocumentsWrapper, StepActionDocument, BtnStepDocument } from './styled';
-import { Formik, FormikActions, FormikContext } from 'formik';
+import { Formik, FormikActions, FormikContext, FormikProps } from 'formik';
 
 const { Step } = Steps;
 const steps = [
@@ -91,10 +91,11 @@ export interface StepProps {
   subtitle?: string;
   records?: Record[];
   table?: Table;
+  description?: string;
 }
 
 export interface DocumentData {
-  step1: string;
+  step1: StepProps;
   step2: StepProps;
   step3: StepProps;
   step4: StepProps;
@@ -105,6 +106,7 @@ export interface DocumentData {
 }
 
 export interface DocumentsPageProps {
+  loading: boolean;
   clientId: number;
   pageData: DocumentData;
 
@@ -118,7 +120,7 @@ export const SwitcherContext = React.createContext<{
 } | null>(null);
 
 const DocumentsPage = (props: DocumentsPageProps) => {
-  const { pageData } = props;
+  const { pageData, loading } = props;
   const [currentStep, updateStep] = useState<number>(0);
   const [switcherContext, setSwitcherContext] = useState(false);
   const value = useMemo(() => ({ switcherContext, setSwitcherContext }), [switcherContext, setSwitcherContext]);
@@ -129,8 +131,9 @@ const DocumentsPage = (props: DocumentsPageProps) => {
       setSwitcherContext(true);
     }
   };
-  const renderForm = () => {
+  const renderForm = (formikProps: FormikProps<DocumentData>) => {
     const StepComponent = steps[currentStep].content;
+
     return (
       <SwitcherContext.Provider value={value}>
         <Steps
@@ -149,9 +152,7 @@ const DocumentsPage = (props: DocumentsPageProps) => {
             />
           ))}
         </Steps>
-        <div className="steps-content">
-          <StepComponent />
-        </div>
+        <div className="steps-content">{!loading && !isEmpty(formikProps.values) ? <StepComponent /> : <Spin />}</div>
       </SwitcherContext.Provider>
     );
   };

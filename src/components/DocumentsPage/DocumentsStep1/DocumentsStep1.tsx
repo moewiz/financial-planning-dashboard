@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { connect } from 'formik';
-import { debounce } from 'lodash';
+import { get, debounce } from 'lodash';
+import { Spin } from 'antd';
 
 import { StepWrapper, TitleStep, TitleStepSmall } from '../styled';
 import { DocumentsStep1Form } from './styled';
@@ -9,10 +10,10 @@ import EditCell, { EditCellType } from '../../StrategyPage/Drawer/EditCell';
 
 const DocumentsStep1 = (props: FormikPartProps) => {
   const { formik } = props;
-  const [value, setValue] = useState(formik.values.step1);
+  const [value, setValue] = useState<string | undefined>(get(formik, 'values.step1.description'));
   useEffect(() => {
-    setValue(formik.values.step1);
-  }, [formik.values.step1]);
+    setValue(get(formik, 'values.step1.description'));
+  }, [get(formik, 'values.step1.description')]);
   const placeholder =
     'What are your reasons for seeking financial advice? ' +
     'For example, are you going through a life event, such as starting a family or retrenchment, or ' +
@@ -32,11 +33,11 @@ const DocumentsStep1 = (props: FormikPartProps) => {
 
   return (
     <StepWrapper>
-      <TitleStep>Why did Ian & Deborah seek advice?</TitleStep>
-      <TitleStepSmall>Your purpose for seeking advice</TitleStepSmall>
+      <TitleStep>{formik.values.step1.title}</TitleStep>
+      <TitleStepSmall>{formik.values.step1.subtitle}</TitleStepSmall>
       <DocumentsStep1Form>
         <EditCell
-          name={'step1'}
+          name={'step1.description'}
           value={value}
           onChange={onChange}
           type={EditCellType.textarea}

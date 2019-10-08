@@ -9,10 +9,11 @@ import { components } from '../../../containers/productOptimizer/CurrentProduct'
 import { EditCellType } from '../../StrategyPage/Drawer/EditCell';
 import TitleEditable from './TitleEditable';
 
-const CardDetails = (props: { record: Record; name: string }) => {
-  const { record, name } = props;
+const CardDetails = (props: { record: Record; name: string; setFieldValue: (field: string, val: any) => void }) => {
+  const { record, name, setFieldValue } = props;
   const onEdit = (value: any, fieldName: string, rowIndex?: number) => {
-    console.log({ value, name: `${name}.table.data.${rowIndex}.${fieldName}` });
+    const field = `${name}.table.data.${rowIndex}.${fieldName}`;
+    setFieldValue(field, value);
   };
   const columns = map(record.table.columns, (column, index: number) => {
     if (isString(column)) {
@@ -41,14 +42,22 @@ const CardDetails = (props: { record: Record; name: string }) => {
   }));
   const dataSource = record.table.data;
   const placeholderRow = { value: '', description: '' };
+  const onEditTitle = (value: any, fieldName: string) => {
+    setFieldValue(`${name}.${fieldName}`, value);
+  };
 
   return (
     <CarouselItem>
-      <TitleEditable defaultValue={record.title} name="title" onChange={onEdit} editable={record.type === 'user'} />
+      <TitleEditable
+        defaultValue={record.title}
+        name="title"
+        onChange={onEditTitle}
+        editable={record.type === 'user'}
+      />
       <TitleEditable
         defaultValue={record.subtitle}
         name="subtitle"
-        onChange={onEdit}
+        onChange={onEditTitle}
         editable={record.type === 'user'}
         subTitle={true}
       />
