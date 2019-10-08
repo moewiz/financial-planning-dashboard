@@ -36,7 +36,12 @@ const DocumentSwitcher = (props: DocumentSwitcherProps) => {
   return stepData ? (
     <DocumentSwitcherWrapper>
       {slideNumber > -1 ? (
-        <DocumentsCarousel slideNumber={slideNumber} stepName={stepName} cards={cards} setFieldValue={setFieldValue} />
+        <DocumentsCarousel
+          slideNumber={slideNumber}
+          stepName={stepName}
+          cards={cards}
+          setFieldValue={setFieldValue}
+        />
       ) : (
         <DocumentsCard
           stepName={stepName}
