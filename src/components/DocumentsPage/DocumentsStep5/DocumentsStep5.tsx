@@ -5,28 +5,10 @@ import { StepWrapper } from '../styled';
 import { DocumentData, FormikPartProps } from '../DocumentsPage';
 import CardDetails from '../DocumentsCarousel/CardDetails';
 
-const step5 = {
-  title: 'Were there any limitations to the advice provided?',
-  subtitle: 'Clearly record the reason for any limitations to your advice',
-  table: {
-    columns: ['Missing Information', 'Reason for limitation'],
-    data: [
-      {
-        id: 1,
-        value: 'Expenses',
-        description:
-          'You were unable to provide us with this information. ' +
-          'Therefore, the supporting calculation provided in this ' +
-          'Statement of Advice is based on the assumption that all personal cash flow is spent',
-      },
-    ],
-  },
-};
-
 const DocumentsStep5 = (props: FormikPartProps) => {
   return (
     <StepWrapper>
-      <CardDetails record={step5} name="step5" setFieldValue={props.formik.setFieldValue} />
+      <CardDetails record={props.formik.values.step5} name="step5" setFieldValue={props.formik.setFieldValue} />
     </StepWrapper>
   );
 };

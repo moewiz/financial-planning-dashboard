@@ -36,8 +36,6 @@ const TitleEditable = (props: TitleEditableProps) => {
       <EditCell name={props.name} value={value} onChange={onChange} options={{ disabled: !editable }} />
     </Wrapper>
   );
-
-  // return <Wrapper editable={editable} onClick={() => toggleEditing(true)}>{value}</Wrapper>;
 };
 
 export default TitleEditable;

@@ -1,60 +1,27 @@
 import React from 'react';
+import { get, map } from 'lodash';
 import { Icon } from 'antd';
 import { connect } from 'formik';
 
 import { StepWrapper, TitleStep, TitleStepSmall } from '../styled';
-import {
-  DocumentsStep8WP,
-  CardThumbnailCompleted,
-  CardThumbnailItem,
-  CardThumbnailChecked,
-  TitleCard,
-  NumberCard,
-  StatusCard,
-  DoneCard,
-} from './styled';
-import { DocumentData, FormikPartProps } from '../DocumentsPage';
+import { DocumentsStep8WP, ListCardThumbnails, CardThumbnailChecked, TitleCard, DoneCard } from './styled';
+import { DocumentData, FormikPartProps, Record } from '../DocumentsPage';
+import CardStatistic from './CardStatistic';
 
-class DocumentsStep8 extends React.PureComponent<FormikPartProps> {
-  public render(): JSX.Element {
-    return (
-      <StepWrapper>
-        <TitleStep>Regulatory compliance</TitleStep>
-        <TitleStepSmall>The following issues were flagged</TitleStepSmall>
-        <DocumentsStep8WP>
-          <CardThumbnailCompleted>
-            <CardThumbnailItem>
-              <TitleCard>Current Position</TitleCard>
-              <NumberCard>2</NumberCard>
-              <StatusCard>Open issues</StatusCard>
-            </CardThumbnailItem>
-            <CardThumbnailItem>
-              <TitleCard>Strategy</TitleCard>
-              <NumberCard>1</NumberCard>
-              <StatusCard>Open issues</StatusCard>
-            </CardThumbnailItem>
-            <CardThumbnailItem>
-              <TitleCard>Product Optimizer</TitleCard>
-              <NumberCard>2</NumberCard>
-              <StatusCard>Open issues</StatusCard>
-            </CardThumbnailItem>
-            <CardThumbnailChecked>
-              <TitleCard>Insurance Optimizer</TitleCard>
-              <DoneCard>
-                <Icon type="check" />
-              </DoneCard>
-            </CardThumbnailChecked>
-            <CardThumbnailChecked>
-              <TitleCard>Document Builder</TitleCard>
-              <DoneCard>
-                <Icon type="check" />
-              </DoneCard>
-            </CardThumbnailChecked>
-          </CardThumbnailCompleted>
-        </DocumentsStep8WP>
-      </StepWrapper>
-    );
-  }
-}
+const DocumentsStep8 = (props: FormikPartProps) => {
+  return (
+    <StepWrapper>
+      <TitleStep>{get(props, 'formik.values.step8.title')}</TitleStep>
+      <TitleStepSmall>{get(props, 'formik.values.step8.subtitle')}</TitleStepSmall>
+      <DocumentsStep8WP>
+        <ListCardThumbnails>
+          {map(get(props, 'formik.values.step8.records'), (record: Record, index: number) => (
+            <CardStatistic record={record} key={index} />
+          ))}
+        </ListCardThumbnails>
+      </DocumentsStep8WP>
+    </StepWrapper>
+  );
+};
 
 export default connect<{}, DocumentData>(DocumentsStep8);

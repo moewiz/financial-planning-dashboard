@@ -79,11 +79,11 @@ interface Table {
 }
 
 export interface Record {
-  type?: string;
-  header?: string;
   title: string;
   subtitle?: string;
+  header?: string;
   table: Table;
+  type?: string;
 }
 
 export interface StepProps {
@@ -99,9 +99,9 @@ export interface DocumentData {
   step2: StepProps;
   step3: StepProps;
   step4: StepProps;
-  step5: StepProps;
+  step5: Record;
   step6: StepProps;
-  step7: StepProps;
+  step7: Record;
   step8: StepProps;
 }
 
@@ -135,25 +135,35 @@ const DocumentsPage = (props: DocumentsPageProps) => {
     const StepComponent = steps[currentStep].content;
 
     return (
-      <SwitcherContext.Provider value={value}>
-        <Steps
-          size="small"
-          current={currentStep}
-          className="header-step-document"
-          onChange={(step: number) => updateStep(step)}
-        >
-          {steps.map((item, stepNumber: number) => (
-            <Step
-              key={item.title}
-              description={item.description}
-              title={item.title}
-              onClick={onClickStep}
-              data-step-number={stepNumber}
-            />
-          ))}
-        </Steps>
-        <div className="steps-content">{!loading && !isEmpty(formikProps.values) ? <StepComponent /> : <Spin />}</div>
-      </SwitcherContext.Provider>
+      <>
+        <SwitcherContext.Provider value={value}>
+          <Steps
+            size="small"
+            current={currentStep}
+            className="header-step-document"
+            onChange={(step: number) => updateStep(step)}
+          >
+            {steps.map((item, stepNumber: number) => (
+              <Step
+                key={item.title}
+                description={item.description}
+                title={item.title}
+                onClick={onClickStep}
+                data-step-number={stepNumber}
+              />
+            ))}
+          </Steps>
+          <div className="steps-content">{!loading && !isEmpty(formikProps.values) ? <StepComponent /> : <Spin />}</div>
+        </SwitcherContext.Provider>
+
+        <StepActionDocument>
+          {currentStep === steps.length - 1 && (
+            <BtnStepDocument htmlType="submit" type="primary" onClick={() => message.success('Processing complete!')}>
+              Submit
+            </BtnStepDocument>
+          )}
+        </StepActionDocument>
+      </>
     );
   };
 
@@ -168,20 +178,6 @@ const DocumentsPage = (props: DocumentsPageProps) => {
         enableReinitialize={true}
         render={renderForm}
       />
-
-      <StepActionDocument>
-        {/*{currentStep > 0 && <BtnStepDocument onClick={this.prev}>Back</BtnStepDocument>}*/}
-        {/*{currentStep < steps.length - 1 && (*/}
-        {/*  <BtnStepDocument type="primary" onClick={this.next}>*/}
-        {/*    Next*/}
-        {/*  </BtnStepDocument>*/}
-        {/*)}*/}
-        {currentStep === steps.length - 1 && (
-          <BtnStepDocument type="primary" onClick={() => message.success('Processing complete!')}>
-            Submit
-          </BtnStepDocument>
-        )}
-      </StepActionDocument>
     </DocumentsWrapper>
   );
 };
