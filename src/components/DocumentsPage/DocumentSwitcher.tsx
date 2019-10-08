@@ -33,7 +33,7 @@ const DocumentSwitcher = (props: DocumentSwitcherProps) => {
   return (
     <DocumentSwitcherWrapper>
       {slideNumber > -1 ? (
-        <DocumentsCarousel slideNumber={slideNumber} />
+        <DocumentsCarousel slideNumber={slideNumber} stepName={stepName} cards={stepData.records || []} />
       ) : (
         <DocumentsCard
           stepName={stepName}

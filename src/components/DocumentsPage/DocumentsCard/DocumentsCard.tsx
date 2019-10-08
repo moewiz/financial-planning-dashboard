@@ -19,7 +19,6 @@ const DocumentsCard = (props: DocumentsCardProps) => {
   const goToSlide = (slide: number) => () => {
     if (isFunction(setSlideNumber)) {
       setSlideNumber(slide);
-      console.log('go to slide', slide)
     }
   };
 

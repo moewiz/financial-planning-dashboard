@@ -5,7 +5,7 @@ import { TitleStep, TitleStepSmall } from '../styled';
 import EditCell from '../../StrategyPage/Drawer/EditCell';
 
 interface TitleEditableProps {
-  value: string;
+  defaultValue: string | undefined;
   name: string;
   onChange: (value: any, name: string) => void;
 
@@ -16,10 +16,10 @@ interface TitleEditableProps {
 const TitleEditable = (props: TitleEditableProps) => {
   const { editable = false, subTitle = false } = props;
   const Wrapper = subTitle ? TitleStepSmall : TitleStep;
-  const [value, setValue] = useState<string>(props.value);
+  const [value, setValue] = useState<string>(props.defaultValue || '');
   useEffect(() => {
-    setValue(props.value);
-  }, [props.value]);
+    setValue(props.defaultValue || '');
+  }, [props.defaultValue]);
   const debounceEdit = useCallback(
     debounce((val, name) => {
       props.onChange(val, name);

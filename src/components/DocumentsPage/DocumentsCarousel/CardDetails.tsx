@@ -44,9 +44,9 @@ const CardDetails = (props: { record: Record }) => {
 
   return (
     <CarouselItem>
-      <TitleEditable value="What the advice covers" name="title" onChange={onEdit} editable={record.type === 'user'} />
+      <TitleEditable defaultValue={record.title} name="title" onChange={onEdit} editable={record.type === 'user'} />
       <TitleEditable
-        value="Record the scope of advice, as agreed between you and the client."
+        defaultValue={record.subtitle}
         name="subtitle"
         onChange={onEdit}
         editable={record.type === 'user'}
