@@ -123,6 +123,20 @@ export const StepWrapper = styled.section`
       margin-left: -10px;
     }
   }
+  .strikethrough {
+    .strategy-item {
+      .ant-input.edit-cell {
+        text-decoration: line-through;
+      }
+    }
+  }
+  .underline {
+    .strategy-item {
+      .ant-input.edit-cell {
+        text-decoration: underline;
+      }
+    }
+  }
 `;
 
 export const TitleStep = styled.div.attrs({

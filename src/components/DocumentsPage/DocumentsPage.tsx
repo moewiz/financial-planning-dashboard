@@ -160,7 +160,7 @@ const DocumentsPage = (props: DocumentsPageProps) => {
           <div className="steps-content">{!loading && !isEmpty(formikProps.values) ? <StepComponent /> : <Spin />}</div>
         </SwitcherContext.Provider>
 
-        <StepActionDocument>
+        <StepActionDocument style={{ paddingRight: 32 }}>
           {currentStep === steps.length - 1 && (
             <BtnStepDocument type="primary" onClick={onClickSubmit}>
               Submit

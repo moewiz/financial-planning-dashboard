@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
-import { get, isString, last, dropRight } from 'lodash';
+import { dropRight, get, isString, last } from 'lodash';
 import { Button } from 'antd';
 
-import {addPercentage, getSumFunds, Product} from './DrawerProduct';
+import { addPercentage, getSumFunds, Product } from './DrawerProduct';
 import LinkProductAndFund from './LinkProductAndFund';
 import { DrawerProductWrapper } from '../styled';
 import { ActionDrawerGeneral, DrawerTitle } from '../../StrategyPage/Drawer/styled';
@@ -76,8 +76,7 @@ class SingleProduct extends PureComponent<SingleProductProps> {
         const fundsWithoutTotal = dropRight(funds);
         const updatedFunds = addPercentage(fundsWithoutTotal);
         const total = funds[funds.length - 1];
-        const sum = getSumFunds(fundsWithoutTotal);
-        total.value = sum;
+        total.value = getSumFunds(fundsWithoutTotal);
 
         setFieldValue(tableName, [...updatedFunds, total]);
       }

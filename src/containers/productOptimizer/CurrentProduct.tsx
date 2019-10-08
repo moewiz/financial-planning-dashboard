@@ -1,10 +1,10 @@
-import React, { PureComponent, useState, useCallback, useEffect } from 'react';
-import { Icon, Table, Popconfirm } from 'antd';
+import React, { PureComponent, useCallback, useEffect, useState } from 'react';
+import { Icon, Popconfirm, Table } from 'antd';
 import cn from 'classnames';
-import { get, debounce, map, filter } from 'lodash';
+import { debounce, filter, get, map } from 'lodash';
 import uuidv1 from 'uuid/v1';
 
-import { HeaderTitleTable, TableEntryContainer, TextTitle, TagStyled, TagList } from '../../pages/client/styled';
+import { HeaderTitleTable, TableEntryContainer, TagList, TagStyled, TextTitle } from '../../pages/client/styled';
 import { ProductTable } from '../../pages/client/productOptimizer/ProductOptimizer';
 import { Projections } from '../../components/Icons';
 import { Product } from '../../components/ProductOptimizer/Drawer/DrawerProduct';
