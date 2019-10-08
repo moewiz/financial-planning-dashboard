@@ -9,6 +9,7 @@ export interface DocumentsCarouselProps {
   slideNumber: number;
   cards: Record[];
   stepName: string;
+  setFieldValue: (field: string, value: any) => void;
 }
 
 const DocumentsCarousel = (props: DocumentsCarouselProps) => {
@@ -18,7 +19,7 @@ const DocumentsCarousel = (props: DocumentsCarouselProps) => {
     <CarouselWrapper>
       <Carousel effect="fade" dotPosition={'left'} initialSlide={slideNumber}>
         {cards.map((card: Record, index: number) => (
-          <CardDetails record={card} key={index} />
+          <CardDetails record={card} key={index} name={`${stepName}.records.${index}`} />
         ))}
       </Carousel>
     </CarouselWrapper>

@@ -26,7 +26,7 @@ const step5 = {
 const DocumentsStep5 = (props: FormikPartProps) => {
   return (
     <StepWrapper>
-      <CardDetails record={step5} />
+      <CardDetails record={step5} name="step5" />
     </StepWrapper>
   );
 };

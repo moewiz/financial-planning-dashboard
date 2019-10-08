@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { get } from 'lodash';
 
 import DocumentsCarousel from './DocumentsCarousel/DocumentsCarousel';
 import DocumentsCard from './DocumentsCard/DocumentsCard';
@@ -8,10 +9,11 @@ import { SwitcherContext, StepProps } from './DocumentsPage';
 interface DocumentSwitcherProps {
   stepName: string;
   stepData: StepProps;
+  setFieldValue: (field: string, value: any) => void;
 }
 
 const DocumentSwitcher = (props: DocumentSwitcherProps) => {
-  const { stepName, stepData } = props;
+  const { stepName, stepData, setFieldValue } = props;
   const [slideNumber, setSlideNumber] = useState<number>(-1);
   const context = useContext(SwitcherContext);
   if (!context) {
@@ -29,22 +31,23 @@ const DocumentSwitcher = (props: DocumentSwitcherProps) => {
       setSwitcherContext(false);
     }
   }, [switcherContext]);
+  const cards = get(stepData, 'records', []);
 
-  return (
+  return stepData ? (
     <DocumentSwitcherWrapper>
       {slideNumber > -1 ? (
-        <DocumentsCarousel slideNumber={slideNumber} stepName={stepName} cards={stepData.records || []} />
+        <DocumentsCarousel slideNumber={slideNumber} stepName={stepName} cards={cards} setFieldValue={setFieldValue} />
       ) : (
         <DocumentsCard
           stepName={stepName}
-          cards={stepData.records || []}
+          cards={cards}
           title={stepData.title}
           subtitle={stepData.subtitle}
           setSlideNumber={updateSlideNumber}
         />
       )}
     </DocumentSwitcherWrapper>
-  );
+  ) : null;
 };
 
 export default DocumentSwitcher;

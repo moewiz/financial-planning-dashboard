@@ -1,12 +1,12 @@
 import React, { useCallback, useState } from 'react';
-import { map, debounce } from 'lodash';
+import { map, debounce, isFunction } from 'lodash';
 
 import { Record, Row } from '../DocumentsPage';
 import { CardBlock, CardBlockText } from './styled';
 import EditCell from '../../StrategyPage/Drawer/EditCell';
 
-const CardThumbnail = (props: { record?: Record; onClick?: () => void; }) => {
-  const { record, onClick } = props;
+const CardThumbnail = (props: { record?: Record; onClick?: () => void; onAdd?: (header: string) => void }) => {
+  const { record, onClick, onAdd } = props;
 
   if (record) {
     const { header, table } = record;
@@ -25,18 +25,16 @@ const CardThumbnail = (props: { record?: Record; onClick?: () => void; }) => {
     setTitle(val);
   }, []);
   const onPressEnter = debounce(() => {
-    console.log('create a new user card with title', title);
+    if (isFunction(onAdd)) {
+      onAdd(title);
+      setTitle(null);
+    }
   }, 300);
 
   return (
     <CardBlock
       title={
-        <EditCell
-          name="title"
-          options={{ placeholder: 'New Title', onPressEnter }}
-          value={title}
-          onChange={onChange}
-        />
+        <EditCell name="title" options={{ placeholder: 'New Title', onPressEnter }} value={title} onChange={onChange} />
       }
       isplaceholder="true"
     />

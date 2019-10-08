@@ -43,6 +43,7 @@ export const CardBlock = styled(Card).attrs({
         text-align: left;
         border: none;
         font-size: 15px;
+        font-weight: 600;
         color: #515c83;
 
         &:focus {

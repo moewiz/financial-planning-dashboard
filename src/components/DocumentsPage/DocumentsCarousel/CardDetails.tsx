@@ -9,10 +9,10 @@ import { components } from '../../../containers/productOptimizer/CurrentProduct'
 import { EditCellType } from '../../StrategyPage/Drawer/EditCell';
 import TitleEditable from './TitleEditable';
 
-const CardDetails = (props: { record: Record }) => {
-  const { record } = props;
-  const onEdit = (value: any, name: string, rowIndex?: number) => {
-    console.log({ value, name, rowIndex });
+const CardDetails = (props: { record: Record; name: string }) => {
+  const { record, name } = props;
+  const onEdit = (value: any, fieldName: string, rowIndex?: number) => {
+    console.log({ value, name: `${name}.table.data.${rowIndex}.${fieldName}` });
   };
   const columns = map(record.table.columns, (column, index: number) => {
     if (isString(column)) {
