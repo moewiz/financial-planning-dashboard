@@ -133,6 +133,10 @@ const DocumentsPage = (props: DocumentsPageProps) => {
   };
   const renderForm = (formikProps: FormikProps<DocumentData>) => {
     const StepComponent = steps[currentStep].content;
+    const onClickSubmit = () => {
+      formikProps.submitForm();
+      message.success('Processing complete!');
+    };
 
     return (
       <>
@@ -158,7 +162,7 @@ const DocumentsPage = (props: DocumentsPageProps) => {
 
         <StepActionDocument>
           {currentStep === steps.length - 1 && (
-            <BtnStepDocument htmlType="submit" type="primary" onClick={() => message.success('Processing complete!')}>
+            <BtnStepDocument type="primary" onClick={onClickSubmit}>
               Submit
             </BtnStepDocument>
           )}
