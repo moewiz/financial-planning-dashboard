@@ -112,6 +112,25 @@ export const StepWrapper = styled.section`
         }
       }
     }
+    &.expanded-table {
+      // .ant-table-row-expand-icon-cell,
+      // .ant-table-expand-icon-th {
+      //   width: 0px;
+      // }
+      .ant-table-tbody > tr > td {
+        border-bottom: none;
+      }
+      tr.ant-table-expanded-row {
+        background-color: #fff;
+        td {
+          border-bottom: 1px solid #e8e8e8;
+          padding: 0;
+        }
+        .strategy-item {
+          margin: 16px;
+        }
+      }
+    }
   }
   .strategy-item {
     width: 100%;

@@ -8,15 +8,32 @@ import { Record } from '../DocumentsPage';
 import EditCell, { EditCellType } from '../../StrategyPage/Drawer/EditCell';
 import TitleEditable from './TitleEditable';
 
-const JustificationField = (props: { defaultValue: string | undefined; onEdit: (val: any, field: string) => void }) => {
-  const { defaultValue, onEdit } = props;
+const JustificationField = (props: {
+  defaultValue: string | undefined;
+  onEdit: (val: any, name: string, index: number) => void;
+  index: number;
+}) => {
+  const { defaultValue, onEdit, index } = props;
   const [value, setValue] = useState(defaultValue);
-  const onChange = (val: any, name: string) => {
+  const debounceEdit = useCallback(
+    debounce((val, name) => {
+      onEdit(val, name, index);
+    }, 500),
+    [],
+  );
+  const onChangeInput = (val: any, name: string) => {
     setValue(val);
-    onEdit(val, name);
+    debounceEdit(val, name);
   };
 
-  return <EditCell name={'justification'} value={value} onChange={onChange} />;
+  return (
+    <EditCell
+      name={'justification'}
+      value={value}
+      onChange={onChangeInput}
+      options={{ placeholder: 'Enter justification' }}
+    />
+  );
 };
 
 const EditCellContainer = (props: any) => {
@@ -58,7 +75,6 @@ const EditCellContainer = (props: any) => {
       ) : (
         props.children
       )}
-      {overwrite && record.isOverwrite && <JustificationField defaultValue={record.justification} onEdit={onChange} />}
     </td>
   );
 };
@@ -127,7 +143,11 @@ const CardDetails = (props: {
           const field = `${name}.table.data.${index}.isOverwrite`;
           setFieldValue(field, !row.isOverwrite);
         };
-        return <div onClick={overwriteRow} style={{ cursor: 'pointer' }}>Overwrite</div>;
+        return (
+          <div onClick={overwriteRow} style={{ cursor: 'pointer' }}>
+            Overwrite
+          </div>
+        );
       },
     });
   }
@@ -148,14 +168,33 @@ const CardDetails = (props: {
         subTitle={true}
       />
 
-      <Table
-        className={cn('table-general documents-table')}
-        columns={columns}
-        dataSource={[...dataSource, placeholderRow]}
-        pagination={false}
-        scroll={{ y: 325 }}
-        components={components}
-      />
+      {overwrite ? (
+        <Table
+          className={cn('table-general documents-table expanded-table')}
+          columns={columns}
+          dataSource={[...dataSource, placeholderRow]}
+          pagination={false}
+          scroll={{ y: 325 }}
+          components={components}
+          expandedRowRender={(row: any, index: number) => {
+            if (row.isOverwrite) {
+              return <JustificationField defaultValue={row.justification} onEdit={onEdit} index={index} />;
+            }
+            return null;
+          }}
+          defaultExpandAllRows={true}
+          expandIcon={() => null}
+        />
+      ) : (
+        <Table
+          className={cn('table-general documents-table')}
+          columns={columns}
+          dataSource={[...dataSource, placeholderRow]}
+          pagination={false}
+          scroll={{ y: 325 }}
+          components={components}
+        />
+      )}
     </CarouselItem>
   );
 };
