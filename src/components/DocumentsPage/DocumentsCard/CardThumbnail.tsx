@@ -25,7 +25,7 @@ const CardThumbnail = (props: { record?: Record; onClick?: () => void; onAdd?: (
     setTitle(val);
   }, []);
   const onPressEnter = debounce(() => {
-    if (isFunction(onAdd)) {
+    if (isFunction(onAdd) && title && title.trim() !== '') {
       onAdd(title);
       setTitle(null);
     }
