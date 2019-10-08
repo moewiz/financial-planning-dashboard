@@ -3,9 +3,15 @@ import React, { useContext, useEffect, useState } from 'react';
 import DocumentsCarousel from './DocumentsCarousel/DocumentsCarousel';
 import DocumentsCard from './DocumentsCard/DocumentsCard';
 import { DocumentSwitcherWrapper } from './styled';
-import { SwitcherContext } from './DocumentsPage';
+import { SwitcherContext, StepProps } from './DocumentsPage';
 
-const DocumentSwitcher = () => {
+interface DocumentSwitcherProps {
+  stepName: string;
+  stepData: StepProps;
+}
+
+const DocumentSwitcher = (props: DocumentSwitcherProps) => {
+  const { stepName, stepData } = props;
   const [slideNumber, setSlideNumber] = useState<number>(-1);
   const context = useContext(SwitcherContext);
   if (!context) {
@@ -29,7 +35,13 @@ const DocumentSwitcher = () => {
       {slideNumber > -1 ? (
         <DocumentsCarousel slideNumber={slideNumber} />
       ) : (
-        <DocumentsCard setSlideNumber={updateSlideNumber} />
+        <DocumentsCard
+          stepName={stepName}
+          cards={stepData.records || []}
+          title={stepData.title}
+          subtitle={stepData.subtitle}
+          setSlideNumber={updateSlideNumber}
+        />
       )}
     </DocumentSwitcherWrapper>
   );

@@ -100,7 +100,8 @@
       },
       {
         "type": "fixed",
-        "title": "Aged Care",
+        "header": "Aged Care",
+        "title": "What the advice cover (Aged Care)",
         "subtitle": "Record the Aged Care scope of advice, as agreed between you and the client.",
         "table": {
           "columns": ["Aged Care", "Advice Limitations"],

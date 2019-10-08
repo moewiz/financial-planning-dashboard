@@ -86,10 +86,10 @@ export interface Record {
   table: Table;
 }
 
-interface StepProps {
+export interface StepProps {
   title: string;
   subtitle?: string;
-  record?: Record[];
+  records?: Record[];
   table?: Table;
 }
 

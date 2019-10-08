@@ -8,7 +8,7 @@ import DocumentSwitcher from '../DocumentSwitcher';
 const DocumentsStep3 = (props: FormikPartProps) => {
   return (
     <StepWrapper>
-      <DocumentSwitcher />
+      <DocumentSwitcher stepName="step3" stepData={props.formik.values.step3} />
     </StepWrapper>
   );
 };

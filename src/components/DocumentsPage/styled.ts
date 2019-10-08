@@ -5,6 +5,11 @@ export const DocumentsWrapper = styled.section`
   padding: 20px;
   .header-step-document {
     margin-bottom: 65px;
+    .ant-steps-item {
+      &:hover {
+        cursor: pointer;
+      }
+    }
     .ant-steps-item-process {
       .ant-steps-item-icon {
         background: #1790ff;
