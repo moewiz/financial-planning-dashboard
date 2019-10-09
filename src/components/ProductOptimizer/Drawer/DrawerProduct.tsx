@@ -19,7 +19,7 @@ export interface Option {
 }
 
 export interface Product {
-  id?: number;
+  id?: number | string;
   description: string;
   value: number | string;
   links?: Product[];

@@ -1,132 +1,71 @@
 import React, { PureComponent } from 'react';
-import { Icon, TreeSelect } from 'antd';
+import { map } from 'lodash';
+import { Dropdown, Icon, Menu } from 'antd';
+const { SubMenu, Item } = Menu;
 
-import { NewProposedProductStyled, ProposePopupWrapper } from './styled';
+import { NewProposedProductStyled } from './styled';
 import { HeaderTitleTable, TextTitle } from '../../pages/client/styled';
+import { Product } from './Drawer/DrawerProduct';
 
 interface NewProposedProductProps {
-  data: CurrentDataTree[];
-  onAdd: (productIds: number[]) => void;
+  currentProducts: Product[];
+  onAdd: (productIds: string[]) => void;
 }
 
-interface NewProposedProductState {
-  value: any;
-  open: boolean;
-}
-
-interface CurrentDataTree {
-  description: string;
-  id?: number;
-  children?: CurrentDataTree[];
-}
-
-export const mapDataToTreeData = (arrayData: CurrentDataTree[], baseIndex: number = 0): any =>
-  arrayData.map((data: CurrentDataTree, index: number) => {
-    if (data.children && data.children.length > 0) {
-      return {
-        key: `${index}`,
-        value: `parent-${index}`,
-        title: data.description,
-        children: mapDataToTreeData(data.children, index),
-      };
-    }
-
-    return {
-      key: `${baseIndex}-${index}`,
-      value: data.id,
-      title: data.description,
-    };
-  });
-
-class NewProposedProduct extends PureComponent<NewProposedProductProps, NewProposedProductState> {
-  public state = {
-    value: [],
-    open: false,
-  };
-  public preventNextClose = true;
-
-  // When the popover is open and users click anywhere on the page,
-  // the popover should close
-  public componentDidMount() {
-    document.addEventListener('click', this.closePopover);
-  }
-
-  public componentDidUpdate(
-    prevProps: Readonly<NewProposedProductProps>,
-    prevState: Readonly<NewProposedProductState>,
-    snapshot?: any,
-  ): void {
-    if (prevState.open !== this.state.open && !this.state.open) {
-      this.addProducts();
-    }
-  }
-
-  public componentWillUnmount() {
-    document.removeEventListener('click', this.closePopover);
-  }
-  // Note: make sure whenever a click happens within the popover it is not closed
-  public onPopoverClick = () => {
-    this.preventNextClose = true;
-  }
-
-  public closePopover = () => {
-    if (!this.preventNextClose && this.state.open) {
-      this.setState({
-        open: false,
-      });
-    }
-
-    this.preventNextClose = false;
-  }
-
-  public addProducts = () => {
+class NewProposedProduct extends PureComponent<NewProposedProductProps> {
+  public renderItems = (option: any, index: number, keys: string[] = []) => {
     const { onAdd } = this.props;
-    onAdd(this.state.value);
-    this.setState({ value: undefined });
-  }
-
-  public openPopover = () => {
-    if (!this.state.open) {
-      this.preventNextClose = true;
-      this.setState({
-        open: true,
-      });
+    if (option.children && option.children.length > 0) {
+      return (
+        <SubMenu title={option.label} key={index}>
+          {map(option.children, (otp, idx: number) => this.renderItems(otp, idx, [...keys, option.value]))}
+        </SubMenu>
+      );
     }
-  }
-
-  public onChange = (value: any) => {
-    this.setState({ value });
-  }
-
-  public getTreeData = () => mapDataToTreeData(this.props.data);
-
-  public render() {
-    const tProps = {
-      treeData: this.getTreeData(),
-      value: this.state.value,
-      onChange: this.onChange,
-      treeCheckable: true,
-      searchPlaceholder: '',
-      allowClear: true,
-      treeDefaultExpandAll: true,
-      style: {
-        width: 300,
-      },
-      open: true,
-      treeNodeFilterProp: 'title',
+    const onClickItem = () => {
+      onAdd([...keys, option.value]);
     };
 
     return (
+      <Item onClick={onClickItem} key={index}>
+        {option.label}
+      </Item>
+    );
+  }
+
+  public renderMenu = () => {
+    const { currentProducts } = this.props;
+    const childProducts = map(currentProducts, (product) => ({ value: product.id, label: product.description }));
+    const options = [
+      {
+        value: 'new',
+        label: 'New',
+      },
+      {
+        value: 'retain',
+        label: 'Retain',
+        children: childProducts,
+      },
+      {
+        value: 'rebalance',
+        label: 'Rebalance',
+        children: childProducts,
+      },
+    ];
+    const menu = map(options, (option, index) => this.renderItems(option, index));
+
+    return <Menu>{menu}</Menu>;
+  }
+
+  public render() {
+    return (
       <NewProposedProductStyled>
         <HeaderTitleTable>
-          <Icon type={'plus-square'} theme={'filled'} onClick={this.openPopover} />
+          <Dropdown overlay={this.renderMenu()} trigger={['click']}>
+            <Icon type={'plus-square'} theme={'filled'} />
+          </Dropdown>
           <TextTitle small={true}>Proposed</TextTitle>
         </HeaderTitleTable>
-        {this.state.open && (
-          <ProposePopupWrapper onClick={this.onPopoverClick}>
-            <TreeSelect {...tProps} dropdownClassName="new-proposed-product" />
-          </ProposePopupWrapper>
-        )}
       </NewProposedProductStyled>
     );
   }

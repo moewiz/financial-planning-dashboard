@@ -4,7 +4,7 @@ import { Button } from 'antd';
 import { FieldArray, FieldArrayRenderProps } from 'formik';
 
 import { ActionDrawerGeneral } from '../../StrategyPage/Drawer/styled';
-import {addPercentage, getSumFunds, Option, Product} from './DrawerProduct';
+import { addPercentage, getSumFunds, Option, Product } from './DrawerProduct';
 import { FundBlock, FundTabContent, HorizontalScrollable } from '../styled';
 import LinkProductAndFund from './LinkProductAndFund';
 import { EditCellType } from '../../StrategyPage/Drawer/EditCell';
@@ -17,7 +17,7 @@ interface FundTabProps {
 }
 
 interface FundTabStates {
-  hovering?: number;
+  hovering?: number | string;
 }
 
 class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
@@ -62,27 +62,27 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
     },
   ];
 
-  public mouseOver = (id?: number) => {
+  public mouseOver = (id?: number | string) => {
     this.setState({
       hovering: id,
     });
   }
 
-  public mouseOut = (id?: number) => {
+  public mouseOut = (id?: number | string) => {
     this.setState({
       hovering: -1,
     });
   }
 
-  public handleMouseOver = (id?: number) => () => {
+  public handleMouseOver = (id?: number | string) => () => {
     this.mouseOver(id);
   }
 
-  public handleMouseOut = (id?: number) => () => {
+  public handleMouseOut = (id?: number | string) => () => {
     this.mouseOut(id);
   }
 
-  public getClasses = (id?: number) => {
+  public getClasses = (id?: number | string) => {
     const { hovering } = this.state;
     const haveHover = hovering !== -1;
     const classname = 'all-proposed';

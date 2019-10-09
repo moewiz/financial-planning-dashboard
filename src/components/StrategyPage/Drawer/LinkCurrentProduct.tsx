@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { Icon, TreeSelect } from 'antd';
 
 import { EditCellProps } from './EditCell';
-import { mapDataToTreeData } from '../../ProductOptimizer/NewProposedProduct';
 import { ProposePopupWrapper } from '../../ProductOptimizer/styled';
 import { LinkCurrentProductWrapper } from './styled';
 
@@ -10,6 +9,30 @@ interface LinkCurrentProductStates {
   value: any;
   open: boolean;
 }
+
+interface CurrentDataTree {
+  description: string;
+  id?: number;
+  children?: CurrentDataTree[];
+}
+
+export const mapDataToTreeData = (arrayData: CurrentDataTree[], baseIndex: number = 0): any =>
+  arrayData.map((data: CurrentDataTree, index: number) => {
+    if (data.children && data.children.length > 0) {
+      return {
+        key: `${index}`,
+        value: `parent-${index}`,
+        title: data.description,
+        children: mapDataToTreeData(data.children, index),
+      };
+    }
+
+    return {
+      key: `${baseIndex}-${index}`,
+      value: data.id,
+      title: data.description,
+    };
+  });
 
 class LinkCurrentProduct extends PureComponent<EditCellProps, LinkCurrentProductStates> {
   public state = {

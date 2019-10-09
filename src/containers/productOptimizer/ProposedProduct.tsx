@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Icon, Popconfirm, Table } from 'antd';
+import { get, filter } from 'lodash';
 import cn from 'classnames';
 import uuidv1 from 'uuid/v1';
 
@@ -58,7 +59,7 @@ const currentProductsTree = [
   },
 ];
 
-class ProposedProduct extends PureComponent<ProductTable, ProposedProductState> {
+class ProposedProduct extends PureComponent<ProductTable & { tabKey: string }, ProposedProductState> {
   public state = {
     loading: false,
   };
@@ -130,21 +131,22 @@ class ProposedProduct extends PureComponent<ProductTable, ProposedProductState> 
     openDrawer(record);
   }
 
-  public onAdd = (productIds: number[]) => {
-    if (productIds && productIds.length > 0) {
-      let products: any[] = [];
-      currentProductsTree.map((parent) => {
-        if (parent.children && parent.children.length > 0) {
-          products = [...products, ...parent.children.filter((product) => productIds.includes(product.id))];
-        }
-      });
-      const { fieldArrayRenderProps, dataList } = this.props;
-      let lastIndex = dataList.length - 1;
-      products.map((product) => {
-        fieldArrayRenderProps.insert(lastIndex, product);
-        lastIndex += 1;
-      });
-    }
+  public onAdd = (productIds: string[]) => {
+    console.log({ productIds });
+    // if (productIds && productIds.length > 0) {
+    //   let products: any[] = [];
+    //   currentProductsTree.map((parent) => {
+    //     if (parent.children && parent.children.length > 0) {
+    //       products = [...products, ...parent.children.filter((product) => productIds.includes(product.id))];
+    //     }
+    //   });
+    //   const { fieldArrayRenderProps, dataList } = this.props;
+    //   let lastIndex = dataList.length - 1;
+    //   products.map((product) => {
+    //     fieldArrayRenderProps.insert(lastIndex, product);
+    //     lastIndex += 1;
+    //   });
+    // }
   }
 
   public onRemove = (record: any, index: number) => {
@@ -196,8 +198,9 @@ class ProposedProduct extends PureComponent<ProductTable, ProposedProductState> 
   }
 
   public getCurrentProducts = () => {
-    // TODO: Ensure that data ignores the selected products
-    return currentProductsTree;
+    const { fieldArrayRenderProps, tabKey } = this.props;
+    const currentProducts: Product[] = get(fieldArrayRenderProps.form.values, [tabKey, 'current'], []);
+    return currentProducts.filter((i) => i.id);
   }
 
   public render() {
@@ -205,7 +208,7 @@ class ProposedProduct extends PureComponent<ProductTable, ProposedProductState> 
 
     return (
       <TableEntryContainer smallPadding>
-        <NewProposedProduct onAdd={this.onAdd} data={this.getCurrentProducts()} />
+        <NewProposedProduct onAdd={this.onAdd} currentProducts={this.getCurrentProducts()} />
         <Table
           rowKey={(rowKey) => (rowKey.id ? rowKey.id.toString() : 'new')}
           className={`table-general optimizer-table ${this.tableName}-table`}

@@ -115,6 +115,7 @@ class ProductOptimizer extends React.PureComponent<ProductOptimizerProps, Produc
                               openDrawer={this.openDrawer}
                               dataList={get(formikProps, 'values.client.proposed', [])}
                               fieldArrayRenderProps={fieldArrayRenderProps}
+                              tabKey="client"
                             />
                           );
                         }}
@@ -143,6 +144,7 @@ class ProductOptimizer extends React.PureComponent<ProductOptimizerProps, Produc
                               openDrawer={this.openDrawer}
                               dataList={get(formikProps, 'values.partner.proposed', [])}
                               fieldArrayRenderProps={fieldArrayRenderProps}
+                              tabKey="partner"
                             />
                           );
                         }}
