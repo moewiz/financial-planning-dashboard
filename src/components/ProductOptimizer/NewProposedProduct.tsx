@@ -42,11 +42,11 @@ class NewProposedProduct extends PureComponent<NewProposedProductProps> {
         ...proposedChoices.new,
       },
       {
-        ...proposedChoices.retain,
+        ...proposedChoices.rebalance,
         children: childProducts,
       },
       {
-        ...proposedChoices.rebalance,
+        ...proposedChoices.retain,
         children: childProducts,
       },
     ];
