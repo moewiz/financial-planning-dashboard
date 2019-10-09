@@ -19,6 +19,10 @@ export interface ProductTable {
 interface ProductOptimizerProps {
   loading: boolean;
   clientId: number;
+  client?: {
+    clientId: number;
+    clientName: string;
+  };
 
   pageData: ProductOptimizerPage;
 }
@@ -73,7 +77,7 @@ class ProductOptimizer extends React.PureComponent<ProductOptimizerProps, Produc
 
   public render() {
     const { isOpen, product } = this.state;
-    const { loading, pageData } = this.props;
+    const { loading, pageData, client } = this.props;
 
     return (
       <StrategyPageWrapper>
@@ -116,6 +120,7 @@ class ProductOptimizer extends React.PureComponent<ProductOptimizerProps, Produc
                               dataList={get(formikProps, 'values.client.proposed', [])}
                               fieldArrayRenderProps={fieldArrayRenderProps}
                               tabKey="client"
+                              client={client}
                             />
                           );
                         }}
@@ -145,6 +150,7 @@ class ProductOptimizer extends React.PureComponent<ProductOptimizerProps, Produc
                               dataList={get(formikProps, 'values.partner.proposed', [])}
                               fieldArrayRenderProps={fieldArrayRenderProps}
                               tabKey="partner"
+                              client={client}
                             />
                           );
                         }}

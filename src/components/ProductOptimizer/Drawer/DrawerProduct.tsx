@@ -30,6 +30,10 @@ export interface Product {
   };
   hasCurrent?: boolean;
   isCurrent?: boolean;
+  note?: {
+    text: string;
+    params: string[];
+  };
 }
 
 interface DrawerProductProps {

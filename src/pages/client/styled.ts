@@ -123,6 +123,19 @@ export const TableEntryContainer = styled.section.attrs({
         }
       }
     }
+    .ant-table-tbody > tr > td {
+      border-bottom: none;
+    }
+    tr.ant-table-expanded-row {
+      background-color: #fff;
+      td {
+        border-bottom: 1px solid #e8e8e8;
+        padding: 0px !important;
+      }
+      .strategy-item {
+        margin: 16px;
+      }
+    }
   }
   .text-align-center {
     text-align: center;

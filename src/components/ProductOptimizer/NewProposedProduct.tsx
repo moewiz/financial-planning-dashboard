@@ -6,6 +6,7 @@ const { SubMenu, Item } = Menu;
 import { NewProposedProductStyled } from './styled';
 import { HeaderTitleTable, TextTitle } from '../../pages/client/styled';
 import { Product } from './Drawer/DrawerProduct';
+import { proposedChoices } from '../../enums/proposedChoices';
 
 interface NewProposedProductProps {
   currentProducts: Product[];
@@ -38,17 +39,14 @@ class NewProposedProduct extends PureComponent<NewProposedProductProps> {
     const childProducts = map(currentProducts, (product) => ({ value: product.id, label: product.description }));
     const options = [
       {
-        value: 'new',
-        label: 'New',
+        ...proposedChoices.new,
       },
       {
-        value: 'retain',
-        label: 'Retain',
+        ...proposedChoices.retain,
         children: childProducts,
       },
       {
-        value: 'rebalance',
-        label: 'Rebalance',
+        ...proposedChoices.rebalance,
         children: childProducts,
       },
     ];

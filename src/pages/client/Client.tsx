@@ -78,7 +78,7 @@ class Client extends React.PureComponent<RouteComponentProps & ClientProps> {
     if (fetchDataEntry) {
       fetchDataEntry(params);
     }
-  };
+  }
 
   public render(): JSX.Element {
     const { match, pageData, client, loading } = this.props;
@@ -93,7 +93,14 @@ class Client extends React.PureComponent<RouteComponentProps & ClientProps> {
           return <StrategyPage clientId={clientId} pageData={pageData} />;
         }
         case Tab.ProductOptimizer: {
-          return <ProductOptimizer clientId={clientId} pageData={pageData} loading={loading} />;
+          return (
+            <ProductOptimizer
+              clientId={clientId}
+              pageData={pageData}
+              loading={loading}
+              client={{ clientId, clientName: client.clientName }}
+            />
+          );
         }
         case Tab.Insurance: {
           return <Insurance clientId={clientId} pageData={pageData} />;

@@ -16,7 +16,7 @@ const Statement = styled.div`
     margin-top: 0px;
   }
 `;
-const Text = styled.span`
+export const Text = styled.span`
   color: #5f698d;
   font-size: 13px;
 `;
