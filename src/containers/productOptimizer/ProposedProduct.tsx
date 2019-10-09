@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Icon, Popconfirm, Table } from 'antd';
-import { get, find } from 'lodash';
+import { get, find, map } from 'lodash';
 import cn from 'classnames';
-import uuidv1 from 'uuid/v1';
 
 import { TableEntryContainer } from '../../pages/client/styled';
 import { Projections } from '../../components/Icons';
@@ -12,10 +11,11 @@ import { Product } from '../../components/ProductOptimizer/Drawer/DrawerProduct'
 import { components } from './CurrentProduct';
 import { EditCellType } from '../../components/StrategyPage/Drawer/EditCell';
 import { proposedChoices } from '../../enums/proposedChoices';
-import StandardText, { formatString, Param, Text } from '../../components/StrategyPage/StandardText';
+import { formatString, Param, Text } from '../../components/StrategyPage/StandardText';
 
 interface ProposedProductState {
   loading: boolean;
+  count: number;
 }
 
 const currentProductsTree = [
@@ -61,17 +61,23 @@ const currentProductsTree = [
   },
 ];
 
+interface ProductOpt extends Product {
+  key: number;
+}
+
 interface ProposedProductProps extends ProductTable {
   tabKey: string;
   client?: {
     clientId: number;
     clientName: string;
   };
+  dataList: ProductOpt[];
 }
 
 class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProductState> {
   public state = {
     loading: false,
+    count: 0,
   };
 
   private columns = [
@@ -133,6 +139,11 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
   ];
   private tableName = 'proposed-product';
 
+  public componentDidMount() {
+    const { dataList } = this.props;
+    this.setState({ count: dataList.length + 1 });
+  }
+
   public openDrawer = (record: any) => {
     const { openDrawer } = this.props;
     openDrawer(record);
@@ -158,9 +169,14 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
     }, 200);
   }
 
+  public increaseCount = () => {
+    this.setState((prevState) => ({ count: prevState.count + 1 }));
+  }
+
   public onAdd = (values: string[]) => {
     const [action, productId] = values;
     const { fieldArrayRenderProps, client } = this.props;
+    const { count } = this.state;
     let newProduct: { [key: string]: any } = {};
     const clientName = get(client, 'clientName');
 
@@ -207,7 +223,8 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
       this.cursorGoToProductField();
     }
 
-    fieldArrayRenderProps.unshift({ ...newProduct, id: uuidv1() });
+    fieldArrayRenderProps.unshift({ ...newProduct, key: count });
+    this.increaseCount();
   }
 
   public onRemove = (record: any, index: number) => {
@@ -218,8 +235,11 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
   }
 
   public handleAdd: (row?: Product) => void = (row = { description: '', value: '' }) => {
+    const { count } = this.state;
     const { fieldArrayRenderProps } = this.props;
-    fieldArrayRenderProps.push(row);
+
+    fieldArrayRenderProps.push({ ...row, key: count });
+    this.increaseCount();
   }
 
   public onEdit = (value: any, name: string, rowIndex: number) => {
@@ -230,18 +250,19 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
 
     const record = dataList[rowIndex];
     const remainingFieldName = name === 'description' ? 'value' : 'description';
-    if (record && !record.id && value && record[remainingFieldName]) {
-      const id = uuidv1();
+    const isLastRow = rowIndex === dataList.length - 1;
+    if (record && isLastRow && !record.id && value && record[remainingFieldName]) {
       const clientName = get(client, 'clientName');
-      fieldArrayRenderProps.form.setFieldValue(`${rowName}.id`, id);
+
       fieldArrayRenderProps.form.setFieldValue(`${rowName}.note`, {
         text: `{{0}}, add a new investment product`,
         params: [clientName],
       });
+      this.increaseCount();
 
       setTimeout(() => {
         this.handleAdd();
-      }, 10);
+      }, 100);
     }
   }
 
@@ -295,10 +316,10 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
         <Table
           className={`table-general optimizer-table ${this.tableName}-table`}
           columns={this.getColumns()}
-          dataSource={dataList.map((data, i: number) => ({ ...data, key: i }))}
+          dataSource={dataList}
           pagination={false}
           components={components}
-          expandedRowRender={(row: Product) => {
+          expandedRowRender={(row: Product, index: number, indent: number, expanded: boolean) => {
             if (row.note) {
               return (
                 <Text>
@@ -311,6 +332,8 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
             return null;
           }}
           defaultExpandAllRows={true}
+          expandIconAsCell={true}
+          expandedRowKeys={map(dataList, 'key')}
           expandIcon={() => null}
         />
       </TableEntryContainer>

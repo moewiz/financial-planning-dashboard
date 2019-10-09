@@ -21,6 +21,7 @@ export interface Option {
 
 export interface Product {
   id?: number | string;
+  key?: number | string;
   description: string;
   value: number | string;
   links?: Product[];
