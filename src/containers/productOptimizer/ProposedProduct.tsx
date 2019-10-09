@@ -138,6 +138,26 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
     openDrawer(record);
   }
 
+  public cursorGoToProductField = () => {
+    // Ensure the new row has been added
+    setTimeout(() => {
+      const productInput: HTMLElement | null = document.querySelector('#proposedTable .ant-input');
+      if (productInput) {
+        productInput.focus();
+      }
+    }, 200);
+  }
+
+  public cursorGoToValueField = () => {
+    // Ensure the new row has been added
+    setTimeout(() => {
+      const productInput: HTMLElement | null = document.querySelector('#proposedTable .ant-input-number-input');
+      if (productInput) {
+        productInput.focus();
+      }
+    }, 200);
+  }
+
   public onAdd = (values: string[]) => {
     const [action, productId] = values;
     const { fieldArrayRenderProps, client } = this.props;
@@ -169,6 +189,7 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
               params: [clientName, productDescription],
             },
           };
+          this.cursorGoToValueField();
           break;
         default:
           break;
@@ -183,6 +204,7 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
           params: [clientName],
         },
       };
+      this.cursorGoToProductField();
     }
 
     fieldArrayRenderProps.unshift({ ...newProduct, id: uuidv1() });
@@ -268,7 +290,7 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
     const { dataList } = this.props;
 
     return (
-      <TableEntryContainer smallPadding>
+      <TableEntryContainer smallPadding id="proposedTable">
         <NewProposedProduct onAdd={this.onAdd} currentProducts={this.getCurrentProducts()} />
         <Table
           className={`table-general optimizer-table ${this.tableName}-table`}
