@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Icon, Popconfirm, Table } from 'antd';
 import { get, find, map } from 'lodash';
 import cn from 'classnames';
+import uuid from 'uuid';
 
 import { TableEntryContainer } from '../../pages/client/styled';
 import { Projections } from '../../components/Icons';
@@ -223,7 +224,7 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
       this.cursorGoToProductField();
     }
 
-    fieldArrayRenderProps.unshift({ ...newProduct, key: count });
+    fieldArrayRenderProps.unshift({ ...newProduct, key: count, id: uuid() });
     this.increaseCount();
   }
 
@@ -252,8 +253,10 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
     const remainingFieldName = name === 'description' ? 'value' : 'description';
     const isLastRow = rowIndex === dataList.length - 1;
     if (record && isLastRow && !record.id && value && record[remainingFieldName]) {
+      const id = uuid();
       const clientName = get(client, 'clientName');
 
+      fieldArrayRenderProps.form.setFieldValue(`${rowName}.id`, id);
       fieldArrayRenderProps.form.setFieldValue(`${rowName}.note`, {
         text: `{{0}}, add a new investment product`,
         params: [clientName],
