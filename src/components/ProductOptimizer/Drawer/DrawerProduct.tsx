@@ -10,6 +10,7 @@ import FundTab from './FundTab';
 import SingleProduct from './SingleProduct';
 import AssetsAllocation from './AssetsAllocation';
 import Fees from './Fees';
+import { formatString, Param, Text } from '../../StrategyPage/StandardText';
 
 export interface Option {
   id?: number;
@@ -150,12 +151,19 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
   public renderLinkedProducts = () => {
     const { product } = this.props;
 
+    if (!product) { return null; }
+
     return (
       <DrawerProductWrapper>
         <DrawerTitle>{get(product, 'description', 'Title')}</DrawerTitle>
         <DrawerSubContent>
-          Detail text goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua.
+          {product.note && (
+            <Text>
+              {formatString(product.note.text, product.note.params, (value, i) => (
+                <Param key={i}>{value}</Param>
+              ))}
+            </Text>
+          )}
         </DrawerSubContent>
 
         <Tabs defaultActiveKey="1">

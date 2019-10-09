@@ -44,7 +44,11 @@
       {
         "id": 4,
         "description": "New proposed 1",
-        "value": 10000
+        "value": 10000,
+        "note": {
+          "text": "{{0}}, add a new investment product",
+          "params": [ "Jane Empty" ]
+        }
       },
       {
         "id": 5,
@@ -73,6 +77,10 @@
               "value": 10000
             }
           ]
+        },
+        "note": {
+          "text": "{{0}}, add a new investment product",
+          "params": [ "Jane Empty" ]
         }
       },
       {
@@ -143,7 +151,14 @@
               ]
             }
           }
-        ]
+        ],
+        "note": {
+          "text": "{{0}}, retain your existing product {{1}}",
+          "params": [
+            "Jane Empty",
+            "Product A"
+          ]
+        }
       },
       {
         "id": 7,
@@ -169,7 +184,14 @@
               ]
             }
           }
-        ]
+        ],
+        "note": {
+          "text": "{{0}}, rebalance your existing product {{1}}",
+          "params": [
+            "Jane Empty",
+            "Product A"
+          ]
+        }
       }
     ]
   },
@@ -195,7 +217,11 @@
       {
         "id": 9,
         "description": "New proposed 1",
-        "value": 10000
+        "value": 10000,
+        "note": {
+          "text": "{{0}}, add a new investment product",
+          "params": [ "Jane Empty" ]
+        }
       },
       {
         "id": 10,
@@ -207,7 +233,14 @@
             "description": "Product C",
             "value": 10000
           }
-        ]
+        ],
+        "note": {
+          "text": "{{0}}, rebalance your existing product {{1}}",
+          "params": [
+            "Jane Empty",
+            "Product C"
+          ]
+        }
       }
     ]
   }
