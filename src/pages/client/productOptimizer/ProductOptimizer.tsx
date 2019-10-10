@@ -1,9 +1,9 @@
 import React from 'react';
+import { DndProvider } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import { Tabs, Button, Spin } from 'antd';
 import { Form, Formik, FormikProps, FieldArray, FieldArrayRenderProps } from 'formik';
 import { get, map } from 'lodash';
-import { DndProvider } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
 
 import { ProductOptimizerPage } from '../../../reducers/client';
 import { StrategyPageWrapper } from '../../../components/StrategyPage/styled';

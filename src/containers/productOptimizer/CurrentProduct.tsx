@@ -1,4 +1,5 @@
 import React, { PureComponent, useCallback, useEffect, useState } from 'react';
+import { DragSourceMonitor, useDrag } from 'react-dnd';
 import { Icon, Popconfirm, Table } from 'antd';
 import cn from 'classnames';
 import { debounce, filter, get, map } from 'lodash';
@@ -10,7 +11,6 @@ import { Projections } from '../../components/Icons';
 import { Product } from '../../components/ProductOptimizer/Drawer/DrawerProduct';
 import EditCell, { EditCellType } from '../../components/StrategyPage/Drawer/EditCell';
 import LinkCurrentProduct from '../../components/StrategyPage/Drawer/LinkCurrentProduct';
-import { DragSourceMonitor, useDrag } from 'react-dnd';
 
 interface CurrentProductState {
   loading: boolean;
