@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const NewProposedProductStyled = styled.div`
-  position: relative;
   .ant-select-open {
     // padding-bottom: 10px;
   }

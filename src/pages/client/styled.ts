@@ -127,7 +127,7 @@ export const TableEntryContainer = styled.section.attrs({
       border-bottom: none;
     }
     tr.ant-table-expanded-row {
-      background-color: #fff;
+      background-color: transparent;
       td {
         border-bottom: 1px solid #e8e8e8;
         padding: 0px !important;

@@ -2,12 +2,13 @@ import React, { PureComponent } from 'react';
 import { Icon, Popconfirm, Table } from 'antd';
 import { get, find, map } from 'lodash';
 import cn from 'classnames';
+import { useDrop } from 'react-dnd';
 import uuid from 'uuid';
 
 import { TableEntryContainer } from '../../pages/client/styled';
 import { Projections } from '../../components/Icons';
 import NewProposedProduct from '../../components/ProductOptimizer/NewProposedProduct';
-import { ProductTable } from '../../pages/client/productOptimizer/ProductOptimizer';
+import { ItemTypes, ProductTable } from '../../pages/client/productOptimizer/ProductOptimizer';
 import { Product } from '../../components/ProductOptimizer/Drawer/DrawerProduct';
 import { components } from './CurrentProduct';
 import { EditCellType } from '../../components/StrategyPage/Drawer/EditCell';
@@ -18,6 +19,38 @@ interface ProposedProductState {
   loading: boolean;
   count: number;
 }
+
+const Droppable: React.FC = (props) => {
+  const [{ canDrop, isOver }, drop] = useDrop({
+    accept: ItemTypes.ROW,
+    drop: () => ({ name: 'Proposed Table' }),
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+    }),
+  });
+
+  const isActive = canDrop && isOver;
+  let backgroundColor = '#fff';
+  if (isActive) {
+    backgroundColor = 'darkgreen';
+  } else if (canDrop) {
+    backgroundColor = 'darkkhaki';
+  }
+
+  return (
+    <table {...props} ref={drop} style={{ backgroundColor }}>
+      {props.children}
+    </table>
+  );
+};
+
+const proposedProduct = {
+  table: Droppable,
+  body: {
+    cell: components.body.cell,
+  },
+};
 
 const currentProductsTree = [
   {
@@ -315,13 +348,14 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
 
     return (
       <TableEntryContainer smallPadding id="proposedTable">
+        <Droppable />
         <NewProposedProduct onAdd={this.onAdd} currentProducts={this.getCurrentProducts()} />
         <Table
           className={`table-general optimizer-table ${this.tableName}-table`}
           columns={this.getColumns()}
           dataSource={dataList}
           pagination={false}
-          components={components}
+          components={proposedProduct}
           expandedRowRender={(row: Product, index: number, indent: number, expanded: boolean) => {
             if (row.note) {
               return (

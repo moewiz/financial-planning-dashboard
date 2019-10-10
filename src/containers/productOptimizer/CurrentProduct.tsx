@@ -5,11 +5,12 @@ import { debounce, filter, get, map } from 'lodash';
 import uuidv1 from 'uuid/v1';
 
 import { HeaderTitleTable, TableEntryContainer, TagList, TagStyled, TextTitle } from '../../pages/client/styled';
-import { ProductTable } from '../../pages/client/productOptimizer/ProductOptimizer';
+import { ItemTypes, ProductTable } from '../../pages/client/productOptimizer/ProductOptimizer';
 import { Projections } from '../../components/Icons';
 import { Product } from '../../components/ProductOptimizer/Drawer/DrawerProduct';
 import EditCell, { EditCellType } from '../../components/StrategyPage/Drawer/EditCell';
 import LinkCurrentProduct from '../../components/StrategyPage/Drawer/LinkCurrentProduct';
+import { DragSourceMonitor, useDrag } from 'react-dnd';
 
 interface CurrentProductState {
   loading: boolean;
@@ -76,6 +77,45 @@ const EditCellContainer = (props: any) => {
 
 export const components = {
   body: {
+    cell: EditCellContainer,
+  },
+};
+
+const style: React.CSSProperties = {
+  backgroundColor: 'white',
+  cursor: 'move',
+};
+
+const DraggableRow = ({
+  record,
+  moveRow,
+  index,
+  ...restProps
+}: {
+  record: any;
+  moveRow: (record: any, index: number) => void;
+  index: number;
+}) => {
+  const [{ isDragging }, drag] = useDrag({
+    item: { record, type: ItemTypes.ROW },
+    end: (item: { name: string } | undefined, monitor: DragSourceMonitor) => {
+      const dropResult = monitor.getDropResult();
+      if (item && dropResult) {
+        moveRow(item, index);
+      }
+    },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
+  const opacity = isDragging ? 0.4 : 1;
+
+  return <tr {...restProps} ref={drag} style={{ ...style, opacity }} />;
+};
+
+const currentComponents = {
+  body: {
+    row: DraggableRow,
     cell: EditCellContainer,
   },
 };
@@ -187,6 +227,10 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
     });
   }
 
+  public moveRow = (record: any, index: number) => {
+    console.log('Move record', { record, index });
+  }
+
   public render() {
     const { dataList } = this.props;
 
@@ -201,7 +245,8 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
           columns={this.getColumns()}
           dataSource={dataList}
           pagination={false}
-          components={components}
+          components={currentComponents}
+          onRow={(record, index) => ({ index, moveRow: this.moveRow, record })}
         />
       </TableEntryContainer>
     );
