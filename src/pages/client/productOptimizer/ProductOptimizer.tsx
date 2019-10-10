@@ -20,6 +20,7 @@ export interface ProductTable {
   dataList: Product[];
   openDrawer: (record?: any) => void;
   fieldArrayRenderProps: FieldArrayRenderProps;
+  clientPartnerName: string;
 }
 
 interface ProductOptimizerProps {
@@ -117,6 +118,7 @@ class ProductOptimizer extends React.PureComponent<ProductOptimizerProps, Produc
                                 openDrawer={this.openDrawer}
                                 dataList={get(formikProps, 'values.client.current', [])}
                                 fieldArrayRenderProps={fieldArrayRenderProps}
+                                clientPartnerName={get(client, 'clientName', '')}
                               />
                             );
                           }}
@@ -132,6 +134,7 @@ class ProductOptimizer extends React.PureComponent<ProductOptimizerProps, Produc
                                 fieldArrayRenderProps={fieldArrayRenderProps}
                                 tabKey="client"
                                 client={client}
+                                clientPartnerName={get(client, 'clientName', '')}
                               />
                             );
                           }}
@@ -149,6 +152,7 @@ class ProductOptimizer extends React.PureComponent<ProductOptimizerProps, Produc
                                 openDrawer={this.openDrawer}
                                 dataList={get(formikProps, 'values.partner.current', [])}
                                 fieldArrayRenderProps={fieldArrayRenderProps}
+                                clientPartnerName={get(client, 'clientName', '')}
                               />
                             );
                           }}
@@ -164,6 +168,7 @@ class ProductOptimizer extends React.PureComponent<ProductOptimizerProps, Produc
                                 fieldArrayRenderProps={fieldArrayRenderProps}
                                 tabKey="partner"
                                 client={client}
+                                clientPartnerName={get(client, 'clientName', '')}
                               />
                             );
                           }}

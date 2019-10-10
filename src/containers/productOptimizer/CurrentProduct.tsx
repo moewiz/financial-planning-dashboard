@@ -93,15 +93,15 @@ const DraggableRow = ({
   ...restProps
 }: {
   record: any;
-  moveRow: (record: any, index: number) => void;
+  moveRow: (record: any, dropResult: any) => void;
   index: number;
 }) => {
   const [{ isDragging }, drag] = useDrag({
     item: { record, type: ItemTypes.ROW },
-    end: (item: { name: string } | undefined, monitor: DragSourceMonitor) => {
+    end: (item: { record: any } | undefined, monitor: DragSourceMonitor) => {
       const dropResult = monitor.getDropResult();
       if (item && dropResult) {
-        moveRow(item, index);
+        moveRow(item.record, dropResult);
       }
     },
     collect: (monitor) => ({
@@ -227,9 +227,33 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
     });
   }
 
-  public moveRow = (record: any, index: number) => {
-    const { fieldArrayRenderProps } = this.props;
-    console.log('Move record', { record, index });
+  public moveRow = (record: any, dropResult: any) => {
+    const { clientPartnerName } = this.props;
+    let newProposedProduct = {
+      ...record,
+      key: new Date().getTime(),
+    };
+    if (record.id) {
+      newProposedProduct = {
+        ...newProposedProduct,
+        links: [record],
+        note: {
+          text: `{{0}}, replace your existing product {{1}}`,
+          params: [clientPartnerName, get(record, 'description')],
+        },
+      };
+    } else {
+      newProposedProduct = {
+        ...newProposedProduct,
+        id: uuidv1(),
+        note: {
+          text: `{{0}}, add a new investment product`,
+          params: [clientPartnerName],
+        },
+      };
+    }
+
+    dropResult.unshift(newProposedProduct);
   }
 
   public render() {

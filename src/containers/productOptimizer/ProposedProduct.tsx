@@ -20,34 +20,6 @@ interface ProposedProductState {
   count: number;
 }
 
-const Droppable: React.FC = (props) => {
-  const [{ canDrop, isOver }, drop] = useDrop({
-    accept: ItemTypes.ROW,
-    drop: () => ({ name: 'Proposed Table' }),
-    collect: (monitor) => ({
-      isOver: monitor.isOver(),
-      canDrop: monitor.canDrop(),
-    }),
-  });
-
-  const isActive = canDrop && isOver;
-  let backgroundColor = '#fff';
-  if (isActive) {
-    backgroundColor = 'darkgreen';
-  } else if (canDrop) {
-    backgroundColor = 'darkkhaki';
-  }
-
-  return <tbody {...props} ref={drop} style={{ backgroundColor }} />;
-};
-
-const proposedProduct = {
-  body: {
-    cell: components.body.cell,
-    wrapper: Droppable,
-  },
-};
-
 const currentProductsTree = [
   {
     description: 'Super',
@@ -110,6 +82,33 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
     count: 0,
   };
 
+  public proposedProduct = {
+    body: {
+      cell: components.body.cell,
+      wrapper: (props: any) => {
+        const { fieldArrayRenderProps } = this.props;
+        const [{ canDrop, isOver }, drop] = useDrop({
+          accept: ItemTypes.ROW,
+          drop: () => ({ name: 'Proposed Table', unshift: fieldArrayRenderProps.unshift }),
+          collect: (monitor) => ({
+            isOver: monitor.isOver(),
+            canDrop: monitor.canDrop(),
+          }),
+        });
+
+        const isActive = canDrop && isOver;
+        let backgroundColor = '#fff';
+        if (isActive) {
+          backgroundColor = '#e7e7ef';
+        } else if (canDrop) {
+          backgroundColor = '#f3f3f7';
+        }
+
+        return <tbody {...props} ref={drop} style={{ backgroundColor }} />;
+      },
+    },
+  };
+
   private columns = [
     {
       title: '',
@@ -167,7 +166,21 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
       width: 60,
     },
   ];
+
   private tableName = 'proposed-product';
+
+  public expandedRowRenderer = (row: Product, index: number, indent: number, expanded: boolean) => {
+    if (row.note) {
+      return (
+        <Text>
+          {formatString(row.note.text, row.note.params, (value, i) => (
+            <Param key={i}>{value}</Param>
+          ))}
+        </Text>
+      );
+    }
+    return null;
+  }
 
   public componentDidMount() {
     const { dataList } = this.props;
@@ -350,19 +363,8 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
           columns={this.getColumns()}
           dataSource={dataList}
           pagination={false}
-          components={proposedProduct}
-          expandedRowRender={(row: Product, index: number, indent: number, expanded: boolean) => {
-            if (row.note) {
-              return (
-                <Text>
-                  {formatString(row.note.text, row.note.params, (value, i) => (
-                    <Param key={i}>{value}</Param>
-                  ))}
-                </Text>
-              );
-            }
-            return null;
-          }}
+          components={this.proposedProduct}
+          expandedRowRender={this.expandedRowRenderer}
           defaultExpandAllRows={true}
           expandIconAsCell={true}
           expandedRowKeys={map(dataList, 'key')}
