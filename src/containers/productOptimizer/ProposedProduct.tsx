@@ -38,17 +38,13 @@ const Droppable: React.FC = (props) => {
     backgroundColor = 'darkkhaki';
   }
 
-  return (
-    <table {...props} ref={drop} style={{ backgroundColor }}>
-      {props.children}
-    </table>
-  );
+  return <tbody {...props} ref={drop} style={{ backgroundColor }} />;
 };
 
 const proposedProduct = {
-  table: Droppable,
   body: {
     cell: components.body.cell,
+    wrapper: Droppable,
   },
 };
 
@@ -348,7 +344,6 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
 
     return (
       <TableEntryContainer smallPadding id="proposedTable">
-        <Droppable />
         <NewProposedProduct onAdd={this.onAdd} currentProducts={this.getCurrentProducts()} />
         <Table
           className={`table-general optimizer-table ${this.tableName}-table`}

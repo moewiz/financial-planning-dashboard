@@ -228,6 +228,7 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
   }
 
   public moveRow = (record: any, index: number) => {
+    const { fieldArrayRenderProps } = this.props;
     console.log('Move record', { record, index });
   }
 
