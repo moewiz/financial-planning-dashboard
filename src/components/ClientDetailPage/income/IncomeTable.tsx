@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
+import { RouteComponentProps, withRouter } from 'react-router';
 import { Button, Icon, Popconfirm } from 'antd';
-import { isFunction } from 'lodash';
+import { get, isFunction } from 'lodash';
 import { FormikProps } from 'formik';
 
 import GeneralTable from '../GeneralTable';
@@ -16,6 +17,7 @@ import {
 import { loadOptionsBaseOnCol } from '../../../utils/columnUtils';
 import { CurrentTypes } from '../../../enums/currents';
 import AddMenu from '../AddMenu';
+import { createEvent } from '../../../utils/GA';
 
 interface IncomeTableProps {
   data: object[];
@@ -32,7 +34,7 @@ interface IncomeTableProps {
   deleteRow: (key: number) => void;
 }
 
-class IncomeTable extends PureComponent<IncomeTableProps> {
+class IncomeTable extends PureComponent<IncomeTableProps & RouteComponentProps> {
   public columns = [
     {
       title: 'Description',
@@ -130,7 +132,7 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
   }
 
   public handleAdd = (value: string[]) => {
-    const { addRow } = this.props;
+    const { addRow, match } = this.props;
     const [owner, type] = value;
     const newData = {
       key: Date.now(),
@@ -149,8 +151,9 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
       },
     };
 
-    // update formik
     if (isFunction(addRow)) {
+      const clientId = Number.parseInt(get(match.params, 'clientId', ''), 10);
+      createEvent('current_position', 'create', 'Income', clientId);
       addRow(newData);
     }
   }
@@ -231,4 +234,4 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
   }
 }
 
-export default IncomeTable;
+export default withRouter(IncomeTable);

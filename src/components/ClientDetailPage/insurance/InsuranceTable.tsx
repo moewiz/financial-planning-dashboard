@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { RouteComponentProps, withRouter } from 'react-router';
 import { Button, Icon, Popconfirm } from 'antd';
 import { isFunction, get } from 'lodash';
 import { TableEntryContainer, HeaderTitleTable, TextTitle, ActionTableGeneral } from '../../../pages/client/styled';
@@ -7,6 +8,7 @@ import GeneralTable from '../GeneralTable';
 import { FormikProps } from 'formik';
 import { ownerWithJointOptions } from '../../../enums/options';
 import { removePartnerOption } from '../../../utils/columnUtils';
+import { createEvent } from '../../../utils/GA';
 
 interface InsuranceTableProps {
   data: object[];
@@ -23,7 +25,7 @@ interface InsuranceTableProps {
   dynamicCustomValue: object;
 }
 
-class InsuranceTable extends PureComponent<InsuranceTableProps> {
+class InsuranceTable extends PureComponent<InsuranceTableProps & RouteComponentProps> {
   public columns = [
     {
       title: 'Provider',
@@ -78,7 +80,7 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
   }
 
   public handleAdd = () => {
-    const { addRow } = this.props;
+    const { addRow, match } = this.props;
     const newData = {
       key: Date.now(),
       provider: 'ABC',
@@ -111,6 +113,8 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
 
     // update formik
     if (isFunction(addRow)) {
+      const clientId = Number.parseInt(get(match.params, 'clientId', ''), 10);
+      createEvent('current_position', 'create', 'Insurance', clientId);
       addRow(newData);
     }
   }
@@ -219,4 +223,4 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
   }
 }
 
-export default InsuranceTable;
+export default withRouter(InsuranceTable);

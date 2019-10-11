@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { RouteComponentProps, withRouter } from 'react-router';
 import { Button, Icon, Popconfirm } from 'antd';
 import ExpandedAssetsRow, { AssetProps } from './ExpandedAssetsRowWrapper';
 import { TableEntryContainer, HeaderTitleTable, TextTitle, ActionTableGeneral } from '../../../pages/client/styled';
@@ -9,6 +10,7 @@ import { from2Options, ownerOptions, to2Options, assetTypes, investmentTypeOptio
 import { loadOptionsBaseOnCol } from '../../../utils/columnUtils';
 import { CurrentTypes } from '../../../enums/currents';
 import AddMenu from '../AddMenu';
+import { createEvent } from '../../../utils/GA';
 
 interface AssetsTableProps {
   data: object[];
@@ -27,7 +29,7 @@ interface AssetsTableProps {
   updateAssets: (assets?: object[]) => void;
 }
 
-class AssetsTable extends PureComponent<AssetsTableProps> {
+class AssetsTable extends PureComponent<AssetsTableProps & RouteComponentProps> {
   public columns = [
     {
       title: 'Description',
@@ -123,7 +125,7 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
   }
 
   public handleAdd = (value: string[]) => {
-    const { addRow } = this.props;
+    const { addRow, match } = this.props;
     const [owner, type] = value;
     const newData = {
       key: Date.now(),
@@ -148,8 +150,9 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
       },
     };
 
-    // update formik
     if (isFunction(addRow)) {
+      const clientId = Number.parseInt(get(match.params, 'clientId', ''), 10);
+      createEvent('current_position', 'create', 'Assets', clientId);
       addRow(newData);
     }
   }
@@ -268,4 +271,4 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
   }
 }
 
-export default AssetsTable;
+export default withRouter(AssetsTable);

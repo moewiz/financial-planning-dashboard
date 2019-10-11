@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
+import { withRouter, RouteComponentProps } from 'react-router';
 import { Button, Icon, Popconfirm } from 'antd';
 import { FormikProps } from 'formik';
-import { isFunction } from 'lodash';
+import { get, isFunction } from 'lodash';
 import { ActionTableGeneral, HeaderTitleTable, TableEntryContainer, TextTitle } from '../../../pages/client/styled';
 import GeneralTable from '../GeneralTable';
 import {
@@ -14,6 +15,7 @@ import {
 import { loadOptionsBaseOnCol } from '../../../utils/columnUtils';
 import { CurrentTypes } from '../../../enums/currents';
 import AddMenu from '../AddMenu';
+import { createEvent } from '../../../utils/GA';
 
 interface ExpenditureTableProps {
   data: object[];
@@ -30,7 +32,7 @@ interface ExpenditureTableProps {
   deleteRow: (key: number) => void;
 }
 
-class ExpenditureTable extends PureComponent<ExpenditureTableProps> {
+class ExpenditureTable extends PureComponent<ExpenditureTableProps & RouteComponentProps> {
   public columns = [
     {
       title: 'Description',
@@ -126,7 +128,7 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps> {
   }
 
   public handleAdd = (value: string[]) => {
-    const { addRow } = this.props;
+    const { addRow, match } = this.props;
     const [owner, type] = value;
     const newData = {
       key: Date.now(),
@@ -145,8 +147,9 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps> {
       },
     };
 
-    // update formik
     if (isFunction(addRow)) {
+      const clientId = Number.parseInt(get(match.params, 'clientId', ''), 10);
+      createEvent('current_position', 'create', 'Expenditure', clientId);
       addRow(newData);
     }
   }
@@ -226,4 +229,4 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps> {
   }
 }
 
-export default ExpenditureTable;
+export default withRouter(ExpenditureTable);

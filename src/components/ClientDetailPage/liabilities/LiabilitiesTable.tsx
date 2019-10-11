@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { RouteComponentProps, withRouter } from 'react-router';
 import { Button, Icon, Popconfirm } from 'antd';
 import { get, isFunction } from 'lodash';
 import { TableEntryContainer, HeaderTitleTable, TextTitle, ActionTableGeneral } from '../../../pages/client/styled';
@@ -8,6 +9,7 @@ import { to2Options, liabilitiesTypes, ownerOptions, from2Options } from '../../
 import { removePartnerOption } from '../../../utils/columnUtils';
 import { CurrentTypes } from '../../../enums/currents';
 import AddMenu from '../AddMenu';
+import { createEvent } from '../../../utils/GA';
 
 interface LiabilitiesTableProps {
   data: object[];
@@ -23,7 +25,7 @@ interface LiabilitiesTableProps {
   ref?: React.RefObject<any>;
 }
 
-class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
+class LiabilitiesTable extends PureComponent<LiabilitiesTableProps & RouteComponentProps> {
   public columns = [
     {
       title: 'Description',
@@ -124,7 +126,7 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
   }
 
   public handleAdd = (value: string[]) => {
-    const { addRow } = this.props;
+    const { addRow, match } = this.props;
     const [owner, type] = value;
     const newData = {
       key: Date.now(),
@@ -153,8 +155,9 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
       drawdowns: [],
     };
 
-    // update formik
     if (isFunction(addRow)) {
+      const clientId = Number.parseInt(get(match.params, 'clientId', ''), 10);
+      createEvent('current_position', 'create', 'Liabilities', clientId);
       addRow(newData);
     }
   }
@@ -263,4 +266,4 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
   }
 }
 
-export default LiabilitiesTable;
+export default withRouter(LiabilitiesTable);
