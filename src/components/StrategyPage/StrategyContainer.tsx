@@ -33,8 +33,13 @@ class StrategyContainer extends PureComponent<StrategyContainerProps & RouteComp
     const [owner, strategyType] = values;
 
     createEvent('strategy', 'create', label, getParams(match.params).clientId);
-    arrayHelpers.unshift(data);
-    this.redrawGraphs(strategyType === 'commenceAccount');
+    // TODO integrate the API
+    if (strategyType === 'commenceAccount') {
+      this.redrawGraphs(true);
+    } else {
+      arrayHelpers.unshift(data);
+      this.redrawGraphs(false);
+    }
   }
 
   public removeItem = (arrayHelpers: ArrayHelpers) => (index: number) => {
