@@ -283,7 +283,7 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
     this.increaseCount();
   }
 
-  public onEdit = (value: any, name: string, rowIndex: number) => {
+  public onEdit = (value: any, name: string, rowIndex: number, isRemove: boolean = false) => {
     const { fieldArrayRenderProps, dataList, client } = this.props;
     const rowName = `${fieldArrayRenderProps.name}[${rowIndex}]`;
     const fieldName = `${rowName}.${name}`;
@@ -307,6 +307,18 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
         this.handleAdd();
       }, 100);
     }
+    if (isRemove) {
+      createEvent('investment', 'unlink', undefined, get(client, 'clientId'));
+    }
+  }
+
+  public onEditLink = (value: any, name: string, rowIndex: number, isRemove: boolean = false) => {
+    const { fieldArrayRenderProps, client } = this.props;
+    const rowName = `${fieldArrayRenderProps.name}[${rowIndex}]`;
+    const fieldName = `${rowName}.${name}`;
+
+    fieldArrayRenderProps.form.setFieldValue(fieldName, value);
+    createEvent('investment', 'link', undefined, get(client, 'clientId'));
   }
 
   public getColumns = () => {
@@ -319,7 +331,7 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
             record,
             rowIndex,
             type: col.type || 'text',
-            onEdit: this.onEdit,
+            onEdit: this.onEditLink,
             options: {
               data: currentProductsTree,
             },

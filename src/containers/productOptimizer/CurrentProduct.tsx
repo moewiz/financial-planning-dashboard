@@ -64,7 +64,7 @@ const EditCellContainer = (props: any) => {
               closable={true}
               color="#e2e2e2"
               onClose={() =>
-                onEdit(filter(get(record, 'links', []), (link) => link.id !== product.id), 'links', rowIndex)
+                onEdit(filter(get(record, 'links', []), (link) => link.id !== product.id), 'links', rowIndex, true)
               }
             >
               {product.description}
