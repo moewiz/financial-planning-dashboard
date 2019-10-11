@@ -14,6 +14,7 @@ import { components } from './CurrentProduct';
 import { EditCellType } from '../../components/StrategyPage/Drawer/EditCell';
 import { proposedChoices } from '../../enums/proposedChoices';
 import { formatString, Param, Text } from '../../components/StrategyPage/StandardText';
+import { createEvent } from '../../utils/GA';
 
 interface ProposedProductState {
   loading: boolean;
@@ -266,6 +267,7 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
       this.cursorGoToProductField();
     }
 
+    createEvent('investment', 'create_proposed', action, get(client, 'clientId'));
     fieldArrayRenderProps.unshift({ ...newProduct, key: count, id: uuid() });
     this.increaseCount();
   }
