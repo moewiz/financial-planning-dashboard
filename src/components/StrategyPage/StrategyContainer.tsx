@@ -5,6 +5,7 @@ import { Col, Row } from 'antd';
 import { ArrayHelpers, FieldArray } from 'formik';
 import { bindActionCreators, Dispatch } from 'redux';
 import { isFunction } from 'lodash';
+import uuidv1 from 'uuid/v1';
 
 import { RootState, StandardAction } from '../../reducers/reducerTypes';
 import { ClientActions, FetchDataEntryPayload, RedrawGraphs } from '../../reducers/client';
@@ -12,8 +13,9 @@ import { StrategyTypes } from '../../enums/strategies';
 import { StrategyWrapper } from './styled';
 import StrategyInformation from './StrategyInformation';
 import StrategyTable from './StrategyTable/StrategyTable';
-import { StrategyItemI } from './StrategyTable/StrategyItem';
 import { getParams } from '../../pages/client/Client';
+import { createEvent } from '../../utils/GA';
+import { getStrategyTitle } from './StrategyPage';
 
 interface StrategyContainerProps {
   type: StrategyTypes;
@@ -24,16 +26,23 @@ interface StrategyContainerProps {
 }
 
 class StrategyContainer extends PureComponent<StrategyContainerProps & RouteComponentProps> {
-  public addItem = (arrayHelpers: ArrayHelpers) => (data: StrategyItemI) => {
+  public addItem = (arrayHelpers: ArrayHelpers) => (values: string[]) => {
+    const { match, type } = this.props;
+    const label = `${getStrategyTitle(type)} - ${values.join('.')}`;
+    const data = { id: uuidv1(), check: true, sentence: values.join('.') };
+    const [owner, strategyType] = values;
+
+    createEvent('strategy', 'create', label, getParams(match.params).clientId);
     arrayHelpers.unshift(data);
+    this.redrawGraphs(strategyType === 'commenceAccount');
   }
 
   public removeItem = (arrayHelpers: ArrayHelpers) => (index: number) => {
     arrayHelpers.remove(index);
   }
 
-  public redrawGraphs = (type: string, shouldUpdateGraphs?: boolean) => {
-    const { redrawGraphs, match } = this.props;
+  public redrawGraphs = (shouldUpdateGraphs: boolean = false) => {
+    const { redrawGraphs, match, type } = this.props;
     const { clientId, tabName, tagName } = getParams(match.params);
 
     if (isFunction(redrawGraphs) && clientId && tagName && tabName) {

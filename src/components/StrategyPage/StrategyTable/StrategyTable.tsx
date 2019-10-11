@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
-import { get, map, isFunction } from 'lodash';
+import { get, map } from 'lodash';
 import { Dropdown, Empty, Icon, Menu } from 'antd';
 import { connect, FormikContext } from 'formik';
-import uuidv1 from 'uuid/v1';
 
 import { StrategyEntry } from '../../../reducers/client';
 import { StrategyTypes } from '../../../enums/strategies';
@@ -19,35 +18,17 @@ interface FormikPartProps {
 
 interface StrategyTableProps {
   type: StrategyTypes;
-  addItem: (data: StrategyItemI) => void;
+  addItem: (values: string[]) => void;
   removeItem: (index: number) => void;
   defaultFullValue: any;
   tableProcessing: string | null;
-
-  redrawGraphs?: (type: string, shouldUpdateGraphs?: boolean) => void;
+  redrawGraphs: (shouldUpdateGraphs?: boolean) => void;
 }
 
 class StrategyTable extends PureComponent<FormikPartProps & StrategyTableProps> {
-  public redrawGraphs = (shouldUpdateGraphs: boolean = false) => {
-    const { redrawGraphs, type } = this.props;
-
-    if (isFunction(redrawGraphs)) {
-      redrawGraphs(type, shouldUpdateGraphs);
-    }
-  }
-
-  public addItem = (value: string[]): void => {
+  public addItem = (values: string[]): void => {
     const { addItem } = this.props;
-    const [owner, type] = value;
-    let shouldUpdateGraphs = false;
-
-    if (type === 'commenceAccount') {
-      shouldUpdateGraphs = true;
-    } else {
-      addItem({ id: uuidv1(), check: true, sentence: value.join('.') });
-    }
-
-    this.redrawGraphs(shouldUpdateGraphs);
+    addItem(values);
   }
 
   public getOptions = () => {
@@ -85,7 +66,7 @@ class StrategyTable extends PureComponent<FormikPartProps & StrategyTableProps> 
   }
 
   public render() {
-    const { type, removeItem, defaultFullValue, formik, tableProcessing } = this.props;
+    const { type, removeItem, defaultFullValue, formik, tableProcessing, redrawGraphs } = this.props;
     const shouldShowMarkAndMargin = type === StrategyTypes.EstatePlanning;
     const strategies = get(this.props, ['formik', 'values', type, 'strategies'], []);
     const client = get(this.props, ['formik', 'values', 'client'], {});
@@ -119,7 +100,7 @@ class StrategyTable extends PureComponent<FormikPartProps & StrategyTableProps> 
                 margin={shouldShowMarkAndMargin}
                 mark={shouldShowMarkAndMargin}
                 removeItem={removeItem}
-                redrawGraphs={this.redrawGraphs}
+                redrawGraphs={redrawGraphs}
                 client={client}
                 partner={partner}
                 defaultFullValue={defaultFullValue}
