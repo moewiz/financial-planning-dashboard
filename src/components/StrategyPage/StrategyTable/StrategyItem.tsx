@@ -37,7 +37,7 @@ export interface StrategyItemProps {
   strategyIndex: number;
   strategyType: string;
   strategy: StrategyItemI;
-  removeItem: (index: number) => void;
+  removeItem: (index: number, strategy: StrategyItemI) => void;
   redrawGraphs: () => void;
   client: DynamicData;
   partner: DynamicData;
@@ -122,7 +122,7 @@ class StrategyItem extends Component<StrategyItemProps> {
         remove('investments');
       }
     }
-    removeItem(strategyIndex);
+    removeItem(strategyIndex, strategy);
     redrawGraphs();
   }
 

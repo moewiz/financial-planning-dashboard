@@ -19,7 +19,7 @@ interface FormikPartProps {
 interface StrategyTableProps {
   type: StrategyTypes;
   addItem: (values: string[]) => void;
-  removeItem: (index: number) => void;
+  removeItem: (index: number, strategy: StrategyItemI) => void;
   defaultFullValue: any;
   tableProcessing: string | null;
   redrawGraphs: (shouldUpdateGraphs?: boolean) => void;

@@ -16,6 +16,7 @@ import StrategyTable from './StrategyTable/StrategyTable';
 import { getParams } from '../../pages/client/Client';
 import { createEvent } from '../../utils/GA';
 import { getStrategyTitle } from './StrategyPage';
+import { StrategyItemI } from './StrategyTable/StrategyItem';
 
 interface StrategyContainerProps {
   type: StrategyTypes;
@@ -42,7 +43,11 @@ class StrategyContainer extends PureComponent<StrategyContainerProps & RouteComp
     }
   }
 
-  public removeItem = (arrayHelpers: ArrayHelpers) => (index: number) => {
+  public removeItem = (arrayHelpers: ArrayHelpers) => (index: number, strategy: StrategyItemI) => {
+    const { match, type } = this.props;
+    const label = `${getStrategyTitle(type)} - ${strategy.sentence}`;
+
+    createEvent('strategy', 'delete', label, getParams(match.params).clientId);
     arrayHelpers.remove(index);
   }
 
