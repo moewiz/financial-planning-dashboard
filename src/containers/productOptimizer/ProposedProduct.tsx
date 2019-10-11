@@ -70,10 +70,6 @@ interface ProductOpt extends Product {
 
 interface ProposedProductProps extends ProductTable {
   tabKey: string;
-  client?: {
-    clientId: number;
-    clientName: string;
-  };
   dataList: ProductOpt[];
 }
 

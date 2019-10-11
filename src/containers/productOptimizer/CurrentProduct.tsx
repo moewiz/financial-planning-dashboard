@@ -11,6 +11,7 @@ import { Projections } from '../../components/Icons';
 import { Product } from '../../components/ProductOptimizer/Drawer/DrawerProduct';
 import EditCell, { EditCellType } from '../../components/StrategyPage/Drawer/EditCell';
 import LinkCurrentProduct from '../../components/StrategyPage/Drawer/LinkCurrentProduct';
+import { createEvent } from '../../utils/GA';
 
 interface CurrentProductState {
   loading: boolean;
@@ -228,7 +229,7 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
   }
 
   public moveRow = (record: any, dropResult: any) => {
-    const { clientPartnerName } = this.props;
+    const { clientPartnerName, client } = this.props;
     let newProposedProduct = {
       ...record,
       key: new Date().getTime(),
@@ -253,6 +254,7 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
       };
     }
 
+    createEvent('investment', 'create_proposed', 'Replace', get(client, 'clientId'));
     dropResult.unshift(newProposedProduct);
   }
 

@@ -21,6 +21,10 @@ export interface ProductTable {
   openDrawer: (record?: any) => void;
   fieldArrayRenderProps: FieldArrayRenderProps;
   clientPartnerName: string;
+  client?: {
+    clientId: number;
+    clientName: string;
+  };
 }
 
 interface ProductOptimizerProps {
@@ -119,6 +123,7 @@ class ProductOptimizer extends React.PureComponent<ProductOptimizerProps, Produc
                                 dataList={get(formikProps, 'values.client.current', [])}
                                 fieldArrayRenderProps={fieldArrayRenderProps}
                                 clientPartnerName={get(client, 'clientName', '')}
+                                client={client}
                               />
                             );
                           }}
@@ -153,6 +158,7 @@ class ProductOptimizer extends React.PureComponent<ProductOptimizerProps, Produc
                                 dataList={get(formikProps, 'values.partner.current', [])}
                                 fieldArrayRenderProps={fieldArrayRenderProps}
                                 clientPartnerName={get(client, 'clientName', '')}
+                                client={client}
                               />
                             );
                           }}
