@@ -10,6 +10,7 @@ import { MainLayoutContent, LayoutMain } from './styled';
 import { initializeGA } from '../../utils/GA';
 import { RootState } from '../../reducers/reducerTypes';
 import { Client } from '../../reducers/client';
+import { withTracker } from '../../utils/withTracker';
 
 interface MainLayoutProp {
   userId: string;

@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ThemeProvider } from 'styled-components';
 
+import { withTracker } from './utils/withTracker';
 import { myTheme } from './common/themes';
 
 import configureStore from './stores/configureStore';
@@ -43,19 +44,15 @@ const PublicRoute: React.FC<RouteProps> = (props) => {
 
 const PrivateRoute: React.FC<RouteProps> = (props) => {
   const { component: Component, ...rest } = props;
+
   if (!ApiUtils.getAccessToken()) {
     return <Redirect to="/sign-in" />;
   }
 
   return (
-    <Route
-      {...rest}
-      render={(matchProps: RouteComponentProps) => (
-        <MainLayout>
-          <Component {...matchProps} />
-        </MainLayout>
-      )}
-    />
+    <MainLayout>
+      <Route {...rest} component={withTracker(Component)} />
+    </MainLayout>
   );
 };
 
