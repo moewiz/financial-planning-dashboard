@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
 import { Button, Icon, Popconfirm } from 'antd';
-import { get, isFunction } from 'lodash';
+import { isFunction } from 'lodash';
 import { FormikProps } from 'formik';
 
 import GeneralTable from '../GeneralTable';
@@ -23,6 +22,7 @@ interface IncomeTableProps {
   data: object[];
   maritalStatus: string;
   dynamicCustomValue: object;
+  clientId: number;
   loading?: boolean;
 
   formProps?: FormikProps<any>;
@@ -34,7 +34,7 @@ interface IncomeTableProps {
   deleteRow: (key: number) => void;
 }
 
-class IncomeTable extends PureComponent<IncomeTableProps & RouteComponentProps> {
+class IncomeTable extends PureComponent<IncomeTableProps> {
   public columns = [
     {
       title: 'Description',
@@ -123,16 +123,16 @@ class IncomeTable extends PureComponent<IncomeTableProps & RouteComponentProps> 
   }
 
   public handleDelete = (key: number) => {
-    const { deleteRow } = this.props;
+    const { deleteRow, clientId } = this.props;
 
-    // update formik
     if (isFunction(deleteRow)) {
+      createEvent('current_position', 'delete', 'Income', clientId);
       deleteRow(key);
     }
   }
 
   public handleAdd = (value: string[]) => {
-    const { addRow, match } = this.props;
+    const { addRow, clientId } = this.props;
     const [owner, type] = value;
     const newData = {
       key: Date.now(),
@@ -152,7 +152,6 @@ class IncomeTable extends PureComponent<IncomeTableProps & RouteComponentProps> 
     };
 
     if (isFunction(addRow)) {
-      const clientId = Number.parseInt(get(match.params, 'clientId', ''), 10);
       createEvent('current_position', 'create', 'Income', clientId);
       addRow(newData);
     }
@@ -234,4 +233,4 @@ class IncomeTable extends PureComponent<IncomeTableProps & RouteComponentProps> 
   }
 }
 
-export default withRouter(IncomeTable);
+export default IncomeTable;

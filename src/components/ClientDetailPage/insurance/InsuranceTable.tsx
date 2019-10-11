@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
 import { Button, Icon, Popconfirm } from 'antd';
 import { isFunction, get } from 'lodash';
 import { TableEntryContainer, HeaderTitleTable, TextTitle, ActionTableGeneral } from '../../../pages/client/styled';
@@ -14,6 +13,7 @@ interface InsuranceTableProps {
   data: object[];
   maritalStatus: string;
   loading?: boolean;
+  clientId: number;
 
   formProps?: FormikProps<any>;
   tableName?: string;
@@ -25,7 +25,7 @@ interface InsuranceTableProps {
   dynamicCustomValue: object;
 }
 
-class InsuranceTable extends PureComponent<InsuranceTableProps & RouteComponentProps> {
+class InsuranceTable extends PureComponent<InsuranceTableProps> {
   public columns = [
     {
       title: 'Provider',
@@ -71,16 +71,16 @@ class InsuranceTable extends PureComponent<InsuranceTableProps & RouteComponentP
   }
 
   public handleDelete = (key: number) => {
-    const { deleteRow } = this.props;
+    const { deleteRow, clientId } = this.props;
 
-    // update formik
     if (isFunction(deleteRow)) {
+      createEvent('current_position', 'delete', 'Insurance', clientId);
       deleteRow(key);
     }
   }
 
   public handleAdd = () => {
-    const { addRow, match } = this.props;
+    const { addRow, clientId } = this.props;
     const newData = {
       key: Date.now(),
       provider: 'ABC',
@@ -111,9 +111,7 @@ class InsuranceTable extends PureComponent<InsuranceTableProps & RouteComponentP
       ],
     };
 
-    // update formik
     if (isFunction(addRow)) {
-      const clientId = Number.parseInt(get(match.params, 'clientId', ''), 10);
       createEvent('current_position', 'create', 'Insurance', clientId);
       addRow(newData);
     }
@@ -223,4 +221,4 @@ class InsuranceTable extends PureComponent<InsuranceTableProps & RouteComponentP
   }
 }
 
-export default withRouter(InsuranceTable);
+export default InsuranceTable;

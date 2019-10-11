@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
 import { Button, Icon, Popconfirm } from 'antd';
 import ExpandedAssetsRow, { AssetProps } from './ExpandedAssetsRowWrapper';
 import { TableEntryContainer, HeaderTitleTable, TextTitle, ActionTableGeneral } from '../../../pages/client/styled';
@@ -17,6 +16,7 @@ interface AssetsTableProps {
   maritalStatus: string;
   dynamicCustomValue: object;
   empStatus: string;
+  clientId: number;
   loading?: boolean;
 
   formProps?: FormikProps<any>;
@@ -29,7 +29,7 @@ interface AssetsTableProps {
   updateAssets: (assets?: object[]) => void;
 }
 
-class AssetsTable extends PureComponent<AssetsTableProps & RouteComponentProps> {
+class AssetsTable extends PureComponent<AssetsTableProps> {
   public columns = [
     {
       title: 'Description',
@@ -116,16 +116,16 @@ class AssetsTable extends PureComponent<AssetsTableProps & RouteComponentProps> 
   }
 
   public handleDelete = (key: number) => {
-    const { deleteRow } = this.props;
+    const { deleteRow, clientId } = this.props;
 
-    // update formik
     if (isFunction(deleteRow)) {
+      createEvent('current_position', 'delete', 'Assets', clientId);
       deleteRow(key);
     }
   }
 
   public handleAdd = (value: string[]) => {
-    const { addRow, match } = this.props;
+    const { addRow, clientId } = this.props;
     const [owner, type] = value;
     const newData = {
       key: Date.now(),
@@ -151,7 +151,6 @@ class AssetsTable extends PureComponent<AssetsTableProps & RouteComponentProps> 
     };
 
     if (isFunction(addRow)) {
-      const clientId = Number.parseInt(get(match.params, 'clientId', ''), 10);
       createEvent('current_position', 'create', 'Assets', clientId);
       addRow(newData);
     }
@@ -271,4 +270,4 @@ class AssetsTable extends PureComponent<AssetsTableProps & RouteComponentProps> 
   }
 }
 
-export default withRouter(AssetsTable);
+export default AssetsTable;

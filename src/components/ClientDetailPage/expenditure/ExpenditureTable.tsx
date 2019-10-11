@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
-import { withRouter, RouteComponentProps } from 'react-router';
 import { Button, Icon, Popconfirm } from 'antd';
 import { FormikProps } from 'formik';
-import { get, isFunction } from 'lodash';
+import { isFunction } from 'lodash';
 import { ActionTableGeneral, HeaderTitleTable, TableEntryContainer, TextTitle } from '../../../pages/client/styled';
 import GeneralTable from '../GeneralTable';
 import {
@@ -22,6 +21,7 @@ interface ExpenditureTableProps {
   maritalStatus: string;
   dynamicCustomValue: object;
   loading?: boolean;
+  clientId: number;
 
   formProps?: FormikProps<any>;
   tableName?: string;
@@ -32,7 +32,7 @@ interface ExpenditureTableProps {
   deleteRow: (key: number) => void;
 }
 
-class ExpenditureTable extends PureComponent<ExpenditureTableProps & RouteComponentProps> {
+class ExpenditureTable extends PureComponent<ExpenditureTableProps> {
   public columns = [
     {
       title: 'Description',
@@ -119,16 +119,16 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps & RouteCompon
   }
 
   public handleDelete = (key: number) => {
-    const { deleteRow } = this.props;
+    const { deleteRow, clientId } = this.props;
 
-    // update formik
     if (isFunction(deleteRow)) {
+      createEvent('current_position', 'delete', 'Expenditure', clientId);
       deleteRow(key);
     }
   }
 
   public handleAdd = (value: string[]) => {
-    const { addRow, match } = this.props;
+    const { addRow, clientId } = this.props;
     const [owner, type] = value;
     const newData = {
       key: Date.now(),
@@ -148,7 +148,6 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps & RouteCompon
     };
 
     if (isFunction(addRow)) {
-      const clientId = Number.parseInt(get(match.params, 'clientId', ''), 10);
       createEvent('current_position', 'create', 'Expenditure', clientId);
       addRow(newData);
     }
@@ -229,4 +228,4 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps & RouteCompon
   }
 }
 
-export default withRouter(ExpenditureTable);
+export default ExpenditureTable;

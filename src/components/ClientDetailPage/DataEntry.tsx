@@ -175,7 +175,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
   }
 
   public render() {
-    const { pageData, loading, maritalStatus, assets, empStatus, submitting } = this.props;
+    const { pageData, loading, maritalStatus, assets, empStatus, submitting, clientId } = this.props;
     const dynamicCustomValue = pick(pageData, ['inflationCPI', 'salaryInflation', 'sgcRate', 'benefitDefaultAge']);
 
     return (
@@ -249,6 +249,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
                   ref={this.incomeForm}
                   maritalStatus={maritalStatus}
                   dynamicCustomValue={dynamicCustomValue}
+                  clientId={clientId}
                 />
               </Form>
             );
@@ -287,6 +288,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
                   ref={this.expenditureForm}
                   maritalStatus={maritalStatus}
                   dynamicCustomValue={dynamicCustomValue}
+                  clientId={clientId}
                 />
               </Form>
             );
@@ -329,6 +331,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
                   dynamicCustomValue={dynamicCustomValue}
                   updateAssets={this.updateAssets}
                   empStatus={empStatus}
+                  clientId={clientId}
                 />
               </Form>
             );
@@ -367,6 +370,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
                   ref={this.liabilitiesForm}
                   maritalStatus={maritalStatus}
                   assets={assets || []}
+                  clientId={clientId}
                 />
               </Form>
             );
@@ -405,6 +409,7 @@ class DataEntryComponent extends PureComponent<DataEntryProps> {
                   ref={this.insuranceForm}
                   maritalStatus={maritalStatus}
                   dynamicCustomValue={dynamicCustomValue}
+                  clientId={clientId}
                 />
               </Form>
             );

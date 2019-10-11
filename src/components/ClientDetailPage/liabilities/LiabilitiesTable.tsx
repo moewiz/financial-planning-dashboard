@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
 import { Button, Icon, Popconfirm } from 'antd';
 import { get, isFunction } from 'lodash';
 import { TableEntryContainer, HeaderTitleTable, TextTitle, ActionTableGeneral } from '../../../pages/client/styled';
@@ -16,6 +15,7 @@ interface LiabilitiesTableProps {
   maritalStatus: string;
   assets: Array<{ refId: number; description: string; type: string }>;
   loading?: boolean;
+  clientId: number;
 
   setFieldValue: (field: string, value: any) => void;
   resetForm: (nextValues?: any) => void;
@@ -25,7 +25,7 @@ interface LiabilitiesTableProps {
   ref?: React.RefObject<any>;
 }
 
-class LiabilitiesTable extends PureComponent<LiabilitiesTableProps & RouteComponentProps> {
+class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
   public columns = [
     {
       title: 'Description',
@@ -117,16 +117,16 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps & RouteCompon
   }
 
   public handleDelete = (key: number) => {
-    const { deleteRow } = this.props;
+    const { deleteRow, clientId } = this.props;
 
-    // update formik
     if (isFunction(deleteRow)) {
+      createEvent('current_position', 'delete', 'Liabilities', clientId);
       deleteRow(key);
     }
   }
 
   public handleAdd = (value: string[]) => {
-    const { addRow, match } = this.props;
+    const { addRow, clientId } = this.props;
     const [owner, type] = value;
     const newData = {
       key: Date.now(),
@@ -156,7 +156,6 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps & RouteCompon
     };
 
     if (isFunction(addRow)) {
-      const clientId = Number.parseInt(get(match.params, 'clientId', ''), 10);
       createEvent('current_position', 'create', 'Liabilities', clientId);
       addRow(newData);
     }
@@ -266,4 +265,4 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps & RouteCompon
   }
 }
 
-export default withRouter(LiabilitiesTable);
+export default LiabilitiesTable;
