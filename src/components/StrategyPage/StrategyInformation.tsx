@@ -19,12 +19,15 @@ import {
   OpenDrawerAction,
 } from '../../reducers/drawer';
 import { loadGraphData } from './StrategyHeader';
+import { createEvent } from '../../utils/GA';
+import { getStrategyTitle } from './StrategyPage';
 
 interface FormikPartProps {
   formik: FormikContext<StrategyEntry>;
 }
 
 interface StrategyInformationProps {
+  clientId: number;
   type: StrategyTypes;
   openDrawer: (tabActive: string) => OpenDrawerAction;
   fetchDrawerData: (type: string) => FetchDrawerDataAction;
@@ -79,9 +82,11 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
       e.preventDefault();
     }
 
-    const { openDrawer, type, fetchDrawerSuccess, formik } = this.props;
-    openDrawer('client');
+    const { openDrawer, type, fetchDrawerSuccess, formik, clientId } = this.props;
     const drawerData = get(formik, ['values', type, 'drawer'], {});
+
+    createEvent('strategy', 'drawer_initiate', getStrategyTitle(type), clientId);
+    openDrawer('client');
     fetchDrawerSuccess(drawerData);
   }
 

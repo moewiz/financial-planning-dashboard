@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router';
-import { Col, Collapse, Icon, Row } from 'antd';
+import { Col, Row } from 'antd';
 import { ArrayHelpers, FieldArray } from 'formik';
 import { bindActionCreators, Dispatch } from 'redux';
 import { isFunction } from 'lodash';
@@ -9,7 +9,7 @@ import { isFunction } from 'lodash';
 import { RootState, StandardAction } from '../../reducers/reducerTypes';
 import { ClientActions, FetchDataEntryPayload, RedrawGraphs } from '../../reducers/client';
 import { StrategyTypes } from '../../enums/strategies';
-import { StrategyWrapper, TitleStrategyBlock } from './styled';
+import { StrategyWrapper } from './styled';
 import StrategyInformation from './StrategyInformation';
 import StrategyTable from './StrategyTable/StrategyTable';
 import { StrategyItemI } from './StrategyTable/StrategyItem';
@@ -65,13 +65,13 @@ class StrategyContainer extends PureComponent<StrategyContainerProps & RouteComp
   }
 
   public render() {
-    const { type } = this.props;
+    const { type, match } = this.props;
 
     return (
       <StrategyWrapper>
         <Row gutter={24}>
           <Col span={12}>
-            <StrategyInformation type={type} />
+            <StrategyInformation type={type} clientId={getParams(match.params).clientId} />
           </Col>
           <Col span={12}>
             <FieldArray name={type + '.strategies'} render={this.renderStrategyTable} validateOnChange={false} />

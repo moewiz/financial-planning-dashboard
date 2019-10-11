@@ -18,7 +18,7 @@ interface StrategyPageProps {
   pageData: StrategyEntry;
 }
 
-const getTitle = (type: StrategyTypes) => {
+export const getStrategyTitle = (type: StrategyTypes) => {
   switch (type) {
     case StrategyTypes.Superannuation:
       return 'Superannuation';
@@ -130,7 +130,7 @@ const StrategyPage = (props: StrategyPageProps) => {
             <Collapse defaultActiveKey={values(StrategyTypes)} bordered={false}>
               <PanelWrapper
                 key={StrategyTypes.Superannuation}
-                header={<TitleStrategyBlock>{getTitle(StrategyTypes.Superannuation)}</TitleStrategyBlock>}
+                header={<TitleStrategyBlock>{getStrategyTitle(StrategyTypes.Superannuation)}</TitleStrategyBlock>}
               >
                 {formikProps.values.superannuation && defaultFullValue && (
                   <StrategyContainer type={StrategyTypes.Superannuation} defaultFullValue={defaultFullValue} />
@@ -138,7 +138,7 @@ const StrategyPage = (props: StrategyPageProps) => {
               </PanelWrapper>
               <PanelWrapper
                 key={StrategyTypes.Pensions}
-                header={<TitleStrategyBlock>{getTitle(StrategyTypes.Pensions)}</TitleStrategyBlock>}
+                header={<TitleStrategyBlock>{getStrategyTitle(StrategyTypes.Pensions)}</TitleStrategyBlock>}
               >
                 {formikProps.values.pension && defaultFullValue && (
                   <StrategyContainer type={StrategyTypes.Pensions} defaultFullValue={defaultFullValue} />
@@ -146,7 +146,7 @@ const StrategyPage = (props: StrategyPageProps) => {
               </PanelWrapper>
               <PanelWrapper
                 key={StrategyTypes.Investments}
-                header={<TitleStrategyBlock>{getTitle(StrategyTypes.Investments)}</TitleStrategyBlock>}
+                header={<TitleStrategyBlock>{getStrategyTitle(StrategyTypes.Investments)}</TitleStrategyBlock>}
               >
                 {formikProps.values.investments && defaultFullValue && (
                   <StrategyContainer type={StrategyTypes.Investments} defaultFullValue={defaultFullValue} />
@@ -154,7 +154,7 @@ const StrategyPage = (props: StrategyPageProps) => {
               </PanelWrapper>
               <PanelWrapper
                 key={StrategyTypes.Debt}
-                header={<TitleStrategyBlock>{getTitle(StrategyTypes.Debt)}</TitleStrategyBlock>}
+                header={<TitleStrategyBlock>{getStrategyTitle(StrategyTypes.Debt)}</TitleStrategyBlock>}
               >
                 {formikProps.values.debt && defaultFullValue && (
                   <StrategyContainer type={StrategyTypes.Debt} defaultFullValue={defaultFullValue} />
@@ -162,7 +162,7 @@ const StrategyPage = (props: StrategyPageProps) => {
               </PanelWrapper>
               <PanelWrapper
                 key={StrategyTypes.Centrelink}
-                header={<TitleStrategyBlock>{getTitle(StrategyTypes.Centrelink)}</TitleStrategyBlock>}
+                header={<TitleStrategyBlock>{getStrategyTitle(StrategyTypes.Centrelink)}</TitleStrategyBlock>}
               >
                 {formikProps.values.centrelink && defaultFullValue && (
                   <StrategyContainer type={StrategyTypes.Centrelink} defaultFullValue={defaultFullValue} />
@@ -170,7 +170,7 @@ const StrategyPage = (props: StrategyPageProps) => {
               </PanelWrapper>
               <PanelWrapper
                 key={StrategyTypes.Insurance}
-                header={<TitleStrategyBlock>{getTitle(StrategyTypes.Insurance)}</TitleStrategyBlock>}
+                header={<TitleStrategyBlock>{getStrategyTitle(StrategyTypes.Insurance)}</TitleStrategyBlock>}
               >
                 {formikProps.values.insurance && defaultFullValue && (
                   <StrategyContainer type={StrategyTypes.Insurance} defaultFullValue={defaultFullValue} />
@@ -178,7 +178,7 @@ const StrategyPage = (props: StrategyPageProps) => {
               </PanelWrapper>
               <PanelWrapper
                 key={StrategyTypes.EstatePlanning}
-                header={<TitleStrategyBlock>{getTitle(StrategyTypes.EstatePlanning)}</TitleStrategyBlock>}
+                header={<TitleStrategyBlock>{getStrategyTitle(StrategyTypes.EstatePlanning)}</TitleStrategyBlock>}
               >
                 {formikProps.values.estatePlanning && defaultFullValue && (
                   <StrategyContainer type={StrategyTypes.EstatePlanning} defaultFullValue={defaultFullValue} />
