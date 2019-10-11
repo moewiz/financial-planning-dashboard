@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Icon, Avatar } from 'antd';
 import { map } from 'lodash';
 
@@ -16,9 +17,9 @@ import {
   StickyStyle,
 } from './styled';
 import { default as ModalNameAndBirthDay } from '../../components/NameAndBirthDay/NameAndBirthDay';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { POSITIONS, Position } from '../../enums/client';
 import { Client, Tag } from '../../reducers/client';
+import { createEvent } from '../../utils/GA';
 
 /* ClientItem
  *    ClientInfo
@@ -47,10 +48,12 @@ class Sidebar extends React.PureComponent<SidebarProps & RouteComponentProps> {
     });
   }
 
-  public showTable = (tagName: string, tabName: string, clientId: number) => {
+  public showTable = (tag: Tag, position: Position, clientId: number) => {
     const { history } = this.props;
+    const { name: tagName, date } = tag;
 
-    history.push(`/client/${clientId}/${tagName}/${tabName}`);
+    createEvent('client_navigation', position.label, date, clientId);
+    history.push(`/client/${clientId}/${tagName}/${position.slug}`);
   }
 
   public selectClient = (clientId: number) => {
@@ -74,7 +77,7 @@ class Sidebar extends React.PureComponent<SidebarProps & RouteComponentProps> {
         }
       >
         {map(POSITIONS, (position: Position) => (
-          <SubList key={name + position.value} onClick={() => this.showTable(name, position.slug, clientId)}>
+          <SubList key={name + position.value} onClick={() => this.showTable(tag, position, clientId)}>
             <i className={position.icon} />
             <span>{position.label}</span>
           </SubList>

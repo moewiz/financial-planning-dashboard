@@ -19,19 +19,20 @@ function initializeGA(userId: string, trackingID?: string): void {
 /**
  * Track user navigate
  */
-function updatePageView(_path?: string) {
-  const path = _path || window.location.pathname + window.location.search;
+function updatePageView(pathName?: string) {
+  const path = pathName || window.location.pathname + window.location.search;
   ReactGA.pageview(path);
 }
 
 /**
  * Event - Add custom tracking event
  */
-function Event(category: string, action: string, label?: string): void {
+function createEvent(category: string, action: string, label?: string, value?: number): void {
   const args: EventArgs = {
     category,
     action,
     label,
+    value,
   };
   return ReactGA.event(args);
 }
@@ -42,7 +43,7 @@ function Event(category: string, action: string, label?: string): void {
  * event_label = create_button_clicked
  */
 function sendGAEventCreateClientButtonClicked(): void {
-  return Event('new_client', 'create_button_clicked');
+  return createEvent('new_client', 'create_button_clicked');
 }
 
 /**
@@ -51,7 +52,7 @@ function sendGAEventCreateClientButtonClicked(): void {
  * event_label = client_saved
  */
 function sendGAEventNewClientCreated(): void {
-  return Event('new_client', 'client_saved');
+  return createEvent('new_client', 'client_saved');
 }
 
-export { initializeGA, sendGAEventCreateClientButtonClicked, sendGAEventNewClientCreated, updatePageView };
+export { initializeGA, sendGAEventCreateClientButtonClicked, sendGAEventNewClientCreated, createEvent, updatePageView };
