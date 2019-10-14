@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Checkbox, Icon, Popconfirm, Table } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
-import { get, isFunction, isNumber, dropRight, last, head } from 'lodash';
+import { get, isFunction, isNumber, dropRight, head } from 'lodash';
 import cn from 'classnames';
 import { FieldArray, FieldArrayRenderProps } from 'formik';
 
@@ -10,6 +10,84 @@ import { ActionDrawerGeneral, ProposedBlock } from '../../StrategyPage/Drawer/st
 import { components } from '../../../containers/productOptimizer/CurrentProduct';
 import CustomSearch, { CustomSearchProp, CustomSearchType } from './CustomSearch';
 import { addPercentage, getSumFunds, Option, Product } from './DrawerProduct';
+
+const fundOptions = [
+  {
+    id: 1,
+    name: 'Solaris W/S Core Aust Equity',
+    value: 16000,
+  },
+  {
+    id: 2,
+    name: 'CFS W/S Index Aust Share',
+    value: 68000,
+  },
+  {
+    id: 3,
+    name: 'Ausbil W/S Aust Emerging Leaders',
+    value: 12000,
+  },
+  {
+    id: 4,
+    name: 'MFS W/S Global Equity',
+    value: 20000,
+  },
+  {
+    id: 5,
+    name: 'CFS W/S Global Share Index',
+    value: 56000,
+  },
+  {
+    id: 6,
+    name: 'CFS W/S - Index Global Share (H)',
+    value: 40000,
+  },
+  {
+    id: 7,
+    name: 'Pendal W/S Global Emerging Market Opportunities',
+    value: 12000,
+  },
+  {
+    id: 8,
+    name: 'CFS W/S Global Property Securities',
+    value: 16000,
+  },
+  {
+    id: 9,
+    name: 'CFS W/S Global Listed Infrast. Secs',
+    value: 20000,
+  },
+  {
+    id: 10,
+    name: 'Schroder W/S Real Return',
+    value: 18000,
+  },
+  {
+    id: 11,
+    name: 'Schroder W/S Real Return',
+    value: 18000,
+  },
+  {
+    id: 12,
+    name: 'Macquarie W/S Income Opps',
+    value: 28000,
+  },
+  {
+    id: 13,
+    name: 'Kapstream W/S Absolute Return Income',
+    value: 36000,
+  },
+  {
+    id: 14,
+    name: 'FirstChoice W/S Fixed Interest',
+    value: 16000,
+  },
+  {
+    id: 15,
+    name: 'FirstRate Wholesale Saver',
+    value: 24000,
+  },
+];
 
 interface FundTableProps {
   columns: any[];
@@ -23,16 +101,7 @@ interface FundTableProps {
 }
 
 const LinkProductAndFund = (props: FundTableProps) => {
-  const {
-    columns,
-    values,
-    setFieldValue,
-    prefixField,
-    linkedProduct,
-    fieldArrayLinks,
-    linkIndex,
-    hasCurrent,
-  } = props;
+  const { columns, values, setFieldValue, prefixField, linkedProduct, fieldArrayLinks, linkIndex, hasCurrent } = props;
   const funds: Option[] = get(values, 'details.funds', []);
   const onSelectProduct = (option: Option) => {
     if (option) {
@@ -41,14 +110,15 @@ const LinkProductAndFund = (props: FundTableProps) => {
     }
   };
   const onSelectFund = (fieldArrayFunds: FieldArrayRenderProps) => (option: Option) => {
-    const shouldAddTotalRow = funds.length === 0;
+    // const shouldAddTotalRow = funds.length === 0;
     if (option) {
-
       fieldArrayFunds.unshift(option);
+      const field = (prefixField ? prefixField + '.' : '') + fieldArrayFunds.name;
+      setFieldValue(field, fundOptions);
 
-      if (shouldAddTotalRow) {
-        fieldArrayFunds.push({ id: -1, name: 'Total', value: option.value, percentage: 100 });
-      }
+      // if (shouldAddTotalRow) {
+      //   fieldArrayFunds.push({ id: -1, name: 'Total', value: option.value, percentage: 100 });
+      // }
     }
   };
   const detailProduct = values && values.details && values.details.product;
@@ -65,11 +135,16 @@ const LinkProductAndFund = (props: FundTableProps) => {
   useEffect(() => {
     if (funds.length > 0 && funds[0].id !== -1) {
       const fieldName = (prefixField ? prefixField + '.' : '') + 'details.funds';
-      const fundsWithoutTotal = dropRight(funds);
-      const updatedFunds = addPercentage(fundsWithoutTotal);
-      const sum = getSumFunds(fundsWithoutTotal);
-      const totalRow = funds[funds.length - 1];
-      totalRow.value = sum;
+      const newFunds = funds[funds.length - 1].id !== -1 ? funds : dropRight(funds);
+      const updatedFunds = addPercentage(newFunds);
+      const sum = getSumFunds(newFunds);
+      let totalRow;
+      if (funds[funds.length - 1].id !== -1) {
+        totalRow = { id: -1, name: 'Total', value: sum, percentage: 100 };
+      } else {
+        totalRow = funds[funds.length - 1];
+        totalRow.value = sum;
+      }
 
       setFieldValue(fieldName, [...updatedFunds, totalRow]);
     }
