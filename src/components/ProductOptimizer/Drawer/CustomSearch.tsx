@@ -25,7 +25,7 @@ interface OptionData extends Option {
 
 const dummyProductForSearching: OptionData[] = [
   {
-    name: 'Recent',
+    name: 'Search Result',
     children: [
       {
         id: 1,
@@ -43,11 +43,6 @@ const dummyProductForSearching: OptionData[] = [
         id: 4,
         name: 'OnePath OneAnswer Frontier Pension',
       },
-    ],
-  },
-  {
-    name: 'Popular',
-    children: [
       {
         id: 5,
         name: 'BT Panorama Super Compact',
@@ -78,13 +73,22 @@ const dummyProductForSearching: OptionData[] = [
 
 const dummyFundForSearching: OptionData[] = [
   {
-    name: 'Search Result',
+    name: 'Model Portfolios',
     children: [
-      { id: 1, name: 'Fund DE', value: 10000 },
-      { id: 2, name: 'Fund DF', value: 5000 },
-      { id: 3, name: 'Fund DG', value: 15000 },
-      { id: 4, name: 'Fund DH', value: 20000 },
-      { id: 5, name: 'Fund DI', value: 25000 },
+      { id: 1, name: 'CFS FirstChoice Low Cost Model Portfolio', value: 10000 },
+      { id: 2, name: 'CFS FirstChoice Accumulation Model Portfolio', value: 5000 },
+      { id: 3, name: 'CFS FirstChoice Retirement Model Portfolio', value: 15000 },
+    ],
+  },
+  {
+    name: 'Managed Funds',
+    children: [
+      { id: 1, name: 'Magellan Global Fund', value: 10000, code: 'FSF1788AU' },
+      { id: 2, name: 'Kapstream Absolute Return Income', value: 5000, code: 'FSF1636AU' },
+      { id: 3, name: 'Schroder Australian Equity', value: 15000, code: 'FSF1637AU' },
+      { id: 6, name: 'Platinum International Fund', value: 15000, code: 'FSF0648AU' },
+      { id: 7, name: 'MFS Global Equity', value: 15000, code: 'FSF0625AU' },
+      { id: 8, name: 'Perpetual Balanced Growth', value: 15000, code: 'FSF0631AU' },
     ],
   },
 ];

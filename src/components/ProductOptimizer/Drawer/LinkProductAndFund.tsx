@@ -41,9 +41,11 @@ const LinkProductAndFund = (props: FundTableProps) => {
     }
   };
   const onSelectFund = (fieldArrayFunds: FieldArrayRenderProps) => (option: Option) => {
+    const shouldAddTotalRow = funds.length === 0;
     if (option) {
-      const shouldAddTotalRow = funds.length === 0;
+
       fieldArrayFunds.unshift(option);
+
       if (shouldAddTotalRow) {
         fieldArrayFunds.push({ id: -1, name: 'Total', value: option.value, percentage: 100 });
       }
@@ -61,7 +63,7 @@ const LinkProductAndFund = (props: FundTableProps) => {
 
   // Update Total row
   useEffect(() => {
-    if (funds.length > 0 && funds[funds.length - 1].id !== -1) {
+    if (funds.length > 0 && funds[0].id !== -1) {
       const fieldName = (prefixField ? prefixField + '.' : '') + 'details.funds';
       const fundsWithoutTotal = dropRight(funds);
       const updatedFunds = addPercentage(fundsWithoutTotal);
