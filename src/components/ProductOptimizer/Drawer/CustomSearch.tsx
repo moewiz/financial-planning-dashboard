@@ -29,13 +29,19 @@ const dummyProductForSearching: OptionData[] = [
     children: [
       {
         id: 1,
-        name: 'BlackRock Global Income',
-        code: 'AMP1995AU',
+        name: 'CFS FirstChoice Wholesale Personal Super',
       },
       {
         id: 2,
-        name: 'Product X',
-        code: 'AMP1707AU',
+        name: 'CFS FirstChoice Wholesale Pension',
+      },
+      {
+        id: 3,
+        name: 'OnePath OneAnswer Frontier Personal Super',
+      },
+      {
+        id: 4,
+        name: 'OnePath OneAnswer Frontier Pension',
       },
     ],
   },
@@ -43,44 +49,28 @@ const dummyProductForSearching: OptionData[] = [
     name: 'Popular',
     children: [
       {
-        id: 3,
-        name: 'AMP Australian Share Index',
-        code: 'AMP1995AU',
-      },
-      {
-        id: 4,
-        name: 'Perpetual Industrial Share',
-        code: 'AMP0057AU',
-      },
-      {
         id: 5,
-        name: 'Plato Australian Shares Income',
-        code: 'AMP0767AU',
+        name: 'BT Panorama Super Compact',
       },
-    ],
-  },
-  {
-    name: 'Model Portfolios',
-    children: [
       {
         id: 6,
-        name: 'Model Portpolio 1 (Growth)',
+        name: 'BT Panorama Super Full',
       },
       {
         id: 7,
-        name: 'Model Portpolio 2 (Defensive)',
+        name: 'BT Panorama Super Compact (Pension)',
       },
       {
         id: 8,
-        name: 'Model Portpolio 3 (Moderate)',
+        name: 'BT Panorama Super Full (Pension)',
       },
       {
         id: 9,
-        name: 'Model Portpolio 4 (Defensive)',
+        name: 'AMP MyNorth Super',
       },
       {
         id: 10,
-        name: 'Model Portpolio 5 (Growth)',
+        name: 'AMP MyNorth Pension',
       },
     ],
   },
