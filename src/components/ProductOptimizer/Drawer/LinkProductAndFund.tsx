@@ -20,7 +20,6 @@ interface FundTableProps {
   hasCurrent?: boolean;
   fieldArrayLinks?: FieldArrayRenderProps;
   linkIndex?: number;
-  total?: number;
 }
 
 const LinkProductAndFund = (props: FundTableProps) => {
@@ -33,7 +32,6 @@ const LinkProductAndFund = (props: FundTableProps) => {
     fieldArrayLinks,
     linkIndex,
     hasCurrent,
-    total,
   } = props;
   const funds: Option[] = get(values, 'details.funds', []);
   const onSelectProduct = (option: Option) => {

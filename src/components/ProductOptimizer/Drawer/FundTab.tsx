@@ -165,7 +165,6 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
               values={product}
               setFieldValue={setFieldValue}
               linkedProduct={true}
-              total={400000}
             />
           </FundBlock>
           <HorizontalScrollable>
