@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Checkbox, Icon, Popconfirm, Table } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { get, isFunction, isNumber, dropRight, last, head } from 'lodash';
@@ -8,7 +8,7 @@ import { FieldArray, FieldArrayRenderProps } from 'formik';
 import { TableEntryContainer } from '../../../pages/client/styled';
 import { ActionDrawerGeneral, ProposedBlock } from '../../StrategyPage/Drawer/styled';
 import { components } from '../../../containers/productOptimizer/CurrentProduct';
-import CustomSearch from './CustomSearch';
+import CustomSearch, { CustomSearchProp, CustomSearchType } from './CustomSearch';
 import { addPercentage, getSumFunds, Option, Product } from './DrawerProduct';
 
 interface FundTableProps {
@@ -20,10 +20,21 @@ interface FundTableProps {
   hasCurrent?: boolean;
   fieldArrayLinks?: FieldArrayRenderProps;
   linkIndex?: number;
+  total?: number;
 }
 
 const LinkProductAndFund = (props: FundTableProps) => {
-  const { columns, values, setFieldValue, prefixField, linkedProduct, fieldArrayLinks, linkIndex, hasCurrent } = props;
+  const {
+    columns,
+    values,
+    setFieldValue,
+    prefixField,
+    linkedProduct,
+    fieldArrayLinks,
+    linkIndex,
+    hasCurrent,
+    total,
+  } = props;
   const funds: Option[] = get(values, 'details.funds', []);
   const onSelectProduct = (option: Option) => {
     if (option) {
@@ -50,18 +61,28 @@ const LinkProductAndFund = (props: FundTableProps) => {
     [linkIndex],
   );
 
+  // Update Total row
   useEffect(() => {
-    if (funds.length > 0) {
+    if (funds.length > 0 && funds[funds.length - 1].id !== -1) {
       const fieldName = (prefixField ? prefixField + '.' : '') + 'details.funds';
       const fundsWithoutTotal = dropRight(funds);
       const updatedFunds = addPercentage(fundsWithoutTotal);
       const sum = getSumFunds(fundsWithoutTotal);
-      const total = funds[funds.length - 1];
-      total.value = sum;
+      const totalRow = funds[funds.length - 1];
+      totalRow.value = sum;
 
-      setFieldValue(fieldName, [...updatedFunds, total]);
+      setFieldValue(fieldName, [...updatedFunds, totalRow]);
     }
   }, [get(values, 'details.funds.length')]);
+  const selectedOption: Option | undefined =
+    get(values, 'details.funds.length') > 1 ? head(get(values, 'details.funds')) : undefined;
+  const searchFundProps: CustomSearchProp = {
+    placeholder: 'Search Fund',
+    type: CustomSearchType.Fund,
+  };
+  if (selectedOption) {
+    searchFundProps.selectedOption = selectedOption;
+  }
 
   return (
     <>
@@ -101,13 +122,13 @@ const LinkProductAndFund = (props: FundTableProps) => {
           return (
             <>
               <ActionDrawerGeneral drawer>
-                <CustomSearch placeholder="Add Product" onSelect={onSelectProduct} selectedOption={detailProduct} />
                 <CustomSearch
-                  placeholder="Search Fund"
-                  type="fund"
-                  onSelect={onSelectFund(fieldArrayFunds)}
-                  selectedOption={head(get(values, 'details.funds'))}
+                  placeholder="Add Product"
+                  type={CustomSearchType.Product}
+                  onSelect={onSelectProduct}
+                  selectedOption={detailProduct}
                 />
+                <CustomSearch onSelect={onSelectFund(fieldArrayFunds)} {...searchFundProps} />
               </ActionDrawerGeneral>
               {linkedProduct && (
                 <ProposedBlock>

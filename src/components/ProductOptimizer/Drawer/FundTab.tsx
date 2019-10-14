@@ -1,5 +1,5 @@
 import React from 'react';
-import { map, get, last, isString, dropRight } from 'lodash';
+import { dropRight, get, isString, last, map } from 'lodash';
 import { Button } from 'antd';
 import { FieldArray, FieldArrayRenderProps } from 'formik';
 
@@ -123,8 +123,7 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
         const fundsWithoutTotal = dropRight(funds);
         const updatedFunds = addPercentage(fundsWithoutTotal);
         const total = funds[funds.length - 1];
-        const sum = getSumFunds(fundsWithoutTotal);
-        total.value = sum;
+        total.value = getSumFunds(fundsWithoutTotal);
 
         setFieldValue(tableName, [...updatedFunds, total]);
       }
@@ -166,6 +165,7 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
               values={product}
               setFieldValue={setFieldValue}
               linkedProduct={true}
+              total={400000}
             />
           </FundBlock>
           <HorizontalScrollable>

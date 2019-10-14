@@ -277,7 +277,7 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
     }
   }
 
-  public handleAdd: (row?: Product) => void = (row = { description: '', value: '' }) => {
+  public handleAdd: (row?: Product) => void = (row = { description: '', value: undefined }) => {
     const { count } = this.state;
     const { fieldArrayRenderProps } = this.props;
 

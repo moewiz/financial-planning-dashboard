@@ -7,9 +7,12 @@ import { TopSearch } from '../../../layouts/Header/styled';
 import { Filter } from '../../Icons';
 import { Option } from './DrawerProduct';
 
-export type CustomSearchType = 'product' | 'fund';
+export enum CustomSearchType {
+  Product = 'product',
+  Fund = 'fund',
+}
 
-interface Prop {
+export interface CustomSearchProp {
   placeholder: string;
   type?: CustomSearchType;
   onSelect?: (value: Option) => void;
@@ -134,7 +137,7 @@ const filterOption = () => {
   console.log('TODO: implement Filter Search result by option ids');
 };
 
-class CustomSearch extends PureComponent<Prop> {
+class CustomSearch extends PureComponent<CustomSearchProp> {
   public renderResults = () => {
     const { type } = this.props;
 

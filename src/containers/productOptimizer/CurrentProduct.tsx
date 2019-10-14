@@ -174,7 +174,7 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
   ];
   private tableName = 'current-product';
 
-  public handleAdd: (row?: Product) => void = (row = { description: '', value: '' }) => {
+  public handleAdd: (row?: Product) => void = (row = { description: '', value: undefined }) => {
     const { fieldArrayRenderProps } = this.props;
     fieldArrayRenderProps.push(row);
   }
