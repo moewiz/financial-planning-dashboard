@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { Checkbox, Icon, Popconfirm, Table } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
-import { get, isFunction, isNumber, dropRight, last } from 'lodash';
+import { get, isFunction, isNumber, dropRight, last, head } from 'lodash';
 import cn from 'classnames';
 import { FieldArray, FieldArrayRenderProps } from 'formik';
 
@@ -102,7 +102,12 @@ const LinkProductAndFund = (props: FundTableProps) => {
             <>
               <ActionDrawerGeneral drawer>
                 <CustomSearch placeholder="Add Product" onSelect={onSelectProduct} selectedOption={detailProduct} />
-                <CustomSearch placeholder="Search Fund" type="fund" onSelect={onSelectFund(fieldArrayFunds)} />
+                <CustomSearch
+                  placeholder="Search Fund"
+                  type="fund"
+                  onSelect={onSelectFund(fieldArrayFunds)}
+                  selectedOption={head(get(values, 'details.funds'))}
+                />
               </ActionDrawerGeneral>
               {linkedProduct && (
                 <ProposedBlock>

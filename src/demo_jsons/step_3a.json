@@ -6,7 +6,10 @@
         "description": "Hesta Personal Super",
         "value": 400000,
         "details": {
-          "product": {},
+          "product": {
+            "id": 1,
+            "name": "Hesta Personal Super"
+          },
           "funds": [
             {
               "id": 1,
@@ -41,7 +44,10 @@
         "description": "Hesta Personal Super",
         "value": 400000,
         "details": {
-          "product": {},
+          "product": {
+            "id": 3,
+            "name": "Hesta Personal Super"
+          },
           "funds": [
             {
               "id": 1,
