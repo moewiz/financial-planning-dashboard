@@ -6,7 +6,7 @@ import { ProposePopupWrapper } from '../../ProductOptimizer/styled';
 import { LinkCurrentProductWrapper } from './styled';
 
 interface LinkCurrentProductStates {
-  value: any;
+  value?: Array<number | string>;
   open: boolean;
 }
 
@@ -77,16 +77,23 @@ class LinkCurrentProduct extends PureComponent<EditCellProps, LinkCurrentProduct
 
   public addProducts = () => {
     const { onChange, name, options } = this.props;
+    const value: Array<number | string> = this.state.value;
     let products: any[] = [];
-    options.data.map((parent: { children?: Array<{ id: number }> }) => {
-      if (parent.children && parent.children.length > 0) {
-        products = [
-          ...products,
-          // @ts-ignore
-          ...parent.children.filter((product: any) => this.state.value.includes(product.id)),
-        ];
-      }
-    });
+    if (value && value.length > 0) {
+      options.data.map((parent: { id?: number | string; children?: Array<{ id: number }> }) => {
+        if (parent.children && parent.children.length > 0) {
+          products = [
+            ...products,
+            // @ts-ignore
+            ...parent.children.filter((product: any) => value.includes(product.id)),
+          ];
+        } else {
+          if (parent.id && value.includes(parent.id)) {
+            products.push(parent);
+          }
+        }
+      });
+    }
     onChange(products, name);
     this.setState({ value: [] });
   }

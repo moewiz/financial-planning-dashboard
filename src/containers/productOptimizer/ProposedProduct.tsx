@@ -323,7 +323,7 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
             type: col.type || 'text',
             onEdit: this.onEdit,
             options: {
-              data: currentProductsTree,
+              data: this.getCurrentProducts(),
             },
           }),
         };
