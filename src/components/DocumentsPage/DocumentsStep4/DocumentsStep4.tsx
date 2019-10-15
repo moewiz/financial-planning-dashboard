@@ -4,6 +4,7 @@ import { connect } from 'formik';
 import { StepWrapper } from '../styled';
 import { DocumentData, FormikPartProps } from '../DocumentsPage';
 import DocumentSwitcher from '../DocumentSwitcher';
+import GoalTable from './GoalTable';
 
 const DocumentsStep4 = (props: FormikPartProps) => {
   return (
@@ -13,6 +14,7 @@ const DocumentsStep4 = (props: FormikPartProps) => {
         stepData={props.formik.values.step4}
         setFieldValue={props.formik.setFieldValue}
       />
+      <GoalTable />
     </StepWrapper>
   );
 };

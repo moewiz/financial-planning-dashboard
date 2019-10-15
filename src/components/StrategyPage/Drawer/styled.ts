@@ -492,6 +492,7 @@ export const ProposedBlock = styled.div`
     display: flex;
     justify-content: space-between;
     &--text {
+      display: block;
       font-size: 13px;
     }
   }
