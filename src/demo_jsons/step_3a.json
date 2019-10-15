@@ -24,7 +24,10 @@
         "description": "CFS FirstChoice Wholesale Investments",
         "value": 50000,
         "details": {
-          "product": {},
+          "product": {
+            "id": 1,
+            "name": "CFS FirstChoice Wholesale Investments"
+          },
           "funds": [
             {
               "id": 1,
@@ -62,7 +65,10 @@
         "description": "CFS FirstChoice Wholesale Investments",
         "value": 50000,
         "details": {
-          "product": {},
+          "product": {
+            "id": 4,
+            "name": "CFS FirstChoice Wholesale Investments"
+          },
           "funds": [
             {
               "id": 1,

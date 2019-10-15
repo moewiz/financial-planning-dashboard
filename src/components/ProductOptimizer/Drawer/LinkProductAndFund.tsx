@@ -343,9 +343,10 @@ const LinkProductAndFund = (props: FundTableProps) => {
                       )}
                     </>
                   ) : (
-                    <div className="proposed-title">
+                    <>
+                      <span className="proposed-title--text">{detailProduct && detailProduct.name}</span>
                       <span className="proposed-title--text">Proposed</span>
-                    </div>
+                    </>
                   )}
                 </ProposedBlock>
               )}
