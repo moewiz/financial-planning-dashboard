@@ -209,7 +209,7 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
     const { close, isOpen } = this.props;
 
     return (
-      <Drawer width={1100} onClose={close} visible={isOpen} destroyOnClose={true}>
+      <Drawer width={1150} onClose={close} visible={isOpen} destroyOnClose={true}>
         {this.renderDrawer()}
       </Drawer>
     );

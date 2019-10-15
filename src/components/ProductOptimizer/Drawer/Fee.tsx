@@ -21,7 +21,7 @@ interface FeeProps {
     subTitle: string;
     ongoingFee: Row[];
     transactionFee: Row[];
-    otherBalances: Row[];
+    otherBalances?: Row[];
   };
 }
 
@@ -55,12 +55,12 @@ class Fee extends PureComponent<FeeProps> {
         parser: (value: any) => value.replace('%', ''),
       },
       key: '2',
-      width: 60,
+      width: 80,
     },
     {
       title: '',
       dataIndex: 'remove',
-      width: 30,
+      width: 28,
       key: '3',
     },
   ];
@@ -110,6 +110,7 @@ class Fee extends PureComponent<FeeProps> {
       return col;
     });
   }
+
   public render() {
     const { product } = this.props;
 
@@ -145,16 +146,18 @@ class Fee extends PureComponent<FeeProps> {
             components={components}
           />
         </TableEntryContainer>
-        <TableEntryContainer drawer>
-          <Table
-            rowKey={(rowKey) => (rowKey.id ? rowKey.id.toString() : 'new')}
-            className={cn('table-general drawer-fund-table linked-product no-bold')}
-            columns={this.getColumns('Other Balances')()}
-            dataSource={otherBalances}
-            pagination={false}
-            components={components}
-          />
-        </TableEntryContainer>
+        {otherBalances && (
+          <TableEntryContainer drawer>
+            <Table
+              rowKey={(rowKey) => (rowKey.id ? rowKey.id.toString() : 'new')}
+              className={cn('table-general drawer-fund-table linked-product no-bold')}
+              columns={this.getColumns('Other Balances')()}
+              dataSource={otherBalances}
+              pagination={false}
+              components={components}
+            />
+          </TableEntryContainer>
+        )}
       </AssetBlock>
     );
   }

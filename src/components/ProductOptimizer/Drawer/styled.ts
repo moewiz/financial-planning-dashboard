@@ -8,7 +8,7 @@ export const AssetsAllocationWrapper = styled.div`
 
 export const FeesWrapper = styled(AssetsAllocationWrapper)`
   .asset-block-container {
-    flex: 0 0 360px;
+    flex: 0 0 380px;
   }
   .table-entry-container {
     margin-top: 0;

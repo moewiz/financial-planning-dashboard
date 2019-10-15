@@ -1,0 +1,121 @@
+{
+  "proposed": {
+    "title": "CFS FirstChoice Wholesale Personal Super",
+    "subTitle": "Proposed",
+    "ongoingFee": [
+      {
+        "id": 1,
+        "name": "Administration Fees",
+        "value": "749.8",
+        "percentage": "0.19"
+      },
+      {
+        "id": 2,
+        "name": "Investment Fees and Costs",
+        "value": "2,222.81",
+        "percentage": "0.56"
+      },
+      {
+        "id": 3,
+        "name": "Membership Fee",
+        "value": "0.00",
+        "percentage": "0.00"
+      },
+      {
+        "id": 4,
+        "name": "Portfolio Balance Rebate (-)",
+        "value": "-137.45",
+        "percentage": "-0.03"
+      },
+      { "id": -1, "name": "", "value": "", "percentage": "" },
+      {
+        "name": "Net Ongoing Cost",
+        "value": "2,835.16",
+        "percentage": ""
+      }
+    ],
+    "transactionFee": [
+      {
+        "id": 1,
+        "name": "Buy/Sell costs",
+        "value": "1,100",
+        "percentage": "0.28"
+      },
+      { "id": -1, "name": "", "value": "", "percentage": "" }
+    ]
+  },
+  "links": [
+    {
+      "title": "Hesta Personal Super",
+      "subTitle": "RoP - Current",
+      "ongoingFee": [
+        {
+          "id": 1,
+          "name": "Administration Fees",
+          "value": "315",
+          "percentage": "0.08"
+        },
+        {
+          "id": 2,
+          "name": "Investment Fees and Costs",
+          "value": "2,780",
+          "percentage": "0.7"
+        },
+        {
+          "id": 3,
+          "name": "Membership Fee",
+          "value": "65",
+          "percentage": "0.02"
+        },
+        { "id": -1, "name": "", "value": "", "percentage": "" },
+        {
+          "name": "Net Ongoing Cost",
+          "value": "3,160",
+          "percentage": ""
+        }
+      ],
+      "transactionFee": [
+        {
+          "id": 1,
+          "name": "Buy/Sell costs",
+          "value": "0",
+          "percentage": "0"
+        },
+        { "id": -1, "name": "", "value": "", "percentage": "" }
+      ]
+    },
+    {
+      "title": "OnePath OneAnswer Frontier Personal Super",
+      "subTitle": "RoP - Alternative",
+      "ongoingFee": [
+        {
+          "id": 1,
+          "name": "Investment Fees and Costs",
+          "value": "4,166.48",
+          "percentage": "1.04"
+        },
+        {
+          "id": 2,
+          "name": "Expence Recovery Fee",
+          "value": "161.3",
+          "percentage": "0.04"
+        },
+        { "id": -1, "name": "", "value": "", "percentage": "" },
+        {
+          "name": "Net Ongoing Cost",
+          "value": "4,327.78",
+          "percentage": ""
+        }
+      ],
+      "transactionFee": [
+        {
+          "id": 1,
+          "name": "Buy/Sell costs",
+          "value": "876",
+          "percentage": "0.22"
+        },
+        { "id": -1, "name": "", "value": "", "percentage": "" }
+      ]
+    }
+  ]
+}

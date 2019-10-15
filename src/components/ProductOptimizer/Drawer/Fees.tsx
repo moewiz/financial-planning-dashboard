@@ -4,7 +4,7 @@ import { map } from 'lodash';
 import { FeesWrapper } from './styled';
 import { HorizontalScrollable } from '../styled';
 import Fee from './Fee';
-import feesData from '../../../demo_jsons/step_3d.json';
+import feesData from '../../../demo_jsons/step_3m.json';
 
 class Fees extends PureComponent {
   public render() {

@@ -59,7 +59,7 @@ export const FundTabContent = styled.div`
 `;
 
 export const FundBlock = styled.div`
-  flex: 0 0 330px;
+  flex: 0 0 350px;
   margin: 0 8px;
   transition: opacity ease 400ms;
   &.all-proposed{

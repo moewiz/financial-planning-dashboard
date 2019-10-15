@@ -100,7 +100,7 @@ export const TableEntryContainer = styled.section.attrs({
     .ant-table-tbody .strategy-item {
       width: 100%;
       input {
-        padding: 4px 11px;
+        padding: 4px 6px;
       }
 
       .edit-cell {
