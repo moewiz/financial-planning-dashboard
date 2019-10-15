@@ -11,8 +11,7 @@ import { components } from '../../../containers/productOptimizer/CurrentProduct'
 import CustomSearch, { CustomSearchProp, CustomSearchType } from './CustomSearch';
 import { addPercentage, getSumFunds, Option, Product } from './DrawerProduct';
 
-// const proposedFunds = [
-const fundOptions = [
+const proposedFunds = [
   {
     id: 1,
     name: 'Solaris W/S Core Aust Equity',
@@ -103,6 +102,89 @@ const roPCurrentFunds = [
   },
 ];
 
+const roPAlternativeFunds = [
+  {
+    id: 1,
+    name: 'Greencape Broad Cap',
+    value: 32000,
+  },
+  {
+    id: 2,
+    name: 'Vanguard Australian Shares Index Trust',
+    value: 52000,
+  },
+  {
+    id: 3,
+    name: 'OnePath Emerging Companies Trust (Karara)',
+    value: 12000,
+  },
+  {
+    id: 4,
+    name: 'MFS Global Equity Trust',
+    value: 20000,
+  },
+  {
+    id: 5,
+    name: 'Vanguard International Shares Index Trust',
+    value: 60000,
+  },
+  {
+    id: 6,
+    name: 'Vanguard International Shares Index (Hedged) Trust',
+    value: 36000,
+  },
+  {
+    id: 7,
+    name: 'OptiMix Ws Global Emerging Markets Share',
+    value: 12000,
+  },
+  {
+    id: 8,
+    name: 'OnePath Global Property Securities (Vanguard)',
+    value: 16000,
+  },
+  {
+    id: 9,
+    name: 'CFS Global Listed Infrastructure',
+    value: 12000,
+  },
+  {
+    id: 10,
+    name: 'Schroder Real Return CPI Plus 5%',
+    value: 16000,
+  },
+  {
+    id: 11,
+    name: 'OnePath Alternatives Growth Trust',
+    value: 12000,
+  },
+  {
+    id: 12,
+    name: 'Schroder Real Return CPI Plus 5%',
+    value: 16000,
+  },
+  {
+    id: 13,
+    name: 'Kapstream Absolute Return Income Trust',
+    value: 32000,
+  },
+  {
+    id: 14,
+    name: 'T Rowe Global Bond',
+    value: 32000,
+  },
+  {
+    id: 15,
+    name: 'OnePath Ws Diversified Fixed Interest Trust (PIMCO)',
+    value: 16000,
+  },
+  {
+    id: 16,
+    name: 'ANZ Cash Advantage',
+    value: 24000,
+  },
+];
+
 interface FundTableProps {
   columns: any[];
   setFieldValue: (field: string, value: any) => void;
@@ -125,16 +207,24 @@ const LinkProductAndFund = (props: FundTableProps) => {
   };
   const onSelectFund = (fieldArrayFunds: FieldArrayRenderProps) => (option: Option) => {
     if (option) {
-      if (!prefixField) {
+      if (option.id === 99) {
+        // Update RoP Alternative funds
+        const totalRow = { id: -1, name: 'Total', value: getSumFunds(roPAlternativeFunds), percentage: 100 };
+        setFieldValue(fieldArrayFunds.name, [...roPAlternativeFunds, totalRow]);
+        return;
+      }
+
+      if (!prefixField && option.id === 9) {
         // Update Proposed funds
-        setFieldValue(fieldArrayFunds.name, fundOptions);
+        setFieldValue(fieldArrayFunds.name, proposedFunds);
 
         // Update RoP Current funds
         const totalRow = { id: -1, name: 'Total', value: getSumFunds(roPCurrentFunds), percentage: 100 };
         setFieldValue('links.0.details.funds', [...roPCurrentFunds, totalRow]);
-      } else {
-        fieldArrayFunds.unshift(option);
+        return;
       }
+
+      fieldArrayFunds.unshift(option);
     }
   };
   const detailProduct = values && values.details && values.details.product;
@@ -170,6 +260,7 @@ const LinkProductAndFund = (props: FundTableProps) => {
   const searchFundProps: CustomSearchProp = {
     placeholder: 'Search Fund',
     type: CustomSearchType.Fund,
+    productId: detailProduct && detailProduct.id,
   };
   if (selectedOption) {
     searchFundProps.selectedOption = selectedOption;

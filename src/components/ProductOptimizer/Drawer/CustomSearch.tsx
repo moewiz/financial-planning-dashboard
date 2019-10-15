@@ -17,6 +17,7 @@ export interface CustomSearchProp {
   type?: CustomSearchType;
   onSelect?: (value: Option) => void;
   selectedOption?: Option;
+  productId?: number;
 }
 
 interface OptionData extends Option {
@@ -93,6 +94,28 @@ const dummyFundForSearching: OptionData[] = [
   },
 ];
 
+const onePathOptions: OptionData[] = [
+  {
+    name: 'Model Portfolios',
+    children: [
+      { id: 99, name: 'OneAnswer Frontier Low Cost Model Portfolio', value: 10000 },
+      { id: 10, name: 'OneAnswer Frontier Accumulation Model Portfolio', value: 5000 },
+      { id: 11, name: 'OneAnswer Frontier Retirement Model Portfolio', value: 15000 },
+    ],
+  },
+  {
+    name: 'Managed Funds',
+    children: [
+      { id: 1, name: 'Magellan Global Fund', value: 10000, code: 'MMF1802AU' },
+      { id: 2, name: 'Kapstream Absolute Return Income', value: 5000, code: 'MMF1713AU' },
+      { id: 3, name: 'Schroder Australian Equity', value: 15000, code: 'MMF1805AU' },
+      { id: 6, name: 'Platinum International Fund', value: 15000, code: 'MMF1803AU' },
+      { id: 7, name: 'MFS Global Equity', value: 15000, code: 'MMF1776AU' },
+      { id: 8, name: 'Perpetual Balanced Growth', value: 15000, code: 'MMF1800AU' },
+    ],
+  },
+];
+
 const renderOptions = (data: OptionData[]) =>
   data &&
   data.map((opt: OptionData) => {
@@ -133,19 +156,27 @@ const filterOption = () => {
 
 class CustomSearch extends PureComponent<CustomSearchProp> {
   public renderResults = () => {
-    const { type } = this.props;
+    const { type, productId } = this.props;
+    let options = type === CustomSearchType.Fund ? dummyFundForSearching : dummyProductForSearching;
 
-    if (type === 'fund') {
-      return renderOptions(dummyFundForSearching);
+    // Custom Fund options for
+    // OnePath OneAnswer Frontier Personal Super
+    if (productId && productId === 3) {
+      options = onePathOptions;
     }
 
-    return renderOptions(dummyProductForSearching);
+    return renderOptions(options);
   }
 
-  public onSelect = (value: number | string) => {
-    const { onSelect, type } = this.props;
+  public onSelect = (value: number | string, option: any) => {
+    const { onSelect, type, productId } = this.props;
     if (isFunction(onSelect)) {
-      const dictionary = type === 'fund' ? dummyFundForSearching : dummyProductForSearching;
+      let dictionary = type === 'fund' ? dummyFundForSearching : dummyProductForSearching;
+      // Custom Fund options for
+      // OnePath OneAnswer Frontier Personal Super
+      if (productId && productId === 3) {
+        dictionary = onePathOptions;
+      }
 
       const options = findOptionObj(dictionary, value);
       if (options && options.length > 0) {
