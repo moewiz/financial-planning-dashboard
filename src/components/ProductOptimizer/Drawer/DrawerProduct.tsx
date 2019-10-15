@@ -163,7 +163,7 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
           <TabPane tab="Fund" key="1">
             {this.renderFundTab()}
           </TabPane>
-          <TabPane tab="Assets Allocation" key="2">
+          <TabPane tab="Asset Type" key="2">
             <AssetsAllocation />
           </TabPane>
           <TabPane tab="Fees" key="3">

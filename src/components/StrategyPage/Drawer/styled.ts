@@ -106,6 +106,11 @@ export const DrawerTableContent = styled.section<{ productOptimizer?: boolean }>
   @media (max-height: 450px) {
     height: auto;
   }
+  ${(props) => props.productOptimizer && css`
+    .drawer-title-sub-row {
+      margin-left: 5px;
+    }
+  `}
 `;
 export const DrawerTableWrapper = styled.div<{ productOptimizer?: boolean }>`
   .parent {
@@ -338,7 +343,7 @@ export type TitleSize = 'medium' | 'small' | 'large';
 
 export const DrawerRowSubTitle = styled.span.attrs({
   className: 'drawer-title-sub-row',
-})<{ size?: TitleSize }>`
+})<{ size?: TitleSize;  }>`
   flex: 1;
   color: #4e5d86;
   text-align: left;
