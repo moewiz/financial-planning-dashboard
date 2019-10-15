@@ -232,6 +232,7 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
     let newProposedProduct = {
       ...record,
       key: new Date().getTime(),
+      id: uuidv1(),
     };
     if (record.id) {
       newProposedProduct = {
@@ -245,7 +246,6 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
     } else {
       newProposedProduct = {
         ...newProposedProduct,
-        id: uuidv1(),
         note: {
           text: `{{0}}, add a new investment product`,
           params: [clientPartnerName],
