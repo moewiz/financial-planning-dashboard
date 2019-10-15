@@ -60,6 +60,6 @@ export const AssetSubTitle = styled.div``;
 export const AssetBlock = styled.div.attrs({
   className: 'asset-block-container',
 })<{ proposed?: boolean }>`
-  flex: 0 0 ${(props) => (props.proposed ? 'auto' : '240px')};
+  flex: 0 0 auto;
   margin: 0 8px;
 `;

@@ -12,7 +12,7 @@ import {
 } from '../../StrategyPage/Drawer/styled';
 import { AssetsAllocationWrapper, AssetSubTitle, AssetTitle, AssetTitleBlock, AssetBlock } from './styled';
 import { HorizontalScrollable } from '../styled';
-import assetsAllocationData from '../../../demo_jsons/step_3c.json';
+import assetsAllocationData from '../../../demo_jsons/step_3l.json';
 
 interface Row {
   title: string;
@@ -32,9 +32,11 @@ interface TableHeaderProps {
 const TableHeader = ({ showTitle }: TableHeaderProps) => (
   <DrawerTableHeader productOptimizer>
     {showTitle && <DrawerRowSubTitle size={'large'}>Assets Allocation</DrawerRowSubTitle>}
-    <span className={'cell'}>Proposed %</span>
-    <span className={'cell'}>Balanced %</span>
-    <span className={'cell'}>Variance %</span>
+    <div style={{ flex: 1, display: 'flex' }}>
+      <span className={'cell'}>Proposed %</span>
+      <span className={'cell'}>Balanced %</span>
+      <span className={'cell'}>Variance %</span>
+    </div>
   </DrawerTableHeader>
 );
 
