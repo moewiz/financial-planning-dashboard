@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { useEffect, useState } from 'react';
 import { isFunction } from 'lodash';
 import { Select, Icon } from 'antd';
 const { OptGroup } = Select;
@@ -149,64 +149,50 @@ const findOptionObj = (data: OptionData[], value: number | string) =>
       return !!(i && i.id);
     });
 
-// TODO: implement Filter Search result by option ids
-const filterOption = () => {
-  console.log('TODO: implement Filter Search result by option ids');
-};
+const CustomSearch = (props: CustomSearchProp) => {
+  const { type, placeholder, selectedOption, productId } = props;
+  const [options, setOptions] = useState<OptionData[]>([]);
 
-class CustomSearch extends PureComponent<CustomSearchProp> {
-  public renderResults = () => {
-    const { type, productId } = this.props;
-    let options = type === CustomSearchType.Fund ? dummyFundForSearching : dummyProductForSearching;
+  const onSelect = (value: number | string) => {
+    const { onSelect: onSelectProp } = props;
+    if (isFunction(onSelectProp)) {
+      const selectedOptions = findOptionObj(options, value);
+      if (selectedOptions && selectedOptions.length > 0) {
+        onSelectProp(selectedOptions[0]);
+      }
+    }
+  };
 
+  // Load options base on productId
+  useEffect(() => {
+    let newOptions = type === CustomSearchType.Fund ? dummyFundForSearching : dummyProductForSearching;
     // Custom Fund options for
     // OnePath OneAnswer Frontier Personal Super
     if (productId && productId === 3) {
-      options = onePathOptions;
+      newOptions = onePathOptions;
     }
 
-    return renderOptions(options);
-  }
+    setOptions(newOptions);
+  }, [productId]);
 
-  public onSelect = (value: number | string, option: any) => {
-    const { onSelect, type, productId } = this.props;
-    if (isFunction(onSelect)) {
-      let dictionary = type === 'fund' ? dummyFundForSearching : dummyProductForSearching;
-      // Custom Fund options for
-      // OnePath OneAnswer Frontier Personal Super
-      if (productId && productId === 3) {
-        dictionary = onePathOptions;
-      }
-
-      const options = findOptionObj(dictionary, value);
-      if (options && options.length > 0) {
-        onSelect(options[0]);
-      }
-    }
-  }
-
-  public render() {
-    const { placeholder, selectedOption } = this.props;
-
-    return (
-      <TopSearch border>
-        <Icon type="search" />
-        <Select
-          showSearch
-          defaultValue={selectedOption && selectedOption.name}
-          onSelect={this.onSelect}
-          placeholder={placeholder}
-          className="custom-select"
-          showArrow={false}
-          dropdownClassName="custom-search-menu"
-          optionFilterProp="title"
-        >
-          {this.renderResults()}
-        </Select>
-        <Icon component={Filter} />
-      </TopSearch>
-    );
-  }
-}
+  return (
+    <TopSearch border>
+      <Icon type="search" />
+      <Select
+        showSearch
+        defaultValue={selectedOption && selectedOption.name}
+        onSelect={onSelect}
+        placeholder={placeholder}
+        className="custom-select"
+        showArrow={false}
+        dropdownClassName="custom-search-menu"
+        optionFilterProp="title"
+      >
+        {renderOptions(options)}
+      </Select>
+      <Icon component={Filter} />
+    </TopSearch>
+  );
+};
 
 export default CustomSearch;
