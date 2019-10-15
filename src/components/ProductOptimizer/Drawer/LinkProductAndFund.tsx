@@ -3,7 +3,7 @@ import { Checkbox, Icon, Popconfirm, Table } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { get, isFunction, isNumber, dropRight, head } from 'lodash';
 import cn from 'classnames';
-import { FieldArray, FieldArrayRenderProps } from 'formik';
+import { FieldArray, FieldArrayRenderProps, getIn } from 'formik';
 
 import { TableEntryContainer } from '../../../pages/client/styled';
 import { ActionDrawerGeneral, ProposedBlock } from '../../StrategyPage/Drawer/styled';
@@ -11,6 +11,7 @@ import { components } from '../../../containers/productOptimizer/CurrentProduct'
 import CustomSearch, { CustomSearchProp, CustomSearchType } from './CustomSearch';
 import { addPercentage, getSumFunds, Option, Product } from './DrawerProduct';
 
+// const proposedFunds = [
 const fundOptions = [
   {
     id: 1,
@@ -89,6 +90,19 @@ const fundOptions = [
   },
 ];
 
+const roPCurrentFunds = [
+  {
+    id: 1,
+    name: 'Conservative Pool',
+    value: 200000,
+  },
+  {
+    id: 2,
+    name: 'Core Pool (My Super)',
+    value: 200000,
+  },
+];
+
 interface FundTableProps {
   columns: any[];
   setFieldValue: (field: string, value: any) => void;
@@ -110,15 +124,17 @@ const LinkProductAndFund = (props: FundTableProps) => {
     }
   };
   const onSelectFund = (fieldArrayFunds: FieldArrayRenderProps) => (option: Option) => {
-    // const shouldAddTotalRow = funds.length === 0;
     if (option) {
-      fieldArrayFunds.unshift(option);
-      const field = (prefixField ? prefixField + '.' : '') + fieldArrayFunds.name;
-      setFieldValue(field, fundOptions);
+      if (!prefixField) {
+        // Update Proposed funds
+        setFieldValue(fieldArrayFunds.name, fundOptions);
 
-      // if (shouldAddTotalRow) {
-      //   fieldArrayFunds.push({ id: -1, name: 'Total', value: option.value, percentage: 100 });
-      // }
+        // Update RoP Current funds
+        const totalRow = { id: -1, name: 'Total', value: getSumFunds(roPCurrentFunds), percentage: 100 };
+        setFieldValue('links.0.details.funds', [...roPCurrentFunds, totalRow]);
+      } else {
+        fieldArrayFunds.unshift(option);
+      }
     }
   };
   const detailProduct = values && values.details && values.details.product;
