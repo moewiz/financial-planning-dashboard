@@ -24,7 +24,7 @@ interface OptionData extends Option {
   children?: OptionData[];
 }
 
-const dummyProductForSearching: OptionData[] = [
+const defaultProducts: OptionData[] = [
   {
     name: 'Search Result',
     children: [
@@ -72,7 +72,7 @@ const dummyProductForSearching: OptionData[] = [
   },
 ];
 
-const dummyFundForSearching: OptionData[] = [
+const cfsFirstChoiceWholesaleFunds: OptionData[] = [
   {
     name: 'Model Portfolios',
     children: [
@@ -94,7 +94,7 @@ const dummyFundForSearching: OptionData[] = [
   },
 ];
 
-const onePathOptions: OptionData[] = [
+const onePathFunds: OptionData[] = [
   {
     name: 'Model Portfolios',
     children: [
@@ -112,6 +112,29 @@ const onePathOptions: OptionData[] = [
       { id: 6, name: 'Platinum International Fund', value: 15000, code: 'MMF1803AU' },
       { id: 7, name: 'MFS Global Equity', value: 15000, code: 'MMF1776AU' },
       { id: 8, name: 'Perpetual Balanced Growth', value: 15000, code: 'MMF1800AU' },
+    ],
+  },
+];
+
+const defaultFunds: OptionData[] = [
+  {
+    name: 'Model Portfolios',
+    children: [
+      { id: 12, name: 'CFS FirstChoice Low Cost Model Portfolio', value: 10000 },
+      { id: 13, name: 'CFS FirstChoice Accumulation Model Portfolio', value: 5000 },
+    ],
+  },
+  {
+    name: 'Managed Funds',
+    children: [
+      { id: 1, name: 'FirstChoice Wholesale Multi-Index Diversified', value: 50000, code: 'FSF0472AU' },
+      { id: 2, name: 'FirstChoice Wholesale Multi-Index Balanced', value: 50000, code: 'FSF0476AU' },
+      { id: 3, name: 'FirstChoice Wholesale Moderate', value: 15000, code: 'FSF0500AU' },
+      { id: 6, name: 'Kapstream Absolute Return Income', value: 15000, code: 'FSF1615AU' },
+      { id: 7, name: 'Schroder Real Return (CPI + 5%)', value: 15000, code: 'FSF1614AU' },
+      { id: 8, name: 'Solaris Core Australian Equity', value: 15000, code: 'FSF0466AU' },
+      { id: 10, name: 'FirstChoice Growth', value: 15000, code: 'FSF0490AU' },
+      { id: 11, name: 'FirstChoice Global Property', value: 15000, code: 'FSF0713AU' },
     ],
   },
 ];
@@ -165,11 +188,22 @@ const CustomSearch = (props: CustomSearchProp) => {
 
   // Load options base on productId
   useEffect(() => {
-    let newOptions = type === CustomSearchType.Fund ? dummyFundForSearching : dummyProductForSearching;
-    // Custom Fund options for
-    // OnePath OneAnswer Frontier Personal Super
-    if (productId && productId === 3) {
-      newOptions = onePathOptions;
+    let newOptions = type === CustomSearchType.Fund ? defaultFunds : defaultProducts;
+
+    // Fund options for the specific
+    if (type === CustomSearchType.Fund) {
+      switch (productId) {
+        // CFS FirstChoice Wholesale Personal Super
+        case 1:
+          newOptions = cfsFirstChoiceWholesaleFunds;
+          break;
+        // OnePath OneAnswer Frontier Personal Super
+        case 3:
+          newOptions = onePathFunds;
+          break;
+        default:
+          break;
+      }
     }
 
     setOptions(newOptions);
