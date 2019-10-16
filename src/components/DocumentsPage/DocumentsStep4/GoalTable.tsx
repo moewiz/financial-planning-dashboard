@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { get, map } from 'lodash';
+import { ArrayHelpers } from 'formik';
 import { Table } from 'antd';
 
 import { Record, Row, StepProps } from '../DocumentsPage';
@@ -13,6 +14,7 @@ interface GoalTableProps {
   stepData: StepProps;
   setFieldValue: (field: string, value: any) => void;
   records: Record[];
+  arrayHelpers: ArrayHelpers;
 }
 
 const goalTableComponents = {
@@ -54,16 +56,22 @@ const columns = [
   {
     title: 'Time frame',
     dataIndex: 'timeFrame',
-    type: EditCellType.text,
+    type: EditCellType.date,
+    options: {
+      pickerType: 'year',
+    },
     key: '2',
     editable: true,
     width: 105,
   },
 ];
 
+const placeholderRow = { id: -1, description: '', priority: 'low', timeFrame: new Date().getFullYear() };
+
 const GoalTable = (props: GoalTableProps) => {
-  const { records, stepData, setFieldValue, stepName } = props;
+  const { records, stepData, setFieldValue, stepName, arrayHelpers } = props;
   const tableData = get(stepData, 'table.data', []);
+  const [dataSource, setDataSource] = useState(tableData);
   const options = map(records, (record: Record) => ({
     value: record.header,
     label: record.header,
@@ -72,6 +80,14 @@ const GoalTable = (props: GoalTableProps) => {
   const onEdit = (value: any, name: string, rowIndex: number) => {
     const fieldName = `${stepName}.table.data.${rowIndex}.${name}`;
     setFieldValue(fieldName, value);
+
+    if (
+      rowIndex === dataSource.length - 1 &&
+      get(dataSource, [rowIndex, 'description'], '').trim() !== '' &&
+      get(dataSource, [rowIndex, 'priority'])
+    ) {
+      // arrayHelpers.push(placeholderRow);
+    }
   };
   const getColumns = () =>
     map(columns, (col) => {
@@ -109,13 +125,25 @@ const GoalTable = (props: GoalTableProps) => {
       return col;
     });
 
+  useEffect(() => {
+    console.log('add placeholder');
+    setDataSource([...dataSource, placeholderRow]);
+    console.log([...dataSource, placeholderRow]);
+  }, []);
+
+  useEffect(() => {
+    console.log('put key to dataSource');
+    console.log(dataSource);
+    setDataSource(tableData.map((data: any, index: number) => ({ ...data, key: index.toString() })));
+  }, [tableData.length]);
+
   return (
     <>
       <TitleStep>{stepData.title}</TitleStep>
       <Table
         className="table-general documents-table goal-table"
         columns={getColumns()}
-        dataSource={tableData}
+        dataSource={dataSource}
         pagination={false}
         scroll={{ y: 400 }}
         components={goalTableComponents}

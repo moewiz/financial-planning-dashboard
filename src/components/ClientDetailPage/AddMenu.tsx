@@ -29,7 +29,7 @@ const AddMenu = ({ type, onClick, maritalStatus }: AddMenuProps) => {
     };
 
     return (
-      <Item onClick={onClickItem} key={index}>
+      <Item onClick={onClickItem} key={index + option.value}>
         {option.label}
       </Item>
     );

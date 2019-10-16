@@ -28,7 +28,7 @@ class NewProposedProduct extends PureComponent<NewProposedProductProps> {
     };
 
     return (
-      <Item onClick={onClickItem} key={index}>
+      <Item onClick={onClickItem} key={index + option.value}>
         {option.label}
       </Item>
     );

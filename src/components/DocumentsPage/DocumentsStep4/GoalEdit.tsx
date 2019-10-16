@@ -24,7 +24,11 @@ const GoalEdit = (props: any) => {
 
   if (type === EditCellType.linkCurrentProduct) {
     return (
-      <td>{record && record.id && <LinkAdvice {...props} name={dataIndex} value={value} onChange={onChange} />}</td>
+      <td>
+        {record && record.id && record.id !== -1 && (
+          <LinkAdvice {...props} name={dataIndex} value={value} onChange={onChange} />
+        )}
+      </td>
     );
   }
 
@@ -32,11 +36,7 @@ const GoalEdit = (props: any) => {
     const newLinks = filter(get(record, 'links', []), (tag) => {
       return JSON.stringify(tag) !== JSON.stringify(removedTag);
     });
-    onEdit(
-      newLinks,
-      'links',
-      rowIndex,
-    );
+    onEdit(newLinks, 'links', rowIndex);
   };
   const links = get(record, 'links', []);
 

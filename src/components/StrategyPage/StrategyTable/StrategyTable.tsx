@@ -71,7 +71,7 @@ class StrategyTable extends PureComponent<FormikPartProps & StrategyTableProps> 
     };
 
     return (
-      <Item onClick={onClickItem} key={index}>
+      <Item onClick={onClickItem} key={index + option.value}>
         {option.label}
       </Item>
     );

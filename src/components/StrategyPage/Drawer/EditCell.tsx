@@ -8,6 +8,7 @@ import { ddFreeTextOptions } from '../../../enums/strategySentences';
 import { DDFreeText, DrawerTableRows, QuotationMark } from './styled';
 import NewInputNumber from './NewInputNumber';
 import LinkCurrentProduct from './LinkCurrentProduct';
+import YearPicker from './YearPicker';
 
 const { MonthPicker } = DatePicker;
 const { Option } = Select;
@@ -102,10 +103,13 @@ class EditCell extends Component<EditCellProps> {
   }
 
   public renderDate = () => {
-    const { value } = this.props;
+    const { value, options } = this.props;
     const momentInput = value ? value : undefined;
     const format = 'MMM YYYY';
     const momentValue = moment(momentInput);
+    if (options && options.pickerType === 'year') {
+      return <YearPicker {...this.props} />;
+    }
 
     return (
       <EntryPickerTable>

@@ -29,7 +29,7 @@ const LinkAdvice = (props: any) => {
     };
 
     return (
-      <Item onClick={onClickItem} key={index}>
+      <Item onClick={onClickItem} key={index + option.value}>
         {option.label}
       </Item>
     );

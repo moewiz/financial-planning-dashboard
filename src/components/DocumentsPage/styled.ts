@@ -157,6 +157,7 @@ export const StepWrapper = styled.section`
     }
   }
   .goal-table {
+    margin-top: 30px;
     .ant-table-thead {
       & > tr {
         & > th {
@@ -182,6 +183,9 @@ export const StepWrapper = styled.section`
           &-selection__rendered {
             padding: 0 8px;
           }
+        }
+        input {
+          font-weight: normal;
         }
       }
     }

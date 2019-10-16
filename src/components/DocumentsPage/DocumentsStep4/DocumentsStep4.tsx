@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'formik';
+import { ArrayHelpers, connect, FieldArray } from 'formik';
 
 import { StepWrapper } from '../styled';
 import { DocumentData, FormikPartProps } from '../DocumentsPage';
@@ -10,12 +10,17 @@ const DocumentsStep4 = (props: FormikPartProps) => {
 
   return (
     <StepWrapper>
-      <GoalTable
-        stepName="step4"
-        stepData={props.formik.values.step4}
-        setFieldValue={props.formik.setFieldValue}
-        records={listOfLinks}
-      />
+      <FieldArray name="step4.table.data" render={
+        (arrayHelpers: ArrayHelpers) => (
+          <GoalTable
+            stepName="step4"
+            stepData={props.formik.values.step4}
+            setFieldValue={props.formik.setFieldValue}
+            records={listOfLinks}
+            arrayHelpers={arrayHelpers}
+          />
+        )
+      } validateOnChange={false} />
     </StepWrapper>
   );
 };
