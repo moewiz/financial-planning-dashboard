@@ -116,10 +116,16 @@ export const TableEntryContainer = styled.section.attrs({
     }
   }
   .proposed-product-table{
+    .ant-table-expand-icon-th, .ant-table-row-expand-icon-cell {
+      width: 0px !important;
+      min-width: 0px !important;
+      padding: 0px !important;
+    }
     .ant-table-thead{
       tr{
         th:first-child{
-          padding-left: 36px
+          // padding-left: 36px
+          padding: 0px !important;
         }
       }
     }
@@ -429,7 +435,9 @@ export const InnerTableContainer = styled.section`
   }
 `;
 
-export const TagList = styled.div``;
+export const TagList = styled.div.attrs({
+  className: 'tag-list',
+})``;
 
 export const TagStyled = styled(Tag)`
   &.ant-tag {

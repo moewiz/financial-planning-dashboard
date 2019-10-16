@@ -6,6 +6,7 @@ import { Record, Row, StepProps } from '../DocumentsPage';
 import { TitleStep } from '../styled';
 import { EditCellType } from '../../StrategyPage/Drawer/EditCell';
 import GoalEdit from './GoalEdit';
+import { priorityOptions } from '../../../enums/options';
 
 interface GoalTableProps {
   stepName: string;
@@ -44,9 +45,19 @@ const columns = [
   {
     title: 'Priority',
     dataIndex: 'priority',
-    type: EditCellType.text,
+    type: EditCellType.select,
     key: '1',
+    options: priorityOptions,
     editable: true,
+    width: 100,
+  },
+  {
+    title: 'Time frame',
+    dataIndex: 'timeFrame',
+    type: EditCellType.text,
+    key: '2',
+    editable: true,
+    width: 105,
   },
 ];
 
@@ -56,7 +67,7 @@ const GoalTable = (props: GoalTableProps) => {
   const options = map(records, (record: Record) => ({
     value: record.header,
     label: record.header,
-    children: map(record.table.data, (row: Row) => ({ value: row.id.toString(), label: row.value })),
+    children: map(record.table.data, (row: Row) => ({ value: row.id && row.id.toString(), label: row.value })),
   }));
   const onEdit = (value: any, name: string, rowIndex: number) => {
     const fieldName = `${stepName}.table.data.${rowIndex}.${name}`;

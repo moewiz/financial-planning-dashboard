@@ -457,6 +457,7 @@ export const QuotationMark = styled.span<{ hideQuotationMark?: boolean }>`
 `;
 
 export const LinkCurrentProductWrapper = styled.div`
+  text-align: center;
   .ant-select {
     margin-left: 0px;
     .ant-select {

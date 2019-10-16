@@ -130,7 +130,7 @@ class EditCell extends Component<EditCellProps> {
         value={value}
         optionLabelProp={yearFi ? 'title' : ''}
         showArrow={false}
-        dropdownClassName="custom-menu-width"
+        dropdownClassName="select-inline"
       >
         {options &&
           options.length > 0 &&

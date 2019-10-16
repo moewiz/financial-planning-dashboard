@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { get, map, debounce, filter } from 'lodash';
+import { debounce, filter, get, map } from 'lodash';
 
 import EditCell, { EditCellType } from '../../StrategyPage/Drawer/EditCell';
 import { TagList, TagStyled } from '../../../pages/client/styled';
@@ -11,7 +11,7 @@ const GoalEdit = (props: any) => {
   const debounceEdit = useCallback(
     debounce((val, name, index) => {
       onEdit(val, name, index);
-    }, 500),
+    }, 300),
     [],
   );
   const onChange = (val: any, name: string) => {
@@ -28,6 +28,18 @@ const GoalEdit = (props: any) => {
     );
   }
 
+  const handleClose = (removedTag: any) => {
+    const newLinks = filter(get(record, 'links', []), (tag) => {
+      return JSON.stringify(tag) !== JSON.stringify(removedTag);
+    });
+    onEdit(
+      newLinks,
+      'links',
+      rowIndex,
+    );
+  };
+  const links = get(record, 'links', []);
+
   return (
     <td className={props.className}>
       {editable ? (
@@ -37,16 +49,9 @@ const GoalEdit = (props: any) => {
       )}
       {showLinks && (
         <TagList>
-          {map(get(record, 'links', []), (product) => (
-            <TagStyled
-              key={product.id}
-              closable={true}
-              color="#e2e2e2"
-              onClose={() =>
-                onEdit(filter(get(record, 'links', []), (link) => link.id !== product.id), 'links', rowIndex)
-              }
-            >
-              {product.value}
+          {map(links, (tag) => (
+            <TagStyled key={JSON.stringify(tag)} closable={true} color="#e2e2e2" onClose={() => handleClose(tag)}>
+              {tag.value}
             </TagStyled>
           ))}
         </TagList>

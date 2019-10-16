@@ -230,3 +230,9 @@ export const REPAYMENT_TYPE: { [key: string]: string } = {
 };
 
 export const repaymentTypeOptions = mapOptionObjectToArray(REPAYMENT_TYPE);
+
+export const priorityOptions = [
+  { value: 'low', label: 'Low'},
+  { value: 'medium', label: 'Medium'},
+  { value: 'high', label: 'High'},
+];
