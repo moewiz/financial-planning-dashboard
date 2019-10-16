@@ -81,7 +81,7 @@ interface Table {
 export interface Record {
   title: string;
   subtitle?: string;
-  header?: string;
+  header: string;
   table: Table;
   type?: string;
 }

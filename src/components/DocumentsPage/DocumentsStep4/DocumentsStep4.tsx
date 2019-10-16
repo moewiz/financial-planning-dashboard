@@ -3,18 +3,19 @@ import { connect } from 'formik';
 
 import { StepWrapper } from '../styled';
 import { DocumentData, FormikPartProps } from '../DocumentsPage';
-import DocumentSwitcher from '../DocumentSwitcher';
 import GoalTable from './GoalTable';
 
 const DocumentsStep4 = (props: FormikPartProps) => {
+  const listOfLinks = props.formik.values.step2.records || [];
+
   return (
     <StepWrapper>
-      <DocumentSwitcher
+      <GoalTable
         stepName="step4"
         stepData={props.formik.values.step4}
         setFieldValue={props.formik.setFieldValue}
+        records={listOfLinks}
       />
-      <GoalTable />
     </StepWrapper>
   );
 };

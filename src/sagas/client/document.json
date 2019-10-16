@@ -10,7 +10,7 @@
     "records": [
       {
         "type": "fixed",
-        "header": "Super",
+        "header": "Superannuation",
         "title": "What the advice cover (Superannuation)",
         "subtitle": "Record the Superannuation-related scope of advice, as agreed between you and the client.",
         "table": {
@@ -190,114 +190,27 @@
     ]
   },
   "step4": {
-    "title": "What are the client's goals, needs and objectives?",
-    "subtitle": "Record any other goals, needs and objectives that emerged as a result of your discussions with the client",
-    "records": [
-      {
-        "type": "fixed",
-        "header": "Super",
-        "title": "What are the client's goals, needs and objectives addressed by your super advice?",
-        "subtitle": "Enter Superannuation-related goals, needs and objectives",
-        "table": {
-          "columns": ["Superannuation", "Goals, needs and objectives"],
-          "data": [
+    "title": "What are the client's goals, needs and objectives addressed?",
+    "table": {
+      "data": [
+        {
+          "id": 1,
+          "description": "You would like to maximize your superannuation, to meet your retirement needs",
+          "priority": "high",
+          "timeFrame": 2019,
+          "links": [
             {
               "id": 1,
-              "value": "",
-              "description": "You would like to maximize your superannuation, to meet your retirement needs"
-            }
-          ]
-        }
-      },
-      {
-        "type": "fixed",
-        "header": "Retirement Income",
-        "title": "What are the client's goals, needs and objectives addressed by your super advice?",
-        "subtitle": "Record the Retirement Income-related items, that did not fall within the scope of advice.",
-        "table": {
-          "columns": ["Retirement Income", "Goals, needs and objectives"],
-          "data": [
-            {
-              "id": 1,
-              "value": "Insurance nominations",
-              "description": "Unspecified"
+              "value": "Contributions"
             },
             {
               "id": 2,
-              "value": "Sample text",
-              "description": "Unspecified"
-            },
-            {
-              "id": 3,
-              "value": "POA/EPOA",
-              "description": "Unspecified"
-            },
-            {
-              "id": 3,
-              "value": "Guardianship",
-              "description": "Unspecified"
+              "value": "Platform Review"
             }
           ]
         }
-      },
-      {
-        "type": "fixed",
-        "header": "Investment",
-        "title": "What are the client's goals, needs and objectives addressed by your super advice?",
-        "subtitle": "Record the Investment-related items, that did not fall within the scope of advice.",
-        "table": {
-          "columns": ["Investment", "Goals, needs and objectives"],
-          "data": [
-            {
-              "id": 1,
-              "value": "Platform review",
-              "description": "Unspecified"
-            }
-          ]
-        }
-      },
-      {
-        "type": "fixed",
-        "header": "Estate Planning",
-        "title": "What are the client's goals, needs and objectives addressed by your super advice?",
-        "subtitle": "Record the Estate Planning-related items, that did not fall within the scope of advice.",
-        "table": {
-          "columns": ["Estate Planning", "Goals, needs and objectives"],
-          "data": []
-        }
-      },
-      {
-        "type": "fixed",
-        "header": "Aged Care",
-        "title": "What are the client's goals, needs and objectives addressed by your super advice?",
-        "subtitle": "Record the Aged Care-related items, that did not fall within the scope of advice.",
-        "table": {
-          "columns": ["Aged Care", "Goals, needs and objectives"],
-          "data": [
-            {
-              "id": 1,
-              "value": "Insurance nominations",
-              "description": "Unspecified"
-            },
-            {
-              "id": 2,
-              "value": "Sample text",
-              "description": "Unspecified"
-            },
-            {
-              "id": 3,
-              "value": "POA/EPOA",
-              "description": "Unspecified"
-            },
-            {
-              "id": 3,
-              "value": "Guardianship",
-              "description": "Unspecified"
-            }
-          ]
-        }
-      }
-    ]
+      ]
+    }
   },
   "step5": {
     "title": "Were there any limitations to the advice provided?",
