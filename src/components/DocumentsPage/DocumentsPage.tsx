@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { Formik, FormikActions, FormikContext, FormikProps } from 'formik';
 import { get, isEmpty } from 'lodash';
 import { Steps, message, Spin } from 'antd';
 
@@ -12,7 +13,6 @@ import DocumentsStep7 from './DocumentsStep7/DocumentsStep7';
 import DocumentsStep8 from './DocumentsStep8/DocumentsStep8';
 
 import { DocumentsWrapper, StepActionDocument, BtnStepDocument } from './styled';
-import { Formik, FormikActions, FormikContext, FormikProps } from 'formik';
 
 const { Step } = Steps;
 const steps = [
@@ -34,7 +34,7 @@ const steps = [
   {
     title: 'Step 4',
     content: DocumentsStep4,
-    description: 'Client is goals',
+    description: 'Client\'s goals',
   },
   {
     title: 'Step 5',

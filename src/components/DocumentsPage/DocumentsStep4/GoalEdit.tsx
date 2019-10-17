@@ -10,7 +10,7 @@ const GoalEdit = (props: any) => {
   const [value, setValue] = useState<any>(get(record, dataIndex));
   const debounceEdit = useCallback(
     debounce((val, name, index) => {
-      onEdit(val, name, index);
+      onEdit(val, name, index, record);
     }, 300),
     [],
   );
