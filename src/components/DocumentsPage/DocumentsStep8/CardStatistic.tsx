@@ -28,7 +28,7 @@ const CardStatistic = (props: { record: Record; onClick: () => void }) => {
 
   return (
     <CardThumbnailItem onClick={handleOnClick} checked={checked && !isLoading}>
-      <Skeleton loading={isLoading}>
+      <Skeleton loading={isLoading} active={true}>
         {checked ? (
           <div className="fadeIn">
             <TitleCard>{record.header}</TitleCard>
