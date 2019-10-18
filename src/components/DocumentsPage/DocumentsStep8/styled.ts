@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -30,7 +30,9 @@ export const ListCardThumbnails = styled.div`
   justify-content: center;
 `;
 
-export const CardThumbnailItem = styled.div`
+export const CardThumbnailItem = styled.div<{ checked?: boolean; }>`
+  background-color: #fff;
+  border: 1px solid #dcdcdc;
   cursor: pointer;
   flex: 0 0 27%;
   margin: 15px 10px;
@@ -38,12 +40,17 @@ export const CardThumbnailItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
   transition: all 300ms ease;
   height: 160px;
   border-radius: 0.35rem;
   box-shadow: 4px 4px 10px 3px rgba(100,100,101,0.21), 0 0 15px rgba(115,162,208,0.06);
   box-sizing: border-box;
+  transition: all 1.5s ease;
+  padding: 10px;
+  ${(props) => props.checked && css`
+    background-color: #e4fff3;
+    border-color: #97dec4;
+  `}
 `;
 
 export const TitleCard = styled.div`

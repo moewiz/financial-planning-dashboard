@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { filter, get } from 'lodash';
+import { Icon, Skeleton } from 'antd';
 
 import { Record } from '../DocumentsPage';
-import { CardThumbnailItem, StatusCard, TitleCard, NumberCard, DoneCard, CardThumbnailChecked } from './styled';
-import { Icon, Skeleton } from 'antd';
+import { CardThumbnailItem, StatusCard, TitleCard, NumberCard, DoneCard } from './styled';
 
 const CardStatistic = (props: { record: Record; onClick: () => void }) => {
   const { record, onClick } = props;
@@ -14,41 +14,36 @@ const CardStatistic = (props: { record: Record; onClick: () => void }) => {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+    }, 4000);
 
     return () => {
       clearTimeout(timeoutId);
     };
   }, []);
-
-  if (isLoading) {
-    return (
-      <CardThumbnailItem>
-        <Skeleton />
-      </CardThumbnailItem>
-    );
-  }
-
-  if (checked) {
-    return (
-      <CardThumbnailChecked onClick={onClick}>
-        <div className="fadeIn">
-          <TitleCard>{record.header}</TitleCard>
-          <DoneCard>
-            <Icon type="check" />
-          </DoneCard>
-        </div>
-      </CardThumbnailChecked>
-    );
-  }
+  const handleOnClick = () => {
+    if (!isLoading) {
+      onClick();
+    }
+  };
 
   return (
-    <CardThumbnailItem onClick={onClick}>
-       <div className="fadeIn">
-        <TitleCard>{record.header}</TitleCard>
-        <NumberCard>{numberIssues}</NumberCard>
-        <StatusCard>Open issue{numberIssues > 1 && 's'}</StatusCard>
-      </div>
+    <CardThumbnailItem onClick={handleOnClick} checked={checked && !isLoading}>
+      <Skeleton loading={isLoading}>
+        {checked ? (
+          <div className="fadeIn">
+            <TitleCard>{record.header}</TitleCard>
+            <DoneCard>
+              <Icon type="check" />
+            </DoneCard>
+          </div>
+        ) : (
+          <div className="fadeIn">
+            <TitleCard>{record.header}</TitleCard>
+            <NumberCard>{numberIssues}</NumberCard>
+            <StatusCard>Open issue{numberIssues > 1 && 's'}</StatusCard>
+          </div>
+        )}
+      </Skeleton>
     </CardThumbnailItem>
   );
 };
