@@ -8,13 +8,15 @@ export const StickyStyle = createGlobalStyle<{ collapsed?: boolean }>`
     top: 0;
     width: ${(props) => (props.collapsed ? 'calc(100% - 80px)' : 'calc(100% - 295px)')};
     background-color: #fff;
-    z-index: 1051;
+    z-index: 1052;
     margin: 0 -24px;
     padding: 4px 24px 20px 24px;
     box-shadow: 2px 5px 4px 0px rgba(240, 240, 240, 0.7);
   }
-  .ant-drawer.ant-drawer-open {
-    z-index: 1052;
+  .ant-drawer {
+    &-open.strategy-drawer {
+      z-index: 1052;
+    }
   }
 `;
 const { Sider } = Layout;

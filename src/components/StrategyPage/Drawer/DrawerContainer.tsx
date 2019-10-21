@@ -80,7 +80,13 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
     const { drawerOpen, drawerData, loading } = this.props;
 
     return (
-      <Drawer width={1100} onClose={this.onCloseDrawer} visible={drawerOpen} destroyOnClose={true}>
+      <Drawer
+        width={1100}
+        onClose={this.onCloseDrawer}
+        visible={drawerOpen}
+        destroyOnClose={true}
+        wrapClassName={'strategy-drawer'}
+      >
         {loading ? <Spin size="small" /> : drawerData ? this.renderDrawer() : null}
       </Drawer>
     );
