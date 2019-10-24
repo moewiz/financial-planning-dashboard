@@ -134,8 +134,8 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
     const { open } = this.state;
     const { pickerType, border, value, defaultOpen, format, options, disabledYear, showAge, ...props } = this.props;
     const className = classNames('picker-' + pickerType + ' has-' + border, { showAge });
-    const momentValue = moment(value);
-    const age = showAge ? moment().diff(momentValue, 'years') : 0;
+    const momentValue = value ? moment(value) : undefined;
+    const age = showAge && value ? moment().diff(momentValue, 'years') : 0;
 
     switch (pickerType) {
       case 'month': {
@@ -143,7 +143,7 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
           <EntryPickerTable className={className}>
             <MonthPicker
               ref={this.myRef}
-              defaultValue={momentValue}
+              value={momentValue}
               {...props}
               onChange={this.handleChange}
               onOpenChange={this.handleOpenChange}
@@ -180,7 +180,7 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
               open={open}
               format={format}
             />
-            { showAge && <span>({age})</span> }
+            { showAge && value && <span>({age})</span> }
           </EntryPickerTable>
         );
       }
