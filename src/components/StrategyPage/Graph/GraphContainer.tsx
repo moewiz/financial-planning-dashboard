@@ -50,6 +50,7 @@ const defaultOptions = {
       '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
       '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
     intersect: false,
+    mode: 'label',
     callbacks: {
       label(
         tooltipItem: { datasetIndex: React.ReactText; yLabel: number },
