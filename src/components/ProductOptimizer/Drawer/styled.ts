@@ -9,6 +9,12 @@ export const AssetsAllocationWrapper = styled.div`
 export const FeesWrapper = styled(AssetsAllocationWrapper)`
   .asset-block-container {
     flex: 0 0 380px;
+    .asset-block-title {
+      width: 380px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
   }
   .table-entry-container {
     margin-top: 0;
@@ -67,7 +73,9 @@ export const AssetTitleBlock = styled.div<{ marginLeft?: boolean }>`
   }
 `;
 
-export const AssetTitle = styled.div`
+export const AssetTitle = styled.div.attrs({
+  className: 'asset-block-title',
+})`
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 8px;
