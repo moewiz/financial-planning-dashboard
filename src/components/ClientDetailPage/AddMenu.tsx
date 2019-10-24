@@ -37,7 +37,17 @@ const AddMenu = ({ type, onClick, maritalStatus }: AddMenuProps) => {
 
   const renderMenu = () => {
     const single = maritalStatus === maritalStatusOptions[1].value;
-    const options = filter(currentChoices[type], (option: Choice) => (single ? option.label !== OWNER.partner : true));
+    let options = filter(currentChoices[type], (option: Choice) => (single ? option.label !== OWNER.partner : true));
+    if (!single) {
+      options = [
+        ...options,
+        {
+          value: 'joint',
+          label: 'Joint',
+          children: options[0].children,
+        },
+      ];
+    }
     const menu = map(options, (option, index) => renderItems(option, index));
 
     return <Menu>{menu}</Menu>;
