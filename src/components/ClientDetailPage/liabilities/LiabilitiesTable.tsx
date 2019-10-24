@@ -5,7 +5,7 @@ import { TableEntryContainer, HeaderTitleTable, TextTitle, ActionTableGeneral } 
 import ExpandedLiabilitiesRow, { LiabilityProps } from './ExpandedLiabilitiesRow';
 import GeneralTable from '../GeneralTable';
 import { to2Options, liabilitiesTypes, ownerOptions, from2Options } from '../../../enums/options';
-import { removePartnerOption } from '../../../utils/columnUtils';
+import { loadOptionsBaseOnCol, removePartnerOption } from '../../../utils/columnUtils';
 import { CurrentTypes } from '../../../enums/currents';
 import AddMenu from '../AddMenu';
 import { createEvent } from '../../../utils/GA';
@@ -198,8 +198,7 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
 
   public render() {
     const { loading, data, maritalStatus, assets } = this.props;
-    const columns = this.columns.map((col) => {
-      const options = removePartnerOption(col, maritalStatus);
+    const columns = this.columns.map((col: any) => {
       const editable = col.editable === false ? false : 'true';
       if (col.key === 'operation') {
         return {
@@ -216,16 +215,20 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
 
       return {
         ...col,
-        onCell: (record: any, rowIndex: number) => ({
-          ...cellProps,
-          options,
-          rowIndex,
-          tableName: this.tableName,
-          type: col.type || 'text',
-          record,
-          editable,
-          handleSave: this.handleSave,
-        }),
+        onCell: (record: any, rowIndex: number) => {
+          const options = loadOptionsBaseOnCol(col, record, { maritalStatus });
+
+          return {
+            ...cellProps,
+            options,
+            rowIndex,
+            tableName: this.tableName,
+            type: col.type || 'text',
+            record,
+            editable,
+            handleSave: this.handleSave,
+          };
+        },
       };
     });
 

@@ -6,6 +6,7 @@ import {
   maritalStatusOptions,
   OWNER,
   POLICY_OWNER,
+  ownerWithJointOptions,
 } from '../enums/options';
 
 export function addJointOption(
@@ -125,7 +126,11 @@ export function loadOptionsBaseOnCol(
     let options = [...col.options];
 
     if (col.dataIndex === 'owner' && record.type && options) {
-      options = addJointOption(col, record, options);
+      if (maritalStatus === maritalStatusOptions[0].value) {
+        options = ownerWithJointOptions;
+      } else {
+        options = addJointOption(col, record, options);
+      }
     }
     if (maritalStatus === maritalStatusOptions[1].value) {
       // Marital State is Single
