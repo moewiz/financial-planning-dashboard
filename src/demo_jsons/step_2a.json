@@ -177,7 +177,7 @@
       {
         "value": "minimum",
         "label": "Minimum Pension income",
-        "renderedLabel": "Minimum Pension income",
+        "renderedLabel": "minimum Pension income",
         "income": 1000
       },
       {
@@ -188,7 +188,7 @@
       {
         "value": "maximum",
         "label": "Maximum Pension income",
-        "renderedLabel": "Maximum Pension income",
+        "renderedLabel": "maximum Pension income",
         "income": 5000
       },
       {
@@ -251,7 +251,7 @@
       {
         "value": "minimum",
         "label": "Minimum Pension income",
-        "renderedLabel": "Minimum Pension income",
+        "renderedLabel": "minimum Pension income",
         "income": 1500
       },
       {
@@ -262,7 +262,7 @@
       {
         "value": "maximum",
         "label": "Maximum Pension income",
-        "renderedLabel": "Maximum Pension income",
+        "renderedLabel": "maximum Pension income",
         "income": 4000
       },
       {

@@ -107,7 +107,7 @@
         "id": 1,
         "value": 1,
         "label": "CFS FirstChoice Wholesale Super",
-        "fullValue": 1920
+        "fullValue": 640818
       },
       {
         "id": 2,
@@ -180,8 +180,8 @@
       {
         "value": "minimum",
         "label": "Minimum Pension income",
-        "renderedLabel": "Minimum Pension income",
-        "income": 1000
+        "renderedLabel": "minimum Pension income",
+        "income": 25630
       },
       {
         "value": "specific",
@@ -191,8 +191,8 @@
       {
         "value": "maximum",
         "label": "Maximum Pension income",
-        "renderedLabel": "Maximum Pension income",
-        "income": 5000
+        "renderedLabel": "maximum Pension income",
+        "income": 50000
       },
       {
         "value": "meetExpenses",
@@ -1288,7 +1288,7 @@
       {
         "check": true,
         "sentence": "client.commenceAccount",
-        "values": ["CFS FirstChoice Wholesale Pension", "2019-07-09T12:00:00", 1, "full_value", [], ["meetExpenses"]]
+        "values": ["(empty)", "2019-07-09T12:00:00", 1, "full_value", [], ["minimum"]]
       }
     ],
     "drawer": {
