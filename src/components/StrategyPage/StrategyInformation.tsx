@@ -102,29 +102,6 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
 
     switch (type) {
       case StrategyTypes.Superannuation: {
-        const config = {
-          datasets: [
-            {
-              dataIndex: 'current',
-              label: 'Current',
-              fill: true,
-              pointRadius: 0,
-              ...colors.lightBlue,
-            },
-            {
-              dataIndex: 'proposed',
-              label: 'Proposed',
-              fill: true,
-              pointRadius: 0,
-              ...colors.darkBlue,
-            },
-          ],
-        };
-        const graphList = map(graph, (graphData: GraphData) => ({
-          ...loadGraphData(config)(graphData),
-          title: graphData.title,
-        }));
-
         return (
           <StrategyInfoWrapper>
             <Row type="flex" justify="space-between" gutter={32}>
@@ -132,7 +109,7 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
                 <StatisticItem listOfKpi={kpi} />
               </Col>
               <Col span={12}>
-                <GraphContainer type={GraphType.Area} dataList={graphList} onGraphClick={this.onGraphClick} />
+                <GraphContainer type={GraphType.Line} dataList={basicGraphData} onGraphClick={this.onGraphClick} />
               </Col>
             </Row>
             <StandardText data={standardText} />

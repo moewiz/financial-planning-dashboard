@@ -20,7 +20,9 @@ export interface DrawerData {
 interface DrawerContainerProps {
   drawerOpen: boolean;
   loading: boolean;
-  drawerData: DrawerData;
+  clientData: DrawerData;
+  currentData: DrawerData;
+  partnerData?: DrawerData;
   tabActive: string;
   page: number;
 
@@ -43,9 +45,9 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
   }
 
   public renderDrawer = () => {
-    const { drawerData, loading, activeTab, tabActive, page } = this.props;
-    const { title, subTitle, footnote } = drawerData;
-    const total = drawerData.tableData && drawerData.tableData.length ? drawerData.tableData.length * 10 : 10;
+    const { clientData, partnerData, currentData, loading, activeTab, tabActive, page } = this.props;
+    const { title, subTitle, footnote } = currentData;
+    const total = currentData.tableData && currentData.tableData.length ? currentData.tableData.length * 10 : 10;
 
     return (
       <>
@@ -56,7 +58,13 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
         <DrawerSubContent>{subTitle}</DrawerSubContent>
 
         {/* Drawer Table */}
-        <MainDrawerContent activeTab={activeTab} tabActive={tabActive} drawerData={drawerData} page={page} />
+        <MainDrawerContent
+          activeTab={activeTab}
+          tabActive={tabActive}
+          clientData={clientData}
+          partnerData={partnerData}
+          page={page}
+        />
 
         <DrawerFooter>
           <DrawerNote>{footnote}</DrawerNote>
@@ -77,7 +85,7 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
   }
 
   public render() {
-    const { drawerOpen, drawerData, loading } = this.props;
+    const { drawerOpen, loading, currentData } = this.props;
 
     return (
       <Drawer
@@ -87,7 +95,7 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
         destroyOnClose={true}
         wrapClassName={'strategy-drawer'}
       >
-        {loading ? <Spin size="small" /> : drawerData ? this.renderDrawer() : null}
+        {loading ? <Spin size="small" /> : currentData ? this.renderDrawer() : null}
       </Drawer>
     );
   }
@@ -96,14 +104,18 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
 const mapStateToProps = (state: RootState) => {
   const tabActive = state.drawer.get('tabActive');
   const page = state.drawer.get('page');
-  const drawerData: DrawerData = state.drawer.get(tabActive);
+  const currentData: DrawerData = state.drawer.get(tabActive);
+  const clientData: DrawerData = state.drawer.get('client');
+  const partnerData: DrawerData = state.drawer.get('partner');
 
   return {
     drawerOpen: state.drawer.get('drawerOpen'),
     loading: state.drawer.get('loading'),
-    tabActive: state.drawer.get('tabActive'),
+    tabActive,
     page,
-    drawerData,
+    currentData,
+    clientData,
+    partnerData,
   };
 };
 

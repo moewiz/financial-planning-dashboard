@@ -7,7 +7,8 @@ import { DrawerData } from './DrawerContainer';
 interface MainDrawerContentProps {
   tabActive: string;
   page: number;
-  drawerData: DrawerData;
+  clientData: DrawerData;
+  partnerData?: DrawerData;
   activeTab: (tabActive: string) => ActiveTabAction;
 }
 
@@ -42,20 +43,28 @@ class MainDrawerContent extends PureComponent<MainDrawerContentProps> {
   }
 
   public render() {
-    const { tabActive, drawerData, page } = this.props;
+    const { tabActive, clientData, partnerData, page } = this.props;
     const { animationCn } = this.state;
-    const allRows = drawerData && drawerData.tableData ? drawerData.tableData : [];
-    const rows = getRows(page, allRows);
 
     return (
       <MainDrawerSection>
         <TabsCustomized defaultActiveKey={tabActive} onChange={this.callback}>
           <TabsPaneCustomized tab="Client" key="client">
-            <DrawerTable columns={drawerData.columns} rows={rows} animationCn={animationCn} />
+            <DrawerTable
+              columns={clientData.columns}
+              rows={getRows(page, clientData.tableData || [])}
+              animationCn={animationCn}
+            />
           </TabsPaneCustomized>
-          <TabsPaneCustomized tab="Partner" key="partner">
-            <DrawerTable columns={drawerData.columns} rows={rows} animationCn={animationCn} />
-          </TabsPaneCustomized>
+          {partnerData && partnerData.tableData && (
+            <TabsPaneCustomized tab="Partner" key="partner">
+              <DrawerTable
+                columns={partnerData.columns}
+                rows={getRows(page, partnerData.tableData)}
+                animationCn={animationCn}
+              />
+            </TabsPaneCustomized>
+          )}
         </TabsCustomized>
       </MainDrawerSection>
     );

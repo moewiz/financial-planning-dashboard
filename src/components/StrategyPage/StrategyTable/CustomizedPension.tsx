@@ -78,6 +78,7 @@ const CustomizedPension = (
   useEffect(() => {
     setPensionIncome(get(strategy, 'values[5][0]'));
   }, [strategy]);
+  const onChange = (val: any, fieldName: string) => setFieldValue(fieldName, val);
 
   return (
     <FullyCustomized>
@@ -98,7 +99,7 @@ const CustomizedPension = (
         name={`${strategyType}.strategies[${strategyIndex}].values[1]`}
         type={EditCellType.date}
         value={get(strategy, 'values[1]')}
-        onChange={(val, fieldName) => setFieldValue(fieldName, val)}
+        onChange={onChange}
       />
       <span>{isCustomisedRollover ? 'as a' : 'from your'}</span>
       <EditCell
@@ -117,7 +118,7 @@ const CustomizedPension = (
             name={`${strategyType}.strategies[${strategyIndex}].values[3]`}
             value={get(strategy, 'values[3]')}
             type={EditCellType.dropdownFreeText}
-            onChange={(val, fieldName) => setFieldValue(fieldName, val)}
+            onChange={onChange}
             defaultFullValue={fullValue}
           />
         )}
@@ -162,7 +163,7 @@ const CustomizedPension = (
                 name={`${strategyType}.strategies[${strategyIndex}].values[5][1]`}
                 value={get(strategy, 'values[5][1]')}
                 type={EditCellType.number}
-                onChange={(val, fieldName) => setFieldValue(fieldName, val)}
+                onChange={onChange}
                 dollar={true}
                 calculateWidth={true}
               />
@@ -171,7 +172,7 @@ const CustomizedPension = (
             <EditCell
               name={`${strategyType}.strategies[${strategyIndex}].values[6]`}
               value={get(strategy, 'values[6]')}
-              onChange={(val, fieldName) => setFieldValue(fieldName, val)}
+              onChange={onChange}
               type={EditCellType.select}
               options={periodTypes}
             />
