@@ -24,6 +24,7 @@ export interface Strategy {
 }
 export interface DynamicData {
   name: string;
+  dob: string;
   superannuation: {
     value: any;
     label: string;

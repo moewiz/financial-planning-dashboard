@@ -24,6 +24,7 @@ export interface StrategyItemI {
   values?: any[];
   mark?: boolean;
   margin?: boolean;
+  invalid?: boolean;
   customNote?: string;
 }
 
@@ -345,6 +346,7 @@ class StrategyItem extends Component<StrategyItemProps> {
       return arrayStatements;
     }
 
+    // tslint:disable-next-line:no-console
     console.log('missing sentence key for:', sentenceKey);
     return null;
   }
@@ -376,7 +378,7 @@ class StrategyItem extends Component<StrategyItemProps> {
     const customNoteName = `${strategyType}.strategies[${strategyIndex}].customNote`;
 
     return (
-      <StrategyTableItems unchecked={!strategy.check}>
+      <StrategyTableItems unchecked={!strategy.check} invalid={strategy.invalid}>
         <CheckboxInput value={strategy.check} onChange={this.onChangeCheck} />
         <StrategyTableText>
           {this.renderText()}

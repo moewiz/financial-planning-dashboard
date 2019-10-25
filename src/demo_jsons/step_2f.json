@@ -102,6 +102,7 @@
   "defaultFullValue": 640818,
   "client": {
     "name": "John Samual",
+    "dob": "1962-08-23T00:00:00",
     "superannuation": [
       {
         "id": 1,
@@ -223,7 +224,8 @@
     ]
   },
   "partner": {
-    "name": "Susan Boyle",
+    "name": "Susan Samual",
+    "dob": "1962-08-23T00:00:00",
     "superannuation": [
       { "value": 4, "label": "Superannuation Product 4" },
       { "value": 5, "label": "Superannuation Product 5" },
@@ -868,7 +870,7 @@
       {
         "check": true,
         "sentence": "client.commenceAccount",
-        "values": ["(empty)", "2019-07-09T12:00:00", 1, "full_value", [], ["minimum"]]
+        "values": ["(empty)", "2023-07-09T12:00:00", 1, "full_value", [], ["minimum"]]
       }
     ],
     "drawer": {

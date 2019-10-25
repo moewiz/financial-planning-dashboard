@@ -222,3 +222,6 @@ body .select-inline.ant-select-dropdown.ant-select-dropdown--single.ant-select-d
   bottom: 124%;
   transform: rotate(-30deg);
 }
+.ant-notification {
+  z-index: 1088 !important;
+}

@@ -93,7 +93,7 @@ class DrawerContainer extends PureComponent<DrawerContainerProps> {
         onClose={this.onCloseDrawer}
         visible={drawerOpen}
         destroyOnClose={true}
-        wrapClassName={'strategy-drawer'}
+        className={'strategy-drawer'}
       >
         {loading ? <Spin size="small" /> : currentData ? this.renderDrawer() : null}
       </Drawer>

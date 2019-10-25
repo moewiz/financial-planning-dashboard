@@ -99,6 +99,7 @@
   "defaultFullValue": 2210,
   "client": {
     "name": "John Samual",
+    "dob": "1962-08-23T00:00:00",
     "superannuation": [
       {
         "id": 1,
@@ -221,7 +222,8 @@
     ]
   },
   "partner": {
-    "name": "Susan Boyle",
+    "name": "Susan Samual",
+    "dob": "1962-08-23T00:00:00",
     "superannuation": [
       { "value": 4, "label": "Superannuation Product 4" },
       { "value": 5, "label": "Superannuation Product 5" },

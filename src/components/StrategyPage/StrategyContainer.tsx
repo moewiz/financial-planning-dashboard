@@ -36,6 +36,12 @@ class StrategyContainer extends PureComponent<StrategyContainerProps & RouteComp
     createEvent('strategy', 'create', label, getParams(match.params).clientId);
     // TODO integrate the API
     if (strategyType === 'commenceAccount') {
+      const accountBasedPension = {
+        ...data,
+        check: false,
+        values: ['(empty)', '2023-07-09T12:00:00', 1, 'full_value', [], ['minimum']],
+      };
+      arrayHelpers.unshift(accountBasedPension);
       this.redrawGraphs(true);
     } else {
       arrayHelpers.unshift(data);
