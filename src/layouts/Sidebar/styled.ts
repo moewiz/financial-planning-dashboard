@@ -55,8 +55,8 @@ export const SiderCollapsible = styled(Sider).attrs({
     }
     .btn-sidebar {
       border-radius: 100%;
-      width: 45px;
-      height: 45px;
+      width: 40px;
+      height: 40px;
       padding: 0 10px;
       transition: all ease 200ms;
       span {
@@ -189,6 +189,7 @@ export const DateItem = styled.span`
   padding-left: 7px;
   color: #697396;
   display: flex;
+  padding-right: 25px;
   align-items: center;
   .anticon {
     font-size: 18px!important;
