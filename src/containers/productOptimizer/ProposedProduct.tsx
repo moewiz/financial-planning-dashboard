@@ -77,7 +77,6 @@ interface ProposedProductProps extends ProductTable {
 const newText = '{{0}}, add a new investment product';
 const retainText = '{{0}}, retain your existing product {{1}}';
 const rebalanceText = '{{0}}, rebalance your existing product {{1}}';
-const replaceText = '{{0}}, replace your existing product {{1}}';
 
 class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProductState> {
   public state = {
@@ -330,7 +329,7 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
     const lastProduct = last(listProducts);
 
     fieldArrayRenderProps.form.setFieldValue(`${rowName}.note`, {
-      text: replaceText,
+      text: `{{0}}, replace your existing product${head.length ? 's' : ''} {{1}}`,
       params: [get(client, 'name'), head.length ? `${head.join(', ')} and ${lastProduct}` : lastProduct],
     });
     createEvent('investment', 'link', undefined, get(client, 'id'));
