@@ -609,7 +609,15 @@
               "dataIndex": "issue"
             }
           ],
-          "data": []
+          "data": [
+            {
+              "id": 1,
+              "subsection": "Insurance",
+              "issue": "Insurance premium information not added",
+              "isOverwrite": false,
+              "justification": null
+            }
+          ]
         }
       },
       {
@@ -649,7 +657,14 @@
             {
               "id": 1,
               "subsection": "CFS FirstChoice Wholesale Investments",
-              "issue": "Recommended asset allocation is not inline with the John’s Balanced risk profile",
+              "issue": "Recommended portfolio not in line with Risk profile",
+              "isOverwrite": false,
+              "justification": null
+            },
+            {
+              "id": 2,
+              "subsection": "CFS FirstChoice Wholesale Investments",
+              "issue": "Fees more expensive",
               "isOverwrite": false,
               "justification": null
             }
@@ -689,7 +704,22 @@
               "dataIndex": "issue"
             }
           ],
-          "data": []
+          "data": [
+            {
+              "id": 1,
+              "subsection": "Strategy",
+              "issue": "Client goal \"You would like to retire by the age of 60\" is not linked to a strategy",
+              "isOverwrite": false,
+              "justification": null
+            },
+            {
+              "id": 2,
+              "subsection": "Strategy",
+              "issue": "Recommended strategy \"Make a non concessional contribution of $60,000\" does not have an alternative strategy listed",
+              "isOverwrite": false,
+              "justification": null
+            }
+          ]
         }
       }
     ]
