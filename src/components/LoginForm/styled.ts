@@ -7,7 +7,7 @@ export const LoginFormWrap = styled.section`
     z-index: 1;
     background-color: #fff;
     overflow: hidden;
-    width: 534px;
+    width: 545px;
     border-radius: 10px;
     .ant-btn-primary[disabled]{
     }
@@ -28,4 +28,11 @@ export const SubHeading = styled.span`
   text-align: center;
   margin: 5px 0px 30px 0px;
   width: 100%;
+`;
+
+export const SubVerifyHeading = styled(SubHeading)`
+  margin: 5px 0px 0px 0px;
+`;
+export const SubNumberHeading = styled(SubHeading)`
+  font-weight: 700
 `;

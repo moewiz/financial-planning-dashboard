@@ -30,9 +30,9 @@ export const LoginVerifyWrap = styled.section`
     }
   }
   .ant-input {
-    width: 50px;
-    height: 40px;
-    font-size: 20px;
+    width: 55px;
+    height: 55px;
+    font-size: 30px;
     color: #252525;
     padding: 0px;
     text-align: center;

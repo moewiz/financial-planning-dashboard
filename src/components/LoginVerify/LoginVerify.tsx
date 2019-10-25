@@ -6,7 +6,7 @@ import { FormInput } from '../Elements';
 import { get, every } from 'lodash';
 import { FormikProps } from 'formik';
 import { LoginFormValues } from '../LoginForm/LoginForm';
-import { SubHeading } from '../LoginForm/styled';
+import { SubVerifyHeading, SubNumberHeading } from '../LoginForm/styled';
 
 interface LoginVerifyProp {
   loading: boolean;
@@ -48,13 +48,17 @@ const LoginVerify: React.FC<LoginVerifyProp> = ({ loading = false, error, formPr
   const code2 = createRef<any>();
   const code3 = createRef<any>();
   const code4 = createRef<any>();
-
+  const messages =  { 
+    line1: 'Enter the 4 digit verification code sent to',
+    line2: '+9******665'
+  }
   return (
     <LoginVerifyWrap>
       <Row gutter={16}>
         <Col xs={{ span: 16, offset: 1 }} lg={{ span: 20, offset: 2 }}>
           <Heading titleText={'Just one more step'} level={2} className="default" />
-          <SubHeading>{message}</SubHeading>
+          <SubVerifyHeading>{messages.line1}</SubVerifyHeading>
+          <SubNumberHeading>{messages.line2}</SubNumberHeading>
           <div className="verify-form">
             <FormInput
               type="text"
