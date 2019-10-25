@@ -52,6 +52,11 @@ const defaultOptions = {
     intersect: false,
     mode: 'label',
     callbacks: {
+      title(
+        tooltipItem: Array<{ label: string }>,
+      ) {
+        return '20' + tooltipItem[0].label;
+      },
       label(
         tooltipItem: { datasetIndex: React.ReactText; yLabel: number },
         data: { datasets: { [x: string]: { label: string } } },
