@@ -425,7 +425,7 @@ export const DrawerFooter = styled.div`
   justify-content: space-between;
   margin-top: 25px;
   p {
-    flex: 0 0 500px;
+    flex: 0 0 450px;
   }
 `;
 

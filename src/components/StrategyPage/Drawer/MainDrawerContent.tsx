@@ -56,11 +56,11 @@ class MainDrawerContent extends PureComponent<MainDrawerContentProps> {
               animationCn={animationCn}
             />
           </TabsPaneCustomized>
-          {partnerData && partnerData.tableData && (
+          {partnerData && (
             <TabsPaneCustomized tab="Partner" key="partner">
               <DrawerTable
                 columns={partnerData.columns}
-                rows={getRows(page, partnerData.tableData)}
+                rows={getRows(page, partnerData.tableData || [])}
                 animationCn={animationCn}
               />
             </TabsPaneCustomized>
