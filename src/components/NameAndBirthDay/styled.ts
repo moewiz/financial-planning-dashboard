@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import { Button, Form } from 'antd';
 
-export const ModalNameBirthDay = styled.section`
+export const ModalNameBirthDay = styled.section.attrs({
+  className : 'birtday-name-fixed'
+})`
   position: fixed;
-  bottom: 27px;
+  bottom: 10px;
   left: 47px;
 `;
 

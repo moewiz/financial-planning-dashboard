@@ -135,6 +135,136 @@ export const defaultClientState: ClientState = {
       clientName: 'Jane Empty',
       tagList: getDefaultTagList(),
     },
+    {
+      clientId: 10,
+      clientName: 'Hisako Abshire',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 11,
+      clientName: 'Chantay Moon',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 12,
+      clientName: 'Jerrell Diggins',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 13,
+      clientName: 'Tai Shiver',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 14,
+      clientName: 'Galina Moronta ',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 15,
+      clientName: 'Kiara Kintner ',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 16,
+      clientName: 'Geneva Sauro',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 17,
+      clientName: 'Luz Swanberg',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 18,
+      clientName: 'Lauryn Vanfleet',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 19,
+      clientName: 'Josie Brant',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 20,
+      clientName: 'Helen Parm',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 21,
+      clientName: 'Raye Deak',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 22,
+      clientName: 'Aurea Parr',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 23,
+      clientName: 'Jesenia Senko',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 24,
+      clientName: 'Angella Pierre',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 25,
+      clientName: 'Howard Osburn',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 26,
+      clientName: 'Malvina Roesler',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 27,
+      clientName: 'Carlene Crisci',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 28,
+      clientName: 'Hui Bellini',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 29,
+      clientName: 'Teodoro Scanlan',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 30,
+      clientName: 'Elvira Trantham',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 31,
+      clientName: 'Bernice Danford',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 32,
+      clientName: 'Noe Nishioka',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 33,
+      clientName: 'Hollie Esters',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 34,
+      clientName: 'Kathrine Manzer',
+      tagList: getDefaultTagList(),
+    },
+    {
+      clientId: 35,
+      clientName: 'Harlan Bronder',
+      tagList: getDefaultTagList(),
+    },
   ],
   assets: [],
   maritalStatus: '',

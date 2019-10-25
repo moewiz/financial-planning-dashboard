@@ -67,6 +67,12 @@ class Sidebar extends React.PureComponent<SidebarProps & RouteComponentProps> {
     const newName = name.split(' ');
     return `${newName[0][0]}${newName[1][0]}`;
   };
+
+  public getColorRandom = () => {
+    const colors = ['#ff0000', '#4caf50', '#4caf50', '#4caf50','#4caf50', '#4caf50', '#4caf50', '#4caf50', '#3f51b5', '#cddc39'];
+    return colors[Math.floor(Math.random() * colors.length)];
+  };
+
   public renderClientItem = (tag: Tag, clientId: number) => {
     const { name, date, icon } = tag;
     const { loading } = this.state;
@@ -108,7 +114,7 @@ class Sidebar extends React.PureComponent<SidebarProps & RouteComponentProps> {
         </TopSearch>
         <ClientSide mode="inline">
           {map(clients, (client: Client) => {
-            const randomColor = client.clientId > 5 ? '#31437d' : '#1790ff';
+            const randomColor = this.getColorRandom();
             return (
               <ClientRoot
                 key={client.clientId}

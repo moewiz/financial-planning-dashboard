@@ -50,10 +50,14 @@ export const SiderCollapsible = styled(Sider).attrs({
     input {
       display: none
     }
+    .birtday-name-fixed{
+      left: 5px;
+    }
     .btn-sidebar {
       border-radius: 100%;
-      width: 60px;
-      height: 60px;
+      width: 45px;
+      height: 45px;
+      padding: 0 10px;
       transition: all ease 200ms;
       span {
         display: none;
@@ -88,8 +92,8 @@ export const FullName = styled.span.attrs({
 export const ClientSide = styled(Menu).attrs({
   className: 'client-side-modify',
 })`
-  height: calc(100vh - 90px);
-  overflow-y: overlay;
+  height: calc(100vh - 160px);
+  overflow-y: scroll;
   overflow-x: hidden;
   border-right: none !important;
 `;
