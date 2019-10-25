@@ -59,6 +59,7 @@ const DocumentsStep8 = (props: FormikPartProps) => {
               <BtnDoneDocument
                 type="primary"
                 onClick={onClickSubmit}
+                disabled = {!checked}
                 style={{
                   opacity: checked ? 1 : 0.6,
                 }}
