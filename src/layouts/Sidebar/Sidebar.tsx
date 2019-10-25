@@ -84,23 +84,21 @@ class Sidebar extends React.PureComponent<SidebarProps & RouteComponentProps> {
 
   public renderClientItem = (tag: Tag, clientId: number) => {
     const { name, date, icon } = tag;
-    const { loading } = this.state;
+
     return (
       <ClientItem
-        key={name}
+        key={name + clientId}
         title={
           <StatusItem>
             <DateItem>
               <Icon type={icon} />
               {date}
             </DateItem>
-            {/* <StatusTags tagName={name}>{name}</StatusTags> */}
           </StatusItem>
         }
       >
         {map(POSITIONS, (position: Position) => (
-          <SubList key={name + position.value} onClick={() => this.showTable(tag, position, clientId)}>
-            {/* <i className={position.icon} /> */}
+          <SubList key={name + clientId + position.value} onClick={() => this.showTable(tag, position, clientId)}>
             <span>{position.label}</span>
           </SubList>
         ))}
