@@ -204,9 +204,10 @@ class CardDetails extends React.PureComponent<CardDetailsProps> {
                     const field = `${arrayHelpers.name}.${index}.isOverwrite`;
                     setFieldValue(field, !row.isOverwrite);
                   };
+                  const warningMessage = row.isOverwrite ? 'Remove override?' : 'Really override?';
 
                   return (
-                    <Popconfirm title="Really override?" onConfirm={overwriteRow}>
+                    <Popconfirm title={warningMessage} onConfirm={overwriteRow}>
                       <span style={{ cursor: 'pointer' }}>Override</span>
                     </Popconfirm>
                   );
@@ -242,9 +243,7 @@ class CardDetails extends React.PureComponent<CardDetailsProps> {
 
             return (
               <>
-                {showAddButton && (
-                  <AddAdvice header={record.header} onAdd={this.onAdd(arrayHelpers)} />
-                )}
+                {showAddButton && <AddAdvice header={record.header} onAdd={this.onAdd(arrayHelpers)} />}
 
                 <Table
                   className={cn('table-general documents-table')}
