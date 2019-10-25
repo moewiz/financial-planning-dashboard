@@ -37,6 +37,16 @@ export const SiderCollapsible = styled(Sider).attrs({
   className: 'client-side-collapsible dumoamay',
 })<{ collapsed?: boolean }>`
   &.ant-layout-sider-collapsed {
+    flex: 0 0 60px!important;
+    max-width: 60px!important;
+    min-width: 60px!important;
+    width: 60px!important;
+    .IconSider{
+      right: 23px;
+    }
+    .anticon-search{
+      display: none;
+    }
     input {
       display: none
     }

@@ -45,7 +45,7 @@ const overrideAntTheme = addLessLoader({
 
     '@menu-inline-toplevel-item-height': '30px',
     '@menu-item-height': '30px',
-    '@menu-collapsed-width': '80px',
+    '@menu-collapsed-width': '60px',
     '@menu-bg': '@component-background',
     '@menu-popup-bg': '@component-background',
     '@menu-item-color': '#515C83',
