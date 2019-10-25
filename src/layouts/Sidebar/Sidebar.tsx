@@ -1,25 +1,24 @@
 import React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Icon, Avatar } from 'antd';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { Avatar, Icon } from 'antd';
 import { map } from 'lodash';
 
 import {
-  SiderCollapsible,
   ClientInfo,
-  FullName,
   ClientItem,
-  SubList,
-  StatusItem,
-  DateItem,
-  StatusTags,
-  ClientSide,
   ClientRoot,
+  ClientSide,
+  DateItem,
+  FullName,
   InputSearch,
-  TopSearch,
+  SiderCollapsible,
+  StatusItem,
   StickyStyle,
+  SubList,
+  TopSearch,
 } from './styled';
 import { default as ModalNameAndBirthDay } from '../../components/NameAndBirthDay/NameAndBirthDay';
-import { POSITIONS, Position } from '../../enums/client';
+import { Position, POSITIONS } from '../../enums/client';
 import { Client, Tag } from '../../reducers/client';
 import { createEvent } from '../../utils/GA';
 
@@ -34,10 +33,29 @@ import { createEvent } from '../../utils/GA';
  *      StatusItem
  */
 
+const colors = ['#00AA55', '#009FD4', '#B381B3', '#939393', '#E3BC00', '#D47500', '#DC2A2A'];
+
+// numberFromText("AA");
+const numberFromText = (text: string): number => {
+  const charCodes = text
+    .split('') // => ["A", "A"]
+    .map((char) => char.charCodeAt(0)) // => [65, 65]
+    .join(''); // => "6565"
+  return parseInt(charCodes, 10);
+};
+
+const getColorFromText = (text: string): string => colors[numberFromText(text) % colors.length];
+
+const getAvatarName = (fullName: string) => {
+  const names = fullName.split(' ');
+  return `${names[0][0]}${names[1][0]}`;
+};
+
 interface SidebarProps {
   clients: Client[];
   tagName?: string;
 }
+
 class Sidebar extends React.PureComponent<SidebarProps & RouteComponentProps> {
   public state = {
     collapsed: false,
@@ -48,7 +66,7 @@ class Sidebar extends React.PureComponent<SidebarProps & RouteComponentProps> {
     this.setState({
       collapsed: !this.state.collapsed,
     });
-  };
+  }
 
   public showTable = (tag: Tag, position: Position, clientId: number) => {
     const { history } = this.props;
@@ -56,22 +74,13 @@ class Sidebar extends React.PureComponent<SidebarProps & RouteComponentProps> {
 
     createEvent('client_navigation', position.label, date, clientId);
     history.push(`/client/${clientId}/${tagName}/${position.slug}`);
-  };
+  }
 
   public selectClient = (clientId: number) => {
     const { history } = this.props;
 
     history.push(`/client/${clientId}`);
-  };
-  public getTextAvatar = (name: any) => {
-    const newName = name.split(' ');
-    return `${newName[0][0]}${newName[1][0]}`;
-  };
-
-  public getColorRandom = () => {
-    const colors = ['#ff0000', '#4caf50', '#4caf50', '#4caf50','#4caf50', '#4caf50', '#4caf50', '#4caf50', '#3f51b5', '#cddc39'];
-    return colors[Math.floor(Math.random() * colors.length)];
-  };
+  }
 
   public renderClientItem = (tag: Tag, clientId: number) => {
     const { name, date, icon } = tag;
@@ -97,7 +106,7 @@ class Sidebar extends React.PureComponent<SidebarProps & RouteComponentProps> {
         ))}
       </ClientItem>
     );
-  };
+  }
 
   public render(): JSX.Element {
     const { clients } = this.props;
@@ -114,7 +123,7 @@ class Sidebar extends React.PureComponent<SidebarProps & RouteComponentProps> {
         </TopSearch>
         <ClientSide mode="inline">
           {map(clients, (client: Client) => {
-            const randomColor = this.getColorRandom();
+            const randomColor = getColorFromText(getAvatarName(client.clientName));
             return (
               <ClientRoot
                 key={client.clientId}
@@ -127,7 +136,7 @@ class Sidebar extends React.PureComponent<SidebarProps & RouteComponentProps> {
                         backgroundColor: `${randomColor}80`,
                       }}
                     >
-                      {this.getTextAvatar(client.clientName)}
+                      {getAvatarName(client.clientName)}
                     </Avatar>
                     <FullName>{client.clientName}</FullName>
                   </ClientInfo>
