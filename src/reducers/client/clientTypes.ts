@@ -108,8 +108,8 @@ export interface ClientState {
 export const getDefaultTagList = () => {
   // const tagList = ['new', 'position', 'strategy', 'products', 'advice', 'done'];
   const tagList = [
-    { name: 'new', date: '10/11/2019', icon: 'exclamation'},
-    { name: 'position', date: '22/05/2019', icon: 'check'}];
+    { name: 'new', date: 'November 10, 2019', icon: 'exclamation'},
+    { name: 'position', date: 'May 22, 2018', icon: 'check'}];
   const tabList = values(Tab);
 
   return map(tagList, (tag) => ({

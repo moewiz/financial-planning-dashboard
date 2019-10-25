@@ -40,6 +40,9 @@ export const FormWrapper = styled(Form)`
   }
 `;
 export const PanelWrapper = styled(Panel)`
+  .ant-collapse-header{
+    display: inline-block;
+  }
 `;
 export const GraphWrapper = styled.div`
 `;

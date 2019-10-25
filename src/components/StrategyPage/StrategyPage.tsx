@@ -40,7 +40,7 @@ export const getStrategyTitle = (type: StrategyTypes) => {
 };
 
 const StrategyPage = (props: StrategyPageProps) => {
-  const [pinned, setPinned] = useState<boolean>(true);
+  const [pinned, setPinned] = useState<boolean>(false);
   const { pageData } = props;
   const netAssets = get(pageData, 'netAssets');
   const cashflowComparisons = get(pageData, 'cashflowComparisons');
