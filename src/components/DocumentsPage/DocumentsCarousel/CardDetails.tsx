@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Table } from 'antd';
+import { Popconfirm, Table } from 'antd';
 import { get, map, isString, debounce, last } from 'lodash';
 import { FieldArray, FieldArrayRenderProps } from 'formik';
 import cn from 'classnames';
@@ -206,9 +206,9 @@ class CardDetails extends React.PureComponent<CardDetailsProps> {
                   };
 
                   return (
-                    <div onClick={overwriteRow} style={{ cursor: 'pointer' }}>
-                      Overwrite
-                    </div>
+                    <Popconfirm title="Really override?" onConfirm={overwriteRow}>
+                      <span style={{ cursor: 'pointer' }}>Override</span>
+                    </Popconfirm>
                   );
                 },
               });
