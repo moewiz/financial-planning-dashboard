@@ -10,8 +10,8 @@ import NewInputNumber from './NewInputNumber';
 import LinkCurrentProduct from './LinkCurrentProduct';
 import YearPicker from './YearPicker';
 import AutoScalingInput from './AutoScalingInput';
+import AutoScalingPicker from './AutoScalingPicker';
 
-const { MonthPicker } = DatePicker;
 const { Option } = Select;
 const { TextArea } = Input;
 
@@ -113,15 +113,13 @@ class EditCell extends Component<EditCellProps> {
     }
 
     return (
-      <EntryPickerTable>
-        <MonthPicker
-          defaultValue={momentValue}
-          onChange={this.handleChangeDate}
-          placeholder={'Select month, year'}
-          format={format}
-          allowClear={false}
-        />
-      </EntryPickerTable>
+      <AutoScalingPicker
+        value={momentValue}
+        onChange={this.handleChangeDate}
+        placeholder={'Select month, year'}
+        format={format}
+        allowClear={false}
+      />
     );
   }
 

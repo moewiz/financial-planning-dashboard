@@ -21,6 +21,7 @@ const hideStyles: CSSProperties = {
   fontSize: 13,
   fontWeight: 600,
 };
+
 const AutoScalingInput = (props: AutoScalingInput) => {
   const { value, onChangeText, className, quotationMark, optionalProps, options } = props;
   const [inputWidth, setInputWidth] = useState<string>();
