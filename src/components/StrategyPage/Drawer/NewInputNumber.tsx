@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { CSSProperties, PureComponent, useEffect, useState } from 'react';
 import { get, isEqual } from 'lodash';
 import { InputNumber } from 'antd';
 
@@ -15,6 +15,54 @@ interface NewInputNumberProps {
 interface NewInputNumberState {
   value: any;
 }
+
+const hideStyles: CSSProperties = {
+  position: 'absolute',
+  height: 0,
+  overflow: 'hidden',
+  whiteSpace: 'pre',
+  fontSize: 13,
+  fontWeight: 600,
+};
+
+interface AutoScalingInputProps {
+  className: string;
+  onChange: (value: number | undefined) => void;
+  value: any;
+  disabled?: boolean;
+  options?: any;
+  optionalProps: { [key: string]: any };
+}
+
+const AutoScalingInput = (props: AutoScalingInputProps) => {
+  const { onChange, value, disabled, options, optionalProps } = props;
+  const [inputWidth, setInputWidth] = useState();
+  const hideRef = React.createRef<HTMLSpanElement>();
+  const inputNumber = React.createRef();
+
+  useEffect(() => {
+    if (inputNumber && hideRef && hideRef.current) {
+      hideRef.current.textContent = get(inputNumber, 'current.inputNumberRef.input.value');
+      setInputWidth(hideRef.current.offsetWidth + 6 + 'px');
+    }
+  }, [value]);
+
+  return (
+    <>
+      <span style={hideStyles} ref={hideRef} />
+      <InputNumber
+        onChange={onChange}
+        value={value}
+        className={'edit-cell'}
+        disabled={disabled}
+        {...optionalProps}
+        {...options}
+        ref={inputNumber}
+        style={{ width: inputWidth }}
+      />
+    </>
+  );
+};
 
 class NewInputNumber extends PureComponent<NewInputNumberProps, NewInputNumberState> {
   constructor(props: NewInputNumberProps) {
@@ -59,34 +107,17 @@ class NewInputNumber extends PureComponent<NewInputNumberProps, NewInputNumberSt
       optionalProps.parser = undefined;
     }
 
-    const precision = get(optionalProps, 'precision', get(options, 'precision', 0));
     if (calculateWidth) {
-      const intValue = Number.isNaN(Number.parseInt(value, 10)) ? 0 : Number.parseInt(value, 10);
-      let valueLength = intValue.toString().length;
-      let extraWidth = 0;
-      let numberSize = 14;
-      let minimum = 24;
-      if (options && options.integer) {
-        numberSize = valueLength < 3 ? 14 : 13;
-        extraWidth = valueLength < 3 ? 8 : 1;
-        minimum = precision ? 36 : 30;
-      } else {
-        if (precision) {
-          valueLength += precision;
-          numberSize = valueLength < 4 ? 15 : 12;
-          extraWidth += 13 + (valueLength > 7 || valueLength === 4 ? -7 : 0);
-          minimum = 50;
-        } else {
-          numberSize = valueLength < 5 ? 16 : 13;
-          extraWidth = valueLength < 3 ? 8 : 1;
-          minimum = 30;
-        }
-      }
-      const width = valueLength * numberSize + extraWidth;
-
-      optionalProps.style = {
-        width: `${width < minimum ? minimum : width}px`,
-      };
+      return (
+        <AutoScalingInput
+          onChange={this.onChange}
+          value={value}
+          className={'edit-cell'}
+          disabled={disabled}
+          optionalProps={optionalProps}
+          options={options}
+        />
+      );
     }
 
     return (

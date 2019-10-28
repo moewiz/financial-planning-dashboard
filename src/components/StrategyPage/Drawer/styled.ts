@@ -206,7 +206,7 @@ export const DrawerTableRows = styled.div<{ noBorder?: boolean; maximumWidth?: b
     &-input {
       text-align: right;
       font-weight: 600;
-      padding: 0 5px;
+      padding: 0 2px;
       color: #4e5d86;
     }
   }
