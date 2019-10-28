@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { notification } from 'antd';
 import { debounce, filter, get, map } from 'lodash';
+import cn from 'classnames';
 
 import EditCell, { EditCellType } from '../../StrategyPage/Drawer/EditCell';
 import { TagList, TagStyled } from '../../../pages/client/styled';
@@ -37,11 +39,22 @@ const GoalEdit = (props: any) => {
       return JSON.stringify(tag) !== JSON.stringify(removedTag);
     });
     onEdit(newLinks, 'links', rowIndex);
+    if (removedTag.warning) {
+      notification.warning({
+        message: 'Warning',
+        description: (
+          <>
+            <span>{removedTag.warning}</span>
+          </>
+        ),
+      });
+      onEdit(true, 'invalid', rowIndex);
+    }
   };
   const links = get(record, 'links', []);
 
   return (
-    <td className={props.className}>
+    <td className={cn(props.className, { invalid: record.invalid })}>
       {editable ? (
         <EditCell {...props} name={dataIndex} value={value} onChange={onChange} type={type} />
       ) : (

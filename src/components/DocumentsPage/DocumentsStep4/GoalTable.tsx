@@ -112,10 +112,10 @@ class GoalTable extends React.Component<GoalTableProps> {
               label: record.header,
               children: map(record.table.data, (row: Row) => {
                 if (row.id && row.value && row.value.trim() !== '') {
-                  return ({
+                  return {
                     value: row.id.toString(),
                     label: row.value,
-                  });
+                  };
                 }
                 return null;
               }).filter((r) => !!r),

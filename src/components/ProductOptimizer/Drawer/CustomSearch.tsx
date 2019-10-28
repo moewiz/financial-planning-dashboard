@@ -78,7 +78,12 @@ const cfsFirstChoiceWholesaleFunds: OptionData[] = [
     children: [
       { id: 10, name: 'CFS FirstChoice Accumulation Model Portfolio', value: 5000 },
       { id: 11, name: 'CFS FirstChoice Retirement Model Portfolio', value: 15000 },
-      { id: 9, name: 'CFS FirstChoice Low Cost Model Portfolio', value: 10000 },
+      {
+        id: 9,
+        name: 'CFS FirstChoice Low Cost Model Portfolio',
+        value: 10000,
+        warning: 'Recommended fees more expensive than current.',
+      },
     ],
   },
   {
@@ -127,9 +132,15 @@ const defaultFunds: OptionData[] = [
   {
     name: 'Managed Funds',
     children: [
-      { id: 1, name: 'FirstChoice Wholesale Multi-Index Diversified', value: 50000, code: 'FSF0472AU' },
       { id: 2, name: 'FirstChoice Wholesale Multi-Index Balanced', value: 50000, code: 'FSF0476AU' },
       { id: 3, name: 'FirstChoice Wholesale Moderate', value: 15000, code: 'FSF0500AU' },
+      {
+        id: 1,
+        name: 'FirstChoice Wholesale Multi-Index Diversified',
+        value: 50000,
+        code: 'FSF0472AU',
+        warning: 'Asset allocation not in line with risk profile.',
+      },
       { id: 6, name: 'Kapstream Absolute Return Income', value: 15000, code: 'FSF1615AU' },
       { id: 7, name: 'Schroder Real Return (CPI + 5%)', value: 15000, code: 'FSF1614AU' },
       { id: 8, name: 'Solaris Core Australian Equity', value: 15000, code: 'FSF0466AU' },

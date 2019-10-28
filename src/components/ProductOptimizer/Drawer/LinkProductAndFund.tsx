@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Checkbox, Icon, Popconfirm, Table } from 'antd';
+import { Checkbox, Icon, notification, Popconfirm, Table } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { get, isFunction, isNumber, dropRight, head } from 'lodash';
 import cn from 'classnames';
@@ -209,13 +209,28 @@ const LinkProductAndFund = (props: FundTableProps) => {
   const onSelectFund = (fieldArrayFunds: FieldArrayRenderProps) => (option: Option) => {
     if (option) {
       setLoading(true);
+
+      const callback = () => {
+        if (option.warning) {
+          notification.warning({
+            message: 'Warning',
+            description: (
+              <>
+                <span>{option.warning}</span>
+              </>
+            ),
+          });
+        }
+        setLoading(false);
+      };
       if (option.id === 99) {
         // OneAnswer Frontier Low Cost Model Portfolio
         // updates RoP Alternative funds
         setTimeout(() => {
           const totalRow = { id: -1, name: 'Total', value: getSumFunds(roPAlternativeFunds), percentage: 100 };
           setFieldValue(fieldArrayFunds.name, [...roPAlternativeFunds, totalRow]);
-          setLoading(false);
+
+          callback();
         }, 3000);
         return;
       }
@@ -230,14 +245,15 @@ const LinkProductAndFund = (props: FundTableProps) => {
           const totalRow = { id: -1, name: 'Total', value: getSumFunds(roPCurrentFunds), percentage: 100 };
           setFieldValue('links.0.details.funds', [...roPCurrentFunds, totalRow]);
 
-          setLoading(false);
+          callback();
         }, 3000);
         return;
       }
 
       setTimeout(() => {
         fieldArrayFunds.unshift(option);
-        setLoading(false);
+
+        callback();
       }, 3000);
       return;
     }

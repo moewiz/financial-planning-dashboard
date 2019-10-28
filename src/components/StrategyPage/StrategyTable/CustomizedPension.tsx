@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { notification } from 'antd';
 import numeral from 'numeral';
 import moment from 'moment';
 import { dropRight, find, get, map, random, findIndex, filter } from 'lodash';
@@ -7,7 +8,6 @@ import { FullyCustomized } from '../Drawer/styled';
 import EditCell, { EditCellType } from '../Drawer/EditCell';
 import { getOptions, StrategyItemProps } from './StrategyItem';
 import { periodTypes } from '../../../enums/strategySentences';
-import { notification } from 'antd';
 
 const defaultTime = '2023-07-09T12:00:00';
 

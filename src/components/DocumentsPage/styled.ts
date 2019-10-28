@@ -195,6 +195,13 @@ export const StepWrapper = styled.section`
           font-weight: normal;
         }
       }
+      td.invalid {
+        .strategy-item {
+          .ant-input, .ant-select {
+            color: #F44336 !important;
+          }
+        }
+      }
     }
     .tag-list {
       padding-left: 8px;

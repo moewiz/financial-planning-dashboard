@@ -17,6 +17,7 @@ export interface Option {
   name: string;
   code?: string;
   value?: number;
+  warning?: string;
 }
 
 export interface Product {
