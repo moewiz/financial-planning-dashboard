@@ -49,6 +49,10 @@ export interface StrategyItemProps {
   setFieldValue: (field: string, value: any) => void;
 }
 
+interface StrategyItemStates {
+  loading: boolean;
+}
+
 export const getOptions = (context: string, object: { client: any; partner: any }, option: string) => {
   const { client, partner } = object;
   if (context === 'joint') {
@@ -102,7 +106,15 @@ const Projections = () => (
   </svg>
 );
 
-class StrategyItem extends Component<StrategyItemProps> {
+class StrategyItem extends Component<StrategyItemProps, StrategyItemStates> {
+  constructor(props: StrategyItemProps) {
+    super(props);
+
+    this.state = {
+      loading: false,
+    };
+  }
+
   public removeItem = () => {
     const { strategy, strategyIndex, removeItem, setFieldValue, redrawGraphs } = this.props;
     const strategySentenceKeys = strategy.sentence.split('.');
@@ -139,6 +151,15 @@ class StrategyItem extends Component<StrategyItemProps> {
     }
   }
 
+  public setLoading = () => {
+    const { redrawGraphs } = this.props;
+    redrawGraphs();
+    this.setState({ loading: true });
+    setTimeout(() => {
+      this.setState({ loading: false });
+    }, 3000);
+  }
+
   public renderCustom = (context: string, sentenceKey: string) => {
     const { client, partner, defaultFullValue } = this.props;
     const getName = () => {
@@ -164,6 +185,7 @@ class StrategyItem extends Component<StrategyItemProps> {
             context={context}
             sentenceKey={sentenceKey}
             defaultFullValue={defaultFullValue}
+            setLoading={this.setLoading}
           />
         );
       }
@@ -374,11 +396,12 @@ class StrategyItem extends Component<StrategyItemProps> {
   }
 
   public render() {
+    const { loading } = this.state;
     const { strategy, mark, margin, strategyType, strategyIndex, setFieldValue } = this.props;
     const customNoteName = `${strategyType}.strategies[${strategyIndex}].customNote`;
 
     return (
-      <StrategyTableItems unchecked={!strategy.check} invalid={strategy.invalid}>
+      <StrategyTableItems unchecked={!strategy.check} invalid={strategy.invalid} loading={loading}>
         <CheckboxInput value={strategy.check} onChange={this.onChangeCheck} />
         <StrategyTableText>
           {this.renderText()}

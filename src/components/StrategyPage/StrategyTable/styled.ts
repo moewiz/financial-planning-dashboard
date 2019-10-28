@@ -35,7 +35,7 @@ export const StrategyTableContent = styled.div`
   max-height: 500px;
   overflow: overlay;
 `;
-export const StrategyTableItems = styled.div<{ unchecked?: boolean; invalid?: boolean; }>`
+export const StrategyTableItems = styled.div<{ unchecked?: boolean; loading?: boolean; invalid?: boolean; }>`
   display: flex;
   align-items: center;
   padding: 10px 0px;
@@ -56,6 +56,14 @@ export const StrategyTableItems = styled.div<{ unchecked?: boolean; invalid?: bo
     .strategy-item {
       .ant-select, .ant-input, .ant-input-number-input {
         color: #F44336 !important;
+      }
+    }
+  `}
+  ${(props) => props.loading && css`
+    opacity: 0.8;
+    .strategy-item {
+      .ant-select, .ant-input, .ant-input-number-input {
+        opacity: 0.8;
       }
     }
   `}

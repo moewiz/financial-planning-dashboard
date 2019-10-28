@@ -12,7 +12,13 @@ import { notification } from 'antd';
 const defaultTime = '2023-07-09T12:00:00';
 
 const CustomizedPension = (
-  props: StrategyItemProps & { name: string; context: string; sentenceKey: string; defaultFullValue: number },
+  props: StrategyItemProps & {
+    name: string;
+    context: string;
+    sentenceKey: string;
+    defaultFullValue: number;
+    setLoading: () => void;
+  },
 ) => {
   const {
     name,
@@ -25,6 +31,7 @@ const CustomizedPension = (
     strategyType,
     defaultFullValue,
     setFieldValue,
+    setLoading,
   } = props;
   const id = strategy.id || `${strategyIndex}-superannuation`;
   const pensionIncomeOptions = map(getOptions(context, { client, partner }, 'pensionIncome'), (option) => ({
@@ -85,6 +92,8 @@ const CustomizedPension = (
   }, [strategy]);
   const onChange = (val: any, fieldName: string) => setFieldValue(fieldName, val);
   const onChangeTime = (val: any, fieldName: string) => {
+    // fade out this strategy item for 3s
+    setLoading();
     const shouldWarning = moment(defaultTime).isAfter(val);
 
     setFieldValue(fieldName, val);
