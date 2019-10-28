@@ -100,7 +100,7 @@ const CustomizedInvestment = (
         .
       </span>
       <br />
-      <span>Make a</span>
+      <span>Make a </span>
       <EditCell
         name={`${strategyType}.strategies[${strategyIndex}].values[2]`}
         value={specificValue}
@@ -108,7 +108,7 @@ const CustomizedInvestment = (
         options={specificOptions}
         onChange={updateSpecific}
       />
-      widthdrawals worth
+      {' '}widthdrawals worth
       {isCustomSpecific ? (
         <b> ${numeral(fullValue).format('0,0')} </b>
       ) : (

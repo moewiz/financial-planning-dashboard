@@ -9,6 +9,7 @@ import { DDFreeText, DrawerTableRows, QuotationMark } from './styled';
 import NewInputNumber from './NewInputNumber';
 import LinkCurrentProduct from './LinkCurrentProduct';
 import YearPicker from './YearPicker';
+import AutoScalingInput from './AutoScalingInput';
 
 const { MonthPicker } = DatePicker;
 const { Option } = Select;
@@ -199,16 +200,16 @@ class EditCell extends Component<EditCellProps> {
     const optionalProps: { [key: string]: any } = {};
 
     if (calculateWidth) {
-      // if empty and placeholder is set
-      const valueLength = value.length === 0 && options.placeholder ? get(options, 'placeholder.length') : value.length;
-      const numberSize = valueLength > 7 ? 8 : 10;
-      const minimum = 30;
-      const extraWidth = valueLength > 20 ? -15 : valueLength > 7 && valueLength < 12 ? 6 : 4;
-      const width = valueLength * numberSize + extraWidth;
-
-      optionalProps.style = {
-        width: `${width < minimum ? minimum : width}px`,
-      };
+      return (
+        <AutoScalingInput
+          value={value}
+          onChangeText={this.onChangeText}
+          className={'edit-cell text'}
+          quotationMark={quotationMark}
+          optionalProps={optionalProps}
+          options={options}
+        />
+      );
     }
 
     if (quotationMark) {

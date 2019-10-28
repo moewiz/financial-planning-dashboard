@@ -130,14 +130,14 @@ const CustomizedPension = (
           quotationMark: true,
         }}
       />
-      in
+      {' '}in
       <EditCell
         name={`${strategyType}.strategies[${strategyIndex}].values[1]`}
         type={EditCellType.date}
         value={get(strategy, 'values[1]')}
         onChange={onChangeTime}
       />
-      <span>{isCustomisedRollover ? 'as a' : 'from your'}</span>
+      <span>{isCustomisedRollover ? 'as a' : ' from your '}</span>
       <EditCell
         name={`${strategyType}.strategies[${strategyIndex}].values[2]`}
         value={superValue}
@@ -146,7 +146,7 @@ const CustomizedPension = (
         onChange={updateFullValue}
       />
       <span>
-        with{' '}
+        {' '}with{' '}
         {isCustomisedRollover ? (
           <b>${numeral(fullValue).format('0,0')}</b>
         ) : (
@@ -204,7 +204,7 @@ const CustomizedPension = (
                 calculateWidth={true}
               />
             )}
-            per
+            per{' '}
             <EditCell
               name={`${strategyType}.strategies[${strategyIndex}].values[6]`}
               value={get(strategy, 'values[6]')}

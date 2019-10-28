@@ -34,7 +34,7 @@ interface AutoScalingInputProps {
   optionalProps: { [key: string]: any };
 }
 
-const AutoScalingInput = (props: AutoScalingInputProps) => {
+const AutoScalingInputNumber = (props: AutoScalingInputProps) => {
   const { onChange, value, disabled, options, optionalProps } = props;
   const [inputWidth, setInputWidth] = useState();
   const hideRef = React.createRef<HTMLSpanElement>();
@@ -109,7 +109,7 @@ class NewInputNumber extends PureComponent<NewInputNumberProps, NewInputNumberSt
 
     if (calculateWidth) {
       return (
-        <AutoScalingInput
+        <AutoScalingInputNumber
           onChange={this.onChange}
           value={value}
           className={'edit-cell'}

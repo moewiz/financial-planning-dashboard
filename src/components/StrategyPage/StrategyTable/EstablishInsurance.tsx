@@ -89,7 +89,7 @@ const EstablishInsurance = (
   return (
     <FullyCustomized>
       <span>
-        {name}, {getAction(sentenceKey)}
+        {name}, {getAction(sentenceKey) + ' '}
         <EditCell
           name={`${strategyType}.strategies[${strategyIndex}].values[0]`}
           value={insurance}
@@ -97,7 +97,7 @@ const EstablishInsurance = (
           type={EditCellType.select}
           onChange={onChangeInsurance}
         />
-        insurance cover of{' '}
+        {' '}insurance cover of{' '}
         <EditCell
           name={`${strategyType}.strategies[${strategyIndex}].values[1]`}
           value={get(strategy, 'values[1]')}

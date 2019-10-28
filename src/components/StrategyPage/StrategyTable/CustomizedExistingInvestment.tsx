@@ -153,7 +153,7 @@ const CustomizedExistingInvestment = (
         </>
       ) : (
         <>
-          <span>withdrawal from your</span>
+          <span> withdrawal from your </span>
           <EditCell
             name={`${strategyType}.strategies[${strategyIndex}].values[3]`}
             value={get(strategy, 'values[3]')}

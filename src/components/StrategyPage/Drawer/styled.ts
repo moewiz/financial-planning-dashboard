@@ -164,7 +164,6 @@ export const DrawerTableRows = styled.div<{ noBorder?: boolean; maximumWidth?: b
     `}
   .edit-cell {
     width: 69px;
-    margin-right: 1px;
     border: 1px solid;
     border-color: transparent;
     &:hover {
@@ -285,7 +284,8 @@ export const DrawerTableRows = styled.div<{ noBorder?: boolean; maximumWidth?: b
         &__rendered {
           line-height: 30px;
           margin: 0px;
-          padding: 0 2px;
+          // padding: 0 2px;
+          padding: 0;
         }
       }
     }
@@ -464,6 +464,11 @@ export const QuotationMark = styled.span<{ hideQuotationMark?: boolean }>`
       css`
         display: none;
       `}
+  }
+  .ant-input {
+    &.edit-cell.text {
+      padding: 0 5px;
+    }
   }
 `;
 
