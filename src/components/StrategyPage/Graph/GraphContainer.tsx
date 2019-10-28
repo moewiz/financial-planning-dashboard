@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { isFunction, isBoolean } from 'lodash';
-import { Icon } from 'antd';
+import { isFunction, isBoolean, isNumber } from 'lodash';
 import { connect } from 'react-redux';
 import { Bar, HorizontalBar, Line } from 'react-chartjs-2';
 import classNames from 'classnames';
@@ -55,7 +54,9 @@ const defaultOptions = {
       title(
         tooltipItem: Array<{ label: string }>,
       ) {
-        return '20' + tooltipItem[0].label;
+        const label = tooltipItem[0].label;
+        const numberLabel = parseInt(label, 10);
+        return (!isNaN(numberLabel) && isNumber(numberLabel)) ? '20' + label : label;
       },
       label(
         tooltipItem: { datasetIndex: React.ReactText; yLabel: number },
