@@ -1,8 +1,8 @@
 export enum Tab {
   Current = 'current',
   Strategy = 'strategy',
-  ProductOptimizer = 'product-optimizer',
-  Documents = 'documents',
+  ProductOptimizer = 'investments',
+  Documents = 'soa',
   Presentation = 'presentation',
   Insurance = 'insurance',
 }
@@ -30,9 +30,9 @@ export const POSITIONS: Position[] = [
     value: PositionValue.ProductOptimizer,
     icon: 'icon-projections',
     slug: Tab.ProductOptimizer,
-    label: 'Product Optimizer',
+    label: 'Investments',
   },
-  { value: PositionValue.Documents, icon: 'icon-documents', slug: Tab.Documents, label: 'Documents' },
-  { value: PositionValue.Presentation, icon: 'icon-presentation', slug: Tab.Presentation, label: 'Presentation' },
   { value: PositionValue.Insurance, icon: 'icon-documents', slug: Tab.Insurance, label: 'Insurance' },
+  { value: PositionValue.Documents, icon: 'icon-documents', slug: Tab.Documents, label: 'SoA' },
+  { value: PositionValue.Presentation, icon: 'icon-presentation', slug: Tab.Presentation, label: 'Presentation' },
 ];
