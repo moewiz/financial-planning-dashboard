@@ -92,10 +92,7 @@ export const FullName = styled.span.attrs({
 export const ClientSide = styled(Menu).attrs({
   className: 'client-side-modify',
 })`
-  height: calc(100vh - 160px);
-  overflow-y: scroll;
-  overflow-x: hidden;
-  border-right: none !important;
+  border-right: 0px !important;
   &.ant-menu-inline-collapsed {
     width: 60px;
   }
@@ -156,14 +153,14 @@ export const SubList = styled(Menu.Item).attrs({
   margin: 0px !important;
   border-left: 1px solid #e4e8eb;
   padding-left: 30px !important;
-  height: 34px !important;
+  height: 30px !important;
   color: #737c9c;
-  font-size: 18px !important;
+  font-size: 14px !important;
   i {
     margin-right: 14px;
   }
   &:first-child {
-    margin-top: 10px !important;
+    margin-top: 0px !important;
   }
   &:hover {
     color: #082074 !important;
