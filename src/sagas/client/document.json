@@ -301,7 +301,19 @@
     "title": "Were there any limitations to the advice provided?",
     "subtitle": "Clearly record the reason for any limitations to your advice",
     "table": {
-      "columns": ["Missing Information", "Reason for limitation"],
+      "columns": [
+        {
+          "dataIndex": "value",
+          "title": "Missing Information",
+          "width": "30%"
+        },
+        {
+          "dataIndex": "description",
+          "title": "Reason for limitation",
+          "width": "70%",
+          "type": 5
+        }
+      ],
       "data": [
         {
           "id": 1,
