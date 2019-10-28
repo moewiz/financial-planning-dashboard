@@ -97,7 +97,7 @@ const CustomizedPension = (
         message: 'Warning',
         description: (
           <>
-            <p>Condition of release not met.</p>
+            <span>Condition of release not met.</span>
             <p>
               Client aged <b>{aged}</b> and <b>employed</b>
             </p>
