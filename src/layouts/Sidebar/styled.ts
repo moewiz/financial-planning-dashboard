@@ -92,10 +92,7 @@ export const FullName = styled.span.attrs({
 export const ClientSide = styled(Menu).attrs({
   className: 'client-side-modify',
 })`
-  height: calc(100vh - 160px);
-  overflow-y: scroll;
-  overflow-x: hidden;
-  border-right: none !important;
+  border-right: 0px !important;
   &.ant-menu-inline-collapsed {
     width: 60px;
   }
