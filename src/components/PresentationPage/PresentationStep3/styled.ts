@@ -32,16 +32,24 @@ export const Sentence = styled.div`
   margin-left: 10px;
 `;
 
-export const SliderWrapper = styled.div``;
-export const SliderTitle = styled.div``;
-export const ValueWrapper = styled.div`
+export const SlidersBlockWrapper = styled.div`
+  padding-bottom: 10px;
+`;
+
+export const SliderWrapper = styled.div`
+  margin-bottom: 20px;
+`;
+export const SliderTitle = styled.div`
+  font-weight: 600;
+`;
+export const ValueWrapper = styled.div<{ marks?: boolean }>`
   display: flex;
   align-items: center;
   .ant-slider {
-    margin: 14px 0 10px;
+    margin: ${(props) => (props.marks ? '14px 6px 10px' : '14px 0 10px')};
   }
 `;
 export const ValueStyled = styled.div`
-  flex: 0 0 70px;
+  flex: 0 0 76px;
   margin-left: 14px;
 `;
