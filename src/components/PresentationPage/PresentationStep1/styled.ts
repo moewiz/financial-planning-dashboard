@@ -7,22 +7,22 @@ export const StepWelcome = styled.div.attrs({
   color: #515c83;
   align-items: center;
   justify-content: space-around;
-}
 `;
+
 export const LeftColumn = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
 export const RightColumn = styled.div`
-  flex: 0 0 180px;
+  flex: 0 0 200px;
   img{
     max-width: 100%;
   }
 `;
 
 export const TitleWelcome = styled.div`
-  font-size: 40px;
+  font-size: 48px;
   font-weight: 600;
   margin-bottom: 30px;
 `;

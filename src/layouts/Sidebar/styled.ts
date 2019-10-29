@@ -37,12 +37,15 @@ export const SiderCollapsible = styled(Sider).attrs({
   className: 'client-side-collapsible dumoamay',
 })<{ collapsed?: boolean }>`
   &.ant-layout-sider-collapsed {
-    flex: 0 0 60px !important;
-    max-width: 60px !important;
-    min-width: 60px !important;
-    width: 60px !important;
-    .IconSider {
-      right: 23px;
+    flex: 0 0 2px !important;
+    max-width: 2px !important;
+    min-width: 2px !important;
+    width: 2px !important;
+    .top-search{
+      box-shadow: none;
+    }
+    .IconSider{
+      right: -5px;
     }
     .anticon-search {
       display: none;
@@ -94,7 +97,7 @@ export const ClientSide = styled(Menu).attrs({
 })`
   border-right: 0px !important;
   &.ant-menu-inline-collapsed {
-    width: 60px;
+    width: 2px;
   }
 `;
 
@@ -240,7 +243,7 @@ export const InputSearch = styled(Input)`
   }
 `;
 
-export const TopSearch = styled.div<{ border?: boolean }>`
+export const TopSearch = styled.div<{ border?: boolean, className?: string }>`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
