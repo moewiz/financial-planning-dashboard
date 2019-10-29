@@ -3,7 +3,8 @@ import { Formik, FormikActions, FormikContext, FormikProps } from 'formik';
 import { get, isEmpty } from 'lodash';
 import { Steps, message, Spin } from 'antd';
 
-import PresentationStep1 from './DocumentsStep1/PresentationStep1';
+import PresentationStep1 from './PresentationStep1/PresentationStep1';
+import PresentationStep2 from './PresentationStep2/PresentationStep2';
 
 import { DocumentsWrapper, StepActionDocument } from './styled';
 import PresentationStep3 from './PresentationStep3/PresentationStep3';
@@ -18,7 +19,7 @@ const steps = [
   },
   {
     title: 'Step 2',
-    content: PresentationStep1,
+    content: PresentationStep2,
     description: 'Current Position',
   },
   {

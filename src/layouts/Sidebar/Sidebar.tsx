@@ -110,7 +110,7 @@ class Sidebar extends React.PureComponent<SidebarProps & RouteComponentProps> {
     const { clients } = this.props;
     return (
       <SiderCollapsible width={295} trigger={null} collapsible collapsed={this.state.collapsed}>
-        <TopSearch>
+        <TopSearch className="top-search">
           <Icon type="search" />
           <InputSearch placeholder="Search Here" />
           <Icon
