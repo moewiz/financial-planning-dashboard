@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { Button } from 'antd';
 
 export const DocumentsWrapper = styled.section`
+  color: #4e5b86;
   padding: 20px;
   .header-step-document {
     margin-bottom: 65px;
