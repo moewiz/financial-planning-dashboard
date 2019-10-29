@@ -6,6 +6,7 @@ import { Steps, message, Spin } from 'antd';
 import PresentationStep1 from './DocumentsStep1/PresentationStep1';
 
 import { DocumentsWrapper, StepActionDocument } from './styled';
+import PresentationStep3 from './PresentationStep3/PresentationStep3';
 
 const { Step } = Steps;
 const steps = [
@@ -21,7 +22,7 @@ const steps = [
   },
   {
     title: 'Step 3',
-    content: PresentationStep1,
+    content: PresentationStep3,
     description: 'Current Projection',
   },
   {
