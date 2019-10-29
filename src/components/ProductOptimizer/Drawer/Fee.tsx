@@ -39,12 +39,13 @@ class Fee extends PureComponent<FeeProps> {
       editable: true,
     },
     {
-      title: 'Value/$',
+      title: 'Value',
       dataIndex: 'value',
       key: '1',
       width: 80,
       className: 'text-align-right',
       editable: true,
+      dollar: true,
       type: EditCellType.number,
       options: {
         precision: 2,

@@ -133,12 +133,13 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
       showLinks: true,
     },
     {
-      title: 'Value/$',
+      title: 'Value',
       dataIndex: 'value',
       options: {
         placeholder: 'Enter Value',
         allowEmpty: true,
       },
+      dollar: true,
       type: EditCellType.number,
       key: '1',
       editable: true,

@@ -63,11 +63,12 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
       sorter: sortAlphabetical('owner'),
     },
     {
-      title: 'Value/$',
+      title: 'Value',
       dataIndex: 'value',
       key: '3',
       width: '10%',
       type: 'number',
+      sign: 'dollar',
       className: 'text-align-right',
     },
     {
