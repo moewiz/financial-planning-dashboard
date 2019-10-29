@@ -130,7 +130,7 @@ const CustomizedPension = (
           quotationMark: true,
         }}
       />
-      {' '}in
+      {' in '}
       <EditCell
         name={`${strategyType}.strategies[${strategyIndex}].values[1]`}
         type={EditCellType.date}
