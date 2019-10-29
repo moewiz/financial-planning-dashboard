@@ -32,7 +32,7 @@ const AutoScalingPicker = (props: AutoScalingPickerProps) => {
   useEffect(() => {
     if (monthPicker && hideRef && hideRef.current) {
       hideRef.current.textContent = get(monthPicker, 'current.picker.input.value');
-      setInputWidth(hideRef.current.offsetWidth + 4 + 'px');
+      setInputWidth(hideRef.current.offsetWidth + 5 + 'px');
     }
   }, [value]);
 

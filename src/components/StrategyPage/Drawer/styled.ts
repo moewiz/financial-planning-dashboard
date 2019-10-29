@@ -240,14 +240,13 @@ export const DrawerTableRows = styled.div<{ noBorder?: boolean; maximumWidth?: b
     .ant-calendar-picker {
       .ant-calendar-picker-input {
         border-color: transparent;
-        width: 62px;
         padding: 0px;
         text-align: center;
         &:hover {
           border-color: #dcdcdc;
         }
         &:focus {
-          ouline: none;
+          outline: none;
           box-shadow: none;
         }
       }
