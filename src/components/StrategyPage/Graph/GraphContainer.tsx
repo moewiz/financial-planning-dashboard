@@ -10,6 +10,7 @@ import { RootState } from '../../../reducers/reducerTypes';
 
 export enum GraphType {
   Line,
+  Doughnut,
   Area,
   Bar,
   HorizontalBar,
