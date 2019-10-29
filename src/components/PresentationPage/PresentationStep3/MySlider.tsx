@@ -11,7 +11,7 @@ interface MySliderProps {
 }
 
 const MySlider = (props: SliderProps & MySliderProps) => {
-  const { title, defaultValue, formatter } = props;
+  const { title, defaultValue, formatter, marks } = props;
   const [value, setValue] = useState<SliderValue>(defaultValue || 0);
   const onChange = (val: SliderValue) => {
     setValue(val);
@@ -24,7 +24,7 @@ const MySlider = (props: SliderProps & MySliderProps) => {
   return (
     <SliderWrapper>
       <SliderTitle>{title}</SliderTitle>
-      <ValueWrapper>
+      <ValueWrapper marks={!!marks}>
         <Slider {...props} {...options} onChange={onChange} style={{ flex: 1 }} />
         <ValueStyled>{formatter ? formatter(value) : value}</ValueStyled>
       </ValueWrapper>
