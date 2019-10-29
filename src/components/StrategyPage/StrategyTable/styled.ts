@@ -35,7 +35,7 @@ export const StrategyTableContent = styled.div`
   max-height: 500px;
   overflow: overlay;
 `;
-export const StrategyTableItems = styled.div<{ unchecked?: boolean; loading?: boolean; invalid?: boolean; }>`
+export const StrategyTableItems = styled.div<{ unchecked?: boolean; loading?: boolean; invalid?: boolean }>`
   display: flex;
   align-items: center;
   padding: 10px 0px;
@@ -43,32 +43,46 @@ export const StrategyTableItems = styled.div<{ unchecked?: boolean; loading?: bo
   &:first-child {
     padding-top: 5px;
   }
-  ${(props) => props.unchecked && css`
-    color: #888;
-    .strategy-item {
-      .ant-select, .ant-input, .ant-input-number-input {
-        color: #888 !important;
+  ${(props) =>
+    props.unchecked &&
+    css`
+      color: #888;
+      .strategy-item {
+        .ant-select,
+        .ant-input,
+        .ant-input-number-input {
+          color: #888 !important;
+        }
       }
-    }
-  `}
-  ${(props) => props.invalid && css`
-    color: #F44336;
-    .strategy-item {
-      .ant-select, .ant-input, .ant-input-number-input {
-        color: #F44336 !important;
+    `}
+  ${(props) =>
+    props.invalid &&
+    css`
+      color: #f44336;
+      .strategy-item {
+        .ant-select,
+        .ant-input,
+        .ant-input-number-input {
+          color: #f44336 !important;
+        }
       }
-    }
-  `}
-  ${(props) => props.loading && css`
-    opacity: 0.8;
-    .strategy-item {
-      .ant-select, .ant-input, .ant-input-number-input {
-        opacity: 0.8;
+    `}
+  ${(props) =>
+    props.loading &&
+    css`
+      opacity: 0.8;
+      .strategy-item {
+        .ant-select,
+        .ant-input,
+        .ant-input-number-input {
+          opacity: 0.8;
+        }
       }
-    }
-  `}
+    `}
 `;
-export const CheckboxCustomize = styled.div`
+export const CheckboxCustomize = styled.div.attrs({
+  className: 'checkbox-customized',
+})`
   margin-left: 1px;
   align-self: flex-start;
   padding-top: 6px;
