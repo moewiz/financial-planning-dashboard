@@ -31,3 +31,17 @@ export const Owner = styled.b`
 export const Sentence = styled.div`
   margin-left: 10px;
 `;
+
+export const SliderWrapper = styled.div``;
+export const SliderTitle = styled.div``;
+export const ValueWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  .ant-slider {
+    margin: 14px 0 10px;
+  }
+`;
+export const ValueStyled = styled.div`
+  flex: 0 0 70px;
+  margin-left: 14px;
+`;
