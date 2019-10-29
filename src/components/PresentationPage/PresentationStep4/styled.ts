@@ -15,9 +15,10 @@ export const CardItemStyled = styled(Card).attrs({
   className: 'card-item',
 })`
   p {
+    font-weight: 600;
+    font-size: 13px;
     margin-bottom: 0;
     text-align: center;
-    font-weight: 600;
   }
 
   .ant-card-cover {

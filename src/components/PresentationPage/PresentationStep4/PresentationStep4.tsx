@@ -33,7 +33,7 @@ const cardLists = [
 
 const PresentationStep4 = (props: FormikPartProps) => {
   return (
-    <StepWrapper>
+    <>
       <CardList>
         {map(cardLists, (children, index) => (
           <CardItem key={index} src={index + 1}>
@@ -41,7 +41,7 @@ const PresentationStep4 = (props: FormikPartProps) => {
           </CardItem>
         ))}
       </CardList>
-    </StepWrapper>
+    </>
   );
 };
 
