@@ -23,11 +23,12 @@ class SingleProduct extends PureComponent<SingleProductProps> {
       key: '0',
     },
     {
-      title: 'Value/$',
+      title: 'Value',
       dataIndex: 'value',
       key: '1',
       className: 'text-align-right',
       editable: true,
+      dollar: true,
       type: EditCellType.number,
       width: '30%',
     },

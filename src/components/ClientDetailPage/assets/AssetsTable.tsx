@@ -59,10 +59,11 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
       sorter: sortAlphabetical('owner'),
     },
     {
-      title: 'Value/$',
+      title: 'Value',
       dataIndex: 'value',
       key: '3',
       type: 'number',
+      sign: 'dollar',
       width: 'calc(16% - 20px)',
       className: 'text-align-right',
     },

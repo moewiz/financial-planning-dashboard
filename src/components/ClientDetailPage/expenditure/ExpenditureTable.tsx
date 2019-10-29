@@ -59,11 +59,12 @@ class ExpenditureTable extends PureComponent<ExpenditureTableProps> {
       sorter: sortAlphabetical('owner'),
     },
     {
-      title: 'Value/$',
+      title: 'Value',
       dataIndex: 'value',
       key: '3',
       width: '14%',
       type: 'number',
+      sign: 'dollar',
       className: 'text-align-right',
     },
     {
