@@ -7,6 +7,7 @@ import PresentationStep1 from './DocumentsStep1/PresentationStep1';
 
 import { DocumentsWrapper, StepActionDocument } from './styled';
 import PresentationStep3 from './PresentationStep3/PresentationStep3';
+import PresentationStep4 from './PresentationStep4/PresentationStep4';
 
 const { Step } = Steps;
 const steps = [
@@ -27,7 +28,7 @@ const steps = [
   },
   {
     title: 'Step 4',
-    content: PresentationStep1,
+    content: PresentationStep4,
     description: 'Strategies',
   },
   {
