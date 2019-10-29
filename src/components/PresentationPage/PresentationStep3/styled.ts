@@ -10,9 +10,13 @@ export const EventWrapper = styled.div`
 
 export const EventItemWrapper = styled.div`
   display: flex;
-  align-items: center;
+  align-items: baseline;
   color: #4e5b86;
   margin: 10px 0;
+
+  .checkbox-customized {
+    padding-top: 0;
+  }
 
   .remove {
     font-size: 16px;
