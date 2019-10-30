@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'formik';
 import { Card, Icon } from 'antd';
+import { get } from 'lodash';
 import { StepWrapper } from '../styled';
 import { Doughnut, Bar } from 'react-chartjs-2';
 
 import { DocumentData, FormikPartProps } from '../PresentationPage';
-import DocumentSwitcher from '../DocumentSwitcher';
 
 import {
   StepCurrentPosition,
@@ -29,7 +29,7 @@ import {
   LineDoughnutText,
 } from './styled';
 
-const dataDoughnut = {
+const incomeData = {
   labels: ['Salary'],
   datasets: [
     {
@@ -39,6 +39,38 @@ const dataDoughnut = {
     },
   ],
 };
+
+const assetData = {
+  labels: [
+    'Primary Residence',
+    'Home Content',
+    'Motor Vehicle',
+    'Hesta Personal Super',
+    'CFS FirstChoice Wholesale Investments',
+    'Cash',
+  ],
+  datasets: [
+    {
+      data: [750000, 10000, 30000, 400000, 50000, 150000],
+      backgroundColor: ['#ffe701', '#2bd8c4', '#FF5722', '#8269f8', '#2e98ff', '#f2f5f8'],
+      hoverBackgroundColor: ['#ffe701', '#2bd8c4', '#FF5722', '#8269f8', '#2e98ff', '#f2f5f8'],
+    },
+  ],
+};
+
+const chartsData = {
+  asset: {
+    line1: '$1,390,000',
+    line2: 'Total',
+    chart: assetData,
+  },
+  income: {
+    line1: '$120,000',
+    line2: 'Income',
+    chart: incomeData,
+  },
+};
+
 const optionsDoughnut = {
   plotOptions: {
     pie: {
@@ -52,6 +84,12 @@ const optionsDoughnut = {
       },
     },
   },
+  legend: {
+    fontSize: 9,
+    fontFamily:
+      '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
+      '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
+  },
 };
 const seriesBarInsurance = {
   labels: ['Life', 'TPD', 'Trauma', 'IP'],
@@ -61,25 +99,30 @@ const seriesBarInsurance = {
       backgroundColor: '#2e98ff',
       borderColor: '#2e98ff',
       borderWidth: 1,
-      data: [ 500000, 500000, 150000, 840000 ],
+      data: [500000, 500000, 150000, 840000],
     },
     {
       label: 'Needs analysis',
       backgroundColor: 'rgba(255,99,132,1)',
       borderColor: 'rgba(255,99,132,1)',
       borderWidth: 1,
-      data: [ 500000, 500000, 150000, 840000 ],
+      data: [500000, 500000, 150000, 840000],
     },
   ],
 };
 
 const PresentationStep2 = (props: FormikPartProps) => {
+  const [chartData, setChartData] = useState(chartsData.income);
+  const updateChart = (key: string) => () => {
+    setChartData(get(chartsData, [key]));
+  };
+
   return (
     <StepWrapper>
       <StepCurrentPosition>
         <StepPositionLeft>
-          <StepPositionTop>
-            <IcomeBlockStep>
+          <StepPositionTop style={{ margin: '0 -10px 30px' }}>
+            <IcomeBlockStep onClick={updateChart('income')}>
               <TitlePositionStep>Income</TitlePositionStep>
               <ValPositionStep>$120,000</ValPositionStep>
             </IcomeBlockStep>
@@ -87,7 +130,7 @@ const PresentationStep2 = (props: FormikPartProps) => {
               <TitlePositionStep>Expenses</TitlePositionStep>
               <ValPositionStep>$69,043</ValPositionStep>
             </ExpensesBlockStep>
-            <AssetsBlockStep>
+            <AssetsBlockStep onClick={updateChart('asset')}>
               <TitlePositionStep>Assets</TitlePositionStep>
               <ValPositionStep>$1,390,000</ValPositionStep>
             </AssetsBlockStep>
@@ -97,10 +140,10 @@ const PresentationStep2 = (props: FormikPartProps) => {
             </LiabilitiesBlockStep>
           </StepPositionTop>
           <StepPositionBottom>
-            <Doughnut options={optionsDoughnut} data={dataDoughnut} />
+            <Doughnut options={optionsDoughnut} data={get(chartData, 'chart')} redraw={true} height={200} />
             <DoughnutDesc>
-              <LineDoughnut>$120,000</LineDoughnut>
-              <LineDoughnutText>Income</LineDoughnutText>
+              <LineDoughnut>{get(chartData, 'line1')}</LineDoughnut>
+              <LineDoughnutText>{get(chartData, 'line2')}</LineDoughnutText>
             </DoughnutDesc>
           </StepPositionBottom>
         </StepPositionLeft>
