@@ -1,6 +1,20 @@
 import styled, { keyframes } from 'styled-components';
 import { Card } from 'antd';
 
+const fadeInIcon = keyframes`
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(80%, 0, 0);
+    transform: translate3d(80%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+`;
+
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -64,11 +78,17 @@ export const TemplateWrapper = styled.div`
       }
     }
   }
+  .fadeInIcon {
+    animation-name: ${fadeInIcon};
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+  }
   .fadeIn {
     animation-name: ${fadeIn};
     animation-duration: 0.5s;
     animation-fill-mode: both;
   }
+
 `;
 
 export const TemplateHeader = styled.div`

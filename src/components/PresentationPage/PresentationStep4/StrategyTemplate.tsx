@@ -12,7 +12,7 @@ const StrategyTemplate = (props: StrategyTemplateProps) => {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setLoading(false);
-    }, 400);
+    }, 1500);
 
     return () => {
       clearTimeout(timeoutId);
@@ -32,7 +32,7 @@ const StrategyTemplate = (props: StrategyTemplateProps) => {
             alt="Salary sacrifice"
             src={`http://sgp18.siteground.asia/~whistle4/images/1.svg`}
             style={{ height: 120 }}
-            className="fadeIn"
+            className="fadeInIcon"
           />
           <div className="header-body">
             <div className="header-body--title fadeIn" style={{ animationDelay: '0.75s' }}>
