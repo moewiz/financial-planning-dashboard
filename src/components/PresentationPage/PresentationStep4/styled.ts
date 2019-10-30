@@ -4,8 +4,8 @@ import { Card } from 'antd';
 const fadeIn = keyframes`
   from {
     opacity: 0;
-    -webkit-transform: translate3d(50%, 0, 0);
-    transform: translate3d(50%, 0, 0);
+    -webkit-transform: translate3d(30px, 0, 0);
+    transform: translate3d(30px, 0, 0);
   }
 
   to {

@@ -12,7 +12,7 @@ const StrategyTemplate = (props: StrategyTemplateProps) => {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 400);
 
     return () => {
       clearTimeout(timeoutId);
