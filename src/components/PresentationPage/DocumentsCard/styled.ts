@@ -76,7 +76,7 @@ export const CardBlockText = styled.p.attrs({
     content: '';
     position: absolute;
     left: 0px;
-    top: calc(50% - 3px);
+    top: 8px;
     background: #515c83;
     border-radius: 100%;
   }
