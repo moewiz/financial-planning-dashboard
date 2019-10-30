@@ -50,7 +50,7 @@ const TableContent = ({ showTitle, values }: TableContentProps) => (
           <div className="values">
             {map(data.values, (value: number, idx: number) => (
               <span className={'cell'} key={idx}>
-                {value}
+                {value}%
               </span>
             ))}
           </div>
@@ -60,7 +60,7 @@ const TableContent = ({ showTitle, values }: TableContentProps) => (
           <div className="values">
             {map(data.values, (value: number, idx: number) => (
               <span className={'cell'} key={idx}>
-                {value}
+                {value}%
               </span>
             ))}
           </div>
