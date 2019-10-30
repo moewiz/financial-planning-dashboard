@@ -564,23 +564,31 @@
       "columns": [
         {
           "title": "Description",
-          "dataIndex": "description"
+          "dataIndex": "description",
+          "width": 220
         },
         {
           "title": "Cost to you",
-          "dataIndex": "cost"
+          "dataIndex": "cost",
+          "className": "text-align-right",
+          "width": 80
         },
         {
           "title": "Amount received by us",
-          "dataIndex": "amount"
+          "dataIndex": "amount",
+          "width": 140
         },
         {
           "title": "Dealer Group retainer",
-          "dataIndex": "practice"
+          "dataIndex": "practice",
+          "className": "text-align-right",
+          "width": 130
         },
         {
           "title": "Advisor retainer",
-          "dataIndex": "advisor"
+          "dataIndex": "advisor",
+          "className": "text-align-right",
+          "width": 100
         }
       ],
       "data": [

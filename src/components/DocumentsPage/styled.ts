@@ -108,6 +108,10 @@ export const StepWrapper = styled.section`
           background-color: #ebeef1;
           color: #515c83;
           font-weight: 600;
+          &.text-align-right {
+            padding: 16px 30px 16px 0;
+            text-align: right;
+          }
         }
       }
     }
@@ -116,6 +120,16 @@ export const StepWrapper = styled.section`
       & > tr {
         & > td {
           color: #586388;
+          &.text-align-right {
+            .strategy-item {
+              .edit-cell {
+                text-align: right;
+                .ant-input-number-input {
+                  text-align: right;
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -197,8 +211,9 @@ export const StepWrapper = styled.section`
       }
       td.invalid {
         .strategy-item {
-          .ant-input, .ant-select {
-            color: #F44336 !important;
+          .ant-input,
+          .ant-select {
+            color: #f44336 !important;
           }
         }
       }
@@ -226,7 +241,7 @@ export const TitleStep = styled.div.attrs({
       font-size: 16px;
       font-weight: 600;
 
-      ${props =>
+      ${(props) =>
         props.editable &&
         css`
           &:hover {
@@ -261,7 +276,7 @@ export const TitleStepSmall = styled.div.attrs({
       margin: 0 0 10px -10px;
       color: #9096af;
 
-      ${props =>
+      ${(props) =>
         props.editable &&
         css`
           &:hover {
