@@ -10,6 +10,10 @@ function currencyFormatter(value: SliderValue) {
   return numeral(value).format('$ 0,0.[00]');
 }
 
+function retirementFormatter(value: SliderValue) {
+  return value + ' years';
+}
+
 const riskProfiles = ['Preservation', 'Defensive', 'Moderate', 'Balanced', 'Growth', 'High growth'];
 
 const convertArrayStringToMarks = (
@@ -36,7 +40,7 @@ const formatterFromArrayString = (array: string[]) => (value: SliderValue) => {
 const SlidersBlock = () => {
   return (
     <SlidersBlockWrapper>
-      <MySlider title={'Retirement'} min={57} max={100} defaultValue={65} step={1} />
+      <MySlider title={'Retirement'} min={57} max={100} defaultValue={65} step={1} formatter={retirementFormatter} />
       <MySlider title={'Income'} min={0} max={500000} defaultValue={100000} formatter={currencyFormatter} step={1000} />
       <MySlider
         title={'Expenses'}
