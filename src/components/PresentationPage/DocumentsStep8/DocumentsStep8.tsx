@@ -5,13 +5,13 @@ import { message } from 'antd';
 
 import { StepWrapper, TitleStep, TitleStepSmall, BtnDoneDocument, StepActionDocument } from '../styled';
 import { DocumentsStep8WP, ListCardThumbnails } from './styled';
-import { DocumentData, FormikPartProps, Record, SwitcherContext } from '../PresentationPage';
+import { DocumentData, FormikPartProps, Record, PresentationSwitcherContext } from '../PresentationPage';
 import CardStatistic from './CardStatistic';
 import DocumentsCarousel from '../DocumentsCarousel/DocumentsCarousel';
 
 const DocumentsStep8 = (props: FormikPartProps) => {
   const [slideNumber, setSlideNumber] = useState<number>(-1);
-  const context = useContext(SwitcherContext);
+  const context = useContext(PresentationSwitcherContext);
   if (!context) {
     return null;
   }
@@ -33,7 +33,7 @@ const DocumentsStep8 = (props: FormikPartProps) => {
   };
   const records = get(props, 'formik.values.step8.records', []);
   const checked = !records.find((record: Record) => {
-    return record.table.data.find(r => r.isOverwrite === false && r.id !== -1)
+    return record.table.data.find((r) => r.isOverwrite === false && r.id !== -1);
   }) ;
   return (
     <StepWrapper>

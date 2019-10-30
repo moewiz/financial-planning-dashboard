@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import DocumentsCarousel from './DocumentsCarousel/DocumentsCarousel';
 import DocumentsCard from './DocumentsCard/DocumentsCard';
 import { DocumentSwitcherWrapper } from './styled';
-import { SwitcherContext, StepProps } from './PresentationPage';
+import { PresentationSwitcherContext, StepProps } from './PresentationPage';
 
 interface DocumentSwitcherProps {
   stepName: string;
@@ -15,7 +15,7 @@ interface DocumentSwitcherProps {
 const DocumentSwitcher = (props: DocumentSwitcherProps) => {
   const { stepName, stepData, setFieldValue } = props;
   const [slideNumber, setSlideNumber] = useState<number>(-1);
-  const context = useContext(SwitcherContext);
+  const context = useContext(PresentationSwitcherContext);
   if (!context) {
     return null;
   }
@@ -36,12 +36,7 @@ const DocumentSwitcher = (props: DocumentSwitcherProps) => {
   return stepData ? (
     <DocumentSwitcherWrapper>
       {slideNumber > -1 ? (
-        <DocumentsCarousel
-          slideNumber={slideNumber}
-          stepName={stepName}
-          cards={cards}
-          setFieldValue={setFieldValue}
-        />
+        <DocumentsCarousel slideNumber={slideNumber} stepName={stepName} cards={cards} setFieldValue={setFieldValue} />
       ) : (
         <DocumentsCard
           stepName={stepName}
