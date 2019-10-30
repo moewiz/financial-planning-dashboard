@@ -55,6 +55,7 @@ export const SiderCollapsible = styled(Sider).attrs({
     }
     .birtday-name-fixed {
       left: 10px;
+      display: none;
     }
     .btn-sidebar {
       border-radius: 100%;
@@ -97,7 +98,11 @@ export const ClientSide = styled(Menu).attrs({
 })`
   border-right: 0px !important;
   &.ant-menu-inline-collapsed {
-    width: 2px;
+    width: 0px;
+    visibility: hidden;
+    .client-item-root{
+      display: none;
+    }
   }
 `;
 
