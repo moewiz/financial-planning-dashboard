@@ -9,6 +9,8 @@ import { ActionDrawerGeneral } from '../../../components/StrategyPage/Drawer/sty
 import { HeaderTitleTable, TableEntryContainer, TextTitle } from '../styled';
 import { Product } from '../../../components/ProductOptimizer/Drawer/DrawerProduct';
 import { Projections } from '../../../components/Icons';
+import { EditCellType } from '../../../components/StrategyPage/Drawer/EditCell';
+import { components } from '../../../containers/productOptimizer/CurrentProduct';
 
 interface InsuranceProps {
   clientId: number;
@@ -21,28 +23,28 @@ const client = {
       id: 1,
       provider: 'OnePath OneCare',
       type: 'Life',
-      cover: '$500,000',
+      cover: '500000',
       premium: 'Stepped',
     },
     {
       id: 2,
       provider: 'OnePath OneCare',
       type: 'TPD',
-      cover: '$500,000',
+      cover: '500000',
       premium: 'Stepped',
     },
     {
       id: 3,
       provider: 'OnePath OneCare',
       type: 'Trauma',
-      cover: '$150,000',
+      cover: '150000',
       premium: 'Stepped',
     },
     {
       id: 4,
       provider: 'OnePath OneCare',
       type: 'Income Protection',
-      cover: '$7,000',
+      cover: '7000',
       premium: 'Stepped',
     },
   ],
@@ -51,28 +53,28 @@ const client = {
       id: 5,
       provider: 'OnePath OneCare',
       type: 'Life',
-      cover: '$500,000',
+      cover: '500000',
       premium: 'Stepped',
     },
     {
       id: 6,
       provider: 'OnePath OneCare',
       type: 'TPD',
-      cover: '$500,000',
+      cover: '500000',
       premium: 'Stepped',
     },
     {
       id: 7,
       provider: 'OnePath OneCare',
       type: 'Trauma',
-      cover: '$150,000',
+      cover: '150000',
       premium: 'Stepped',
     },
     {
       id: 8,
       provider: 'OnePath OneCare',
       type: 'Income Protection',
-      cover: '$7,000',
+      cover: '7000',
       premium: 'Stepped',
     },
   ],
@@ -84,28 +86,28 @@ const partner = {
       id: 1,
       provider: 'OnePath OneCare',
       type: 'Life',
-      cover: '$500,000',
+      cover: '500000',
       premium: 'Stepped',
     },
     {
       id: 2,
       provider: 'OnePath OneCare',
       type: 'TPD',
-      cover: '$500,000',
+      cover: '500000',
       premium: 'Stepped',
     },
     {
       id: 3,
       provider: 'OnePath OneCare',
       type: 'Trauma',
-      cover: '$150,000',
+      cover: '150000',
       premium: 'Stepped',
     },
     {
       id: 4,
       provider: 'OnePath OneCare',
       type: 'Income Protection',
-      cover: '$7,000',
+      cover: '7000',
       premium: 'Stepped',
     },
   ],
@@ -114,28 +116,28 @@ const partner = {
       id: 5,
       provider: 'OnePath OneCare',
       type: 'Life',
-      cover: '$500,000',
+      cover: '500000',
       premium: 'Stepped',
     },
     {
       id: 6,
       provider: 'OnePath OneCare',
       type: 'TPD',
-      cover: '$500,000',
+      cover: '500000',
       premium: 'Stepped',
     },
     {
       id: 7,
       provider: 'OnePath OneCare',
       type: 'Trauma',
-      cover: '$150,000',
+      cover: '150000',
       premium: 'Stepped',
     },
     {
       id: 8,
       provider: 'OnePath OneCare',
       type: 'Income Protection',
-      cover: '$7,000',
+      cover: '7000',
       premium: 'Stepped',
     },
   ],
@@ -156,7 +158,7 @@ interface TableProps {
 const BasicTable = ({ title, dataList, columns, className }: TableProps) => (
   <TableEntryContainer smallPadding>
     <HeaderTitleTable>
-      { title === 'Proposed' && <Icon type={'plus-square'} theme={'filled'} />}
+      {title === 'Proposed' && <Icon type={'plus-square'} theme={'filled'} />}
       <TextTitle small={true}>{title}</TextTitle>
     </HeaderTitleTable>
     <Table
@@ -165,6 +167,7 @@ const BasicTable = ({ title, dataList, columns, className }: TableProps) => (
       columns={columns}
       dataSource={dataList}
       pagination={false}
+      components={components}
     />
   </TableEntryContainer>
 );
@@ -187,7 +190,11 @@ class Insurance extends PureComponent<InsuranceProps> {
       title: 'Cover',
       dataIndex: 'cover',
       key: '2',
-      width: 68,
+      width: 90,
+      editable: true,
+      dollar: true,
+      type: EditCellType.number,
+      className: 'text-align-right',
     },
     {
       title: 'Premium',
@@ -210,6 +217,30 @@ class Insurance extends PureComponent<InsuranceProps> {
     },
   ];
 
+  public onEdit = (value: any, name: string, rowIndex: number) => {
+    console.log({ value });
+  }
+
+  public getColumns = () => {
+    return this.columns.map((col) => {
+      if (col.editable) {
+        console.log('col', col);
+        return {
+          ...col,
+          onCell: (record: any, rowIndex: number) => ({
+            ...col,
+            record,
+            rowIndex,
+            type: col.type || 'text',
+            onEdit: this.onEdit,
+          }),
+        };
+      }
+
+      return col;
+    });
+  }
+
   public render() {
     return (
       <StrategyPageWrapper>
@@ -217,13 +248,13 @@ class Insurance extends PureComponent<InsuranceProps> {
           <TabPanStyled tab="Client" key="1">
             <BasicTable
               title="Current"
-              columns={this.columns}
+              columns={this.getColumns()}
               dataList={get(dummyInsuranceData, 'client.current', [])}
               className="current-product-table"
             />
             <BasicTable
               title="Proposed"
-              columns={this.columns}
+              columns={this.getColumns()}
               dataList={get(dummyInsuranceData, 'client.proposed', [])}
               className="current-product-table"
             />
@@ -231,13 +262,13 @@ class Insurance extends PureComponent<InsuranceProps> {
           <TabPanStyled tab="Partner" key="2">
             <BasicTable
               title="Current"
-              columns={this.columns}
+              columns={this.getColumns()}
               dataList={get(dummyInsuranceData, 'partner.current', [])}
               className="current-product-table"
             />
             <BasicTable
               title="Proposed"
-              columns={this.columns}
+              columns={this.getColumns()}
               dataList={get(dummyInsuranceData, 'partner.proposed', [])}
               className="current-product-table"
             />
