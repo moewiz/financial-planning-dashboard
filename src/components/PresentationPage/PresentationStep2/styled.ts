@@ -29,7 +29,7 @@ export const StepPositionTop = styled.div`
 
 export const StepPositionBottom = styled.div`
   box-shadow: 0 2px 4px 0px rgba(0,0,0,0.23);
-  padding: 35px 10px;
+  padding: 35px 0px 45px 0px;
   display: inline-block;
   width: 100%;
   margin: 0 auto;
