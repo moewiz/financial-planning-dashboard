@@ -29,10 +29,14 @@ export const StepPositionTop = styled.div`
 
 export const StepPositionBottom = styled.div`
   box-shadow: 0 2px 4px 0px rgba(0,0,0,0.23);
-  padding: 10px;
+  padding: 35px 10px;
   display: inline-block;
-  width: calc(100% - 10px);
+  width: 100%;
   margin: 0 auto;
+  position: relative;
+  .chartjs-render-monitor{
+    transform: scale(1.2);
+  }
 `;
 
 export const TitlePositionStep = styled.div`
@@ -50,7 +54,7 @@ export const IcomeBlockStep = styled.div`
   flex: 0 0 calc(50% - 20px);
   margin: 10px 10px;
   text-align: center;
-  padding: 20px 10px;
+  padding: 25px 10px;
   border-radius: 5px;
 `;
 
@@ -90,5 +94,22 @@ export const KeyPoitItem = styled.div`
 export const CardResultsPositionStep = styled.div`
   .ant-card-grid{
     padding: 15px!important;
+    min-height: 75px;
   }
+`;
+
+export const DoughnutDesc = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  left: calc(50% - 30px);
+  top: calc(50% + 5px);
+`;
+export const LineDoughnut = styled.span`
+  font-size: 13px;
+`;
+export const LineDoughnutText = styled.span`
+  font-size: 12px;
+  margin-top: -3px;
 `;
