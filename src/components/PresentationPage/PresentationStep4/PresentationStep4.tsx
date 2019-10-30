@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { connect } from 'formik';
-import { times, map } from 'lodash';
+import { map } from 'lodash';
 
-import { StepWrapper } from '../styled';
-import { FormikPartProps, DocumentData } from '../PresentationPage';
+import { FormikPartProps, DocumentData, PresentationSwitcherContext } from '../PresentationPage';
 import { CardList } from './styled';
 import CardItem from './CardItem';
+import StrategyTemplate from './StrategyTemplate';
 
 const cardLists = [
   <p>Salary Sacrifice</p>,
@@ -32,15 +32,35 @@ const cardLists = [
 ];
 
 const PresentationStep4 = (props: FormikPartProps) => {
+  const [slideNumber, setSlideNumber] = useState<number>(-1);
+  const context = useContext(PresentationSwitcherContext);
+  if (!context) {
+    return null;
+  }
+  const { switcherContext, setSwitcherContext } = context;
+  const onClickCard = (index: number) => () => {
+    setSlideNumber(index);
+  };
+  useEffect(() => {
+    if (slideNumber > -1 && switcherContext) {
+      setSlideNumber(-1);
+      setSwitcherContext(false);
+    }
+  }, [switcherContext]);
+
   return (
     <>
-      <CardList>
-        {map(cardLists, (children, index) => (
-          <CardItem key={index} src={index + 1}>
-            {children}
-          </CardItem>
-        ))}
-      </CardList>
+      {slideNumber > -1 ? (
+        <StrategyTemplate index={slideNumber} />
+      ) : (
+        <CardList>
+          {map(cardLists, (children, index: number) => (
+            <CardItem key={index} src={index + 1} onClick={onClickCard(index)}>
+              {children}
+            </CardItem>
+          ))}
+        </CardList>
+      )}
     </>
   );
 };

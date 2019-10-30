@@ -111,7 +111,7 @@ export interface DocumentsPageProps {
   className?: string;
 }
 
-export const SwitcherContext = React.createContext<{
+export const PresentationSwitcherContext = React.createContext<{
   switcherContext: boolean;
   setSwitcherContext: React.Dispatch<React.SetStateAction<boolean>>;
 } | null>(null);
@@ -137,7 +137,7 @@ const PresentationPage = (props: DocumentsPageProps) => {
 
     return (
       <>
-        <SwitcherContext.Provider value={value}>
+        <PresentationSwitcherContext.Provider value={value}>
           <Steps
             size="small"
             current={currentStep}
@@ -156,7 +156,7 @@ const PresentationPage = (props: DocumentsPageProps) => {
           </Steps>
           {/* <div className="steps-content">{!loading && !isEmpty(formikProps.values) ? <StepComponent /> : <Spin />}</div> */}
           <div className="steps-content">{<StepComponent />}</div>
-        </SwitcherContext.Provider>
+        </PresentationSwitcherContext.Provider>
       </>
     );
   };

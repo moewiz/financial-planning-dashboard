@@ -30,3 +30,35 @@ export const CardItemStyled = styled(Card).attrs({
     padding: 20px;
   }
 `;
+
+export const TemplateWrapper = styled.div`
+  padding: 0 32px;
+`;
+
+export const TemplateHeader = styled.div`
+  display: flex;
+  margin-bottom: 50px;
+  .header-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 30px;
+    &--title {
+      font-size: 40px;
+      font-weight: 600;
+      padding: 0 0 10px 10px;
+    }
+    &--content {
+      font-size: 16px;
+    }
+  }
+`;
+
+export const TemplateContent = styled.div`
+  ul {
+    list-style-type: disc;
+    li {
+      margin-bottom: 15px;
+    }
+  }
+`;
