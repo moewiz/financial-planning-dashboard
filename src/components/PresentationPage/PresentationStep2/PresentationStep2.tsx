@@ -24,15 +24,18 @@ import {
   ExpensesBlockStep,
   AssetsBlockStep,
   LiabilitiesBlockStep,
+  DoughnutDesc,
+  LineDoughnut,
+  LineDoughnutText,
 } from './styled';
 
 const dataDoughnut = {
-  labels: ['Income', 'Expenses', 'Assets', 'Liabilities'],
+  labels: ['Salary'],
   datasets: [
     {
-      data: [12000, 69043, 13900, 30000],
-      backgroundColor: ['#ffe700', '#2bd8c4', '#8269f8', '#2e98ff'],
-      hoverBackgroundColor: ['#ffe700', '#2bd8c4', '#8269f8', '#2e98ff'],
+      data: [120000],
+      backgroundColor: ['#2bd8c4', '#2bd8c4', '#8269f8', '#2e98ff'],
+      hoverBackgroundColor: ['#2bd8c4', '#2bd8c4', '#8269f8', '#2e98ff'],
     },
   ],
 };
@@ -50,23 +53,24 @@ const optionsDoughnut = {
     },
   },
 };
-const seriesBar = {
-  labels: ['7/12', '8/12', '9/12', '10/12', '11/12', '12/12', '13/12'],
+const seriesBarInsurance = {
+  labels: ['Life', 'TPD', 'Trauma', 'IP'],
   datasets: [
     {
+      label: 'Insurance cover',
       backgroundColor: '#2e98ff',
       borderColor: '#2e98ff',
       borderWidth: 1,
-      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-      hoverBorderColor: 'rgba(255,99,132,1)',
-      data: [321, 112, 220, 250, 150, 125, 100, 75],
+      data: [ 500000, 500000, 150000, 840000 ],
+    },
+    {
+      label: 'Needs analysis',
+      backgroundColor: 'rgba(255,99,132,1)',
+      borderColor: 'rgba(255,99,132,1)',
+      borderWidth: 1,
+      data: [ 500000, 500000, 150000, 840000 ],
     },
   ],
-};
-
-const gridStyle = {
-  width: '25%',
-  textAlign: 'center',
 };
 
 const PresentationStep2 = (props: FormikPartProps) => {
@@ -94,6 +98,10 @@ const PresentationStep2 = (props: FormikPartProps) => {
           </StepPositionTop>
           <StepPositionBottom>
             <Doughnut options={optionsDoughnut} data={dataDoughnut} />
+            <DoughnutDesc>
+              <LineDoughnut>$120,000</LineDoughnut>
+              <LineDoughnutText>Income</LineDoughnutText>
+            </DoughnutDesc>
           </StepPositionBottom>
         </StepPositionLeft>
         <StepPositionRight>
@@ -101,7 +109,7 @@ const PresentationStep2 = (props: FormikPartProps) => {
             <CardChartPositionStep>
               <Card title="Key Chart" bordered={false} style={{ width: '100%' }}>
                 <Bar
-                  data={seriesBar}
+                  data={seriesBarInsurance}
                   width={200}
                   height={100}
                   options={{
