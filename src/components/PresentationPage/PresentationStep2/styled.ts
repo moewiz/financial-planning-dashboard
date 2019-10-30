@@ -17,7 +17,8 @@ export const StepPositionLeft = styled.div.attrs({
 export const StepPositionRight = styled.div.attrs({
   className: 'presentation-position-right',
 })`
-  flex: 0 0 calc(75% - 20px);
+  // flex: 0 0 calc(75% - 20px);
+  flex: 1;
   margin-left: 20px;
 `;
 
@@ -69,7 +70,8 @@ export const LiabilitiesBlockStep = styled(IcomeBlockStep)`
 
 export const CardChartPositionStep = styled.section`
   box-shadow: 0 2px 4px 0px rgba(0,0,0,0.23);
-  flex: 0 0 calc(50% - 30px);
+  // flex: 0 0 calc(50% - 30px);
+  flex: 1;
   max-width: 50%;
   margin-right: 15px;
 `;
