@@ -1,4 +1,5 @@
 import styled, { keyframes, css } from 'styled-components';
+
 const fadeIn = keyframes`
   from {
     opacity: 0;

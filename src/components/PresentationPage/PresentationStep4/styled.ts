@@ -1,5 +1,19 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Card } from 'antd';
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(50%, 0, 0);
+    transform: translate3d(50%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+`;
 
 export const CardList = styled.div.attrs({
   className: 'card-list',
@@ -33,6 +47,28 @@ export const CardItemStyled = styled(Card).attrs({
 
 export const TemplateWrapper = styled.div`
   padding: 0 32px;
+  .ant-skeleton.ant-skeleton-with-avatar {
+    margin-bottom: 50px;
+    .ant-skeleton-header {
+      padding-right: 35px;
+      .icon-placeholder {
+        width: 100px;
+        height: 120px;
+      }
+    }
+    .ant-skeleton-content {
+      h3.ant-skeleton-title {
+        height: 32px;
+        margin-top: 0px;
+        margin-bottom: 40px;
+      }
+    }
+  }
+  .fadeIn {
+    animation-name: ${fadeIn};
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+  }
 `;
 
 export const TemplateHeader = styled.div`

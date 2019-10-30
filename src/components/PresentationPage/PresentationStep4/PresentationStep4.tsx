@@ -46,7 +46,7 @@ const PresentationStep4 = (props: FormikPartProps) => {
       setSlideNumber(-1);
       setSwitcherContext(false);
     }
-  }, [switcherContext]);
+  }, [switcherContext, slideNumber]);
 
   return (
     <>
