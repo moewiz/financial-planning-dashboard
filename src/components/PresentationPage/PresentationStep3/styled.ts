@@ -50,6 +50,6 @@ export const ValueWrapper = styled.div<{ marks?: boolean }>`
   }
 `;
 export const ValueStyled = styled.div`
-  flex: 0 0 76px;
+  flex: 0 0 80px;
   margin-left: 14px;
 `;
