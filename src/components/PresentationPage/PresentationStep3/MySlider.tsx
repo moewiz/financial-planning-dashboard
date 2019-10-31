@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { debounce } from 'lodash';
 import { Slider } from 'antd';
 import { SliderProps, SliderValue } from 'antd/lib/slider';
 
@@ -14,10 +15,19 @@ interface MySliderProps {
 const MySlider = (props: SliderProps & MySliderProps) => {
   const { title, defaultValue, formatter, marks, onChangeValue } = props;
   const [value, setValue] = useState<SliderValue>(defaultValue || 0);
+  const debounceOnChangeValue = useCallback(
+    debounce((val) => {
+      if (onChangeValue) {
+        console.log('value', val);
+        onChangeValue(val);
+      }
+    }, 300),
+    [],
+  );
   const onChange = (val: SliderValue) => {
     setValue(val);
     if (onChangeValue) {
-      onChangeValue(val);
+      debounceOnChangeValue(val);
     }
   };
   const options: { [key: string]: any } = {};
