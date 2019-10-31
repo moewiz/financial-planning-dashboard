@@ -11,6 +11,7 @@ import { CheckboxGroup } from './styled';
 import { CheckboxCustomize } from '../../StrategyPage/StrategyTable/styled';
 import { Checkbox } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
+import { chartsDataResources } from '../PresentationStep3/PresentationStep3';
 
 const CheckboxContainer = (props: { children: React.ReactNode }) => {
   const [value, setValue] = useState<boolean>(true);
@@ -44,7 +45,7 @@ const PresentationStep5 = (props: FormikPartProps) => {
           <EventsBlock />
         </StepPositionLeft>
         <StepPositionRight>
-          <ChartsBlock />
+          <ChartsBlock chartsData={chartsDataResources['60']} />
         </StepPositionRight>
       </StepCurrentPosition>
     </StepWrapper>
