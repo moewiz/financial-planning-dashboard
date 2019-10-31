@@ -65,7 +65,7 @@ const PresentationStep7 = (props: FormikPartProps) => {
     <StepWrapper>
       <CardFeesStep>
         <FeesTable>
-          <Table dataSource={dataSource} columns={columns} />
+          <Table className={'table-general documents-table'} dataSource={dataSource} columns={columns} pagination={false} />
         </FeesTable>
       </CardFeesStep>
     </StepWrapper>
