@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { Formik, FormikActions, FormikContext, FormikProps } from 'formik';
 import { get, isEmpty } from 'lodash';
 import { Steps, message, Spin } from 'antd';
+import { createGlobalStyle } from 'styled-components';
 
 import PresentationStep1 from './PresentationStep1/PresentationStep1';
 import PresentationStep2 from './PresentationStep2/PresentationStep2';
@@ -112,6 +113,14 @@ export interface DocumentsPageProps {
   className?: string;
 }
 
+const CrispClientStyled = createGlobalStyle<{ hideCrisp?: boolean }>`
+  ${(props) => props.hideCrisp && `
+    .crisp-client {
+      display: none;
+    }
+  `}
+`;
+
 export const PresentationSwitcherContext = React.createContext<{
   switcherContext: boolean;
   setSwitcherContext: React.Dispatch<React.SetStateAction<boolean>>;
@@ -173,6 +182,7 @@ const PresentationPage = (props: DocumentsPageProps) => {
         enableReinitialize={true}
         render={renderForm}
       />
+      <CrispClientStyled hideCrisp={true} />
     </DocumentsWrapper>
   );
 };
