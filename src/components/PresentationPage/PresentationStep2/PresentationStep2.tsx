@@ -42,18 +42,16 @@ const incomeData = {
 
 const assetData = {
   labels: [
-    'Primary Residence',
-    'Home Content',
-    'Motor Vehicle',
-    'Hesta Personal Super',
-    'CFS FirstChoice Wholesale Investments',
+    'Lifestyle',
+    'Super',
+    'Investment',
     'Cash',
   ],
   datasets: [
     {
-      data: [750000, 10000, 30000, 400000, 50000, 150000],
-      backgroundColor: ['#ffe701', '#2bd8c4', '#FF5722', '#8269f8', '#2e98ff', '#f2f5f8'],
-      hoverBackgroundColor: ['#ffe701', '#2bd8c4', '#FF5722', '#8269f8', '#2e98ff', '#f2f5f8'],
+      data: [790000, 400000, 50000, 150000],
+      backgroundColor: ['#ffe701', '#2bd8c4', '#8269f8', '#2e98ff'],
+      hoverBackgroundColor: ['#ffe701', '#2bd8c4', '#8269f8', '#2e98ff'],
     },
   ],
 };
