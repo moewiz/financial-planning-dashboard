@@ -7,6 +7,7 @@ import numeral from 'numeral';
 
 import { GraphCard, GraphTitle, GraphWrapper, GraphGroup } from '../styled';
 import { RootState } from '../../../reducers/reducerTypes';
+import { GRAPH_FREQUENCY } from '../../../enums/timer';
 
 export enum GraphType {
   Line,
@@ -84,7 +85,7 @@ const GraphContainer = (props: GraphProps) => {
   useEffect(() => {
     const id = setInterval(() => {
       setActiveIndex((index) => (index + 1 >= listOfData.length ? 0 : index + 1));
-    }, 6000);
+    }, GRAPH_FREQUENCY);
     return () => clearInterval(id);
   }, []);
   const redraw = isBoolean(redrawProp) ? redrawProp : true;
