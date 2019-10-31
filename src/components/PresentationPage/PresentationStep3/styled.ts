@@ -69,3 +69,29 @@ export const ChartBlock = styled.div`
     cursor: pointer;
   }
 `;
+export const DrilldownChartWrapper = styled.div`
+  .anticon.anticon-arrow-left {
+    font-size: 24px;
+    padding: 8px;
+  }
+`;
+export const DrilldownHeader = styled.div`
+  display: flex;
+`;
+export const DrilldownContent = styled.div``;
+export const ButtonGroup = styled(ChartsBlockWrapper)``;
+export const DrilldownButton = styled.button`
+  min-width: 180px;
+  text-align: center;
+  padding: 5px 20px;
+  margin: 0 20px;
+  font-weight: 600;
+  border: 1px solid #dedede;
+  border-radius: 4px;
+  outline: none;
+
+  &:hover, &.active {
+    cursor: pointer;
+    border-color: #03A9F4;
+  }
+`;
