@@ -11,7 +11,7 @@ export const StepCurrentPosition = styled.div.attrs({
 export const StepPositionLeft = styled.div.attrs({
   className: 'presentation-position-left',
 })`
-  flex: 0 0 25%;
+  flex: 0 0 35%;
 
 `;
 export const StepPositionRight = styled.div.attrs({
@@ -36,7 +36,6 @@ export const StepPositionBottom = styled.div`
   margin: 0 auto;
   position: relative;
   .chartjs-render-monitor{
-    transform: scale(1.2);
   }
 `;
 
@@ -55,7 +54,7 @@ export const IcomeBlockStep = styled.div`
   flex: 0 0 calc(50% - 20px);
   margin: 10px 10px;
   text-align: center;
-  padding: 25px 10px;
+  padding: 29px 10px;
   border-radius: 5px;
 `;
 
