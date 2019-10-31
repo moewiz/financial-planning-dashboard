@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const LoginMain = styled.div`
-  background-image: url(./images/bg-login-indra.png);
+  background-image: url('http://sgp18.siteground.asia/~whistle4/images/bg-login.png');
   height: 100vh;
   background-repeat: no-repeat;
   background-position: center 80%;
