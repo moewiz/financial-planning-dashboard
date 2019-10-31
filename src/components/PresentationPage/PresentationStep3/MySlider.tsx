@@ -7,16 +7,20 @@ import { SliderTitle, SliderWrapper, ValueStyled, ValueWrapper } from './styled'
 interface MySliderProps {
   title: string;
   formatter?: (value: SliderValue) => React.ReactNode;
+  onChangeValue?: (value: SliderValue) => void;
   defaultValue?: number;
 }
 
 const MySlider = (props: SliderProps & MySliderProps) => {
-  const { title, defaultValue, formatter, marks } = props;
+  const { title, defaultValue, formatter, marks, onChangeValue } = props;
   const [value, setValue] = useState<SliderValue>(defaultValue || 0);
   const onChange = (val: SliderValue) => {
     setValue(val);
+    if (onChangeValue) {
+      onChangeValue(val);
+    }
   };
-  const options: {[key: string]: any} = {};
+  const options: { [key: string]: any } = {};
   if (formatter) {
     options.tipFormatter = formatter;
   }

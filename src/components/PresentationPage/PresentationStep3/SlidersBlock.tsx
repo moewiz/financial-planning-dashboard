@@ -37,10 +37,20 @@ const formatterFromArrayString = (array: string[]) => (value: SliderValue) => {
   }
 };
 
-const SlidersBlock = () => {
+const SlidersBlock = (props: { onChangeRetirementYear?: (retirementYear: SliderValue) => void }) => {
+  const { onChangeRetirementYear } = props;
+
   return (
     <SlidersBlockWrapper>
-      <MySlider title={'Retirement'} min={57} max={100} defaultValue={60} step={1} formatter={retirementFormatter} />
+      <MySlider
+        title={'Retirement'}
+        min={57}
+        max={100}
+        defaultValue={60}
+        step={1}
+        formatter={retirementFormatter}
+        onChangeValue={onChangeRetirementYear}
+      />
       <MySlider title={'Income'} min={0} max={500000} defaultValue={100000} formatter={currencyFormatter} step={1000} />
       <MySlider
         title={'Expenses'}

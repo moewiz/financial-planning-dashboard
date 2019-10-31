@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { get } from 'lodash';
 
 import { ChartBlock, ChartsBlockWrapper } from './styled';
 import GraphPresentation from '../../StrategyPage/Graph/GraphPresentation';
@@ -202,8 +203,10 @@ const calmPVConfig = {
   ],
 };
 
-const ChartsBlock = () => {
+const ChartsBlock = (props: { chartsData: any }) => {
+  const { chartsData } = props;
   const [chartIndex, setChartIndex] = useState<number>(-1);
+
   return (
     <>
       {chartIndex > -1 ? (
@@ -213,16 +216,25 @@ const ChartsBlock = () => {
       ) : (
         <ChartsBlockWrapper>
           <ChartBlock onClick={() => setChartIndex(0)}>
-            <GraphPresentation type={GraphType.Line} data={loadGraphData(configNetAssets)(netAssetsChartData)} />
+            <GraphPresentation
+              type={GraphType.Line}
+              data={loadGraphData(configNetAssets)(get(chartsData, 'netAssetsChartData'))}
+            />
           </ChartBlock>
           <ChartBlock onClick={() => setChartIndex(1)}>
-            <GraphPresentation type={GraphType.Bar} data={loadGraphData(cashflowConfig)(cashflowChartData)} />
+            <GraphPresentation
+              type={GraphType.Bar}
+              data={loadGraphData(cashflowConfig)(get(chartsData, 'cashflowChartData'))}
+            />
           </ChartBlock>
           <ChartBlock onClick={() => setChartIndex(2)}>
-            <GraphPresentation type={GraphType.Bar} data={loadGraphData(taxConfig)(taxChartData)} />
+            <GraphPresentation type={GraphType.Bar} data={loadGraphData(taxConfig)(get(chartsData, 'taxChartData'))} />
           </ChartBlock>
           <ChartBlock onClick={() => setChartIndex(3)}>
-            <GraphPresentation type={GraphType.Bar} data={loadGraphData(calmPVConfig)(calmPVChartData)} />
+            <GraphPresentation
+              type={GraphType.Bar}
+              data={loadGraphData(calmPVConfig)(get(chartsData, 'calmPVChartData'))}
+            />
           </ChartBlock>
         </ChartsBlockWrapper>
       )}
