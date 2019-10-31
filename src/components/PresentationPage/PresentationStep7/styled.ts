@@ -4,9 +4,19 @@ export const CardFeesStep = styled.section`
 
 `;
 export const FeesTable = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #000;
+
+  .fees-col-description{
+    color: #515c83;
+  }
+  .fees-col-amount{
+    color: #515c83;
+  }
+
+  .fees-col-type{
+    font-weight: 600;
+    color: #515c83;
+
+  }
 `;
 export const FeesRow = styled.div`
   display: flex;
