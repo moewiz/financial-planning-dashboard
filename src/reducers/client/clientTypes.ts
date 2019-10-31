@@ -40,9 +40,10 @@ export interface DynamicData {
 }
 export interface GraphData {
   xAxis: string[];
-  current: number[];
-  proposed: number[];
+  current?: number[];
+  proposed?: number[];
   title?: string;
+  [key: string]: any;
 }
 export interface StrategyEntry {
   superannuation?: Strategy;

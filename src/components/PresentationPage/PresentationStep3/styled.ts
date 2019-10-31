@@ -53,3 +53,15 @@ export const ValueStyled = styled.div`
   flex: 0 0 80px;
   margin-left: 14px;
 `;
+export const ChartsBlockWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+export const ChartBlock = styled.div`
+  box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.23);
+  flex: 0 0 calc(50% - 20px);
+  margin: 10px 8px;
+  text-align: center;
+  padding: 29px 10px;
+  border-radius: 5px;
+`;
