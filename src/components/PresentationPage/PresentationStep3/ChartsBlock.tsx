@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { ChartBlock, ChartsBlockWrapper } from './styled';
 import GraphPresentation from '../../StrategyPage/Graph/GraphPresentation';
 import { GraphType } from '../../StrategyPage/Graph/GraphContainer';
 import { loadGraphData } from '../../StrategyPage/StrategyHeader';
+import DrilldownChart from './DrilldownChart';
 
 const netAssetsChartData = {
   xAxis: ['19', '20', '21', '22', '23', '24', '25', '26', '27', '28'],
@@ -163,26 +164,14 @@ const taxConfig = {
 const calmPVConfig = {
   datasets: [
     {
-      type: 'line',
-      dataIndex: 'total',
-      label: 'Total inflow',
-      fill: false,
-      borderColor: '#EC932F',
-      // backgroundColor: '#EC932F',
-      // pointBorderColor: '#EC932F',
-      // pointBackgroundColor: '#EC932F',
-      // pointHoverBackgroundColor: '#EC932F',
-      // pointHoverBorderColor: '#EC932F',
-    },
-    {
       type: 'bar',
       dataIndex: 'netAssets',
       label: 'Net Assets',
       fill: false,
       borderColor: '#71B37C',
-      // backgroundColor: '#71B37C',
-      // hoverBackgroundColor: '#71B37C',
-      // hoverBorderColor: '#71B37C',
+      backgroundColor: '#71B37C',
+      hoverBackgroundColor: '#71B37C',
+      hoverBorderColor: '#71B37C',
     },
     {
       type: 'bar',
@@ -198,25 +187,46 @@ const calmPVConfig = {
       fill: false,
       borderColor: '#fffb03',
     },
+    {
+      type: 'line',
+      dataIndex: 'total',
+      label: 'Total inflow',
+      fill: false,
+      borderColor: '#EC932F',
+      backgroundColor: '#EC932F',
+      pointBorderColor: '#EC932F',
+      pointBackgroundColor: '#EC932F',
+      pointHoverBackgroundColor: '#EC932F',
+      pointHoverBorderColor: '#EC932F',
+    },
   ],
 };
 
 const ChartsBlock = () => {
+  const [chartIndex, setChartIndex] = useState<number>(-1);
   return (
-    <ChartsBlockWrapper>
-      <ChartBlock>
-        <GraphPresentation type={GraphType.Line} data={loadGraphData(configNetAssets)(netAssetsChartData)} />
-      </ChartBlock>
-      <ChartBlock>
-        <GraphPresentation type={GraphType.Bar} data={loadGraphData(cashflowConfig)(cashflowChartData)} />
-      </ChartBlock>
-      <ChartBlock>
-        <GraphPresentation type={GraphType.Bar} data={loadGraphData(taxConfig)(taxChartData)} />
-      </ChartBlock>
-      <ChartBlock>
-        <GraphPresentation type={GraphType.Bar} data={loadGraphData(calmPVConfig)(calmPVChartData)} />
-      </ChartBlock>
-    </ChartsBlockWrapper>
+    <>
+      {chartIndex > -1 ? (
+        <>
+          <DrilldownChart index={chartIndex} back={() => setChartIndex(-1)} />
+        </>
+      ) : (
+        <ChartsBlockWrapper>
+          <ChartBlock onClick={() => setChartIndex(0)}>
+            <GraphPresentation type={GraphType.Line} data={loadGraphData(configNetAssets)(netAssetsChartData)} />
+          </ChartBlock>
+          <ChartBlock onClick={() => setChartIndex(1)}>
+            <GraphPresentation type={GraphType.Bar} data={loadGraphData(cashflowConfig)(cashflowChartData)} />
+          </ChartBlock>
+          <ChartBlock onClick={() => setChartIndex(2)}>
+            <GraphPresentation type={GraphType.Bar} data={loadGraphData(taxConfig)(taxChartData)} />
+          </ChartBlock>
+          <ChartBlock onClick={() => setChartIndex(3)}>
+            <GraphPresentation type={GraphType.Bar} data={loadGraphData(calmPVConfig)(calmPVChartData)} />
+          </ChartBlock>
+        </ChartsBlockWrapper>
+      )}
+    </>
   );
 };
 
