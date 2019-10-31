@@ -14,7 +14,11 @@ const CardItem = (props: CardItemProps) => {
     <CardItemStyled
       hoverable
       cover={
-        <img alt="example" src={`http://sgp18.siteground.asia/~whistle4/images/${src}.svg`} style={{ height: 100 }} />
+        <img
+          alt="example"
+          src={`http://sgp18.siteground.asia/~whistle4/images/${src}.png`}
+          style={{ width: 100, height: 100, margin: '0 auto' }}
+        />
       }
       onClick={onClick}
     >

@@ -30,8 +30,8 @@ const StrategyTemplate = (props: StrategyTemplateProps) => {
         <TemplateHeader>
           <img
             alt="Salary sacrifice"
-            src={`http://sgp18.siteground.asia/~whistle4/images/1.svg`}
-            style={{ height: 120 }}
+            src={`http://sgp18.siteground.asia/~whistle4/images/1.png`}
+            style={{ width: 120, height: 120 }}
             className="fadeInIcon"
           />
           <div className="header-body">
