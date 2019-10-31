@@ -10,6 +10,7 @@ import PresentationStep2 from './PresentationStep2/PresentationStep2';
 import { DocumentsWrapper } from './styled';
 import PresentationStep3 from './PresentationStep3/PresentationStep3';
 import PresentationStep4 from './PresentationStep4/PresentationStep4';
+import PresentationStep7 from './PresentationStep7/PresentationStep7';
 import PresentationStep8 from './PresentationStep8/PresentationStep8';
 import PresentationStep5 from './PresentationStep5/PresentationStep5';
 
@@ -47,7 +48,7 @@ const steps = [
   },
   {
     title: 'Step 7',
-    content: PresentationStep1,
+    content: PresentationStep7,
     description: 'Fees',
   },
   {
