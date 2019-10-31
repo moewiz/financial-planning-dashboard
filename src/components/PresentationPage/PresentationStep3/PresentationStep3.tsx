@@ -267,6 +267,7 @@ export const chartsDataResources = {
 const PresentationStep3 = (props: FormikPartProps) => {
   const [chartsData, setChartsData] = useState(chartsDataResources['60']);
   const onChangeRetirementYear = (retirementYear: SliderValue) => {
+    console.log('retirementYear', retirementYear)
     if (retirementYear === 65) {
       setChartsData(chartsDataResources['65']);
     }
