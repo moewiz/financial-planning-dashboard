@@ -18,7 +18,6 @@ const MySlider = (props: SliderProps & MySliderProps) => {
   const debounceOnChangeValue = useCallback(
     debounce((val) => {
       if (onChangeValue) {
-        console.log('value', val);
         onChangeValue(val);
       }
     }, 300),
