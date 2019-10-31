@@ -1,16 +1,17 @@
 import React, { useMemo, useState } from 'react';
 import { Formik, FormikActions, FormikContext, FormikProps } from 'formik';
-import { get, isEmpty } from 'lodash';
-import { Steps, message, Spin } from 'antd';
+import { get } from 'lodash';
+import { Steps, message } from 'antd';
 import { createGlobalStyle } from 'styled-components';
 
 import PresentationStep1 from './PresentationStep1/PresentationStep1';
 import PresentationStep2 from './PresentationStep2/PresentationStep2';
 
-import { DocumentsWrapper, StepActionDocument } from './styled';
+import { DocumentsWrapper } from './styled';
 import PresentationStep3 from './PresentationStep3/PresentationStep3';
 import PresentationStep4 from './PresentationStep4/PresentationStep4';
 import PresentationStep8 from './PresentationStep8/PresentationStep8';
+import PresentationStep5 from './PresentationStep5/PresentationStep5';
 
 const { Step } = Steps;
 const steps = [
@@ -36,7 +37,7 @@ const steps = [
   },
   {
     title: 'Step 5',
-    content: PresentationStep1,
+    content: PresentationStep5,
     description: 'Proposed Projection',
   },
   {
@@ -114,7 +115,9 @@ export interface DocumentsPageProps {
 }
 
 const CrispClientStyled = createGlobalStyle<{ hideCrisp?: boolean }>`
-  ${(props) => props.hideCrisp && `
+  ${(props) =>
+    props.hideCrisp &&
+    `
     .crisp-client {
       display: none;
     }
