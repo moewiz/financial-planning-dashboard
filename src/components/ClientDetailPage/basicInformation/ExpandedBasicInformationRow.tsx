@@ -9,6 +9,7 @@ import {
   ExpandedSelectGroup,
 } from '../assets/styled';
 import {
+  EMP_STATUS,
   hasPrivateHealthInsuranceOptions,
   isOrNotOptions,
   lookingForCoupleAdviceOptions,
@@ -18,6 +19,7 @@ import {
 export interface BasicInformation {
   description: string;
   dob: string;
+  empStatus: string;
   expandable: {
     riskProfile: string;
     hasPrivateHealthInsurance: boolean;
@@ -35,7 +37,8 @@ const ExpandedBasicInformationRow = (
   indent: number,
   expanded: boolean,
 ): React.ReactNode => {
-  const { expandable, description } = record;
+  const { expandable, description, empStatus } = record;
+  const isUnemployedOrRetired = EMP_STATUS[empStatus] === 'Retired' || EMP_STATUS[empStatus] === 'Unemployed';
 
   if (description && expandable) {
     // Note: Always use Jul 1st as the month and day in the calculation for the retirement year
@@ -49,26 +52,26 @@ const ExpandedBasicInformationRow = (
             <ExpandedSelectGroup>
               <EditableCell
                 record={record}
-                dataIndex={'expandable.riskProfile'}
-                type={'select'}
-                tableName={'basicInformation'}
+                dataIndex="expandable.riskProfile"
+                type="select"
+                tableName="basicInformation"
                 options={riskProfileOptions}
                 rowIndex={index}
-                editable={true}
-                expandedField={true}
+                editable
+                expandedField
               />
             </ExpandedSelectGroup>
-            <ExpandedAssetsText>and</ExpandedAssetsText>
+            <ExpandedAssetsText>and they</ExpandedAssetsText>
             <ExpandedSelectGroup>
               <EditableCell
                 record={record}
-                dataIndex={'expandable.hasPrivateHealthInsurance'}
-                type={'select'}
-                tableName={'basicInformation'}
+                dataIndex="expandable.hasPrivateHealthInsurance"
+                type="select"
+                tableName="basicInformation"
                 options={hasPrivateHealthInsuranceOptions}
                 rowIndex={index}
-                editable={true}
-                expandedField={true}
+                editable
+                expandedField
               />
             </ExpandedSelectGroup>
             <ExpandedAssetsText>private health insurance</ExpandedAssetsText>
@@ -79,47 +82,49 @@ const ExpandedBasicInformationRow = (
             <ExpandedSelectGroup>
               <EditableCell
                 record={record}
-                dataIndex={'expandable.lookingForCoupleAdvice'}
-                type={'select'}
-                tableName={'basicInformation'}
+                dataIndex="expandable.lookingForCoupleAdvice"
+                type="select"
+                tableName="basicInformation"
                 options={lookingForCoupleAdviceOptions}
                 rowIndex={index}
-                editable={true}
-                expandedField={true}
+                editable
+                expandedField
               />
             </ExpandedSelectGroup>
           </ExpandedAssetsInlineGroups>
 
-          <ExpandedAssetsInlineGroups>
-            <ExpandedAssetsText>Client will retire in</ExpandedAssetsText>
-            <ExpandedSelectGroup>
-              <EditableCell
-                record={record}
-                dataIndex={'expandable.retirementYear'}
-                type={'date'}
-                pickerType={'year'}
-                tableName={'basicInformation'}
-                rowIndex={index}
-                editable={true}
-                expandedField={true}
-                disabledYear={true}
-              />
-            </ExpandedSelectGroup>
-            <ExpandedAssetsText>(Age {retirementAge})</ExpandedAssetsText>
-          </ExpandedAssetsInlineGroups>
+          {!isUnemployedOrRetired && (
+            <ExpandedAssetsInlineGroups>
+              <ExpandedAssetsText>The client will retire in</ExpandedAssetsText>
+              <ExpandedSelectGroup>
+                <EditableCell
+                  record={record}
+                  dataIndex="expandable.retirementYear"
+                  type="date"
+                  pickerType="year"
+                  tableName="basicInformation"
+                  rowIndex={index}
+                  editable
+                  expandedField
+                  disabledYear
+                />
+              </ExpandedSelectGroup>
+              <ExpandedAssetsText>({retirementAge})</ExpandedAssetsText>
+            </ExpandedAssetsInlineGroups>
+          )}
 
           <ExpandedAssetsInlineGroups>
-            <ExpandedAssetsText>Client</ExpandedAssetsText>
+            <ExpandedAssetsText>The client</ExpandedAssetsText>
             <ExpandedSelectGroup>
               <EditableCell
                 record={record}
-                dataIndex={'expandable.isSmoker'}
-                type={'select'}
-                tableName={'basicInformation'}
+                dataIndex="expandable.isSmoker"
+                type="select"
+                tableName="basicInformation"
                 options={isOrNotOptions}
                 rowIndex={index}
-                editable={true}
-                expandedField={true}
+                editable
+                expandedField
               />
             </ExpandedSelectGroup>
             <ExpandedAssetsText>a smoker</ExpandedAssetsText>
@@ -135,26 +140,26 @@ const ExpandedBasicInformationRow = (
           <ExpandedSelectGroup>
             <EditableCell
               record={record}
-              dataIndex={'expandable.riskProfile'}
-              type={'select'}
-              tableName={'basicInformation'}
+              dataIndex="expandable.riskProfile"
+              type="select"
+              tableName="basicInformation"
               options={riskProfileOptions}
               rowIndex={index}
-              editable={true}
-              expandedField={true}
+              editable
+              expandedField
             />
           </ExpandedSelectGroup>
-          <ExpandedAssetsText>profile and</ExpandedAssetsText>
+          <ExpandedAssetsText>profile and they</ExpandedAssetsText>
           <ExpandedSelectGroup>
             <EditableCell
               record={record}
-              dataIndex={'expandable.hasPrivateHealthInsurance'}
-              type={'select'}
-              tableName={'basicInformation'}
+              dataIndex="expandable.hasPrivateHealthInsurance"
+              type="select"
+              tableName="basicInformation"
               options={hasPrivateHealthInsuranceOptions}
               rowIndex={index}
-              editable={true}
-              expandedField={true}
+              editable
+              expandedField
             />
           </ExpandedSelectGroup>
           <ExpandedAssetsText>private health insurance</ExpandedAssetsText>
@@ -165,47 +170,47 @@ const ExpandedBasicInformationRow = (
           <ExpandedSelectGroup>
             <EditableCell
               record={record}
-              dataIndex={'expandable.jointRiskProfile'}
-              type={'select'}
-              tableName={'basicInformation'}
+              dataIndex="expandable.jointRiskProfile"
+              type="select"
+              tableName="basicInformation"
               options={joinRiskProfileOptions}
               rowIndex={index}
-              editable={true}
-              expandedField={true}
+              editable
+              expandedField
             />
           </ExpandedSelectGroup>
         </ExpandedAssetsInlineGroups>
 
         <ExpandedAssetsInlineGroups>
-          <ExpandedAssetsText>Partner will retire in</ExpandedAssetsText>
+          <ExpandedAssetsText>The partner will retire in</ExpandedAssetsText>
           <ExpandedSelectGroup>
             <EditableCell
               record={record}
-              dataIndex={'expandable.retirementYear'}
-              type={'date'}
-              pickerType={'year'}
-              tableName={'basicInformation'}
+              dataIndex="expandable.retirementYear"
+              type="date"
+              pickerType="year"
+              tableName="basicInformation"
               rowIndex={index}
-              editable={true}
-              expandedField={true}
-              disabledYear={true}
+              editable
+              expandedField
+              disabledYear
             />
           </ExpandedSelectGroup>
           {retirementAge && <ExpandedAssetsText>({retirementAge})</ExpandedAssetsText>}
         </ExpandedAssetsInlineGroups>
 
         <ExpandedAssetsInlineGroups>
-          <ExpandedAssetsText>Partner</ExpandedAssetsText>
+          <ExpandedAssetsText>The partner</ExpandedAssetsText>
           <ExpandedSelectGroup>
             <EditableCell
               record={record}
-              dataIndex={'expandable.isSmoker'}
-              type={'select'}
-              tableName={'basicInformation'}
+              dataIndex="expandable.isSmoker"
+              type="select"
+              tableName="basicInformation"
               options={isOrNotOptions}
               rowIndex={index}
-              editable={true}
-              expandedField={true}
+              editable
+              expandedField
             />
           </ExpandedSelectGroup>
           <ExpandedAssetsText>a smoker</ExpandedAssetsText>
