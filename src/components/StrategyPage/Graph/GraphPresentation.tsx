@@ -9,6 +9,7 @@ interface GraphPresentationProps {
   type: GraphType;
   data: any;
   redraw?: boolean;
+  options?: any;
 }
 
 const defaultOptions = {
@@ -28,18 +29,18 @@ const defaultOptions = {
   },
   tooltips: {
     titleFontFamily:
-      '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
-      '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
+      "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', " +
+      "'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
     bodyFontFamily:
-      '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
-      '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
+      "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', " +
+      "'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
     footerFontFamily:
-      '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
-      '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
+      "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', " +
+      "'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
     intersect: false,
     mode: 'label',
     callbacks: {
-      title(tooltipItem: Array<{ label: string }>) {
+      title(tooltipItem: { label: string }[]) {
         const label = tooltipItem[0].label;
         const numberLabel = parseInt(label, 10);
         return !isNaN(numberLabel) && isNumber(numberLabel) ? '20' + label : label;
@@ -61,7 +62,7 @@ const defaultOptions = {
 };
 
 const GraphPresentation = (props: GraphPresentationProps) => {
-  const { type, data, redraw } = props;
+  const { type, data, redraw, options } = props;
 
   switch (type) {
     case GraphType.Area:
@@ -83,11 +84,11 @@ const GraphPresentation = (props: GraphPresentationProps) => {
         />
       );
     case GraphType.Line:
-      return <Line height={190} data={data} redraw={redraw} options={defaultOptions} />;
+      return <Line height={190} data={data} redraw={redraw} options={{ ...defaultOptions, ...options }} />;
     case GraphType.Bar:
-      return <Bar height={190} data={data} redraw={redraw} options={defaultOptions} />;
+      return <Bar height={190} data={data} redraw={redraw} options={{ ...defaultOptions, ...options }} />;
     case GraphType.HorizontalBar:
-      return <HorizontalBar height={190} data={data} redraw={redraw} options={defaultOptions} />;
+      return <HorizontalBar height={190} data={data} redraw={redraw} options={{ ...defaultOptions, ...options }} />;
     default:
       return null;
   }

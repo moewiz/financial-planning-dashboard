@@ -203,16 +203,14 @@ const calmPVConfig = {
   ],
 };
 
-const ChartsBlock = (props: { chartsData: any }) => {
-  const { chartsData } = props;
+const ChartsBlock = (props: { chartsData: any; retirementYear?: number }) => {
+  const { chartsData, retirementYear = 60 } = props;
   const [chartIndex, setChartIndex] = useState<number>(-1);
 
   return (
     <>
       {chartIndex > -1 ? (
-        <>
-          <DrilldownChart index={chartIndex} back={() => setChartIndex(-1)} />
-        </>
+        <DrilldownChart index={chartIndex} back={() => setChartIndex(-1)} retirementYear={retirementYear} />
       ) : (
         <ChartsBlockWrapper>
           <ChartBlockLeft onClick={() => setChartIndex(0)}>
