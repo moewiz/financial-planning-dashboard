@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Icon } from 'antd';
 import classNames from 'classnames';
 import NetAssetsDrilldownCharts from './NetAssetsDrilldownCharts';
 import CashflowDrilldownCharts from './CashflowDrilldownCharts';
 import TaxDrilldownCharts from './TaxDrilldownCharts';
+import CalmPVDrilldownCharts from './CalmPVDrilldownCharts';
 
 import { DrilldownChartWrapper, ButtonGroup, DrilldownHeader, DrilldownContent, DrilldownButton } from './styled';
 
@@ -43,10 +44,27 @@ const DrilldownChart = (props: DrilldownChartProps) => {
         )}
       </DrilldownHeader>
       <DrilldownContent>
-        <div>Chart go here: {index}</div>
-        <TaxDrilldownCharts retirementYear={retirementYear} currentDrilldown={currentDrilldown} shouldShow />
-        {/*<CashflowDrilldownCharts retirementYear={retirementYear} currentDrilldown={currentDrilldown} shouldShow />*/}
-        {/*<NetAssetsDrilldownCharts retirementYear={retirementYear} currentDrilldown={currentDrilldown} />*/}
+        {/*<div>Chart go here: {index}</div>*/}
+        <CalmPVDrilldownCharts
+          retirementYear={retirementYear}
+          currentDrilldown={currentDrilldown}
+          shouldShow={index === 3}
+        />
+        <TaxDrilldownCharts
+          retirementYear={retirementYear}
+          currentDrilldown={currentDrilldown}
+          shouldShow={index === 2}
+        />
+        <CashflowDrilldownCharts
+          retirementYear={retirementYear}
+          currentDrilldown={currentDrilldown}
+          shouldShow={index === 1}
+        />
+        <NetAssetsDrilldownCharts
+          retirementYear={retirementYear}
+          currentDrilldown={currentDrilldown}
+          shouldShow={index === 0}
+        />
       </DrilldownContent>
     </DrilldownChartWrapper>
   );

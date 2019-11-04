@@ -4,9 +4,16 @@ import { ChartBlock } from './styled';
 import GraphPresentation from '../../StrategyPage/Graph/GraphPresentation';
 import { GraphType } from '../../StrategyPage/Graph/GraphContainer';
 
-const NetAssetsDrilldownCharts = (props: { retirementYear: number; currentDrilldown: number }) => {
-  const { retirementYear, currentDrilldown } = props;
+const NetAssetsDrilldownCharts = (props: {
+  retirementYear: number;
+  currentDrilldown: number;
+  shouldShow?: boolean;
+}) => {
+  const { retirementYear, currentDrilldown, shouldShow } = props;
   const data = (netAssetsDrillDownData as any)[retirementYear];
+  if (!shouldShow) {
+    return null;
+  }
 
   return (
     <>
