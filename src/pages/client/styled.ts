@@ -25,14 +25,14 @@ export const TableEntryContainer = styled.section.attrs({
     .ant-table-thead {
       tr {
         th:first-child {
-          padding-left: 20px;
+          padding-left: 45px;
         }
       }
     }
     .ant-table-tbody {
       tr {
         td:first-child {
-          padding-left: 20px;
+          padding-left: 45px;
         }
       }
     }

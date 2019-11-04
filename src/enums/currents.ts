@@ -6,3 +6,8 @@ export enum CurrentTypes {
   Liabilities = 'liabilities',
   Insurance = 'insurance',
 }
+
+export enum CURRENT_COLUMN_WIDTH {
+  Default = 'calc(70% / 6)',
+  Double = '15%',
+}

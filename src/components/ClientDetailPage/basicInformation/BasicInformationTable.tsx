@@ -4,6 +4,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { FormikProps } from 'formik';
 import { connect } from 'react-redux';
 import { isFunction, get } from 'lodash';
+import { CURRENT_COLUMN_WIDTH } from '../../../enums/currents';
 
 import ExpandedBasicInformationRow from './ExpandedBasicInformationRow';
 import { ActionTableGeneral, HeaderTitleTable, TableEntryContainer, TextTitle } from '../../../pages/client/styled';
@@ -33,7 +34,7 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
     {
       title: 'Description',
       dataIndex: 'description',
-      width: 'calc(23% - 20px)',
+      // width: CURRENT_COLUMN_WIDTH.Double,
       type: 'text',
       editable: false,
     },
@@ -41,40 +42,40 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
       title: 'First Name',
       dataIndex: 'firstName',
       type: 'text',
-      width: '12%',
+      width: CURRENT_COLUMN_WIDTH.Default,
     },
     {
       title: 'Last Name',
       dataIndex: 'lastName',
       type: 'text',
-      width: '13%',
+      width: CURRENT_COLUMN_WIDTH.Default,
     },
     {
       title: 'DOB',
       dataIndex: 'dob',
       type: 'date',
-      width: '19%',
+      width: CURRENT_COLUMN_WIDTH.Default,
       showAge: true,
     },
     {
       title: 'Emp Status',
       dataIndex: 'empStatus',
       type: 'select',
-      width: '15%',
+      width: CURRENT_COLUMN_WIDTH.Double,
       options: empStatusOptions,
     },
     {
       title: 'Gender',
       dataIndex: 'gender',
       type: 'select',
-      width: '10%',
+      width: CURRENT_COLUMN_WIDTH.Default,
       options: genderOptions,
     },
     {
       title: 'Marital Status',
       dataIndex: 'maritalStatus',
       type: 'select',
-      width: 'calc(9% - 20px)',
+      width: CURRENT_COLUMN_WIDTH.Default,
       options: maritalStatusOptions,
       confirmTitle: {
         title: 'Remove partner?',
@@ -83,6 +84,10 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
         cancelText: 'No',
         fieldValue: maritalStatusOptions[1].value,
       },
+    },
+    {
+      title: '',
+      width: CURRENT_COLUMN_WIDTH.Default,
     },
   ];
 
