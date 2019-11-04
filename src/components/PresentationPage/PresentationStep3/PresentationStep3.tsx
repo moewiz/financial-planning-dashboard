@@ -272,6 +272,10 @@ const PresentationStep3 = (props: FormikPartProps) => {
       setRetirementYrs(65);
       setChartsData(chartsDataResources['65']);
     }
+    if (retirementYear === 60) {
+      setRetirementYrs(60);
+      setChartsData(chartsDataResources['60']);
+    }
   };
 
   return (
