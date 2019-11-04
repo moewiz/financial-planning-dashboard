@@ -6,6 +6,7 @@ import { PaginationConfig } from 'antd/lib/pagination';
 import { TableCurrentDataSource } from 'antd/lib/table';
 
 import GeneralTable from '../GeneralTable';
+import { CURRENT_COLUMN_WIDTH } from '../../../enums/currents';
 import ExpandedAssetsRow, { AssetProps } from './ExpandedAssetsRowWrapper';
 import { TableEntryContainer, HeaderTitleTable, TextTitle, ActionTableGeneral } from '../../../pages/client/styled';
 import { from2Options, ownerOptions, to2Options, assetTypes, investmentTypeOptions } from '../../../enums/options';
@@ -38,13 +39,12 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
     {
       title: 'Description',
       dataIndex: 'description',
-      width: '16%',
     },
     {
       title: 'Type',
       dataIndex: 'type',
       key: '1',
-      width: '17%',
+      width: CURRENT_COLUMN_WIDTH.Default,
       type: 'select',
       options: assetTypes,
       sorter: sortAlphabetical('type'),
@@ -55,7 +55,7 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
       key: '2',
       type: 'select',
       options: ownerOptions,
-      width: 'calc(8% - 20px)',
+      width: CURRENT_COLUMN_WIDTH.Default,
       sorter: sortAlphabetical('owner'),
     },
     {
@@ -64,14 +64,15 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
       key: '3',
       type: 'number',
       sign: 'dollar',
-      width: 'calc(16% - 20px)',
       className: 'text-align-right',
+      width: CURRENT_COLUMN_WIDTH.Default,
+      // className: 'text-align-right',
     },
     {
       title: 'Investment',
       dataIndex: 'investment',
       key: '4',
-      width: '16%',
+      width: CURRENT_COLUMN_WIDTH.Double,
       type: 'select',
       options: investmentTypeOptions,
       sorter: sortAlphabetical('investment'),
@@ -81,7 +82,7 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
       dataIndex: 'from',
       key: '5',
       type: 'date',
-      width: '10%',
+      width: CURRENT_COLUMN_WIDTH.Default,
       pickerType: 'custom',
       options: from2Options,
     },
@@ -89,7 +90,7 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
       title: 'To',
       dataIndex: 'to',
       key: '6',
-      width: '10%',
+      width: CURRENT_COLUMN_WIDTH.Default,
       type: 'date',
       pickerType: 'custom',
       options: to2Options,
@@ -98,7 +99,7 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
       title: '',
       key: 'operation',
       editable: false,
-      width: 28,
+      width: CURRENT_COLUMN_WIDTH.Default,
       className: 'text-align-center',
     },
   ];

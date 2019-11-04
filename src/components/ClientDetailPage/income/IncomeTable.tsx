@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Button, Icon, Popconfirm } from 'antd';
 import { isFunction } from 'lodash';
 import { FormikProps } from 'formik';
+import { CURRENT_COLUMN_WIDTH } from '../../../enums/currents';
 
 import GeneralTable from '../GeneralTable';
 import { ActionTableGeneral, HeaderTitleTable, TableEntryContainer, TextTitle } from '../../../pages/client/styled';
@@ -42,13 +43,13 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
       dataIndex: 'description',
       type: 'text',
       key: '0',
-      width: 'calc(19% - 20px)',
+      // width: CURRENT_COLUMN_WIDTH.Double,
     },
     {
       title: 'Type',
       dataIndex: 'type',
       key: '1',
-      width: 'calc(11% - 20px)',
+      width: CURRENT_COLUMN_WIDTH.Default,
       type: 'select',
       options: incomeTypeOptions,
       sorter: sortAlphabetical('type'),
@@ -57,7 +58,7 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
       title: 'Owner',
       dataIndex: 'owner',
       key: '2',
-      width: '9%',
+      width: CURRENT_COLUMN_WIDTH.Default,
       type: 'select',
       options: ownerOptions,
       sorter: sortAlphabetical('owner'),
@@ -66,7 +67,7 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
       title: 'Value',
       dataIndex: 'value',
       key: '3',
-      width: '10%',
+      width: CURRENT_COLUMN_WIDTH.Default,
       type: 'number',
       sign: 'dollar',
       className: 'text-align-right',
@@ -75,7 +76,7 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
       title: 'Indexation',
       dataIndex: 'indexation',
       key: '4',
-      width: '25%',
+      width: CURRENT_COLUMN_WIDTH.Double,
       type: 'select',
       options: indexationOptions,
     },
@@ -84,7 +85,7 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
       dataIndex: 'from',
       key: '5',
       type: 'date',
-      width: '9%',
+      width: CURRENT_COLUMN_WIDTH.Default,
       pickerType: 'custom',
       options: from1Options,
     },
@@ -92,7 +93,7 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
       title: 'To',
       dataIndex: 'to',
       key: '6',
-      width: '17%',
+      width: CURRENT_COLUMN_WIDTH.Default,
       type: 'date',
       pickerType: 'custom',
       options: to1Options,
@@ -102,7 +103,7 @@ class IncomeTable extends PureComponent<IncomeTableProps> {
       key: 'operation',
       className: 'text-align-center',
       editable: false,
-      width: 28,
+      width: CURRENT_COLUMN_WIDTH.Default,
     },
   ];
 

@@ -3,6 +3,7 @@ import { Button, Icon, Popconfirm } from 'antd';
 import { get, isFunction } from 'lodash';
 import { TableEntryContainer, HeaderTitleTable, TextTitle, ActionTableGeneral } from '../../../pages/client/styled';
 import ExpandedLiabilitiesRow, { LiabilityProps } from './ExpandedLiabilitiesRow';
+import { CURRENT_COLUMN_WIDTH } from '../../../enums/currents';
 import GeneralTable from '../GeneralTable';
 import { to2Options, liabilitiesTypes, ownerOptions, from2Options } from '../../../enums/options';
 import { loadOptionsBaseOnCol, removePartnerOption } from '../../../utils/columnUtils';
@@ -33,13 +34,13 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
       dataIndex: 'description',
       type: 'text',
       key: '0',
-      width: 'calc(19% - 20px)',
+      // width: 'calc(19% - 20px)',
     },
     {
       title: 'Type',
       dataIndex: 'type',
       key: '1',
-      width: 'calc(17% - 20px)',
+      width: CURRENT_COLUMN_WIDTH.Default,
       type: 'select',
       options: liabilitiesTypes,
       sorter: sortAlphabetical('type'),
@@ -48,7 +49,7 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
       title: 'Owner',
       dataIndex: 'owner',
       key: '2',
-      width: '10%',
+      width: CURRENT_COLUMN_WIDTH.Default,
       type: 'select',
       options: ownerOptions,
       sorter: sortAlphabetical('owner'),
@@ -57,7 +58,7 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
       title: 'Value',
       dataIndex: 'value',
       key: '3',
-      width: '14%',
+      width: CURRENT_COLUMN_WIDTH.Default,
       type: 'number',
       sign: 'dollar',
       className: 'text-align-right',
@@ -66,7 +67,7 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
       title: 'Interest',
       dataIndex: 'interest',
       key: '4',
-      width: '13%',
+      width: CURRENT_COLUMN_WIDTH.Double,
       type: 'number',
       precision: 1,
       sign: 'percent',
@@ -76,7 +77,7 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
       dataIndex: 'from',
       key: '5',
       type: 'date',
-      width: '10%',
+      width: CURRENT_COLUMN_WIDTH.Default,
       pickerType: 'custom',
       options: from2Options,
       className: 'table-expand-datepicker',
@@ -85,7 +86,7 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
       title: 'To',
       dataIndex: 'to',
       key: '6',
-      width: '10%',
+      width: CURRENT_COLUMN_WIDTH.Default,
       type: 'date',
       pickerType: 'custom',
       className: 'table-expand-datepicker',
@@ -96,7 +97,7 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
       key: 'operation',
       editable: false,
       className: 'text-align-center',
-      width: 28,
+      width: CURRENT_COLUMN_WIDTH.Default,
     },
   ];
 

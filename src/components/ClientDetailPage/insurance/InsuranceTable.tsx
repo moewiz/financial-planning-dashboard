@@ -8,6 +8,7 @@ import { FormikProps } from 'formik';
 import { ownerWithJointOptions } from '../../../enums/options';
 import { removePartnerOption } from '../../../utils/columnUtils';
 import { createEvent } from '../../../utils/GA';
+import { CURRENT_COLUMN_WIDTH } from '../../../enums/currents';
 
 interface InsuranceTableProps {
   data: object[];
@@ -32,7 +33,7 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
       dataIndex: 'provider',
       type: 'text',
       key: '0',
-      width: 160,
+      // width: 160,
     },
     {
       title: 'Owner',
@@ -40,11 +41,37 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
       key: '2',
       type: 'select',
       options: ownerWithJointOptions,
+      width: CURRENT_COLUMN_WIDTH.Default,
+    },
+    {
+      key: 'empty',
+      title: '',
+      width: CURRENT_COLUMN_WIDTH.Default,
+    },
+    {
+      key: 'empty',
+      title: '',
+      width: CURRENT_COLUMN_WIDTH.Default,
+    },
+    {
+      key: 'empty',
+      title: '',
+      width: CURRENT_COLUMN_WIDTH.Double,
+    },
+    {
+      key: 'empty',
+      title: '',
+      width: CURRENT_COLUMN_WIDTH.Default,
+    },
+    {
+      key: 'empty',
+      title: '',
+      width: CURRENT_COLUMN_WIDTH.Default,
     },
     {
       title: '',
       key: 'operation',
-      width: 28,
+      width: CURRENT_COLUMN_WIDTH.Default,
       className: 'text-align-center',
       editable: false,
     },
