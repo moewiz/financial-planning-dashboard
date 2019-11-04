@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import { Icon } from 'antd';
 import classNames from 'classnames';
 import NetAssetsDrilldownCharts from './NetAssetsDrilldownCharts';
+import CashflowDrilldownCharts from './CashflowDrilldownCharts';
+import TaxDrilldownCharts from './TaxDrilldownCharts';
 
 import { DrilldownChartWrapper, ButtonGroup, DrilldownHeader, DrilldownContent, DrilldownButton } from './styled';
 
@@ -42,7 +44,9 @@ const DrilldownChart = (props: DrilldownChartProps) => {
       </DrilldownHeader>
       <DrilldownContent>
         <div>Chart go here: {index}</div>
-        <NetAssetsDrilldownCharts retirementYear={retirementYear} currentDrilldown={currentDrilldown} />
+        <TaxDrilldownCharts retirementYear={retirementYear} currentDrilldown={currentDrilldown} shouldShow />
+        {/*<CashflowDrilldownCharts retirementYear={retirementYear} currentDrilldown={currentDrilldown} shouldShow />*/}
+        {/*<NetAssetsDrilldownCharts retirementYear={retirementYear} currentDrilldown={currentDrilldown} />*/}
       </DrilldownContent>
     </DrilldownChartWrapper>
   );
