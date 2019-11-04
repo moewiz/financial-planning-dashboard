@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const EventWrapper = styled.div`
   margin-bottom: 20px;
@@ -46,7 +46,7 @@ export const ValueWrapper = styled.div<{ marks?: boolean }>`
   display: flex;
   align-items: center;
   .ant-slider {
-    margin: ${(props) => (props.marks ? '14px 6px 10px' : '14px 0 10px')};
+    margin: ${props => (props.marks ? '14px 6px 10px' : '14px 0 10px')};
   }
 `;
 export const ValueStyled = styled.div`
@@ -72,6 +72,12 @@ export const ChartBlock = styled.div`
   text-align: center;
   border-radius: 5px;
   padding: 30px 15px;
+  ${(props: { hidden?: boolean }) =>
+    props.hidden &&
+    css`
+      visibility: hidden;
+    `};
+
   &:hover {
     cursor: pointer;
   }
@@ -106,8 +112,9 @@ export const DrilldownButton = styled.button`
   border-radius: 4px;
   outline: none;
 
-  &:hover, &.active {
+  &:hover,
+  &.active {
     cursor: pointer;
-    border-color: #03A9F4;
+    border-color: #03a9f4;
   }
 `;
