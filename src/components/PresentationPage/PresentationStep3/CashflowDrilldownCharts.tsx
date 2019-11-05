@@ -1,6 +1,6 @@
 import React from 'react';
 import { cashFlowDrillDownData } from './drilldownData';
-import { ChartBlock } from './styled';
+import { ChartBlockDrillDown } from './styled';
 import GraphPresentation from '../../StrategyPage/Graph/GraphPresentation';
 import { GraphType } from '../../StrategyPage/Graph/GraphContainer';
 
@@ -13,11 +13,12 @@ const CashflowDrilldownCharts = (props: { retirementYear: number; currentDrilldo
 
   return (
     <>
-      <ChartBlock hidden={currentDrilldown !== 0}>
+      <ChartBlockDrillDown hidden={currentDrilldown !== 0}>
         <GraphPresentation
           type={GraphType.Bar}
           data={data.income}
           redraw
+          height={470}
           options={{
             legend: {
               display: true,
@@ -25,12 +26,13 @@ const CashflowDrilldownCharts = (props: { retirementYear: number; currentDrilldo
             },
           }}
         />
-      </ChartBlock>
-      <ChartBlock hidden={currentDrilldown !== 1}>
+      </ChartBlockDrillDown>
+      <ChartBlockDrillDown hidden={currentDrilldown !== 1}>
         <GraphPresentation
           type={GraphType.Bar}
           data={data.expenses}
           redraw
+          height={470}
           options={{
             legend: {
               display: true,
@@ -38,12 +40,13 @@ const CashflowDrilldownCharts = (props: { retirementYear: number; currentDrilldo
             },
           }}
         />
-      </ChartBlock>
-      <ChartBlock hidden={currentDrilldown !== 2}>
+      </ChartBlockDrillDown>
+      <ChartBlockDrillDown hidden={currentDrilldown !== 2}>
         <GraphPresentation
           type={GraphType.Bar}
           data={data.netIncome}
           redraw
+          height={470}
           options={{
             legend: {
               display: true,
@@ -51,7 +54,7 @@ const CashflowDrilldownCharts = (props: { retirementYear: number; currentDrilldo
             },
           }}
         />
-      </ChartBlock>
+      </ChartBlockDrillDown>
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { netAssetsDrillDownData } from './drilldownData';
-import { ChartBlock } from './styled';
+import { ChartBlockDrillDown } from './styled';
 import GraphPresentation from '../../StrategyPage/Graph/GraphPresentation';
 import { GraphType } from '../../StrategyPage/Graph/GraphContainer';
 import numeral from "numeral";
@@ -18,11 +18,12 @@ const NetAssetsDrilldownCharts = (props: {
 
   return (
     <>
-      <ChartBlock hidden={currentDrilldown !== 0}>
+      <ChartBlockDrillDown hidden={currentDrilldown !== 0}>
         <GraphPresentation
           type={GraphType.Bar}
           data={data.assets}
           redraw
+          height={470}
           options={{
             legend: {
               display: true,
@@ -48,12 +49,13 @@ const NetAssetsDrilldownCharts = (props: {
             },
           }}
         />
-      </ChartBlock>
-      <ChartBlock hidden={currentDrilldown !== 1}>
+      </ChartBlockDrillDown>
+      <ChartBlockDrillDown hidden={currentDrilldown !== 1}>
         <GraphPresentation
           type={GraphType.Line}
           data={data.liabilities}
           redraw
+          height={470}
           options={{
             legend: {
               display: true,
@@ -61,12 +63,13 @@ const NetAssetsDrilldownCharts = (props: {
             },
           }}
         />
-      </ChartBlock>
-      <ChartBlock hidden={currentDrilldown !== 2}>
+      </ChartBlockDrillDown>
+      <ChartBlockDrillDown hidden={currentDrilldown !== 2}>
         <GraphPresentation
           type={GraphType.Line}
           data={data.netAssets}
           redraw
+          height={470}
           options={{
             legend: {
               display: true,
@@ -74,7 +77,7 @@ const NetAssetsDrilldownCharts = (props: {
             },
           }}
         />
-      </ChartBlock>
+      </ChartBlockDrillDown>
     </>
   );
 };
