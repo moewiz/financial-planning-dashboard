@@ -26,6 +26,10 @@ export const StepPositionTop = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 30px;
+  .ant-card-body{
+    padding: 15px;
+    min-height: 223px;
+  }
 `;
 
 export const StepPositionBottom = styled.div`
@@ -35,6 +39,7 @@ export const StepPositionBottom = styled.div`
   width: 100%;
   margin: 0 auto;
   position: relative;
+  min-height: 385px;
   .chartjs-render-monitor{
   }
 `;
@@ -46,25 +51,33 @@ export const TitlePositionStep = styled.div`
 `;
 
 export const ValPositionStep = styled.div`
- font-size: 18px;
+ font-size: 16px;
 `;
 
-export const IcomeBlockStep = styled.div`
+export const BlockStep = styled.div`
   box-shadow: 0 2px 4px 0px rgba(0,0,0,0.23);
-  flex: 0 0 calc(50% - 20px);
-  margin: 10px 10px;
+  flex: 0 0 calc(50% - 10px);
   text-align: center;
-  padding: 29px 10px;
+  padding: 36px 10px;
   border-radius: 5px;
 `;
 
-export const ExpensesBlockStep = styled(IcomeBlockStep)`
+export const IcomeBlockStep = styled(BlockStep)`
+  margin-right: 10px;
+  margin-bottom: 20px;
 `;
 
-export const AssetsBlockStep = styled(IcomeBlockStep)`
+export const ExpensesBlockStep = styled(BlockStep)`
+  margin-left: 10px;
+  margin-bottom: 20px;
 `;
 
-export const LiabilitiesBlockStep = styled(IcomeBlockStep)`
+export const AssetsBlockStep = styled(BlockStep)`
+  margin-right: 10px;
+`;
+
+export const LiabilitiesBlockStep = styled(BlockStep)`
+  margin-left: 10px;
 `;
 
 export const CardChartPositionStep = styled.section`
@@ -73,6 +86,9 @@ export const CardChartPositionStep = styled.section`
   flex: 1;
   max-width: 50%;
   margin-right: 15px;
+  .ant-card-head-title{
+     padding: 10px 0px;
+   }
 `;
 
 export const CardPointPositionStep = styled(CardChartPositionStep)`
@@ -95,8 +111,16 @@ export const KeyPoitItem = styled.div`
 export const CardResultsPositionStep = styled.div`
   .ant-card-grid{
     padding: 15px!important;
-    min-height: 75px;
+    min-height: 169px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    font-size: 16px;
+    justify-content: center;
   }
+  .ant-card-head-title{
+     padding: 10px 0px;
+   }
 `;
 
 export const DoughnutDesc = styled.div`

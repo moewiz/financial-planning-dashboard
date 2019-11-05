@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { connect } from 'formik';
 import { Card, Icon } from 'antd';
+import numeral from 'numeral';
 import { get } from 'lodash';
 import { StepWrapper } from '../styled';
 import { Doughnut, Bar } from 'react-chartjs-2';
+
 
 import { DocumentData, FormikPartProps } from '../PresentationPage';
 
@@ -108,7 +110,19 @@ const seriesBarInsurance = {
     },
   ],
 };
-
+const defaultOptions = {
+  scales: {
+    yAxes: [{
+        ticks: {
+            // Include a dollar sign in the ticks
+            callback: (value: any, index: any, values: any) => {
+              return numeral(Math.round(value * 100) / 100).format('$0,0.[00]');
+            },
+        },
+    }],
+  },
+  maintainAspectRatio: false,
+}
 const PresentationStep2 = (props: FormikPartProps) => {
   const [chartData, setChartData] = useState(chartsData.income);
   const updateChart = (key: string) => () => {
@@ -119,7 +133,7 @@ const PresentationStep2 = (props: FormikPartProps) => {
     <StepWrapper>
       <StepCurrentPosition>
         <StepPositionLeft>
-          <StepPositionTop style={{ margin: '0 -10px 30px' }}>
+          <StepPositionTop>
             <IcomeBlockStep onClick={updateChart('income')}>
               <TitlePositionStep>Income</TitlePositionStep>
               <ValPositionStep>$120,000</ValPositionStep>
@@ -148,42 +162,40 @@ const PresentationStep2 = (props: FormikPartProps) => {
         <StepPositionRight>
           <StepPositionTop>
             <CardChartPositionStep>
-              <Card title="Key Chart" bordered={false} style={{ width: '100%' }}>
+              <Card title="Insurance" bordered={false} style={{ width: '100%' }}>
                 <Bar
                   data={seriesBarInsurance}
                   width={200}
                   height={100}
-                  options={{
-                    maintainAspectRatio: 1,
-                  }}
+                  options={defaultOptions}
                 />
               </Card>
             </CardChartPositionStep>
             <CardPointPositionStep>
-              <Card title="Key Point" bordered={false} style={{ width: '100%' }}>
+              <Card title="Estate Planning" bordered={false} style={{ width: '100%' }}>
                 <KeyPoitList>
                   <KeyPoitItem>
-                    <Icon type="check" />
-                    WiLB
-                  </KeyPoitItem>
-                  <KeyPoitItem>
-                    <Icon type="check" />
-                    POA
+                    <Icon type="exclamation" />
+                    Will
                   </KeyPoitItem>
                   <KeyPoitItem>
                     <Icon type="exclamation" />
-                    Death benefit nomination
+                    PoA
+                  </KeyPoitItem>
+                  <KeyPoitItem>
+                    <Icon type="check" />
+                    Death Benefit nomination
                   </KeyPoitItem>
                   <KeyPoitItem>
                     <Icon type="exclamation" />
-                    Sample lable
+                    Testamentary Trust
                   </KeyPoitItem>
                 </KeyPoitList>
               </Card>
             </CardPointPositionStep>
           </StepPositionTop>
           <CardResultsPositionStep>
-            <Card title="Key results">
+            <Card title="Goals">
               <Card.Grid>Review your superannuation</Card.Grid>
               <Card.Grid>Retire by the age of 60</Card.Grid>
               <Card.Grid>Review your debt obligations</Card.Grid>
