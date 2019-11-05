@@ -36,6 +36,13 @@ export const CardList = styled.div.attrs({
 
   .card-item {
     margin: 0 10px;
+    flex: 1;
+    &:first-child {
+      margin-left:0px
+    }
+    &:last-child {
+      margin-right:0px
+    }
   }
 `;
 
