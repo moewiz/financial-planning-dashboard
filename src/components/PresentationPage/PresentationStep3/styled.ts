@@ -82,6 +82,7 @@ export const ChartBlock = styled.div`
     cursor: pointer;
   }
 `;
+
 export const ChartBlockLeft = styled(ChartBlock)`
   margin-right: 10px;
   margin-bottom: 20px;
@@ -91,7 +92,13 @@ export const ChartBlockRight = styled(ChartBlock)`
   margin-left: 10px;
   margin-bottom: 20px;
 `;
+
+export const ChartBlockDrillDown = styled(ChartBlock)`
+  margin-top: 10px;
+`;
+
 export const DrilldownChartWrapper = styled.div`
+  height: 100%;
   .anticon.anticon-arrow-left {
     font-size: 24px;
     padding: 8px;
@@ -100,7 +107,9 @@ export const DrilldownChartWrapper = styled.div`
 export const DrilldownHeader = styled.div`
   display: flex;
 `;
-export const DrilldownContent = styled.div``;
+export const DrilldownContent = styled.div`
+  height: 100%;
+`;
 export const ButtonGroup = styled(ChartsBlockWrapper)``;
 export const DrilldownButton = styled.button`
   min-width: 180px;

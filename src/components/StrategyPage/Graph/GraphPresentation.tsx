@@ -10,6 +10,7 @@ interface GraphPresentationProps {
   data: any;
   redraw?: boolean;
   options?: any;
+  height?: number | undefined;
 }
 
 const defaultOptions = {
@@ -64,7 +65,7 @@ const defaultOptions = {
 };
 
 const GraphPresentation = (props: GraphPresentationProps) => {
-  const { type, data, redraw, options } = props;
+  const { type, data, redraw, options, height = 190 } = props;
 
   switch (type) {
     case GraphType.Area:
@@ -86,11 +87,11 @@ const GraphPresentation = (props: GraphPresentationProps) => {
         />
       );
     case GraphType.Line:
-      return <Line height={190} data={data} redraw={redraw} options={{ ...defaultOptions, ...options }} />;
+      return <Line height={height} data={data} redraw={redraw} options={{ ...defaultOptions, ...options }} />;
     case GraphType.Bar:
-      return <Bar height={190} data={data} redraw={redraw} options={{ ...defaultOptions, ...options }} />;
+      return <Bar height={height} data={data} redraw={redraw} options={{ ...defaultOptions, ...options }} />;
     case GraphType.HorizontalBar:
-      return <HorizontalBar height={190} data={data} redraw={redraw} options={{ ...defaultOptions, ...options }} />;
+      return <HorizontalBar height={height} data={data} redraw={redraw} options={{ ...defaultOptions, ...options }} />;
     default:
       return null;
   }
