@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { get } from 'lodash';
 
-import { ChartBlock, ChartsBlockWrapper } from './styled';
+import { ChartBlockLeft, ChartBlockRight, ChartsBlockWrapper } from './styled';
 import GraphPresentation from '../../StrategyPage/Graph/GraphPresentation';
 import { GraphType } from '../../StrategyPage/Graph/GraphContainer';
 import { loadGraphData } from '../../StrategyPage/StrategyHeader';
@@ -215,27 +215,29 @@ const ChartsBlock = (props: { chartsData: any }) => {
         </>
       ) : (
         <ChartsBlockWrapper>
-          <ChartBlock onClick={() => setChartIndex(0)}>
+          <ChartBlockLeft onClick={() => setChartIndex(0)}>
             <GraphPresentation
               type={GraphType.Line}
               data={loadGraphData(configNetAssets)(get(chartsData, 'netAssetsChartData'))}
             />
-          </ChartBlock>
-          <ChartBlock onClick={() => setChartIndex(1)}>
+          </ChartBlockLeft>
+          <ChartBlockRight onClick={() => setChartIndex(1)}>
             <GraphPresentation
               type={GraphType.Bar}
               data={loadGraphData(cashflowConfig)(get(chartsData, 'cashflowChartData'))}
             />
-          </ChartBlock>
-          <ChartBlock onClick={() => setChartIndex(2)}>
-            <GraphPresentation type={GraphType.Bar} data={loadGraphData(taxConfig)(get(chartsData, 'taxChartData'))} />
-          </ChartBlock>
-          <ChartBlock onClick={() => setChartIndex(3)}>
+          </ChartBlockRight>
+          <ChartBlockLeft onClick={() => setChartIndex(2)}>
+            <GraphPresentation type={GraphType.Bar}
+            data={loadGraphData(taxConfig)(get(chartsData, 'taxChartData'))}
+            />
+          </ChartBlockLeft>
+          <ChartBlockRight onClick={() => setChartIndex(3)}>
             <GraphPresentation
               type={GraphType.Bar}
               data={loadGraphData(calmPVConfig)(get(chartsData, 'calmPVChartData'))}
             />
-          </ChartBlock>
+          </ChartBlockRight>
         </ChartsBlockWrapper>
       )}
     </>

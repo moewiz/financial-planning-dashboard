@@ -56,18 +56,34 @@ export const ValueStyled = styled.div`
 export const ChartsBlockWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
+  & > div{
+    &:last-child{
+      margin-bottom: 0px
+    }
+    &:nth-child(3){
+      margin-bottom: 0px
+    }
+  }
+ 
 `;
 export const ChartBlock = styled.div`
   box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.23);
-  flex: 0 0 calc(50% - 30px);
-  margin: 0 10px 30px;
+  flex: 0 0 calc(50% - 20px);
   text-align: center;
-  padding: 12px 10px 10px;
   border-radius: 5px;
-
+  padding: 30px 15px;
   &:hover {
     cursor: pointer;
   }
+`;
+export const ChartBlockLeft = styled(ChartBlock)`
+  margin-right: 10px;
+  margin-bottom: 20px;
+`;
+
+export const ChartBlockRight = styled(ChartBlock)`
+  margin-left: 10px;
+  margin-bottom: 20px;
 `;
 export const DrilldownChartWrapper = styled.div`
   .anticon.anticon-arrow-left {
