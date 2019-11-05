@@ -265,6 +265,10 @@ export const chartsDataResources = {
 };
 
 const PresentationStep3 = (props: FormikPartProps) => {
+  // a quick and dirty solution to let the presentation step 3 knows that we've added a life event
+  // I have to do this because indra requires the task have to be completed within this afternoon
+  // TODO: refactor this to reducer
+  const [hasLifeEvent, setHasLifeEvent] = useState(false);
   const [retirementYrs, setRetirementYrs] = useState(60);
   const [chartsData, setChartsData] = useState(chartsDataResources['60']);
   const onChangeRetirementYear = (retirementYear: SliderValue) => {
@@ -283,10 +287,14 @@ const PresentationStep3 = (props: FormikPartProps) => {
       <StepCurrentPosition>
         <StepPositionLeft style={{ flex: '0 0 295px', padding: '15px', border: '1px solid #dedede' }}>
           <SlidersBlock onChangeRetirementYear={onChangeRetirementYear} />
-          <EventsBlock />
+          <EventsBlock setHasLifeEvent={setHasLifeEvent} />
         </StepPositionLeft>
         <StepPositionRight>
-          <ChartsBlock chartsData={chartsData} retirementYear={retirementYrs} />
+          <ChartsBlock
+            chartsData={chartsData}
+            retirementYear={retirementYrs}
+            hasLifeEvent={hasLifeEvent}
+          />
         </StepPositionRight>
       </StepCurrentPosition>
     </StepWrapper>

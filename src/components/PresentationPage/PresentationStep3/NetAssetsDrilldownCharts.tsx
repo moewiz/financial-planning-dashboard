@@ -1,17 +1,20 @@
 import React from 'react';
-import { netAssetsDrillDownData } from './drilldownData';
+import numeral from 'numeral';
+import { netAssetsDrillDownData, netAssetsDrillDownDataWithLifeEvent } from './drilldownData';
 import { ChartBlockDrillDown } from './styled';
 import GraphPresentation from '../../StrategyPage/Graph/GraphPresentation';
 import { GraphType } from '../../StrategyPage/Graph/GraphContainer';
-import numeral from "numeral";
 
 const NetAssetsDrilldownCharts = (props: {
   retirementYear: number;
   currentDrilldown: number;
   shouldShow?: boolean;
+  hasLifeEvent?: boolean;
 }) => {
-  const { retirementYear, currentDrilldown, shouldShow } = props;
-  const data = (netAssetsDrillDownData as any)[retirementYear];
+  const { retirementYear, currentDrilldown, shouldShow, hasLifeEvent } = props;
+  const data = hasLifeEvent
+    ? (netAssetsDrillDownDataWithLifeEvent as any)[retirementYear]
+    : (netAssetsDrillDownData as any)[retirementYear];
   if (!shouldShow) {
     return null;
   }
