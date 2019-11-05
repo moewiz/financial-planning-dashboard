@@ -52,7 +52,7 @@ export const CardItemStyled = styled(Card).attrs({
 })`
   p {
     font-weight: 600;
-    font-size: 13px;
+    font-size: 16px;
     color: #4e5b86;
     margin-bottom: 0;
     text-align: center;
