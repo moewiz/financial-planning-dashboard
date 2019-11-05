@@ -203,14 +203,19 @@ const calmPVConfig = {
   ],
 };
 
-const ChartsBlock = (props: { chartsData: any; retirementYear?: number }) => {
-  const { chartsData, retirementYear = 60 } = props;
+const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeEvent?: boolean }) => {
+  const { chartsData, retirementYear = 60, hasLifeEvent = false } = props;
   const [chartIndex, setChartIndex] = useState<number>(-1);
 
   return (
     <>
       {chartIndex > -1 ? (
-        <DrilldownChart index={chartIndex} back={() => setChartIndex(-1)} retirementYear={retirementYear} />
+        <DrilldownChart
+          index={chartIndex}
+          back={() => setChartIndex(-1)}
+          retirementYear={retirementYear}
+          hasLifeEvent={hasLifeEvent}
+        />
       ) : (
         <ChartsBlockWrapper>
           <ChartBlockLeft onClick={() => setChartIndex(0)}>
@@ -226,9 +231,7 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number }) => {
             />
           </ChartBlockRight>
           <ChartBlockLeft onClick={() => setChartIndex(2)}>
-            <GraphPresentation type={GraphType.Bar}
-            data={loadGraphData(taxConfig)(get(chartsData, 'taxChartData'))}
-            />
+            <GraphPresentation type={GraphType.Bar} data={loadGraphData(taxConfig)(get(chartsData, 'taxChartData'))} />
           </ChartBlockLeft>
           <ChartBlockRight onClick={() => setChartIndex(3)}>
             <GraphPresentation

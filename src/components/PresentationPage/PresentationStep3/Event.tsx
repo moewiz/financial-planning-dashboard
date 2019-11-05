@@ -6,17 +6,21 @@ import EventItem, { Event as EventI } from './EventItem';
 
 interface EventProps {
   title: string;
+  setHasLifeEvent?: (hasLifeEvent: boolean) => void;
 }
 
 const Event = (props: EventProps) => {
-  const { title } = props;
+  const { title, setHasLifeEvent = () => null } = props;
   const [events, setEvents] = useState<EventI[]>([]);
   const createEvent = (key: string) => {
     const newEvent = { key, title: title.toLowerCase(), year: 2019 };
     setEvents([...events, newEvent]);
+    setHasLifeEvent(true);
   };
   const onRemove = (index: number) => {
-    setEvents(events.filter((e, i) => i !== index));
+    const newEventList = events.filter((e, i) => i !== index);
+    setHasLifeEvent(!!newEventList.length);
+    setEvents(newEventList);
   };
 
   return (
