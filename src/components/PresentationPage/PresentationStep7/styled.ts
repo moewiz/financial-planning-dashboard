@@ -1,56 +1,86 @@
 import styled, { css } from 'styled-components';
-
+import { Card } from 'antd';
 export const CardFeesStep = styled.section`
 
 `;
 export const FeesTable = styled.div`
-
-  .fees-col-description{
-    color: #515c83;
-  }
-  .fees-col-amount{
-    color: #515c83;
-  }
-
+  max-width: 943px;
+  margin: 0 auto;
+  font-size: 16px;
   .fees-col-type{
-    font-weight: 600;
     color: #515c83;
-
+    font-size: 16px;
   }
-`;
-export const FeesRow = styled.div`
-  display: flex;
-  border-bottom: 1px solid #000;
-  .fees-col-item{
-    &:nth-child(2){
-      border-left: 1px solid #000;
-      border-right: 1px solid #000;
+  .fees-col-fee{
+    color: #515c83;
+    font-size: 16px;
+    p{
+      display: inline-block;
+      width: 100%;
+      &:first-child{
+        margin-bottom: 10px;
+      }
+      &:last-child{
+        margin-bottom: 0px;
+      }
     }
   }
-  &:last-child {
-    border-bottom: none;
-  }
-`;
-export const FeesRowHead = styled(FeesRow)`
- background-color: #4a85e8;
- .fees-col-item{
-  padding: 7px 15px;
-  align-items: center;
-  color: #000;
-  font-weight: 600;
- }
-`;
-export const FeesColItem = styled.div.attrs({
-  className: 'fees-col-item',
-})`
-  padding: 15px;
-  flex: 1;
-  display: flex;
 `;
 
-export const FeesColCenterItem = styled(FeesColItem)`
+export const CardListStep7 = styled.div.attrs({
+  className: 'card-list-step7',
+})`
+  display: flex;
   justify-content: center;
+  margin-bottom: 30px;
+  .card-item-step7 {
+    margin: 0 10px;
+    flex: 1;
+    box-shadow: 0 2px 4px 0px rgba(0,0,0,0.23);
+    max-width: 220px;
+    &:first-child {
+      margin-left:0px
+    }
+    &:last-child {
+      margin-right:0px
+    }
+  }
 `;
-export const FeesColBoldItem = styled(FeesColItem)`
-  font-weight: 600;
+
+export const CardItemStyled = styled(Card).attrs({
+  className: 'card-item-step7',
+})`
+  p {
+    font-weight: 600;
+    font-size: 13px;
+    color: #4e5b86;
+    margin-bottom: 0;
+    text-align: center;
+  }
+
+  .ant-card-cover {
+    padding: 30px 10px 20px;
+  }
+
+  .ant-card-body {
+    padding: 20px;
+  }
+`;
+export const CardStep7Container = styled(Card).attrs({
+  className: 'card-step7-container',
+})`
+  max-width: 943px;
+  margin: 0 auto!important;
+  .ant-card-head-title{
+    color: #515c83;
+    padding: 10px 0px;
+  }
+  .ant-card-body{
+    padding: 0px;
+    .ant-card-body{
+      color: #515c83;
+      font-size: 16px;
+      padding: 20px;
+    }
+  }
 `;
