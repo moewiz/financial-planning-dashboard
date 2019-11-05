@@ -13,7 +13,6 @@ const CardItemStep7 = (props: CardItemProps) => {
 
   return (
     <CardItemStyled
-      hoverable
       cover={
         <img
           alt="example"
