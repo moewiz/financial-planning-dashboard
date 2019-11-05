@@ -203,6 +203,45 @@ const calmPVConfig = {
   ],
 };
 
+const calmPVConfigWithLifeEvent = {
+  datasets: [
+    {
+      type: 'bar',
+      dataIndex: 'netAssets',
+      label: 'Net Assets',
+      fill: false,
+      borderColor: '#71B37C',
+      backgroundColor: '#71B37C',
+      hoverBackgroundColor: '#71B37C',
+      hoverBorderColor: '#71B37C',
+    },
+    {
+      type: 'line',
+      dataIndex: 'expenditure',
+      label: 'Expenditure',
+      fill: false,
+      borderColor: '#FF5722',
+      backgroundColor: '#FF5722',
+      pointBorderColor: '#FF5722',
+      pointBackgroundColor: '#FF5722',
+      pointHoverBackgroundColor: '#FF5722',
+      pointHoverBorderColor: '#FF5722',
+    },
+    {
+      type: 'line',
+      dataIndex: 'income',
+      label: 'income',
+      fill: false,
+      borderColor: '#fffb03',
+      backgroundColor: '#fffb03',
+      pointBorderColor: '#fffb03',
+      pointBackgroundColor: '#fffb03',
+      pointHoverBackgroundColor: '#fffb03',
+      pointHoverBorderColor: '#fffb03',
+    },
+  ],
+};
+
 const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeEvent?: boolean }) => {
   const { chartsData, retirementYear = 60, hasLifeEvent = false } = props;
   const [chartIndex, setChartIndex] = useState<number>(-1);
@@ -236,7 +275,9 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
           <ChartBlockRight onClick={() => setChartIndex(3)}>
             <GraphPresentation
               type={GraphType.Bar}
-              data={loadGraphData(calmPVConfig)(get(chartsData, 'calmPVChartData'))}
+              data={loadGraphData(hasLifeEvent ? calmPVConfigWithLifeEvent : calmPVConfig)(
+                get(chartsData, 'calmPVChartData'),
+              )}
             />
           </ChartBlockRight>
         </ChartsBlockWrapper>
