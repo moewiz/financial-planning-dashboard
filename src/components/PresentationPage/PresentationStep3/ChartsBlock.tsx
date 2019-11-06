@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { get } from 'lodash';
 
-import {ChartBlockLeft, ChartBlockRight, ChartBlockTitle, ChartsBlockWrapper} from './styled';
+import { ChartBlockLeft, ChartBlockRight, ChartBlockTitle, ChartsBlockWrapper } from './styled';
 import GraphPresentation from '../../StrategyPage/Graph/GraphPresentation';
 import { GraphType } from '../../StrategyPage/Graph/GraphContainer';
 import { loadGraphData } from '../../StrategyPage/StrategyHeader';
@@ -262,6 +262,10 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
             <GraphPresentation
               type={GraphType.Line}
               data={loadGraphData(configNetAssets)(get(chartsData, 'netAssetsChartData'))}
+              redraw
+              options={{
+                maintainAspectRatio: true,
+              }}
             />
           </ChartBlockLeft>
           <ChartBlockRight onClick={() => setChartIndex(1)}>
@@ -269,11 +273,22 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
             <GraphPresentation
               type={GraphType.Bar}
               data={loadGraphData(cashflowConfig)(get(chartsData, 'cashflowChartData'))}
+              redraw
+              options={{
+                maintainAspectRatio: true,
+              }}
             />
           </ChartBlockRight>
           <ChartBlockLeft onClick={() => setChartIndex(2)}>
             <ChartBlockTitle>Tax</ChartBlockTitle>
-            <GraphPresentation type={GraphType.Bar} data={loadGraphData(taxConfig)(get(chartsData, 'taxChartData'))} />
+            <GraphPresentation
+              type={GraphType.Bar}
+              data={loadGraphData(taxConfig)(get(chartsData, 'taxChartData'))}
+              redraw
+              options={{
+                maintainAspectRatio: true,
+              }}
+            />
           </ChartBlockLeft>
           <ChartBlockRight onClick={() => setChartIndex(3)}>
             <ChartBlockTitle>CALM PV</ChartBlockTitle>
@@ -282,6 +297,10 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
               data={loadGraphData(hasLifeEvent ? calmPVConfigWithLifeEvent : calmPVConfig)(
                 get(chartsData, 'calmPVChartData'),
               )}
+              redraw
+              options={{
+                maintainAspectRatio: true,
+              }}
             />
           </ChartBlockRight>
         </ChartsBlockWrapper>
