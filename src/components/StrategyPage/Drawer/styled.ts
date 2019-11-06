@@ -86,7 +86,7 @@ export const TabsPaneCustomized = styled(TabPane).attrs({
 })``;
 
 export const DrawerTableHeader = styled.div<{ productOptimizer?: boolean }>`
-  padding: 10px 5px;
+  padding: 10px 15px;
   background: #ebeef1;
   text-align: right;
   display: flex;
@@ -103,6 +103,7 @@ export const DrawerTableContent = styled.section<{ productOptimizer?: boolean }>
   color: #4e5d86;
   height: ${(props) => (props.productOptimizer ? 'auto' : 'calc(100vh - 350px)')};
   overflow: overlay;
+  padding: 10px 15px;
   @media (max-height: 450px) {
     height: auto;
   }
@@ -135,8 +136,9 @@ export const DrawerTableWrapper = styled.div<{ productOptimizer?: boolean }>`
   }
   .cell {
     display: inline-block;
-    width: 60px;
-    margin: 0 5px;
+    width: 69px;
+    padding: 0 5px;
+    border: 1px solid transparent;
     text-align: right;
     color: #4e5d86;
     font-size: 13px;
@@ -236,6 +238,7 @@ export const DrawerTableRows = styled.div<{ noBorder?: boolean; maximumWidth?: b
       font-weight: 600;
       font-size: 13px;
       color: #4e5d86;
+      padding: 0 5px;
     }
     .ant-calendar-picker {
       .ant-calendar-picker-input {
@@ -264,14 +267,9 @@ export const DrawerTableRows = styled.div<{ noBorder?: boolean; maximumWidth?: b
         margin: 0px;
         .ant-select-arrow {
           display: none;
-          // right: 4px;
         }
         &:hover {
           border-color: #dcdcdc;
-          // padding-right: 16px;
-          // .ant-select-arrow {
-          //   display: inline-block;
-          // }
         }
         &:focus {
           outline: none;
@@ -283,7 +281,6 @@ export const DrawerTableRows = styled.div<{ noBorder?: boolean; maximumWidth?: b
         &__rendered {
           line-height: 30px;
           margin: 0px;
-          // padding: 0 2px;
           padding: 0;
         }
       }
