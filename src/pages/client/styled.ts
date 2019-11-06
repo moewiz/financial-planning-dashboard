@@ -78,7 +78,7 @@ export const TableEntryContainer = styled.section.attrs({
           .edit-cell {
             font-weight: 600;
             .ant-input-number-input {
-              font-weight: 600;
+              font-weight: 600!important;
             }
             &.ant-input-number-disabled {
               background-color: #fff;

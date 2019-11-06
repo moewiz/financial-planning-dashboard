@@ -28,15 +28,8 @@ export const FeesWrapper = styled(AssetsAllocationWrapper)`
     .ant-table-tbody {
       tr {
         &:last-child {
-          .investments-bold{
-            font-weight: 600;
-          }
           .edit-cell {
-          }
-          td {
-            input{
-              font-weight: 600!important;
-            }
+            // font-weight: normal;
           }
         }
       }
