@@ -4,15 +4,20 @@ import {
   netAssetsDrillDownData,
   netAssetsDrillDownDataWithLifeEvent,
   netAssetsDrillDownDataWithoutSalarySatisfy,
-  netAssetsDrillDownDataWOSalarySatisfyDataWLifeEvent,
+  netAssetsDrillDownDataWOSalarySatisfyWLifeEvent,
+  netAssetsDrillDownDataWOSalarySatisfyNInsuranceWLifeEvent,
 } from './drilldownData';
 import { ChartBlockDrillDown } from '../PresentationStep3/styled';
 import GraphPresentation from '../../StrategyPage/Graph/GraphPresentation';
 import { GraphType } from '../../StrategyPage/Graph/GraphContainer';
 
 const getNetAssetChartData = (hasLifeEvent: boolean, retirementYear: number, checkList?: any) => {
+  if (!(checkList as any)['Salary Sacrifice'] && !(checkList as any)['Insurance'] && hasLifeEvent) {
+    return (netAssetsDrillDownDataWOSalarySatisfyNInsuranceWLifeEvent as any)[retirementYear];
+  }
+
   if (!(checkList as any)['Salary Sacrifice'] && hasLifeEvent) {
-    return (netAssetsDrillDownDataWOSalarySatisfyDataWLifeEvent as any)[retirementYear];
+    return (netAssetsDrillDownDataWOSalarySatisfyWLifeEvent as any)[retirementYear];
   }
 
   if (!(checkList as any)['Salary Sacrifice']) {
