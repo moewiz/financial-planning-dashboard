@@ -4,15 +4,15 @@ import { get } from 'lodash';
 import { Steps, message } from 'antd';
 import { createGlobalStyle } from 'styled-components';
 
+import { DocumentsWrapper } from './styled';
 import PresentationStep1 from './PresentationStep1/PresentationStep1';
 import PresentationStep2 from './PresentationStep2/PresentationStep2';
-
-import { DocumentsWrapper } from './styled';
 import PresentationStep3 from './PresentationStep3/PresentationStep3';
 import PresentationStep4 from './PresentationStep4/PresentationStep4';
+import PresentationStep5 from './PresentationStep5/PresentationStep5';
+import PresentationStep6 from './PresentationStep6/PresentationStep6';
 import PresentationStep7 from './PresentationStep7/PresentationStep7';
 import PresentationStep8 from './PresentationStep8/PresentationStep8';
-import PresentationStep5 from './PresentationStep5/PresentationStep5';
 
 const { Step } = Steps;
 const steps = [
@@ -43,7 +43,7 @@ const steps = [
   },
   {
     title: 'Step 6',
-    content: PresentationStep1,
+    content: PresentationStep6,
     description: 'Investment Product Comparison',
   },
   {

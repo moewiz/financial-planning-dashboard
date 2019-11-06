@@ -13,7 +13,7 @@ interface GraphPresentationProps {
   height?: number | undefined;
 }
 
-const defaultOptions = {
+const getDefaultOptions = (config?: any) => ({
   scales: {
     yAxes: [
       {
@@ -62,7 +62,7 @@ const defaultOptions = {
       },
     },
   },
-};
+});
 
 const GraphPresentation = (props: GraphPresentationProps) => {
   const { type, data, redraw, options, height = 190 } = props;
@@ -75,7 +75,7 @@ const GraphPresentation = (props: GraphPresentationProps) => {
           data={data}
           redraw={redraw}
           options={{
-            ...defaultOptions,
+            ...getDefaultOptions(),
             scales: {
               yAxes: [
                 {
@@ -87,11 +87,13 @@ const GraphPresentation = (props: GraphPresentationProps) => {
         />
       );
     case GraphType.Line:
-      return <Line height={height} data={data} redraw={redraw} options={{ ...defaultOptions, ...options }} />;
+      return <Line height={height} data={data} redraw={redraw} options={{ ...getDefaultOptions(), ...options }} />;
     case GraphType.Bar:
-      return <Bar height={height} data={data} redraw={redraw} options={{ ...defaultOptions, ...options }} />;
+      return <Bar height={height} data={data} redraw={redraw} options={{ ...getDefaultOptions(), ...options }} />;
     case GraphType.HorizontalBar:
-      return <HorizontalBar height={height} data={data} redraw={redraw} options={{ ...defaultOptions, ...options }} />;
+      return (
+        <HorizontalBar height={height} data={data} redraw={redraw} options={{ ...getDefaultOptions(), ...options }} />
+      );
     default:
       return null;
   }
