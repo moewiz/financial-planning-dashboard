@@ -92,8 +92,9 @@ const GraphContainer = (props: GraphProps) => {
 
   // redraw graph
   useEffect(() => {
+    console.log('redraw graph');
     setListOfData([...defaultListOfData]);
-  }, [data]);
+  }, [data, dataList]);
 
   const renderGraph = (graphData: any, index: number) => {
     switch (type) {
