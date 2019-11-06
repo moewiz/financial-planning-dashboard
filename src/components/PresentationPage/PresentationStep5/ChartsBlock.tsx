@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { get } from 'lodash';
 
 import { ChartBlockLeft, ChartBlockRight, ChartsBlockWrapper, ChartBlockTitle } from '../PresentationStep3/styled';
@@ -96,9 +96,52 @@ const calmPVConfig = {
   ],
 };
 
-const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeEvent?: boolean }) => {
-  const { chartsData, retirementYear = 60, hasLifeEvent = false } = props;
+const calmPVConfigWithoutSalarySarisfy = {
+  datasets: [
+    {
+      type: 'line',
+      dataIndex: 'expenditure',
+      label: 'Expenditure',
+      fill: false,
+      borderColor: '#FF5722',
+      backgroundColor: '#FF5722',
+      pointBorderColor: '#FF5722',
+      pointBackgroundColor: '#FF5722',
+      pointHoverBackgroundColor: '#FF5722',
+      pointHoverBorderColor: '#FF5722',
+    },
+    {
+      type: 'line',
+      dataIndex: 'inflowCapital',
+      label: 'Inflow + Capital',
+      fill: false,
+      borderColor: '#ffff00',
+      backgroundColor: '#ffff00',
+      pointBorderColor: '#ffff00',
+      pointBackgroundColor: '#ffff00',
+      pointHoverBackgroundColor: '#ffff00',
+      pointHoverBorderColor: '#ffff00',
+    },
+    {
+      type: 'bar',
+      dataIndex: 'netAssets',
+      label: 'Net Assets',
+      fill: false,
+      borderColor: '#71B37C',
+      backgroundColor: '#71B37C',
+      hoverBackgroundColor: '#71B37C',
+      hoverBorderColor: '#71B37C',
+    },
+  ],
+};
+
+const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeEvent?: boolean; checkList?: any }) => {
+  const { chartsData, retirementYear = 60, hasLifeEvent = false, checkList = {} } = props;
   const [chartIndex, setChartIndex] = useState<number>(-1);
+  let calmPVConfigFinal = calmPVConfig;
+  if (!(checkList as any)['Salary Sacrifice']) {
+    calmPVConfigFinal = calmPVConfigWithoutSalarySarisfy;
+  }
 
   return (
     <>
@@ -154,7 +197,7 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
             <ChartBlockTitle>CALM PV</ChartBlockTitle>
             <GraphPresentation
               type={GraphType.Bar}
-              data={loadGraphData(calmPVConfig)(get(chartsData, 'calmPVChartData'))}
+              data={loadGraphData(calmPVConfigFinal)(get(chartsData, 'calmPVChartData'))}
               options={{
                 legend: {
                   display: true,
