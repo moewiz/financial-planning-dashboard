@@ -12,6 +12,7 @@ import {
   StatisticSubValue,
   StatisticUpDown,
 } from './styled';
+import { GRAPH_FREQUENCY } from '../../enums/timer';
 
 export interface Statistic {
   title: string;
@@ -33,7 +34,7 @@ const StatisticItem = (props: StatisticItemProps) => {
   useEffect(() => {
     const id = setInterval(() => {
       setActiveIndex((index) => (index + 1 >= listOfKpi.length ? 0 : index + 1));
-    }, 6000);
+    }, GRAPH_FREQUENCY);
     return () => clearInterval(id);
   }, []);
 
