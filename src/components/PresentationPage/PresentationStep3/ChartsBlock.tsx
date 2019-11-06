@@ -261,6 +261,9 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
             <ChartBlockTitle>Net assets</ChartBlockTitle>
             <GraphPresentation
               type={GraphType.Line}
+              options={{
+                maintainAspectRatio: true,
+              }}
               data={loadGraphData(configNetAssets)(get(chartsData, 'netAssetsChartData'))}
               redraw
               options={{
@@ -272,6 +275,9 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
             <ChartBlockTitle>Cashflow</ChartBlockTitle>
             <GraphPresentation
               type={GraphType.Bar}
+              options={{
+                maintainAspectRatio: true,
+              }}
               data={loadGraphData(cashflowConfig)(get(chartsData, 'cashflowChartData'))}
               redraw
               options={{
@@ -282,17 +288,19 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
           <ChartBlockLeft onClick={() => setChartIndex(2)}>
             <ChartBlockTitle>Tax</ChartBlockTitle>
             <GraphPresentation
-              type={GraphType.Bar}
-              data={loadGraphData(taxConfig)(get(chartsData, 'taxChartData'))}
-              redraw
               options={{
                 maintainAspectRatio: true,
               }}
+              type={GraphType.Bar}
+              data={loadGraphData(taxConfig)(get(chartsData, 'taxChartData'))}
             />
           </ChartBlockLeft>
           <ChartBlockRight onClick={() => setChartIndex(3)}>
             <ChartBlockTitle>CALM PV</ChartBlockTitle>
             <GraphPresentation
+              options={{
+                maintainAspectRatio: true,
+              }}
               type={GraphType.Bar}
               data={loadGraphData(hasLifeEvent ? calmPVConfigWithLifeEvent : calmPVConfig)(
                 get(chartsData, 'calmPVChartData'),

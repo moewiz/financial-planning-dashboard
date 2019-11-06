@@ -73,6 +73,7 @@ export const ChartBlock = styled.div`
   border-radius: 5px;
   padding: 30px 15px;
   max-width: calc(50% - 20px);
+  position: relative;
   .chartjs-render-monitor{
     margin: 0 auto;
   }
