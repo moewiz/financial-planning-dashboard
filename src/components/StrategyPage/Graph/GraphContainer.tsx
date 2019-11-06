@@ -36,6 +36,18 @@ interface GraphProps {
 }
 
 const defaultOptions = {
+  scales: {
+    yAxes: [
+      {
+        ticks: {
+          // Include a dollar sign in the ticks
+          callback: (value: any, index: any, values: any) => {
+            return numeral(Math.round(value * 100) / 100).format('$0,0.[00]');
+          },
+        },
+      },
+    ],
+  },
   maintainAspectRatio: false,
   legend: {
     display: false,

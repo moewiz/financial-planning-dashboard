@@ -1277,20 +1277,18 @@
     ],
     "standardText": [
       {
-        "text": "{{0}} will be invested in line with {{1}} risk profile",
-        "params": ["CFS FirstChoice Wholesale Investments", "Balanced"]
+        "text": "Investment funds will be invested in line with your {{0}} risk profile",
+        "params": ["Balanced"]
       },
       {
-        "text": "{{0}} will be invested in line with {{1}} risk profile",
-        "params": ["Cash", "Balanced"]
+        "text": "Cash will be invested at {{0}}",
+        "params": ["current cash rate"]
       },
       {
-        "text": "Product fees of {{0}} factored in investment value",
-        "params": ["1%"]
+        "text": "Product fees of 1% factored in investment value"
       },
       {
-        "text": "Investment income {{0}} for full period",
-        "params": ["re-invested"]
+        "text": "Investment income re-invested for full period"
       }
     ],
     "strategies": [],
@@ -2296,14 +2294,17 @@
       }
     ],
     "standardText": [
-      {
-        "text": "Text line one"
+      {       
+        "text": "Life and TPD insurance premiums are {{0}}",
+        "params": ["stepped"]
       },
       {
-        "text": "Text line two"
+        "text": "Trauma insurance premiums are {{0}}",
+        "params": ["stepped"]
       },
       {
-        "text": "Text line three"
+        "text": "IP insurance premiums are {{0}}",
+        "params": ["stepped"]
       }
     ],
     "strategies": [
@@ -2336,14 +2337,9 @@
     "graph": [],
     "standardText": [
       {
-        "text": "Text line one"
-      },
-      {
-        "text": "Text line two"
-      },
-      {
-        "text": "Text line three"
-      }
+        "text": "Legal fees {{0}} into projections",
+        "params": ["not factored "]
+      }     
     ],
     "strategies": []
   }
