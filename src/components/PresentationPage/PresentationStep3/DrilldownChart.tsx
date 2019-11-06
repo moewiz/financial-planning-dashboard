@@ -55,6 +55,7 @@ const DrilldownChart = (props: DrilldownChartProps) => {
           retirementYear={retirementYear}
           currentDrilldown={currentDrilldown}
           shouldShow={index === 2}
+          hasLifeEvent={hasLifeEvent}
         />
         <CashflowDrilldownCharts
           retirementYear={retirementYear}

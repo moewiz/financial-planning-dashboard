@@ -1918,6 +1918,131 @@ export const taxFlowDrillDownData = {
   },
 };
 
+export const taxFlowDrillDownDataWithLifeEvent = {
+  60: {
+    tax: {
+      labels: [
+        'Jul 2019',
+        'Jul 2020',
+        'Jul 2021',
+        'Jul 2022',
+        'Jul 2023',
+        'Jul 2024',
+        'Jul 2025',
+        'Jul 2026',
+        'Jul 2027',
+        'Jul 2028',
+        'Jul 2029',
+        'Jul 2030',
+        'Jul 2031',
+        'Jul 2032',
+        'Jul 2033',
+        'Jul 2034',
+        'Jul 2035',
+        'Jul 2036',
+        'Jul 2037',
+        'Jul 2038',
+      ],
+      datasets: [
+        {
+          label: 'Tax payable ',
+          backgroundColor: '#5B9BD5', //
+          stroke: '#5B9BD5',
+          data: [
+            33289,
+            35019,
+            36758,
+            36135,
+            -128,
+            -135,
+            -143,
+            -151,
+            -159,
+            -167,
+            -176,
+            -186,
+            -196,
+            -207,
+            616,
+            1164,
+            1654,
+            2058,
+            2476,
+            4252,
+          ],
+        },
+        {
+          label: 'Medicare levy',
+          backgroundColor: '#ED7D31', //
+          stroke: '#ED7D31',
+          data: [2484, 2575, 2669, 2767, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        },
+      ],
+    },
+  },
+  65: {
+    tax: {
+      labels: [
+        'Jul 2019',
+        'Jul 2020',
+        'Jul 2021',
+        'Jul 2022',
+        'Jul 2023',
+        'Jul 2024',
+        'Jul 2025',
+        'Jul 2026',
+        'Jul 2027',
+        'Jul 2028',
+        'Jul 2029',
+        'Jul 2030',
+        'Jul 2031',
+        'Jul 2032',
+        'Jul 2033',
+        'Jul 2034',
+        'Jul 2035',
+        'Jul 2036',
+        'Jul 2037',
+        'Jul 2038',
+      ],
+      datasets: [
+        {
+          label: 'Tax payable ',
+          backgroundColor: '#5B9BD5', //
+          stroke: '#5B9BD5',
+          data: [
+            -104,
+            -109,
+            -115,
+            -122,
+            -128,
+            -135,
+            -143,
+            -151,
+            -159,
+            -167,
+            -176,
+            -186,
+            -196,
+            -207,
+            -218,
+            -230,
+            1169,
+            1833,
+            2476,
+            2906,
+          ],
+        },
+        {
+          label: 'Medicare levy',
+          backgroundColor: '#ED7D31', //
+          stroke: '#ED7D31',
+          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        },
+      ],
+    },
+  },
+};
+
 export const calmPVDrillDownData = {
   60: {
     calmpv: {
