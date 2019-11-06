@@ -90,7 +90,6 @@ const GraphContainer = (props: GraphProps) => {
 
   // redraw graph
   useEffect(() => {
-    console.log('redraw graph');
     setListOfData([...defaultListOfData]);
   }, [data, dataList]);
 
