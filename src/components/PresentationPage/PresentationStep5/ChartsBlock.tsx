@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { get } from 'lodash';
 
-import { ChartBlockLeft, ChartBlockRight, ChartsBlockWrapper } from '../PresentationStep3/styled';
+import { ChartBlockLeft, ChartBlockRight, ChartsBlockWrapper, ChartBlockTitle } from '../PresentationStep3/styled';
 import GraphPresentation from '../../StrategyPage/Graph/GraphPresentation';
 import { GraphType } from '../../StrategyPage/Graph/GraphContainer';
 import { loadGraphData } from '../../StrategyPage/StrategyHeader';
@@ -21,7 +21,7 @@ const configNetAssets = {
       label: 'Proposed',
       fill: false,
       lineTension: 0.2,
-      borderColor: '#5B9BD5',
+      borderColor: '#00BCD4',
     },
   ],
 };
@@ -47,13 +47,13 @@ const taxConfig = {
       dataIndex: 'current',
       label: 'Current',
       fill: true,
-      borderColor: '#00BCD4',
+      borderColor: '#FF5722',
     },
     {
       dataIndex: 'proposed',
       label: 'Proposed',
       fill: true,
-      borderColor: '#cfaeff',
+      borderColor: '#00BCD4',
     },
   ],
 };
@@ -64,12 +64,12 @@ const calmPVConfig = {
       dataIndex: 'expenditure',
       label: 'Expenditure',
       fill: false,
-      borderColor: '#EC932F',
-      backgroundColor: '#EC932F',
-      pointBorderColor: '#EC932F',
-      pointBackgroundColor: '#EC932F',
-      pointHoverBackgroundColor: '#EC932F',
-      pointHoverBorderColor: '#EC932F',
+      borderColor: '#FF5722',
+      backgroundColor: '#FF5722',
+      pointBorderColor: '#FF5722',
+      pointBackgroundColor: '#FF5722',
+      pointHoverBackgroundColor: '#FF5722',
+      pointHoverBorderColor: '#FF5722',
     },
     {
       type: 'line',
@@ -112,24 +112,55 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
       ) : (
         <ChartsBlockWrapper>
           <ChartBlockLeft onClick={() => setChartIndex(0)}>
+            <ChartBlockTitle>Net assets</ChartBlockTitle>
             <GraphPresentation
               type={GraphType.Line}
               data={loadGraphData(configNetAssets)(get(chartsData, 'netAssetsChartData'))}
+              options={{
+                legend: {
+                  display: true,
+                  position: 'bottom',
+                },
+              }}
             />
           </ChartBlockLeft>
           <ChartBlockRight onClick={() => setChartIndex(1)}>
+            <ChartBlockTitle>Cashflow</ChartBlockTitle>
             <GraphPresentation
               type={GraphType.Bar}
               data={loadGraphData(cashflowConfig)(get(chartsData, 'cashflowChartData'))}
+              options={{
+                legend: {
+                  display: true,
+                  position: 'bottom',
+                },
+              }}
             />
           </ChartBlockRight>
           <ChartBlockLeft onClick={() => setChartIndex(2)}>
-            <GraphPresentation type={GraphType.Bar} data={loadGraphData(taxConfig)(get(chartsData, 'taxChartData'))} />
+            <ChartBlockTitle>Tax</ChartBlockTitle>
+            <GraphPresentation
+              type={GraphType.Bar}
+              data={loadGraphData(taxConfig)(get(chartsData, 'taxChartData'))}
+              options={{
+                legend: {
+                  display: true,
+                  position: 'bottom',
+                },
+              }}
+            />
           </ChartBlockLeft>
           <ChartBlockRight onClick={() => setChartIndex(3)}>
+            <ChartBlockTitle>CALM PV</ChartBlockTitle>
             <GraphPresentation
               type={GraphType.Bar}
               data={loadGraphData(calmPVConfig)(get(chartsData, 'calmPVChartData'))}
+              options={{
+                legend: {
+                  display: true,
+                  position: 'bottom',
+                },
+              }}
             />
           </ChartBlockRight>
         </ChartsBlockWrapper>

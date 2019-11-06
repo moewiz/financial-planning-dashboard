@@ -96,6 +96,15 @@ export const ChartBlockDrillDown = styled(ChartBlock)`
   margin-top: 10px;
 `;
 
+export const ChartBlockTitle = styled.div`
+  display: inline-block;
+  width: 100%;
+  font-size: 20px;
+  color: #4e5b86;
+  margin-bottom: 10px;
+  //text-align: left;
+`;
+
 export const DrilldownChartWrapper = styled.div`
   height: 100%;
   .anticon.anticon-arrow-left {
