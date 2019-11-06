@@ -88,6 +88,7 @@ const initFormValues = (value: Product) => {
     funds.push({ id: -1, name: 'Total', value: sum, percentage: '100' });
 
     product.details = {
+      ...product.details,
       product: get(product, 'details.product'),
       funds,
     };
@@ -99,6 +100,10 @@ const initFormValues = (value: Product) => {
 class DrawerProduct extends PureComponent<DrawerProductProps> {
   public renderDrawer = () => {
     const { product } = this.props;
+    if (!product) {
+      return null;
+    }
+
     if (product && product.links && product.links.length > 0) {
       return this.renderLinkedProducts();
     }

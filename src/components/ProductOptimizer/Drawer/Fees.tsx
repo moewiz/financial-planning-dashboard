@@ -3,23 +3,23 @@ import { map } from 'lodash';
 
 import { FeesWrapper } from './styled';
 import { HorizontalScrollable } from '../styled';
-import Fee from './Fee';
+import Fee, { FeeProps } from './Fee';
 import feesData from '../../../demo_jsons/step_3m.json';
 
-class Fees extends PureComponent {
-  public render() {
-    return (
-      <FeesWrapper>
-        <Fee product={feesData.proposed} />
+const Fees = (props: { data?: FeeProps['product']; links?: Array<FeeProps['product']> }) => {
+  const { data, links } = props;
 
-        <HorizontalScrollable>
-          {map(feesData.links, (product, index: number) => (
-            <Fee product={product} key={index} />
-          ))}
-        </HorizontalScrollable>
-      </FeesWrapper>
-    );
-  }
-}
+  return (
+    <FeesWrapper>
+      <Fee product={data || feesData.proposed} />
+
+      <HorizontalScrollable>
+        {map(links || feesData.links, (product: FeeProps['product'], index: number) => (
+          <Fee product={product} key={index} />
+        ))}
+      </HorizontalScrollable>
+    </FeesWrapper>
+  );
+};
 
 export default Fees;

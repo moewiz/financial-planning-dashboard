@@ -1,12 +1,15 @@
 import React, { PureComponent } from 'react';
 import { dropRight, get, isString, last } from 'lodash';
-import { Button } from 'antd';
+import { Button, Tabs } from 'antd';
+const { TabPane } = Tabs;
 
 import { addPercentage, getSumFunds, Product } from './DrawerProduct';
 import LinkProductAndFund from './LinkProductAndFund';
 import { DrawerProductWrapper } from '../styled';
 import { ActionDrawerGeneral, DrawerTitle } from '../../StrategyPage/Drawer/styled';
 import { EditCellType } from '../../StrategyPage/Drawer/EditCell';
+import AssetsAllocation from './AssetsAllocation';
+import Fees from './Fees';
 
 interface SingleProductProps {
   values: Product;
@@ -110,7 +113,17 @@ class SingleProduct extends PureComponent<SingleProductProps> {
       <DrawerProductWrapper>
         <DrawerTitle>{get(values.details, 'product.name', 'My Product')}</DrawerTitle>
 
-        <LinkProductAndFund columns={this.getColumns()} values={values} setFieldValue={setFieldValue} />
+        <Tabs defaultActiveKey="1">
+          <TabPane tab="Fund" key="1">
+            <LinkProductAndFund columns={this.getColumns()} values={values} setFieldValue={setFieldValue} />
+          </TabPane>
+          <TabPane tab="Asset Allocation" key="2">
+            <AssetsAllocation data={get(values.details, 'assetAllocation')} links={[]} />
+          </TabPane>
+          <TabPane tab="Fees" key="3">
+            <Fees data={get(values.details, 'fees')}  links={[]}/>
+          </TabPane>
+        </Tabs>
 
         <ActionDrawerGeneral visible>
           <Button htmlType={'submit'} type={'primary'} disabled={isSubmitting || !dirty}>

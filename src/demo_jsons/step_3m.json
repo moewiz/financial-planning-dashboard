@@ -12,7 +12,7 @@
       {
         "id": 2,
         "name": "Investment Fees and Costs",
-        "value": "2,222.81",
+        "value": "2222.81",
         "percentage": "0.56"
       },
       {
@@ -30,7 +30,7 @@
       { "id": -1, "name": "", "value": "", "percentage": "" },
       {
         "name": "Net Ongoing Cost",
-        "value": "2,835.16",
+        "value": "2835.16",
         "percentage": ""
       }
     ],
@@ -38,7 +38,7 @@
       {
         "id": 1,
         "name": "Buy/Sell costs",
-        "value": "1,100",
+        "value": "1100",
         "percentage": "0.28"
       },
       { "id": -1, "name": "", "value": "", "percentage": "" }
@@ -58,7 +58,7 @@
         {
           "id": 2,
           "name": "Investment Fees and Costs",
-          "value": "2,780",
+          "value": "2780",
           "percentage": "0.7"
         },
         {
@@ -70,7 +70,7 @@
         { "id": -1, "name": "", "value": "", "percentage": "" },
         {
           "name": "Net Ongoing Cost",
-          "value": "3,160",
+          "value": "3160",
           "percentage": ""
         }
       ],
@@ -91,7 +91,7 @@
         {
           "id": 1,
           "name": "Investment Fees and Costs",
-          "value": "4,166.48",
+          "value": "4166.48",
           "percentage": "1.04"
         },
         {
@@ -103,7 +103,7 @@
         { "id": -1, "name": "", "value": "", "percentage": "" },
         {
           "name": "Net Ongoing Cost",
-          "value": "4,327.78",
+          "value": "4327.78",
           "percentage": ""
         }
       ],

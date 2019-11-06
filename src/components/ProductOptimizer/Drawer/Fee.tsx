@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Icon, Popconfirm, Table } from 'antd';
 import { last, take } from 'lodash';
 import cn from 'classnames';
+import numeral from 'numeral';
 
 import { AssetBlock, AssetSubTitle, AssetTitle, AssetTitleBlock } from './styled';
 import { TableEntryContainer } from '../../../pages/client/styled';
@@ -16,7 +17,7 @@ interface Row {
   [key: string]: any;
 }
 
-interface FeeProps {
+export interface FeeProps {
   product: {
     title: string;
     subTitle: string;
@@ -131,7 +132,7 @@ class Fee extends PureComponent<FeeProps> {
             {totalRow.name}
           </div>
           <div className="value">
-            {totalRow.value}
+            {numeral(totalRow.value).format('$0,0.00')}
           </div>
         </>
       );

@@ -32,18 +32,18 @@ const defaultOptions = {
   },
   tooltips: {
     titleFontFamily:
-      "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', " +
-      "'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+      '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
+      '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
     bodyFontFamily:
-      "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', " +
-      "'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+      '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
+      '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
     footerFontFamily:
-      "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', " +
-      "'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+      '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
+      '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
     intersect: false,
     mode: 'label',
     callbacks: {
-      title(tooltipItem: { label: string }[]) {
+      title(tooltipItem: Array<{ label: string }>) {
         const label = tooltipItem[0].label;
         const numberLabel = parseInt(label, 10);
         return !isNaN(numberLabel) && isNumber(numberLabel) ? '20' + label : label;

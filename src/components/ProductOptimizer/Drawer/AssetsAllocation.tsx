@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { map } from 'lodash';
 
 import {
@@ -43,29 +43,31 @@ const TableHeader = ({ showTitle }: TableHeaderProps) => (
 const TableContent = ({ showTitle, values }: TableContentProps) => (
   <DrawerTableContent productOptimizer>
     <DrawerTableRows>
-      {map(values, (data: Row, index: number) => (
-        data.total ?
-        <DrawerTableParent customBorder key={index}>
-          {showTitle && <DrawerRowSubTitle size="large">{data.title}</DrawerRowSubTitle>}
-          <div className="values">
-            {map(data.values, (value: number, idx: number) => (
-              <span className={'cell'} key={idx}>
-                {value}%
-              </span>
-            ))}
-          </div>
-        </DrawerTableParent> :
-        <DrawerTableListItems key={index}>
-          {showTitle && <DrawerRowSubTitle>{data.title}</DrawerRowSubTitle>}
-          <div className="values">
-            {map(data.values, (value: number, idx: number) => (
-              <span className={'cell'} key={idx}>
-                {value}%
-              </span>
-            ))}
-          </div>
-        </DrawerTableListItems>
-      ))}
+      {map(values, (data: Row, index: number) =>
+        data.total ? (
+          <DrawerTableParent customBorder key={index}>
+            {showTitle && <DrawerRowSubTitle size="large">{data.title}</DrawerRowSubTitle>}
+            <div className="values">
+              {map(data.values, (value: number, idx: number) => (
+                <span className={'cell'} key={idx}>
+                  {value}%
+                </span>
+              ))}
+            </div>
+          </DrawerTableParent>
+        ) : (
+          <DrawerTableListItems key={index}>
+            {showTitle && <DrawerRowSubTitle>{data.title}</DrawerRowSubTitle>}
+            <div className="values">
+              {map(data.values, (value: number, idx: number) => (
+                <span className={'cell'} key={idx}>
+                  {value}%
+                </span>
+              ))}
+            </div>
+          </DrawerTableListItems>
+        ),
+      )}
     </DrawerTableRows>
   </DrawerTableContent>
 );
@@ -92,20 +94,25 @@ const AssetColumn = ({ product, proposed }: AssetColumnProps) => (
   </AssetBlock>
 );
 
-class AssetsAllocation extends PureComponent {
-  public render() {
-    return (
-      <AssetsAllocationWrapper>
-        <AssetColumn product={assetsAllocationData.proposed} proposed={true} />
-
-        <HorizontalScrollable>
-          {map(assetsAllocationData.links, (product, index: number) => (
-            <AssetColumn product={product} key={index} />
-          ))}
-        </HorizontalScrollable>
-      </AssetsAllocationWrapper>
-    );
-  }
+export interface AssetsAllocationProps {
+  data?: AssetColumnProps['product'];
+  links?: Array<AssetColumnProps['product']>;
 }
+
+const AssetsAllocation = (props: AssetsAllocationProps) => {
+  const { data, links } = props;
+
+  return (
+    <AssetsAllocationWrapper>
+      <AssetColumn product={data || assetsAllocationData.proposed} proposed={true} />
+
+      <HorizontalScrollable>
+        {map(links || assetsAllocationData.links, (product, index: number) => (
+          <AssetColumn product={product} key={index} />
+        ))}
+      </HorizontalScrollable>
+    </AssetsAllocationWrapper>
+  );
+};
 
 export default AssetsAllocation;
