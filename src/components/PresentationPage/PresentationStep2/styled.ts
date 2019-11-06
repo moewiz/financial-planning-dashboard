@@ -39,10 +39,18 @@ export const StepPositionBottom = styled.div`
   width: 100%;
   margin: 0 auto;
   position: relative;
-  min-height: 320px;
-  .income-doughnut{
-    left: calc(50% - 30px);
-    top: calc(50% + 15px);
+  min-height: 331px;
+  &.income-doughnut{
+    .presentation-doughnut-desc{
+      left: calc(50% - 32px);
+      top: calc(50% + 20px);
+    }
+  }
+  &.asset-doughnut{
+    .presentation-doughnut-desc{
+      left: calc(50% - 36px);
+      top: calc(50% + 27px);
+    }
   }
   .chartjs-render-monitor{
     position: absolute;
@@ -137,8 +145,6 @@ export const DoughnutDesc = styled.div.attrs({
   display: flex;
   flex-direction: column;
   text-align: center;
-  left: calc(50% - 35px);
-  top: calc(50% + 25px);
   transform: translateY(-50%);
 `;
 export const LineDoughnut = styled.span`
