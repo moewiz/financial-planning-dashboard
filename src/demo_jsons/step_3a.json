@@ -153,7 +153,106 @@
               "name": "FirstChoice Wholesale Moderate",
               "value": 50000
             }
-          ]
+          ],
+          "assetAllocation": {
+            "title": "",
+            "subTitle": "",
+            "values": [
+              {
+                "title": "Domestic Equity",
+                "values": [20.24, 24, -3.76]
+              },
+              {
+                "title": "International Equity",
+                "values": [27.25, 32, -4.75]
+              },
+              {
+                "title": "Domestic Property",
+                "values": [0.16, 0, 0.16]
+              },
+              {
+                "title": "International Property",
+                "values": [4.44, 7, -2.56]
+              },
+              {
+                "title": "Other Growth",
+                "values": [0, 0, 0]
+              },
+              {
+                "title": "Growth Alternatives",
+                "values": [9.23, 7, 2.23]
+              },
+              {
+                "title": "Total Growth",
+                "values": [61.32, 70, -8.68],
+                "total": true
+              },
+              {
+                "title": "Domestic Fixed Interest",
+                "values": [6.96, 2, 4.96]
+              },
+              {
+                "title": "International Fixed Interest",
+                "values": [16.75, 2, 14.75]
+              },
+              {
+                "title": "Domestic Cash",
+                "values": [14.05, 6, 8.05]
+              },
+              {
+                "title": "International Cash",
+                "values": [0.92, 0, 0.92]
+              },
+              {
+                "title": "Defensive Alternatives",
+                "values": [0, 20, -20]
+              },
+              {
+                "title": "Total Defensive",
+                "values": [38.68, 30, 8.68],
+                "total": true
+              }
+            ]
+          },
+          "fees": {
+            "title": "",
+            "subTitle": "",
+            "ongoingFee": [
+              {
+                "id": 1,
+                "name": "Administration Fees",
+                "value": "490",
+                "percentage": "0.98"
+              },
+              { "id": -1, "name": "", "value": "", "percentage": "" },
+              {
+                "name": "Net Ongoing Cost",
+                "value": "490",
+                "percentage": ""
+              }
+            ],
+            "transactionFee": [
+              {
+                "id": 1,
+                "name": "Buy/Sell costs",
+                "value": "0",
+                "percentage": "0"
+              },
+              { "id": -1, "name": "", "value": "", "percentage": "" }
+            ],
+            "otherBalances": [
+              {
+                "id": 1,
+                "name": "Total Balance held by client",
+                "value": 0
+              },
+              {
+                "id": 2,
+                "name": "Total balance held by family group",
+                "value": 0
+              }
+            ]
+          }
         }
       }
     ],
