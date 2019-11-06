@@ -45,7 +45,7 @@ export const chartsDataResourcesWithLifeEvent = {
         'Jul 2027',
         'Jul 2028',
       ],
-      value: [33289, 35019, 36758, 36135, 0, 0, 0, 0, 0, 0],
+      current: [33289, 35019, 36758, 36135, 0, 0, 0, 0, 0, 0],
       proposed: [31721, 33425, 35190, 34659, 0, 0, 0, 0, 0, 0],
     },
     calmPVChartData: {
@@ -164,7 +164,7 @@ export const chartsDataResourcesWithLifeEvent = {
         'Jul 2027',
         'Jul 2028',
       ],
-      value: [33289, 35019, 36758, 36135, 0, 0, 0, 0, 0, 0],
+      current: [33289, 35019, 36758, 36135, 0, 0, 0, 0, 0, 0],
       proposed: [31721, 33425, 35190, 34659, 0, 0, 0, 0, 0, 0],
     },
     calmPVChartData: {
@@ -286,7 +286,7 @@ export const chartsDataResources = {
         'Jul 2027',
         'Jul 2028',
       ],
-      value: [33289, 35019, 36758, 36135, 0, 0, 0, 0, 0, 0],
+      current: [33289, 35019, 36758, 36135, 0, 0, 0, 0, 0, 0],
       proposed: [31721, 33425, 35190, 34659, 0, 0, 0, 0, 0, 0],
     },
     calmPVChartData: {
@@ -405,7 +405,7 @@ export const chartsDataResources = {
         'Jul 2027',
         'Jul 2028',
       ],
-      value: [33289, 35019, 36758, 36135, 0, 0, 0, 0, 0, 0],
+      current: [33289, 35019, 36758, 36135, 0, 0, 0, 0, 0, 0],
       proposed: [31721, 33425, 35190, 34659, 0, 0, 0, 0, 0, 0],
     },
     calmPVChartData: {
