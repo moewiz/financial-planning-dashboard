@@ -136,8 +136,8 @@ export const DrawerTableWrapper = styled.div<{ productOptimizer?: boolean }>`
   }
   .cell {
     display: inline-block;
-    width: 69px;
-    padding: 0 5px;
+    width: 72px;
+    padding: 0 2px;
     border: 1px solid transparent;
     text-align: right;
     color: #4e5d86;
@@ -165,7 +165,7 @@ export const DrawerTableRows = styled.div<{ noBorder?: boolean; maximumWidth?: b
       width: 100%;
     `}
   .edit-cell {
-    width: 69px;
+    width: 72px;
     border: 1px solid;
     border-color: transparent;
     &:hover {

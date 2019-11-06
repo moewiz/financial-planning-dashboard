@@ -78,7 +78,7 @@ class DrawerItem extends PureComponent<DrawerItemProps> {
     } else {
       return map(columns, (column: string, index: number) => {
         let value = get(values, [index], 0);
-        let format = '0,0';
+        let format = '$0,0';
         if (percent && isNumber(value)) {
           value /= 100;
           format = '0.00%';

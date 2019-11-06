@@ -60,11 +60,13 @@ const assetData = {
 
 const chartsData = {
   asset: {
+    className: 'asset-doughnut',
     line1: '$1,390,000',
     line2: 'Total',
     chart: assetData,
   },
   income: {
+    className: 'income-doughnut',
     line1: '$120,000',
     line2: 'Income',
     chart: incomeData,
@@ -84,6 +86,9 @@ const optionsDoughnut = {
       },
     },
   },
+  fullWidth: true,
+  responsive: true,
+  maintainAspectRatio: true,
   legend: {
     fontSize: 9,
     fontFamily:
@@ -151,7 +156,7 @@ const PresentationStep2 = (props: FormikPartProps) => {
               <ValPositionStep>$300,000</ValPositionStep>
             </LiabilitiesBlockStep>
           </StepPositionTop>
-          <StepPositionBottom>
+          <StepPositionBottom className = {get(chartData, 'className')}>
             <Doughnut options={optionsDoughnut} data={get(chartData, 'chart')} redraw={true} height={200} />
             <DoughnutDesc>
               <LineDoughnut>{get(chartData, 'line1')}</LineDoughnut>

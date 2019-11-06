@@ -39,8 +39,15 @@ export const StepPositionBottom = styled.div`
   width: 100%;
   margin: 0 auto;
   position: relative;
-  min-height: 385px;
+  min-height: 280px;
+  .income-doughnut{
+    left: calc(50% - 30px);
+    top: calc(50% + 15px);
+  }
   .chartjs-render-monitor{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
   }
 `;
 
@@ -111,7 +118,7 @@ export const KeyPoitItem = styled.div`
 export const CardResultsPositionStep = styled.div`
   .ant-card-grid{
     padding: 15px!important;
-    min-height: 169px;
+    min-height: 116px;
     text-align: center;
     align-items: center;
     display: flex;
@@ -123,13 +130,16 @@ export const CardResultsPositionStep = styled.div`
    }
 `;
 
-export const DoughnutDesc = styled.div`
+export const DoughnutDesc = styled.div.attrs({
+  className: 'presentation-doughnut-desc',
+})`
   position: absolute;
   display: flex;
   flex-direction: column;
   text-align: center;
-  left: calc(50% - 30px);
-  top: calc(50% + 5px);
+  left: calc(50% - 35px);
+  top: calc(50% + 25px);
+  transform: translateY(-50%);
 `;
 export const LineDoughnut = styled.span`
   font-size: 13px;

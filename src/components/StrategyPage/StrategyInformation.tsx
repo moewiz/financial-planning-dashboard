@@ -177,6 +177,29 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
         );
       }
       case StrategyTypes.Insurance: {
+        const insuranceConfig = {
+          datasets: [
+            {
+              dataIndex: 'current',
+              label: 'Needs Analysis',
+              fill: false,
+              borderColor: '#00BCD4',
+              lineTension: 0,
+            },
+            {
+              dataIndex: 'proposed',
+              label: 'Proposed',
+              fill: false,
+              borderColor: '#FF5722',
+              lineTension: 0,
+            },
+          ],
+        };
+        const insuranceGraphData = map(graph, (graphData: GraphData) => ({
+          ...loadGraphData(insuranceConfig)(graphData),
+          title: graphData.title,
+        }));
+
         return (
           <StrategyInfoWrapper>
             <Row type="flex" justify="space-between" gutter={32}>
@@ -186,7 +209,7 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
               <Col span={12}>
                 <GraphContainer
                   type={GraphType.Bar}
-                  dataList={basicGraphData}
+                  dataList={insuranceGraphData}
                   onGraphClick={this.onGraphClick}
                 />
               </Col>

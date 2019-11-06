@@ -91,6 +91,7 @@ const StrategyPage = (props: StrategyPageProps) => {
   const togglePinned = useCallback(() => {
     setPinned((p) => !p);
   }, []);
+  const defaultActiveKey = values(StrategyTypes).filter((i) => i !== StrategyTypes.Centrelink);
 
   return (
     <StrategyPageWrapper>
@@ -127,7 +128,7 @@ const StrategyPage = (props: StrategyPageProps) => {
         enableReinitialize={true}
         render={(formikProps: FormikProps<StrategyEntry>) => (
           <FormWrapper id="strategy-form">
-            <Collapse defaultActiveKey={values(StrategyTypes)} bordered={false}>
+            <Collapse defaultActiveKey={defaultActiveKey} bordered={false}>
               <PanelWrapper
                 key={StrategyTypes.Superannuation}
                 header={<TitleStrategyBlock>{getStrategyTitle(StrategyTypes.Superannuation)}</TitleStrategyBlock>}

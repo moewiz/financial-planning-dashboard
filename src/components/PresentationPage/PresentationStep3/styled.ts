@@ -56,9 +56,10 @@ export const ValueStyled = styled.div`
 export const ChartsBlockWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  & > div {
-    &:last-child {
-      margin-bottom: 0px;
+  width: 100%;
+  & > div{
+    &:last-child{
+      margin-bottom: 0px
     }
     &:nth-child(3) {
       margin-bottom: 0px;
@@ -71,6 +72,10 @@ export const ChartBlock = styled.div`
   text-align: center;
   border-radius: 5px;
   padding: 30px 15px;
+  max-width: calc(50% - 20px);
+  .chartjs-render-monitor{
+    margin: 0 auto;
+  }
   ${(props: { hidden?: boolean }) =>
     props.hidden &&
     css`
