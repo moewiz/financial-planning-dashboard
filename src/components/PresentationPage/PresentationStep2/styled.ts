@@ -39,7 +39,7 @@ export const StepPositionBottom = styled.div`
   width: 100%;
   margin: 0 auto;
   position: relative;
-  min-height: 331px;
+  min-height: 330px;
   &.income-doughnut{
     .presentation-doughnut-desc{
       left: calc(50% - 32px);
