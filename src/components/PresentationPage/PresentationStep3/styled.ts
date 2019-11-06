@@ -56,15 +56,14 @@ export const ValueStyled = styled.div`
 export const ChartsBlockWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  & > div{
-    &:last-child{
-      margin-bottom: 0px
+  & > div {
+    &:last-child {
+      margin-bottom: 0px;
     }
-    &:nth-child(3){
-      margin-bottom: 0px
+    &:nth-child(3) {
+      margin-bottom: 0px;
     }
   }
- 
 `;
 export const ChartBlock = styled.div`
   box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.23);
