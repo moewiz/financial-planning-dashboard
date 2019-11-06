@@ -27,23 +27,21 @@ const getDefaultOptions = (config?: any) => ({
     ],
   },
   maintainAspectRatio: false,
+  // maintainAspectRatio: true,
   legend: {
     display: false,
   },
   tooltips: {
-    titleFontFamily:
-      '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
-      '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
-    bodyFontFamily:
-      '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
-      '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
-    footerFontFamily:
-      '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
-      '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
+    titleFontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+      'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
+    bodyFontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+      ''Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
+    footerFontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+      'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
     intersect: false,
     mode: 'label',
     callbacks: {
-      title(tooltipItem: Array<{ label: string }>) {
+      title(tooltipItem: { label: string }[]) {
         const label = tooltipItem[0].label;
         const numberLabel = parseInt(label, 10);
         return !isNaN(numberLabel) && isNumber(numberLabel) ? '20' + label : label;
@@ -71,7 +69,7 @@ const GraphPresentation = (props: GraphPresentationProps) => {
     case GraphType.Area:
       return (
         <Line
-          height={190}
+          height={height}
           data={data}
           redraw={redraw}
           options={{

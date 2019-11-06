@@ -203,7 +203,9 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
             <GraphPresentation
               type={GraphType.Line}
               data={loadGraphData(configNetAssets)(get(chartsData, 'netAssetsChartData'))}
+              redraw
               options={{
+                maintainAspectRatio: true,
                 legend: {
                   display: true,
                   position: 'bottom',
@@ -216,7 +218,9 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
             <GraphPresentation
               type={GraphType.Bar}
               data={loadGraphData(cashflowConfig)(get(chartsData, 'cashflowChartData'))}
+              redraw
               options={{
+                maintainAspectRatio: true,
                 legend: {
                   display: true,
                   position: 'bottom',
@@ -229,7 +233,9 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
             <GraphPresentation
               type={GraphType.Bar}
               data={loadGraphData(taxConfig)(get(chartsData, 'taxChartData'))}
+              redraw
               options={{
+                maintainAspectRatio: true,
                 legend: {
                   display: true,
                   position: 'bottom',
@@ -242,7 +248,9 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
             <GraphPresentation
               type={GraphType.Bar}
               data={loadGraphData(calmPVConfigFinal)(get(chartsData, 'calmPVChartData'))}
+              redraw
               options={{
+                maintainAspectRatio: true,
                 legend: {
                   display: true,
                   position: 'bottom',
