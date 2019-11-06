@@ -33,7 +33,7 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
       dataIndex: 'provider',
       type: 'text',
       key: '0',
-      // width: 160,
+      width: CURRENT_COLUMN_WIDTH.Provider,
     },
     {
       title: 'Owner',
@@ -41,7 +41,7 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
       key: '2',
       type: 'select',
       options: ownerWithJointOptions,
-      width: CURRENT_COLUMN_WIDTH.Default,
+      width: CURRENT_COLUMN_WIDTH.Owner,
     },
     {
       key: 'empty',
@@ -71,7 +71,7 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
     {
       title: '',
       key: 'operation',
-      width: CURRENT_COLUMN_WIDTH.Default,
+      width: CURRENT_COLUMN_WIDTH.Delete,
       className: 'text-align-center',
       editable: false,
     },

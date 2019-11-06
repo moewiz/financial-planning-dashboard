@@ -31,8 +31,18 @@ export const EntryPickerTable = styled.section`
     }
   }
   &.showAge {
-    width: calc(100% - 22px) !important;
+    input{
+      padding-right: 0px;
+      margin-right: 0px;
+    }
     color: #5f698d;
+    .readOnly.ant-calendar-picker{
+      width: calc(100% - 62px)!important;
+    }
+  }
+  .dob-age{
+    display: inline-block;
+    width: 60px;
   }
   &.text-small{
     .ant-input{

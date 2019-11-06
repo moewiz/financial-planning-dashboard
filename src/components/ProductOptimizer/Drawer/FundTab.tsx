@@ -35,7 +35,7 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
       dataIndex: 'value',
       key: '1',
       width: 100,
-      className: 'text-align-right',
+      className: 'text-align-right investments-bold',
       editable: true,
       dollar: true,
       type: EditCellType.number,
@@ -43,7 +43,7 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
     {
       title: '%',
       dataIndex: 'percentage',
-      className: 'text-align-center',
+      className: 'text-align-center investments-bold',
       type: EditCellType.number,
       editable: true,
       options: {

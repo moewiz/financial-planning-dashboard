@@ -34,7 +34,7 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
     {
       title: 'Description',
       dataIndex: 'description',
-      // width: CURRENT_COLUMN_WIDTH.Double,
+      width: CURRENT_COLUMN_WIDTH.DescriptionIcon,
       type: 'text',
       editable: false,
     },
@@ -42,40 +42,40 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
       title: 'First Name',
       dataIndex: 'firstName',
       type: 'text',
-      width: CURRENT_COLUMN_WIDTH.Default,
+      width: CURRENT_COLUMN_WIDTH.firstName,
     },
     {
       title: 'Last Name',
       dataIndex: 'lastName',
       type: 'text',
-      width: CURRENT_COLUMN_WIDTH.Default,
+      width: CURRENT_COLUMN_WIDTH.lastName,
     },
     {
       title: 'DOB',
       dataIndex: 'dob',
       type: 'date',
-      width: CURRENT_COLUMN_WIDTH.Default,
+      width: CURRENT_COLUMN_WIDTH.DOB,
       showAge: true,
     },
     {
       title: 'Emp Status',
       dataIndex: 'empStatus',
       type: 'select',
-      width: CURRENT_COLUMN_WIDTH.Double,
+      width: CURRENT_COLUMN_WIDTH.empStatus,
       options: empStatusOptions,
     },
     {
       title: 'Gender',
       dataIndex: 'gender',
       type: 'select',
-      width: CURRENT_COLUMN_WIDTH.Default,
+      width: CURRENT_COLUMN_WIDTH.gender,
       options: genderOptions,
     },
     {
       title: 'Marital Status',
       dataIndex: 'maritalStatus',
       type: 'select',
-      width: CURRENT_COLUMN_WIDTH.Default,
+      width: CURRENT_COLUMN_WIDTH.maritalStatus,
       options: maritalStatusOptions,
       confirmTitle: {
         title: 'Remove partner?',
@@ -84,10 +84,6 @@ class BasicInformationTable extends PureComponent<BasicInformationProps> {
         cancelText: 'No',
         fieldValue: maritalStatusOptions[1].value,
       },
-    },
-    {
-      title: '',
-      width: CURRENT_COLUMN_WIDTH.Default,
     },
   ];
 

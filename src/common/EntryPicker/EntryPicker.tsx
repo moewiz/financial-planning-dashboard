@@ -180,7 +180,7 @@ class EntryPicker extends PureComponent<EntryPickerProps, EntryPickerState> {
               open={open}
               format={format}
             />
-            { showAge && value && <span>({age})</span> }
+            { showAge && value && <span className="dob-age">(Age {age})</span> }
           </EntryPickerTable>
         );
       }
