@@ -14,14 +14,14 @@ const configNetAssets = {
       label: 'Current',
       fill: false,
       lineTension: 0.2,
-      borderColor: '#FF5722',
+      borderColor: '#00BCD4', // #FF5722
     },
     {
       dataIndex: 'proposed',
       label: 'Proposed',
       fill: false,
       lineTension: 0.2,
-      borderColor: '#00BCD4',
+      borderColor: '#FF5722',
     },
   ],
 };
@@ -31,13 +31,13 @@ const cashflowConfig = {
       dataIndex: 'current',
       label: 'Current',
       fill: true,
-      borderColor: '#FF5722',
+      borderColor: '#00BCD4',
     },
     {
       dataIndex: 'proposed',
       label: 'Proposed',
       fill: true,
-      borderColor: '#00BCD4',
+      borderColor: '#FF5722',
     },
   ],
 };
@@ -47,13 +47,13 @@ const taxConfig = {
       dataIndex: 'current',
       label: 'Current',
       fill: true,
-      borderColor: '#FF5722',
+      borderColor: '#00BCD4',
     },
     {
       dataIndex: 'proposed',
       label: 'Proposed',
       fill: true,
-      borderColor: '#00BCD4',
+      borderColor: '#FF5722',
     },
   ],
 };
@@ -135,12 +135,55 @@ const calmPVConfigWithoutSalarySarisfy = {
   ],
 };
 
+const calmPVConfigWithoutSalarySarisfyNInsuranceWithLifeEvent = {
+  datasets: [
+    {
+      type: 'line',
+      dataIndex: 'expenditure',
+      label: 'Expenditure',
+      fill: false,
+      borderColor: '#FF5722',
+      backgroundColor: '#FF5722',
+      pointBorderColor: '#FF5722',
+      pointBackgroundColor: '#FF5722',
+      pointHoverBackgroundColor: '#FF5722',
+      pointHoverBorderColor: '#FF5722',
+    },
+    {
+      type: 'line',
+      dataIndex: 'incomeCapital',
+      label: 'Inflow + Capital Drawdown',
+      fill: false,
+      borderColor: '#ffff00',
+      backgroundColor: '#ffff00',
+      pointBorderColor: '#ffff00',
+      pointBackgroundColor: '#ffff00',
+      pointHoverBackgroundColor: '#ffff00',
+      pointHoverBorderColor: '#ffff00',
+    },
+    {
+      type: 'bar',
+      dataIndex: 'netAssets',
+      label: 'Net Assets',
+      fill: false,
+      borderColor: '#71B37C',
+      backgroundColor: '#71B37C',
+      hoverBackgroundColor: '#71B37C',
+      hoverBorderColor: '#71B37C',
+    },
+  ],
+};
+
 const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeEvent?: boolean; checkList?: any }) => {
   const { chartsData, retirementYear = 60, hasLifeEvent = false, checkList = {} } = props;
   const [chartIndex, setChartIndex] = useState<number>(-1);
   let calmPVConfigFinal = calmPVConfig;
   if (!(checkList as any)['Salary Sacrifice']) {
     calmPVConfigFinal = calmPVConfigWithoutSalarySarisfy;
+  }
+
+  if (!(checkList as any)['Salary Sacrifice'] && !(checkList as any)['Insurance'] && hasLifeEvent) {
+    calmPVConfigFinal = calmPVConfigWithoutSalarySarisfyNInsuranceWithLifeEvent;
   }
 
   return (

@@ -16,6 +16,7 @@ import {
   chartsDataResources,
   chartsDataResourcesWithLifeEvent,
   chartsDataResourcesWithoutSalarySacrifice,
+  chartsDataResourcesWithoutSalarySacrificeNInsuranceWithLifeEvent,
 } from './chartData';
 
 interface CheckListInterface {
@@ -65,6 +66,14 @@ const CheckboxContainer = (props: { children: React.ReactNode; handleItemToggle?
 };
 
 const getData = (hasLifeEvent: boolean, retirementYrs: number, checkList?: CheckListInterface) => {
+  if (!(checkList as any)['Salary Sacrifice'] && !(checkList as any)['Insurance'] && hasLifeEvent) {
+    return (chartsDataResourcesWithoutSalarySacrificeNInsuranceWithLifeEvent as any)[retirementYrs];
+  }
+
+  if (!(checkList as any)['Salary Sacrifice'] && hasLifeEvent) {
+    return (chartsDataResources as any)[retirementYrs];
+  }
+
   if (!(checkList as CheckListInterface)['Salary Sacrifice']) {
     return (chartsDataResourcesWithoutSalarySacrifice as any)[retirementYrs];
   }
@@ -72,7 +81,6 @@ const getData = (hasLifeEvent: boolean, retirementYrs: number, checkList?: Check
   if (hasLifeEvent) {
     // return (chartsDataResourcesWithLifeEvent as any)[retirementYrs];
     return (chartsDataResources as any)[retirementYrs];
-
   }
 
   return (chartsDataResources as any)[retirementYrs];
