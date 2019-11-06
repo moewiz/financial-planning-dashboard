@@ -1,23 +1,41 @@
 import React from 'react';
 import numeral from 'numeral';
-import { netAssetsDrillDownData, netAssetsDrillDownDataWithLifeEvent } from './drilldownData';
+import {
+  netAssetsDrillDownData,
+  netAssetsDrillDownDataWithLifeEvent,
+  netAssetsDrillDownDataWithoutSalarySatisfy,
+} from './drilldownData';
 import { ChartBlockDrillDown } from '../PresentationStep3/styled';
 import GraphPresentation from '../../StrategyPage/Graph/GraphPresentation';
 import { GraphType } from '../../StrategyPage/Graph/GraphContainer';
+import { chartsDataResources, chartsDataResourcesWithoutSalarySacrifice } from './chartData';
+
+const getNetAssetChartData = (hasLifeEvent: boolean, retirementYear: number, checkList?: any) => {
+  if (!(checkList as any)['Salary Sacrifice']) {
+    return (netAssetsDrillDownDataWithoutSalarySatisfy as any)[retirementYear];
+  }
+
+  if (hasLifeEvent) {
+    // return (netAssetsDrillDownDataWithLifeEvent as any)[retirementYrs];
+    return (netAssetsDrillDownData as any)[retirementYear];
+  }
+
+  return (netAssetsDrillDownData as any)[retirementYear];
+};
 
 const NetAssetsDrilldownCharts = (props: {
   retirementYear: number;
   currentDrilldown: number;
   shouldShow?: boolean;
   hasLifeEvent?: boolean;
+  checkList?: any;
 }) => {
-  const { retirementYear, currentDrilldown, shouldShow, hasLifeEvent } = props;
-  const data = hasLifeEvent
-    ? (netAssetsDrillDownDataWithLifeEvent as any)[retirementYear]
-    : (netAssetsDrillDownData as any)[retirementYear];
+  const { retirementYear, currentDrilldown, shouldShow, hasLifeEvent = false, checkList = {} } = props;
   if (!shouldShow) {
     return null;
   }
+
+  const data = getNetAssetChartData(hasLifeEvent, retirementYear, checkList);
 
   return (
     <>

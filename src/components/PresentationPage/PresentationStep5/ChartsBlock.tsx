@@ -151,6 +151,7 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
           back={() => setChartIndex(-1)}
           retirementYear={retirementYear}
           hasLifeEvent={hasLifeEvent}
+          checkList={checkList}
         />
       ) : (
         <ChartsBlockWrapper>

@@ -19,6 +19,7 @@ interface DrilldownChartProps {
   back: () => void;
   retirementYear: number;
   hasLifeEvent?: boolean;
+  checkList?: any;
 }
 
 const buttons = [
@@ -30,7 +31,7 @@ const buttons = [
 
 const DrilldownChart = (props: DrilldownChartProps) => {
   const [currentDrilldown, setCurrentDrilldown] = useState(0);
-  const { index, back, retirementYear, hasLifeEvent } = props;
+  const { index, back, retirementYear, hasLifeEvent, checkList = {} } = props;
 
   return (
     <DrilldownChartWrapper>
@@ -75,6 +76,7 @@ const DrilldownChart = (props: DrilldownChartProps) => {
           currentDrilldown={currentDrilldown}
           shouldShow={index === 0}
           hasLifeEvent={hasLifeEvent}
+          checkList={checkList}
         />
       </DrilldownContent>
     </DrilldownChartWrapper>
