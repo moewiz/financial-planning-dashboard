@@ -39,7 +39,7 @@ export const StepPositionBottom = styled.div`
   width: 100%;
   margin: 0 auto;
   position: relative;
-  min-height: 280px;
+  min-height: 320px;
   .income-doughnut{
     left: calc(50% - 30px);
     top: calc(50% + 15px);
@@ -118,7 +118,7 @@ export const KeyPoitItem = styled.div`
 export const CardResultsPositionStep = styled.div`
   .ant-card-grid{
     padding: 15px!important;
-    min-height: 116px;
+    min-height: 141px;
     text-align: center;
     align-items: center;
     display: flex;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { map } from 'lodash';
-
+import numeral from 'numeral';
 import {
   DrawerTableContent,
   DrawerTableHeader,
@@ -50,7 +50,7 @@ const TableContent = ({ showTitle, values }: TableContentProps) => (
             <div className="values">
               {map(data.values, (value: number, idx: number) => (
                 <span className={'cell'} key={idx}>
-                  {value}%
+                  {numeral(value / 100).format('0.0%')}
                 </span>
               ))}
             </div>
@@ -61,7 +61,7 @@ const TableContent = ({ showTitle, values }: TableContentProps) => (
             <div className="values">
               {map(data.values, (value: number, idx: number) => (
                 <span className={'cell'} key={idx}>
-                  {value}%
+                  {numeral(value / 100).format('0.0%')}
                 </span>
               ))}
             </div>
