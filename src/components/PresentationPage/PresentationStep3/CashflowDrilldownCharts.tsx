@@ -1,12 +1,19 @@
 import React from 'react';
-import { cashFlowDrillDownData } from './drilldownData';
+import { cashFlowDrillDownData, cashFlowDrillDownDataWithLifeEvent } from './drilldownData';
 import { ChartBlockDrillDown } from './styled';
 import GraphPresentation from '../../StrategyPage/Graph/GraphPresentation';
 import { GraphType } from '../../StrategyPage/Graph/GraphContainer';
 
-const CashflowDrilldownCharts = (props: { retirementYear: number; currentDrilldown: number; shouldShow: boolean }) => {
-  const { retirementYear, currentDrilldown, shouldShow } = props;
-  const data = (cashFlowDrillDownData as any)[retirementYear];
+const CashflowDrilldownCharts = (props: {
+  retirementYear: number;
+  currentDrilldown: number;
+  shouldShow: boolean;
+  hasLifeEvent?: boolean;
+}) => {
+  const { retirementYear, currentDrilldown, shouldShow, hasLifeEvent } = props;
+  const data = hasLifeEvent
+    ? (cashFlowDrillDownDataWithLifeEvent as any)[retirementYear]
+    : (cashFlowDrillDownData as any)[retirementYear];
   if (!shouldShow) {
     return null;
   }
