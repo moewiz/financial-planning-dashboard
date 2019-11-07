@@ -24,10 +24,10 @@ interface GraphProps {
     labels?: any[];
     datasets: object[];
   };
-  dataList?: {
+  dataList?: Array<{
     labels?: any[];
     datasets: object[];
-  }[];
+  }>;
   processingDraw: boolean;
   options?: object;
   className?: string;
@@ -55,21 +55,21 @@ const defaultOptions = {
   tooltips: {
     bodyFontStyle: 'normal',
     titleFontFamily:
-      "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', " +
-      "'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+      '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
+      '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
     bodyFontFamily:
-      "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', " +
-      "'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+      '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
+      '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
     footerFontFamily:
-      "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', " +
-      "'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+      '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
+      '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
     intersect: false,
     mode: 'label',
     callbacks: {
-      title(tooltipItem: { label: string }[]) {
+      title(tooltipItem: Array<{ label: string }>) {
         const label = tooltipItem[0].label;
         const numberLabel = parseInt(label, 10);
-        return !isNaN(numberLabel) && isNumber(numberLabel) ? '20' + label : label;
+        return !isNaN(numberLabel) && isNumber(numberLabel) ? 'Age ' + label : label;
       },
       label(
         tooltipItem: { datasetIndex: React.ReactText; yLabel: number },
@@ -88,14 +88,14 @@ const defaultOptions = {
 };
 
 const GraphContainer = (props: GraphProps) => {
-  const { type, name, data, className, onGraphClick, redraw: redrawProp, dataList } = props;
+  const { type, name, data, className, onGraphClick, redraw: redrawProp, dataList, options } = props;
   const flipping = dataList && dataList.length > 0;
   const [activeIndex, setActiveIndex] = useState(0);
   const defaultListOfData = dataList && dataList.length > 0 ? dataList : [data];
   const [listOfData, setListOfData] = useState(defaultListOfData);
   useEffect(() => {
     const id = setInterval(() => {
-      setActiveIndex(index => (index + 1 >= listOfData.length ? 0 : index + 1));
+      setActiveIndex((index) => (index + 1 >= listOfData.length ? 0 : index + 1));
     }, GRAPH_FREQUENCY);
     return () => clearInterval(id);
   }, []);
@@ -117,6 +117,7 @@ const GraphContainer = (props: GraphProps) => {
               redraw={redraw}
               options={{
                 ...defaultOptions,
+                ...options,
                 scales: {
                   yAxes: [
                     {
@@ -131,19 +132,19 @@ const GraphContainer = (props: GraphProps) => {
       case GraphType.Line:
         return (
           <GraphCard className={classNames({ active: index === activeIndex })} key={index}>
-            <Line height={190} data={graphData} redraw={redraw} options={defaultOptions} />
+            <Line height={190} data={graphData} redraw={redraw} options={{ ...defaultOptions, ...options }} />
           </GraphCard>
         );
       case GraphType.Bar:
         return (
           <GraphCard className={classNames({ active: index === activeIndex })} key={index}>
-            <Bar height={190} data={graphData} redraw={redraw} options={defaultOptions} />
+            <Bar height={190} data={graphData} redraw={redraw} options={{ ...defaultOptions, ...options }} />
           </GraphCard>
         );
       case GraphType.HorizontalBar:
         return (
           <GraphCard className={classNames({ active: index === activeIndex })} key={index}>
-            <HorizontalBar height={190} data={graphData} redraw={redraw} options={defaultOptions} />
+            <HorizontalBar height={190} data={graphData} redraw={redraw} options={{ ...defaultOptions, ...options }} />
           </GraphCard>
         );
       default:
