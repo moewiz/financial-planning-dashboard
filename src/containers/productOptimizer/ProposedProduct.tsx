@@ -5,7 +5,7 @@ import cn from 'classnames';
 import { useDrop } from 'react-dnd';
 import uuid from 'uuid';
 
-import { TableEntryContainer } from '../../pages/client/styled';
+import { HeaderTitleTable, TableEntryContainer, TextTitle } from '../../pages/client/styled';
 import { Projections } from '../../components/Icons';
 import NewProposedProduct from '../../components/ProductOptimizer/NewProposedProduct';
 import { ItemTypes, ProductTable } from '../../pages/client/productOptimizer/ProductOptimizer';
@@ -16,6 +16,7 @@ import { proposedChoices } from '../../enums/proposedChoices';
 import { formatString, Param, Text } from '../../components/StrategyPage/StandardText';
 import { createEvent } from '../../utils/GA';
 import { listenerCount } from 'cluster';
+import { FieldArrayRenderProps } from 'formik';
 
 interface ProposedProductState {
   loading: boolean;
@@ -72,6 +73,7 @@ interface ProductOpt extends Product {
 interface ProposedProductProps extends ProductTable {
   tabKey: string;
   dataList: ProductOpt[];
+  readOnly?: boolean;
 }
 
 const newText = '{{0}}, add a new investment product';
@@ -82,33 +84,6 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
   public state = {
     loading: false,
     count: 0,
-  };
-
-  public proposedProduct = {
-    body: {
-      cell: components.body.cell,
-      wrapper: (props: any) => {
-        const { fieldArrayRenderProps } = this.props;
-        const [{ canDrop, isOver }, drop] = useDrop({
-          accept: ItemTypes.ROW,
-          drop: () => ({ name: 'Proposed Table', unshift: fieldArrayRenderProps.unshift }),
-          collect: (monitor) => ({
-            isOver: monitor.isOver(),
-            canDrop: monitor.canDrop(),
-          }),
-        });
-
-        const isActive = canDrop && isOver;
-        let backgroundColor = '#fff';
-        if (isActive) {
-          backgroundColor = '#e7e7ef';
-        } else if (canDrop) {
-          backgroundColor = '#f3f3f7';
-        }
-
-        return <tbody {...props} ref={drop} style={{ backgroundColor }} />;
-      },
-    },
   };
 
   private columns = [
@@ -149,6 +124,7 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
       title: '',
       key: 'operation',
       render: (text: any, record: any, index: number) => {
+        const { readOnly } = this.props;
         const isDisable = !record || !record.id;
         return (
           <>
@@ -157,7 +133,7 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
               component={Projections}
               onClick={() => !isDisable && this.openDrawer(record)}
             />
-            {isDisable ? (
+            {readOnly ? null : isDisable ? (
               <Icon className={'remove disabled'} type="close-square" />
             ) : (
               <Popconfirm title="Really delete?" onConfirm={() => this.onRemove(record, index)}>
@@ -172,6 +148,32 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
   ];
 
   private tableName = 'proposed-product';
+
+  public proposedProduct = (fieldArrayRenderProps: FieldArrayRenderProps) => ({
+    body: {
+      cell: components.body.cell,
+      wrapper: (props: any) => {
+        const [{ canDrop, isOver }, drop] = useDrop({
+          accept: ItemTypes.ROW,
+          drop: () => ({ name: 'Proposed Table', unshift: fieldArrayRenderProps.unshift }),
+          collect: (monitor) => ({
+            isOver: monitor.isOver(),
+            canDrop: monitor.canDrop(),
+          }),
+        });
+
+        const isActive = canDrop && isOver;
+        let backgroundColor = '#fff';
+        if (isActive) {
+          backgroundColor = '#e7e7ef';
+        } else if (canDrop) {
+          backgroundColor = '#f3f3f7';
+        }
+
+        return <tbody {...props} ref={drop} style={{ backgroundColor }} />;
+      },
+    },
+  })
 
   public expandedRowRenderer = (row: Product, index: number, indent: number, expanded: boolean) => {
     if (row.note) {
@@ -221,8 +223,11 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
   }
 
   public onAdd = (values: string[]) => {
+    const { fieldArrayRenderProps, client, readOnly } = this.props;
     const [action, productId] = values;
-    const { fieldArrayRenderProps, client } = this.props;
+    if (readOnly || !fieldArrayRenderProps) {
+      return;
+    }
     const { count } = this.state;
     let newProduct: { [key: string]: any } = {};
     const clientName = get(client, 'name');
@@ -277,21 +282,30 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
 
   public onRemove = (record: any, index: number) => {
     if (record && record.id) {
-      const { fieldArrayRenderProps } = this.props;
+      const { fieldArrayRenderProps, readOnly } = this.props;
+      if (readOnly || !fieldArrayRenderProps) {
+        return;
+      }
       fieldArrayRenderProps.remove(index);
     }
   }
 
   public handleAdd: (row?: Product) => void = (row = { description: '', value: undefined }) => {
     const { count } = this.state;
-    const { fieldArrayRenderProps } = this.props;
+    const { fieldArrayRenderProps, readOnly } = this.props;
+    if (readOnly || !fieldArrayRenderProps) {
+      return;
+    }
 
     fieldArrayRenderProps.push({ ...row, key: count });
     this.increaseCount();
   }
 
   public onEdit = (value: any, name: string, rowIndex: number, isRemove: boolean = false) => {
-    const { fieldArrayRenderProps, dataList, client } = this.props;
+    const { fieldArrayRenderProps, dataList, client, readOnly } = this.props;
+    if (readOnly || !fieldArrayRenderProps) {
+      return;
+    }
     const rowName = `${fieldArrayRenderProps.name}[${rowIndex}]`;
     const fieldName = `${rowName}.${name}`;
     fieldArrayRenderProps.form.setFieldValue(fieldName, value);
@@ -320,7 +334,10 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
   }
 
   public onEditLink = (value: any, name: string, rowIndex: number, isRemove: boolean = false) => {
-    const { fieldArrayRenderProps, client } = this.props;
+    const { fieldArrayRenderProps, client, readOnly } = this.props;
+    if (readOnly || !fieldArrayRenderProps) {
+      return;
+    }
     const rowName = `${fieldArrayRenderProps.name}[${rowIndex}]`;
     const fieldName = `${rowName}.${name}`;
 
@@ -337,6 +354,8 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
   }
 
   public getColumns = () => {
+    const { readOnly } = this.props;
+
     return this.columns.map((col) => {
       if (col.key === 'links') {
         return {
@@ -359,6 +378,7 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
           ...col,
           onCell: (record: any, rowIndex: number) => ({
             ...col,
+            readOnly,
             record,
             rowIndex,
             type: col.type || 'text',
@@ -373,22 +393,31 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
 
   public getCurrentProducts = () => {
     const { fieldArrayRenderProps, tabKey } = this.props;
-    const currentProducts: Product[] = get(fieldArrayRenderProps.form.values, [tabKey, 'current'], []);
-    return currentProducts.filter((i) => i.id);
+    if (fieldArrayRenderProps) {
+      const currentProducts: Product[] = get(fieldArrayRenderProps.form.values, [tabKey, 'current'], []);
+      return currentProducts.filter((i) => i.id);
+    }
+    return [];
   }
 
   public render() {
-    const { dataList } = this.props;
+    const { dataList, readOnly, fieldArrayRenderProps } = this.props;
 
     return (
       <TableEntryContainer smallPadding id="proposedTable">
-        <NewProposedProduct onAdd={this.onAdd} currentProducts={this.getCurrentProducts()} />
+        {!readOnly && fieldArrayRenderProps ? (
+          <NewProposedProduct onAdd={this.onAdd} currentProducts={this.getCurrentProducts()} />
+        ) : (
+          <HeaderTitleTable>
+            <TextTitle small={true}>Current</TextTitle>
+          </HeaderTitleTable>
+        )}
         <Table
           className={`table-general optimizer-table ${this.tableName}-table`}
           columns={this.getColumns()}
           dataSource={dataList}
           pagination={false}
-          components={this.proposedProduct}
+          components={!readOnly && fieldArrayRenderProps ? this.proposedProduct(fieldArrayRenderProps) : components}
           expandedRowRender={this.expandedRowRenderer}
           defaultExpandAllRows={true}
           expandIconAsCell={true}

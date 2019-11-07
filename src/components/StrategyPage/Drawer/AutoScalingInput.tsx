@@ -11,6 +11,7 @@ interface AutoScalingInput {
   quotationMark: boolean;
   options?: any;
   optionalProps: { [key: string]: any };
+  disabled?: boolean;
 }
 
 const hideStyles: CSSProperties = {

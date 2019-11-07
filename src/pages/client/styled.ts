@@ -196,6 +196,7 @@ export const TableEntryContainer = styled.section.attrs({
         font-weight: normal;
         text-align: left;
         margin-left: -11px;
+        background-color: #fff;
         .ant-input-number-input {
           font-weight: normal;
         }

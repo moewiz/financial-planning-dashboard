@@ -192,7 +192,7 @@ class EditCell extends Component<EditCellProps> {
   }
 
   public renderInputText = () => {
-    const { calculateWidth, value: propValue, options: customOptions } = this.props;
+    const { calculateWidth, value: propValue, options: customOptions, disabled } = this.props;
     const { quotationMark = false, ...options } = customOptions || {};
     const value = propValue ? propValue : '';
     const optionalProps: { [key: string]: any } = {};
@@ -206,6 +206,7 @@ class EditCell extends Component<EditCellProps> {
           quotationMark={quotationMark}
           optionalProps={optionalProps}
           options={options}
+          disabled={disabled}
         />
       );
     }
@@ -217,6 +218,7 @@ class EditCell extends Component<EditCellProps> {
             value={value}
             onChange={this.onChangeText}
             className={'edit-cell text'}
+            disabled={disabled}
             {...optionalProps}
             {...options}
           />
@@ -225,15 +227,31 @@ class EditCell extends Component<EditCellProps> {
     }
 
     return (
-      <Input value={value} onChange={this.onChangeText} className={'edit-cell text'} {...optionalProps} {...options} />
+      <Input
+        value={value}
+        onChange={this.onChangeText}
+        className={'edit-cell text'}
+        disabled={disabled}
+        {...optionalProps}
+        {...options}
+      />
     );
   }
 
   public renderInputTextArea = () => {
-    const { placeholder, options, value: propValue } = this.props;
+    const { placeholder, options, value: propValue, disabled } = this.props;
     const value = propValue || '';
 
-    return <TextArea value={value} placeholder={placeholder} onChange={this.onChangeTextArea} autosize {...options} />;
+    return (
+      <TextArea
+        value={value}
+        placeholder={placeholder}
+        onChange={this.onChangeTextArea}
+        autosize
+        disabled={disabled}
+        {...options}
+      />
+    );
   }
 
   public renderLinkCurrentProduct = () => {

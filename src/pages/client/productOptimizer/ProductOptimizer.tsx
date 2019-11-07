@@ -19,8 +19,8 @@ export const ItemTypes = {
 export interface ProductTable {
   dataList: Product[];
   openDrawer: (record?: any) => void;
-  fieldArrayRenderProps: FieldArrayRenderProps;
-  client: {
+  fieldArrayRenderProps?: FieldArrayRenderProps;
+  client?: {
     id: number;
     name: string;
   };
@@ -35,6 +35,7 @@ interface ProductOptimizerProps {
   };
 
   pageData: ProductOptimizerPage;
+  readOnly?: boolean;
 }
 
 interface ProductOptimizerStates {

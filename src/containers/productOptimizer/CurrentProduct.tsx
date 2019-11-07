@@ -18,7 +18,7 @@ interface CurrentProductState {
 }
 
 const EditCellContainer = (props: any) => {
-  const { dataIndex, record, type, editable, onEdit, rowIndex, showLinks } = props;
+  const { dataIndex, record, type, editable, onEdit, rowIndex, showLinks, readOnly } = props;
   const [value, setValue] = useState<any>(get(record, dataIndex));
   useEffect(() => {
     setValue(get(record, dataIndex));
@@ -51,7 +51,7 @@ const EditCellContainer = (props: any) => {
           value={value}
           onChange={onChange}
           type={type}
-          disabled={record.id === -1 && dataIndex === 'percentage'}
+          disabled={readOnly || (record.id === -1 && dataIndex === 'percentage')}
         />
       ) : (
         props.children
@@ -64,7 +64,9 @@ const EditCellContainer = (props: any) => {
               closable={true}
               color="#e2e2e2"
               onClose={() =>
-                onEdit(filter(get(record, 'links', []), (link) => link.id !== product.id), 'links', rowIndex, true)
+                readOnly
+                  ? null
+                  : onEdit(filter(get(record, 'links', []), (link) => link.id !== product.id), 'links', rowIndex, true)
               }
             >
               {product.description}
@@ -121,7 +123,7 @@ const currentComponents = {
   },
 };
 
-class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
+class CurrentProduct extends PureComponent<ProductTable & { readOnly?: boolean }, CurrentProductState> {
   public state = {
     loading: false,
   };
@@ -155,7 +157,9 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
       title: '',
       key: 'operation',
       render: (text: any, record: any, index: number) => {
+        const { readOnly } = this.props;
         const isDisable = !record || !record.id;
+
         return (
           <>
             <Icon
@@ -163,13 +167,15 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
               component={Projections}
               onClick={() => !isDisable && this.openDrawer(record)}
             />
-            {isDisable ? (
-              <Icon className={'remove disabled'} type="close-square" />
-            ) : (
-              <Popconfirm title="Really delete?" onConfirm={() => this.onRemove(record, index)}>
-                <Icon className="remove" type="close-square" />
-              </Popconfirm>
-            )}
+            {!readOnly ? (
+              isDisable ? (
+                <Icon className={'remove disabled'} type="close-square" />
+              ) : (
+                <Popconfirm title="Really delete?" onConfirm={() => this.onRemove(record, index)}>
+                  <Icon className="remove" type="close-square" />
+                </Popconfirm>
+              )
+            ) : null}
           </>
         );
       },
@@ -179,7 +185,10 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
   private tableName = 'current-product';
 
   public handleAdd: (row?: Product) => void = (row = { description: '', value: undefined }) => {
-    const { fieldArrayRenderProps } = this.props;
+    const { fieldArrayRenderProps, readOnly } = this.props;
+    if (readOnly || !fieldArrayRenderProps) {
+      return;
+    }
     fieldArrayRenderProps.push(row);
   }
 
@@ -190,13 +199,19 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
 
   public onRemove = (record: any, index: number) => {
     if (record && record.id) {
-      const { fieldArrayRenderProps } = this.props;
+      const { fieldArrayRenderProps, readOnly } = this.props;
+      if (readOnly || !fieldArrayRenderProps) {
+        return;
+      }
       fieldArrayRenderProps.remove(index);
     }
   }
 
   public onEdit = (value: any, name: string, rowIndex: number) => {
-    const { fieldArrayRenderProps, dataList } = this.props;
+    const { fieldArrayRenderProps, dataList, readOnly } = this.props;
+    if (readOnly || !fieldArrayRenderProps) {
+      return;
+    }
     const rowName = `${fieldArrayRenderProps.name}[${rowIndex}]`;
     const fieldName = `${rowName}.${name}`;
     fieldArrayRenderProps.form.setFieldValue(fieldName, value);
@@ -213,12 +228,14 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
   }
 
   public getColumns = () => {
+    const { readOnly } = this.props;
     return this.columns.map((col) => {
       if (col.editable) {
         return {
           ...col,
           onCell: (record: any, rowIndex: number) => ({
             ...col,
+            readOnly,
             record,
             rowIndex,
             type: col.type || 'text',
@@ -264,22 +281,33 @@ class CurrentProduct extends PureComponent<ProductTable, CurrentProductState> {
   }
 
   public render() {
-    const { dataList } = this.props;
+    const { dataList, readOnly } = this.props;
 
     return (
       <TableEntryContainer smallPadding>
         <HeaderTitleTable>
           <TextTitle small={true}>Current</TextTitle>
         </HeaderTitleTable>
-        <Table
-          rowKey={(rowKey) => (rowKey.id ? rowKey.id.toString() : 'new')}
-          className={`table-general optimizer-table ${this.tableName}-table`}
-          columns={this.getColumns()}
-          dataSource={dataList}
-          pagination={false}
-          components={currentComponents}
-          onRow={(record, index) => ({ index, moveRow: this.moveRow, record })}
-        />
+        {readOnly ? (
+          <Table
+            rowKey={(rowKey) => (rowKey.id ? rowKey.id.toString() : 'new')}
+            className={`table-general optimizer-table ${this.tableName}-table`}
+            columns={this.getColumns()}
+            dataSource={dataList}
+            pagination={false}
+            components={components}
+          />
+        ) : (
+          <Table
+            rowKey={(rowKey) => (rowKey.id ? rowKey.id.toString() : 'new')}
+            className={`table-general optimizer-table ${this.tableName}-table`}
+            columns={this.getColumns()}
+            dataSource={dataList}
+            pagination={false}
+            components={currentComponents}
+            onRow={(record, index) => ({ index, moveRow: this.moveRow, record })}
+          />
+        )}
       </TableEntryContainer>
     );
   }
