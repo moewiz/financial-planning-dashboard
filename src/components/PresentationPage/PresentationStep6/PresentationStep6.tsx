@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { connect } from 'formik';
 import numeral from 'numeral';
 
-import numeral from 'numeral';
 import { StepWrapper } from '../styled';
 import { DocumentData, FormikPartProps } from '../PresentationPage';
 import { GraphType } from '../../StrategyPage/Graph/GraphContainer';
