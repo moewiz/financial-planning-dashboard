@@ -60,7 +60,7 @@ const EditCellContainer = (props: any) => {
       )}
       {showLinks && (
         <TagList>
-          {map(get(record, 'links', []), (product) => (
+          {map(get(record, 'links', []), (product) => product && product.id !== -1 && (
             <TagStyled
               key={product.id}
               closable={!readOnly}
