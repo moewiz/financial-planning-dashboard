@@ -43,10 +43,10 @@ const getDefaultOptions = (config?: any) => ({
     intersect: false,
     mode: 'label',
     callbacks: {
-      title(tooltipItem: { label: string }[]) {
+      title(tooltipItem: Array<{ label: string }>) {
         const label = tooltipItem[0].label;
         const numberLabel = parseInt(label, 10);
-        return !isNaN(numberLabel) && isNumber(numberLabel) ? '20' + label : label;
+        return !isNaN(numberLabel) && isNumber(numberLabel) ? 'Age ' + label : label;
       },
       label(
         tooltipItem: { datasetIndex: React.ReactText; yLabel: number },
