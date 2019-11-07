@@ -99,6 +99,11 @@ class LinkCurrentProduct extends PureComponent<EditCellProps, LinkCurrentProduct
   }
 
   public openPopover = () => {
+    const { disabled } = this.props;
+    if (disabled) {
+      return;
+    }
+
     if (!this.state.open) {
       this.preventNextClose = true;
       this.setState({

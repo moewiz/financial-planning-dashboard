@@ -37,7 +37,9 @@ const EditCellContainer = (props: any) => {
   if (editable && type === EditCellType.linkCurrentProduct) {
     return (
       <td>
-        {record && record.id && <LinkCurrentProduct {...props} name={dataIndex} value={value} onChange={onChange} />}
+        {record && record.id && (
+          <LinkCurrentProduct disabled={readOnly} {...props} name={dataIndex} value={value} onChange={onChange} />
+        )}
       </td>
     );
   }
@@ -61,12 +63,10 @@ const EditCellContainer = (props: any) => {
           {map(get(record, 'links', []), (product) => (
             <TagStyled
               key={product.id}
-              closable={true}
+              closable={!readOnly}
               color="#e2e2e2"
               onClose={() =>
-                readOnly
-                  ? null
-                  : onEdit(filter(get(record, 'links', []), (link) => link.id !== product.id), 'links', rowIndex, true)
+                onEdit(filter(get(record, 'links', []), (link) => link.id !== product.id), 'links', rowIndex, true)
               }
             >
               {product.description}

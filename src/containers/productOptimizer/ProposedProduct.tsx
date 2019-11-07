@@ -362,6 +362,7 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
           ...col,
           onCell: (record: any, rowIndex: number) => ({
             ...col,
+            readOnly,
             record,
             rowIndex,
             type: col.type || 'text',
