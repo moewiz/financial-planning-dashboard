@@ -20,9 +20,9 @@ import {
   CardPointPositionStep,
   StepPositionBottom,
   ValPositionStep,
-  KeyPoitItem,
+  KeyPointItem,
   CardResultsPositionStep,
-  KeyPoitList,
+  KeyPointList,
   ExpensesBlockStep,
   AssetsBlockStep,
   LiabilitiesBlockStep,
@@ -178,24 +178,24 @@ const PresentationStep2 = (props: FormikPartProps) => {
             </CardChartPositionStep>
             <CardPointPositionStep>
               <Card title="Estate Planning" bordered={false} style={{ width: '100%' }}>
-                <KeyPoitList>
-                  <KeyPoitItem>
+                <KeyPointList>
+                  <KeyPointItem>
                     <Icon type="exclamation" />
                     Will
-                  </KeyPoitItem>
-                  <KeyPoitItem>
+                  </KeyPointItem>
+                  <KeyPointItem>
                     <Icon type="exclamation" />
                     PoA
-                  </KeyPoitItem>
-                  <KeyPoitItem>
+                  </KeyPointItem>
+                  <KeyPointItem>
                     <Icon type="check" />
                     Death Benefit nomination
-                  </KeyPoitItem>
-                  <KeyPoitItem>
+                  </KeyPointItem>
+                  <KeyPointItem>
                     <Icon type="exclamation" />
                     Testamentary Trust
-                  </KeyPoitItem>
-                </KeyPoitList>
+                  </KeyPointItem>
+                </KeyPointList>
               </Card>
             </CardPointPositionStep>
           </StepPositionTop>

@@ -110,12 +110,12 @@ export const CardPointPositionStep = styled(CardChartPositionStep)`
    margin-right: 0px;
    margin-left: 15px;
 `;
-export const KeyPoitList = styled.div`
+export const KeyPointList = styled.div`
  display: flex;
  color: #697396;
  flex-direction: column;
 `;
-export const KeyPoitItem = styled.div`
+export const KeyPointItem = styled.div`
  font-size: 16px;
  margin-bottom: 10px;
  .anticon {

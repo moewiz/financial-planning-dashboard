@@ -17,7 +17,7 @@ import { getParams } from '../../pages/client/Client';
 import { createEvent } from '../../utils/GA';
 import { getStrategyTitle } from './StrategyPage';
 import { StrategyItemI } from './StrategyTable/StrategyItem';
-import { KeyPoitItem, KeyPoitList } from '../PresentationPage/PresentationStep2/styled';
+import { KeyPointItem, KeyPointList } from '../PresentationPage/PresentationStep2/styled';
 
 interface StrategyContainerProps {
   type: StrategyTypes;

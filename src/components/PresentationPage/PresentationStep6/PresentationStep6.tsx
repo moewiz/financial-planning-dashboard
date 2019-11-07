@@ -98,16 +98,16 @@ const PresentationStep6 = (props: FormikPartProps) => {
               position: 'bottom',
             },
             tooltips: {
-              titleFontFamily:
-                '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
-                '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
-              bodyFontFamily:
-                '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
-                '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
-              footerFontFamily:
-                '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
-                '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
-              '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
+              bodyFontStyle: 'normal',
+              titleFontStyle: 'normal',
+              titleFontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+              'Cantarell',
+      'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
+              bodyFontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+      ''Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
+              footerFontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+              'Cantarell',
+      'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
               intersect: false,
               mode: 'label',
               callbacks: {

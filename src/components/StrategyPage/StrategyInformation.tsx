@@ -21,7 +21,7 @@ import {
 import { loadGraphData } from './StrategyHeader';
 import { createEvent } from '../../utils/GA';
 import { getStrategyTitle } from './StrategyPage';
-import { KeyPoitItem, KeyPoitList } from '../PresentationPage/PresentationStep2/styled';
+import { KeyPointItem, KeyPointList } from '../PresentationPage/PresentationStep2/styled';
 
 interface FormikPartProps {
   formik: FormikContext<StrategyEntry>;
@@ -41,14 +41,14 @@ const generalConfig = {
       dataIndex: 'current',
       label: 'Current',
       fill: false,
-      borderColor: '#00BCD4',
+      borderColor: '#FF5722',
       lineTension: 0,
     },
     {
       dataIndex: 'proposed',
       label: 'Proposed',
       fill: false,
-      borderColor: '#FF5722',
+      borderColor: '#00BCD4',
       lineTension: 0,
     },
   ],
@@ -89,7 +89,7 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
     createEvent('strategy', 'drawer_initiate', getStrategyTitle(type), clientId);
     openDrawer('client');
     fetchDrawerSuccess(drawerData);
-  };
+  }
 
   public render() {
     const { type } = this.props;
@@ -224,29 +224,26 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
               </Col>
               <Col span={12}>
                 <EstatePlanningBoxWrapper>
-                  <KeyPoitList>
-                    <KeyPoitItem>
+                  <KeyPointList>
+                    <KeyPointItem>
                       <Icon type="exclamation" />
                       Will
-                    </KeyPoitItem>
-                    <KeyPoitItem>
+                    </KeyPointItem>
+                    <KeyPointItem>
                       <Icon type="exclamation" />
                       PoA
-                    </KeyPoitItem>
-                    <KeyPoitItem>
+                    </KeyPointItem>
+                    <KeyPointItem>
                       <Icon type="check" />
                       Death Benefit nomination
-                    </KeyPoitItem>
-                    <KeyPoitItem>
+                    </KeyPointItem>
+                    <KeyPointItem>
                       <Icon type="exclamation" />
                       Testamentary Trust
-                    </KeyPoitItem>
-                  </KeyPoitList>
+                    </KeyPointItem>
+                  </KeyPointList>
                 </EstatePlanningBoxWrapper>
               </Col>
-              {/*<Col span={12}>*/}
-              {/*  <GraphContainer type={GraphType.Bar} dataList={basicGraphData} onGraphClick={this.onGraphClick} />*/}
-              {/*</Col>*/}
             </Row>
             <StandardText data={standardText} />
           </StrategyInfoWrapper>
