@@ -198,7 +198,17 @@ interface FundTableProps {
 }
 
 const LinkProductAndFund = (props: FundTableProps) => {
-  const { columns, values, setFieldValue, prefixField, linkedProduct, fieldArrayLinks, linkIndex, hasCurrent, readOnly } = props;
+  const {
+    columns,
+    values,
+    setFieldValue,
+    prefixField,
+    linkedProduct,
+    fieldArrayLinks,
+    linkIndex,
+    hasCurrent,
+    readOnly,
+  } = props;
   const funds: Option[] = get(values, 'details.funds', []);
   const [loading, setLoading] = useState<boolean>(false);
   const onSelectProduct = (option: Option) => {
@@ -310,7 +320,7 @@ const LinkProductAndFund = (props: FundTableProps) => {
                 return {
                   ...col,
                   render: (text: any, record: any, fundIndex: number) => {
-                    if (record && record.id !== -1) {
+                    if (!readOnly && record && record.id !== -1) {
                       return (
                         <Popconfirm
                           title="Really delete?"
@@ -347,7 +357,7 @@ const LinkProductAndFund = (props: FundTableProps) => {
               </ActionDrawerGeneral>
               {linkedProduct && (
                 <ProposedBlock>
-                  {prefixField ? (
+                  {prefixField && !readOnly ? (
                     <>
                       <div className="proposed-title">
                         <span className="proposed-title--text">{detailProduct && detailProduct.name}</span>

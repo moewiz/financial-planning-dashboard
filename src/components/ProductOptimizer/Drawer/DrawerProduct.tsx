@@ -113,7 +113,7 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
   }
 
   public renderFundTab = () => {
-    const { product } = this.props;
+    const { product, readOnly } = this.props;
     if (!product) {
       return null;
     }
@@ -138,6 +138,7 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
                 setFieldValue={formikProps.setFieldValue}
                 isSubmitting={formikProps.isSubmitting}
                 dirty={formikProps.dirty}
+                readOnly={readOnly}
               />
             </Form>
           );
@@ -147,7 +148,7 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
   }
 
   public renderLinkedProducts = () => {
-    const { product } = this.props;
+    const { product, readOnly } = this.props;
 
     if (!product) {
       return null;
@@ -174,7 +175,7 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
             <AssetsAllocation />
           </TabPane>
           <TabPane tab="Fees" key="3">
-            <Fees />
+            <Fees readOnly={readOnly} />
           </TabPane>
         </Tabs>
       </DrawerProductWrapper>

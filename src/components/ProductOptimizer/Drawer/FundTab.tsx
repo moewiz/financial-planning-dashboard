@@ -14,6 +14,7 @@ interface FundTabProps {
   setFieldValue: (field: string, value: any) => void;
   isSubmitting: boolean;
   dirty: boolean;
+  readOnly?: boolean;
 }
 
 interface FundTabStates {
@@ -132,12 +133,15 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
   }
 
   public getColumns = (prefixField?: string) => {
+    const { readOnly } = this.props;
+
     return this.columns.map((col) => {
       if (col.editable) {
         return {
           ...col,
           onCell: (record: any, rowIndex: number) => ({
             ...col,
+            readOnly,
             record,
             rowIndex,
             type: col.type || 'text',
@@ -151,7 +155,7 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
   }
 
   public render() {
-    const { product, setFieldValue, isSubmitting, dirty } = this.props;
+    const { product, setFieldValue, isSubmitting, dirty, readOnly } = this.props;
 
     return (
       <>
@@ -166,6 +170,7 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
               values={product}
               setFieldValue={setFieldValue}
               linkedProduct={true}
+              readOnly={readOnly}
             />
           </FundBlock>
           <HorizontalScrollable>
@@ -192,6 +197,7 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
                           fieldArrayLinks={fieldArrayRenderProps}
                           linkIndex={index}
                           hasCurrent={product.hasCurrent}
+                          readOnly={readOnly}
                         />
                       </FundBlock>
                     );
@@ -202,14 +208,16 @@ class FundTab extends React.PureComponent<FundTabProps, FundTabStates> {
           </HorizontalScrollable>
         </FundTabContent>
 
-        <ActionDrawerGeneral visible>
-          <Button htmlType={'button'} type={'default'}>
-            <span>Add comparison product</span>
-          </Button>
-          <Button htmlType={'submit'} type={'primary'} disabled={isSubmitting || !dirty}>
-            <span>Save</span>
-          </Button>
-        </ActionDrawerGeneral>
+        {!readOnly && (
+          <ActionDrawerGeneral visible>
+            <Button htmlType={'button'} type={'default'}>
+              <span>Add comparison product</span>
+            </Button>
+            <Button htmlType={'submit'} type={'primary'} disabled={isSubmitting || !dirty}>
+              <span>Save</span>
+            </Button>
+          </ActionDrawerGeneral>
+        )}
       </>
     );
   }

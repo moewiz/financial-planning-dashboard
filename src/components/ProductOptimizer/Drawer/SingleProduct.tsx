@@ -135,13 +135,13 @@ class SingleProduct extends PureComponent<SingleProductProps> {
           </TabPane>
         </Tabs>
 
-        <ActionDrawerGeneral visible>
-          {!readOnly && (
+        {!readOnly && (
+          <ActionDrawerGeneral visible>
             <Button htmlType={'submit'} type={'primary'} disabled={isSubmitting || !dirty}>
               <span>Save</span>
             </Button>
-          )}
-        </ActionDrawerGeneral>
+          </ActionDrawerGeneral>
+        )}
       </DrawerProductWrapper>
     );
   }
