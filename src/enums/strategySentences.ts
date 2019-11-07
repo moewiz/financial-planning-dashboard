@@ -135,14 +135,14 @@ const strategySentences: any = {
     },
     customRegular: {
       statement:
-        '%name%, make non-concessional contribution of {{0}} per {{1}} from {{2}} to {{3}}. ' +
+        '%name%, make a non-concessional contribution of {{0}} per {{1}} from {{2}} to {{3}}. ' +
         'This contribution is to be funded from {{4}}',
       types: [EditCellType.number, EditCellType.select, EditCellType.date, EditCellType.date, EditCellType.select],
       options: ['', periodTypes, '', '', 'investments'],
     },
     customOneOff: {
       statement:
-        '%name%, make non-concessional contribution of {{0}} in {{1}}. ' +
+        '%name%, make a non-concessional contribution of {{0}} in {{1}}. ' +
         'This contribution is to be funded from {{2}}',
       types: [EditCellType.number, EditCellType.select, EditCellType.select],
       options: ['', 'year', 'investments'],

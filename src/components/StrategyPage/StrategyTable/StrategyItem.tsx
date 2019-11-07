@@ -326,7 +326,7 @@ class StrategyItem extends Component<StrategyItemProps, StrategyItemStates> {
                       options = getOptions(context, { client, partner }, options);
                     }
                     if (option === 'investments' && strategyType === StrategyTypes.Superannuation) {
-                      options = [...options, { value: 'cashflow', label: 'Cashflow' }];
+                      options = [...options, { value: 'cashflow', label: 'Cash' }];
                     }
                     break;
                   }
