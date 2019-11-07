@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'formik';
-
 import { Checkbox } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { SliderValue } from 'antd/lib/slider';
+
 import { StepWrapper } from '../styled';
 import { DocumentData, FormikPartProps } from '../PresentationPage';
 import { StepCurrentPosition, StepPositionLeft, StepPositionRight } from '../PresentationStep2/styled';
@@ -14,7 +14,6 @@ import { CheckboxGroup } from './styled';
 import { CheckboxCustomize } from '../../StrategyPage/StrategyTable/styled';
 import {
   chartsDataResources,
-  chartsDataResourcesWithLifeEvent,
   chartsDataResourcesWithoutSalarySacrifice,
   chartsDataResourcesWithoutSalarySacrificeNInsuranceWithLifeEvent,
 } from './chartData';
@@ -33,7 +32,7 @@ const defaultCheckListValue = {
   'Non-Concessional Contribution': true,
   'Establish a pension': true,
   'Debt reduction': true,
-  Insurance: true,
+  'Insurance': true,
   'Estate Planning': true,
 };
 
@@ -66,7 +65,7 @@ const CheckboxContainer = (props: { children: React.ReactNode; handleItemToggle?
 };
 
 const getData = (hasLifeEvent: boolean, retirementYrs: number, checkList?: CheckListInterface) => {
-  if (!(checkList as any)['Salary Sacrifice'] && !(checkList as any)['Insurance'] && hasLifeEvent) {
+  if (!(checkList as any)['Salary Sacrifice'] && !(checkList as any).Insurance && hasLifeEvent) {
     return (chartsDataResourcesWithoutSalarySacrificeNInsuranceWithLifeEvent as any)[retirementYrs];
   }
 
