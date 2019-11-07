@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'formik';
-import { get } from 'lodash';
+import numeral from 'numeral';
 
 import numeral from 'numeral';
 import { StepWrapper } from '../styled';
@@ -9,10 +9,9 @@ import { GraphType } from '../../StrategyPage/Graph/GraphContainer';
 import { loadGraphData } from '../../StrategyPage/StrategyHeader';
 import GraphPresentation from '../../StrategyPage/Graph/GraphPresentation';
 import DrawerProduct, { Product } from '../../ProductOptimizer/Drawer/DrawerProduct';
-import { Table } from 'antd';
-import { HeaderTitleTable, TableEntryContainer, TextTitle } from '../../../pages/client/styled';
-import CurrentProduct from '../../../containers/productOptimizer/CurrentProduct';
-import { map } from 'lodash-es';
+import { TextTitle } from '../../../pages/client/styled';
+import { CurrentProduct, ProposedProduct } from '../../../containers/productOptimizer';
+import { AssetAllocationComparison, InvestmentProducts } from './styled';
 
 const currentProducts = [
   {
@@ -534,7 +533,7 @@ const proposedProducts = [
     },
   },
   {
-    key: 0,
+    key: 1573035347030,
     description: 'CFS Super',
     value: 400000,
     id: '83da13cc-372b-4b4f-b8da-1222c2987ca9',
@@ -750,60 +749,65 @@ const PresentationStep6 = (props: FormikPartProps) => {
   return (
     <StepWrapper>
       <TextTitle>Investment Products</TextTitle>
-      <CurrentProduct dataList={currentProducts} openDrawer={openDrawer} readOnly={true} />
+      <InvestmentProducts>
+        <CurrentProduct dataList={currentProducts} openDrawer={openDrawer} readOnly={true} />
+        <ProposedProduct dataList={proposedProducts} openDrawer={openDrawer} readOnly={true} tabKey={'client'} />
+      </InvestmentProducts>
 
       <TextTitle>Asset Allocation comparison</TextTitle>
-      <GraphPresentation
-        type={GraphType.Bar}
-        height={300}
-        data={loadGraphData(chartConfig)(chartData)}
-        options={{
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                  // Include a dollar sign in the ticks
-                  callback: (value: any, index: any, values: any) => {
-                    return value + '%';
+      <AssetAllocationComparison>
+        <GraphPresentation
+          type={GraphType.Bar}
+          height={300}
+          data={loadGraphData(chartConfig)(chartData)}
+          options={{
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    // Include a dollar sign in the ticks
+                    callback: (value: any, index: any, values: any) => {
+                      return value + '%';
+                    },
                   },
                 },
-              },
-            ],
-          },
-          legend: {
-            display: true,
-            position: 'bottom',
-          },
-          tooltips: {
-            bodyFontStyle: 'normal',
-            titleFontFamily:
-              '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
+              ],
+            },
+            legend: {
+              display: true,
+              position: 'bottom',
+            },
+            tooltips: {
+              titleFontFamily:
+                '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
+                '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
+              bodyFontFamily:
+                '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
+                '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
+              footerFontFamily:
+                '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
+                '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
               '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
-            bodyFontFamily:
-              '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
-              '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
-            footerFontFamily:
-              '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
-              '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
-            intersect: false,
-            mode: 'label',
-            callbacks: {
-              label(
-                tooltipItem: { datasetIndex: React.ReactText; yLabel: number },
-                data: { datasets: { [x: string]: { label: string } } },
-              ) {
-                let label = data.datasets[tooltipItem.datasetIndex].label || '';
+              intersect: false,
+              mode: 'label',
+              callbacks: {
+                label(
+                  tooltipItem: { datasetIndex: React.ReactText; yLabel: number },
+                  data: { datasets: { [x: string]: { label: string } } },
+                ) {
+                  let label = data.datasets[tooltipItem.datasetIndex].label || '';
 
-                if (label) {
-                  label += ': ';
-                }
-                label += numeral(Math.round(tooltipItem.yLabel * 100) / 100).format('0,0.[00]') + '%';
-                return label;
+                  if (label) {
+                    label += ': ';
+                  }
+                  label += numeral(Math.round(tooltipItem.yLabel * 100) / 100).format('0,0.[00]') + '%';
+                  return label;
+                },
               },
             },
-          },
-        }}
-      />
+          }}
+        />
+      </AssetAllocationComparison>
       <DrawerProduct isOpen={isOpen} close={closeDrawer} product={product} />
     </StepWrapper>
   );

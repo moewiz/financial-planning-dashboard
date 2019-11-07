@@ -409,7 +409,7 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
           <NewProposedProduct onAdd={this.onAdd} currentProducts={this.getCurrentProducts()} />
         ) : (
           <HeaderTitleTable>
-            <TextTitle small={true}>Current</TextTitle>
+            <TextTitle small={true}>Proposed</TextTitle>
           </HeaderTitleTable>
         )}
         <Table
