@@ -185,7 +185,28 @@
         "adviserFeeValue": 0,
         "adviserFeeType": "percent",
         "insuranceCost": 0
-      }
+      },
+      "sgContribution": {
+        "superSalary": 120000,
+        "increaseToLimit": false,
+        "sgrate": "9.5"
+      },
+      "contributionWithdrawals": [
+        {
+          "id": 1,
+          "type": "salarySacrificePersonalDeductible",
+          "increaseToLimit": false,
+          "value": 3000,
+          "from": {
+            "type": "start",
+            "yearValue": null
+          },
+          "to": {
+            "type": "end",
+            "yearValue": null
+          }
+        }
+      ]
     }
   ],
   "liabilities": [
