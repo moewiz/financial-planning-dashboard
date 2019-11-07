@@ -131,7 +131,7 @@ class SingleProduct extends PureComponent<SingleProductProps> {
             <AssetsAllocation data={get(values.details, 'assetAllocation')} links={[]} />
           </TabPane>
           <TabPane tab="Fees" key="3">
-            <Fees data={get(values.details, 'fees')} links={[]} />
+            <Fees data={get(values.details, 'fees')} links={[]} readOnly={readOnly} />
           </TabPane>
         </Tabs>
 

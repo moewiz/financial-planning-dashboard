@@ -25,6 +25,7 @@ export interface FeeProps {
     transactionFee: Row[];
     otherBalances?: Row[];
   };
+  readOnly?: boolean;
 }
 
 class Fee extends PureComponent<FeeProps> {
@@ -79,6 +80,7 @@ class Fee extends PureComponent<FeeProps> {
     console.log({ value, name, rowIndex });
   }
   public getColumns = (title: string) => () => {
+    const { readOnly } = this.props;
     let columns = [...this.columns];
     if (title === 'Other Balances') {
       columns = columns.filter((col) => col.dataIndex !== 'percentage');
@@ -90,6 +92,7 @@ class Fee extends PureComponent<FeeProps> {
           ...col,
           onCell: (record: any, rowIndex: number) => ({
             ...col,
+            readOnly,
             record,
             rowIndex,
             type: col.type || 'text',
@@ -98,7 +101,7 @@ class Fee extends PureComponent<FeeProps> {
         };
       }
 
-      if (col.dataIndex === 'remove') {
+      if (!readOnly && col.dataIndex === 'remove') {
         return {
           ...col,
           render: (text: any, record: any, fundIndex: number) => {
