@@ -6,14 +6,14 @@ export const TopMenu = styled.div`
   align-items: center;
   justify-content: flex-end;
   height: 46px;
-  box-shadow: 0 2px 4px 0px rgba(0,0,0,0.23);
+  box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.23);
   padding: 0px 25px;
 `;
 
 export const InputSearch = styled(Input)`
   border: none;
-  color: #515C83;
-  &:focus{
+  color: #515c83;
+  &:focus {
     outline: none;
     border: none;
     box-shadow: none;
@@ -44,8 +44,7 @@ export const TopSearch = styled.div<{ border?: boolean }>`
           cursor: default;
         }
       }
-    `
-  }
+    `}
   .custom-select {
     width: 100%;
     position: absolute;
@@ -58,6 +57,11 @@ export const TopSearch = styled.div<{ border?: boolean }>`
         line-height: 32px;
       }
     }
+    &.ant-select-disabled {
+      .ant-select-selection {
+        background-color: #fff;
+      }
+    }
     .ant-select-selection-selected-value {
       .code {
         display: none;
@@ -68,7 +72,7 @@ export const TopSearch = styled.div<{ border?: boolean }>`
 
 export const MenuItem = styled.div`
   display: flex;
-  color: #515C83;
+  color: #515c83;
   height: 100%;
   align-items: center;
   .ant-avatar {

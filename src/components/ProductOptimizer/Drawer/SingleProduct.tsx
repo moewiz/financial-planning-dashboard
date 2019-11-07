@@ -16,6 +16,7 @@ interface SingleProductProps {
   setFieldValue: (field: string, value: any) => void;
   isSubmitting: boolean;
   dirty: boolean;
+  readOnly?: boolean;
 }
 
 class SingleProduct extends PureComponent<SingleProductProps> {
@@ -89,12 +90,15 @@ class SingleProduct extends PureComponent<SingleProductProps> {
     }
   }
   public getColumns = () => {
+    const { readOnly } = this.props;
+
     return this.columns.map((col) => {
       if (col.editable) {
         return {
           ...col,
           onCell: (record: any, rowIndex: number) => ({
             ...col,
+            readOnly,
             record,
             rowIndex,
             type: col.type || 'text',
@@ -108,27 +112,35 @@ class SingleProduct extends PureComponent<SingleProductProps> {
   }
 
   public render() {
-    const { values, setFieldValue, isSubmitting, dirty } = this.props;
+    const { values, setFieldValue, isSubmitting, dirty, readOnly } = this.props;
+
     return (
       <DrawerProductWrapper>
         <DrawerTitle>{get(values.details, 'product.name', 'My Product')}</DrawerTitle>
 
         <Tabs defaultActiveKey="1">
           <TabPane tab="Fund" key="1">
-            <LinkProductAndFund columns={this.getColumns()} values={values} setFieldValue={setFieldValue} />
+            <LinkProductAndFund
+              columns={this.getColumns()}
+              values={values}
+              setFieldValue={setFieldValue}
+              readOnly={readOnly}
+            />
           </TabPane>
           <TabPane tab="Asset Allocation" key="2">
             <AssetsAllocation data={get(values.details, 'assetAllocation')} links={[]} />
           </TabPane>
           <TabPane tab="Fees" key="3">
-            <Fees data={get(values.details, 'fees')}  links={[]}/>
+            <Fees data={get(values.details, 'fees')} links={[]} />
           </TabPane>
         </Tabs>
 
         <ActionDrawerGeneral visible>
-          <Button htmlType={'submit'} type={'primary'} disabled={isSubmitting || !dirty}>
-            <span>Save</span>
-          </Button>
+          {!readOnly && (
+            <Button htmlType={'submit'} type={'primary'} disabled={isSubmitting || !dirty}>
+              <span>Save</span>
+            </Button>
+          )}
         </ActionDrawerGeneral>
       </DrawerProductWrapper>
     );

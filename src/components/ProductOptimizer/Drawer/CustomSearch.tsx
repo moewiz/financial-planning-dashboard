@@ -18,6 +18,7 @@ export interface CustomSearchProp {
   onSelect?: (value: Option) => void;
   selectedOption?: Option;
   productId?: number;
+  readOnly?: boolean;
 }
 
 interface OptionData extends Option {
@@ -184,7 +185,7 @@ const findOptionObj = (data: OptionData[], value: number | string) =>
     });
 
 const CustomSearch = (props: CustomSearchProp) => {
-  const { type, placeholder, selectedOption, productId } = props;
+  const { type, placeholder, selectedOption, productId, readOnly } = props;
   const [options, setOptions] = useState<OptionData[]>([]);
 
   const onSelect = (value: number | string) => {
@@ -234,6 +235,7 @@ const CustomSearch = (props: CustomSearchProp) => {
         showArrow={false}
         dropdownClassName="custom-search-menu"
         optionFilterProp="title"
+        disabled={readOnly}
       >
         {renderOptions(options)}
       </Select>

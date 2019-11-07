@@ -44,6 +44,7 @@ interface DrawerProductProps {
   isOpen: boolean;
   close: () => void;
   product?: Product;
+  readOnly?: boolean;
 }
 
 const alternativeProduct: Product = {
@@ -181,7 +182,7 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
   }
 
   public renderSingleProduct = () => {
-    const { product } = this.props;
+    const { product, readOnly } = this.props;
 
     if (product) {
       return (
@@ -201,6 +202,7 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
                 setFieldValue={formikProps.setFieldValue}
                 dirty={formikProps.dirty}
                 isSubmitting={formikProps.isSubmitting}
+                readOnly={readOnly}
               />
             </Form>
           )}

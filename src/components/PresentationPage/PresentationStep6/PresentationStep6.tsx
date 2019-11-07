@@ -129,7 +129,7 @@ const PresentationStep6 = (props: FormikPartProps) => {
           }}
         />
       </AssetAllocationComparison>
-      <DrawerProduct isOpen={isOpen} close={closeDrawer} product={product} />
+      <DrawerProduct isOpen={isOpen} close={closeDrawer} product={product} readOnly={true} />
     </StepWrapper>
   );
 };
