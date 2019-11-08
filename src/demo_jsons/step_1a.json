@@ -47,7 +47,7 @@
       "refId": 0,
       "description": "Primary Residence",
       "type": "lifestyle",
-      "owner": "joint",
+      "owner": "client",
       "value": 750000,
       "investment": "primaryResidence",
       "from": {
@@ -214,7 +214,7 @@
       "id": 1,
       "description": "Primary Residence Mortgage",
       "type": "nonDeductible",
-      "owner": "joint",
+      "owner": "client",
       "value": 300000,
       "interest": 5,
       "from": {
