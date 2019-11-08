@@ -5,16 +5,17 @@ import { Icon, Skeleton } from 'antd';
 import { Record } from '../DocumentsPage';
 import { CardThumbnailItem, StatusCard, TitleCard, NumberCard, DoneCard } from './styled';
 
-const CardStatistic = (props: { record: Record; onClick: () => void }) => {
-  const { record, onClick } = props;
+const CardStatistic = (props: { record: Record; onClick: () => void; loadedPage: boolean }) => {
+  const { record, onClick, loadedPage } = props;
   const [isLoading, setIsLoading] = useState(true);
   const numberIssues = filter(record.table.data, (d) => d.id !== -1 && !d.isOverwrite).length;
   const checked = get(record, 'table.data.length') === 0 || numberIssues === 0;
 
   useEffect(() => {
+    const loadingTime = loadedPage ? 1500 : 4000;
     const timeoutId = setTimeout(() => {
       setIsLoading(false);
-    }, 4000);
+    }, loadingTime);
 
     return () => {
       clearTimeout(timeoutId);

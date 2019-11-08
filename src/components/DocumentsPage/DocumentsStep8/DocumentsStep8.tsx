@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { filter, get, map } from 'lodash';
+import { get, map } from 'lodash';
 import { connect } from 'formik';
 import { message } from 'antd';
 
@@ -11,6 +11,7 @@ import DocumentsCarousel from '../DocumentsCarousel/DocumentsCarousel';
 
 const DocumentsStep8 = (props: FormikPartProps) => {
   const [slideNumber, setSlideNumber] = useState<number>(-1);
+  const [loadedPage, setLoaded] = useState<boolean>(false);
   const context = useContext(SwitcherContext);
   if (!context) {
     return null;
@@ -20,6 +21,11 @@ const DocumentsStep8 = (props: FormikPartProps) => {
     setSlideNumber(slide);
     setSwitcherContext(false);
   };
+
+  useEffect(() => {
+    setLoaded(true);
+    return () => setLoaded(false);
+  }, []);
 
   useEffect(() => {
     if (slideNumber > -1 && switcherContext) {
@@ -33,8 +39,9 @@ const DocumentsStep8 = (props: FormikPartProps) => {
   };
   const records = get(props, 'formik.values.step8.records', []);
   const checked = !records.find((record: Record) => {
-    return record.table.data.find(r => r.isOverwrite === false && r.id !== -1)
-  }) ;
+    return record.table.data.find((r) => r.isOverwrite === false && r.id !== -1);
+  });
+
   return (
     <StepWrapper>
       <DocumentsStep8WP>
@@ -52,19 +59,19 @@ const DocumentsStep8 = (props: FormikPartProps) => {
             <TitleStepSmall>{get(props, 'formik.values.step8.subtitle')}</TitleStepSmall>
             <ListCardThumbnails>
               {map(records, (record: Record, index: number) => (
-                <CardStatistic record={record} key={index} onClick={updateSlideNumber(index)} />
+                <CardStatistic record={record} key={index} onClick={updateSlideNumber(index)} loadedPage={loadedPage} />
               ))}
             </ListCardThumbnails>
             <StepActionDocument style={{ paddingRight: 32 }}>
               <BtnDoneDocument
                 type="primary"
                 onClick={onClickSubmit}
-                disabled = {!checked}
+                disabled={!checked}
                 href="http://sgp18.siteground.asia/~whistle4/download/John-Samual-Nov-13-2019.docx"
                 style={{
                   opacity: checked ? 1 : 0.6,
                 }}
-                >
+              >
                 Generate SOA
               </BtnDoneDocument>
             </StepActionDocument>
