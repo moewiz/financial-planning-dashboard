@@ -6,14 +6,14 @@
       {
         "id": 1,
         "name": "Administration Fees",
-        "value": "749.8",
-        "percentage": "0.19"
+        "value": "835.00",
+        "percentage": "0.2"
       },
       {
         "id": 2,
         "name": "Investment Fees and Costs",
-        "value": "2222.81",
-        "percentage": "0.56"
+        "value": "2800",
+        "percentage": "0.7"
       },
       {
         "id": 3,
@@ -30,7 +30,7 @@
       { "id": -1, "name": "", "value": "", "percentage": "" },
       {
         "name": "Net Ongoing Cost",
-        "value": "2835.16",
+        "value": "3497.55",
         "percentage": ""
       }
     ],
@@ -39,7 +39,7 @@
         "id": 1,
         "name": "Buy/Sell costs",
         "value": "1100",
-        "percentage": "0.28"
+        "percentage": "0.24"
       },
       { "id": -1, "name": "", "value": "", "percentage": "" }
     ]
