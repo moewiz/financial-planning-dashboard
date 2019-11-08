@@ -181,23 +181,25 @@ const ExpandedBasicInformationRow = (
           </ExpandedSelectGroup>
         </ExpandedAssetsInlineGroups>
 
-        <ExpandedAssetsInlineGroups>
-          <ExpandedAssetsText>Partner will retire in</ExpandedAssetsText>
-          <ExpandedSelectGroup>
-            <EditableCell
-              record={record}
-              dataIndex="expandable.retirementYear"
-              type="date"
-              pickerType="year"
-              tableName="basicInformation"
-              rowIndex={index}
-              editable
-              expandedField
-              disabledYear
-            />
-          </ExpandedSelectGroup>
-          {retirementAge && <ExpandedAssetsText>({retirementAge})</ExpandedAssetsText>}
-        </ExpandedAssetsInlineGroups>
+        {!isUnemployedOrRetired && (
+          <ExpandedAssetsInlineGroups>
+            <ExpandedAssetsText>Partner will retire in</ExpandedAssetsText>
+            <ExpandedSelectGroup>
+              <EditableCell
+                record={record}
+                dataIndex="expandable.retirementYear"
+                type="date"
+                pickerType="year"
+                tableName="basicInformation"
+                rowIndex={index}
+                editable
+                expandedField
+                disabledYear
+              />
+            </ExpandedSelectGroup>
+            {retirementAge && <ExpandedAssetsText>({retirementAge})</ExpandedAssetsText>}
+          </ExpandedAssetsInlineGroups>
+        )}
 
         <ExpandedAssetsInlineGroups>
           <ExpandedAssetsText>Partner</ExpandedAssetsText>
