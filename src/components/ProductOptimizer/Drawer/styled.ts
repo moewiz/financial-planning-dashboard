@@ -6,7 +6,7 @@ export const AssetsAllocationWrapper = styled.div`
   color: #4e5d86;
 `;
 
-export const FeesWrapper = styled(AssetsAllocationWrapper)`
+export const FeesWrapper = styled(AssetsAllocationWrapper)<{ haveLinkedProducts?: boolean }>`
   .asset-block-container {
     flex: 0 0 380px;
     .asset-block-title {
@@ -21,17 +21,10 @@ export const FeesWrapper = styled(AssetsAllocationWrapper)`
     margin-bottom: 10px;
     padding-top: 0;
   }
-  .horizontal-scrollable{
-    .drawer-fund-table {
-      .ant-table-body {
-        height: 280px;
-      }
-    }
-  }
   .drawer-fund-table {
     .ant-table-body {
-      min-height: 110px;
-      height: auto
+      min-height: auto;
+      height: auto;
     }
     .ant-table-tbody {
       tr {
@@ -71,6 +64,15 @@ export const FeesWrapper = styled(AssetsAllocationWrapper)`
       }
     }
   }
+  ${(props) =>
+    props.haveLinkedProducts &&
+    `
+    .drawer-fund-table {
+      .ant-table-body {
+        min-height: 265px;
+      }
+    }
+  `}
 `;
 
 export const AssetTitleBlock = styled.div<{ marginLeft?: boolean }>`

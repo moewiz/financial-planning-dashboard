@@ -8,9 +8,10 @@ import feesData from '../../../demo_jsons/step_3m.json';
 
 const Fees = (props: { data?: FeeProps['product']; links?: Array<FeeProps['product']>; readOnly?: boolean }) => {
   const { data, links, readOnly } = props;
+  const haveLinkedProducts = (links ? links.length > 0 : feesData.links.length > 0);
 
   return (
-    <FeesWrapper>
+    <FeesWrapper haveLinkedProducts={haveLinkedProducts}>
       <Fee product={data || feesData.proposed} readOnly={readOnly} />
 
       <HorizontalScrollable>
