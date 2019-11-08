@@ -35,14 +35,13 @@ class StrategyTable extends PureComponent<FormikPartProps & StrategyTableProps> 
 
   public addItem = (values: string[]): void => {
     const { addItem } = this.props;
-    console.log('values', values);
     addItem(values);
-  };
+  }
 
   public getOptions = () => {
     const { type } = this.props;
     return strategyChoices[type] || [];
-  };
+  }
 
   public renderItem = (option: Choice, index: number | string, parentKeys: string[] = []) => {
     if (option.children && option.children.length > 0) {
@@ -64,14 +63,14 @@ class StrategyTable extends PureComponent<FormikPartProps & StrategyTableProps> 
         {option.label}
       </Item>
     );
-  };
+  }
 
   public renderMenu = () => {
     const options = this.getOptions();
     const menu = map(options, (option: Choice, index: number) => this.renderItem(option, index, []));
 
     return <Menu>{menu}</Menu>;
-  };
+  }
 
   public render() {
     const { type, removeItem, defaultFullValue, formik, tableProcessing, redrawGraphs } = this.props;

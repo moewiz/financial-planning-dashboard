@@ -48,7 +48,7 @@ class StrategyContainer extends PureComponent<StrategyContainerProps & RouteComp
       arrayHelpers.unshift(data);
       this.redrawGraphs(false);
     }
-  };
+  }
 
   public removeItem = (arrayHelpers: ArrayHelpers) => (index: number, strategy: StrategyItemI) => {
     const { match, type } = this.props;
@@ -56,7 +56,7 @@ class StrategyContainer extends PureComponent<StrategyContainerProps & RouteComp
 
     createEvent('strategy', 'delete', label, getParams(match.params).clientId);
     arrayHelpers.remove(index);
-  };
+  }
 
   public redrawGraphs = (shouldUpdateGraphs: boolean = false) => {
     const { redrawGraphs, match, type } = this.props;
@@ -73,7 +73,7 @@ class StrategyContainer extends PureComponent<StrategyContainerProps & RouteComp
 
       redrawGraphs(payload);
     }
-  };
+  }
 
   public renderStrategyTable = (arrayHelpers: ArrayHelpers) => {
     const { type, defaultFullValue, tableProcessing } = this.props;
@@ -88,16 +88,20 @@ class StrategyContainer extends PureComponent<StrategyContainerProps & RouteComp
         tableProcessing={tableProcessing}
       />
     );
-  };
+  }
 
   public render() {
-    const { type, match } = this.props;
+    const { type, match, tableProcessing } = this.props;
 
     return (
       <StrategyWrapper>
         <Row gutter={24}>
           <Col span={12}>
-            <StrategyInformation type={type} clientId={getParams(match.params).clientId} />
+            <StrategyInformation
+              type={type}
+              clientId={getParams(match.params).clientId}
+              tableProcessing={tableProcessing}
+            />
           </Col>
           <Col span={12}>
             <FieldArray name={type + '.strategies'} render={this.renderStrategyTable} validateOnChange={false} />
