@@ -6,7 +6,6 @@ import { get } from 'lodash';
 import { StepWrapper } from '../styled';
 import { Doughnut, Bar } from 'react-chartjs-2';
 
-
 import { DocumentData, FormikPartProps } from '../PresentationPage';
 
 import {
@@ -43,12 +42,7 @@ const incomeData = {
 };
 
 const assetData = {
-  labels: [
-    'Lifestyle',
-    'Super',
-    'Investment',
-    'Cash',
-  ],
+  labels: ['Lifestyle', 'Super', 'Investment', 'Cash'],
   datasets: [
     {
       data: [790000, 400000, 50000, 150000],
@@ -118,16 +112,18 @@ const seriesBarInsurance = {
 const defaultOptions = {
   scales: {
     yAxes: [{
-        ticks: {
-            // Include a dollar sign in the ticks
-            callback: (value: any, index: any, values: any) => {
-              return numeral(Math.round(value * 100) / 100).format('$0,0.[00]');
-            },
+      ticks: {
+        beginAtZero: true,
+        stepSize: 200000,
+        // Include a dollar sign in the ticks
+        callback: (value: any, index: any, values: any) => {
+          return numeral(Math.round(value * 100) / 100).format('$0,0.[00]');
         },
+      },
     }],
   },
   maintainAspectRatio: false,
-}
+};
 const PresentationStep2 = (props: FormikPartProps) => {
   const [chartData, setChartData] = useState(chartsData.income);
   const updateChart = (key: string) => () => {
@@ -156,7 +152,7 @@ const PresentationStep2 = (props: FormikPartProps) => {
               <ValPositionStep>$300,000</ValPositionStep>
             </LiabilitiesBlockStep>
           </StepPositionTop>
-          <StepPositionBottom className = {get(chartData, 'className')}>
+          <StepPositionBottom className={get(chartData, 'className')}>
             <Doughnut options={optionsDoughnut} data={get(chartData, 'chart')} redraw={true} height={200} />
             <DoughnutDesc>
               <LineDoughnut>{get(chartData, 'line1')}</LineDoughnut>
@@ -168,12 +164,7 @@ const PresentationStep2 = (props: FormikPartProps) => {
           <StepPositionTop>
             <CardChartPositionStep>
               <Card title="Insurance" bordered={false} style={{ width: '100%' }}>
-                <Bar
-                  data={seriesBarInsurance}
-                  width={200}
-                  height={100}
-                  options={defaultOptions}
-                />
+                <Bar data={seriesBarInsurance} width={200} height={100} options={defaultOptions} />
               </Card>
             </CardChartPositionStep>
             <CardPointPositionStep>

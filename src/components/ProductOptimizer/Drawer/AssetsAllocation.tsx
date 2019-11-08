@@ -1,5 +1,5 @@
 import React from 'react';
-import { map } from 'lodash';
+import { map, isNumber } from 'lodash';
 import numeral from 'numeral';
 import {
   DrawerTableContent,
@@ -16,7 +16,7 @@ import assetsAllocationData from '../../../demo_jsons/step_3l.json';
 
 interface Row {
   title: string;
-  values: number[];
+  values: Array<number | string>;
   total?: boolean;
 }
 
@@ -48,9 +48,9 @@ const TableContent = ({ showTitle, values }: TableContentProps) => (
           <DrawerTableParent customBorder key={index}>
             {showTitle && <DrawerRowSubTitle size="large">{data.title}</DrawerRowSubTitle>}
             <div className="values">
-              {map(data.values, (value: number, idx: number) => (
+              {map(data.values, (value: number | string, idx: number) => (
                 <span className={'cell'} key={idx}>
-                  {numeral(value / 100).format('0.0%')}
+                  {isNumber(value) ? numeral(value / 100).format('0.0%') : value}
                 </span>
               ))}
             </div>
@@ -59,9 +59,9 @@ const TableContent = ({ showTitle, values }: TableContentProps) => (
           <DrawerTableListItems key={index}>
             {showTitle && <DrawerRowSubTitle>{data.title}</DrawerRowSubTitle>}
             <div className="values">
-              {map(data.values, (value: number, idx: number) => (
+              {map(data.values, (value: number | string, idx: number) => (
                 <span className={'cell'} key={idx}>
-                  {numeral(value / 100).format('0.0%')}
+                  {isNumber(value) ? numeral(value / 100).format('0.0%') : value}
                 </span>
               ))}
             </div>
