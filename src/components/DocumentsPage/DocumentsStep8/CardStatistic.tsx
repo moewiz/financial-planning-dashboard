@@ -12,6 +12,7 @@ const CardStatistic = (props: { record: Record; onClick: () => void; loadedPage:
   const checked = get(record, 'table.data.length') === 0 || numberIssues === 0;
 
   useEffect(() => {
+    // Hack: Make "loading skeleton" MUCH FASTER after if loads first time
     const loadingTime = loadedPage ? 1500 : 4000;
     const timeoutId = setTimeout(() => {
       setIsLoading(false);

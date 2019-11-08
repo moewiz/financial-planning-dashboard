@@ -22,6 +22,7 @@ const DocumentsStep8 = (props: FormikPartProps) => {
     setSwitcherContext(false);
   };
 
+  // Hack: Make "loading skeleton" MUCH FASTER after if loads first time
   useEffect(() => {
     setLoaded(true);
     return () => setLoaded(false);
