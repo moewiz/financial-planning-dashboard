@@ -108,7 +108,11 @@ class AssetsTable extends PureComponent<AssetsTableProps> {
 
   public componentDidUpdate(prevProps: Readonly<AssetsTableProps>, prevState: Readonly<{}>, snapshot?: any): void {
     const { maritalStatus, setFieldValue, data } = this.props;
-    if (prevProps.maritalStatus !== maritalStatus && maritalStatus === 'single') {
+    if (
+      prevProps.maritalStatus !== '' &&
+      prevProps.maritalStatus !== maritalStatus &&
+      maritalStatus === 'single'
+    ) {
       // update All Owner to Client
       const newData = data.map((d) => ({ ...d, owner: 'client' }));
       setFieldValue(this.tableName, newData);

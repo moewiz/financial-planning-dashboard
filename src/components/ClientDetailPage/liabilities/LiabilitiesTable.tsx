@@ -105,7 +105,11 @@ class LiabilitiesTable extends PureComponent<LiabilitiesTableProps> {
 
   public componentDidUpdate(prevProps: Readonly<LiabilitiesTableProps>, prevState: Readonly<{}>, snapshot?: any): void {
     const { maritalStatus, setFieldValue, data } = this.props;
-    if (prevProps.maritalStatus !== maritalStatus && maritalStatus === 'single') {
+    if (
+      prevProps.maritalStatus !== '' &&
+      prevProps.maritalStatus !== maritalStatus &&
+      maritalStatus === 'single'
+    ) {
       // update All Owner to Client
       const newData = data.map((d) => ({ ...d, owner: 'client' }));
       setFieldValue(this.tableName, newData);
