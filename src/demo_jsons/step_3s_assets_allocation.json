@@ -1,15 +1,15 @@
 {
   "proposed": {
-    "title": "CFS FirstChoice Wholesale Personal Super",
+    "title": "CFS FirstChoice Wholesale Investments",
     "subTitle": "Proposed",
     "values": [
       {
         "title": "Domestic Equity",
-        "values": [23.59, 24, -0.41]
+        "values": [20.5, 24, -3.5]
       },
       {
         "title": "International Equity",
-        "values": [31.09, 32, -0.91]
+        "values": [20.5, 32, -11.5]
       },
       {
         "title": "Domestic Property",
@@ -17,97 +17,97 @@
       },
       {
         "title": "International Property",
-        "values": [8.98, 7, 1.98]
-      },
-      {
-        "title": "Growth Alternatives",
-        "values": [0, 0, 0]
+        "values": [9, 7, 2]
       },
       {
         "title": "Other Growth",
-        "values": [4.49, 7, -2.51]
+        "values": [0, 0, 0]
+      },
+      {
+        "title": "Growth Alternatives",
+        "values": [0, 7, -7]
       },
       {
         "title": "Total Growth",
-        "values": [68.15, 70, -1.85],
+        "values": [50, 70, -20],
         "total": true
       },
       {
         "title": "Domestic Fixed Interest",
-        "values": [1.12, 2, -0.88]
+        "values": [16, 2, 14]
       },
       {
         "title": "International Fixed Interest",
-        "values": [2.68, 2, 0.68]
+        "values": [14, 2, 12]
       },
       {
         "title": "Domestic Cash",
-        "values": [7.06, 6, 1.06]
+        "values": [20, 6, 4]
       },
       {
         "title": "International Cash",
-        "values": [0.49, 0, 0.49]
+        "values": [0, 0, 0]
       },
       {
         "title": "Defensive Alternatives",
-        "values": [20.5, 20, 0.5]
+        "values": [0, 20, -20]
       },
       {
         "title": "Total Defensive",
-        "values": [31.85, 30, 1.85],
+        "values": [50, 30, 20],
         "total": true
       }
     ]
   },
   "links": [
     {
-      "title": "Hesta Personal Super",
+      "title": "CFS FirstChoice Wholesale Investments",
       "subTitle": "RoP - Current",
       "values": [
         {
           "title": "Domestic Equity",
-          "values": [21.5, 24, -2.5]
+          "values": [20.24, 24, -3.76]
         },
         {
           "title": "International Equity",
-          "values": [17.5, 32, -14.5]
+          "values": [27.25, 32, -4.75]
         },
         {
           "title": "Domestic Property",
-          "values": [20.25, 0, 20.25]
+          "values": [0.16, 0, 0.16]
         },
         {
           "title": "International Property",
-          "values": [0, 7, -7]
-        },
-        {
-          "title": "Growth Alternatives",
-          "values": [0, 0, 0]
+          "values": [4.44, 7, -2.56]
         },
         {
           "title": "Other Growth",
-          "values": [7.25, 7, 0.25]
+          "values": [0, 0, 0]
+        },
+        {
+          "title": "Growth Alternatives",
+          "values": [9.23, 7, 2.23]
         },
         {
           "title": "Total Growth",
-          "values": [66.5, 70, -3.5],
+          "values": [61.32, 70, -8.68],
           "total": true
         },
         {
           "title": "Domestic Fixed Interest",
-          "values": [0, 2, -2]
+          "values": [6.96, 2, 4.96]
         },
         {
           "title": "International Fixed Interest",
-          "values": [20, 2, 18]
+          "values": [16.75, 2, 14.75]
         },
         {
           "title": "Domestic Cash",
-          "values": [13.5, 6, 7.5]
+          "values": [14.05, 6, 8.05]
         },
         {
           "title": "International Cash",
-          "values": [0, 0, 0]
+          "values": [0.92, 0, 0.92]
         },
         {
           "title": "Defensive Alternatives",
@@ -115,67 +115,67 @@
         },
         {
           "title": "Total Defensive",
-          "values": [33.5, 30, 3.5],
+          "values": [38.68, 30, 8.68],
           "total": true
         }
       ]
     },
     {
-      "title": "OnePath OneAnswer Frontier Personal Super",
+      "title": "Not specified",
       "subTitle": "RoP - Alternative",
       "values": [
         {
           "title": "Domestic Equity",
-          "values": [23.57, 24, -0.43]
+          "values": ["-", "-", "-"]
         },
         {
           "title": "International Equity",
-          "values": [31.77, 32, -0.23]
+          "values": ["-", "-", "-"]
         },
         {
           "title": "Domestic Property",
-          "values": [0.04, 0, 0.04]
+          "values": ["-", "-", "-"]
         },
         {
           "title": "International Property",
-          "values": [7.08, 7, 0.08]
+          "values": ["-", "-", "-"]
         },
         {
           "title": "Growth Alternatives",
-          "values": [0, 0, 0]
+          "values": ["-", "-", "-"]
         },
         {
           "title": "Other Growth",
-          "values": [6.99, 7, -0.01]
+          "values": ["-", "-", "-"]
         },
         {
           "title": "Total Growth",
-          "values": [69.46, 70, -0.54],
+          "values": ["-", "-", "-"],
           "total": true
         },
         {
           "title": "Domestic Fixed Interest",
-          "values": [2.17, 2, 0.17]
+          "values": ["-", "-", "-"]
         },
         {
           "title": "International Fixed Interest",
-          "values": [1.84, 2, -0.16]
+          "values": ["-", "-", "-"]
         },
         {
           "title": "Domestic Cash",
-          "values": [6.53, 6, 0.53]
+          "values": ["-", "-", "-"]
         },
         {
           "title": "International Cash",
-          "values": [0.02, 0, 0.02]
+          "values": ["-", "-", "-"]
         },
         {
           "title": "Defensive Alternatives",
-          "values": [19.99, 20, -0.01]
+          "values": ["-", "-", "-"]
         },
         {
           "title": "Total Defensive",
-          "values": [30.54, 30, 0.54],
+          "values": ["-", "-", "-"],
           "total": true
         }
       ]

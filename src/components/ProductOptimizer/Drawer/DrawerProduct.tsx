@@ -11,6 +11,8 @@ import SingleProduct from './SingleProduct';
 import AssetsAllocation from './AssetsAllocation';
 import Fees from './Fees';
 import { formatString, Param, Text } from '../../StrategyPage/StandardText';
+import assetsAllocationData3s from '../../../demo_jsons/step_3s_assets_allocation.json';
+import feesData3s from '../../../demo_jsons/step_3s_fees.json';
 
 export interface Option {
   id?: number;
@@ -153,6 +155,20 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
     if (!product) {
       return null;
     }
+    const assetsAllocationProps =
+      get(product, 'details.product.id') === 4 && get(product, 'links[0].id') === 4
+        ? {
+            data: assetsAllocationData3s.proposed,
+            links: assetsAllocationData3s.links,
+          }
+        : {};
+    const feesProps =
+      get(product, 'details.product.id') === 4 && get(product, 'links[0].id') === 4
+        ? {
+          data: feesData3s.proposed,
+          links: feesData3s.links,
+        }
+        : {};
 
     return (
       <DrawerProductWrapper>
@@ -172,10 +188,10 @@ class DrawerProduct extends PureComponent<DrawerProductProps> {
             {this.renderFundTab()}
           </TabPane>
           <TabPane tab="Asset Allocation" key="2">
-            <AssetsAllocation />
+            <AssetsAllocation {...assetsAllocationProps} />
           </TabPane>
           <TabPane tab="Fees" key="3">
-            <Fees readOnly={readOnly} />
+            <Fees {...feesProps} readOnly={readOnly} />
           </TabPane>
         </Tabs>
       </DrawerProductWrapper>

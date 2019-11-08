@@ -1,0 +1,96 @@
+{
+  "proposed": {
+    "title": "CFS FirstChoice Wholesale Investments",
+    "subTitle": "Proposed",
+    "ongoingFee": [
+      {
+        "id": 1,
+        "name": "Investment Fees and Costs",
+        "value": "325",
+        "percentage": "0.65"
+      },
+      { "id": -1, "name": "", "value": "", "percentage": "" },
+      {
+        "name": "Net Ongoing Cost",
+        "value": "325",
+        "percentage": ""
+      }
+    ],
+    "transactionFee": [
+      {
+        "id": 1,
+        "name": "Buy/Sell costs",
+        "value": "100",
+        "percentage": "0.20"
+      },
+      { "id": -1, "name": "", "value": "", "percentage": "" }
+    ],
+    "otherBalances": [
+      {
+        "id": 1,
+        "name": "Total Balance held by client",
+        "value": 0
+      },
+      {
+        "id": 2,
+        "name": "Total balance held by family group",
+        "value": 0
+      }
+    ]
+  },
+  "links": [
+    {
+      "title": "CFS FirstChoice Wholesale Investments",
+      "subTitle": "RoP - Current",
+      "ongoingFee": [
+        {
+          "id": 2,
+          "name": "Investment Fees and Costs",
+          "value": "490",
+          "percentage": "0.98"
+        },
+        { "id": -1, "name": "", "value": "", "percentage": "" },
+        {
+          "name": "Net Ongoing Cost",
+          "value": "490",
+          "percentage": ""
+        }
+      ],
+      "transactionFee": [
+        {
+          "id": 1,
+          "name": "Buy/Sell costs",
+          "value": "0",
+          "percentage": "0"
+        },
+        { "id": -1, "name": "", "value": "", "percentage": "" }
+      ],
+      "otherBalances": [
+        {
+          "id": 1,
+          "name": "Total Balance held by client",
+          "value": 0
+        },
+        {
+          "id": 2,
+          "name": "Total balance held by family group",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "title": "Not specified",
+      "subTitle": "RoP - Alternative",
+      "ongoingFee": [
+        { "id": -1, "name": "", "value": "", "percentage": "" },
+        {
+          "name": "Net Ongoing Cost",
+          "value": "",
+          "percentage": ""
+        }
+      ],
+      "transactionFee": [{ "id": -1, "name": "", "value": "", "percentage": "" }],
+      "otherBalances": [{ "id": -1, "name": "", "value": "", "percentage": "" }]
+    }
+  ]
+}

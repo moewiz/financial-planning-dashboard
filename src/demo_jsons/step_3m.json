@@ -1,18 +1,36 @@
 {
   "proposed": {
-    "title": "CFS FirstChoice Wholesale Investments",
+    "title": "CFS FirstChoice Wholesale Personal Super",
     "subTitle": "Proposed",
     "ongoingFee": [
       {
         "id": 1,
+        "name": "Administration Fees",
+        "value": "749.8",
+        "percentage": "0.19"
+      },
+      {
+        "id": 2,
         "name": "Investment Fees and Costs",
-        "value": "325",
-        "percentage": "0.65"
+        "value": "2222.81",
+        "percentage": "0.56"
+      },
+      {
+        "id": 3,
+        "name": "Membership Fee",
+        "value": "0.00",
+        "percentage": "0.00"
+      },
+      {
+        "id": 4,
+        "name": "Portfolio Balance Rebate (-)",
+        "value": "-137.45",
+        "percentage": "-0.03"
       },
       { "id": -1, "name": "", "value": "", "percentage": "" },
       {
         "name": "Net Ongoing Cost",
-        "value": "325",
+        "value": "2835.16",
         "percentage": ""
       }
     ],
@@ -20,39 +38,39 @@
       {
         "id": 1,
         "name": "Buy/Sell costs",
-        "value": "100",
-        "percentage": "0.20"
+        "value": "1100",
+        "percentage": "0.28"
       },
       { "id": -1, "name": "", "value": "", "percentage": "" }
-    ],
-    "otherBalances": [
-      {
-        "id": 1,
-        "name": "Total Balance held by client",
-        "value": 0
-      },
-      {
-        "id": 2,
-        "name": "Total balance held by family group",
-        "value": 0
-      }
     ]
   },
   "links": [
     {
-      "title": "CFS FirstChoice Wholesale Investments",
+      "title": "Hesta Personal Super",
       "subTitle": "RoP - Current",
       "ongoingFee": [
         {
+          "id": 1,
+          "name": "Administration Fees",
+          "value": "315",
+          "percentage": "0.08"
+        },
+        {
           "id": 2,
           "name": "Investment Fees and Costs",
-          "value": "490",
-          "percentage": "0.98"
+          "value": "2780",
+          "percentage": "0.7"
+        },
+        {
+          "id": 3,
+          "name": "Membership Fee",
+          "value": "65",
+          "percentage": "0.02"
         },
         { "id": -1, "name": "", "value": "", "percentage": "" },
         {
           "name": "Net Ongoing Cost",
-          "value": "490",
+          "value": "3160",
           "percentage": ""
         }
       ],
@@ -64,33 +82,40 @@
           "percentage": "0"
         },
         { "id": -1, "name": "", "value": "", "percentage": "" }
-      ],
-      "otherBalances": [
-        {
-          "id": 1,
-          "name": "Total Balance held by client",
-          "value": 0
-        },
-        {
-          "id": 2,
-          "name": "Total balance held by family group",
-          "value": 0
-        }
       ]
     },
     {
-      "title": "Not specified",
+      "title": "OnePath OneAnswer Frontier Personal Super",
       "subTitle": "RoP - Alternative",
       "ongoingFee": [
+        {
+          "id": 1,
+          "name": "Investment Fees and Costs",
+          "value": "4166.48",
+          "percentage": "1.04"
+        },
+        {
+          "id": 2,
+          "name": "Expence Recovery Fee",
+          "value": "161.3",
+          "percentage": "0.04"
+        },
         { "id": -1, "name": "", "value": "", "percentage": "" },
         {
           "name": "Net Ongoing Cost",
-          "value": "",
+          "value": "4327.78",
           "percentage": ""
         }
       ],
-      "transactionFee": [{ "id": -1, "name": "", "value": "", "percentage": "" }],
-      "otherBalances": [{ "id": -1, "name": "", "value": "", "percentage": "" }]
+      "transactionFee": [
+        {
+          "id": 1,
+          "name": "Buy/Sell costs",
+          "value": "876",
+          "percentage": "0.22"
+        },
+        { "id": -1, "name": "", "value": "", "percentage": "" }
+      ]
     }
   ]
 }
