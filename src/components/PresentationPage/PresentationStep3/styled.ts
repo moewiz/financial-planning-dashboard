@@ -46,7 +46,7 @@ export const ValueWrapper = styled.div<{ marks?: boolean }>`
   display: flex;
   align-items: center;
   .ant-slider {
-    margin: ${props => (props.marks ? '14px 6px 10px' : '14px 0 10px')};
+    margin: ${(props) => (props.marks ? '14px 6px 10px' : '14px 0 10px')};
   }
 `;
 export const ValueStyled = styled.div`
@@ -57,9 +57,9 @@ export const ChartsBlockWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  & > div{
-    &:last-child{
-      margin-bottom: 0px
+  & > div {
+    &:last-child {
+      margin-bottom: 0px;
     }
     &:nth-child(3) {
       margin-bottom: 0px;
@@ -74,7 +74,7 @@ export const ChartBlock = styled.div`
   padding: 30px 15px;
   max-width: calc(50% - 20px);
   position: relative;
-  .chartjs-render-monitor{
+  .chartjs-render-monitor {
     margin: 0 auto;
   }
   ${(props: { hidden?: boolean }) =>
@@ -96,11 +96,10 @@ export const ChartBlockLeft = styled(ChartBlock)`
 export const ChartBlockRight = styled(ChartBlock)`
   margin-left: 10px;
   margin-bottom: 20px;
-
 `;
 
 export const ChartBlockDrillDown = styled(ChartBlock).attrs({
-  className: 'chart-block-drill-down'
+  className: 'chart-block-drill-down',
 })`
   width: 100%;
   flex: 0 0 100%;

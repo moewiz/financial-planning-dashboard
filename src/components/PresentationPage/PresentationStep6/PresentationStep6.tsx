@@ -10,10 +10,27 @@ import GraphPresentation from '../../StrategyPage/Graph/GraphPresentation';
 import DrawerProduct, { Product } from '../../ProductOptimizer/Drawer/DrawerProduct';
 import { TextTitle } from '../../../pages/client/styled';
 import { CurrentProduct, ProposedProduct } from '../../../containers/productOptimizer';
-import { AssetAllocationComparison, InvestmentProducts } from './styled';
+import { AssetAllocationComparison, AssetAllocationGraph, InvestmentProducts } from './styled';
 import { currentProducts, proposedProducts } from './investmentProducts';
 
-const chartConfig = {
+const chartConfig1 = {
+  datasets: [
+    {
+      dataIndex: 'balanced',
+      label: 'Balanced',
+      fill: true,
+      borderColor: '#70ad47',
+    },
+    {
+      dataIndex: 'current',
+      label: 'Current',
+      fill: true,
+      borderColor: '#00BCD4',
+    },
+  ],
+};
+
+const chartConfig2 = {
   datasets: [
     {
       dataIndex: 'balanced',
@@ -26,12 +43,6 @@ const chartConfig = {
       label: 'Proposed',
       fill: true,
       borderColor: '#FF5722',
-    },
-    {
-      dataIndex: 'current',
-      label: 'Current',
-      fill: true,
-      borderColor: '#00BCD4',
     },
   ],
 };
@@ -74,64 +85,124 @@ const PresentationStep6 = (props: FormikPartProps) => {
         <ProposedProduct dataList={proposedProducts} openDrawer={openDrawer} readOnly={true} tabKey={'client'} />
       </InvestmentProducts>
 
-      <TextTitle>Asset Allocation comparison</TextTitle>
+      <TextTitle style={{ display: 'block', marginBottom: 10 }}>Asset Allocation comparison</TextTitle>
       <AssetAllocationComparison>
-        <GraphPresentation
-          type={GraphType.Bar}
-          height={300}
-          data={loadGraphData(chartConfig)(chartData)}
-          options={{
-            scales: {
-              yAxes: [
-                {
-                  ticks: {
-                    // Include a dollar sign in the ticks
-                    callback: (value: any, index: any, values: any) => {
-                      return value + '%';
+        <AssetAllocationGraph>
+          <GraphPresentation
+            type={GraphType.Bar}
+            height={300}
+            data={loadGraphData(chartConfig1)(chartData)}
+            options={{
+              scales: {
+                yAxes: [
+                  {
+                    ticks: {
+                      // Include a dollar sign in the ticks
+                      callback: (value: any, index: any, values: any) => {
+                        return value + '%';
+                      },
                     },
                   },
-                },
-              ],
-              xAxes: [{
-                ticks: {
-                  fontSize: 10,
-                },
-              }],
-            },
-            legend: {
-              display: true,
-              position: 'bottom',
-            },
-            tooltips: {
-              bodyFontStyle: 'normal',
-              titleFontStyle: 'normal',
-              titleFontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-              'Cantarell',
-      'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
-              bodyFontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
-      ''Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
-              footerFontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-              'Cantarell',
-      'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
-              intersect: false,
-              mode: 'label',
-              callbacks: {
-                label(
-                  tooltipItem: { datasetIndex: React.ReactText; yLabel: number },
-                  data: { datasets: { [x: string]: { label: string } } },
-                ) {
-                  let label = data.datasets[tooltipItem.datasetIndex].label || '';
+                ],
+                xAxes: [
+                  {
+                    ticks: {
+                      fontSize: 10,
+                    },
+                  },
+                ],
+              },
+              legend: {
+                display: true,
+                position: 'bottom',
+              },
+              tooltips: {
+                bodyFontStyle: 'normal',
+                titleFontStyle: 'normal',
+                titleFontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+              'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
+                bodyFontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+                'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
+                footerFontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+              'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
+                intersect: false,
+                mode: 'label',
+                callbacks: {
+                  label(
+                    tooltipItem: { datasetIndex: React.ReactText; yLabel: number },
+                    data: { datasets: { [x: string]: { label: string } } },
+                  ) {
+                    let label = data.datasets[tooltipItem.datasetIndex].label || '';
 
-                  if (label) {
-                    label += ': ';
-                  }
-                  label += numeral(Math.round(tooltipItem.yLabel * 100) / 100).format('0,0.[00]') + '%';
-                  return label;
+                    if (label) {
+                      label += ': ';
+                    }
+                    label += numeral(Math.round(tooltipItem.yLabel * 100) / 100).format('0,0.[00]') + '%';
+                    return label;
+                  },
                 },
               },
-            },
-          }}
-        />
+            }}
+          />
+        </AssetAllocationGraph>
+        <AssetAllocationGraph>
+          <GraphPresentation
+            type={GraphType.Bar}
+            height={300}
+            data={loadGraphData(chartConfig2)(chartData)}
+            options={{
+              scales: {
+                yAxes: [
+                  {
+                    ticks: {
+                      // Include a dollar sign in the ticks
+                      callback: (value: any, index: any, values: any) => {
+                        return value + '%';
+                      },
+                    },
+                  },
+                ],
+                xAxes: [
+                  {
+                    ticks: {
+                      fontSize: 10,
+                    },
+                  },
+                ],
+              },
+              legend: {
+                display: true,
+                position: 'bottom',
+              },
+              tooltips: {
+                bodyFontStyle: 'normal',
+                titleFontStyle: 'normal',
+                titleFontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+              'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
+                bodyFontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+                'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
+                footerFontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+              'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
+                intersect: false,
+                mode: 'label',
+                callbacks: {
+                  label(
+                    tooltipItem: { datasetIndex: React.ReactText; yLabel: number },
+                    data: { datasets: { [x: string]: { label: string } } },
+                  ) {
+                    let label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                    if (label) {
+                      label += ': ';
+                    }
+                    label += numeral(Math.round(tooltipItem.yLabel * 100) / 100).format('0,0.[00]') + '%';
+                    return label;
+                  },
+                },
+              },
+            }}
+          />
+        </AssetAllocationGraph>
       </AssetAllocationComparison>
       <DrawerProduct isOpen={isOpen} close={closeDrawer} product={product} readOnly={true} />
     </StepWrapper>
