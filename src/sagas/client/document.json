@@ -353,11 +353,7 @@
               "dataIndex": "alternatives"
             }
           ],
-<<<<<<< HEAD
           "data": [
-=======
-          "data": [           
->>>>>>> "Presentation" Step 6 - remove first 3 rows of data
             {
               "id": 4,
               "value": "John Samual, salary sacrifice $10,000 per annum into CFS FirstChoice Wholesale Super from Jul 2019 to Jul 2023",
