@@ -54,14 +54,16 @@ class ApiUtils {
   }
 
   public static shouldRefreshToken(): boolean {
-    const token = ApiUtils.getAccessToken();
-    const expiredAt = ApiUtils.getExpiredAt();
-
-    if (token && expiredAt) {
-      return moment().unix() > expiredAt;
-    }
-
+    // bypass for now
     return false;
+    // const token = ApiUtils.getAccessToken();
+    // const expiredAt = ApiUtils.getExpiredAt();
+    //
+    // if (token && expiredAt) {
+    //   return moment().unix() > expiredAt;
+    // }
+    //
+    // return false;
   }
 
   public static handleLogout() {
