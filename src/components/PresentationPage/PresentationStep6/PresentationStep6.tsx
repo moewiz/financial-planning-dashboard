@@ -85,7 +85,7 @@ const PresentationStep6 = (props: FormikPartProps) => {
         <ProposedProduct dataList={proposedProducts} openDrawer={openDrawer} readOnly={true} tabKey={'client'} />
       </InvestmentProducts>
 
-      <TextTitle style={{ display: 'block', marginBottom: 10 }}>Asset Allocation comparison</TextTitle>
+      <TextTitle>Asset Allocation comparison</TextTitle>
       <AssetAllocationComparison>
         <AssetAllocationGraph>
           <GraphPresentation
