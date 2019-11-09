@@ -222,9 +222,18 @@ class CardDetails extends React.PureComponent<CardDetailsProps> {
                     }
                     const overwriteRow = () => {
                       const field = `${arrayHelpers.name}.${index}.isOverwrite`;
-                      const updatedOverwrite = !row.isOverwrite;
-                      console.log({ row, updatedOverwrite, index });
-                      setFieldValue(field, !row.isOverwrite);
+                      const updatedOverride = !row.isOverwrite;
+                      if (updatedOverride) {
+                        setTimeout(() => {
+                          const justification: HTMLElement | null = document.querySelector(
+                            `.documents-table tr[data-row-key="${row.key}-extra-row"] input.ant-input`,
+                          );
+                          if (justification && justification.focus) {
+                            justification.focus();
+                          }
+                        }, 450);
+                      }
+                      setFieldValue(field, updatedOverride);
                     };
                     const warningMessage = row.isOverwrite ? 'Remove override?' : 'Really override?';
 
