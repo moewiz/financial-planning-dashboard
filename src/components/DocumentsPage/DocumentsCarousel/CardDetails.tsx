@@ -85,7 +85,7 @@ const EditCellContainer = (props: any) => {
 };
 
 const iconStyles: React.CSSProperties = {
-  fontSize: 16,
+  fontSize: 18,
   cursor: 'pointer',
 };
 
