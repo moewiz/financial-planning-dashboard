@@ -151,7 +151,7 @@ export const StepWrapper = styled.section`
   }
   .strikethrough {
     .strategy-item {
-      .ant-input.edit-cell {
+      .ant-input {
         text-decoration: line-through;
       }
     }
