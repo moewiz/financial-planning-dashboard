@@ -121,6 +121,9 @@ export const StepWrapper = styled.section`
             padding: 16px 30px 16px 0;
             text-align: right;
           }
+          &.text-align-center {
+            text-align: center;
+          }
         }
       }
     }
@@ -135,6 +138,17 @@ export const StepWrapper = styled.section`
                 text-align: right;
                 .ant-input-number-input {
                   text-align: right;
+                }
+              }
+            }
+          }
+          &.text-align-center {
+            text-align: center;
+            .strategy-item {
+              .edit-cell {
+                text-align: center;
+                .ant-input-number-input {
+                  text-align: center;
                 }
               }
             }

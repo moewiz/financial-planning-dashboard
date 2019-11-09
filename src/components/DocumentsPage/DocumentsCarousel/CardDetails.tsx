@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Popconfirm, Table } from 'antd';
+import { Icon, Popconfirm, Table } from 'antd';
 import { get, map, isString, debounce, last } from 'lodash';
 import { FieldArray, FieldArrayRenderProps } from 'formik';
 import cn from 'classnames';
@@ -82,6 +82,11 @@ const EditCellContainer = (props: any) => {
       )}
     </td>
   );
+};
+
+const iconStyles: React.CSSProperties = {
+  fontSize: 16,
+  cursor: 'pointer',
 };
 
 const components = {
@@ -193,27 +198,44 @@ class CardDetails extends React.PureComponent<CardDetailsProps> {
             }));
 
             if (overwrite) {
-              columns.push({
-                title: 'Action',
-                key: 'overwrite',
-                width: 100,
-                render: (text: any, row: any, index: number) => {
-                  if (index === dataList.length - 1) {
-                    return null;
-                  }
-                  const overwriteRow = () => {
-                    const field = `${arrayHelpers.name}.${index}.isOverwrite`;
-                    setFieldValue(field, !row.isOverwrite);
-                  };
-                  const warningMessage = row.isOverwrite ? 'Remove override?' : 'Really override?';
-
-                  return (
-                    <Popconfirm title={warningMessage} onConfirm={overwriteRow}>
-                      <span style={{ cursor: 'pointer' }}>Override</span>
-                    </Popconfirm>
-                  );
+              columns.push(
+                {
+                  title: 'Fix',
+                  key: 'fix',
+                  className: 'text-align-center',
+                  width: 100,
+                  render: (text: any, row: any, index: number) => {
+                    if (index === dataList.length - 1) {
+                      return null;
+                    }
+                    return <Icon type="tool" style={iconStyles} />;
+                  },
                 },
-              });
+                {
+                  title: 'Override',
+                  key: 'overwrite',
+                  className: 'text-align-center',
+                  width: 100,
+                  render: (text: any, row: any, index: number) => {
+                    if (index === dataList.length - 1) {
+                      return null;
+                    }
+                    const overwriteRow = () => {
+                      const field = `${arrayHelpers.name}.${index}.isOverwrite`;
+                      const updatedOverwrite = !row.isOverwrite;
+                      console.log({ row, updatedOverwrite, index });
+                      setFieldValue(field, !row.isOverwrite);
+                    };
+                    const warningMessage = row.isOverwrite ? 'Remove override?' : 'Really override?';
+
+                    return (
+                      <Popconfirm title={warningMessage} onConfirm={overwriteRow}>
+                        <Icon type="warning" style={iconStyles} />
+                      </Popconfirm>
+                    );
+                  },
+                },
+              );
 
               return (
                 <Table

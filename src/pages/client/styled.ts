@@ -81,7 +81,7 @@ export const TableEntryContainer = styled.section.attrs({
           .edit-cell {
             font-weight: 600;
             .ant-input-number-input {
-              font-weight: 600!important;
+              font-weight: 600 !important;
             }
             &.ant-input-number-disabled {
               background-color: #fff;
@@ -139,12 +139,12 @@ export const TableEntryContainer = styled.section.attrs({
     }
   }
   .proposed-product-table {
-    &.proposed-table{
+    &.proposed-table {
       .ant-table-tbody {
         .ant-table-row {
           .strategy-item {
-            .edit-cell{
-              .ant-input-number-input{
+            .edit-cell {
+              .ant-input-number-input {
                 padding: 0 5px;
               }
             }
@@ -152,7 +152,6 @@ export const TableEntryContainer = styled.section.attrs({
         }
       }
       .ant-table-thead > tr > th {
-        
         &.text-align-right {
           padding-right: 12px !important;
         }
@@ -486,7 +485,7 @@ export const InnerTableContainer = styled.section`
       border-bottom: none;
       padding: 0;
       padding: 2px 0;
-      &.special-table-small{
+      &.special-table-small {
         padding-right: 25px;
       }
     }
