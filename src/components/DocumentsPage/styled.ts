@@ -70,6 +70,14 @@ export const StepActionDocument = styled.div.attrs({
   display: flex;
   justify-content: flex-end;
 `;
+export const StepActionDocumentFixed = styled(StepActionDocument)`
+  @media(max-height: 900px){
+    position: fixed;
+    bottom: 32px;
+    width: 200px;
+    right: 65px;
+  }
+`;
 
 export const BtnStepDocument = styled(Button).attrs({
   className: 'btn-step-document',

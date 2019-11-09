@@ -80,7 +80,7 @@ export const MenuItem = styled.div`
   }
   .client-full-name {
     font-size: 14px;
-    margin: 0;
+    margin: 0 0px 0px 10px;
     height: 46px;
     line-height: 46px;
   }

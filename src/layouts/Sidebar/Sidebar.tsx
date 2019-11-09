@@ -74,8 +74,8 @@ class Sidebar extends React.PureComponent<SidebarProps & RouteComponentProps> {
 
     createEvent('client_navigation', position.label, date, clientId);
     history.push(`/client/${clientId}/${tagName}/${position.slug}`);
+    window.scrollTo(0, 0);
   }
-
   public selectClient = (clientId: number) => {
     const { history } = this.props;
 

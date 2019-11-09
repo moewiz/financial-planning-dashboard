@@ -114,7 +114,7 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
         placeholder: 'Enter Value',
         allowEmpty: true,
       },
-      width: 100,
+      width: 110,
       dollar: true,
       type: EditCellType.number,
       key: '1',

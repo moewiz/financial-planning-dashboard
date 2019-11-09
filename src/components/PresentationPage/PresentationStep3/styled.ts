@@ -4,7 +4,7 @@ export const EventWrapper = styled.div`
   margin-bottom: 20px;
 
   .table-entry-header {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 `;
 
@@ -71,10 +71,14 @@ export const ChartBlock = styled.div`
   flex: 0 0 calc(50% - 20px);
   text-align: center;
   border-radius: 5px;
-  padding: 30px 15px;
+  padding: 5px 15px;
   max-width: calc(50% - 20px);
   position: relative;
-  .chartjs-render-monitor {
+  @media(min-height: 862px){
+    flex: 0 0 calc(50% - 60px);
+    max-width: calc(50% - 60px);
+  }
+  .chartjs-render-monitor{
     margin: 0 auto;
   }
   ${(props: { hidden?: boolean }) =>
@@ -91,11 +95,19 @@ export const ChartBlock = styled.div`
 export const ChartBlockLeft = styled(ChartBlock)`
   margin-right: 10px;
   margin-bottom: 20px;
+  @media(min-height: 862px){
+    margin-right: 15px;
+    margin-bottom: 20px;
+  }
 `;
 
 export const ChartBlockRight = styled(ChartBlock)`
   margin-left: 10px;
   margin-bottom: 20px;
+  @media(min-height: 862px){
+    margin-left: 15px;
+    margin-bottom: 20px;
+  }
 `;
 
 export const ChartBlockDrillDown = styled(ChartBlock).attrs({

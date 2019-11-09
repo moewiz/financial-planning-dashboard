@@ -62,7 +62,7 @@ export const CardItemStyled = styled(Card).attrs({
   }
 
   .ant-card-cover {
-    padding: 30px 10px 20px;
+    padding: 20px 10px 0px;
   }
 
   .ant-card-body {

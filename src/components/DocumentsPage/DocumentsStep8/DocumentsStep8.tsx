@@ -3,7 +3,7 @@ import { get, map } from 'lodash';
 import { connect } from 'formik';
 import { message } from 'antd';
 
-import { StepWrapper, TitleStep, TitleStepSmall, BtnDoneDocument, StepActionDocument } from '../styled';
+import { StepWrapper, TitleStep, TitleStepSmall, BtnDoneDocument, StepActionDocumentFixed } from '../styled';
 import { DocumentsStep8WP, ListCardThumbnails } from './styled';
 import { DocumentData, FormikPartProps, Record, SwitcherContext } from '../DocumentsPage';
 import CardStatistic from './CardStatistic';
@@ -63,7 +63,7 @@ const DocumentsStep8 = (props: FormikPartProps) => {
                 <CardStatistic record={record} key={index} onClick={updateSlideNumber(index)} loadedPage={loadedPage} />
               ))}
             </ListCardThumbnails>
-            <StepActionDocument style={{ paddingRight: 32 }}>
+            <StepActionDocumentFixed style={{ paddingRight: 32 }}>
               <BtnDoneDocument
                 id="generate-soa-btn"
                 type="primary"
@@ -76,7 +76,7 @@ const DocumentsStep8 = (props: FormikPartProps) => {
               >
                 Generate SOA
               </BtnDoneDocument>
-            </StepActionDocument>
+            </StepActionDocumentFixed>
           </>
         )}
       </DocumentsStep8WP>
