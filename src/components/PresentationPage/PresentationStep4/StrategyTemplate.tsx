@@ -66,6 +66,11 @@ const StrategyTemplate = (props: StrategyTemplateProps) => {
                 You will also continue to have sufficient funds to meet your income requirements after making the
                 contributions.
               </li>
+              <li className="animated fadeInUp faster" style={{ animationDelay: '3s' }}>
+                We estimate the recommended contribution of $10,000 (annualized) will reduce your income tax payable by
+                $4,050, while your superannuation contributions tax payable will increase by $1,500. Thereby resulting
+                in a net tax benefit of $2,550.
+              </li>
             </ul>
           </TemplateContent>
         </Skeleton>
