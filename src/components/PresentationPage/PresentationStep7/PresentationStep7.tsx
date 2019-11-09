@@ -3,11 +3,54 @@ import { connect } from 'formik';
 import { Card, Icon, Table } from 'antd';
 import { StepWrapper } from '../styled';
 import { DocumentData, FormikPartProps } from '../PresentationPage';
-import CardItem from './CardItemStep7';
 import { map } from 'lodash';
-import { CardFeesStep, FeesTable, CardListStep7, CardStep7Container } from './styled';
+import {CardFeesStep, FeesTable, CardListStep7, CardStep7Container, CardItemStyled} from './styled';
+import {
+  StatisticGroup,
+  StatisticLabel,
+  StatisticUpDown,
+  StatisticValue,
+  StatisticWrapper,
+} from '../../StrategyPage/styled';
 
-const cardLists = [<p>Text 1</p>, <p>Text 2</p>, <p>Text 3</p>, <p>Text 4</p>];
+interface CardItem {
+  title: string;
+  subTitle: string;
+  value: string;
+  isIncrease: boolean;
+  delta: string;
+}
+
+const cardLists: CardItem[] = [
+  {
+    title: 'Net Assets',
+    subTitle: '10 year change',
+    value: '$ 119,533',
+    isIncrease: true,
+    delta: '9.23%',
+  },
+  {
+    title: 'Cashflow',
+    subTitle: '10 year change',
+    value: '$ 6,937',
+    isIncrease: false,
+    delta: '0.86%',
+  },
+  {
+    title: 'Tax',
+    subTitle: '10 year change',
+    value: '$ 17,144',
+    isIncrease: false,
+    delta: '11.4%',
+  },
+  {
+    title: 'Retirement Funding',
+    subTitle: 'Funds last until',
+    value: '2042',
+    isIncrease: true,
+    delta: '4 years',
+  },
+];
 const dataSource = [
   {
     key: '1',
@@ -54,14 +97,21 @@ const PresentationStep7 = (props: FormikPartProps) => {
   const onClickCard = (index: number) => () => {
     setSlideNumber(index);
   };
+
   return (
     <StepWrapper>
       <CardFeesStep>
         <CardListStep7>
-          {map(cardLists, (children, index: number) => (
-            <CardItem key={index} src={index + 1} onClick={onClickCard(index)}>
-              {children}
-            </CardItem>
+          {map(cardLists, (card: CardItem, index: number) => (
+            <CardItemStyled key={index}>
+              <StatisticLabel style={{ fontSize: 16 }}>{card.title}</StatisticLabel>
+              <StatisticLabel style={{ fontSize: 16, color: '#000' }}>{card.subTitle}</StatisticLabel>
+              <StatisticValue>{card.value}</StatisticValue>
+              <StatisticUpDown>
+                {card.isIncrease ? <Icon type="caret-up" /> : <Icon type="caret-down" />}
+                {' ' + card.delta}
+              </StatisticUpDown>
+            </CardItemStyled>
           ))}
         </CardListStep7>
         <FeesTable>
