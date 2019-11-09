@@ -22,7 +22,6 @@ export const TableEntryContainer = styled.section.attrs({
     `}
   .ant-input-disabled, .ant-input-number-disabled {
     background-color: #fff;
-    padding: 0 5px;
   }
   .expenditure-table,
   .income-table {
@@ -87,7 +86,6 @@ export const TableEntryContainer = styled.section.attrs({
             &.ant-input-number-disabled {
               background-color: #fff;
               color: rgba(0, 0, 0, 0.65);
-              padding: 0 5px;
             }
           }
         }
