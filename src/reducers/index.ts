@@ -21,6 +21,7 @@ const rootPersistConfig = {
           userId: inboundState.get('userId'),
           token: inboundState.get('token'),
           expired: inboundState.get('expired'),
+          fullName: inboundState.get('fullName'),
           refreshToken: inboundState.get('refreshToken'),
         });
       },
@@ -30,6 +31,7 @@ const rootPersistConfig = {
           .set('userId', outboundState.userId)
           .set('token', outboundState.token)
           .set('expired', outboundState.expired)
+          .set('fullName', outboundState.fullName)
           .set('refreshToken', outboundState.refreshToken);
       },
       {
