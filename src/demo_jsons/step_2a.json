@@ -852,20 +852,7 @@
         "proposed": [460000, 500709, 544024, 590653, 640818, 671580, 653906, 611497, 565714, 516367]
       }
     ],
-    "standardText": [
-      {
-        "text": "Pension funds will be invested in line with {{0}} risk profile",
-        "params": ["xx"]
-      },
-      {
-        "text": "Product fees of {{0}} factored in pension value",
-        "params": ["xx%"]
-      },
-      {
-        "text": "Income set to meet required expenses of {{0}} per annum",
-        "params": ["$xx,xx"]
-      }
-    ],
+    "standardText": [],
     "strategies": [],
     "drawer": {
       "client": {
