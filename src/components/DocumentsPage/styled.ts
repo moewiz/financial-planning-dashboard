@@ -118,6 +118,14 @@ export const StepWrapper = styled.section`
   padding: 0 33px;
   .documents-table {
     margin-bottom: 50px;
+    &.documents-table-soa{
+      .ant-table-tbody > tr{
+        &.ant-table-row{
+          vertical-align: top;
+        }
+      }
+     
+    }
     .ant-table-thead {
       background-color: #eceef1;
       & > tr {
