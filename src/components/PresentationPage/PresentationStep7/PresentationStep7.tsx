@@ -105,7 +105,7 @@ const PresentationStep7 = (props: FormikPartProps) => {
           {map(cardLists, (card: CardItem, index: number) => (
             <CardItemStyled key={index}>
               <StatisticLabel style={{ fontSize: 16 }}>{card.title}</StatisticLabel>
-              <StatisticLabel style={{ fontSize: 16, color: '#000' }}>{card.subTitle}</StatisticLabel>
+              <StatisticLabel style={{ color: '#000' }}>{card.subTitle}</StatisticLabel>
               <StatisticValue>{card.value}</StatisticValue>
               <StatisticUpDown>
                 {card.isIncrease ? <Icon type="caret-up" /> : <Icon type="caret-down" />}
