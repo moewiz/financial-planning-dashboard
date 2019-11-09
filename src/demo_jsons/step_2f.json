@@ -358,7 +358,7 @@
         "values": [10000, "annum", 1, "2019-07-09T12:00:00", "2023-07-10T12:00:00"]
       },
       {
-        "check": false,
+        "check": true,
         "sentence": "client.nonConcessional.customOneOff",
         "values": [60000, 2019, "cashflow"]
       }
