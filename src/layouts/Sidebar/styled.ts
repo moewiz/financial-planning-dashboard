@@ -36,6 +36,8 @@ export const ClientInfo = styled.div.attrs({
 export const SiderCollapsible = styled(Sider).attrs({
   className: 'client-side-collapsible dumoamay',
 })<{ collapsed?: boolean }>`
+  position: relative;
+  z-index: 10000;
   &.ant-layout-sider-collapsed {
     flex: 0 0 2px !important;
     max-width: 2px !important;

@@ -93,5 +93,6 @@ export const Header = styled.header.attrs({
   opacity: 1;
   background: #fff !important;
   z-index: 999;
-  width: calc(100% - 295px);
+  width: 100%;
+  left: 0px;
 `;
