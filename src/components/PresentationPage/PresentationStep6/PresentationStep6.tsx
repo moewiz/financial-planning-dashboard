@@ -95,6 +95,7 @@ const PresentationStep6 = (props: FormikPartProps) => {
             height={300}
             data={loadGraphData(chartConfig1)(chartData)}
             options={{
+              maintainAspectRatio: true,
               scales: {
                 yAxes: [
                   {
@@ -154,6 +155,7 @@ const PresentationStep6 = (props: FormikPartProps) => {
             height={300}
             data={loadGraphData(chartConfig2)(chartData)}
             options={{
+              maintainAspectRatio: true,
               scales: {
                 yAxes: [
                   {
