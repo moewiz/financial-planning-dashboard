@@ -23,11 +23,11 @@ const PresentationStep1 = (props: FormikPartProps) => {
           {/*<TitleWelcome>Welcome</TitleWelcome>*/}
           <PresentationSection>
             <PresentationLabel>Advisor:</PresentationLabel>
-            <PresentationLine>Mr.Always Right</PresentationLine>
+            <PresentationLine>Mr. Always Right</PresentationLine>
           </PresentationSection>
           <PresentationSection>
             <PresentationLabel>Client:</PresentationLabel>
-            <PresentationLine>Mr.John Samual</PresentationLine>
+            <PresentationLine>Mr. John Samual</PresentationLine>
           </PresentationSection>
           <PresentationSection>
             <PresentationLabel>Date:</PresentationLabel>

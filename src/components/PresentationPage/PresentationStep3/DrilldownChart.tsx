@@ -17,7 +17,7 @@ interface DrilldownChartProps {
 
 const buttons = [
   ['Assets', 'Liabilities', 'Net Assets'],
-  ['Income', 'Expenses', 'Net Assets'],
+  ['Income', 'Expenses', 'Net Income'],
   ['Tax'],
   ['Retirement Funding'],
 ];

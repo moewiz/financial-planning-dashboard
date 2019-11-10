@@ -204,7 +204,7 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
       ) : (
         <ChartsBlockWrapper>
           <ChartBlockLeft onClick={() => setChartIndex(0)}>
-            <ChartBlockTitle>Net assets</ChartBlockTitle>
+            <ChartBlockTitle>Net Assets</ChartBlockTitle>
             <GraphPresentation
               type={GraphType.Line}
               data={loadGraphData(configNetAssets)(get(chartsData, 'netAssetsChartData'))}

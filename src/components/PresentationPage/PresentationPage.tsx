@@ -29,7 +29,7 @@ const steps = [
   {
     title: 'Step 3',
     content: PresentationStep3,
-    description: 'Current Projection',
+    description: 'Current Projections',
   },
   {
     title: 'Step 4',
@@ -39,7 +39,7 @@ const steps = [
   {
     title: 'Step 5',
     content: PresentationStep5,
-    description: 'Proposed Projection',
+    description: 'Proposed Projections',
   },
   {
     title: 'Step 6',

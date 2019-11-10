@@ -39,12 +39,12 @@ const steps = [
   {
     title: 'Step 5',
     content: DocumentsStep5,
-    description: 'Limitations of Client\'s advice',
+    description: 'Limitations of client\'s advice',
   },
   {
     title: 'Step 6',
     content: DocumentsStep6,
-    description: 'Summary of recommendation',
+    description: 'Summary of recommendations',
   },
   {
     title: 'Step 7',
@@ -54,7 +54,7 @@ const steps = [
   {
     title: 'Step 8',
     content: DocumentsStep8,
-    description: 'SOA compliance check',
+    description: 'SoA compliance check',
   },
 ];
 

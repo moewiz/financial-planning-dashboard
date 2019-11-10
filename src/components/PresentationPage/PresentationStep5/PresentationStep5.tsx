@@ -21,8 +21,8 @@ import {
 interface CheckListInterface {
   'Salary Sacrifice'?: boolean;
   'Non-Concessional Contribution'?: boolean;
-  'Establish a pension'?: boolean;
-  'Debt reduction'?: boolean;
+  'Establish a Pension'?: boolean;
+  'Debt Reduction'?: boolean;
   Insurance?: boolean;
   'Estate Planning'?: boolean;
 }
@@ -30,8 +30,8 @@ interface CheckListInterface {
 const defaultCheckListValue = {
   'Salary Sacrifice': true,
   'Non-Concessional Contribution': true,
-  'Establish a pension': true,
-  'Debt reduction': true,
+  'Establish a Pension': true,
+  'Debt Reduction': true,
   'Insurance': true,
   'Estate Planning': true,
 };
@@ -39,8 +39,8 @@ const defaultCheckListValue = {
 const checkBoxList = [
   'Salary Sacrifice',
   'Non-Concessional Contribution',
-  'Establish a pension',
-  'Debt reduction',
+  'Establish a Pension',
+  'Debt Reduction',
   'Insurance',
   'Estate Planning',
 ];

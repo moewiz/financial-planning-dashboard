@@ -36,7 +36,7 @@ const cashflowConfig = {
       label: 'Proposed',
       fill: true,
       borderColor: '#FF5722',
-      
+
     },
   ],
 };
@@ -55,7 +55,7 @@ const taxConfig = {
       fill: false,
       lineTension: 0,
       borderColor: '#FF5722',
-      
+
     },
   ],
 };
@@ -121,7 +121,7 @@ const StrategyHeader = (props: StrategyHeaderProps) => {
   return (
     <Row gutter={32}>
       <Col span={6}>
-        <GraphContainer type={GraphType.Line} name="Net assets" data={loadGraphData(configNetAssets)(netAssets)} />
+        <GraphContainer type={GraphType.Line} name="Net Assets" data={loadGraphData(configNetAssets)(netAssets)} />
       </Col>
       <Col span={6}>
         <GraphContainer
@@ -131,7 +131,7 @@ const StrategyHeader = (props: StrategyHeaderProps) => {
         />
       </Col>
       <Col span={6}>
-        <GraphContainer type={GraphType.Bar} name="Net tax" data={loadGraphData(taxConfig)(tax)} />
+        <GraphContainer type={GraphType.Bar} name="Net Tax" data={loadGraphData(taxConfig)(tax)} />
       </Col>
       <Col span={6}>
         <GraphContainer
