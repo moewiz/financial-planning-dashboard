@@ -225,6 +225,7 @@ const LinkProductAndFund = (props: FundTableProps) => {
         if (option.warning) {
           notification.warning({
             message: 'Warning',
+            duration: 0,
             description: (
               <>
                 <span>{option.warning}</span>

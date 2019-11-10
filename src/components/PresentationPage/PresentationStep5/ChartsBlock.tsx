@@ -175,6 +175,10 @@ const calmPVConfigWithoutSalarySarisfyNInsuranceWithLifeEvent = {
   ],
 };
 
+const formatNumber = (value: any, index: any, values: any) => {
+  return numeral(Math.round(value * 100) / 100).format('$0,0.[00]');
+};
+
 const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeEvent?: boolean; checkList?: any }) => {
   const { chartsData, retirementYear = 60, hasLifeEvent = false, checkList = {} } = props;
   const [chartIndex, setChartIndex] = useState<number>(-1);
@@ -211,6 +215,18 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
                   display: true,
                   position: 'bottom',
                 },
+                scales: {
+                  yAxes: [
+                    {
+                      ticks: {
+                        stepSize: 100000,
+                        min: 1000000,
+                        max: 1600000,
+                        callback: formatNumber,
+                      },
+                    },
+                  ],
+                },
               }}
             />
           </ChartBlockLeft>
@@ -230,10 +246,10 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
                   yAxes: [
                     {
                       ticks: {
+                        stepSize: 10000,
+                        min: 40000,
                         max: 100000,
-                        callback: (value: any, index: any, values: any) => {
-                          return numeral(Math.round(value * 100) / 100).format('$0,0.[00]');
-                        },
+                        callback: formatNumber,
                       },
                     },
                   ],
@@ -253,6 +269,18 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
                   display: true,
                   position: 'bottom',
                 },
+                scales: {
+                  yAxes: [
+                    {
+                      ticks: {
+                        stepSize: 10000,
+                        min: 0,
+                        max: 60000,
+                        callback: formatNumber,
+                      },
+                    },
+                  ],
+                },
               }}
             />
           </ChartBlockLeft>
@@ -267,6 +295,18 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
                 legend: {
                   display: true,
                   position: 'bottom',
+                },
+                scales: {
+                  yAxes: [
+                    {
+                      ticks: {
+                        stepSize: 100000,
+                        min: 100000,
+                        max: 700000,
+                        callback: formatNumber,
+                      },
+                    },
+                  ],
                 },
               }}
             />

@@ -71,7 +71,7 @@ export const StepActionDocument = styled.div.attrs({
   justify-content: flex-end;
 `;
 export const StepActionDocumentFixed = styled(StepActionDocument)`
-  @media(max-height: 900px){
+  @media (max-height: 900px) {
     position: fixed;
     bottom: 32px;
     width: 200px;
@@ -118,13 +118,12 @@ export const StepWrapper = styled.section`
   padding: 0 33px;
   .documents-table {
     margin-bottom: 50px;
-    &.documents-table-soa{
-      .ant-table-tbody > tr{
-        &.ant-table-row{
+    &.documents-table-soa {
+      .ant-table-tbody > tr {
+        &.ant-table-row {
           vertical-align: top;
         }
       }
-     
     }
     .ant-table-thead {
       background-color: #eceef1;
@@ -149,6 +148,9 @@ export const StepWrapper = styled.section`
         & > td {
           color: #586388;
           &.text-align-right {
+            textarea {
+              text-align: right;
+            }
             .strategy-item {
               .edit-cell {
                 text-align: right;
@@ -280,7 +282,7 @@ export const TitleStep = styled.div.attrs({
       font-size: 16px;
       font-weight: 600;
 
-      ${props =>
+      ${(props: any) =>
         props.editable &&
         css`
           &:hover {
@@ -315,7 +317,7 @@ export const TitleStepSmall = styled.div.attrs({
       margin: 0 0 10px -10px;
       color: #9096af;
 
-      ${props =>
+      ${(props: any) =>
         props.editable &&
         css`
           &:hover {

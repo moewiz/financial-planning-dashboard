@@ -30,12 +30,12 @@ const defaultProducts: OptionData[] = [
     name: 'Search Result',
     children: [
       {
-        id: 1,
-        name: 'CFS FirstChoice Wholesale Personal Super',
-      },
-      {
         id: 2,
         name: 'CFS FirstChoice Wholesale Pension',
+      },
+      {
+        id: 1,
+        name: 'CFS FirstChoice Wholesale Personal Super',
       },
       {
         id: 3,

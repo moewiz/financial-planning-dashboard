@@ -4,12 +4,12 @@ import { Layout } from 'antd';
 
 import Header from '../Header';
 import Sidebar from '../Sidebar';
-
-const { Content } = Layout;
-import { MainLayoutContent, LayoutMain } from './styled';
+import { MainLayoutContent, LayoutMain, Content } from './styled';
 import { initializeGA } from '../../utils/GA';
 import { RootState } from '../../reducers/reducerTypes';
 import { Client } from '../../reducers/client';
+
+// const { Content } = Layout;
 
 interface MainLayoutProp {
   userId: string;

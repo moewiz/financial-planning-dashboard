@@ -16,3 +16,9 @@ export const MainLayoutContent = styled(Layout).attrs({
     padding-left: 45px;
   }
 `;
+
+export const Content = styled.main.attrs({
+  className: 'ant-layout-content',
+})`
+  margin-top: 56px;
+`;
