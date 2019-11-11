@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Layout } from 'antd';
 
 import Header from '../Header';
 import Sidebar from '../Sidebar';
@@ -8,8 +7,6 @@ import { MainLayoutContent, LayoutMain, Content } from './styled';
 import { initializeGA } from '../../utils/GA';
 import { RootState } from '../../reducers/reducerTypes';
 import { Client } from '../../reducers/client';
-
-// const { Content } = Layout;
 
 interface MainLayoutProp {
   userId: string;

@@ -9,8 +9,13 @@ import { Choice, strategyChoices } from '../../../enums/strategyChoices';
 import { TextTitle, Spinner } from '../../../pages/client/styled';
 import { HeaderTitleMargin, HeaderTitleMark, HeaderTitleStrategy, StrategyTableContent } from './styled';
 import StrategyItem, { StrategyItemI } from './StrategyItem';
+import { includes } from 'lodash-es';
 
 const { SubMenu, Item } = Menu;
+
+const listShowMarkMargin: string[] = [
+  // StrategyTypes.EstatePlanning,
+];
 
 interface FormikPartProps {
   formik: FormikContext<StrategyEntry>;
@@ -74,7 +79,7 @@ class StrategyTable extends PureComponent<FormikPartProps & StrategyTableProps> 
 
   public render() {
     const { type, removeItem, defaultFullValue, formik, tableProcessing, redrawGraphs } = this.props;
-    const shouldShowMarkAndMargin = type === StrategyTypes.EstatePlanning;
+    const shouldShowMarkAndMargin = includes(listShowMarkMargin, type);
     const strategies = get(this.props, ['formik', 'values', type, 'strategies'], []);
     const client = get(this.props, ['formik', 'values', 'client'], {});
     const partner = get(this.props, ['formik', 'values', 'partner'], {});

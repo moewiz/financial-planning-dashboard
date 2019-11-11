@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { get, isEqual, find } from 'lodash';
-import { Layout, Icon } from 'antd';
+import { Layout } from 'antd';
 
 import { RootState, StandardAction } from '../../reducers/reducerTypes';
 import {
@@ -16,7 +16,6 @@ import {
 } from '../../reducers/client';
 import { Tab } from '../../enums/client';
 import Heading from '../../components/Heading/Heading';
-import { ButtonModalFixed } from '../../components/NameAndBirthDay/styled';
 import { HomeDesc, HomePage } from '../home/styled';
 import DataEntryComponent from '../../components/ClientDetailPage/DataEntry';
 import StrategyPage from '../../components/StrategyPage/StrategyPage';
@@ -80,7 +79,7 @@ class Client extends React.PureComponent<RouteComponentProps & ClientProps> {
     if (fetchDataEntry) {
       fetchDataEntry(params);
     }
-  };
+  }
 
   public render(): JSX.Element {
     const { match, pageData, client, loading } = this.props;

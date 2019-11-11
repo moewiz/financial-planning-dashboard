@@ -870,7 +870,7 @@
       {
         "check": true,
         "sentence": "client.commenceAccount",
-        "values": ["(empty)", "2023-07-09T12:00:00", 1, "full_value", [], ["minimum"]]
+        "values": ["", "2023-07-09T12:00:00", 1, "full_value", [], ["minimum"]]
       }
     ],
     "drawer": {
@@ -2347,6 +2347,20 @@
         "params": ["not factored "]
       }
     ],
-    "strategies": []
+    "strategies": [
+      {
+        "check": true,
+        "sentence": "client.will.implement"
+      },
+      {
+        "check": true,
+        "sentence": "client.powerOfAttorney.appoint"
+      },
+      {
+        "check": true,
+        "sentence": "partner.superannuationBeneficiary",
+        "values": ["Sarah Samuel"]
+      }
+    ]
   }
 }

@@ -44,27 +44,27 @@ class InsuranceTable extends PureComponent<InsuranceTableProps> {
       width: CURRENT_COLUMN_WIDTH.Owner,
     },
     {
-      key: 'empty',
+      key: '3',
       title: '',
       width: CURRENT_COLUMN_WIDTH.Default,
     },
     {
-      key: 'empty',
+      key: '4',
       title: '',
       width: CURRENT_COLUMN_WIDTH.Default,
     },
     {
-      key: 'empty',
+      key: '5',
       title: '',
       width: CURRENT_COLUMN_WIDTH.Double,
     },
     {
-      key: 'empty',
+      key: '6',
       title: '',
       width: CURRENT_COLUMN_WIDTH.Default,
     },
     {
-      key: 'empty',
+      key: '7',
       title: '',
       width: CURRENT_COLUMN_WIDTH.Default,
     },

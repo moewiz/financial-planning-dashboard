@@ -4,6 +4,7 @@ import { get, find, map, take, last } from 'lodash';
 import cn from 'classnames';
 import { useDrop } from 'react-dnd';
 import uuid from 'uuid';
+import { FieldArrayRenderProps } from 'formik';
 
 import { HeaderTitleTable, TableEntryContainer, TextTitle } from '../../pages/client/styled';
 import { Projections } from '../../components/Icons';
@@ -15,8 +16,6 @@ import { EditCellType } from '../../components/StrategyPage/Drawer/EditCell';
 import { proposedChoices } from '../../enums/proposedChoices';
 import { formatString, Param, Text } from '../../components/StrategyPage/StandardText';
 import { createEvent } from '../../utils/GA';
-import { listenerCount } from 'cluster';
-import { FieldArrayRenderProps } from 'formik';
 
 interface ProposedProductState {
   loading: boolean;
@@ -348,7 +347,7 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
     const lastProduct = last(listProducts);
 
     fieldArrayRenderProps.form.setFieldValue(`${rowName}.note`, {
-      text: `{{0}}, replace your existing product${head.length ? 's' : ''} {{1}}`,
+      text: `{{0}}, rebanlance your existing product${head.length ? 's' : ''} {{1}}`,
       params: [get(client, 'name'), head.length ? `${head.join(', ')} and ${lastProduct}` : lastProduct],
     });
     createEvent('investment', 'link', undefined, get(client, 'id'));
