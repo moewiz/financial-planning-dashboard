@@ -95,6 +95,9 @@ const NetAssetsDrilldownCharts = (props: {
                   ticks: {
                     max: 300000,
                     min: 0,
+                    callback: (value: any, index: any, values: any) => {
+                      return numeral(Math.round(value * 100) / 100).format('$0,0.[00]');
+                    },
                   },
                 },
               ],
@@ -120,6 +123,9 @@ const NetAssetsDrilldownCharts = (props: {
                     max: 1600000,
                     min: 0,
                     step: 200000,
+                    callback: (value: any, index: any, values: any) => {
+                      return numeral(Math.round(value * 100) / 100).format('$0,0.[00]');
+                    },
                   },
                 },
               ],
