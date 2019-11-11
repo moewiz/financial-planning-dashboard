@@ -14,7 +14,7 @@ const configNetAssets = {
       label: 'Value',
       fill: false,
       lineTension: 0.2,
-      borderColor: '#FF5722',
+      borderColor: '#00BCD4',
     },
   ],
 };
@@ -203,7 +203,7 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
               redraw
               options={{
                 maintainAspectRatio: true,
-                ...startWithZeroConfig(1200000, 200000),
+                ...startWithZeroConfig(1200000, 150000),
               }}
             />
           </ChartBlockRight>

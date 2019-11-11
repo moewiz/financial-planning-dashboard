@@ -300,9 +300,9 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
                   yAxes: [
                     {
                       ticks: {
-                        stepSize: 100000,
-                        min: 100000,
-                        max: 700000,
+                        stepSize: 150000,
+                        min: 0,
+                        max: 900000,
                         callback: formatNumber,
                       },
                     },

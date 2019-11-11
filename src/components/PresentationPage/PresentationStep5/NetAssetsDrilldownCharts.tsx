@@ -117,7 +117,9 @@ const NetAssetsDrilldownCharts = (props: {
               yAxes: [
                 {
                   ticks: {
-                    max: 1550000,
+                    max: 1600000,
+                    min: 0,
+                    step: 200000,
                   },
                 },
               ],

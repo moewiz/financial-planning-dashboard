@@ -26,8 +26,8 @@ export const netAssetsDrillDownData = {
       datasets: [
         {
           label: 'Primary Residence',
-          backgroundColor: '#FBBD00', // green
-          stroke: '#FBBD00',
+          backgroundColor: '#4E79A7', // green
+          stroke: '#4E79A7',
           data: [
             750000,
             774000,
@@ -53,8 +53,8 @@ export const netAssetsDrillDownData = {
         },
         {
           label: 'Superannuation',
-          backgroundColor: '#4472C4', // dark blue
-          stroke: '#4472C4',
+          backgroundColor: '#F28E2B', // dark blue
+          stroke: '#F28E2B',
           data: [
             400000,
             425587,
@@ -80,14 +80,14 @@ export const netAssetsDrillDownData = {
         },
         {
           label: 'Cash',
-          backgroundColor: '#375D80', // blue
-          stroke: '#375D80',
+          backgroundColor: '#E15759', // blue
+          stroke: '#E15759',
           data: [150000, 165882, 183174, 202004, 224876, 154573, 81963, 6983, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
         {
           label: 'Direct Investment',
-          backgroundColor: '#70AD47', // yellow
-          stroke: '#70AD47',
+          backgroundColor: '#76B7B2', // yellow
+          stroke: '#76B7B2',
           data: [
             50000,
             52725,
@@ -141,8 +141,8 @@ export const netAssetsDrillDownData = {
           label: 'Mortgage',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#FF5722',
-          borderColor: '#FF5722',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             300000,
             295481,
@@ -196,8 +196,8 @@ export const netAssetsDrillDownData = {
           label: 'Net Assets',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#A5A5A5',
-          borderColor: '#A5A5A5',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             1050000,
             1122713,
@@ -251,8 +251,8 @@ export const netAssetsDrillDownData = {
       datasets: [
         {
           label: 'Primary Residence',
-          backgroundColor: '#FBBD00', // gren
-          stroke: '#FBBD00',
+          backgroundColor: '#4E79A7', // gren
+          stroke: '#4E79A7',
           data: [
             750000,
             774000,
@@ -278,8 +278,8 @@ export const netAssetsDrillDownData = {
         },
         {
           label: 'Superannuation',
-          backgroundColor: '#4472C4', // dark blue
-          stroke: '#4472C4',
+          backgroundColor: '#F28E2B', // dark blue
+          stroke: '#F28E2B',
           data: [
             400000,
             425587,
@@ -305,8 +305,8 @@ export const netAssetsDrillDownData = {
         },
         {
           label: 'Cash',
-          backgroundColor: '#375D80', // blue
-          stroke: '#375D80',
+          backgroundColor: '#E15759', // blue
+          stroke: '#E15759',
           data: [
             150000,
             165882,
@@ -332,8 +332,8 @@ export const netAssetsDrillDownData = {
         },
         {
           label: 'Direct Investment',
-          backgroundColor: '#70AD47', // yellow
-          stroke: '#70AD47',
+          backgroundColor: '#76B7B2', // yellow
+          stroke: '#76B7B2',
           data: [
             50000,
             52725,
@@ -387,8 +387,8 @@ export const netAssetsDrillDownData = {
           label: 'Mortgage',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#FF5722',
-          borderColor: '#FF5722',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             300000,
             295481,
@@ -442,8 +442,8 @@ export const netAssetsDrillDownData = {
           label: 'Net Assets',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#A5A5A5',
-          borderColor: '#A5A5A5',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             1050000,
             1122713,
@@ -500,42 +500,9 @@ const netAssetsDrillDownDataWithoutSalarySatisfyData = {
     ],
     datasets: [
       {
-        label: 'Pension',
-        backgroundColor: '#4472C4', // grey
-        stroke: '#4472C4',
-        data: [
-          0,
-          0,
-          0,
-          0,
-          601483,
-          564327,
-          523789,
-          479651,
-          431678,
-          379625,
-          323229,
-          279502,
-          239222,
-          199323,
-          159145,
-          116331,
-          70389,
-          32147,
-          908,
-          0,
-        ],
-      },
-      {
-        label: 'Superannuation',
-        backgroundColor: '#FFC000', // dark blue 4472C4
-        stroke: '#FFC000',
-        data: [460000, 492005, 525894, 562328, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      },
-      {
         label: 'Primary Residence',
-        backgroundColor: '#A5A5A5', // green
-        stroke: '#A5A5A5',
+        backgroundColor: '#4E79A7', // green
+        stroke: '#4E79A7',
         data: [
           750000,
           774000,
@@ -560,9 +527,15 @@ const netAssetsDrillDownDataWithoutSalarySatisfyData = {
         ],
       },
       {
+        label: 'Superannuation',
+        backgroundColor: '#F28E2B', // dark blue 4472C4
+        stroke: '#F28E2B',
+        data: [460000, 492005, 525894, 562328, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      },
+      {
         label: 'Cash',
-        backgroundColor: '#ED7D31', // blue 375D80
-        stroke: '#ED7D31',
+        backgroundColor: '#E15759', // blue 375D80
+        stroke: '#E15759',
         data: [
           20000,
           20300,
@@ -588,8 +561,8 @@ const netAssetsDrillDownDataWithoutSalarySatisfyData = {
       },
       {
         label: 'Direct Investment',
-        backgroundColor: '#375D80', // yellow 70AD47
-        stroke: '#375D80',
+        backgroundColor: '#76B7B2', // yellow 70AD47
+        stroke: '#76B7B2',
         data: [
           50000,
           53200,
@@ -611,6 +584,33 @@ const netAssetsDrillDownDataWithoutSalarySatisfyData = {
           143542,
           152728,
           143539,
+        ],
+      },
+      {
+        label: 'Pension',
+        backgroundColor: '#59A14F', // grey
+        stroke: '#59A14F',
+        data: [
+          0,
+          0,
+          0,
+          0,
+          601483,
+          564327,
+          523789,
+          479651,
+          431678,
+          379625,
+          323229,
+          279502,
+          239222,
+          199323,
+          159145,
+          116331,
+          70389,
+          32147,
+          908,
+          0,
         ],
       },
     ],
@@ -643,8 +643,8 @@ const netAssetsDrillDownDataWithoutSalarySatisfyData = {
         label: 'Mortgage',
         fill: false,
         lineTension: 0.2,
-        backgroundColor: '#FF5722',
-        borderColor: '#FF5722',
+        backgroundColor: '#4E79A7',
+        borderColor: '#4E79A7',
         data: [
           230000,
           226535,
@@ -698,8 +698,8 @@ const netAssetsDrillDownDataWithoutSalarySatisfyData = {
         label: 'Net Assets',
         fill: false,
         lineTension: 0.2,
-        backgroundColor: '#A5A5A5',
-        borderColor: '#A5A5A5',
+        backgroundColor: '#4E79A7',
+        borderColor: '#4E79A7',
         data: [
           1050000,
           1112970,
@@ -758,42 +758,9 @@ const netAssetsDrillDownDataWOSalarySatisfyWLifeEventData = {
     ],
     datasets: [
       {
-        label: 'Pension',
-        backgroundColor: '#70AD47', // grey
-        stroke: '#70AD47',
-        data: [
-          0,
-          0,
-          0,
-          0,
-          554897,
-          515109,
-          471792,
-          424717,
-          373642,
-          318311,
-          258452,
-          193779,
-          126822,
-          59983,
-          1694,
-          48,
-          1,
-          0,
-          0,
-          0,
-        ],
-      },
-      {
-        label: 'Superannuation',
-        backgroundColor: '#4472C4', // dark blue
-        stroke: '#4472C4',
-        data: [460000, 482083, 505225, 529479, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      },
-      {
         label: 'Primary Residence',
-        backgroundColor: '#FFC000',
-        stroke: '#FFC000',
+        backgroundColor: '#4E79A7',
+        stroke: '#4E79A7',
         data: [
           750000,
           774000,
@@ -818,36 +785,15 @@ const netAssetsDrillDownDataWOSalarySatisfyWLifeEventData = {
         ],
       },
       {
-        label: 'Insurance Payout',
-        backgroundColor: '#A5A5A5',
-        stroke: '#A5A5A5',
-        data: [
-          500000,
-          453489,
-          404402,
-          352632,
-          298072,
-          307312,
-          316839,
-          326661,
-          336787,
-          347227,
-          357991,
-          369089,
-          380531,
-          392327,
-          396483,
-          347588,
-          297779,
-          248320,
-          199189,
-          149494,
-        ],
+        label: 'Superannuation',
+        backgroundColor: '#F28E2B', // dark blue
+        stroke: '#F28E2B',
+        data: [460000, 482083, 505225, 529479, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       },
       {
         label: 'Cash',
-        backgroundColor: '#ED7D31', // blue 375D80
-        stroke: '#ED7D31',
+        backgroundColor: '#E15759', // blue 375D80
+        stroke: '#E15759',
         data: [
           20000,
           17858,
@@ -873,8 +819,8 @@ const netAssetsDrillDownDataWOSalarySatisfyWLifeEventData = {
       },
       {
         label: 'Direct Investment',
-        backgroundColor: '#375D80', // yellow 70AD47
-        stroke: '#375D80',
+        backgroundColor: '#76B7B2', // yellow 70AD47
+        stroke: '#76B7B2',
         data: [
           50000,
           53200,
@@ -896,6 +842,60 @@ const netAssetsDrillDownDataWOSalarySatisfyWLifeEventData = {
           143542,
           152728,
           162503,
+        ],
+      },
+      {
+        label: 'Pension',
+        backgroundColor: '#59A14F', // grey
+        stroke: '#59A14F',
+        data: [
+          0,
+          0,
+          0,
+          0,
+          554897,
+          515109,
+          471792,
+          424717,
+          373642,
+          318311,
+          258452,
+          193779,
+          126822,
+          59983,
+          1694,
+          48,
+          1,
+          0,
+          0,
+          0,
+        ],
+      },
+      {
+        label: 'Insurance Payout',
+        backgroundColor: '#EDC948',
+        stroke: '#EDC948',
+        data: [
+          500000,
+          453489,
+          404402,
+          352632,
+          298072,
+          307312,
+          316839,
+          326661,
+          336787,
+          347227,
+          357991,
+          369089,
+          380531,
+          392327,
+          396483,
+          347588,
+          297779,
+          248320,
+          199189,
+          149494,
         ],
       },
     ],
@@ -928,8 +928,8 @@ const netAssetsDrillDownDataWOSalarySatisfyWLifeEventData = {
         label: 'Mortgage',
         fill: false,
         lineTension: 0.2,
-        backgroundColor: '#FF5722',
-        borderColor: '#FF5722',
+        backgroundColor: '#4E79A7',
+        borderColor: '#4E79A7',
         data: [
           230000,
           226535,
@@ -983,8 +983,8 @@ const netAssetsDrillDownDataWOSalarySatisfyWLifeEventData = {
         label: 'Net Assets',
         fill: false,
         lineTension: 0.2,
-        backgroundColor: '#A5A5A5',
-        borderColor: '#A5A5A5',
+        backgroundColor: '#4E79A7',
+        borderColor: '#4E79A7',
         data: [
           1550000,
           1554095,
@@ -1043,42 +1043,9 @@ const netAssetsDrillDownDataWOSalarySatisfyNInsuranceWLifeEventData = {
     ],
     datasets: [
       {
-        label: 'Pension',
-        backgroundColor: '#4472C4', // grey
-        stroke: '#4472C4',
-        data: [
-          0,
-          0,
-          0,
-          0,
-          486767,
-          442938,
-          395340,
-          343728,
-          287845,
-          227421,
-          162165,
-          119265,
-          77937,
-          33604,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-        ],
-      },
-      {
-        label: 'Superannuation',
-        backgroundColor: '#FFC000', // dark blue 4472C4
-        stroke: '#FFC000',
-        data: [460000, 482083, 505225, 529479, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      },
-      {
         label: 'Primary Residence',
-        backgroundColor: '#A5A5A5', // gren
-        stroke: '#A5A5A5',
+        backgroundColor: '#4E79A7', // gren
+        stroke: '#4E79A7',
         data: [
           750000,
           774000,
@@ -1103,16 +1070,49 @@ const netAssetsDrillDownDataWOSalarySatisfyNInsuranceWLifeEventData = {
         ],
       },
       {
+        label: 'Superannuation',
+        backgroundColor: '#F28E2B', // dark blue 4472C4
+        stroke: '#F28E2B',
+        data: [460000, 482083, 505225, 529479, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      },
+      {
         label: 'Cash',
-        backgroundColor: '#ED7D31', // blue 375D80
-        stroke: '#ED7D31',
+        backgroundColor: '#E15759', // blue 375D80
+        stroke: '#E15759',
         data: [20000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       },
       {
         label: 'Direct Investment',
-        backgroundColor: '#375D80', // yellow 70AD47
-        stroke: '#375D80',
+        backgroundColor: '#76B7B2', // yellow 70AD47
+        stroke: '#76B7B2',
         data: [50000, 9047, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      },
+      {
+        label: 'Pension',
+        backgroundColor: '#59A14F', // grey
+        stroke: '#59A14F',
+        data: [
+          0,
+          0,
+          0,
+          0,
+          486767,
+          442938,
+          395340,
+          343728,
+          287845,
+          227421,
+          162165,
+          119265,
+          77937,
+          33604,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+        ],
       },
     ],
   },
@@ -1144,8 +1144,8 @@ const netAssetsDrillDownDataWOSalarySatisfyNInsuranceWLifeEventData = {
         label: 'Mortgage',
         fill: false,
         lineTension: 0.2,
-        backgroundColor: '#FF5722',
-        borderColor: '#FF5722',
+        backgroundColor: '#4E79A7',
+        borderColor: '#4E79A7',
         data: [
           230000,
           226535,
@@ -1199,8 +1199,8 @@ const netAssetsDrillDownDataWOSalarySatisfyNInsuranceWLifeEventData = {
         label: 'Net Assets',
         fill: false,
         lineTension: 0.2,
-        backgroundColor: '#A5A5A5',
-        borderColor: '#A5A5A5',
+        backgroundColor: '#4E79A7',
+        borderColor: '#4E79A7',
         data: [
           1050000,
           1038595,
@@ -1261,20 +1261,20 @@ export const cashFlowDrillDownData = {
       datasets: [
         {
           label: 'Salary',
-          backgroundColor: '#5B9BD5', //
-          stroke: '#5B9BD5',
+          backgroundColor: '#59A14F', //
+          stroke: '#59A14F',
           data: [120000, 124200, 128547, 133046, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
         {
           label: 'Centrelink payment',
-          backgroundColor: '#FFC000', //
-          stroke: '#FFC000',
+          backgroundColor: '#4E79A7', // #F28E2B
+          stroke: '#4E79A7',
           data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14112, 21614, 26397, 31103, 33803, 35395, 36407, 37344, 38305, 39292],
         },
         {
           label: 'Capital Drawdown',
-          backgroundColor: '#4472C4', //
-          stroke: '#4472C4',
+          backgroundColor: '#F28E2B', //
+          stroke: '#F28E2B',
           data: [
             0,
             0,
@@ -1326,8 +1326,8 @@ export const cashFlowDrillDownData = {
       datasets: [
         {
           label: 'Living expenses',
-          backgroundColor: '#5B9BD5',
-          borderColor: '#5B9BD5',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             50000,
             51150,
@@ -1353,8 +1353,8 @@ export const cashFlowDrillDownData = {
         },
         {
           label: 'Repayment of borrowings',
-          backgroundColor: '#ED7D31',
-          borderColor: '#ED7D31',
+          backgroundColor: '#F28E2B',
+          borderColor: '#F28E2B',
           data: [
             19043,
             19043,
@@ -1408,8 +1408,8 @@ export const cashFlowDrillDownData = {
           label: 'Net income',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#A5A5A5',
-          borderColor: '#A5A5A5',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             82675,
             84998,
@@ -1463,20 +1463,20 @@ export const cashFlowDrillDownData = {
       datasets: [
         {
           label: 'Salary',
-          backgroundColor: '#5B9BD5', //
-          stroke: '#5B9BD5',
+          backgroundColor: '#59A14F', //
+          stroke: '#59A14F',
           data: [120000, 124200, 128547, 133046, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
         {
           label: 'Centrelink payment',
-          backgroundColor: '#FFC000', //
-          stroke: '#FFC000',
+          backgroundColor: '#4E79A7', //
+          stroke: '#4E79A7',
           data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14112, 21614, 26397, 31103, 33803, 35395, 36407, 37344, 38305, 39292],
         },
         {
           label: 'Capital Drawdown',
-          backgroundColor: '#4472C4', //
-          stroke: '#4472C4',
+          backgroundColor: '#F28E2B', //
+          stroke: '#F28E2B',
           data: [
             0,
             0,
@@ -1528,8 +1528,8 @@ export const cashFlowDrillDownData = {
       datasets: [
         {
           label: 'Living expenses',
-          backgroundColor: '#5B9BD5',
-          borderColor: '#5B9BD5',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             50000,
             51150,
@@ -1555,8 +1555,8 @@ export const cashFlowDrillDownData = {
         },
         {
           label: 'Repayment of borrowings',
-          backgroundColor: '#ED7D31',
-          borderColor: '#ED7D31',
+          backgroundColor: '#F28E2B',
+          borderColor: '#F28E2B',
           data: [
             19043,
             19043,
@@ -1610,8 +1610,8 @@ export const cashFlowDrillDownData = {
           label: 'Net income',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#A5A5A5',
-          borderColor: '#A5A5A5',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             82675,
             84998,
@@ -1670,8 +1670,8 @@ export const taxFlowDrillDownData = {
       datasets: [
         {
           label: 'Tax payable ',
-          backgroundColor: '#5B9BD5', //
-          stroke: '#5B9BD5',
+          backgroundColor: '#4E79A7', //
+          stroke: '#4E79A7',
           data: [
             33289,
             35019,
@@ -1697,8 +1697,8 @@ export const taxFlowDrillDownData = {
         },
         {
           label: 'Medicare levy',
-          backgroundColor: '#ED7D31', //
-          stroke: '#ED7D31',
+          backgroundColor: '#F28E2B', //
+          stroke: '#F28E2B',
           data: [2484, 2575, 2669, 2767, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
       ],
@@ -1731,8 +1731,8 @@ export const taxFlowDrillDownData = {
       datasets: [
         {
           label: 'Tax payable ',
-          backgroundColor: '#5B9BD5', //
-          stroke: '#5B9BD5',
+          backgroundColor: '#4E79A7', //
+          stroke: '#4E79A7',
           data: [
             33289,
             35019,
@@ -1758,8 +1758,8 @@ export const taxFlowDrillDownData = {
         },
         {
           label: 'Medicare levy',
-          backgroundColor: '#ED7D31', //
-          stroke: '#ED7D31',
+          backgroundColor: '#F28E2B', //
+          stroke: '#F28E2B',
           data: [2484, 2575, 2669, 2767, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
       ],
@@ -1808,8 +1808,8 @@ export const calmPVDrillDownData = {
           label: 'Income and capital drawdown',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#FFC000',
-          borderColor: '#FFC000',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             120000,
             124200,
@@ -1843,8 +1843,8 @@ export const calmPVDrillDownData = {
         },
         {
           label: 'Expenditure',
-          backgroundColor: '#5B9BD5', //
-          stroke: '#5B9BD5',
+          backgroundColor: '#F28E2B', //
+          stroke: '#F28E2B',
           data: [
             106368,
             109396,
@@ -1881,8 +1881,8 @@ export const calmPVDrillDownData = {
           type: 'line',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#ED7D31',
-          borderColor: '#ED7D31',
+          backgroundColor: '#E15759',
+          borderColor: '#E15759',
           data: [
             600000,
             629710,
@@ -1955,8 +1955,8 @@ export const calmPVDrillDownData = {
           label: 'Income and capital drawdown',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#FFC000',
-          borderColor: '#FFC000',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             120000,
             124200,
@@ -1990,8 +1990,8 @@ export const calmPVDrillDownData = {
         },
         {
           label: 'Expenditure',
-          backgroundColor: '#5B9BD5', //
-          stroke: '#5B9BD5',
+          backgroundColor: '#F28E2B', //
+          stroke: '#F28E2B',
           data: [
             106368,
             109396,
@@ -2028,8 +2028,8 @@ export const calmPVDrillDownData = {
           type: 'line',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#ED7D31',
-          borderColor: '#ED7D31',
+          backgroundColor: '#E15759',
+          borderColor: '#E15759',
           data: [
             600000,
             629710,

@@ -26,8 +26,8 @@ export const netAssetsDrillDownData = {
       datasets: [
         {
           label: 'Primary Residence',
-          backgroundColor: '#FBBD00', // gren
-          stroke: '#FBBD00',
+          backgroundColor: '#4E79A7', // gren
+          stroke: '#4E79A7',
           data: [
             750000,
             774000,
@@ -53,8 +53,8 @@ export const netAssetsDrillDownData = {
         },
         {
           label: 'Superannuation',
-          backgroundColor: '#4472C4', // dark blue
-          stroke: '#4472C4',
+          backgroundColor: '#F28E2B', // dark blue
+          stroke: '#F28E2B',
           data: [
             400000,
             425587,
@@ -80,14 +80,14 @@ export const netAssetsDrillDownData = {
         },
         {
           label: 'Cash',
-          backgroundColor: '#375D80', // blue
-          stroke: '#375D80',
+          backgroundColor: '#E15759', // blue
+          stroke: '#E15759',
           data: [150000, 165882, 183174, 202004, 224876, 154573, 81963, 6983, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
         {
           label: 'Direct Investment',
-          backgroundColor: '#70AD47', // yellow
-          stroke: '#70AD47',
+          backgroundColor: '#76B7B2', // yellow
+          stroke: '#76B7B2',
           data: [
             50000,
             52725,
@@ -141,8 +141,8 @@ export const netAssetsDrillDownData = {
           label: 'Mortgage',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#FF5722',
-          borderColor: '#FF5722',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             300000,
             295481,
@@ -196,8 +196,8 @@ export const netAssetsDrillDownData = {
           label: 'Net Assets',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#A5A5A5',
-          borderColor: '#A5A5A5',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             1050000,
             1122713,
@@ -251,8 +251,8 @@ export const netAssetsDrillDownData = {
       datasets: [
         {
           label: 'Primary Residence',
-          backgroundColor: '#FBBD00', // gren
-          stroke: '#FBBD00',
+          backgroundColor: '#4E79A7', // gren
+          stroke: '#4E79A7',
           data: [
             750000,
             774000,
@@ -278,8 +278,8 @@ export const netAssetsDrillDownData = {
         },
         {
           label: 'Superannuation',
-          backgroundColor: '#4472C4', // dark blue
-          stroke: '#4472C4',
+          backgroundColor: '#F28E2B', // dark blue
+          stroke: '#F28E2B',
           data: [
             400000,
             425587,
@@ -305,8 +305,8 @@ export const netAssetsDrillDownData = {
         },
         {
           label: 'Cash',
-          backgroundColor: '#375D80', // blue
-          stroke: '#375D80',
+          backgroundColor: '#E15759', // blue
+          stroke: '#E15759',
           data: [
             150000,
             165882,
@@ -332,8 +332,8 @@ export const netAssetsDrillDownData = {
         },
         {
           label: 'Direct Investment',
-          backgroundColor: '#70AD47', // yellow
-          stroke: '#70AD47',
+          backgroundColor: '#76B7B2', // yellow
+          stroke: '#76B7B2',
           data: [
             50000,
             52725,
@@ -387,8 +387,8 @@ export const netAssetsDrillDownData = {
           label: 'Mortgage',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#FF5722',
-          borderColor: '#FF5722',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             300000,
             295481,
@@ -442,8 +442,8 @@ export const netAssetsDrillDownData = {
           label: 'Net Assets',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#A5A5A5',
-          borderColor: '#A5A5A5',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             1050000,
             1122713,
@@ -500,8 +500,8 @@ export const netAssetsDrillDownDataWithLifeEvent = {
       datasets: [
         {
           label: 'Insurance payout',
-          backgroundColor: '#A5A5A5', //
-          stroke: '#A5A5A5',
+          backgroundColor: '#4E79A7', //
+          stroke: '#4E79A7',
           data: [
             500000,
             454470,
@@ -527,8 +527,8 @@ export const netAssetsDrillDownDataWithLifeEvent = {
         },
         {
           label: 'Primary Residence',
-          backgroundColor: '#FBBD00', // gren
-          stroke: '#FBBD00',
+          backgroundColor: '#F28E2B', // gren
+          stroke: '#F28E2B',
           data: [
             750000,
             774000,
@@ -554,8 +554,8 @@ export const netAssetsDrillDownDataWithLifeEvent = {
         },
         {
           label: 'Superannuation',
-          backgroundColor: '#4472C4', // dark blue
-          stroke: '#4472C4',
+          backgroundColor: '#E15759', // dark blue
+          stroke: '#E15759',
           data: [
             400000,
             415706,
@@ -581,14 +581,14 @@ export const netAssetsDrillDownDataWithLifeEvent = {
         },
         {
           label: 'Cash',
-          backgroundColor: '#375D80', // blue
-          stroke: '#375D80',
+          backgroundColor: '#76B7B2', // blue
+          stroke: '#76B7B2',
           data: [150000, 136341, 122213, 107603, 92497, 76883, 60745, 44069, 26841, 9045, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
         {
           label: 'Direct Investment',
-          backgroundColor: '#70AD47', // yellow
-          stroke: '#70AD47',
+          backgroundColor: '#59A14F', // yellow
+          stroke: '#59A14F',
           data: [
             50000,
             52725,
@@ -642,8 +642,8 @@ export const netAssetsDrillDownDataWithLifeEvent = {
           label: 'Mortgage',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#FF5722',
-          borderColor: '#FF5722',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             300000,
             295481,
@@ -697,8 +697,8 @@ export const netAssetsDrillDownDataWithLifeEvent = {
           label: 'Net Assets',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#A5A5A5',
-          borderColor: '#A5A5A5',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             1550000,
             1537761,
@@ -752,8 +752,8 @@ export const netAssetsDrillDownDataWithLifeEvent = {
       datasets: [
         {
           label: 'Insurance payout',
-          backgroundColor: '#A5A5A5', //
-          stroke: '#A5A5A5',
+          backgroundColor: '#4E79A7', //
+          stroke: '#4E79A7',
           data: [
             500000,
             454470,
@@ -779,8 +779,8 @@ export const netAssetsDrillDownDataWithLifeEvent = {
         },
         {
           label: 'Primary Residence',
-          backgroundColor: '#FBBD00', // gren
-          stroke: '#FBBD00',
+          backgroundColor: '#F28E2B', // gren
+          stroke: '#F28E2B',
           data: [
             750000,
             774000,
@@ -806,8 +806,8 @@ export const netAssetsDrillDownDataWithLifeEvent = {
         },
         {
           label: 'Superannuation',
-          backgroundColor: '#4472C4', // dark blue
-          stroke: '#4472C4',
+          backgroundColor: '#E15759', // dark blue
+          stroke: '#E15759',
           data: [
             400000,
             415706,
@@ -839,8 +839,8 @@ export const netAssetsDrillDownDataWithLifeEvent = {
         },
         {
           label: 'Direct Investment',
-          backgroundColor: '#70AD47', // yellow
-          stroke: '#70AD47',
+          backgroundColor: '#76B7B2', // yellow
+          stroke: '#76B7B2',
           data: [
             50000,
             52725,
@@ -894,8 +894,8 @@ export const netAssetsDrillDownDataWithLifeEvent = {
           label: 'Mortgage',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#FF5722',
-          borderColor: '#FF5722',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             300000,
             295481,
@@ -949,8 +949,8 @@ export const netAssetsDrillDownDataWithLifeEvent = {
           label: 'Net Assets',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#A5A5A5',
-          borderColor: '#A5A5A5',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             1550000,
             1537761,
@@ -1007,20 +1007,20 @@ export const cashFlowDrillDownData = {
       datasets: [
         {
           label: 'Salary',
-          backgroundColor: '#5B9BD5', //
-          stroke: '#5B9BD5',
+          backgroundColor: '#59A14F', //
+          stroke: '#59A14F',
           data: [120000, 124200, 128547, 133046, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
         {
           label: 'Centrelink payment',
-          backgroundColor: '#FFC000', //
-          stroke: '#FFC000',
+          backgroundColor: '#4E79A7', //
+          stroke: '#4E79A7',
           data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14112, 21614, 26397, 31103, 33803, 35395, 36407, 37344, 38305, 39292],
         },
         {
           label: 'Capital Drawdown',
-          backgroundColor: '#4472C4', //
-          stroke: '#4472C4',
+          backgroundColor: '#F28E2B', //
+          stroke: '#F28E2B',
           data: [
             0,
             0,
@@ -1072,8 +1072,8 @@ export const cashFlowDrillDownData = {
       datasets: [
         {
           label: 'Living expenses',
-          backgroundColor: '#5B9BD5',
-          borderColor: '#5B9BD5',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             50000,
             51150,
@@ -1099,8 +1099,8 @@ export const cashFlowDrillDownData = {
         },
         {
           label: 'Repayment of borrowings',
-          backgroundColor: '#ED7D31',
-          borderColor: '#ED7D31',
+          backgroundColor: '#F28E2B',
+          borderColor: '#F28E2B',
           data: [
             19043,
             19043,
@@ -1154,8 +1154,8 @@ export const cashFlowDrillDownData = {
           label: 'Net income',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#A5A5A5',
-          borderColor: '#A5A5A5',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             82675,
             84998,
@@ -1209,20 +1209,20 @@ export const cashFlowDrillDownData = {
       datasets: [
         {
           label: 'Salary',
-          backgroundColor: '#5B9BD5', //
-          stroke: '#5B9BD5',
+          backgroundColor: '#59A14F', //
+          stroke: '#59A14F',
           data: [120000, 124200, 128547, 133046, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
         {
           label: 'Centrelink payment',
-          backgroundColor: '#FFC000', //
-          stroke: '#FFC000',
+          backgroundColor: '#4E79A7', //
+          stroke: '#4E79A7',
           data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14112, 21614, 26397, 31103, 33803, 35395, 36407, 37344, 38305, 39292],
         },
         {
           label: 'Capital Drawdown',
-          backgroundColor: '#4472C4', //
-          stroke: '#4472C4',
+          backgroundColor: '#F28E2B', //
+          stroke: '#F28E2B',
           data: [
             0,
             0,
@@ -1274,8 +1274,8 @@ export const cashFlowDrillDownData = {
       datasets: [
         {
           label: 'Living expenses',
-          backgroundColor: '#5B9BD5',
-          borderColor: '#5B9BD5',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             50000,
             51150,
@@ -1301,8 +1301,8 @@ export const cashFlowDrillDownData = {
         },
         {
           label: 'Repayment of borrowings',
-          backgroundColor: '#ED7D31',
-          borderColor: '#ED7D31',
+          backgroundColor: '#F28E2B',
+          borderColor: '#F28E2B',
           data: [
             19043,
             19043,
@@ -1356,8 +1356,8 @@ export const cashFlowDrillDownData = {
           label: 'Net income',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#A5A5A5',
-          borderColor: '#A5A5A5',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             82675,
             84998,
@@ -1414,20 +1414,20 @@ export const cashFlowDrillDownDataWithLifeEvent = {
       datasets: [
         {
           label: 'Salary',
-          backgroundColor: '#5B9BD5', //
-          stroke: '#5B9BD5',
+          backgroundColor: '#59A14F', //
+          stroke: '#59A14F',
           data: [120000, 124200, 128547, 133046, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
         {
           label: 'Centrelink payment',
-          backgroundColor: '#FFC000', //
-          stroke: '#FFC000',
+          backgroundColor: '#4E79A7', //
+          stroke: '#4E79A7',
           data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14112, 21614, 26397, 31103, 33803, 35395, 36407, 37344, 38305, 39292],
         },
         {
           label: 'Capital Drawdown',
-          backgroundColor: '#4472C4', //
-          stroke: '#4472C4',
+          backgroundColor: '#F28E2B', //
+          stroke: '#F28E2B',
           data: [
             0,
             0,
@@ -1479,8 +1479,8 @@ export const cashFlowDrillDownDataWithLifeEvent = {
       datasets: [
         {
           label: 'Living expenses',
-          backgroundColor: '#5B9BD5',
-          borderColor: '#5B9BD5',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             50000,
             51150,
@@ -1506,8 +1506,8 @@ export const cashFlowDrillDownDataWithLifeEvent = {
         },
         {
           label: 'Repayment of borrowings',
-          backgroundColor: '#ED7D31',
-          borderColor: '#ED7D31',
+          backgroundColor: '#F28E2B',
+          borderColor: '#F28E2B',
           data: [
             19043,
             19043,
@@ -1561,8 +1561,8 @@ export const cashFlowDrillDownDataWithLifeEvent = {
           label: 'Net income',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#A5A5A5',
-          borderColor: '#A5A5A5',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             82675,
             84998,
@@ -1616,20 +1616,20 @@ export const cashFlowDrillDownDataWithLifeEvent = {
       datasets: [
         {
           label: 'Salary',
-          backgroundColor: '#5B9BD5', //
-          stroke: '#5B9BD5',
+          backgroundColor: '#59A14F', //
+          stroke: '#59A14F',
           data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
         {
           label: 'Centrelink payment',
-          backgroundColor: '#FFC000', //
-          stroke: '#FFC000',
+          backgroundColor: '#4E79A7', //
+          stroke: '#4E79A7',
           data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3939, 10031, 15262, 20398, 25399, 30326, 35079, 36728, 38305, 39292],
         },
         {
           label: 'Capital Drawdown',
-          backgroundColor: '#4472C4', //
-          stroke: '#4472C4',
+          backgroundColor: '#F28E2B', //
+          stroke: '#F28E2B',
           data: [
             69043,
             70193,
@@ -1681,8 +1681,8 @@ export const cashFlowDrillDownDataWithLifeEvent = {
       datasets: [
         {
           label: 'Living expenses',
-          backgroundColor: '#5B9BD5',
-          borderColor: '#5B9BD5',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             50000,
             51150,
@@ -1708,8 +1708,8 @@ export const cashFlowDrillDownDataWithLifeEvent = {
         },
         {
           label: 'Repayment of borrowings',
-          backgroundColor: '#ED7D31',
-          borderColor: '#ED7D31',
+          backgroundColor: '#F28E2B',
+          borderColor: '#F28E2B',
           data: [
             19043,
             19043,
@@ -1763,8 +1763,8 @@ export const cashFlowDrillDownDataWithLifeEvent = {
           label: 'Net income',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#A5A5A5',
-          borderColor: '#A5A5A5',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             68939,
             70084,
@@ -1821,8 +1821,8 @@ export const taxFlowDrillDownData = {
       datasets: [
         {
           label: 'Tax payable ',
-          backgroundColor: '#5B9BD5', //
-          stroke: '#5B9BD5',
+          backgroundColor: '#4E79A7', //
+          stroke: '#4E79A7',
           data: [
             33289,
             35019,
@@ -1848,8 +1848,8 @@ export const taxFlowDrillDownData = {
         },
         {
           label: 'Medicare levy',
-          backgroundColor: '#ED7D31', //
-          stroke: '#ED7D31',
+          backgroundColor: '#F28E2B', //
+          stroke: '#F28E2B',
           data: [2484, 2575, 2669, 2767, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
       ],
@@ -1882,8 +1882,8 @@ export const taxFlowDrillDownData = {
       datasets: [
         {
           label: 'Tax payable ',
-          backgroundColor: '#5B9BD5', //
-          stroke: '#5B9BD5',
+          backgroundColor: '#4E79A7', //
+          stroke: '#4E79A7',
           data: [
             33289,
             35019,
@@ -1909,8 +1909,8 @@ export const taxFlowDrillDownData = {
         },
         {
           label: 'Medicare levy',
-          backgroundColor: '#ED7D31', //
-          stroke: '#ED7D31',
+          backgroundColor: '#F28E2B', //
+          stroke: '#F28E2B',
           data: [2484, 2575, 2669, 2767, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
       ],
@@ -1946,8 +1946,8 @@ export const taxFlowDrillDownDataWithLifeEvent = {
       datasets: [
         {
           label: 'Tax payable ',
-          backgroundColor: '#5B9BD5', //
-          stroke: '#5B9BD5',
+          backgroundColor: '#4E79A7', //
+          stroke: '#4E79A7',
           data: [
             33289,
             35019,
@@ -1973,8 +1973,8 @@ export const taxFlowDrillDownDataWithLifeEvent = {
         },
         {
           label: 'Medicare levy',
-          backgroundColor: '#ED7D31', //
-          stroke: '#ED7D31',
+          backgroundColor: '#F28E2B', //
+          stroke: '#F28E2B',
           data: [2484, 2575, 2669, 2767, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
       ],
@@ -2007,8 +2007,8 @@ export const taxFlowDrillDownDataWithLifeEvent = {
       datasets: [
         {
           label: 'Tax payable ',
-          backgroundColor: '#5B9BD5', //
-          stroke: '#5B9BD5',
+          backgroundColor: '#4E79A7', //
+          stroke: '#4E79A7',
           data: [
             -104,
             -109,
@@ -2034,8 +2034,8 @@ export const taxFlowDrillDownDataWithLifeEvent = {
         },
         {
           label: 'Medicare levy',
-          backgroundColor: '#ED7D31', //
-          stroke: '#ED7D31',
+          backgroundColor: '#F28E2B', //
+          stroke: '#F28E2B',
           data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
       ],
@@ -2083,8 +2083,8 @@ export const calmPVDrillDownData = {
 
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#FFC000',
-          borderColor: '#FFC000',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             120000,
             124200,
@@ -2122,8 +2122,8 @@ export const calmPVDrillDownData = {
           yAxisID: 'netAssets',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#ED7D31',
-          borderColor: '#ED7D31',
+          backgroundColor: '#F28E2B',
+          borderColor: '#F28E2B',
           data: [
             600000,
             629710,
@@ -2157,8 +2157,8 @@ export const calmPVDrillDownData = {
         },
         {
           label: 'Expenditure',
-          backgroundColor: '#5B9BD5', //
-          stroke: '#5B9BD5',
+          backgroundColor: '#E15759', //
+          stroke: '#E15759',
           yAxisID: 'expenditure',
           data: [
             106368,
@@ -2233,8 +2233,8 @@ export const calmPVDrillDownData = {
 
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#FFC000',
-          borderColor: '#FFC000',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             120000,
             124200,
@@ -2272,8 +2272,8 @@ export const calmPVDrillDownData = {
           yAxisID: 'netAssets',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#ED7D31',
-          borderColor: '#ED7D31',
+          backgroundColor: '#F28E2B',
+          borderColor: '#F28E2B',
           data: [
             600000,
             629710,
@@ -2308,8 +2308,8 @@ export const calmPVDrillDownData = {
         {
           label: 'Expenditure',
           yAxisID: 'expenditure',
-          backgroundColor: '#5B9BD5', //
-          stroke: '#5B9BD5',
+          backgroundColor: '#E15759', //
+          stroke: '#E15759',
           data: [
             106368,
             109396,
@@ -2385,8 +2385,8 @@ export const calmPVDrillDownDataWithLifeEvent = {
           label: 'Income and capital drawdown',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#FFC000',
-          borderColor: '#FFC000',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             120000,
             124200,
@@ -2424,8 +2424,8 @@ export const calmPVDrillDownDataWithLifeEvent = {
           yAxisID: 'netAssets',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#ED7D31',
-          borderColor: '#ED7D31',
+          backgroundColor: '#F28E2B',
+          borderColor: '#F28E2B',
           data: [
             600000,
             629710,
@@ -2460,8 +2460,8 @@ export const calmPVDrillDownDataWithLifeEvent = {
         {
           label: 'Expenditure',
           yAxisID: 'expenditure',
-          backgroundColor: '#5B9BD5', //
-          stroke: '#5B9BD5',
+          backgroundColor: '#E15759', //
+          stroke: '#E15759',
           data: [
             106368,
             109396,
@@ -2535,8 +2535,8 @@ export const calmPVDrillDownDataWithLifeEvent = {
 
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#FFC000',
-          borderColor: '#FFC000',
+          backgroundColor: '#4E79A7',
+          borderColor: '#4E79A7',
           data: [
             68939,
             70084,
@@ -2574,8 +2574,8 @@ export const calmPVDrillDownDataWithLifeEvent = {
           yAxisID: 'netAssets',
           fill: false,
           lineTension: 0.2,
-          backgroundColor: '#ED7D31',
-          borderColor: '#ED7D31',
+          backgroundColor: '#F28E2B',
+          borderColor: '#F28E2B',
           data: [
             1100000,
             1035427,
@@ -2610,8 +2610,8 @@ export const calmPVDrillDownDataWithLifeEvent = {
         {
           label: 'Expenditure',
           yAxisID: 'expenditure',
-          backgroundColor: '#5B9BD5', //
-          stroke: '#5B9BD5',
+          backgroundColor: '#E15759', //
+          stroke: '#E15759',
           data: [
             68939,
             70084,
