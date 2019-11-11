@@ -525,7 +525,7 @@ export const proposedProducts = [
       },
     ],
     note: {
-      text: '{{0}}, replace your existing product {{1}}',
+      text: '{{0}}, rebalance your existing product {{1}}',
       params: ['John Samual', 'CFS FirstChoice Wholesale Investments'],
     },
     hasCurrent: true,
@@ -536,7 +536,7 @@ export const proposedProducts = [
     value: 400000,
     id: '83da13cc-372b-4b4f-b8da-1222c2987ca9',
     note: {
-      text: '{{0}}, replace your existing product {{1}}',
+      text: '{{0}}, rebalance your existing product {{1}}',
       params: ['John Samual', 'Hesta Personal Super'],
     },
     links: [
