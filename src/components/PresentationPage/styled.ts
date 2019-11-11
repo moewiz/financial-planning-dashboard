@@ -164,7 +164,6 @@ export const StepWrapper = styled.section`
     }
   }
   .goal-table {
-    margin-top: 30px;
     .ant-table-thead {
       & > tr {
         & > th {

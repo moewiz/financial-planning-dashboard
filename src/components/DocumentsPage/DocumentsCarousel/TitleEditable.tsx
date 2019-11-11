@@ -7,7 +7,7 @@ import EditCell from '../../StrategyPage/Drawer/EditCell';
 interface TitleEditableProps {
   defaultValue: string | undefined;
   name: string;
-  onChange: (value: any, name: string) => void;
+  onChange?: (value: any, name: string) => void;
 
   editable?: boolean;
   subTitle?: boolean;
@@ -22,7 +22,9 @@ const TitleEditable = (props: TitleEditableProps) => {
   }, [props.defaultValue]);
   const debounceEdit = useCallback(
     debounce((val, name) => {
-      props.onChange(val, name);
+      if (props.onChange) {
+        props.onChange(val, name);
+      }
     }, 500),
     [],
   );

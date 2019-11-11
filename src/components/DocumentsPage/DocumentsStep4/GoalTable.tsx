@@ -9,6 +9,7 @@ import { TitleStep } from '../styled';
 import { EditCellType } from '../../StrategyPage/Drawer/EditCell';
 import GoalEdit from './GoalEdit';
 import { priorityOptions } from '../../../enums/options';
+import TitleEditable from '../DocumentsCarousel/TitleEditable';
 
 interface GoalTableProps {
   stepName: string;
@@ -103,7 +104,10 @@ class GoalTable extends React.Component<GoalTableProps> {
 
     return (
       <>
-        <TitleStep>{stepData.title}</TitleStep>
+        <TitleEditable defaultValue={stepData.title} name="title" editable={false} />
+        {stepData.subtitle && (
+          <TitleEditable defaultValue={stepData.subtitle} name="subtitle" editable={false} subTitle={true} />
+        )}
         <FieldArray
           name={`${stepName}.table.data`}
           render={(arrayHelpers: FieldArrayRenderProps) => {
