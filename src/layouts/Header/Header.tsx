@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Icon, Avatar } from 'antd';
+import { Avatar } from 'antd';
 import { TopMenu, MenuItem, Header as StyledHeader } from './styled';
 import { FullName } from '../Sidebar/styled';
 
