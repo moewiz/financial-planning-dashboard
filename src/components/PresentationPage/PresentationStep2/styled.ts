@@ -12,7 +12,6 @@ export const StepPositionLeft = styled.div.attrs({
   className: 'presentation-position-left',
 })`
   flex: 0 0 35%;
-
 `;
 export const StepPositionRight = styled.div.attrs({
   className: 'presentation-position-right',
@@ -26,33 +25,34 @@ export const StepPositionTop = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 30px;
-  .ant-card-body{
+  .ant-card-body {
     padding: 15px;
     min-height: 223px;
   }
 `;
 
 export const StepPositionBottom = styled.div`
-  box-shadow: 0 2px 4px 0px rgba(0,0,0,0.23);
+  box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.23);
   padding: 35px 10px;
   display: inline-block;
   width: 100%;
   margin: 0 auto;
   position: relative;
   min-height: 330px;
-  &.income-doughnut{
-    .presentation-doughnut-desc{
+  //min-height: 400px;
+  &.income-doughnut {
+    .presentation-doughnut-desc {
       left: calc(50% - 32px);
       top: calc(50% + 20px);
     }
   }
-  &.asset-doughnut{
-    .presentation-doughnut-desc{
+  &.asset-doughnut {
+    .presentation-doughnut-desc {
       left: calc(50% - 36px);
       top: calc(50% + 27px);
     }
   }
-  .chartjs-render-monitor{
+  .chartjs-render-monitor {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -66,11 +66,11 @@ export const TitlePositionStep = styled.div`
 `;
 
 export const ValPositionStep = styled.div`
- font-size: 16px;
+  font-size: 16px;
 `;
 
 export const BlockStep = styled.div`
-  box-shadow: 0 2px 4px 0px rgba(0,0,0,0.23);
+  box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.23);
   flex: 0 0 calc(50% - 10px);
   text-align: center;
   padding: 36px 10px;
@@ -96,36 +96,36 @@ export const LiabilitiesBlockStep = styled(BlockStep)`
 `;
 
 export const CardChartPositionStep = styled.section`
-  box-shadow: 0 2px 4px 0px rgba(0,0,0,0.23);
+  box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.23);
   // flex: 0 0 calc(50% - 30px);
   flex: 1;
   max-width: 50%;
   margin-right: 15px;
-  .ant-card-head-title{
-     padding: 10px 0px;
-   }
+  .ant-card-head-title {
+    padding: 10px 0px;
+  }
 `;
 
 export const CardPointPositionStep = styled(CardChartPositionStep)`
-   margin-right: 0px;
-   margin-left: 15px;
+  margin-right: 0px;
+  margin-left: 15px;
 `;
 export const KeyPointList = styled.div`
- display: flex;
- color: #697396;
- flex-direction: column;
+  display: flex;
+  color: #697396;
+  flex-direction: column;
 `;
 export const KeyPointItem = styled.div`
- font-size: 16px;
- margin-bottom: 24px;
- .anticon {
-  font-size: 18px ;
-  margin-right: 20px;
+  font-size: 16px;
+  margin-bottom: 24px;
+  .anticon {
+    font-size: 18px;
+    margin-right: 20px;
   }
 `;
 export const CardResultsPositionStep = styled.div`
-  .ant-card-grid{
-    padding: 15px!important;
+  .ant-card-grid {
+    padding: 15px !important;
     min-height: 141px;
     text-align: center;
     align-items: center;
@@ -133,9 +133,9 @@ export const CardResultsPositionStep = styled.div`
     font-size: 16px;
     justify-content: center;
   }
-  .ant-card-head-title{
-     padding: 10px 0px;
-   }
+  .ant-card-head-title {
+    padding: 10px 0px;
+  }
 `;
 
 export const DoughnutDesc = styled.div.attrs({

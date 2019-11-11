@@ -3,6 +3,32 @@ import { cashFlowDrillDownData, cashFlowDrillDownDataWithLifeEvent } from './dri
 import { ChartBlockDrillDown } from '../PresentationStep3/styled';
 import GraphPresentation from '../../StrategyPage/Graph/GraphPresentation';
 import { GraphType } from '../../StrategyPage/Graph/GraphContainer';
+import numeral from "numeral";
+
+const stackedConfig = {
+  legend: {
+    display: true,
+    position: 'bottom',
+  },
+  scales: {
+    xAxes: [
+      {
+        stacked: true,
+      },
+    ],
+    yAxes: [
+      {
+        ticks: {
+          // Include a dollar sign in the ticks
+          callback: (value: any, index: any, values: any) => {
+            return numeral(Math.round(value * 100) / 100).format('$0,0.[00]');
+          },
+        },
+        stacked: true,
+      },
+    ],
+  },
+};
 
 const CashflowDrilldownCharts = (props: {
   retirementYear: number;
@@ -26,12 +52,7 @@ const CashflowDrilldownCharts = (props: {
           data={data.income}
           redraw
           height={470}
-          options={{
-            legend: {
-              display: true,
-              position: 'bottom',
-            },
-          }}
+          options={stackedConfig}
         />
       </ChartBlockDrillDown>
       <ChartBlockDrillDown hidden={currentDrilldown !== 1}>
@@ -40,12 +61,7 @@ const CashflowDrilldownCharts = (props: {
           data={data.expenses}
           redraw
           height={470}
-          options={{
-            legend: {
-              display: true,
-              position: 'bottom',
-            },
-          }}
+          options={stackedConfig}
         />
       </ChartBlockDrillDown>
       <ChartBlockDrillDown hidden={currentDrilldown !== 2}>

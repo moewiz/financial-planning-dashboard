@@ -92,7 +92,7 @@ const optionsDoughnut = {
   },
   fullWidth: true,
   responsive: true,
-  maintainAspectRatio: true,
+  maintainAspectRatio: false,
   legend: {
     fontSize: 9,
     fontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
