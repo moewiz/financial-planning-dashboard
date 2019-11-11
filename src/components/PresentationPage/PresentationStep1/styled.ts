@@ -27,6 +27,11 @@ export const TitleWelcome = styled.div`
   margin-bottom: 30px;
 `;
 
+export const TitleWelcomeImg = styled.img`
+  width: 200px;
+  margin-bottom: 30px;
+`;
+
 export const PresentationSection = styled.div`
   display: flex;
   margin-bottom: 10px;

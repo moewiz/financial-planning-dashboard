@@ -1,9 +1,9 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import moment from 'moment';
-import { store } from '../App';
-import { AuthActions } from '../reducers/auth';
 import https from 'https';
 import { get } from 'lodash';
+import { store } from '../App';
+import { AuthActions } from '../reducers/auth';
 
 export interface RequestConfig extends AxiosRequestConfig {
   apiVersion?: string;
@@ -110,7 +110,54 @@ ApiUtils.HTTP.interceptors.request.use((extendedConfig: RequestConfig) => {
 
 ApiUtils.HTTP.interceptors.response.use(
   (response: AxiosResponse) => response,
-  (error) => {
+  error => {
+    if (error && error.response && error.response.status === 401) {
+      ApiUtils.handleLogout();
+    }
+    return Promise.reject(error);
+  },
+);
+
+ApiUtils.HTTPS.interceptors.request.use((extendedConfig: RequestConfig) => {
+  const config: RequestConfig = Object.assign({}, extendedConfig);
+  const accessToken = ApiUtils.getAccessToken() || null;
+
+  if (ApiUtils.shouldRefreshToken()) {
+    store.dispatch(AuthActions.refreshToken());
+  }
+
+  if (!config.headers.Authorization) {
+    config.headers.Authorization = accessToken && `Bearer ${accessToken}`;
+  }
+
+  let endPoint;
+  switch (config.apiVersion) {
+    case ApiUtils.API_VERSION_2:
+      endPoint = ApiUtils.BASE_URL + ApiUtils.API_VERSION_2;
+      break;
+    case ApiUtils.API_VERSION_NONE:
+      endPoint = ApiUtils.BASE_URL.slice(0, ApiUtils.BASE_URL.lastIndexOf('/'));
+      break;
+    case ApiUtils.API_VERSION_1:
+      endPoint = ApiUtils.BASE_URL + ApiUtils.API_VERSION_1;
+      break;
+    default:
+      endPoint = ApiUtils.BASE_URL + ApiUtils.API_VERSION_1;
+      break;
+  }
+
+  if (!config.absoluteUrl) {
+    config.url = endPoint + config.url;
+  } else {
+    config.url = endPoint;
+  }
+
+  return config;
+});
+
+ApiUtils.HTTPS.interceptors.response.use(
+  (response: AxiosResponse) => response,
+  error => {
     if (error && error.response && error.response.status === 401) {
       ApiUtils.handleLogout();
     }

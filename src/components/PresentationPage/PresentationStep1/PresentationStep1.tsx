@@ -9,8 +9,9 @@ import {
   PresentationLabel,
   PresentationLine,
   TitleWelcome,
+  TitleWelcomeImg,
 } from './styled';
-import { DocumentData, FormikPartProps  } from '../PresentationPage';
+import { DocumentData, FormikPartProps } from '../PresentationPage';
 
 const PresentationStep1 = (props: FormikPartProps) => {
   const { formik } = props;
@@ -18,14 +19,15 @@ const PresentationStep1 = (props: FormikPartProps) => {
     <StepWrapper>
       <StepWelcome>
         <LeftColumn>
-          <TitleWelcome>Welcome</TitleWelcome>
+          <TitleWelcomeImg src="http://sgp18.siteground.asia/~whistle4/images/screen_1_welcome.png" />
+          {/*<TitleWelcome>Welcome</TitleWelcome>*/}
           <PresentationSection>
             <PresentationLabel>Advisor:</PresentationLabel>
-            <PresentationLine>Mr.Always Right</PresentationLine>
+            <PresentationLine>Mr. Always Right</PresentationLine>
           </PresentationSection>
           <PresentationSection>
             <PresentationLabel>Client:</PresentationLabel>
-            <PresentationLine>Mr.John Samual</PresentationLine>
+            <PresentationLine>Mr. John Samual</PresentationLine>
           </PresentationSection>
           <PresentationSection>
             <PresentationLabel>Date:</PresentationLabel>

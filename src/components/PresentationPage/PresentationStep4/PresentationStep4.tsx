@@ -14,20 +14,17 @@ const cardLists = [
     <p>Contribution</p>
   </>,
   <>
-    <p>Reduce primary</p>
+    <p>Reduce Primary</p>
     <p>Residence Loan</p>
   </>,
   <>
-    <p>Another</p>
-    <p>Title #4</p>
+    <p>Debt reduction</p>
   </>,
   <>
-    <p>Another</p>
-    <p>Title #5</p>
+    <p>Insurance</p>
   </>,
   <>
-    <p>Another</p>
-    <p>Title #6</p>
+    <p>Estate Planning</p>
   </>,
 ];
 

@@ -85,3 +85,14 @@ export const MenuItem = styled.div`
     line-height: 46px;
   }
 `;
+
+export const Header = styled.header.attrs({
+  className: 'header ant-layout-header',
+})`
+  position: fixed;
+  opacity: 1;
+  background: #fff !important;
+  z-index: 999;
+  width: 100%;
+  left: 0px;
+`;

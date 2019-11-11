@@ -88,6 +88,7 @@ const ExpandedLiabilitiesRow = (props: {
     if (e < minimum) {
       notification.error({
         message: 'Error',
+        duration: 0,
         description: 'Specified repayment amount should be higher than the minimum',
       });
     }

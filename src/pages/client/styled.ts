@@ -341,8 +341,9 @@ export const HeaderTitleTable = styled.div.attrs({
 
 export const TextTitle = styled.span<TextTitleProps>`
   color: #4e5b86;
-  font-size: ${(props) => (props.small ? '15px' : '21px')};
+  font-size: ${(props: any) => (props.small ? '15px' : '21px')};
   font-weight: 600;
+  display: block;
   ${(props) =>
     props.strategy &&
     css`

@@ -41,6 +41,7 @@ const GoalEdit = (props: any) => {
     onEdit(newLinks, 'links', rowIndex);
     if (removedTag.warning) {
       notification.warning({
+        duration: 0,
         message: 'Warning',
         description: (
           <>

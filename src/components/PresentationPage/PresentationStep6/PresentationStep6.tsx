@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { connect } from 'formik';
 import numeral from 'numeral';
 
@@ -10,14 +10,15 @@ import GraphPresentation from '../../StrategyPage/Graph/GraphPresentation';
 import DrawerProduct, { Product } from '../../ProductOptimizer/Drawer/DrawerProduct';
 import { TextTitle } from '../../../pages/client/styled';
 import { CurrentProduct, ProposedProduct } from '../../../containers/productOptimizer';
-import { AssetAllocationComparison, AssetAllocationGraph, InvestmentProducts } from './styled';
+import { AssetAllocationComparison, AssetAllocationGraph, InvestmentProducts, ChartTitle, ChartGroupTitle } from './styled';
 import { currentProducts, proposedProducts } from './investmentProducts';
+import {notification} from 'antd';
 
 const chartConfig1 = {
   datasets: [
     {
       dataIndex: 'balanced',
-      label: 'Balanced',
+      label: 'Target',
       fill: true,
       borderColor: '#70ad47',
     },
@@ -34,7 +35,7 @@ const chartConfig2 = {
   datasets: [
     {
       dataIndex: 'balanced',
-      label: 'Balanced',
+      label: 'Target',
       fill: true,
       borderColor: '#70ad47',
     },
@@ -81,18 +82,20 @@ const PresentationStep6 = (props: FormikPartProps) => {
     <StepWrapper>
       <TextTitle>Investment Products</TextTitle>
       <InvestmentProducts>
-        <CurrentProduct dataList={currentProducts} openDrawer={openDrawer} readOnly={true} />
-        <ProposedProduct dataList={proposedProducts} openDrawer={openDrawer} readOnly={true} tabKey={'client'} />
+        <CurrentProduct dataList={currentProducts} openDrawer={openDrawer} readOnly />
+        <ProposedProduct dataList={proposedProducts} openDrawer={openDrawer} readOnly tabKey="client" />
       </InvestmentProducts>
 
-      <TextTitle>Asset Allocation comparison</TextTitle>
+      <ChartGroupTitle>Asset Allocation comparison</ChartGroupTitle>
       <AssetAllocationComparison>
         <AssetAllocationGraph>
+          <ChartTitle>Current</ChartTitle>
           <GraphPresentation
             type={GraphType.Bar}
             height={300}
             data={loadGraphData(chartConfig1)(chartData)}
             options={{
+              maintainAspectRatio: true,
               scales: {
                 yAxes: [
                   {
@@ -146,11 +149,13 @@ const PresentationStep6 = (props: FormikPartProps) => {
           />
         </AssetAllocationGraph>
         <AssetAllocationGraph>
+          <ChartTitle>Proposed</ChartTitle>
           <GraphPresentation
             type={GraphType.Bar}
             height={300}
             data={loadGraphData(chartConfig2)(chartData)}
             options={{
+              maintainAspectRatio: true,
               scales: {
                 yAxes: [
                   {
@@ -204,7 +209,7 @@ const PresentationStep6 = (props: FormikPartProps) => {
           />
         </AssetAllocationGraph>
       </AssetAllocationComparison>
-      <DrawerProduct isOpen={isOpen} close={closeDrawer} product={product} readOnly={true} />
+      <DrawerProduct isOpen={isOpen} close={closeDrawer} product={product} readOnly />
     </StepWrapper>
   );
 };

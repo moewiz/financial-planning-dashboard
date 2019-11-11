@@ -65,7 +65,7 @@ const dataSource = [
   {
     key: '3',
     type: 'Investments and Platform Fee',
-    fee: ['CFS Investment $325 (0.65%)', 'CFS Super $3,498( 0.87)'],
+    fee: ['CFS Investment $325 (0.65%), CFS Super $3,498 (0.87)'],
   },
 ];
 
@@ -125,7 +125,7 @@ const PresentationStep7 = (props: FormikPartProps) => {
         <CardStep7Container>
           <Card title="Our Ongoing Services" bordered={false}>
             <p>
-              At Always Right, we want you to live more and worry less. This is why we have a program of ongoing support
+              At IOOF, we want you to live more and worry less. This is why we have a program of ongoing support
               which is designed to give you peace of mind and confidence that your financial affairs are in good hands.
             </p>
             <p>We partner with you to achieve your lifestyle goals - life should be more than just survival.</p>

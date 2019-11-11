@@ -125,14 +125,22 @@ const ticks = {
   },
 };
 
-const startWithZeroConfig = {
+const startWithZeroConfig = (max: number, stepSize: number) => ({
   scales: {
     yAxes: [
       {
-        ticks,
+        ticks: {
+          ...ticks,
+          max,
+          stepSize,
+        },
       },
     ],
   },
+});
+
+const formatNumber = (value: any, index: any, values: any) => {
+  return numeral(Math.round(value * 100) / 100).format('$0,0.[00]');
 };
 
 const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeEvent?: boolean }) => {
@@ -156,7 +164,7 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
               type={GraphType.Line}
               options={{
                 maintainAspectRatio: true,
-                ...startWithZeroConfig,
+                ...startWithZeroConfig(2400000, 400000),
               }}
               data={loadGraphData(configNetAssets)(get(chartsData, 'netAssetsChartData'))}
               redraw
@@ -165,11 +173,11 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
           <ChartBlockRight onClick={() => setChartIndex(1)}>
             <ChartBlockTitle>Cashflow</ChartBlockTitle>
             <GraphPresentation
-              type={GraphType.Bar}
               options={{
                 maintainAspectRatio: true,
-                ...startWithZeroConfig,
+                ...startWithZeroConfig(120000, 20000),
               }}
+              type={GraphType.Bar}
               data={loadGraphData(cashflowConfig)(get(chartsData, 'cashflowChartData'))}
               redraw
             />
@@ -179,7 +187,7 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
             <GraphPresentation
               options={{
                 maintainAspectRatio: true,
-                ...startWithZeroConfig,
+                ...startWithZeroConfig(60000, 10000),
               }}
               type={GraphType.Bar}
               data={loadGraphData(taxConfig)(get(chartsData, 'taxChartData'))}
@@ -195,7 +203,7 @@ const ChartsBlock = (props: { chartsData: any; retirementYear?: number; hasLifeE
               redraw
               options={{
                 maintainAspectRatio: true,
-                ...startWithZeroConfig,
+                ...startWithZeroConfig(1200000, 200000),
               }}
             />
           </ChartBlockRight>

@@ -1,17 +1,17 @@
 {
   "step1": {
     "title": "Why did John seek advice?",
-    "subtitle": "Your purpose for seeking advice",
+    "subtitle": "Recond the Client's purpose for seeking advice",
     "description": "John is planning to retire at the age of 60 and would like to know how long will his retirement funds last and to have a considerable income to back his financial obligations and living expenses post retirement. He would also like to reduce his financial obligations to help his financial situation at retirement."
   },
   "step2": {
     "title": "What the advice cover",
-    "subtitle": "Records the scope of advice, as agreed between you and client",
+    "subtitle": "Record scope of advice, as agreed between you and the client",
     "records": [
       {
         "type": "fixed",
         "header": "Superannuation",
-        "title": "What the advice cover (Superannuation)",
+        "title": "What the advice covers (Superannuation)",
         "subtitle": "Record the Superannuation-related scope of advice, as agreed between you and the client.",
         "table": {
           "columns": ["Superannuation", "Advice Limitations"],
@@ -37,7 +37,7 @@
       {
         "type": "fixed",
         "header": "Retirement Income",
-        "title": "What the advice cover (Retirement Income)",
+        "title": "What the advice covers (Retirement Income)",
         "subtitle": "Record the Retirement Income scope of advice, as agreed between you and the client.",
         "table": {
           "columns": ["Retirement Income", "Advice Limitations"],
@@ -53,7 +53,7 @@
       {
         "type": "fixed",
         "header": "Investment",
-        "title": "What the advice cover (Investment)",
+        "title": "What the advice covers (Investment)",
         "subtitle": "Record the Investment scope of advice, as agreed between you and the client.",
         "table": {
           "columns": ["Investment", "Advice Limitations"],
@@ -69,7 +69,7 @@
       {
         "type": "fixed",
         "header": "Estate Planning",
-        "title": "What the advice cover (Estate Planning)",
+        "title": "What the advice covers (Estate Planning)",
         "subtitle": "Record the Estate Planning scope of advice, as agreed between you and the client.",
         "table": {
           "columns": ["Estate Planning", "Advice Limitations"],
@@ -94,15 +94,15 @@
       },
       {
         "type": "fixed",
-        "header": "Non-deductible dept",
-        "title": "What the advice cover (Non-deductible dept)",
-        "subtitle": "Record the Non-deductible dept scope of advice, as agreed between you and the client.",
+        "header": "Non-deductible debt",
+        "title": "What the advice covers (Non-deductible debt)",
+        "subtitle": "Record the Non-deductible debt scope of advice, as agreed between you and the client.",
         "table": {
-          "columns": ["Non-deductible dept", "Advice Limitations"],
+          "columns": ["Non-deductible debt", "Advice Limitations"],
           "data": [
             {
               "id": 1,
-              "value": "Dept",
+              "value": "Debt",
               "description": "No Limitations"
             }
           ]
@@ -111,7 +111,7 @@
       {
         "type": "fixed",
         "header": "Insurance",
-        "title": "What the advice cover (Insurance)",
+        "title": "What the advice covers (Insurance)",
         "subtitle": "Record the Insurance scope of advice, as agreed between you and the client.",
         "table": {
           "columns": ["Insurance", "Advice Limitations"],
@@ -142,13 +142,13 @@
     ]
   },
   "step3": {
-    "title": "What the advice cover doesn't cover",
-    "subtitle": "Records the items that did not fall within the scope of advice.",
+    "title": "What the advice doesn't cover",
+    "subtitle": "Record the items that did not fall within the scope of advice.",
     "records": [
       {
         "type": "fixed",
         "header": "Aged Care",
-        "title": "What the advice cover doesn't cover (Aged Care)",
+        "title": "What the advice doesn't cover (Aged Care)",
         "subtitle": "Record the Aged Care-related items, that did not fall within the scope of advice.",
         "table": {
           "columns": ["Aged Care", "Reason for being scoped out"],
@@ -164,7 +164,7 @@
       {
         "type": "fixed",
         "header": "Social Security",
-        "title": "What the advice cover doesn't cover (Social Security)",
+        "title": "What the advice doesn't cover (Social Security)",
         "subtitle": "Record the Social Security-related items, that did not fall within the scope of advice.",
         "table": {
           "columns": ["Social Security", "Reason for being scoped out"],
@@ -180,7 +180,8 @@
     ]
   },
   "step4": {
-    "title": "What are the client's goals, needs and objectives addressed?",
+    "title": "Client's goals, needs and objectives",
+    "subtitle": "Record the client's goals, needs and objectives and link them to the advice area that addresses it.",
     "table": {
       "data": [
         {
@@ -299,8 +300,8 @@
     }
   },
   "step5": {
-    "title": "Were there any limitations to the advice provided?",
-    "subtitle": "Clearly record the reason for any limitations to your advice",
+    "title": "Limitations to advice provided",
+    "subtitle": "Record any limitations to your advice",
     "table": {
       "columns": [
         {
@@ -330,13 +331,13 @@
     }
   },
   "step6": {
-    "title": "Summary of Recommendations",
-    "subtitle": "Supporting text goes here",
+    "title": "Summary of recommendations",
+    "subtitle": "Review recommendations, customize descriptions for SoA and add alternative strategies",
     "records": [
       {
         "type": "fixed",
         "header": "Super",
-        "title": "Summary of Recommendations (Superannuation)",
+        "title": "Summary of recommendations (Superannuation)",
         "subtitle": "Supporting text goes here",
         "table": {
           "columns": [
@@ -370,7 +371,7 @@
               "id": 6,
               "value": "John Samual, replace your existing Hesta Personal Super",
               "description": "John, we recommend you: Rollover your existing Hesta Personal Super worth approximately $460,000 into a new CFS FirstChoice Wholesale Personal Super.",
-              "alternatives": "Retain your existing superannuation fund as is. This was discounted due to the proposed product:\n-Having more investment options\n-Providing the ability to structure a diversified portfolio suited to your risk profile\n-Providing transparency of how your funds are invested"
+              "alternatives": "Retain your existing superannuation fund as is. This was discounted due to the proposed product:\n- Having more investment options\n- Providing the ability to structure a diversified portfolio suited to your risk profile\n- Providing transparency of how your funds are invested"
             }
           ]
         }
@@ -378,7 +379,7 @@
       {
         "type": "fixed",
         "header": "Retirement income",
-        "title": "Summary of Recommendations (Retirement income)",
+        "title": "Summary of recommendations (Retirement income)",
         "subtitle": "Supporting text goes here",
         "table": {
           "columns": [
@@ -408,7 +409,7 @@
       {
         "type": "fixed",
         "header": "Investment",
-        "title": "Summary of Recommendations (Investment)",
+        "title": "Summary of recommendations (Investment)",
         "subtitle": "Supporting text goes here",
         "table": {
           "columns": [
@@ -438,7 +439,7 @@
       {
         "type": "fixed",
         "header": "Debt",
-        "title": "Summary of Recommendations (Debt)",
+        "title": "Summary of recommendations (Debt)",
         "subtitle": "Supporting text goes here",
         "table": {
           "columns": [
@@ -468,7 +469,7 @@
       {
         "type": "fixed",
         "header": "Insurance",
-        "title": "Summary of Recommendations (Insurance)",
+        "title": "Summary of recommendations (Insurance)",
         "subtitle": "Supporting text goes here",
         "table": {
           "columns": [
@@ -516,7 +517,7 @@
       {
         "type": "fixed",
         "header": "Estate Planning",
-        "title": "Summary of Recommendations (Estate Planning)",
+        "title": "Summary of recommendations (Estate Planning)",
         "subtitle": "Supporting text goes here",
         "table": {
           "columns": [
@@ -579,13 +580,13 @@
           "width": 140
         },
         {
-          "title": "Dealer Group retainer",
+          "title": "Dealer Group %",
           "dataIndex": "practice",
           "className": "text-align-right",
           "width": 130
         },
         {
-          "title": "Advisor retainer",
+          "title": "Adviser %",
           "dataIndex": "advisor",
           "className": "text-align-right",
           "width": 100
@@ -595,14 +596,14 @@
         {
           "id": 1,
           "description": "Preparation fee",
-          "cost": "$500",
+          "cost": "$2,250",
           "amount": "0.5% of Total Portfolio",
           "practice": "20%",
           "advisor": "80%"
         },
         {
           "id": 1,
-          "description": "Ongoing advisor service fee",
+          "description": "Ongoing adviser service fee",
           "cost": "$2,200",
           "amount": "Fixed Fee",
           "practice": "20%",
@@ -613,12 +614,12 @@
   },
   "step8": {
     "title": "Regulatory Compliance",
-    "subtitle": "The following issues were flagged",
+    "subtitle": "Please address the following issues to generate the SoA",
     "records": [
       {
         "header": "Current",
         "title": "Regulatory Compliance (Current)",
-        "subtitle": "Supporting text goes here",
+        "subtitle": "Please address the open issues found",
         "table": {
           "columns": [
             {
@@ -644,7 +645,7 @@
       {
         "header": "Strategy",
         "title": "Regulatory Compliance (Strategy)",
-        "subtitle": "Supporting text goes here",
+        "subtitle": "Please address the open issues found",
         "table": {
           "columns": [
             {
@@ -662,7 +663,7 @@
       {
         "header": "Investment",
         "title": "Regulatory Compliance (Investment)",
-        "subtitle": "Supporting text goes here",
+        "subtitle": "Please address the open issues found",
         "table": {
           "columns": [
             {
@@ -695,7 +696,7 @@
       {
         "header": "Insurance",
         "title": "Regulatory Compliance (Insurance)",
-        "subtitle": "Supporting text goes here",
+        "subtitle": "Please address the open issues found",
         "table": {
           "columns": [
             {
@@ -711,9 +712,9 @@
         }
       },
       {
-        "header": "SOA",
+        "header": "SoA",
         "title": "Regulatory Compliance (Document)",
-        "subtitle": "Supporting text goes here",
+        "subtitle": "Please address the open issues found",
         "table": {
           "columns": [
             {

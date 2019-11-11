@@ -104,6 +104,7 @@ const CustomizedPension = (
 
       notification.warning({
         message: 'Warning',
+        duration: 0,
         description: (
           <>
             <span>Condition of release not met.</span>
