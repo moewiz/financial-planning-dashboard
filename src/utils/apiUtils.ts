@@ -108,44 +108,7 @@ ApiUtils.HTTP.interceptors.request.use((extendedConfig: RequestConfig) => {
   return config;
 });
 
-ApiUtils.HTTPS.interceptors.request.use((extendedConfig: RequestConfig) => {
-  const config: RequestConfig = Object.assign({}, extendedConfig);
-  const accessToken = ApiUtils.getAccessToken() || null;
-
-  if (ApiUtils.shouldRefreshToken()) {
-    store.dispatch(AuthActions.refreshToken());
-  }
-
-  if (!config.headers.Authorization) {
-    config.headers.Authorization = accessToken && `Bearer ${accessToken}`;
-  }
-
-  let endPoint;
-  switch (config.apiVersion) {
-    case ApiUtils.API_VERSION_2:
-      endPoint = ApiUtils.BASE_URL + ApiUtils.API_VERSION_2;
-      break;
-    case ApiUtils.API_VERSION_NONE:
-      endPoint = ApiUtils.BASE_URL.slice(0, ApiUtils.BASE_URL.lastIndexOf('/'));
-      break;
-    case ApiUtils.API_VERSION_1:
-      endPoint = ApiUtils.BASE_URL + ApiUtils.API_VERSION_1;
-      break;
-    default:
-      endPoint = ApiUtils.BASE_URL + ApiUtils.API_VERSION_1;
-      break;
-  }
-
-  if (!config.absoluteUrl) {
-    config.url = endPoint + config.url;
-  } else {
-    config.url = endPoint;
-  }
-
-  return config;
-});
-
-ApiUtils.HTTPS.interceptors.response.use(
+ApiUtils.HTTP.interceptors.response.use(
   (response: AxiosResponse) => response,
   (error) => {
     if (error && error.response && error.response.status === 401) {
