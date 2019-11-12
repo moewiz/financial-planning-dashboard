@@ -33,7 +33,7 @@ export const CardList = styled.div.attrs({
   className: 'card-list',
 })`
   display: flex;
-  margin-top: 150px;
+  margin-top: 90px;
 
   .card-item {
     margin: 0 10px;
