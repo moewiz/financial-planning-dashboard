@@ -5,7 +5,7 @@ export const PresentationStep8WP = styled.div.attrs({
 })`
   color: #515c83;
   text-align: center;
-  margin-top: 80px;
+  margin-top: 90px;
 `;
 export const StepThanksText = styled.div`
   font-size: 38px;
