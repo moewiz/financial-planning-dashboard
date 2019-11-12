@@ -9,7 +9,8 @@ import { DocumentData, FormikPartProps, Record, SwitcherContext } from '../Docum
 import CardStatistic from './CardStatistic';
 import DocumentsCarousel from '../DocumentsCarousel/DocumentsCarousel';
 
-const DocumentsStep8 = (props: FormikPartProps) => {
+const DocumentsStep8 = (props: FormikPartProps & { updateStep: (step: number) => void; }) => {
+  const { updateStep } = props;
   const [slideNumber, setSlideNumber] = useState<number>(-1);
   const [loadedPage, setLoaded] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -59,6 +60,7 @@ const DocumentsStep8 = (props: FormikPartProps) => {
             stepName="step8"
             setFieldValue={props.formik.setFieldValue}
             overwrite={true}
+            updateStep={updateStep}
           />
         ) : (
           <>
@@ -90,4 +92,4 @@ const DocumentsStep8 = (props: FormikPartProps) => {
   );
 };
 
-export default connect<{}, DocumentData>(DocumentsStep8);
+export default connect<{ updateStep: (step: number) => void; }, DocumentData>(DocumentsStep8);

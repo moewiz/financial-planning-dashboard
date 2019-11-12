@@ -13,10 +13,11 @@ export interface DocumentsCarouselProps {
   setFieldValue: (field: string, value: any) => void;
 
   overwrite?: boolean;
+  updateStep?: (step: number) => void;
 }
 
 const DocumentsCarousel = (props: DocumentsCarouselProps) => {
-  const { slideNumber, cards, stepName, setFieldValue, overwrite } = props;
+  const { slideNumber, cards, stepName, setFieldValue, overwrite, updateStep } = props;
   const carouselInstance = React.createRef<Carousel>();
   const onPrev = () => {
     if (carouselInstance.current) {
@@ -40,6 +41,7 @@ const DocumentsCarousel = (props: DocumentsCarouselProps) => {
             setFieldValue={setFieldValue}
             overwrite={overwrite}
             showAddButton={stepName === 'step2' && card.type !== 'user'}
+            updateStep={updateStep}
           />
         ))}
       </Carousel>
