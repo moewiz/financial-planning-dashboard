@@ -211,6 +211,13 @@ export const StepWrapper = styled.section`
       }
     }
   }
+  .error-line {
+    .strategy-item {
+      .ant-input {
+        color: #F44336;
+      }
+    }
+  }
   .underline {
     .strategy-item {
       .ant-input.edit-cell {

@@ -58,6 +58,9 @@ const EditCellContainer = (props: any) => {
     debounceEdit(val, name, rowIndex);
   };
   const classNames = [props.className];
+  if (record && record.error) {
+    classNames.push('error-line');
+  }
   if (overwrite) {
     if (record.isOverwrite) {
       classNames.push('strikethrough');
