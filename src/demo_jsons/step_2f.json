@@ -365,8 +365,8 @@
     ],
     "drawer": {
       "client": {
-        "title": "Your insurance needs",
-        "subTitle": "Our insurance recommendation are based on our analysis of your circumstances and ...",
+        "title": "Superannuation",
+        "subTitle": "The table below depicts the accumulation superannuation projections",
         "footnote": "Note: Recommended sums insured have been rounded to take advantage of pricing point discounts ...",
         "columns": [
           "2019/20",
