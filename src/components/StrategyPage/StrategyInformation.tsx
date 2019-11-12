@@ -258,11 +258,11 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
                 <EstatePlanningBoxWrapper>
                   <KeyPointList>
                     <KeyPointItem>
-                      <Icon type="exclamation" />
+                      <Icon type="check" />
                       Will
                     </KeyPointItem>
                     <KeyPointItem>
-                      <Icon type="exclamation" />
+                      <Icon type="check" />
                       PoA
                     </KeyPointItem>
                     <KeyPointItem>
