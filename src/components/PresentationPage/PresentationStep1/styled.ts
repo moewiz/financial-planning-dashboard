@@ -6,7 +6,8 @@ export const StepWelcome = styled.div.attrs({
   display: flex;
   color: #515c83;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  margin-top: 90px;
 `;
 
 export const LeftColumn = styled.div`
@@ -16,6 +17,7 @@ export const LeftColumn = styled.div`
 
 export const RightColumn = styled.div`
   flex: 0 0 200px;
+  margin-left: 40px;
   img{
     max-width: 100%;
   }

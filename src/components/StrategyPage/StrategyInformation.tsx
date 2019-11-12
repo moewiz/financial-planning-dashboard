@@ -140,7 +140,7 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
       }
       case StrategyTypes.Pensions: {
         const pensionOption = options(600000, 0, 100000);
-        const pensionOption2 = options(700000, 0, 100000);
+        const pensionOption2 = options(900000, 0, 150000);
 
         return (
           <StrategyInfoWrapper>

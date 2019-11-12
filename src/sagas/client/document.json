@@ -365,7 +365,8 @@
               "id": 5,
               "value": "John Samual, make non-concessional contribution of $60,000 in 2019/2020 Financial Year. This contribution is to be funded from Cash",
               "description": "John, we recommend you make a non-concessional contribution of $60,000 into your existing Hesta Personal Super in the 2019/20 financial year.  The contribution can be made from your existing bank account.",
-              "alternatives": ""
+              "alternatives": "",
+              "error": true
             },
             {
               "id": 6,

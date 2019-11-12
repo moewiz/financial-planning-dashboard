@@ -262,7 +262,7 @@ class CurrentProduct extends PureComponent<ProductTable & { readOnly?: boolean }
         ...newProposedProduct,
         links: [record],
         note: {
-          text: `{{0}}, rebalance your existing product {{1}}`,
+          text: `{{0}}, replace your existing product {{1}}`,
           params: [clientName, get(record, 'description')],
         },
       };

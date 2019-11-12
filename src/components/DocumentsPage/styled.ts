@@ -103,7 +103,7 @@ export const BtnDoneDocument = styled(BtnStepDocument).attrs({
   className: 'btn-done-document',
 })`
   width: 135px;
-  position: fixed;
+  position: fixed !important;
   bottom: 30px;
   right: 100px;
   z-index: 999;
@@ -208,6 +208,13 @@ export const StepWrapper = styled.section`
     .strategy-item {
       .ant-input {
         text-decoration: line-through;
+      }
+    }
+  }
+  .error-line {
+    .strategy-item {
+      .ant-input {
+        color: #F44336;
       }
     }
   }

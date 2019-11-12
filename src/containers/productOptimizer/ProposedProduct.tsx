@@ -347,7 +347,7 @@ class ProposedProduct extends PureComponent<ProposedProductProps, ProposedProduc
     const lastProduct = last(listProducts);
 
     fieldArrayRenderProps.form.setFieldValue(`${rowName}.note`, {
-      text: `{{0}}, rebanlance your existing product${head.length ? 's' : ''} {{1}}`,
+      text: `{{0}}, replace your existing product${head.length ? 's' : ''} {{1}}`,
       params: [get(client, 'name'), head.length ? `${head.join(', ')} and ${lastProduct}` : lastProduct],
     });
     createEvent('investment', 'link', undefined, get(client, 'id'));

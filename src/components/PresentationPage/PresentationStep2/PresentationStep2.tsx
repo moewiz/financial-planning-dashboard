@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'formik';
 import { Card, Icon } from 'antd';
 import numeral from 'numeral';
-import { get, isNumber } from 'lodash';
+import { get, cloneDeep } from 'lodash';
 import { Doughnut, Bar } from 'react-chartjs-2';
 import { StepWrapper } from '../styled';
 
@@ -37,6 +37,7 @@ const incomeData = {
       data: [120000],
       backgroundColor: ['#2bd8c4', '#2bd8c4', '#8269f8', '#2e98ff'],
       hoverBackgroundColor: ['#2bd8c4', '#2bd8c4', '#8269f8', '#2e98ff'],
+      label: 'Salary',
     },
   ],
 };
@@ -71,10 +72,9 @@ const optionsDoughnut = {
   tooltips: {
     callbacks: {
       label: (tooltipItem: any, data: any) => {
-        const { datasets = [] } = data;
-        const [currentDate] = datasets;
-        const [salary] = currentDate.data;
-        return `Salary: ${numeral(salary).format('$0,0.[00]')}`;
+        const salary = get(data.datasets, [tooltipItem.datasetIndex, 'data', tooltipItem.index]);
+        const label = get(data.labels, [tooltipItem.index]);
+        return `${label}: ${numeral(salary).format('$0,0.[00]')}`;
       },
     },
   },
@@ -164,7 +164,7 @@ const PresentationStep2 = (props: FormikPartProps) => {
             </LiabilitiesBlockStep>
           </StepPositionTop>
           <StepPositionBottom className={get(chartData, 'className')}>
-            <Doughnut options={optionsDoughnut} data={get(chartData, 'chart')} redraw height={200} />
+            <Doughnut options={optionsDoughnut} data={cloneDeep(get(chartData, 'chart'))} redraw height={200} />
             <DoughnutDesc>
               <LineDoughnut>{get(chartData, 'line1')}</LineDoughnut>
               <LineDoughnutText>{get(chartData, 'line2')}</LineDoughnutText>

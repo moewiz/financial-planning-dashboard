@@ -12,7 +12,7 @@ import DocumentsStep6 from './DocumentsStep6/DocumentsStep6';
 import DocumentsStep7 from './DocumentsStep7/DocumentsStep7';
 import DocumentsStep8 from './DocumentsStep8/DocumentsStep8';
 
-import { DocumentsWrapper, StepActionDocument } from './styled';
+import { DocumentsWrapper } from './styled';
 
 const { Step } = Steps;
 const steps = [
@@ -78,6 +78,10 @@ interface Table {
   data: Row[];
 }
 
+export interface StepComponentProps {
+  updateStep: (step: number) => void;
+}
+
 export interface Record {
   title: string;
   subtitle?: string;
@@ -133,7 +137,11 @@ const DocumentsPage = (props: DocumentsPageProps) => {
     }
   };
   const renderForm = (formikProps: FormikProps<DocumentData>) => {
-    const StepComponent = steps[currentStep].content;
+    const StepComponent:
+      | React.ComponentClass<{}>
+      | React.FunctionComponent<{}>
+      | React.ComponentClass<{ updateStep: (step: number) => void }>
+      | React.FunctionComponent<{ updateStep: (step: number) => void }> = steps[currentStep].content;
     const onClickSubmit = () => {
       formikProps.submitForm();
       message.success('Processing complete!');
@@ -158,7 +166,9 @@ const DocumentsPage = (props: DocumentsPageProps) => {
               />
             ))}
           </Steps>
-          <div className="steps-content">{!loading && !isEmpty(formikProps.values) ? <StepComponent /> : <Spin />}</div>
+          <div className="steps-content">
+            {!loading && !isEmpty(formikProps.values) ? <StepComponent updateStep={updateStep} /> : <Spin />}
+          </div>
         </SwitcherContext.Provider>
       </>
     );

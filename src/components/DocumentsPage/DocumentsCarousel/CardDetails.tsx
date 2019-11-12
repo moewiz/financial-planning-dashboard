@@ -58,6 +58,9 @@ const EditCellContainer = (props: any) => {
     debounceEdit(val, name, rowIndex);
   };
   const classNames = [props.className];
+  if (record && record.error) {
+    classNames.push('error-line');
+  }
   if (overwrite) {
     if (record.isOverwrite) {
       classNames.push('strikethrough');
@@ -100,6 +103,7 @@ interface CardDetailsProps {
   name: string;
   setFieldValue: (field: string, val: any) => void;
 
+  updateStep?: (step: number) => void;
   overwrite?: boolean;
   showAddButton?: boolean;
 }
@@ -148,7 +152,7 @@ class CardDetails extends React.PureComponent<CardDetailsProps> {
   }
 
   public render() {
-    const { record, name, setFieldValue, overwrite } = this.props;
+    const { record, name, setFieldValue, overwrite, updateStep } = this.props;
     const dataList = record.table.data;
 
     return (
@@ -208,7 +212,9 @@ class CardDetails extends React.PureComponent<CardDetailsProps> {
                     if (index === dataList.length - 1) {
                       return null;
                     }
-                    return <Icon type="tool" style={iconStyles} />;
+                    // DEMO - When user clicks this "Fix" icon, navigate to Step 4
+                    // https://github.com/kodiakorg/financial/issues/407
+                    return <Icon type="tool" style={iconStyles} onClick={() => updateStep && updateStep(3)} />;
                   },
                 },
                 {
