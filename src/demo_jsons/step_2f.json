@@ -861,9 +861,6 @@
       {
         "text": "Product fees of {{0}} factored in pension value",
         "params": ["1%"]
-      },
-      {
-        "text": "Pension drawdowns set to meet required expenses"
       }
     ],
     "strategies": [
