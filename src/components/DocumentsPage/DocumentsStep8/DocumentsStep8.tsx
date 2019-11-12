@@ -69,7 +69,7 @@ const DocumentsStep8 = (props: FormikPartProps) => {
                 type="primary"
                 onClick={onClickSubmit}
                 disabled={!checked}
-                href="http://sgp18.siteground.asia/~whistle4/download/John-Samual-Nov-13-2019.docx"
+                href="http://sgp18.siteground.asia/~whistle4/download/John-Samual-Nov-13-2019.doc"
                 style={{
                   opacity: checked ? 1 : 0.6,
                 }}
