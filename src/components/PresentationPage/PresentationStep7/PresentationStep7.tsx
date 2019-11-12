@@ -55,7 +55,7 @@ const dataSource = [
   {
     key: '1',
     type: 'SoA Preparation Fee',
-    fee: ['$1500'],
+    fee: ['$1,500'],
   },
   {
     key: '2',

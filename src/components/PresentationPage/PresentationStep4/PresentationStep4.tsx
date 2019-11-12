@@ -18,7 +18,7 @@ const cardLists = [
     <p>Residence Loan</p>
   </>,
   <>
-    <p>Debt reduction</p>
+    <p>Debt Reduction</p>
   </>,
   <>
     <p>Insurance</p>

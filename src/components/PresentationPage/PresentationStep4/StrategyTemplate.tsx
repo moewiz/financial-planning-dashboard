@@ -212,7 +212,7 @@ const StrategyTemplate = (props: StrategyTemplateProps) => {
             />
             <div className="header-body">
               <div className="header-body--title fadeIn" style={{ animationDelay: '0.75s' }}>
-                Debt reduction
+                Debt Reduction
               </div>
               <div className="header-body--content fadeIn" style={{ animationDelay: '1.5s' }}>
                 <b>John Samual,</b> Utilize <b>$70,000 per annum</b> from your Bank account <br />

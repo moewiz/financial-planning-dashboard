@@ -1,7 +1,7 @@
 {
   "step1": {
     "title": "Why did John seek advice?",
-    "subtitle": "Recond the Client's purpose for seeking advice",
+    "subtitle": "Record the Client's purpose for seeking advice",
     "description": "John is planning to retire at the age of 60 and would like to know how long will his retirement funds last and to have a considerable income to back his financial obligations and living expenses post retirement. He would also like to reduce his financial obligations to help his financial situation at retirement."
   },
   "step2": {
@@ -332,13 +332,13 @@
   },
   "step6": {
     "title": "Summary of recommendations",
-    "subtitle": "Review recommendations, customize descriptions for SoA and add alternative strategies",
+    "subtitle": "Review recommendations, customise descriptions for SoA and add alternative strategies",
     "records": [
       {
         "type": "fixed",
         "header": "Super",
         "title": "Summary of recommendations (Superannuation)",
-        "subtitle": "Supporting text goes here",
+        "subtitle": "Review recommendations, customise descriptions for SoA and add alternative strategies",
         "table": {
           "columns": [
             {
@@ -685,8 +685,8 @@
             },
             {
               "id": 2,
-              "subsection": "CFS FirstChoice Wholesale Investments",
-              "issue": "Fees more expensive",
+              "subsection": "CFS FirstChoice Wholesale Super",
+              "issue": "Recommended fees more expensive than current",
               "isOverwrite": false,
               "justification": null
             }
