@@ -103,7 +103,7 @@ export const BtnDoneDocument = styled(BtnStepDocument).attrs({
   className: 'btn-done-document',
 })`
   width: 135px;
-  position: fixed;
+  position: fixed !important;
   bottom: 30px;
   right: 100px;
   z-index: 999;

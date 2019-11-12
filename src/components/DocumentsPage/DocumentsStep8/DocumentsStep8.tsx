@@ -12,6 +12,7 @@ import DocumentsCarousel from '../DocumentsCarousel/DocumentsCarousel';
 const DocumentsStep8 = (props: FormikPartProps) => {
   const [slideNumber, setSlideNumber] = useState<number>(-1);
   const [loadedPage, setLoaded] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const context = useContext(SwitcherContext);
   if (!context) {
     return null;
@@ -35,8 +36,13 @@ const DocumentsStep8 = (props: FormikPartProps) => {
     }
   }, [switcherContext]);
   const onClickSubmit = () => {
+    setLoading(true);
     props.formik.submitForm();
-    message.success('Processing complete!');
+    setTimeout(() => {
+      window.location.href = 'http://sgp18.siteground.asia/~whistle4/download/John-Samual-SoA.doc';
+      message.success('Processing complete!');
+      setLoading(false);
+    }, 6000);
   };
   const records = get(props, 'formik.values.step8.records', []);
   const checked = !records.find((record: Record) => {
@@ -69,12 +75,12 @@ const DocumentsStep8 = (props: FormikPartProps) => {
                 type="primary"
                 onClick={onClickSubmit}
                 disabled={!checked}
-                href="http://sgp18.siteground.asia/~whistle4/download/John-Samual-SoA.doc"
                 style={{
                   opacity: checked ? 1 : 0.6,
                 }}
+                loading={loading}
               >
-                Generate SOA
+                Generate SoA
               </BtnDoneDocument>
             </StepActionDocumentFixed>
           </>
