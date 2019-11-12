@@ -17,6 +17,7 @@ export const LeftColumn = styled.div`
 
 export const RightColumn = styled.div`
   flex: 0 0 200px;
+  margin-left: 40px;
   img{
     max-width: 100%;
   }
