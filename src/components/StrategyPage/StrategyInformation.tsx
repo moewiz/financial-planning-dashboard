@@ -80,6 +80,24 @@ const colors = {
   },
 };
 
+const options = (max: number, min: number, stepSize: number) => ({
+  scales: {
+    yAxes: [
+      {
+        ticks: {
+          // Include a dollar sign in the ticks
+          max,
+          min,
+          stepSize,
+          callback: (value: any, index: any, values: any) => {
+            return numeral(Math.round(value * 100) / 100).format('$0,0.[00]');
+          },
+        },
+      },
+    ],
+  },
+});
+
 class StrategyInformation extends PureComponent<FormikPartProps & StrategyInformationProps> {
   public onGraphClick = (e: React.SyntheticEvent) => {
     if (e && e.preventDefault) {
@@ -92,7 +110,7 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
     createEvent('strategy', 'drawer_initiate', getStrategyTitle(type), clientId);
     openDrawer('client');
     fetchDrawerSuccess(drawerData);
-  }
+  };
 
   public render() {
     const { type, tableProcessing } = this.props;
@@ -121,6 +139,9 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
         );
       }
       case StrategyTypes.Pensions: {
+        const pensionOption = options(600000, 0, 100000);
+        const pensionOption2 = options(700000, 0, 100000);
+
         return (
           <StrategyInfoWrapper>
             <Row type="flex" justify="space-between" gutter={32}>
@@ -128,7 +149,12 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
                 <StatisticItem listOfKpi={kpi} />
               </Col>
               <Col span={12}>
-                <GraphContainer type={GraphType.Line} dataList={basicGraphData} onGraphClick={this.onGraphClick} />
+                <GraphContainer
+                  type={GraphType.Line}
+                  dataList={basicGraphData}
+                  onGraphClick={this.onGraphClick}
+                  optionList={[pensionOption, pensionOption2]}
+                />
               </Col>
             </Row>
             <StandardText
@@ -148,7 +174,12 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
                 <StatisticItem listOfKpi={kpi} />
               </Col>
               <Col span={12}>
-                <GraphContainer type={GraphType.Line} dataList={basicGraphData} onGraphClick={this.onGraphClick} />
+                <GraphContainer
+                  type={GraphType.Line}
+                  dataList={basicGraphData}
+                  onGraphClick={this.onGraphClick}
+                  options={options(350000, 50000, 50000)}
+                />
               </Col>
             </Row>
             <StandardText data={standardText} />
@@ -163,7 +194,15 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
                 <StatisticItem listOfKpi={kpi} />
               </Col>
               <Col span={12}>
-                <GraphContainer type={GraphType.Line} dataList={basicGraphData} onGraphClick={this.onGraphClick} />
+                <GraphContainer
+                  type={GraphType.Line}
+                  dataList={basicGraphData}
+                  onGraphClick={this.onGraphClick}
+                  optionList={[
+                    options(340000, 100000, 40000),
+                    options(180000, 0, 30000),
+                  ]}
+                />
               </Col>
             </Row>
             <StandardText data={standardText} />
@@ -192,17 +231,46 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
               {
                 ticks: {
                   // Include a dollar sign in the ticks
+                  min: 3000,
+                  max: 9000,
+                  stepSize: 1000,
                   callback: (value: any, index: any, values: any) => {
                     return numeral(Math.round(value * 100) / 100).format('$0,0.[00]');
                   },
                 },
               },
             ],
-            xAxes: [{
-              ticks: {
-                fontSize: 10,
+            xAxes: [
+              {
+                ticks: {
+                  fontSize: 10,
+                },
               },
-            }],
+            ],
+          },
+        };
+        const optionInsuranc2 = {
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  // Include a dollar sign in the ticks
+                  min: 0,
+                  max: 600000,
+                  stepSize: 100000,
+                  callback: (value: any, index: any, values: any) => {
+                    return numeral(Math.round(value * 100) / 100).format('$0,0.[00]');
+                  },
+                },
+              },
+            ],
+            xAxes: [
+              {
+                ticks: {
+                  fontSize: 10,
+                },
+              },
+            ],
           },
         };
         const insuranceConfig = {
@@ -236,7 +304,7 @@ class StrategyInformation extends PureComponent<FormikPartProps & StrategyInform
               </Col>
               <Col span={12}>
                 <GraphContainer
-                  options={optionInsurance}
+                  optionList={[optionInsuranc2, optionInsurance]}
                   type={GraphType.Bar}
                   dataList={insuranceGraphData}
                   onGraphClick={this.onGraphClick}

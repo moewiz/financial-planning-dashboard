@@ -2,6 +2,7 @@ import React from 'react';
 import { Col, Row } from 'antd';
 import { get } from 'lodash';
 
+import numeral from 'numeral';
 import GraphContainer, { GraphType } from './Graph/GraphContainer';
 import { GraphData } from '../../reducers/client';
 
@@ -36,7 +37,6 @@ const cashflowConfig = {
       label: 'Proposed',
       fill: true,
       borderColor: '#FF5722',
-
     },
   ],
 };
@@ -55,7 +55,6 @@ const taxConfig = {
       fill: false,
       lineTension: 0,
       borderColor: '#FF5722',
-
     },
   ],
 };
@@ -105,7 +104,7 @@ export const loadGraphData = (config: GraphConfig) => (
 } => {
   return {
     labels: get(data, 'xAxis', []),
-    datasets: config.datasets.map((dataset) => {
+    datasets: config.datasets.map((dataset: any) => {
       return {
         backgroundColor: dataset.borderColor,
         ...dataset,
@@ -114,6 +113,24 @@ export const loadGraphData = (config: GraphConfig) => (
     }),
   };
 };
+
+const options = (max: number, min: number, stepSize: number) => ({
+  scales: {
+    yAxes: [
+      {
+        ticks: {
+          // Include a dollar sign in the ticks
+          max,
+          min,
+          stepSize,
+          callback: (value: any, index: any, values: any) => {
+            return numeral(Math.round(value * 100) / 100).format('$0,0.[00]');
+          },
+        },
+      },
+    ],
+  },
+});
 
 const StrategyHeader = (props: StrategyHeaderProps) => {
   const { netAssets, cashflowComparisons, tax, retirementFunding } = props;
@@ -128,16 +145,23 @@ const StrategyHeader = (props: StrategyHeaderProps) => {
           type={GraphType.Bar}
           name="Cashflow"
           data={loadGraphData(cashflowConfig)(cashflowComparisons)}
+          options={options(100000, 0, 20000)}
         />
       </Col>
       <Col span={6}>
-        <GraphContainer type={GraphType.Bar} name="Net Tax" data={loadGraphData(taxConfig)(tax)} />
+        <GraphContainer
+          type={GraphType.Bar}
+          name="Net Tax"
+          data={loadGraphData(taxConfig)(tax)}
+          options={options(50000, 0, 10000)}
+        />
       </Col>
       <Col span={6}>
         <GraphContainer
           type={GraphType.Line}
           name="Retirement Funding"
           data={loadGraphData(retirementFundingConfig)(retirementFunding)}
+          options={options(1000000, 0, 200000)}
         />
       </Col>
     </Row>

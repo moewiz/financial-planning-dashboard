@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import { connect } from 'formik';
 import numeral from 'numeral';
 
@@ -10,9 +10,14 @@ import GraphPresentation from '../../StrategyPage/Graph/GraphPresentation';
 import DrawerProduct, { Product } from '../../ProductOptimizer/Drawer/DrawerProduct';
 import { TextTitle } from '../../../pages/client/styled';
 import { CurrentProduct, ProposedProduct } from '../../../containers/productOptimizer';
-import { AssetAllocationComparison, AssetAllocationGraph, InvestmentProducts, ChartTitle, ChartGroupTitle } from './styled';
+import {
+  AssetAllocationComparison,
+  AssetAllocationGraph,
+  InvestmentProducts,
+  ChartTitle,
+  ChartGroupTitle,
+} from './styled';
 import { currentProducts, proposedProducts } from './investmentProducts';
-import {notification} from 'antd';
 
 const chartConfig1 = {
   datasets: [
@@ -92,10 +97,10 @@ const PresentationStep6 = (props: FormikPartProps) => {
           <ChartTitle>Current</ChartTitle>
           <GraphPresentation
             type={GraphType.Bar}
-            height={300}
+            height={200}
             data={loadGraphData(chartConfig1)(chartData)}
             options={{
-              maintainAspectRatio: true,
+              maintainAspectRatio: false,
               scales: {
                 yAxes: [
                   {
@@ -152,10 +157,10 @@ const PresentationStep6 = (props: FormikPartProps) => {
           <ChartTitle>Proposed</ChartTitle>
           <GraphPresentation
             type={GraphType.Bar}
-            height={300}
+            height={200}
             data={loadGraphData(chartConfig2)(chartData)}
             options={{
-              maintainAspectRatio: true,
+              maintainAspectRatio: false,
               scales: {
                 yAxes: [
                   {

@@ -17,11 +17,8 @@ export enum GraphType {
   HorizontalBar,
 }
 
-const deepMerged = (original: any, updated: any) => values(merge(
-  keyBy(original, 'label'),
-  keyBy(updated, 'label'),
- ));
- 
+const deepMerged = (original: any, updated: any) => values(merge(keyBy(original, 'label'), keyBy(updated, 'label')));
+
 interface GraphProps {
   type: GraphType;
   name?: string;
@@ -29,10 +26,11 @@ interface GraphProps {
     labels?: any[];
     datasets: object[];
   };
-  dataList?: Array<{
+  dataList?: {
     labels?: any[];
     datasets: object[];
-  }>;
+  }[];
+  optionList?: any[];
   processingDraw: boolean;
   options?: object;
   className?: string;
@@ -46,6 +44,7 @@ const defaultOptions = {
       {
         ticks: {
           // Include a dollar sign in the ticks
+          stacked: true,
           callback: (value: any, index: any, values: any) => {
             return numeral(Math.round(value * 100) / 100).format('$0,0.[00]');
           },
@@ -59,19 +58,16 @@ const defaultOptions = {
   },
   tooltips: {
     bodyFontStyle: 'normal',
-    titleFontFamily:
-      '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
-      '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
-    bodyFontFamily:
-      '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
-      '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
-    footerFontFamily:
-      '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', ' +
-      '\'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
+    titleFontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
+    bodyFontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
+    footerFontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
     intersect: false,
     mode: 'label',
     callbacks: {
-      title(tooltipItem: Array<{ label: string }>) {
+      title(tooltipItem: { label: string }[]) {
         const label = tooltipItem[0].label;
         const numberLabel = parseInt(label, 10);
         return !isNaN(numberLabel) && isNumber(numberLabel) ? 'Age ' + label : label;
@@ -93,14 +89,14 @@ const defaultOptions = {
 };
 
 const GraphContainer = (props: GraphProps) => {
-  const { type, name, data, className, onGraphClick, redraw: redrawProp, dataList, options } = props;
+  const { type, name, data, className, onGraphClick, redraw: redrawProp, dataList, options, optionList = [] } = props;
   const flipping = dataList && dataList.length > 0;
   const [activeIndex, setActiveIndex] = useState(0);
   const defaultListOfData = dataList && dataList.length > 0 ? dataList : [data];
   const [listOfData, setListOfData] = useState(defaultListOfData);
   useEffect(() => {
     const id = setInterval(() => {
-      setActiveIndex((index) => (index + 1 >= listOfData.length ? 0 : index + 1));
+      setActiveIndex((index: number) => (index + 1 >= listOfData.length ? 0 : index + 1));
     }, GRAPH_FREQUENCY);
     return () => clearInterval(id);
   }, []);
@@ -122,14 +118,14 @@ const GraphContainer = (props: GraphProps) => {
               redraw={redraw}
               options={{
                 ...defaultOptions,
-                ...options,
-                scales: {
-                  yAxes: [
-                    {
-                      stacked: true,
-                    },
-                  ],
-                },
+                // scales: {
+                //   yAxes: [
+                //     {
+                //       stacked: true,
+                //     },
+                //   ],
+                // },
+                ...(optionList[index] || {}),
                 ...options,
               }}
             />
@@ -138,19 +134,34 @@ const GraphContainer = (props: GraphProps) => {
       case GraphType.Line:
         return (
           <GraphCard className={classNames({ active: index === activeIndex })} key={index}>
-            <Line height={190} data={graphData} redraw={redraw} options={{ ...defaultOptions, ...options }} />
+            <Line
+              height={190}
+              data={graphData}
+              redraw={redraw}
+              options={{ ...defaultOptions, ...(optionList[index] || {}), ...options }}
+            />
           </GraphCard>
         );
       case GraphType.Bar:
         return (
           <GraphCard className={classNames({ active: index === activeIndex })} key={index}>
-            <Bar height={190} data={graphData} redraw={redraw} options={{ ...defaultOptions, ...options }} />
+            <Bar
+              height={190}
+              data={graphData}
+              redraw={redraw}
+              options={{ ...defaultOptions, ...(optionList[index] || {}), ...options }}
+            />
           </GraphCard>
         );
       case GraphType.HorizontalBar:
         return (
           <GraphCard className={classNames({ active: index === activeIndex })} key={index}>
-            <HorizontalBar height={190} data={graphData} redraw={redraw} options={{ ...defaultOptions, ...options }} />
+            <HorizontalBar
+              height={190}
+              data={graphData}
+              redraw={redraw}
+              options={{ ...defaultOptions, ...(optionList[index] || {}), ...options }}
+            />
           </GraphCard>
         );
       default:

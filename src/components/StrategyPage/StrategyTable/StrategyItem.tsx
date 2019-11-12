@@ -138,9 +138,9 @@ class StrategyItem extends Component<StrategyItemProps, StrategyItemStates> {
     }
     removeItem(strategyIndex, strategy);
     redrawGraphs();
-  }
+  };
 
-  public handleMenuClick: (param: ClickParam) => void = (e) => {
+  public handleMenuClick: (param: ClickParam) => void = e => {
     if (e && e.key === '3') {
       // add Custom note to the current row.
       const { strategy, setFieldValue, strategyIndex, strategyType } = this.props;
@@ -149,7 +149,7 @@ class StrategyItem extends Component<StrategyItemProps, StrategyItemStates> {
         setFieldValue(customNoteName, '');
       }
     }
-  }
+  };
 
   public setLoading = () => {
     const { redrawGraphs } = this.props;
@@ -158,7 +158,7 @@ class StrategyItem extends Component<StrategyItemProps, StrategyItemStates> {
     setTimeout(() => {
       this.setState({ loading: false });
     }, 3000);
-  }
+  };
 
   public renderCustom = (context: string, sentenceKey: string) => {
     const { client, partner, defaultFullValue } = this.props;
@@ -243,7 +243,7 @@ class StrategyItem extends Component<StrategyItemProps, StrategyItemStates> {
             context={context}
             sentenceKey={sentenceKey}
             defaultFullValue={defaultFullValue}
-            existingFuneralBond={true}
+            existingFuneralBond
           />
         );
       }
@@ -264,7 +264,7 @@ class StrategyItem extends Component<StrategyItemProps, StrategyItemStates> {
       default:
         return null;
     }
-  }
+  };
 
   public renderText = () => {
     const { strategy, client, partner, strategyType, strategyIndex, defaultFullValue, setFieldValue } = this.props;
@@ -354,7 +354,7 @@ class StrategyItem extends Component<StrategyItemProps, StrategyItemStates> {
               type={type}
               value={value}
               options={options}
-              onChange={(val) => setFieldValue(name, val)}
+              onChange={val => setFieldValue(name, val)}
               defaultFullValue={defaultFullValue}
               {...optionalProps}
             />
@@ -371,7 +371,7 @@ class StrategyItem extends Component<StrategyItemProps, StrategyItemStates> {
     // tslint:disable-next-line:no-console
     console.log('missing sentence key for:', sentenceKey);
     return null;
-  }
+  };
 
   public onChangeCheck = (check: boolean) => {
     const { setFieldValue, strategyType, strategyIndex, redrawGraphs } = this.props;
@@ -379,21 +379,21 @@ class StrategyItem extends Component<StrategyItemProps, StrategyItemStates> {
 
     redrawGraphs();
     setFieldValue(fieldName, check);
-  }
+  };
 
   public onChangeCheckMark = (check: boolean) => {
     const { setFieldValue, strategyType, strategyIndex } = this.props;
     const fieldName = `${strategyType}.strategies[${strategyIndex}].mark`;
 
     setFieldValue(fieldName, check);
-  }
+  };
 
   public onChangeCheckMargin = (check: boolean) => {
     const { setFieldValue, strategyType, strategyIndex } = this.props;
     const fieldName = `${strategyType}.strategies[${strategyIndex}].margin`;
 
     setFieldValue(fieldName, check);
-  }
+  };
 
   public render() {
     const { loading } = this.state;
@@ -410,13 +410,13 @@ class StrategyItem extends Component<StrategyItemProps, StrategyItemStates> {
               name={customNoteName}
               value={strategy.customNote}
               type={EditCellType.textarea}
-              onChange={(val) => setFieldValue(customNoteName, val)}
+              onChange={val => setFieldValue(customNoteName, val)}
               placeholder="Enter custom note"
             />
           )}
         </StrategyTableText>
-        {mark && <CheckboxInput value={strategy.mark || false} onChange={this.onChangeCheckMark} custom={true} />}
-        {margin && <CheckboxInput value={strategy.margin || false} onChange={this.onChangeCheckMargin} custom={true} />}
+        {mark && <CheckboxInput value={strategy.mark || false} onChange={this.onChangeCheckMark} custom />}
+        {margin && <CheckboxInput value={strategy.margin || false} onChange={this.onChangeCheckMargin} custom />}
         <StrategyTableIcon>
           <Dropdown
             overlay={

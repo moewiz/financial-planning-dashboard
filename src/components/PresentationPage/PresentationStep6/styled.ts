@@ -6,7 +6,10 @@ export const InvestmentProducts = styled.div`
   margin-bottom: 25px;
 `;
 
-export const AssetAllocationComparison = styled(InvestmentProducts)``;
+export const AssetAllocationComparison = styled(InvestmentProducts)`
+  display: flex;
+  align-items: flex-start;
+`;
 export const AssetAllocationGraph = styled.div`
   flex: 50%;
 `;

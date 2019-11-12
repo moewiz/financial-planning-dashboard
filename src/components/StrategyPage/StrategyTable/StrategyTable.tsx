@@ -3,13 +3,13 @@ import { get, map } from 'lodash';
 import { Dropdown, Empty, Icon, Menu } from 'antd';
 import { connect, FormikContext } from 'formik';
 
+import { includes } from 'lodash-es';
 import { StrategyEntry } from '../../../reducers/client';
 import { StrategyTypes } from '../../../enums/strategies';
 import { Choice, strategyChoices } from '../../../enums/strategyChoices';
 import { TextTitle, Spinner } from '../../../pages/client/styled';
 import { HeaderTitleMargin, HeaderTitleMark, HeaderTitleStrategy, StrategyTableContent } from './styled';
 import StrategyItem, { StrategyItemI } from './StrategyItem';
-import { includes } from 'lodash-es';
 
 const { SubMenu, Item } = Menu;
 
