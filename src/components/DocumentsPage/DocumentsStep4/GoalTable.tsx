@@ -5,6 +5,7 @@ import { Table } from 'antd';
 import uuid from 'uuid';
 
 import { Record, Row, StepProps } from '../DocumentsPage';
+import { TitleStep } from '../styled';
 import { EditCellType } from '../../StrategyPage/Drawer/EditCell';
 import GoalEdit from './GoalEdit';
 import { priorityOptions } from '../../../enums/options';
